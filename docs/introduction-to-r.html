@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 1 Introduction to R | 5023Y</title>
 <meta name="author" content="Philip T. Leftwich">
-<meta name="description" content="Go to RStudio Cloud and enter the Project labelled Week One - this will clone the project and provide you with your own workspace. Follow the instructions below to get used to the R command line,...">
+<meta name="description" content="R is the name of the programming language we will learn on this course. RStudio is a convenient interface which we will be using throughout the course in order to learn how to organise data,...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 1 Introduction to R | 5023Y">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://ueabio.github.io/data-sci/introduction-to-r.html">
 <meta property="og:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
-<meta property="og:description" content="Go to RStudio Cloud and enter the Project labelled Week One - this will clone the project and provide you with your own workspace. Follow the instructions below to get used to the R command line,...">
+<meta property="og:description" content="R is the name of the programming language we will learn on this course. RStudio is a convenient interface which we will be using throughout the course in order to learn how to organise data,...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 1 Introduction to R | 5023Y">
-<meta name="twitter:description" content="Go to RStudio Cloud and enter the Project labelled Week One - this will clone the project and provide you with your own workspace. Follow the instructions below to get used to the R command line,...">
+<meta name="twitter:description" content="R is the name of the programming language we will learn on this course. RStudio is a convenient interface which we will be using throughout the course in order to learn how to organise data,...">
 <meta name="twitter:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.13/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -119,11 +119,62 @@
 <h1>
 <span class="header-section-number">1</span> Introduction to R<a class="anchor" aria-label="anchor" href="#introduction-to-r"><i class="fas fa-link"></i></a>
 </h1>
+<ul>
+<li><p>R is the name of the programming language we will learn on this course.</p></li>
+<li><p>RStudio is a convenient interface which we will be using throughout the course in order to learn how to organise data, produce accurate data analyses &amp; data visualisations.</p></li>
+<li><p>RStudio Cloud is a pay-to-use cloud software that means we can access R, RStudio and our projects through any browser with a username login. R and RStudio can be downloaded for free onto your personal computers, but for convenience we will use a classroom space on RStudio Cloud.</p></li>
+</ul>
+<p>Eventually we will also add extra tools like GitHub and RMarkdown for data reproducibility and collaborative programming, check out this short (and very cheesy) intro video.], which are collaboration and version control systems that we will be using throughout the course. More on this in future weeks.</p>
+<p>By the end of this module I hope you will have the tools to confidently analyze real data, make informative and beautiful data visuals, and be able to analyse lots of different types of data.</p>
+<div id="getting-around-on-rstudio" class="section level2" number="1.1">
+<h2>
+<span class="header-section-number">1.1</span> Getting around on RStudio<a class="anchor" aria-label="anchor" href="#getting-around-on-rstudio"><i class="fas fa-link"></i></a>
+</h2>
+<p><strong>VIDEO AND EXPLAINER</strong></p>
+</div>
+<div id="using-rstudio-cloud" class="section level2" number="1.2">
+<h2>
+<span class="header-section-number">1.2</span> Using RStudio Cloud<a class="anchor" aria-label="anchor" href="#using-rstudio-cloud"><i class="fas fa-link"></i></a>
+</h2>
+<p>All of our sessions will run on cloud-based software. All you have to do is make a free account, and join our Workspace BIO-5023Y the sharing link is here.</p>
+<p>Once you are signed up - you will see that there are two spaces:</p>
+<ul>
+<li><p>Your workspace</p></li>
+<li><p>BIO-5023Y</p></li>
+</ul>
+<p>Make sure you are working in the class workspace - there is a limit to the hours/month on your workspace, so all assigments and project work should take place in the BIO-5023Y space.</p>
+<p>RStudio Cloud works in exactly the same way as RStudio, but means you don’t have to download any software. You can access the hosted cloud server and your projects through any browser connection (Chrome works best), from any computer.</p>
+<p>Watch these short explainer videos to get used to navigating the environment.</p>
+<p><strong>Video and explainer</strong></p>
+</div>
+<div id="get-help" class="section level2" number="1.3">
+<h2>
+<span class="header-section-number">1.3</span> Get Help!<a class="anchor" aria-label="anchor" href="#get-help"><i class="fas fa-link"></i></a>
+</h2>
+<p>There are a lot of sources of information about using R out there. Here are a few helpful places to get help when you have an issue, or just to learn more</p>
+<ul>
+<li><p>The R help system itself - type <code>help()</code> and put the name of the package or function you are querying inside the brackets</p></li>
+<li><p>Vignettes - type browseVignettes() into the console and hit Enter, a list of available vignettes for all the packages we have will be displayed</p></li>
+<li><p>Cheat Sheets - available at RStudio.com. Most common packages have an associate cheat sheet covering the basics of how to use them. Download/bookmark ones we will use commonly such as ggplot2, Data transformation with dplyr, Data tidying with tidyr &amp; Data import.</p></li>
+<li><p>Google - I use Google constantly, because I continually forget how to do even basic tasks. If I want to remind myself how to round a number, I might type something like R round number - if I am using a particular package I should include that in the search term as well</p></li>
+<li><p>Ask for help - If you are stuck, getting an error message, can’t think what to do next, then ask someone. It could be me, it could be a classmate. When you do this it is very important that you show the code, include the error message. “This doesn’t work” is not helpful. “Here is my code, this is the data I am using, I want it to do X, and here’s the problem I get.”</p></li>
+</ul>
+<div class="info">
+<p>
+It may be daunting to send your code to someone for help. It is natural and common to feel apprehensive, or to think that your code is really bad. I still feel the same! But we learn when we share our mistakes, and eventually you will find it funny when you look back on your early mistakes, or laugh about the mistakes you still occasionally make!
+</p>
+</div>
+</div>
+<div id="get-started" class="section level2" number="1.4">
+<h2>
+<span class="header-section-number">1.4</span> Get Started<a class="anchor" aria-label="anchor" href="#get-started"><i class="fas fa-link"></i></a>
+</h2>
 <p>Go to RStudio Cloud and enter the Project labelled <code>Week One</code> - this will clone the project and provide you with your own workspace.</p>
 <p>Follow the instructions below to get used to the R command line, and how R works as a language.</p>
-<div id="your-first-r-command" class="section level2" number="1.1">
+</div>
+<div id="your-first-r-command" class="section level2" number="1.5">
 <h2>
-<span class="header-section-number">1.1</span> Your first R command<a class="anchor" aria-label="anchor" href="#your-first-r-command"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.5</span> Your first R command<a class="anchor" aria-label="anchor" href="#your-first-r-command"><i class="fas fa-link"></i></a>
 </h2>
 <p>In the RStudio pane, navigate to the console (bottom left) and <code>type or copy</code> the below it should appear at the &gt;</p>
 <p>Hit Enter on your keyboard.</p>
@@ -136,9 +187,9 @@
 <p>The first line shows the request you made to R, the next line is R's response</p>
 <p>You didn't type the <code><a href="https://rdrr.io/r/base/Comparison.html">&gt;</a></code> symbol: that's just the R command prompt and isn't part of the actual command.</p>
 <p>It's important to understand how the output is formatted. Obviously, the correct answer to the sum <code>10 + 20</code> is <code>30</code>, and not surprisingly R has printed that out as part of its response. But it's also printed out this <code>[1]</code> part, which probably doesn't make a lot of sense to you right now. You're going to see that a lot. You can think of <code>[1] 30</code> as if R were saying "the answer to the 1st question you asked is 30".</p>
-<div id="typos" class="section level3" number="1.1.1">
+<div id="typos" class="section level3" number="1.5.1">
 <h3>
-<span class="header-section-number">1.1.1</span> Typos<a class="anchor" aria-label="anchor" href="#typos"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.5.1</span> Typos<a class="anchor" aria-label="anchor" href="#typos"><i class="fas fa-link"></i></a>
 </h3>
 <p>Before we go on to talk about other types of calculations that we can do with R, there's a few other things I want to point out. The first thing is that, while R is good software, it's still software. It's pretty stupid, and because it's stupid it can't handle typos. It takes it on faith that you meant to type <em>exactly</em> what you did type. For example, suppose that you forgot to hit the shift key when trying to type <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code>, and as a result your command ended up being <code>10 = 20</code> rather than <code>10 + 20</code>. Try it for yourself and replicate this error message:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -150,9 +201,9 @@
 <pre><code>## [1] -10</code></pre>
 <p>In this case, R produces the right answer, but to the the wrong question.</p>
 </div>
-<div id="more-simple-arithmetic" class="section level3" number="1.1.2">
+<div id="more-simple-arithmetic" class="section level3" number="1.5.2">
 <h3>
-<span class="header-section-number">1.1.2</span> More simple arithmetic<a class="anchor" aria-label="anchor" href="#more-simple-arithmetic"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.5.2</span> More simple arithmetic<a class="anchor" aria-label="anchor" href="#more-simple-arithmetic"><i class="fas fa-link"></i></a>
 </h3>
 <p>One of the best ways to get to know R is to play with it, it's pretty difficult to break it so don't worry too much. Type whatever you want into to the console and see what happens.</p>
 <p>If the last line of your console looks like this</p>
@@ -164,9 +215,9 @@
 [1] 30</code></pre>
 <p><em>Alternatively</em> hit escape, and R will forget what you were trying to do and return to a blank line.</p>
 </div>
-<div id="try-some-maths" class="section level3" number="1.1.3">
+<div id="try-some-maths" class="section level3" number="1.5.3">
 <h3>
-<span class="header-section-number">1.1.3</span> Try some maths<a class="anchor" aria-label="anchor" href="#try-some-maths"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.5.3</span> Try some maths<a class="anchor" aria-label="anchor" href="#try-some-maths"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fl">1</span><span class="op">+</span><span class="fl">7</span></code></pre></div>
@@ -189,9 +240,9 @@
 5^4 = 5 \times 5 \times 5 \times 5 
 \]</span></p>
 </div>
-<div id="perform-some-combos" class="section level3" number="1.1.4">
+<div id="perform-some-combos" class="section level3" number="1.5.4">
 <h3>
-<span class="header-section-number">1.1.4</span> Perform some combos<a class="anchor" aria-label="anchor" href="#perform-some-combos"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.5.4</span> Perform some combos<a class="anchor" aria-label="anchor" href="#perform-some-combos"><i class="fas fa-link"></i></a>
 </h3>
 <p>Perform some mathematical combos, noting that the order in which R performs calculations is the standard one.</p>
 <p>That is, first calculate things inside <strong>B</strong>rackets <code>()</code>, then calculate <strong>O</strong>rders of (exponents) <code><a href="https://rdrr.io/r/base/Arithmetic.html">^</a></code>, then <strong>D</strong>ivision <code><a href="https://rdrr.io/r/base/Arithmetic.html">/</a></code> and <strong>M</strong>ultiplication <code><a href="https://rdrr.io/r/base/Arithmetic.html">*</a></code>, then <strong>A</strong>ddition <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code> and <strong>S</strong>ubtraction <code><a href="https://rdrr.io/r/base/Arithmetic.html">-</a></code>.</p>
@@ -216,14 +267,14 @@ You can run them again, or edit them. Later on we will look at scripts, as an es
 </blockquote>
 </div>
 </div>
-<div id="true-or-false-data" class="section level2" number="1.2">
+<div id="true-or-false-data" class="section level2" number="1.6">
 <h2>
-<span class="header-section-number">1.2</span> "true or false" data<a class="anchor" aria-label="anchor" href="#true-or-false-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.6</span> "true or false" data<a class="anchor" aria-label="anchor" href="#true-or-false-data"><i class="fas fa-link"></i></a>
 </h2>
 <p>Time to make a sidebar onto another kind of data. A key concept in that a lot of R relies on is the idea of a <strong><em>logical value</em></strong>. A logical value is an assertion about whether something is true or false. This is implemented in R in a pretty straightforward way. There are two logical values, namely <code>TRUE</code> and <code>FALSE</code>. Despite the simplicity, a logical values are very useful things. Let's see how they work.</p>
-<div id="assessing-mathematical-truths" class="section level3" number="1.2.1">
+<div id="assessing-mathematical-truths" class="section level3" number="1.6.1">
 <h3>
-<span class="header-section-number">1.2.1</span> Assessing mathematical truths<a class="anchor" aria-label="anchor" href="#assessing-mathematical-truths"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.6.1</span> Assessing mathematical truths<a class="anchor" aria-label="anchor" href="#assessing-mathematical-truths"><i class="fas fa-link"></i></a>
 </h3>
 <p>In George Orwell's classic book <em>1984</em>, one of the slogans used by the totalitarian Party was "two plus two equals five", the idea being that the political domination of human freedom becomes complete when it is possible to subvert even the most basic of truths.</p>
 <p>But they didn't have R. R will not be subverted. It has rather firm opinions on the topic of what is and isn't true, at least as regards basic mathematics. If I ask it to calculate <code>2 + 2</code>, it always gives the same answer, and it's not bloody 5:</p>
@@ -249,9 +300,9 @@ You can run them again, or edit them. Later on we will look at scripts, as an es
 <p>That's probably for the best.</p>
 </div>
 </div>
-<div id="storing-outputs" class="section level2" number="1.3">
+<div id="storing-outputs" class="section level2" number="1.7">
 <h2>
-<span class="header-section-number">1.3</span> Storing outputs<a class="anchor" aria-label="anchor" href="#storing-outputs"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.7</span> Storing outputs<a class="anchor" aria-label="anchor" href="#storing-outputs"><i class="fas fa-link"></i></a>
 </h2>
 <p>With simple questions like the ones above we are happy to just see the answer, but our quesitons are often more complex than this. If we need to take multiple steps, we benefit from being able to store our answers and recall them for use in later steps. This is very simple to do we can <em>assign</em> outputs to a name:</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
@@ -297,9 +348,9 @@ You can run them again, or edit them. Later on we will look at scripts, as an es
 <blockquote>
 <p>**Note - RStudio will by default save the objects in its memory when you close a session. These will then be there the next time you logon. It might seem nice to be able to close things down and pick up where you left off, but its actually quite dangerous. It's messy, and can cause lots of problems when we work with scripts later, so don't do this!!! To stop RStudio from saving objects by default go to the Preferences option and change "Save workspace to .RData on exit" to "Never". Instead we are going to learn how to use scripts to quickly re-run analyses we have been working on.</p>
 </blockquote>
-<div id="choosing-names" class="section level3" number="1.3.1">
+<div id="choosing-names" class="section level3" number="1.7.1">
 <h3>
-<span class="header-section-number">1.3.1</span> Choosing names<a class="anchor" aria-label="anchor" href="#choosing-names"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.7.1</span> Choosing names<a class="anchor" aria-label="anchor" href="#choosing-names"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
 <li><p>Use informative variable names. As a general rule, using meaningful names like <code>orange</code> and <code>apple</code> is preferred over arbitrary ones like <code>variable1</code> and <code>variable2</code>. Otherwise it's very hard to remember what the contents of different variables actually are.</p></li>
@@ -309,16 +360,16 @@ You can run them again, or edit them. Later on we will look at scripts, as an es
 </ul>
 </div>
 </div>
-<div id="writing-scripts" class="section level2" number="1.4">
+<div id="writing-scripts" class="section level2" number="1.8">
 <h2>
-<span class="header-section-number">1.4</span> Writing scripts<a class="anchor" aria-label="anchor" href="#writing-scripts"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.8</span> Writing scripts<a class="anchor" aria-label="anchor" href="#writing-scripts"><i class="fas fa-link"></i></a>
 </h2>
 <p>Until now we have been typing words directly into the Console. This is fine for short/simple calculations - but as soon as we have a more complex, multi-step process this becomes time consuming, error-prone and <em>boring</em>. <strong>Scripts</strong> are a document containing all of your commands (in the order you want them to run), they are <em>repeatable, shareable, annotated records of what you have done</em>. In short they are incredibly useful - and a big step towards <strong>open</strong> and <strong>reproducible</strong> research.</p>
 <p>To create a script go to File &gt; New File &gt; R Script.</p>
 <p>This will open a pane in the top-left of RStudio with a tab name of <code>Untitled1</code>. In your new script, type some of the basic arithmetic and assignment commands you used previously. When you write a script, make sure it has all of the commands you need to complete your analysis, <em>in the order you want them to run</em>.</p>
-<div id="commenting-on-scripts" class="section level3" number="1.4.1">
+<div id="commenting-on-scripts" class="section level3" number="1.8.1">
 <h3>
-<span class="header-section-number">1.4.1</span> Commenting on scripts<a class="anchor" aria-label="anchor" href="#commenting-on-scripts"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.8.1</span> Commenting on scripts<a class="anchor" aria-label="anchor" href="#commenting-on-scripts"><i class="fas fa-link"></i></a>
 </h3>
 <p>Annotating your instructions provides yourself and others insights into why you are doing what you are doing. This is a vital aspect of a robust and reproducible workflow. And when you come back to a script, one week, one month or one year from now you will often wonder what a command was for. It is very, very useful to make notes for yourself, and its useful in case anyone else will ever read your script. Make these comments helpful they are for humans to read.</p>
 <p>In R we signal a comment with the # key. Everything in the line after a # is ignored by R and won't be treated as a command. You should see that it is marked in a different colour in your script.</p>
@@ -326,9 +377,9 @@ You can run them again, or edit them. Later on we will look at scripts, as an es
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># I really love R</span></code></pre></div>
 </div>
-<div id="running-your-script" class="section level3" number="1.4.2">
+<div id="running-your-script" class="section level3" number="1.8.2">
 <h3>
-<span class="header-section-number">1.4.2</span> Running your script<a class="anchor" aria-label="anchor" href="#running-your-script"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.8.2</span> Running your script<a class="anchor" aria-label="anchor" href="#running-your-script"><i class="fas fa-link"></i></a>
 </h3>
 <p>To run the commands from your script, we need to get it into the Console. You could select and copy/paste this into the Console. But there are a couple of faster shortcuts.</p>
 <ul>
@@ -337,9 +388,9 @@ You can run them again, or edit them. Later on we will look at scripts, as an es
 <li><p>If you want to run the whole script in one go then press Ctrl+A then either click Run or press Ctrl+Enter</p></li>
 </ul>
 </div>
-<div id="saving-your-script" class="section level3" number="1.4.3">
+<div id="saving-your-script" class="section level3" number="1.8.3">
 <h3>
-<span class="header-section-number">1.4.3</span> Saving your script<a class="anchor" aria-label="anchor" href="#saving-your-script"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.8.3</span> Saving your script<a class="anchor" aria-label="anchor" href="#saving-your-script"><i class="fas fa-link"></i></a>
 </h3>
 <p>Our script now contains code and comments from our first workshop. We need to save it.</p>
 <p>Alongside our data, our script is the most precious part of our analysis. We don't need to save anything else, any outputs etc. because our script can always be used to generate everything again. Note the colour of the script - the name changes colour when we have unsaved changes. Press the Save button or go to File &gt; Save as.
@@ -347,9 +398,9 @@ Give the File a sensible name like "Simple commands in R" and in the bottom righ
 <p>You could now safely quit R, and when you log on next time to this project, your script will be waiting for you.</p>
 </div>
 </div>
-<div id="error" class="section level2" number="1.5">
+<div id="error" class="section level2" number="1.9">
 <h2>
-<span class="header-section-number">1.5</span> Error<a class="anchor" aria-label="anchor" href="#error"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.9</span> Error<a class="anchor" aria-label="anchor" href="#error"><i class="fas fa-link"></i></a>
 </h2>
 <p>Things will go wrong eventually, they always do...</p>
 <p>R is <em>very</em> pedantic, even the smallest typo can result in failure and typos are impossilbe to avoid. So we will make mistakes. One type of mistake we will make is an <strong>error</strong>. The code fails to run. The most common causes for an error are:</p>
@@ -360,10 +411,16 @@ Give the File a sensible name like "Simple commands in R" and in the bottom righ
 </ul>
 <p>There's nothing wrong with making <em>lots</em> of errors. The trick is not to panic or get frustrated, but to read the error message and our script carefully and start to <em>debug</em>...</p>
 <p>... and sometimes we need to walk away and come back later!</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-26"></span>
+<img src="images/Error.jpg" alt="R Error" width="80%"><p class="caption">
+Figure 1.1: courtesy of Allison Horst
+</p>
 </div>
-<div id="functions" class="section level2" number="1.6">
+</div>
+<div id="functions" class="section level2" number="1.10">
 <h2>
-<span class="header-section-number">1.6</span> Functions<a class="anchor" aria-label="anchor" href="#functions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.10</span> Functions<a class="anchor" aria-label="anchor" href="#functions"><i class="fas fa-link"></i></a>
 </h2>
 <p>Functions are the tools of R. Each one helps us to do a different task.</p>
 <p>Take for example the function that we use to round a number to a certain number of digits - this function is called <code>round</code></p>
@@ -379,9 +436,9 @@ Give the File a sensible name like "Simple commands in R" and in the bottom righ
 </ul>
 <p>Arguments are the information we give to a function. These arguments are in the form <code>name = value</code> the name specifies the argument, and the value is what we are providing. That is the first argument x is the number we would like to round, it has a value of 2.4326782647. The second argument digits is how we would like the number to be rounded and we specify 2.</p>
 <p>Ok put the above commmand in your script and add a comment with # as to what you are doing.</p>
-<div id="storing-the-output-of-functions" class="section level3" number="1.6.1">
+<div id="storing-the-output-of-functions" class="section level3" number="1.10.1">
 <h3>
-<span class="header-section-number">1.6.1</span> Storing the output of functions<a class="anchor" aria-label="anchor" href="#storing-the-output-of-functions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.10.1</span> Storing the output of functions<a class="anchor" aria-label="anchor" href="#storing-the-output-of-functions"><i class="fas fa-link"></i></a>
 </h3>
 <p>What if we need the answer from a function in a later calculation. The answer is to use the assignment operator again.</p>
 <p>Can you work out what is going on here? If so copy this into your R script and a #comment next to each line.</p>
@@ -391,9 +448,9 @@ Give the File a sensible name like "Simple commands in R" and in the bottom righ
 <span class="va">rounded_number</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span>x  <span class="op">=</span> <span class="va">my_number</span>, 
                         digits <span class="op">=</span> <span class="va">number_of_digits</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="more-fun-with-functions" class="section level3" number="1.6.2">
+<div id="more-fun-with-functions" class="section level3" number="1.10.2">
 <h3>
-<span class="header-section-number">1.6.2</span> More fun with functions<a class="anchor" aria-label="anchor" href="#more-fun-with-functions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.10.2</span> More fun with functions<a class="anchor" aria-label="anchor" href="#more-fun-with-functions"><i class="fas fa-link"></i></a>
 </h3>
 <p>Check this out</p>
 <div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
@@ -420,9 +477,9 @@ Give the File a sensible name like "Simple commands in R" and in the bottom righ
 <pre><code>## starting httpd help server ... done</code></pre>
 </div>
 </div>
-<div id="packages" class="section level2" number="1.7">
+<div id="packages" class="section level2" number="1.11">
 <h2>
-<span class="header-section-number">1.7</span> Packages<a class="anchor" aria-label="anchor" href="#packages"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.11</span> Packages<a class="anchor" aria-label="anchor" href="#packages"><i class="fas fa-link"></i></a>
 </h2>
 <p>An R package is a container for various things including functions and data. These make it easy to do very complicate protocols by using custom-built functions. Later we will see how we can write our own simple functions.</p>
 <p>On RStudio Cloud I have already installed several add-on packages, all we need to do is use a simple function to load these packages into our workspace. Once this is complete we will have access to all the custom functions they contain.</p>
@@ -435,9 +492,9 @@ Give the File a sensible name like "Simple commands in R" and in the bottom righ
 </blockquote>
 <p>Packages are a lot like new apps extending the functionality of what your phone can do. To use the functionalities of a package they must be loaded <em>before</em> we call on the funcitons or data they contain. So the most sensible place to put library calls for packages is at the very <strong>top</strong> of our script. So let's do that now.</p>
 </div>
-<div id="my-first-data-visualisation" class="section level2" number="1.8">
+<div id="my-first-data-visualisation" class="section level2" number="1.12">
 <h2>
-<span class="header-section-number">1.8</span> My first data visualisation<a class="anchor" aria-label="anchor" href="#my-first-data-visualisation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.12</span> My first data visualisation<a class="anchor" aria-label="anchor" href="#my-first-data-visualisation"><i class="fas fa-link"></i></a>
 </h2>
 <p>Let's run our first data visualisation using the functions and data we have now loaded - this produces a plot using functions from the <code>ggplot2</code> package (<span class="citation"><a href="references.html#ref-R-ggplot2" role="doc-biblioref">Wickham et al.</a> (<a href="references.html#ref-R-ggplot2" role="doc-biblioref">2021</a>)</span>) and data from the <code>palmerpenguins</code> (<span class="citation"><a href="references.html#ref-R-palmerpenguins" role="doc-biblioref">Horst et al.</a> (<a href="references.html#ref-R-palmerpenguins" role="doc-biblioref">2020</a>)</span>) package. Use the # comments to add notes on what you are using each package for in your script.</p>
 <p>Using these functions we can write a simple line of code to produce a figure. We specify the data source, the variables to be used for the x and y axis and then the type of visual object to produce, colouring them by the species.</p>
@@ -445,7 +502,7 @@ Give the File a sensible name like "Simple commands in R" and in the bottom righ
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">penguins</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">bill_length_mm</span>, y <span class="op">=</span> <span class="va">bill_depth_mm</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>colour<span class="op">=</span><span class="va">species</span><span class="op">)</span><span class="op">)</span> </code></pre></div>
 <pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
-<div class="inline-figure"><img src="01-data_files/figure-html/unnamed-chunk-34-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="01-data_files/figure-html/unnamed-chunk-35-1.png" width="100%" style="display: block; margin: auto;"></div>
 <blockquote>
 <p>**Note - you may have noticed R gave you a warning. Not the same as a big scary error, but R wants you to be aware of something. In this case that two of the observations had missing data in them (either bill length or bill depth), so couldn't be plotted.</p>
 </blockquote>
@@ -456,11 +513,11 @@ Give the File a sensible name like "Simple commands in R" and in the bottom righ
            y <span class="op">=</span> <span class="va">bill_depth_mm</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="co"># sets y axis value as bill depth</span>
     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>colour<span class="op">=</span><span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="co"># plot points coloured by penguin species</span></code></pre></div>
 <pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
-<div class="inline-figure"><img src="01-data_files/figure-html/unnamed-chunk-35-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="01-data_files/figure-html/unnamed-chunk-36-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
-<div id="quitting" class="section level2" number="1.9">
+<div id="quitting" class="section level2" number="1.13">
 <h2>
-<span class="header-section-number">1.9</span> Quitting<a class="anchor" aria-label="anchor" href="#quitting"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.13</span> Quitting<a class="anchor" aria-label="anchor" href="#quitting"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li><p>Make sure you have saved any changes to your R script - that's all you need to make sure you've done!</p></li>
@@ -483,36 +540,36 @@ Task
 Produce a scatterplot of longevity<code>against</code>thorax`. What does the relationship look like?
 </div>
 </div>
-<button id="displayTextunnamed-chunk-38" onclick="javascript:toggle('unnamed-chunk-38');">
+<button id="displayTextunnamed-chunk-39" onclick="javascript:toggle('unnamed-chunk-39');">
 Show Solution
 </button>
-<div id="toggleTextunnamed-chunk-38" style="display: none">
+<div id="toggleTextunnamed-chunk-39" style="display: none">
 <div class="panel panel-default">
 <div class="panel-heading panel-heading1">
 Solution
 </div>
 <div class="panel-body">
 <div class="tab">
-<button class="tablinksunnamed-chunk-38 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-38', 'unnamed-chunk-38');">
+<button class="tablinksunnamed-chunk-39 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-39', 'unnamed-chunk-39');">
 Base R
 </button>
-<button class="tablinksunnamed-chunk-38" onclick="javascript:openCode(event, 'option2unnamed-chunk-38', 'unnamed-chunk-38');">
+<button class="tablinksunnamed-chunk-39" onclick="javascript:openCode(event, 'option2unnamed-chunk-39', 'unnamed-chunk-39');">
 <tt>tidyverse</tt>
 </button>
 </div>
-<div id="option1unnamed-chunk-38" class="tabcontentunnamed-chunk-38">
+<div id="option1unnamed-chunk-39" class="tabcontentunnamed-chunk-39">
 <div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">longevity</span> <span class="op">~</span> <span class="va">thorax</span>, data <span class="op">=</span> <span class="va">ff</span>, 
      pch<span class="op">=</span><span class="fl">19</span>, col<span class="op">=</span><span class="st">'darkgrey'</span><span class="op">)</span></code></pre></div>
 <p>The plot suggests that a linear relationship might exist between the two variables. So we can proceed by fitting a linear model in R.</p>
 </div>
-<div id="option2unnamed-chunk-38" class="tabcontentunnamed-chunk-38">
+<div id="option2unnamed-chunk-39" class="tabcontentunnamed-chunk-39">
 <div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">ff</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">thorax</span>, y <span class="op">=</span> <span class="va">longevity</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>The plot suggests that a linear relationship might exist between the two variables. So we can proceed by fitting a linear model in R.</p>
 </div>
-<script> javascript:hide('option2unnamed-chunk-38') </script>
+<script> javascript:hide('option2unnamed-chunk-39') </script>
 </div>
 </div>
 </div>
@@ -530,10 +587,10 @@ Task
 </div>
 </div>
 
-<button id="displayTextunnamed-chunk-40" onclick="javascript:toggle('unnamed-chunk-40');">
+<button id="displayTextunnamed-chunk-41" onclick="javascript:toggle('unnamed-chunk-41');">
 Show Solution
 </button>
-<div id="toggleTextunnamed-chunk-40" style="display: none">
+<div id="toggleTextunnamed-chunk-41" style="display: none">
 <div class="panel panel-default">
 <div class="panel-heading panel-heading1">
 Solution
@@ -550,9 +607,9 @@ Solution
 </div>
 </div>
 </div>
-<div id="activity-1" class="section level2" number="1.10">
+<div id="activity-1" class="section level2" number="1.14">
 <h2>
-<span class="header-section-number">1.10</span> Activity 1<a class="anchor" aria-label="anchor" href="#activity-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.14</span> Activity 1<a class="anchor" aria-label="anchor" href="#activity-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>Read through the study to familiarise yourself with the data you will be using over the coming weeks and answer the below questions.</p>
 <p>When you get the correct answer, the answer box will turn green. Sometimes this doesn't work on Internet Explorer or Edge so be sure to use Chrome or Firefox.</p>
@@ -577,9 +634,9 @@ Solution
 </ul>
 <p><input class="webex-solveme nospaces" size="2" data-answer='["20"]'></p>
 </div>
-<div id="activity-2" class="section level2" number="1.11">
+<div id="activity-2" class="section level2" number="1.15">
 <h2>
-<span class="header-section-number">1.11</span> Activity 2<a class="anchor" aria-label="anchor" href="#activity-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.15</span> Activity 2<a class="anchor" aria-label="anchor" href="#activity-2"><i class="fas fa-link"></i></a>
 </h2>
 <p><a href="files/Data_Skills_1A.zip" download>Download the files for Psych 1A here</a></p>
 <p>The files are stored in a <strong>zip file</strong>. A zip file is a folder that contains files that have been compressed to make the file size smaller (like vacuum packed food) and enables you to download multiple files at once, however, before you use the files from a zip folder you first need to extract them.</p>
@@ -591,9 +648,9 @@ Solution
 <li>You can now use the unzipped files. Save the zip folder for now, we're going to use it again in chapter 3.</li>
 </ol>
 </div>
-<div id="activity-3" class="section level2" number="1.12">
+<div id="activity-3" class="section level2" number="1.16">
 <h2>
-<span class="header-section-number">1.12</span> Activity 3<a class="anchor" aria-label="anchor" href="#activity-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.16</span> Activity 3<a class="anchor" aria-label="anchor" href="#activity-3"><i class="fas fa-link"></i></a>
 </h2>
 <p>Now that you've unzipped the folder, you should see that you have eight files. Three of these files are the data from Woodworth et al. - <code>code-book.pdf</code>, <code>ahi-cesd.csv</code> and <code>participant-info.csv</code>. Open and review each of these files and use the code book to figure out what the data in each variable (column) represents.</p>
 <ul>
@@ -800,40 +857,44 @@ $( document ).ready(function() {
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#introduction-to-r"><span class="header-section-number">1</span> Introduction to R</a></li>
+<li><a class="nav-link" href="#getting-around-on-rstudio"><span class="header-section-number">1.1</span> Getting around on RStudio</a></li>
+<li><a class="nav-link" href="#using-rstudio-cloud"><span class="header-section-number">1.2</span> Using RStudio Cloud</a></li>
+<li><a class="nav-link" href="#get-help"><span class="header-section-number">1.3</span> Get Help!</a></li>
+<li><a class="nav-link" href="#get-started"><span class="header-section-number">1.4</span> Get Started</a></li>
 <li>
-<a class="nav-link" href="#your-first-r-command"><span class="header-section-number">1.1</span> Your first R command</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#typos"><span class="header-section-number">1.1.1</span> Typos</a></li>
-<li><a class="nav-link" href="#more-simple-arithmetic"><span class="header-section-number">1.1.2</span> More simple arithmetic</a></li>
-<li><a class="nav-link" href="#try-some-maths"><span class="header-section-number">1.1.3</span> Try some maths</a></li>
-<li><a class="nav-link" href="#perform-some-combos"><span class="header-section-number">1.1.4</span> Perform some combos</a></li>
+<a class="nav-link" href="#your-first-r-command"><span class="header-section-number">1.5</span> Your first R command</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#typos"><span class="header-section-number">1.5.1</span> Typos</a></li>
+<li><a class="nav-link" href="#more-simple-arithmetic"><span class="header-section-number">1.5.2</span> More simple arithmetic</a></li>
+<li><a class="nav-link" href="#try-some-maths"><span class="header-section-number">1.5.3</span> Try some maths</a></li>
+<li><a class="nav-link" href="#perform-some-combos"><span class="header-section-number">1.5.4</span> Perform some combos</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#true-or-false-data"><span class="header-section-number">1.2</span> "true or false" data</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#assessing-mathematical-truths"><span class="header-section-number">1.2.1</span> Assessing mathematical truths</a></li></ul>
+<a class="nav-link" href="#true-or-false-data"><span class="header-section-number">1.6</span> "true or false" data</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#assessing-mathematical-truths"><span class="header-section-number">1.6.1</span> Assessing mathematical truths</a></li></ul>
 </li>
 <li>
-<a class="nav-link" href="#storing-outputs"><span class="header-section-number">1.3</span> Storing outputs</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#choosing-names"><span class="header-section-number">1.3.1</span> Choosing names</a></li></ul>
+<a class="nav-link" href="#storing-outputs"><span class="header-section-number">1.7</span> Storing outputs</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#choosing-names"><span class="header-section-number">1.7.1</span> Choosing names</a></li></ul>
 </li>
 <li>
-<a class="nav-link" href="#writing-scripts"><span class="header-section-number">1.4</span> Writing scripts</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#commenting-on-scripts"><span class="header-section-number">1.4.1</span> Commenting on scripts</a></li>
-<li><a class="nav-link" href="#running-your-script"><span class="header-section-number">1.4.2</span> Running your script</a></li>
-<li><a class="nav-link" href="#saving-your-script"><span class="header-section-number">1.4.3</span> Saving your script</a></li>
+<a class="nav-link" href="#writing-scripts"><span class="header-section-number">1.8</span> Writing scripts</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#commenting-on-scripts"><span class="header-section-number">1.8.1</span> Commenting on scripts</a></li>
+<li><a class="nav-link" href="#running-your-script"><span class="header-section-number">1.8.2</span> Running your script</a></li>
+<li><a class="nav-link" href="#saving-your-script"><span class="header-section-number">1.8.3</span> Saving your script</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#error"><span class="header-section-number">1.5</span> Error</a></li>
+<li><a class="nav-link" href="#error"><span class="header-section-number">1.9</span> Error</a></li>
 <li>
-<a class="nav-link" href="#functions"><span class="header-section-number">1.6</span> Functions</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#storing-the-output-of-functions"><span class="header-section-number">1.6.1</span> Storing the output of functions</a></li>
-<li><a class="nav-link" href="#more-fun-with-functions"><span class="header-section-number">1.6.2</span> More fun with functions</a></li>
+<a class="nav-link" href="#functions"><span class="header-section-number">1.10</span> Functions</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#storing-the-output-of-functions"><span class="header-section-number">1.10.1</span> Storing the output of functions</a></li>
+<li><a class="nav-link" href="#more-fun-with-functions"><span class="header-section-number">1.10.2</span> More fun with functions</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#packages"><span class="header-section-number">1.7</span> Packages</a></li>
-<li><a class="nav-link" href="#my-first-data-visualisation"><span class="header-section-number">1.8</span> My first data visualisation</a></li>
-<li><a class="nav-link" href="#quitting"><span class="header-section-number">1.9</span> Quitting</a></li>
-<li><a class="nav-link" href="#activity-1"><span class="header-section-number">1.10</span> Activity 1</a></li>
-<li><a class="nav-link" href="#activity-2"><span class="header-section-number">1.11</span> Activity 2</a></li>
-<li><a class="nav-link" href="#activity-3"><span class="header-section-number">1.12</span> Activity 3</a></li>
+<li><a class="nav-link" href="#packages"><span class="header-section-number">1.11</span> Packages</a></li>
+<li><a class="nav-link" href="#my-first-data-visualisation"><span class="header-section-number">1.12</span> My first data visualisation</a></li>
+<li><a class="nav-link" href="#quitting"><span class="header-section-number">1.13</span> Quitting</a></li>
+<li><a class="nav-link" href="#activity-1"><span class="header-section-number">1.14</span> Activity 1</a></li>
+<li><a class="nav-link" href="#activity-2"><span class="header-section-number">1.15</span> Activity 2</a></li>
+<li><a class="nav-link" href="#activity-3"><span class="header-section-number">1.16</span> Activity 3</a></li>
 </ul>
 
       <div class="book-extra">

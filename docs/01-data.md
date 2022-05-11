@@ -8,6 +8,58 @@
 
 
 
+* R is the name of the programming language we will learn on this course. 
+
+* RStudio is a convenient interface which we will be using throughout the course in order to learn how to organise data, produce accurate data analyses & data visualisations. 
+
+* RStudio Cloud is a pay-to-use cloud software that means we can access R, RStudio and our projects through any browser with a username login. R and RStudio can be downloaded for free onto your personal computers, but for convenience we will use a classroom space on RStudio Cloud. 
+
+Eventually we will also add extra tools like GitHub and RMarkdown for data reproducibility and collaborative programming, check out this short (and very cheesy) intro video.], which are collaboration and version control systems that we will be using throughout the course. More on this in future weeks.
+
+By the end of this module I hope you will have the tools to confidently analyze real data, make informative and beautiful data visuals, and be able to analyse lots of different types of data.
+
+## Getting around on RStudio
+
+**VIDEO AND EXPLAINER**
+
+## Using RStudio Cloud
+
+All of our sessions will run on cloud-based software. All you have to do is make a free account, and join our Workspace BIO-5023Y the sharing link is here.
+
+Once you are signed up - you will see that there are two spaces:
+
+* Your workspace
+
+* BIO-5023Y
+
+Make sure you are working in the class workspace - there is a limit to the hours/month on your workspace, so all assigments and project work should take place in the BIO-5023Y space.
+
+RStudio Cloud works in exactly the same way as RStudio, but means you don’t have to download any software. You can access the hosted cloud server and your projects through any browser connection (Chrome works best), from any computer.
+
+Watch these short explainer videos to get used to navigating the environment.
+
+**Video and explainer**
+
+## Get Help!
+
+There are a lot of sources of information about using R out there. Here are a few helpful places to get help when you have an issue, or just to learn more
+
+* The R help system itself - type `help()` and put the name of the package or function you are querying inside the brackets
+
+* Vignettes - type browseVignettes() into the console and hit Enter, a list of available vignettes for all the packages we have will be displayed
+
+* Cheat Sheets - available at RStudio.com. Most common packages have an associate cheat sheet covering the basics of how to use them. Download/bookmark ones we will use commonly such as ggplot2, Data transformation with dplyr, Data tidying with tidyr & Data import.
+
+* Google - I use Google constantly, because I continually forget how to do even basic tasks. If I want to remind myself how to round a number, I might type something like R round number - if I am using a particular package I should include that in the search term as well
+
+* Ask for help - If you are stuck, getting an error message, can’t think what to do next, then ask someone. It could be me, it could be a classmate. When you do this it is very important that you show the code, include the error message. “This doesn’t work” is not helpful. “Here is my code, this is the data I am using, I want it to do X, and here’s the problem I get.”
+
+<div class="info">
+<p>It may be daunting to send your code to someone for help. It is natural and common to feel apprehensive, or to think that your code is really bad. I still feel the same! But we learn when we share our mistakes, and eventually you will find it funny when you look back on your early mistakes, or laugh about the mistakes you still occasionally make!</p>
+</div>
+
+## Get Started
+
 Go to RStudio Cloud and enter the Project labelled `Week One` - this will clone the project and provide you with your own workspace.
 
 Follow the instructions below to get used to the R command line, and how R works as a language. 
@@ -412,7 +464,10 @@ There's nothing wrong with making *lots* of errors. The trick is not to panic or
 
 ... and sometimes we need to walk away and come back later!
 
-
+<div class="figure" style="text-align: center">
+<img src="images/Error.jpg" alt="R Error" width="80%" />
+<p class="caption">(\#fig:unnamed-chunk-26)courtesy of Allison Horst</p>
+</div>
 
 
 ## Functions
@@ -563,7 +618,7 @@ ggplot(data = penguins,aes(x = bill_length_mm, y = bill_depth_mm)) + geom_point(
 ## Warning: Removed 2 rows containing missing values (geom_point).
 ```
 
-<img src="01-data_files/figure-html/unnamed-chunk-34-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="01-data_files/figure-html/unnamed-chunk-35-1.png" width="100%" style="display: block; margin: auto;" />
 
 > **Note - you may have noticed R gave you a warning. Not the same as a big scary error, but R wants you to be aware of something. In this case that two of the observations had missing data in them (either bill length or bill depth), so couldn't be plotted. 
 
@@ -581,7 +636,7 @@ ggplot(data = penguins, # calls ggplot function, data is penguins
 ## Warning: Removed 2 rows containing missing values (geom_point).
 ```
 
-<img src="01-data_files/figure-html/unnamed-chunk-35-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="01-data_files/figure-html/unnamed-chunk-36-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 ## Quitting
@@ -614,9 +669,9 @@ https://github.com/UEABIO/5023Y_Workshop/blob/main/data/Challenger.csv
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
 Produce a scatterplot of longevity` against `thorax`. What does the relationship look like? </div></div>
 
-<button id="displayTextunnamed-chunk-38" onclick="javascript:toggle('unnamed-chunk-38');">Show Solution</button>
+<button id="displayTextunnamed-chunk-39" onclick="javascript:toggle('unnamed-chunk-39');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-38" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body"><div class="tab"><button class="tablinksunnamed-chunk-38 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-38', 'unnamed-chunk-38');">Base R</button><button class="tablinksunnamed-chunk-38" onclick="javascript:openCode(event, 'option2unnamed-chunk-38', 'unnamed-chunk-38');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-38" class="tabcontentunnamed-chunk-38">
+<div id="toggleTextunnamed-chunk-39" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body"><div class="tab"><button class="tablinksunnamed-chunk-39 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-39', 'unnamed-chunk-39');">Base R</button><button class="tablinksunnamed-chunk-39" onclick="javascript:openCode(event, 'option2unnamed-chunk-39', 'unnamed-chunk-39');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-39" class="tabcontentunnamed-chunk-39">
 
 ```r
 plot(longevity ~ thorax, data = ff, 
@@ -625,7 +680,7 @@ plot(longevity ~ thorax, data = ff,
 
 
 The plot suggests that a linear relationship might exist between the two variables. So we can proceed by fitting a linear model in R.
-</div><div id="option2unnamed-chunk-38" class="tabcontentunnamed-chunk-38">
+</div><div id="option2unnamed-chunk-39" class="tabcontentunnamed-chunk-39">
 
 ```r
 ggplot(ff) +
@@ -634,7 +689,7 @@ ggplot(ff) +
 
 
 The plot suggests that a linear relationship might exist between the two variables. So we can proceed by fitting a linear model in R.
-</div><script> javascript:hide('option2unnamed-chunk-38') </script></div></div></div>
+</div><script> javascript:hide('option2unnamed-chunk-39') </script></div></div></div>
 
 
 
@@ -645,9 +700,9 @@ The plot suggests that a linear relationship might exist between the two variabl
 2. Display a summary of the fit, together with the 97% confidence interval for the estimated parameters.
 3. Show the diagnostic plots for the model. </div></div>
 
-<button id="displayTextunnamed-chunk-40" onclick="javascript:toggle('unnamed-chunk-40');">Show Solution</button>
+<button id="displayTextunnamed-chunk-41" onclick="javascript:toggle('unnamed-chunk-41');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-40" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-41" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 fit <- lm(longevity ~ thorax, ff)

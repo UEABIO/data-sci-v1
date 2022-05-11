@@ -1,3 +1,5 @@
+fig:unnamed-chunk-2
+fig:unnamed-chunk-26
 fig:img-rstudio
 fig:img-autocomplete
 fig:img-objects-enviro
@@ -26,7 +28,6 @@ fig:createplot2
 fig:img-new-markdownb
 fig:img-new-chunkb
 fig:unnamed-chunk-10
-fig:unnamed-chunk-2
 fig:unnamed-chunk-1
 fig:data50hist
 fig:data10Khist
@@ -35,8 +36,15 @@ fig:settings-code
 fig:img-updaterstudio
 fig:img-updateall
 fig:img-soundimals-hash
-how-to-use-this-book-and-the-walkthrough-videos
+how-to-use-this-book
+course-structure
+workshops
+lectures
 introduction-to-r
+getting-around-on-rstudio
+using-rstudio-cloud
+get-help
+get-started
 your-first-r-command
 typos
 more-simple-arithmetic
