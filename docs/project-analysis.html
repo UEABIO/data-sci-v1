@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 16 Project analysis | 5023Y</title>
+<meta name="author" content="Philip T. Leftwich">
+<meta name="description" content="We've spent the last 6 months giving you the skills you need to be able to deal with your own data. Now's the time to show us what you've learned. In this chapter we're going to describe the steps...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 16 Project analysis | 5023Y">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://ueabio.github.io/data-sci/project-analysis.html">
+<meta property="og:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
+<meta property="og:description" content="We've spent the last 6 months giving you the skills you need to be able to deal with your own data. Now's the time to show us what you've learned. In this chapter we're going to describe the steps...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 16 Project analysis | 5023Y">
+<meta name="twitter:description" content="We've spent the last 6 months giving you the skills you need to be able to deal with your own data. Now's the time to show us what you've learned. In this chapter we're going to describe the steps...">
+<meta name="twitter:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.13/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1.9000/transition.js"></script><script src="libs/bs3compat-0.3.1.9000/tabs.js"></script><script src="libs/bs3compat-0.3.1.9000/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/font-awesome-5.13.0/js/script.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NP3MF25W3"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6NP3MF25W3');
+    </script><script language="javascript"> 
+        function toggle(id) {
+            var ele = document.getElementById("toggleText" + id);
+            var text = document.getElementById("displayText" + id);
+            var buttonText = text.innerHTML.replace("Show ", "");
+            buttonText = buttonText.replace("Hide ", "");
+            if(ele.style.display == "block") {
+                ele.style.display = "none";
+                text.innerHTML = "Show " + buttonText;
+            } else {
+                ele.style.display = "block";
+                text.innerHTML = "Hide " + buttonText;
+            }
+        } 
+    </script><script language="javascript">
+        function openCode(evt, codeName, id) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent" + id);
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks" + id);
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(codeName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script><script language="javascript">
+        function hide(id){
+            document.getElementById(id).style.display = "none";
+        }
+    </script><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/psyteachr.css">
+<link rel="stylesheet" href="include/webex.css">
+<link rel="stylesheet" href="include/style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Data Science for Biologists">5023Y</a>:
+        <small class="text-muted">Data Science for Biologists</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Overview</a></li>
+<li><a class="" href="introduction-to-r.html"><span class="header-section-number">1</span> Introduction to R</a></li>
+<li><a class="" href="programming-basics.html"><span class="header-section-number">2</span> Programming basics</a></li>
+<li><a class="" href="ref1.html"><span class="header-section-number">3</span> Intro to R</a></li>
+<li><a class="" href="loading-data.html"><span class="header-section-number">4</span> Loading data</a></li>
+<li><a class="" href="data-wrangling-1.html"><span class="header-section-number">5</span> Data wrangling 1</a></li>
+<li><a class="" href="data-wrangling-2.html"><span class="header-section-number">6</span> Data wrangling 2</a></li>
+<li><a class="" href="intro-to-data-viz.html"><span class="header-section-number">7</span> Intro to Data Viz</a></li>
+<li><a class="" href="scatterplots.html"><span class="header-section-number">8</span> Scatterplots</a></li>
+<li><a class="" href="aq-data-and-recap.html"><span class="header-section-number">9</span> AQ data and recap</a></li>
+<li><a class="" href="reshaping-data.html"><span class="header-section-number">10</span> Reshaping data</a></li>
+<li><a class="" href="pipes.html"><span class="header-section-number">11</span> Pipes</a></li>
+<li><a class="" href="mega-pipe.html"><span class="header-section-number">12</span> Mega pipe</a></li>
+<li><a class="" href="intro-to-probability.html"><span class="header-section-number">13</span> Intro to Probability</a></li>
+<li><a class="" href="probability-continued.html"><span class="header-section-number">14</span> Probability continued</a></li>
+<li><a class="" href="simulation.html"><span class="header-section-number">15</span> Simulation</a></li>
+<li><a class="active" href="project-analysis.html"><span class="header-section-number">16</span> Project analysis</a></li>
+<li class="book-part">Appendices</li>
+<li><a class="" href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></li>
+<li><a class="" href="updating-r-rstudio-and-packages.html"><span class="header-section-number">B</span> Updating R, RStudio, and packages</a></li>
+<li><a class="" href="exporting-files-from-the-server.html"><span class="header-section-number">C</span> Exporting files from the server</a></li>
+<li><a class="" href="symbols.html"><span class="header-section-number">D</span> Symbols</a></li>
+<li><a class="" href="license.html">License</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/UEABIO/data-sci">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="project-analysis" class="section level1" number="16">
+<h1>
+<span class="header-section-number">16</span> Project analysis<a class="anchor" aria-label="anchor" href="#project-analysis"><i class="fas fa-link"></i></a>
+</h1>
+<p>We've spent the last 6 months giving you the skills you need to be able to deal with your own data. Now's the time to show us what you've learned. In this chapter we're going to describe the steps you will need to go through when analysing your data but, aside from a few lines that will help you deal with the questionnaire data and a couple of things you haven't done before we're not going to give you any code solutions.</p>
+<p>For everything else, you have done it before, so use this book to help you. Remember, you don't need to write the code from memory, you just need to find the relevant examples and then copy and paste and change what needs changing to make it work for you.</p>
+<p>We suggest that you problem-solve the code as a group, however, make sure that you all have a separate copy of the final working code. You can book into GTA sessions in week 9 and 10 to help you as well.</p>
+<div id="step-1-import-and-initial-data-wrangling" class="section level2" number="16.1">
+<h2>
+<span class="header-section-number">16.1</span> Step 1: Import and initial data wrangling<a class="anchor" aria-label="anchor" href="#step-1-import-and-initial-data-wrangling"><i class="fas fa-link"></i></a>
+</h2>
+<p>To help get you on your way, we've done a bit of the initial wrangling for you. Download the data files from Moodle into your working directory, create a new Markdown, then run all the below code without changing anything.</p>
+<div class="sourceCode" id="cb258"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+
+<span class="co"># read in data but skip rows 2 and 3</span>
+<span class="va">col_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu">read_csv</span><span class="op">(</span><span class="st">"big5_data.csv"</span>, n_max <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span>
+<span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"big5_data.csv"</span>, col_names <span class="op">=</span> <span class="va">col_names</span>, skip <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Progress</span> <span class="op">==</span> <span class="fl">100</span>, <span class="co"># only keep data from participants who progressed to end of survey</span>
+         <span class="va">DistributionChannel</span> <span class="op">!=</span> <span class="st">"preview"</span><span class="op">)</span>  <span class="co"># Remove Emily's preview data</span>
+
+<span class="co"># read in scoring and codebook data</span>
+<span class="va">scoring</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"scoring.csv"</span><span class="op">)</span>
+<span class="va">codebook</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"code_book.csv"</span><span class="op">)</span>
+
+<span class="co"># create dataset of just big 5 data then join with codebook and scoring</span>
+<span class="va">big5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">dat</span>, <span class="va">ResponseId</span>, <span class="va">Q4_1</span><span class="op">:</span><span class="va">Q4_60</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">pivot_longer</span><span class="op">(</span>cols <span class="op">=</span> <span class="va">Q4_1</span><span class="op">:</span><span class="va">Q4_60</span>, names_to <span class="op">=</span> <span class="st">"item"</span>, values_to <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">codebook</span>, by <span class="op">=</span> <span class="st">"item"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">scoring</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"response"</span>, <span class="st">"direction"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co"># create dataset that just has demographic questions</span>
+
+<span class="va">demographic</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">dat</span>, <span class="va">ResponseId</span>, 
+                      <span class="st">"age"</span> <span class="op">=</span> <span class="va">Q6</span>, 
+                      <span class="st">"gender"</span> <span class="op">=</span> <span class="va">Q7</span>, 
+                      <span class="st">"sexual_orientation"</span> <span class="op">=</span> <span class="va">Q8</span>, 
+                      <span class="st">"siblings"</span> <span class="op">=</span> <span class="va">Q9</span>, 
+                      <span class="st">"birth_order"</span> <span class="op">=</span> <span class="va">Q10</span>, 
+                      <span class="st">"neurodivergent"</span> <span class="op">=</span> <span class="va">Q11</span>,
+                      <span class="st">"team_name"</span> <span class="op">=</span> <span class="va">Q14</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>gender <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">gender</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Man"</span>, <span class="st">"Woman"</span>, <span class="st">"Non-binary"</span>, <span class="st">"Prefer not to say"</span><span class="op">)</span><span class="op">)</span>,
+         sexual_orientation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">sexual_orientation</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Straight/ Heterosexual"</span>, <span class="st">"Bisexual/pansexual"</span>, <span class="st">"Gay or Lesbian"</span>, <span class="st">"Asexual"</span>, <span class="st">"Other"</span>, <span class="st">"Prefer not to say"</span><span class="op">)</span><span class="op">)</span>,
+         birth_order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">birth_order</span><span class="op">)</span>,
+         neurodivergent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">neurodivergent</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Neurotypical"</span>, <span class="st">"Diagnosed"</span>, <span class="st">"Seeking diagnosis"</span>, <span class="st">"Not seeking diagnosis"</span>, <span class="st">"Prefer not to say"</span><span class="op">)</span><span class="op">)</span>,
+         team_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">team_name</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co"># get rid of objects we don't need</span>
+<span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span><span class="va">dat</span>, <span class="va">scoring</span>, <span class="va">codebook</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="step-2-bfi-2-scores" class="section level2" number="16.2">
+<h2>
+<span class="header-section-number">16.2</span> Step 2: BFI-2 scores<a class="anchor" aria-label="anchor" href="#step-2-bfi-2-scores"><i class="fas fa-link"></i></a>
+</h2>
+<p>First, let's deal with the Big 5 scores and just focus on the whole dataset rather than your team data.</p>
+<p>Create an object named <code>trait_dat</code> (where <code>trait</code> is the name of the Big 5 trait you are using as your DV) that just has the data from the trait you are interested in. Your starting dataset should be <code>big5</code>.</p>
+<p>Hint: <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code></p>
+<p>Then, use <code>trait_dat</code> to calculate the average trait <code>score</code> for each participant (<code>ResponseId</code>). Store these scores in an object named <code>trait_scores</code>.</p>
+<p>Hint: <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> and then <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code>.</p>
+</div>
+<div id="step-3-iv" class="section level2" number="16.3">
+<h2>
+<span class="header-section-number">16.3</span> Step 3: IV<a class="anchor" aria-label="anchor" href="#step-3-iv"><i class="fas fa-link"></i></a>
+</h2>
+<p>Now, let's deal with the demographic information you're using as your IV. We want to wrangle the dataset according to the decisions you made in your registered report. You can save each of the below steps to a different object, or you can use the <code><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></code>. However you do it, make the final object named <code>my_demo</code>.</p>
+<ol style="list-style-type: decimal">
+<li>First, if you have exclusion criteria, filter out any participants you don't want in your dataset (e.g., if you have an age limit, or don't want people with no siblings). You may also want to remove people who answered "Prefer not to say" for your IV at this point.</li>
+<li>Then, select to keep just the columns that contain the participant's id, age, gender, team name, and your IV (assuming it isn't gender, in which case you only need those four).</li>
+<li>Then, create any new category groups as required. For example, you might want to collapse sexual orientation into two categories, "heterosexual" and "queer". This is slightly complicated so we'll give you example code - you can adapt the code to collapse other categories like the neurodivergent or birth order options. Be very careful with the spelling, it needs to be exact for <code>recode</code> to work.</li>
+<li>If you're doing birth order, be aware that it is currently stored as a factor because we're using it as a category. What this means is that you can't perform any numeric operations on it in its current state (e.g., you can't calculate the mean birth order or use filter to drop participants above or below a certain value). If you need to do anything like this, create a new variable that recodes this data <code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code>.</li>
+<li>Finally, add <code>drop_na(IV)</code> and <code><a href="https://rdrr.io/r/base/droplevels.html">droplevels()</a></code> to your code (see below) where IV is the variable that you're using as your IV. This will get rid of anyone who didn't respond to your IV question (because obviously you can't include them in your analysis). <code>droplevels</code> removes any factors that don't have any data points (if you don't do this your plots will still show the prefer not to say category even if there's no data in this category).</li>
+</ol>
+<div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">my_demo</span> <span class="op">&lt;-</span> <span class="va">data_from_step1_and_step2</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>sexual_orientation_recoded <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span><span class="op">(</span><span class="va">sexual_orientation</span>, 
+                                             <span class="st">"Straight/ Heterosexual"</span> <span class="op">=</span> <span class="st">"Heterosexual"</span>,
+                                             <span class="st">"Gay or Lesbian"</span> <span class="op">=</span> <span class="st">"Queer"</span>,
+                                             <span class="st">"Bisexual/pansexual"</span> <span class="op">=</span> <span class="st">"Queer"</span>,
+                                             <span class="st">"Asexual"</span> <span class="op">=</span> <span class="st">"Queer"</span>,
+                                             <span class="st">"Other"</span> <span class="op">=</span> <span class="st">"Queer"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">drop_na</span><span class="op">(</span><span class="va">sexual_orientation</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># put your IV variable in here</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/droplevels.html">droplevels</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="step-4-joining-it-all-together" class="section level2" number="16.4">
+<h2>
+<span class="header-section-number">16.4</span> Step 4: Joining it all together<a class="anchor" aria-label="anchor" href="#step-4-joining-it-all-together"><i class="fas fa-link"></i></a>
+</h2>
+<p>Getting there.</p>
+<p>Now, create a dataset named <code>all_dat</code> that joins together <code>my_demo</code> and <code>trait_scores</code> so that you have a single dataset that contains all the data you need from participants who are present in both datasets.</p>
+<p>Hint: <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join()</a></code></p>
+<p>Now on to the analysis (the worst part is over).</p>
+</div>
+<div id="step-5-sample-information" class="section level2" number="16.5">
+<h2>
+<span class="header-section-number">16.5</span> Step 5: Sample information<a class="anchor" aria-label="anchor" href="#step-5-sample-information"><i class="fas fa-link"></i></a>
+</h2>
+<p>Count the number of participants in the data set. This is the overall class sample size. You haven't done this very often so we'll give you the code.</p>
+<div class="sourceCode" id="cb260"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">all_dat</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>Count the number of people of each gender in <code>all_dat</code>. You can also create a column of percentages. You haven't done this before so we'll also give you the code.</p>
+<div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">all_dat</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">gender</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>percent <span class="op">=</span> <span class="va">n</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">*</span><span class="fl">100</span><span class="op">)</span></code></pre></div>
+<p>Calculate the mean age and SD of the full sample. If there is missing data, you may need to use <code>na.rm = TRUE</code>.</p>
+<p>Hint: <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code></p>
+<p>Count how many participants are in each of your IV groups, e.g., how many first born and late born, or how many neurodivergent and neurotypical. Remember to use the recoded variable if you collapsed the categories. You may also wish to calculate percentages.</p>
+</div>
+<div id="step-6-group-differences-in-scores" class="section level2" number="16.6">
+<h2>
+<span class="header-section-number">16.6</span> Step 6: Group differences in scores<a class="anchor" aria-label="anchor" href="#step-6-group-differences-in-scores"><i class="fas fa-link"></i></a>
+</h2>
+<p>Calculate the mean and SD trait score for each of your groups. If there is missing data, you may need to use <code>na.rm = TRUE</code>.</p>
+<p>Hint: <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> then <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code></p>
+</div>
+<div id="step-7-visualisations" class="section level2" number="16.7">
+<h2>
+<span class="header-section-number">16.7</span> Step 7: Visualisations<a class="anchor" aria-label="anchor" href="#step-7-visualisations"><i class="fas fa-link"></i></a>
+</h2>
+<p>Create a bar chart of means for your DV by IV with error bars that display standard error (<code>mean_se</code>).</p>
+<p>Create a violin-boxplot for your DV by IV.</p>
+<p>Ensure that your visualisations are appropriately labelled and try to make them look visually appealing.</p>
+</div>
+<div id="step-8-team-data" class="section level2" number="16.8">
+<h2>
+<span class="header-section-number">16.8</span> Step 8: Team data<a class="anchor" aria-label="anchor" href="#step-8-team-data"><i class="fas fa-link"></i></a>
+</h2>
+<p>Almost done. Now, create a dataset that just contains the data from your team. Be very careful about the spelling of your team name, there is a space before and after the colon and it must be exactly as it is in the dataset to work including all capital letters. You might want to open up the data file to check the exact spelling. Here's an example.</p>
+<div class="sourceCode" id="cb262"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">team_dat</span> <span class="op">&lt;-</span> <span class="va">all_dat</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">team_name</span> <span class="op">==</span> <span class="st">"PR01 : Pavlov's Puppies"</span><span class="op">)</span></code></pre></div>
+<p>Then repeat Steps 5 - 7 but use <code>team_dat</code> instead of <code>all_dat</code>. You should be able to reuse all of code, and just plug in the different dataset.</p>
+</div>
+<div id="finished-7" class="section level2" number="16.9">
+<h2>
+<span class="header-section-number">16.9</span> Finished<a class="anchor" aria-label="anchor" href="#finished-7"><i class="fas fa-link"></i></a>
+</h2>
+<p>And you're done! I wish that I could adequately convey how impressive what you've just done is. I wish that I could show you how amazing your skills are compared to most other psychology undergraduates in the UK and across the world. But no-one ever believe me so I'm going to <a href="https://www.tiktok.com/@mamagum/video/6972749768233684226">leave you with this</a></p>
+
+</div>
+</div>
+
+
+
+<div class="chapter-nav">
+<div class="prev"><a href="simulation.html"><span class="header-section-number">15</span> Simulation</a></div>
+<div class="next"><a href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#project-analysis"><span class="header-section-number">16</span> Project analysis</a></li>
+<li><a class="nav-link" href="#step-1-import-and-initial-data-wrangling"><span class="header-section-number">16.1</span> Step 1: Import and initial data wrangling</a></li>
+<li><a class="nav-link" href="#step-2-bfi-2-scores"><span class="header-section-number">16.2</span> Step 2: BFI-2 scores</a></li>
+<li><a class="nav-link" href="#step-3-iv"><span class="header-section-number">16.3</span> Step 3: IV</a></li>
+<li><a class="nav-link" href="#step-4-joining-it-all-together"><span class="header-section-number">16.4</span> Step 4: Joining it all together</a></li>
+<li><a class="nav-link" href="#step-5-sample-information"><span class="header-section-number">16.5</span> Step 5: Sample information</a></li>
+<li><a class="nav-link" href="#step-6-group-differences-in-scores"><span class="header-section-number">16.6</span> Step 6: Group differences in scores</a></li>
+<li><a class="nav-link" href="#step-7-visualisations"><span class="header-section-number">16.7</span> Step 7: Visualisations</a></li>
+<li><a class="nav-link" href="#step-8-team-data"><span class="header-section-number">16.8</span> Step 8: Team data</a></li>
+<li><a class="nav-link" href="#finished-7"><span class="header-section-number">16.9</span> Finished</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/UEABIO/data-sci/blob/main/book/16-project.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/UEABIO/data-sci/edit/main/book/16-project.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+</div>
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  if (t = document.getElementById("webex-total_correct")) {
+    var correct = document.getElementsByClassName("webex-correct").length;
+    var solvemes = document.getElementsByClassName("webex-solveme").length;
+    var radiogroups = document.getElementsByClassName("webex-radiogroup").length;
+    var selects = document.getElementsByClassName("webex-select").length;
+    
+    t.innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+  
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+  
+  var cl = this.classList
+  
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+  
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+  
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+  
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+  
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+  }
+  
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+  
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+  }
+
+  update_total_correct();
+}
+
+</script><script>
+$( document ).ready(function() {
+  var cite = ' ';
+  var license = ' <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>';
+
+  $("footer div.row div:eq(1) p").html(
+    license
+  );
+});
+</script>
+
+</div>
+ <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-05-11.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+/* (edit style.css for your own book styles) */
+
+button {
+    background-color: #467AAC;
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.panel-default > .panel-heading {
+    background-image: none;
+    background-color: #467AAC;
+    color: white;
+    border-color: #467AAC;
+}
+
+.panel-default > .panel-heading1 {
+    background-image: none;
+    background-color: #075cad;
+    color: white;
+    border-color: #075cad;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    background-color: #b2b2b2
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #075cad;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #075cad;
+}
+
+
