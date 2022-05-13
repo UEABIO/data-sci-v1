@@ -211,7 +211,7 @@ When you create a new code chunk you should notice that the grey box starts and 
 </li>
 <li>Note that text values and dates need to be contained in quotation marks but numerical values do not. Missing and/or unnecessary quotation marks are a common cause of code not working - remember this!</li>
 </ul>
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">name</span> <span class="op">&lt;-</span> <span class="st">"Emily"</span> 
 <span class="va">age</span> <span class="op">&lt;-</span> <span class="fl">35</span>
 <span class="va">today</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>
@@ -250,7 +250,7 @@ Figure 3.5: Slightly better method of running code
 </h2>
 <p>An incredibly useful feature of R Markdown is that R can insert values into your writing using <strong>inline code</strong>. If you've ever had to copy and paste a value or text from one file in to another, you'll know how easy it can be to make mistakes. Inline code avoids this. It's easier to show you what inline code does rather than to explain it so let's have a go.</p>
 <p>First, copy and paste this text exactly (do not change anything) to the <strong>white space</strong> underneath your code chunk.</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="ref1.html#cb73-1" aria-hidden="true" tabindex="-1"></a>My name is <span class="st">`</span><span class="at">r name</span><span class="st">`</span> and I am <span class="st">`</span><span class="at">r age</span><span class="st">`</span> years old. It is <span class="st">`</span><span class="at">r next_birthday - today</span><span class="st">`</span> days until my birthday.</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="ref1.html#cb76-1" aria-hidden="true" tabindex="-1"></a>My name is <span class="st">`</span><span class="at">r name</span><span class="st">`</span> and I am <span class="st">`</span><span class="at">r age</span><span class="st">`</span> years old. It is <span class="st">`</span><span class="at">r next_birthday - today</span><span class="st">`</span> days until my birthday.</span></code></pre></div>
 </div>
 <div id="activity-8-knitting-your-file" class="section level2" number="3.11">
 <h2>

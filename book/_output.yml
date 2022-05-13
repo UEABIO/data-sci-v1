@@ -29,5 +29,5 @@ bookdown::epub_book:
   stylesheet: include/epub.css
   cover_image: images/logo.png
   toc: yes
-  toc_depth: 2
+  toc_depth: 1
 

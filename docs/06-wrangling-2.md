@@ -149,7 +149,7 @@ data_median_group <- summarise(happy_dat, median_score = median(cesdTotal))
 
 * What does `group_by()` do? 
 
-<div class='webex-radiogroup' id='radio_VRMOWMZXWY'><label><input type="radio" autocomplete="off" name="radio_VRMOWMZXWY" value=""></input> <span>provides summary statistics of an existing dataframe</span></label><label><input type="radio" autocomplete="off" name="radio_VRMOWMZXWY" value=""></input> <span>organises information in ascending or descending order</span></label><label><input type="radio" autocomplete="off" name="radio_VRMOWMZXWY" value=""></input> <span>transforms existing columns</span></label><label><input type="radio" autocomplete="off" name="radio_VRMOWMZXWY" value="answer"></input> <span>groups data frames based on a specific column so that all later operations are carried out on a group basis</span></label></div>
+<div class='webex-radiogroup' id='radio_CSUSKTAXJM'><label><input type="radio" autocomplete="off" name="radio_CSUSKTAXJM" value=""></input> <span>provides summary statistics of an existing dataframe</span></label><label><input type="radio" autocomplete="off" name="radio_CSUSKTAXJM" value=""></input> <span>organises information in ascending or descending order</span></label><label><input type="radio" autocomplete="off" name="radio_CSUSKTAXJM" value=""></input> <span>transforms existing columns</span></label><label><input type="radio" autocomplete="off" name="radio_CSUSKTAXJM" value="answer"></input> <span>groups data frames based on a specific column so that all later operations are carried out on a group basis</span></label></div>
 
 
 * How would you change the code to group by education rather than `Happiness_Category`?

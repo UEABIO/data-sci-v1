@@ -176,7 +176,7 @@ Figure 8.1: Scatterplot of happiness and depression scores
 <li>By default the regression line will be extended, beyond the original y-axis limits, if you want to change this so that your plots looks like the below, add <code>limits = c(0,60)</code> to <code><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous()</a></code>
 </li>
 </ul>
-<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span><span class="op">)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula 'y ~ x'</code></pre>
 <pre><code>## Warning: Removed 20 rows containing missing values (geom_smooth).</code></pre>
@@ -193,7 +193,7 @@ Figure 8.2: Scatterplot of happiness and depression scores
 </h2>
 <p>It seems fairly obvious that there might be a negative relationship between happiness and depression, so instead we want to look at whether this relationship changes depending on different demographic variables.</p>
 <p>Just like in the last chapter, we need to ensure that R knows what type of data each variable is. At the moment, <code>sex</code> and <code>educ</code> are all registered as numeric variables, but we know that they're really categories.</p>
-<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">summarydata</span><span class="op">)</span></code></pre></div>
 <pre><code>## tibble [992 x 5] (S3: tbl_df/tbl/data.frame)
 ##  $ ahiTotal : num [1:992] 32 34 34 35 36 37 38 38 38 38 ...
@@ -215,7 +215,7 @@ Figure 8.2: Scatterplot of happiness and depression scores
 <li>
 <code><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_color_viridis_d()</a></code> works exactly like the other colour blind friendly scale functions you have used, so we can use <code>name</code> and <code>labels</code> to adjust the legend.</li>
 </ul>
-<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">summarydata</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">ahiTotal</span> , y <span class="op">=</span> <span class="va">cesdTotal</span>, colour <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Happiness Score"</span><span class="op">)</span> <span class="op">+</span>
@@ -248,14 +248,14 @@ Figure 8.2: Scatterplot of happiness and depression scores
 <button>
 Hint 1
 </button>
-<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">data</span>, new_variable <span class="op">=</span> <span class="va">equal_or_more_than_median</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="webex-solution">
 <button>
 Hint 2
 </button>
-<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">data</span>, new_variable <span class="op">=</span> <span class="va">variable</span> <span class="op">&gt;=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">variable</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 <p>Now, reproduce the below plot using this new variable:</p>
@@ -272,7 +272,7 @@ Explain this answer
 </button>
 <p>The line for the "unhappy" group is much steeper than the line for the "happy" group. That is, is you're generally unhappy, then you report a much stronger link between your happiness and depression levels than if you're generally happy.</p>
 <p>If you actually wanted to look at the difference in the relationships statistically, you could compute the correlation coefficients like below, but don't worry about that until Level 2.</p>
-<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dat_above</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">summarydata</span>, <span class="va">happiness</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="va">dat_below</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">summarydata</span>, <span class="va">happiness</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span>
 
@@ -321,10 +321,10 @@ Explain this answer
 <button>
 Solution
 </button>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="scatterplots.html#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb146-2"><a href="scatterplots.html#cb146-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span> (<span class="st">'ahi-cesd.csv'</span>)</span>
-<span id="cb146-3"><a href="scatterplots.html#cb146-3" aria-hidden="true" tabindex="-1"></a>pinfo <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'participant-info.csv'</span>)</span>
-<span id="cb146-4"><a href="scatterplots.html#cb146-4" aria-hidden="true" tabindex="-1"></a>all_dat <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(dat, pinfo, <span class="at">by=</span><span class="fu">c</span>(<span class="st">"id"</span>, <span class="st">"intervention"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="scatterplots.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb149-2"><a href="scatterplots.html#cb149-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span> (<span class="st">'ahi-cesd.csv'</span>)</span>
+<span id="cb149-3"><a href="scatterplots.html#cb149-3" aria-hidden="true" tabindex="-1"></a>pinfo <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'participant-info.csv'</span>)</span>
+<span id="cb149-4"><a href="scatterplots.html#cb149-4" aria-hidden="true" tabindex="-1"></a>all_dat <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(dat, pinfo, <span class="at">by=</span><span class="fu">c</span>(<span class="st">"id"</span>, <span class="st">"intervention"</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="activity-2-2" class="section level3" number="8.8.2">
@@ -335,7 +335,7 @@ Solution
 <button>
 Solution
 </button>
-<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">summarydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">all_dat</span>, <span class="va">ahiTotal</span>, <span class="va">cesdTotal</span>, <span class="va">sex</span>, <span class="va">age</span>, <span class="va">educ</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
@@ -347,7 +347,7 @@ Solution
 <button>
 Solution
 </button>
-<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">all_dat</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">ahiTotal</span> , y <span class="op">=</span> <span class="va">cesdTotal</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Happiness Score"</span><span class="op">)</span> <span class="op">+</span>
@@ -364,7 +364,7 @@ Solution
 <button>
 Solution
 </button>
-<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">all_dat</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">ahiTotal</span> , y <span class="op">=</span> <span class="va">cesdTotal</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Happiness Score"</span><span class="op">)</span> <span class="op">+</span>
@@ -385,7 +385,7 @@ Solution
 <button>
 Solution
 </button>
-<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">summarydata</span> <span class="op">&lt;-</span> <span class="va">summarydata</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">sex</span><span class="op">)</span>,
          educ <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">educ</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -399,7 +399,7 @@ Solution
 <button>
 Solution
 </button>
-<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">summarydata</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">ahiTotal</span> , y <span class="op">=</span> <span class="va">cesdTotal</span>, 
                         colour <span class="op">=</span> <span class="va">educ</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
@@ -428,7 +428,7 @@ Solution
 <button>
 Solution
 </button>
-<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">summarydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">summarydata</span>, <span class="va">happiness</span> <span class="op">&gt;=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">ahiTotal</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 

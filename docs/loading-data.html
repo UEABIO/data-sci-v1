@@ -167,7 +167,7 @@
 <ul>
 <li>To load the <code>tidyverse</code> type the following code into your <strong>code chunk</strong> (not the console) and then run it.</li>
 </ul>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div id="open-data" class="section level2" number="4.6">
@@ -185,7 +185,7 @@
 <ul>
 <li>First, we will create an object called <code>dat</code> that contains the data in the <code>ahi-cesd.csv</code> file. Then, we will create an object called <code>info</code> that contains the data in the <code>participant-info.csv</code>.</li>
 </ul>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span> <span class="op">(</span><span class="st">"ahi-cesd.csv"</span><span class="op">)</span>
 <span class="va">pinfo</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"participant-info.csv"</span><span class="op">)</span></code></pre></div>
 <div class="danger">
@@ -219,7 +219,7 @@ There is also a function called <code><a href="https://rdrr.io/r/utils/read.tabl
 <ul>
 <li>Run this code and then view the new dataset using one of the methods from Activity 4.</li>
 </ul>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">all_dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">dat</span>, <span class="co"># the first table you want to join</span>
                       y <span class="op">=</span> <span class="va">pinfo</span>, <span class="co"># the second table you want to join</span>
                       by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"id"</span>, <span class="st">"intervention"</span><span class="op">)</span><span class="op">)</span> <span class="co"># columns the two tables have in common</span></code></pre></div>
@@ -231,7 +231,7 @@ There is also a function called <code><a href="https://rdrr.io/r/utils/read.tabl
 <p>Our final step is to pull our variables of interest. Very frequently, datasets will have more variables and data than you actually want to use and it can make life easier to create a new object with just the data you need.</p>
 <p>In this case, the file contains the responses to each individual question on both the AHI scale and the CESD scale as well as the total score (i.e., the sum of all the individual responses). For our analysis, all we care about is the total scores, as well as the demographic information about participants.</p>
 <p>To do this we use the <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code> function to create a new object named <code>summarydata</code>.</p>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">summarydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span>.data <span class="op">=</span> <span class="va">all_dat</span>, <span class="co"># name of the object to take data from</span>
                       <span class="va">ahiTotal</span>, <span class="va">cesdTotal</span>, <span class="va">sex</span>, <span class="va">age</span>, <span class="va">educ</span>, <span class="va">income</span>, <span class="va">occasion</span>,<span class="va">elapsed.days</span><span class="op">)</span> <span class="co"># all the columns you want to keep</span></code></pre></div>
 <div class="danger">
@@ -250,7 +250,7 @@ If you get an error message when using select that says <code>unused argument</c
 <p>As you're going to learn about more over this course, data visualisation is extremely important. Visualisations can be used to give you more information about your dataset, but they can also be used to mislead.</p>
 <p>We're going to look at how to write the code to produce simple visualisations in a few weeks, for now, we want to focus on how to read and interpret different kinds of graphs. Please feel free to play around with the code and change <code>TRUE</code> to <code>FALSE</code> and adjust the values and labels and see what happens but do not worry about understanding the code. Just copy and paste it.</p>
 <p>Copy, paste and run the below code to produce a bar graph that shows the number of female and male participants in the dataset.</p>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">summarydata</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">sex</span><span class="op">)</span>, fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">sex</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>show.legend <span class="op">=</span> <span class="cn">FALSE</span>, alpha <span class="op">=</span> <span class="fl">.8</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_x_discrete</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Sex"</span><span class="op">)</span> <span class="op">+</span>
@@ -261,7 +261,7 @@ If you get an error message when using select that says <code>unused argument</c
 <option value="answer">More female participants</option>
 <option value="">More male participants</option></select></p>
 <p>Copy, paste, and run the below code to create violin-boxplots of happiness scores for each income group.</p>
-<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">summarydata</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">income</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">ahiTotal</span>, fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">income</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html">geom_violin</a></span><span class="op">(</span>trim <span class="op">=</span> <span class="cn">FALSE</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span>, alpha <span class="op">=</span> <span class="fl">.4</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">.2</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span>, alpha <span class="op">=</span> <span class="fl">.7</span><span class="op">)</span><span class="op">+</span>
@@ -313,7 +313,7 @@ If you get an error message when using select that says <code>unused argument</c
 <ol style="list-style-type: decimal">
 <li>Restart the R session (<code>Session - Restart R</code>). This should unload any packages you had loaded and also clear the environment. Make sure that the working directory is set to the right folder and then run the below code:</li>
 </ol>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span> <span class="op">(</span><span class="st">"ahi-cesd.csv"</span><span class="op">)</span></code></pre></div>
 <p>This will produce the error <code>could not find function "read_csv"</code>. Once you figure out how to fix this error, make a note of it.</p>
 <div class="webex-solution">
@@ -325,7 +325,7 @@ Solution
 <ol start="2" style="list-style-type: decimal">
 <li>Make sure that the working directory is set to the right folder and then run the below code:</li>
 </ol>
-<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"ahi-cesd"</span><span class="op">)</span></code></pre></div>
 <p>This will produce the error <code>Error: 'ahi-cesd' does not exist in current working directory</code>. Once you figure out how to fix this error, make a note of it.</p>
@@ -338,7 +338,7 @@ Solution
 <ol start="3" style="list-style-type: decimal">
 <li>Make sure that the working directory is set to the right folder and then run the below code:</li>
 </ol>
-<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span> <span class="op">(</span><span class="st">"ahi-cesd.csv"</span><span class="op">)</span>
 <span class="va">pinfo</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"participant-info.csv"</span><span class="op">)</span>

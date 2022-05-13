@@ -59,7 +59,8 @@ There are a lot of sources of information about using R out there. Here are a fe
 * Ask for help - If you are stuck, getting an error message, can’t think what to do next, then ask someone. It could be me, it could be a classmate. When you do this it is very important that you show the code, include the error message. “This doesn’t work” is not helpful. “Here is my code, this is the data I am using, I want it to do X, and here’s the problem I get.”
 
 <div class="info">
-<p>It may be daunting to send your code to someone for help. It is natural and common to feel apprehensive, or to think that your code is really bad. I still feel the same! But we learn when we share our mistakes, and eventually you will find it funny when you look back on your early mistakes, or laugh about the mistakes you still occasionally make!</p>
+<p>It may be daunting to send your code to someone for help.</p>
+<p>It is natural and common to feel apprehensive, or to think that your code is really bad. I still feel the same! But we learn when we share our mistakes, and eventually you will find it funny when you look back on your early mistakes, or laugh about the mistakes you still occasionally make!</p>
 </div>
 
 ## Get Started
@@ -81,7 +82,15 @@ Hit Enter on your keyboard.
 ```
 
 * What answer did you get? 
-">" <input class='webex-solveme nospaces' size='2' data-answer='["30"]'/>
+
+<button id="displayTextunnamed-chunk-4" onclick="javascript:toggle('unnamed-chunk-4');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-4" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+
+```r
+30
+```
+</div></div></div>
 
 
 The first line shows the request you made to R, the next line is R's response
@@ -101,7 +110,14 @@ Before we go on to talk about other types of calculations that we can do with R,
 ```
 
 * What answer did you get?
-<select class='webex-select'><option value='blank'></option><option value=''>30</option><option value='answer'>Error in 10 = 20 : invalid (do_set) left-hand side to assignment</option><option value=''>10</option></select>
+
+<button id="displayTextunnamed-chunk-6" onclick="javascript:toggle('unnamed-chunk-6');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-6" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+
+Error in 10 = 20 : invalid (do_set) left-hand side to assignment
+</div></div></div>
+
 
 What's happened here is that R has attempted to interpret `10 = 20` as a command, and spits out an error message because the command doesn't make any sense to it. When a *human* looks at this, and then looks down at his or her keyboard and sees that `+` and `=` are on the same key, it's pretty obvious that the command was a typo. But R doesn't know this, so it gets upset. And, if you look at it from its perspective, this makes sense. All that R "knows" is that `10` is a legitimate number, `20` is a legitimate number, and `=` is a legitimate part of the language too. In other words, from its perspective this really does look like the user meant to type `10 = 20`, since all the individual parts of that statement are legitimate and it's too stupid to realise that this is probably a typo. Therefore, R takes it on faith that this is exactly what you meant... it only "discovers" that the command is nonsense when it tries to follow your instructions, typo and all. And then it whinges, and spits out an error.
 
@@ -213,7 +229,8 @@ The first one calculates 16 raised to the power of 1, then divided this answer b
 
 
 <div class="info">
-<p>While the cursor is in the console, you can press the up arrow to see all your previous commands. You can run them again, or edit them. Later on we will look at scripts, as an essential way to re-use, store and edit commands.</p>
+<p>While the cursor is in the console, you can press the up arrow to see all your previous commands.</p>
+<p>You can run them again, or edit them. Later on we will look at scripts, as an essential way to re-use, store and edit commands.</p>
 </div>
 
 ## "TRUE or FALSE" data
@@ -242,12 +259,18 @@ Of course, so far R is just doing the calculations. I haven't asked it to explic
 2 + 2 == 4
 ```
 
-> <select class='webex-select'><option value='blank'></option><option value='answer'>TRUE</option><option value=''>FALSE</option></select>
+<button id="displayTextunnamed-chunk-20" onclick="javascript:toggle('unnamed-chunk-20');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-20" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+
+TRUE
+</div></div></div>
 
 What I've done here is use the **_equality operator_**, `==`, to force R to make a "true or false" judgement. 
 
 <div class="info">
-<p>This is a very different operator to the assignment operator <code>=</code> you saw previously. A common typo that people make when trying to write logical commands in R (or other languages, since the "<code>=</code> versus <code>==</code>" distinction is important in most programming languages) is to accidentally type <code>=</code> when you really mean <code>==</code>.</p>
+<p>This is a very different operator to the assignment operator <code>=</code> you saw previously.</p>
+<p>A common typo that people make when trying to write logical commands in R (or other languages, since the "<code>=</code> versus <code>==</code>" distinction is important in most programming languages) is to accidentally type <code>=</code> when you really mean <code>==</code>.</p>
 </div>
 
 Okay, let's see what R thinks of the Party slogan:
@@ -301,7 +324,16 @@ If you perform this action you should be able to do two things
 a
 ```
 
-What output do you get when you type `a` into your console? <input class='webex-solveme nospaces' size='1' data-answer='["3"]'/>
+What output do you get when you type `a` into your console? 
+
+<button id="displayTextunnamed-chunk-27" onclick="javascript:toggle('unnamed-chunk-27');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-27" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+
+```r
+3
+```
+</div></div></div>
 
 You can now call this object at *any time* during your R session and perform calculations with it. 
 
@@ -310,7 +342,14 @@ You can now call this object at *any time* during your R session and perform cal
 2 * a
 ```
 
-> <input class='webex-solveme nospaces' size='1' data-answer='["6"]'/>
+<button id="displayTextunnamed-chunk-29" onclick="javascript:toggle('unnamed-chunk-29');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-29" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+
+```r
+6
+```
+</div></div></div>
 
 What happens if we assign a value to a named object that **already** exists in our R environment??? for example
 
@@ -320,7 +359,7 @@ a <- 10
 a
 ```
 
-The value of `a` is now <input class='webex-solveme nospaces' size='2' data-answer='["10"]'/>
+The value of `a` is now 10.
 
 You should see that the previous assignment is lost, *gone forever* and has been replaced by the new value. 
 
@@ -333,7 +372,9 @@ c <- a + b
 ```
 
 <div class="warning">
-<p>Remember: If you now change the value of b, the value of c does <em>not</em> change. Objects are totally <strong>independent</strong> from each other once they are made. Overwriting objects with new values means the old value is lost.</p>
+<p>Remember: If you now change the value of b, the value of c does <em>not</em> change.</p>
+<p>Objects are totally <strong>independent</strong> from each other once they are made.</p>
+<p>Overwriting objects with new values means the old value is lost.</p>
 </div>
 
 
@@ -345,13 +386,21 @@ c
 
 * What is the value of `c`? 
 
-> <input class='webex-solveme nospaces' size='2' data-answer='["15"]'/>
+<button id="displayTextunnamed-chunk-34" onclick="javascript:toggle('unnamed-chunk-34');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-34" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+
+[1] 15
+</div></div></div>
 
 
 Look at the environment tab again  - you should see it's starting to fill up now!
 
 <div class="info">
-<p>RStudio will by default save the objects in its memory when you close a session. These will then be there the next time you logon. It might seem nice to be able to close things down and pick up where you left off, but its actually quite dangerous. It's messy, and can cause lots of problems when we work with scripts later, so don't do this!!! To stop RStudio from saving objects by default go to the Preferences option and change "Save workspace to .RData on exit" to "Never". Instead we are going to learn how to use scripts to quickly re-run analyses we have been working on.</p>
+<p>RStudio will by default save the objects in its memory when you close a session.</p>
+<p>These will then be there the next time you logon. It might seem nice to be able to close things down and pick up where you left off, but its actually quite dangerous. It's messy, and can cause lots of problems when we work with scripts later, so don't do this!</p>
+<p>To stop RStudio from saving objects by default go to the Preferences option and change "Save workspace to .RData on exit" to "Never".</p>
+<p>Instead we are going to learn how to use scripts to quickly re-run analyses we have been working on.</p>
 </div>
 
 ### Choosing names
@@ -366,7 +415,7 @@ Look at the environment tab again  - you should see it's starting to fill up now
 
 <div class="figure" style="text-align: center">
 <img src="images/snake_case.png" alt="snake_case" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-30)courtesy of Allison Horst</p>
+<p class="caption">(\#fig:unnamed-chunk-36)courtesy of Allison Horst</p>
 </div>
 
 
@@ -386,11 +435,14 @@ There's nothing wrong with making *lots* of errors. The trick is not to panic or
 
 ... and sometimes we need to walk away and come back later!
 
-Try typing the command `help()` into the R console, it should open a new tab on the bottom right. Put a function or package into the brackets to get help with a specific topic 
+Try typing the command `help()` into the R console, it should open a new tab on the bottom right. 
+
+
+Put a function or package into the brackets to get help with a specific topic 
 
 <div class="figure" style="text-align: center">
 <img src="images/Error.jpg" alt="R Error" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-31)courtesy of Allison Horst</p>
+<p class="caption">(\#fig:unnamed-chunk-37)courtesy of Allison Horst</p>
 </div>
 
 
@@ -479,9 +531,9 @@ How do we know argument orders and defaults? Well we get to know how a lot of fu
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
 Use R to bring up the help menu for the function `round` </div></div>
 
-<button id="displayTextunnamed-chunk-40" onclick="javascript:toggle('unnamed-chunk-40');">Show Solution</button>
+<button id="displayTextunnamed-chunk-46" onclick="javascript:toggle('unnamed-chunk-46');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-40" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-46" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 help(round)
@@ -508,7 +560,8 @@ library(palmerpenguins)
 * `palmerpenguins` - is a good example of a data-heavy package, it contains no functions, but instead datasets that we can use.
 
 <div class="warning">
-<p>A common source of errors is to call a function that is part of a package but forgetting to load the package. If R says something like <code>Error in "function-name": could not find</code> then most likely the function was misspelled or the package containing the function hasn't been loaded.</p>
+<p>A common source of errors is to call a function that is part of a package but forgetting to load the package.</p>
+<p>If R says something like <code>Error in "function-name": could not find</code> then most likely the function was misspelled or the package containing the function hasn't been loaded.</p>
 </div>
 
 ## My first data visualisation
@@ -528,10 +581,11 @@ ggplot(data = penguins,aes(x = bill_length_mm, y = bill_depth_mm)) + geom_point(
 ## Warning: Removed 2 rows containing missing values (geom_point).
 ```
 
-<img src="01-data_files/figure-html/unnamed-chunk-43-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="01-data_files/figure-html/unnamed-chunk-49-1.png" width="100%" style="display: block; margin: auto;" />
 
 <div class="information">
-<p>You may have noticed R gave you a warning. Not the same as a big scary error, but R wants you to be aware of something. In this case that two of the observations had missing data in them (either bill length or bill depth), so couldn't be plotted.</p>
+<p>You may have noticed R gave you a warning. Not the same as a big scary error, but R wants you to be aware of something.</p>
+<p>In this case that two of the observations had missing data in them (either bill length or bill depth), so couldn't be plotted.</p>
 </div>
 
 The above command can also be written as below, its in a longer style with each new line for each argument in the function. This style can be easier to read, and makes it easier to write comments with `#`. Copy this longer command into your console then hit Enter. 
@@ -576,9 +630,9 @@ Add the `library(ggplot2)` & `library(palmerpenguins)` on lines 2 & 3.
 Put a comment next to each line explaining what the package is for
 "Hint use the help() function". </div></div>
 
-<button id="displayTextunnamed-chunk-48" onclick="javascript:toggle('unnamed-chunk-48');">Show Solution</button>
+<button id="displayTextunnamed-chunk-54" onclick="javascript:toggle('unnamed-chunk-54');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-48" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-54" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 # I really love R
@@ -615,7 +669,7 @@ Try it now.
 
 You should notice that unlike when making previous data visuals, you do not immediately see your graph, this is because you assigned the output of your functions to an R object, instead of the default action where R would print the output. 
 
-* To see the new plot you have made you should type <input class='webex-solveme nospaces' size='6' data-answer='["plot_1"]'/> into the R console. Or add it underneath the script and run it again! 
+* To see the new plot you have made you should type `plot_1` into the R console. Or add it underneath the script and run it again! 
 
 ### Making an output
 
@@ -633,7 +687,11 @@ ggsave(filename = "bill_scatterplot.png",
 
 Check the files tab on RStudio Cloud, there should now be a new file in your workspace. 
 <div class="warning">
-<p>It is very important to have naming conventions for all files. Everything after the <code>.</code> is file extension information informing the computer how to process the contents of the file. <code>.png</code> stands for "Portable Graphics Format”, and it means the data is an uncompressed image format. Everything before the <code>.</code> is for humans, it is a good idea to make sure these have a naming convention. Avoid periods, spaces or slashes, do use YYYYMMDD and underscores e.g. YYYYMMDD_short_image_description.fileextension</p>
+<p>It is very important to have naming conventions for all files.</p>
+<p>Everything after the <code>.</code> is file extension information informing the computer how to process the contents of the file. <code>.png</code> stands for "Portable Graphics Format”, and it means the data is an uncompressed image format.</p>
+<p>Everything before the <code>.</code> is for humans, it is a good idea to make sure these have a naming convention.</p>
+<p>Avoid periods, spaces or slashes, instead use YYYYMMDD and underscores</p>
+<p>e.g. YYYYMMDD_short_image_description.fileextension</p>
 </div>
 
 
@@ -664,9 +722,9 @@ You could now safely quit R, and when you log on next time to this project, your
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
 Produce a scatterplot of longevity` against `thorax`. What does the relationship look like? </div></div>
 
-<button id="displayTextunnamed-chunk-53" onclick="javascript:toggle('unnamed-chunk-53');">Show Solution</button>
+<button id="displayTextunnamed-chunk-59" onclick="javascript:toggle('unnamed-chunk-59');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-53" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body"><div class="tab"><button class="tablinksunnamed-chunk-53 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-53', 'unnamed-chunk-53');">Base R</button><button class="tablinksunnamed-chunk-53" onclick="javascript:openCode(event, 'option2unnamed-chunk-53', 'unnamed-chunk-53');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-53" class="tabcontentunnamed-chunk-53">
+<div id="toggleTextunnamed-chunk-59" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body"><div class="tab"><button class="tablinksunnamed-chunk-59 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-59', 'unnamed-chunk-59');">Base R</button><button class="tablinksunnamed-chunk-59" onclick="javascript:openCode(event, 'option2unnamed-chunk-59', 'unnamed-chunk-59');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-59" class="tabcontentunnamed-chunk-59">
 
 ```r
 plot(longevity ~ thorax, data = ff, 
@@ -675,7 +733,7 @@ plot(longevity ~ thorax, data = ff,
 
 
 The plot suggests that a linear relationship might exist between the two variables. So we can proceed by fitting a linear model in R.
-</div><div id="option2unnamed-chunk-53" class="tabcontentunnamed-chunk-53">
+</div><div id="option2unnamed-chunk-59" class="tabcontentunnamed-chunk-59">
 
 ```r
 ggplot(ff) +
@@ -684,7 +742,7 @@ ggplot(ff) +
 
 
 The plot suggests that a linear relationship might exist between the two variables. So we can proceed by fitting a linear model in R.
-</div><script> javascript:hide('option2unnamed-chunk-53') </script></div></div></div>
+</div><script> javascript:hide('option2unnamed-chunk-59') </script></div></div></div>
 
 
 
@@ -695,9 +753,9 @@ The plot suggests that a linear relationship might exist between the two variabl
 2. Display a summary of the fit, together with the 97% confidence interval for the estimated parameters.
 3. Show the diagnostic plots for the model. </div></div>
 
-<button id="displayTextunnamed-chunk-55" onclick="javascript:toggle('unnamed-chunk-55');">Show Solution</button>
+<button id="displayTextunnamed-chunk-61" onclick="javascript:toggle('unnamed-chunk-61');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-55" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-61" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 fit <- lm(longevity ~ thorax, ff)
@@ -710,38 +768,34 @@ par(mfrow=c(1, 1))
 </div></div></div>
 
 
-
-
-
 ## Activity 1 
-
-Quiz
 
 When you get the correct answer, the answer box will turn green. Sometimes this doesn't work on Internet Explorer or Edge so be sure to use Chrome or Firefox.
 
-* What is the output from 5^4
+1.  What is the output from 5^4
+
 <input class='webex-solveme nospaces' size='3' data-answer='["625"]'/> 
 
-* Put the brackets in the correct place to make this equation correct `4+2*8 = 48`
+2. Put the brackets in the correct place to make this equation correct `4+2*8 = 48`
 
 <input class='webex-solveme nospaces' size='2' data-answer='["48"]'/>
 
-* What answer will you get when you type `2+2 = 4` into the R console?
+3. What answer will you get when you type `2+2 = 4` into the R console?
 
 <select class='webex-select'><option value='blank'></option><option value=''>TRUE</option><option value=''>FALSE</option><option value='answer'>Error</option></select>
 
-<button id="displayTextunnamed-chunk-56" onclick="javascript:toggle('unnamed-chunk-56');">Show Solution</button>
+<button id="displayTextunnamed-chunk-62" onclick="javascript:toggle('unnamed-chunk-62');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-56" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-62" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 If we wanted R to make a judgement we must use == not = otherwise we will get an Error message
 </div></div></div>
 
-* What symbol do I use if I want to **assign** a value or output of a function to an R object
+4. What symbol do I use if I want to **assign** a value or output of a function to an R object
 
 <input class='webex-solveme nospaces' size='2' data-answer='["<-"]'/>
 
-* What is the value of `a` if I ran the following commands?
+5. What is the value of `a` if I ran the following commands?
 
 
 ```r
@@ -750,27 +804,32 @@ a <-  12*2
 a <- 5
 ```
 
-> <input class='webex-solveme nospaces' size='1' data-answer='["5"]'/>
+ <input class='webex-solveme nospaces' size='1' data-answer='["5"]'/>
 
-* Which of these variable naming conventions is **not** written correctly?
+6. Which of these variable naming conventions is **not** written correctly?
 
 <select class='webex-select'><option value='blank'></option><option value=''>snake_case</option><option value=''>camelCase</option><option value='answer'>Screaming_Snake_Case</option><option value=''>kebab-case</option></select>
 
-* What should I type into the R console if I want `help` with the `round()` function?
+7. What should I type into the R console if I want `help` with the `round()` function?
 
 <input class='webex-solveme nospaces' size='11' data-answer='["help(round)"]'/>
 
-* Which of these statements about function arguments **is not true**
+8. Which of these statements about function arguments **is not true**
 
 <select class='webex-select'><option value='blank'></option><option value=''>Arguments are the inputs we give to a function</option><option value='answer'>Values for R arguments must always be defined by the user</option><option value=''>Naming arguments supersedes position in a function</option><option value=''>There is no limit to the number of arguments a function could have</option></select>
 
-* Evaluate this statement "An R Package can contain code functions, data, or both."
+9. Evaluate this statement "An R Package can contain code functions, data, or both."
 
 <select class='webex-select'><option value='blank'></option><option value='answer'>TRUE</option><option value=''>FALSE</option></select>
 
+### Head to Blackboard and submit your answers to the quiz to get your first Data Science Learning Badge. 
+
+<h3 style = 'color:#003366;' id="webex-total_correct"></h3>
+
+
+
 
 ## Activity 2
-
 
 
 ```{=html}
@@ -779,6 +838,12 @@ a <- 5
 </a>
 ```
 
+1. Download this R Script
 
+2. Upload it to your workspace on RStudio Cloud
+
+3. Rearrange the chunks of code to make a sensible pipeline
+
+4. Save the file! 
 
 

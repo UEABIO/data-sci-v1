@@ -1,6 +1,6 @@
 fig:unnamed-chunk-2
-fig:unnamed-chunk-30
-fig:unnamed-chunk-31
+fig:unnamed-chunk-36
+fig:unnamed-chunk-37
 fig:img-rstudio
 fig:img-autocomplete
 fig:img-objects-enviro
@@ -71,6 +71,7 @@ making-an-output
 saving-your-script
 quitting
 activity-1
+head-to-blackboard-and-submit-your-answers-to-the-quiz-to-get-your-first-data-science-learning-badge.
 activity-2
 programming-basics
 r-and-rstudio
