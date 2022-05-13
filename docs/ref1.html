@@ -211,7 +211,7 @@ When you create a new code chunk you should notice that the grey box starts and 
 </li>
 <li>Note that text values and dates need to be contained in quotation marks but numerical values do not. Missing and/or unnecessary quotation marks are a common cause of code not working - remember this!</li>
 </ul>
-<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">name</span> <span class="op">&lt;-</span> <span class="st">"Emily"</span> 
 <span class="va">age</span> <span class="op">&lt;-</span> <span class="fl">35</span>
 <span class="va">today</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>
@@ -250,7 +250,7 @@ Figure 3.5: Slightly better method of running code
 </h2>
 <p>An incredibly useful feature of R Markdown is that R can insert values into your writing using <strong>inline code</strong>. If you've ever had to copy and paste a value or text from one file in to another, you'll know how easy it can be to make mistakes. Inline code avoids this. It's easier to show you what inline code does rather than to explain it so let's have a go.</p>
 <p>First, copy and paste this text exactly (do not change anything) to the <strong>white space</strong> underneath your code chunk.</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="ref1.html#cb94-1" aria-hidden="true" tabindex="-1"></a>My name is <span class="st">`</span><span class="at">r name</span><span class="st">`</span> and I am <span class="st">`</span><span class="at">r age</span><span class="st">`</span> years old. It is <span class="st">`</span><span class="at">r next_birthday - today</span><span class="st">`</span> days until my birthday.</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="ref1.html#cb73-1" aria-hidden="true" tabindex="-1"></a>My name is <span class="st">`</span><span class="at">r name</span><span class="st">`</span> and I am <span class="st">`</span><span class="at">r age</span><span class="st">`</span> years old. It is <span class="st">`</span><span class="at">r next_birthday - today</span><span class="st">`</span> days until my birthday.</span></code></pre></div>
 </div>
 <div id="activity-8-knitting-your-file" class="section level2" number="3.11">
 <h2>
@@ -258,7 +258,7 @@ Figure 3.5: Slightly better method of running code
 </h2>
 <p>Nearly finished! As our final step we are going to "knit" our file. This simply means that we're going to compile our code into a document that is more presentable. To do this click <code>Knit</code> -&gt; <code>Knit to HMTL</code>. R Markdown will create a new HTML document and it will automatically save this file in your working directory.</p>
 <p>As if by magic, that slightly odd bit of text you copied and pasted now appears as a normal sentence with the values pulled in from the objects you created.</p>
-<p><strong>My name is Emily and I am 35 years old. It is -304 days until my birthday.</strong></p>
+<p><strong>My name is Emily and I am 35 years old. It is -306 days until my birthday.</strong></p>
 <p>We're not going to use this function very often in the rest of the course but hopefully you can see just how useful this would be when writing up a report with lots of numbers! R Markdown is an incredibly powerful and flexible format - this book was written using it! If you want to push yourself with R, additional functions and features of R Markdown would be a good place to start.</p>
 <p>Before we finish, there are a few final things to note about knitting that will be useful for the homework:</p>
 <ul>
@@ -501,7 +501,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-05-11.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-05-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

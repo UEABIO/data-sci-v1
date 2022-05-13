@@ -139,7 +139,7 @@
 <p>Probability (<em>p</em>) is the extent to which an event is likely to occur and is represented by a number between 0 and 1. For example, the probability of flipping a coin and it landing on 'heads' would be estimated at <em>p = .5</em>, i.e., there is a 50% chance of getting a head when you flip a coin. Calculating the probability of any discrete event occurring can be formulated as:</p>
 <p><span class="math display">\[p = \frac{number \  of  \ ways \ the \ event \ could \  arise}{number \ of \ possible \ outcomes}\]</span>
 For example, what is the probability of randomly drawing your name out of a hat of 12 names where one name is definitely yours?</p>
-<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fl">1</span><span class="op">/</span><span class="fl">12</span></code></pre></div>
 <pre><code>## [1] 0.08333333</code></pre>
 <p>The probability is .08, or to put it another way, there is an 8.3% chance that you would pull your name out of the hat.</p>
@@ -169,10 +169,10 @@ For example, what is the probability of randomly drawing your name out of a hat 
 <option value="">ordinal</option></select>
 </li>
 <li>Finishing position in marathon (e.g. 1st, 2nd, 3rd): <select class="webex-select"><option value="blank"></option>
+<option value="">interval</option>
 <option value="">categorical</option>
-<option value="">ratio</option>
 <option value="answer">ordinal</option>
-<option value="">interval</option></select>
+<option value="">ratio</option></select>
 </li>
 <li>Which Sesame Street character a runner was dressed as: <select class="webex-select"><option value="blank"></option>
 <option value="">interval</option>
@@ -181,10 +181,10 @@ For example, what is the probability of randomly drawing your name out of a hat 
 <option value="answer">categorical</option></select>
 </li>
 <li>Temperature of a runner dressed in a cookie monster outfit (in degrees Celsius): <select class="webex-select"><option value="blank"></option>
-<option value="answer">interval</option>
-<option value="">ratio</option>
+<option value="">ordinal</option>
 <option value="">categorical</option>
-<option value="">ordinal</option></select>
+<option value="">ratio</option>
+<option value="answer">interval</option></select>
 </li>
 </ul>
 </div>
@@ -224,7 +224,7 @@ Figure 0.1: Probability of no. of heads from 10 coin tosses
 <button>
 Solution
 </button>
-<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">heads10000</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">replicate</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10000</span>, expr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">1</span>, <span class="fl">10</span>, <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">data10000</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>heads <span class="op">=</span> <span class="va">heads10000</span><span class="op">)</span> <span class="op">%&gt;%</span>   <span class="co"># convert to a tibble</span>
@@ -268,16 +268,16 @@ Figure 5.3: A simulation of an experiment collecting height data from 2000 parti
 <p>Complete the sentences so that they are correct.</p>
 <ul>
 <li>In a normal distribution, the mean, median, and mode <select class="webex-select"><option value="blank"></option>
-<option value="answer">are all equal</option>
+<option value="">sum to zero</option>
 <option value="">are always different</option>
-<option value="">sum to zero</option></select>.</li>
+<option value="answer">are all equal</option></select>.</li>
 <li>In a normal distribution, the further away from the mean an observation is <select class="webex-select"><option value="blank"></option>
 <option value="answer">the lower its probability of occuring</option>
 <option value="">the higher its probability of occuring</option></select>.</li>
 <li>Whereas the binomial distribution is based on situations in which there are two possible outcomes, the normal distribution is based on situations in which the data <select class="webex-select"><option value="blank"></option>
+<option value="answer">is a continuous variable</option>
 <option value="">is a categorical variable</option>
-<option value="">has three possible values</option>
-<option value="answer">is a continuous variable</option></select>.</li>
+<option value="">has three possible values</option></select>.</li>
 </ul>
 </div>
 <div id="activity-4-distribution-test" class="section level2" number="13.10">
@@ -519,7 +519,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-05-11.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-05-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -127,7 +127,7 @@
 <span class="header-section-number">16.1</span> Step 1: Import and initial data wrangling<a class="anchor" aria-label="anchor" href="#step-1-import-and-initial-data-wrangling"><i class="fas fa-link"></i></a>
 </h2>
 <p>To help get you on your way, we've done a bit of the initial wrangling for you. Download the data files from Moodle into your working directory, create a new Markdown, then run all the below code without changing anything.</p>
-<div class="sourceCode" id="cb258"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 
 <span class="co"># read in data but skip rows 2 and 3</span>
@@ -187,7 +187,7 @@
 <li>If you're doing birth order, be aware that it is currently stored as a factor because we're using it as a category. What this means is that you can't perform any numeric operations on it in its current state (e.g., you can't calculate the mean birth order or use filter to drop participants above or below a certain value). If you need to do anything like this, create a new variable that recodes this data <code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code>.</li>
 <li>Finally, add <code>drop_na(IV)</code> and <code><a href="https://rdrr.io/r/base/droplevels.html">droplevels()</a></code> to your code (see below) where IV is the variable that you're using as your IV. This will get rid of anyone who didn't respond to your IV question (because obviously you can't include them in your analysis). <code>droplevels</code> removes any factors that don't have any data points (if you don't do this your plots will still show the prefer not to say category even if there's no data in this category).</li>
 </ol>
-<div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">my_demo</span> <span class="op">&lt;-</span> <span class="va">data_from_step1_and_step2</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>sexual_orientation_recoded <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span><span class="op">(</span><span class="va">sexual_orientation</span>, 
                                              <span class="st">"Straight/ Heterosexual"</span> <span class="op">=</span> <span class="st">"Heterosexual"</span>,
@@ -212,11 +212,11 @@
 <span class="header-section-number">16.5</span> Step 5: Sample information<a class="anchor" aria-label="anchor" href="#step-5-sample-information"><i class="fas fa-link"></i></a>
 </h2>
 <p>Count the number of participants in the data set. This is the overall class sample size. You haven't done this very often so we'll give you the code.</p>
-<div class="sourceCode" id="cb260"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">all_dat</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>Count the number of people of each gender in <code>all_dat</code>. You can also create a column of percentages. You haven't done this before so we'll also give you the code.</p>
-<div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">all_dat</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">gender</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>percent <span class="op">=</span> <span class="va">n</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">*</span><span class="fl">100</span><span class="op">)</span></code></pre></div>
@@ -244,7 +244,7 @@
 <span class="header-section-number">16.8</span> Step 8: Team data<a class="anchor" aria-label="anchor" href="#step-8-team-data"><i class="fas fa-link"></i></a>
 </h2>
 <p>Almost done. Now, create a dataset that just contains the data from your team. Be very careful about the spelling of your team name, there is a space before and after the colon and it must be exactly as it is in the dataset to work including all capital letters. You might want to open up the data file to check the exact spelling. Here's an example.</p>
-<div class="sourceCode" id="cb262"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">team_dat</span> <span class="op">&lt;-</span> <span class="va">all_dat</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">team_name</span> <span class="op">==</span> <span class="st">"PR01 : Pavlov's Puppies"</span><span class="op">)</span></code></pre></div>
 <p>Then repeat Steps 5 - 7 but use <code>team_dat</code> instead of <code>all_dat</code>. You should be able to reuse all of code, and just plug in the different dataset.</p>
@@ -474,7 +474,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-05-11.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-05-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
