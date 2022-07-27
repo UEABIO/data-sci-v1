@@ -4,17 +4,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 9 AQ data and recap | 5023Y</title>
+<title>Chapter 10 AQ data and recap | 5023Y</title>
 <meta name="author" content="Philip T. Leftwich">
 <meta name="description" content="Welcome back to Psych 1B! This semester we're going to build on the data skills you developed in the first semester by adding in a couple of new data wrangling functions, running probability...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 9 AQ data and recap | 5023Y">
+<meta property="og:title" content="Chapter 10 AQ data and recap | 5023Y">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://ueabio.github.io/data-sci/aq-data-and-recap.html">
 <meta property="og:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
 <meta property="og:description" content="Welcome back to Psych 1B! This semester we're going to build on the data skills you developed in the first semester by adding in a couple of new data wrangling functions, running probability...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 9 AQ data and recap | 5023Y">
+<meta name="twitter:title" content="Chapter 10 AQ data and recap | 5023Y">
 <meta name="twitter:description" content="Welcome back to Psych 1B! This semester we're going to build on the data skills you developed in the first semester by adding in a couple of new data wrangling functions, running probability...">
 <meta name="twitter:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.13/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -85,22 +85,23 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Overview</a></li>
-<li><a class="" href="introduction-to-r.html"><span class="header-section-number">1</span> Introduction to R</a></li>
-<li><a class="" href="programming-basics.html"><span class="header-section-number">2</span> Programming basics</a></li>
-<li><a class="" href="ref1.html"><span class="header-section-number">3</span> Intro to R</a></li>
-<li><a class="" href="loading-data.html"><span class="header-section-number">4</span> Loading data</a></li>
-<li><a class="" href="data-wrangling-1.html"><span class="header-section-number">5</span> Data wrangling 1</a></li>
-<li><a class="" href="data-wrangling-2.html"><span class="header-section-number">6</span> Data wrangling 2</a></li>
-<li><a class="" href="intro-to-data-viz.html"><span class="header-section-number">7</span> Intro to Data Viz</a></li>
-<li><a class="" href="scatterplots.html"><span class="header-section-number">8</span> Scatterplots</a></li>
-<li><a class="active" href="aq-data-and-recap.html"><span class="header-section-number">9</span> AQ data and recap</a></li>
-<li><a class="" href="reshaping-data.html"><span class="header-section-number">10</span> Reshaping data</a></li>
-<li><a class="" href="pipes.html"><span class="header-section-number">11</span> Pipes</a></li>
-<li><a class="" href="mega-pipe.html"><span class="header-section-number">12</span> Mega pipe</a></li>
-<li><a class="" href="intro-to-probability.html"><span class="header-section-number">13</span> Intro to Probability</a></li>
-<li><a class="" href="probability-continued.html"><span class="header-section-number">14</span> Probability continued</a></li>
-<li><a class="" href="simulation.html"><span class="header-section-number">15</span> Simulation</a></li>
-<li><a class="" href="project-analysis.html"><span class="header-section-number">16</span> Project analysis</a></li>
+<li><a class="" href="introduction-to-r-and-rstudio.html"><span class="header-section-number">1</span> Introduction to R and RStudio</a></li>
+<li><a class="" href="introduction-to-the-tidyverse.html"><span class="header-section-number">2</span> Introduction to the tidyverse</a></li>
+<li><a class="" href="working-with-data.html"><span class="header-section-number">3</span> Working with data</a></li>
+<li><a class="" href="ref1.html"><span class="header-section-number">4</span> Intro to R</a></li>
+<li><a class="" href="loading-data.html"><span class="header-section-number">5</span> Loading data</a></li>
+<li><a class="" href="data-wrangling-1.html"><span class="header-section-number">6</span> Data wrangling 1</a></li>
+<li><a class="" href="data-wrangling-2.html"><span class="header-section-number">7</span> Data wrangling 2</a></li>
+<li><a class="" href="intro-to-data-viz.html"><span class="header-section-number">8</span> Intro to Data Viz</a></li>
+<li><a class="" href="scatterplots.html"><span class="header-section-number">9</span> Scatterplots</a></li>
+<li><a class="active" href="aq-data-and-recap.html"><span class="header-section-number">10</span> AQ data and recap</a></li>
+<li><a class="" href="reshaping-data.html"><span class="header-section-number">11</span> Reshaping data</a></li>
+<li><a class="" href="pipes.html"><span class="header-section-number">12</span> Pipes</a></li>
+<li><a class="" href="mega-pipe.html"><span class="header-section-number">13</span> Mega pipe</a></li>
+<li><a class="" href="intro-to-probability.html"><span class="header-section-number">14</span> Intro to Probability</a></li>
+<li><a class="" href="probability-continued.html"><span class="header-section-number">15</span> Probability continued</a></li>
+<li><a class="" href="simulation.html"><span class="header-section-number">16</span> Simulation</a></li>
+<li><a class="" href="project-analysis.html"><span class="header-section-number">17</span> Project analysis</a></li>
 <li class="book-part">Appendices</li>
 <li><a class="" href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></li>
 <li><a class="" href="updating-r-rstudio-and-packages.html"><span class="header-section-number">B</span> Updating R, RStudio, and packages</a></li>
@@ -115,9 +116,9 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="aq-data-and-recap" class="section level1" number="9">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="aq-data-and-recap" class="section level1" number="10">
 <h1>
-<span class="header-section-number">9</span> AQ data and recap<a class="anchor" aria-label="anchor" href="#aq-data-and-recap"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10</span> AQ data and recap<a class="anchor" aria-label="anchor" href="#aq-data-and-recap"><i class="fas fa-link"></i></a>
 </h1>
 <p>Welcome back to Psych 1B! This semester we're going to build on the data skills you developed in the first semester by adding in a couple of new data wrangling functions, running probability simulations in preparation for statistics in level 2, and analysing your own data for the group project.</p>
 <div class="info">
@@ -126,9 +127,9 @@ If you haven't yet installed R on your own machine, we strongly encourage you to
 </p>
 </div>
 <p>It would be nice to always get data formatted in the way that you want it, but one of the challenges as a scientist is dealing with Other People’s Data. People often structure data in ways that is convenient for data entry, but not very convenient for data analysis, and so, much effort must be expended ’wrangling’ data into shape before you can do more interesting things with it. Additionally, performing analyses often requires pulling together data obtained from different sources: you have done this in semester 1 by combining the participant information with the depression and happiness data. In this semester, we are going to give you some tips on how to structure data, and introduce strategies for transforming and combining data from different sources.</p>
-<div id="autism-quotient-data" class="section level2" number="9.1">
+<div id="autism-quotient-data" class="section level2" number="10.1">
 <h2>
-<span class="header-section-number">9.1</span> Autism-quotient data<a class="anchor" aria-label="anchor" href="#autism-quotient-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1</span> Autism-quotient data<a class="anchor" aria-label="anchor" href="#autism-quotient-data"><i class="fas fa-link"></i></a>
 </h2>
 <p>For Psych 1B we're going to use a different dataset for our exercises based upon data that was collected using SurveyMonkey but that has has simulated variables added for the purposes of these exercises (gender was missing, so we have added this in). For this research project, participants completed the short 10-item version of the Autism-Spectrum Quotient (AQ) (Baron-Cohen, Wheelwright, Skinner, Martin, &amp; Clubley, 2001), which is designed to measure autistic traits in adults. The items for the questionnaire are shown below.</p>
 <p>Table 1: The ten items on the AQ-10.</p>
@@ -234,9 +235,9 @@ I find it difficult to work out people’s intentions.
 <p>For those items where agreeing with the item means a higher autistic quotient (AQ) score, participants recieve a score of 1 if they answer "Slightly agree" or "Agree". This is called <strong>forward scoring</strong>. For those items where disagreeing with the item means a higher AQ score, participants recieve a score of 1 if they answer "Slightly disagree" or "Disagree". This is know as <strong>reverse coding</strong>.</p>
 <p>The AQ score for each participant is the total score (i.e., the sum) of all 10 questions. The higher the AQ score, the more ’autistic traits’ they are assumed to exhibit and it is this score we are interested in.</p>
 </div>
-<div id="activity-1-download-the-data" class="section level2" number="9.2">
+<div id="activity-1-download-the-data" class="section level2" number="10.2">
 <h2>
-<span class="header-section-number">9.2</span> Activity 1: Download the data<a class="anchor" aria-label="anchor" href="#activity-1-download-the-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.2</span> Activity 1: Download the data<a class="anchor" aria-label="anchor" href="#activity-1-download-the-data"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>Download the <a href="files/Psych%201B.zip" download><code>Psych 1B</code></a> zip file.</li>
@@ -244,9 +245,9 @@ I find it difficult to work out people’s intentions.
 <li>If you're working on the server, upload the zip file to the server. It will automatically unzip it for you. As above, tidy up your server files if necessary.</li>
 </ul>
 </div>
-<div id="activity-2-open-a-new-markdown-document" class="section level2" number="9.3">
+<div id="activity-2-open-a-new-markdown-document" class="section level2" number="10.3">
 <h2>
-<span class="header-section-number">9.3</span> Activity 2: Open a new Markdown document<a class="anchor" aria-label="anchor" href="#activity-2-open-a-new-markdown-document"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.3</span> Activity 2: Open a new Markdown document<a class="anchor" aria-label="anchor" href="#activity-2-open-a-new-markdown-document"><i class="fas fa-link"></i></a>
 </h2>
 <p>In Psych 1A, we provided the Markdown documents for you in the form of stub files. From this point on, you're going to create and save your own.</p>
 <ul>
@@ -258,13 +259,13 @@ I find it difficult to work out people’s intentions.
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:img-new-markdownb"></span>
 <img src="images/markdown_new.gif" alt="Opening a new R Markdown document" width="100%"><p class="caption">
-Figure 9.1: Opening a new R Markdown document
+Figure 10.1: Opening a new R Markdown document
 </p>
 </div>
 </div>
-<div id="activity-3-create-a-new-code-chunk" class="section level2" number="9.4">
+<div id="activity-3-create-a-new-code-chunk" class="section level2" number="10.4">
 <h2>
-<span class="header-section-number">9.4</span> Activity 3: Create a new code chunk<a class="anchor" aria-label="anchor" href="#activity-3-create-a-new-code-chunk"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.4</span> Activity 3: Create a new code chunk<a class="anchor" aria-label="anchor" href="#activity-3-create-a-new-code-chunk"><i class="fas fa-link"></i></a>
 </h2>
 <p>Let's recap how to use Markdown. When you first open a new R Markdown document you will see a bunch of default welcome text. Do the following steps:</p>
 <ul>
@@ -278,14 +279,14 @@ Figure 9.1: Opening a new R Markdown document
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:img-new-chunkb"></span>
 <img src="images/markdown-code_chunks.gif" alt="New R chunk" width="100%"><p class="caption">
-Figure 9.2: New R chunk
+Figure 10.2: New R chunk
 </p>
 </div>
 <p>You should create a new code chunk <strong>for each activity</strong> or each analysis step (like there was in the stub files from 1A) and make sure there is a description of what the code is doing. This will make it easier to read your Markdown and find where any errors in the code are. <strong>Do not put all of your code in one big chunk.</strong></p>
 </div>
-<div id="activity-4-load-in-the-data" class="section level2" number="9.5">
+<div id="activity-4-load-in-the-data" class="section level2" number="10.5">
 <h2>
-<span class="header-section-number">9.5</span> Activity 4: Load in the data<a class="anchor" aria-label="anchor" href="#activity-4-load-in-the-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.5</span> Activity 4: Load in the data<a class="anchor" aria-label="anchor" href="#activity-4-load-in-the-data"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>Type and run the code that loads the <code>tidyverse</code> package.</li>
@@ -297,9 +298,9 @@ The solutions are at the bottom if you need them. However, as you'll discover in
 </p>
 </div>
 </div>
-<div id="activity-5-look-at-the-data" class="section level2" number="9.6">
+<div id="activity-5-look-at-the-data" class="section level2" number="10.6">
 <h2>
-<span class="header-section-number">9.6</span> Activity 5: Look at the data<a class="anchor" aria-label="anchor" href="#activity-5-look-at-the-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.6</span> Activity 5: Look at the data<a class="anchor" aria-label="anchor" href="#activity-5-look-at-the-data"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li><p>View each of the three datasets by clicking on their name in the environment.</p></li>
@@ -309,9 +310,9 @@ The solutions are at the bottom if you need them. However, as you'll discover in
 <li><p><strong>qformats</strong> contains a list of whether each question is forward or reverse coded.</p></li>
 </ul>
 </div>
-<div id="thinking-through-the-problem" class="section level2" number="9.7">
+<div id="thinking-through-the-problem" class="section level2" number="10.7">
 <h2>
-<span class="header-section-number">9.7</span> Thinking through the problem<a class="anchor" aria-label="anchor" href="#thinking-through-the-problem"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.7</span> Thinking through the problem<a class="anchor" aria-label="anchor" href="#thinking-through-the-problem"><i class="fas fa-link"></i></a>
 </h2>
 <p>In order to get a total AQ score for each participant, we need to combine the information from all three files, that is, we need to know the participants response and then how to score it. We technically <em>could</em> score the data by hand. However, there are 66 participants in this dataset with each participant providing 10 responses. This means we would have to manually tidy up 660 responses.</p>
 <p>Not only would this be a horribly mind-numbing task, it is also one in which you would be prone to make errors. Even if you were 99% accurate, you would still get about 7 of the scores wrong. Worst of all, this approach does not scale beyond small datasets. When you analyse the data from your group project, there will likely be thousands of participants and you don't have time to do these by hand!</p>
@@ -901,9 +902,9 @@ F
 <p>Then we just add up the scores, which yields an AQ score of 4 for participant 16. We would then repeat this logic for the remaining 65 participants. Anyone fancy doing this for a big data set?!</p>
 <p>Due to the large margin for error in carrying out this task by hand, it's important to learn how to make the computer do the dirty work. The computer won't make mistakes and will free up your mind to focus on the bigger issues in your research.</p>
 </div>
-<div id="activity-5-recap" class="section level2" number="9.8">
+<div id="activity-5-recap" class="section level2" number="10.8">
 <h2>
-<span class="header-section-number">9.8</span> Activity 5: Recap<a class="anchor" aria-label="anchor" href="#activity-5-recap"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.8</span> Activity 5: Recap<a class="anchor" aria-label="anchor" href="#activity-5-recap"><i class="fas fa-link"></i></a>
 </h2>
 <p>Finally, let's refresh your memory of some of the important tidyverse functions before we delve into anything new.</p>
 <ul>
@@ -933,19 +934,19 @@ F
 </li>
 </ul>
 </div>
-<div id="activity-solutions---aq-data-and-recap" class="section level2" number="9.9">
+<div id="activity-solutions---aq-data-and-recap" class="section level2" number="10.9">
 <h2>
-<span class="header-section-number">9.9</span> Activity solutions - AQ data and recap<a class="anchor" aria-label="anchor" href="#activity-solutions---aq-data-and-recap"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.9</span> Activity solutions - AQ data and recap<a class="anchor" aria-label="anchor" href="#activity-solutions---aq-data-and-recap"><i class="fas fa-link"></i></a>
 </h2>
-<div id="activity-4-1" class="section level3" number="9.9.1">
+<div id="activity-4-1" class="section level3" number="10.9.1">
 <h3>
-<span class="header-section-number">9.9.1</span> Activity 4<a class="anchor" aria-label="anchor" href="#activity-4-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.9.1</span> Activity 4<a class="anchor" aria-label="anchor" href="#activity-4-1"><i class="fas fa-link"></i></a>
 </h3>
 <div class="webex-solution">
 <button>
 Solution
 </button>
-<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="va">scoring</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span> <span class="op">(</span><span class="st">"scoring.csv"</span><span class="op">)</span>
 <span class="va">responses</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"responses.csv"</span><span class="op">)</span>
@@ -1135,22 +1136,22 @@ $( document ).ready(function() {
   );
 });
 </script><div class="chapter-nav">
-<div class="prev"><a href="scatterplots.html"><span class="header-section-number">8</span> Scatterplots</a></div>
-<div class="next"><a href="reshaping-data.html"><span class="header-section-number">10</span> Reshaping data</a></div>
+<div class="prev"><a href="scatterplots.html"><span class="header-section-number">9</span> Scatterplots</a></div>
+<div class="next"><a href="reshaping-data.html"><span class="header-section-number">11</span> Reshaping data</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#aq-data-and-recap"><span class="header-section-number">9</span> AQ data and recap</a></li>
-<li><a class="nav-link" href="#autism-quotient-data"><span class="header-section-number">9.1</span> Autism-quotient data</a></li>
-<li><a class="nav-link" href="#activity-1-download-the-data"><span class="header-section-number">9.2</span> Activity 1: Download the data</a></li>
-<li><a class="nav-link" href="#activity-2-open-a-new-markdown-document"><span class="header-section-number">9.3</span> Activity 2: Open a new Markdown document</a></li>
-<li><a class="nav-link" href="#activity-3-create-a-new-code-chunk"><span class="header-section-number">9.4</span> Activity 3: Create a new code chunk</a></li>
-<li><a class="nav-link" href="#activity-4-load-in-the-data"><span class="header-section-number">9.5</span> Activity 4: Load in the data</a></li>
-<li><a class="nav-link" href="#activity-5-look-at-the-data"><span class="header-section-number">9.6</span> Activity 5: Look at the data</a></li>
-<li><a class="nav-link" href="#thinking-through-the-problem"><span class="header-section-number">9.7</span> Thinking through the problem</a></li>
-<li><a class="nav-link" href="#activity-5-recap"><span class="header-section-number">9.8</span> Activity 5: Recap</a></li>
+<li><a class="nav-link" href="#aq-data-and-recap"><span class="header-section-number">10</span> AQ data and recap</a></li>
+<li><a class="nav-link" href="#autism-quotient-data"><span class="header-section-number">10.1</span> Autism-quotient data</a></li>
+<li><a class="nav-link" href="#activity-1-download-the-data"><span class="header-section-number">10.2</span> Activity 1: Download the data</a></li>
+<li><a class="nav-link" href="#activity-2-open-a-new-markdown-document"><span class="header-section-number">10.3</span> Activity 2: Open a new Markdown document</a></li>
+<li><a class="nav-link" href="#activity-3-create-a-new-code-chunk"><span class="header-section-number">10.4</span> Activity 3: Create a new code chunk</a></li>
+<li><a class="nav-link" href="#activity-4-load-in-the-data"><span class="header-section-number">10.5</span> Activity 4: Load in the data</a></li>
+<li><a class="nav-link" href="#activity-5-look-at-the-data"><span class="header-section-number">10.6</span> Activity 5: Look at the data</a></li>
+<li><a class="nav-link" href="#thinking-through-the-problem"><span class="header-section-number">10.7</span> Thinking through the problem</a></li>
+<li><a class="nav-link" href="#activity-5-recap"><span class="header-section-number">10.8</span> Activity 5: Recap</a></li>
 <li>
-<a class="nav-link" href="#activity-solutions---aq-data-and-recap"><span class="header-section-number">9.9</span> Activity solutions - AQ data and recap</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#activity-4-1"><span class="header-section-number">9.9.1</span> Activity 4</a></li></ul>
+<a class="nav-link" href="#activity-solutions---aq-data-and-recap"><span class="header-section-number">10.9</span> Activity solutions - AQ data and recap</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#activity-4-1"><span class="header-section-number">10.9.1</span> Activity 4</a></li></ul>
 </li>
 </ul>
 
@@ -1169,7 +1170,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-05-13.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-07-27.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

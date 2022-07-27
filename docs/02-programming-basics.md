@@ -1,176 +1,58 @@
-# Programming basics
 
-In this chapter, we will cover how to use R and RStudio at the University of Glasgow as well as some basic programming concepts and terminology, common pitfalls, helpful hints, and where to get help. Those of you who have no programming experience should find this chapter particularly helpful, however, even if you've used R before there may be some helpful hints and tips so please make sure you read through this chapter before the moving on.
+# Introduction to the tidyverse
 
-This is a long chapter but we don't expect you to memorise all the information that is contained in it and some sections of it will not make sense until you start writing your own code - just make sure you know what help is available!
 
-There is a [walkthrough video](https://moodle.gla.ac.uk/filter/echo360/lti_launch.php?url=https%3A%2F%2Fecho360.org.uk%2Flti%2F73750256-551c-47b5-9f1b-247567d647c2%3FmediaId%3D2398dd0c-864a-4a2f-9a43-9e34f005e808%26autoplay%3Dfalse%26automute%3Dfalse&cmid=2529962) of this chapter available via Echo360 (Moodle login required) - I strongly encourage you to read through the chapter first before watching the video.
 
-## R and RStudio
 
-R is a programming language that you will write code in and RStudio is an Integrated Development Environment (IDE) which makes working with R easier. Think of it as knowing English and using a plain text editor like NotePad to write a book versus using a word processor like Microsoft Word. You could do it, but it wouldn't look as good and it would be much harder without things like spell-checking and formatting. In a similar way, you can use R without R Studio but we wouldn't recommend it. The key thing to remember is that although you will do all of your work using RStudio for this course, you are actually using two pieces of software which means that from time-to-time, both of them may have separate updates.
 
-There are two ways you can use R for psychology. First, you can use a online version of R and R through your web browser and we will refer to this as the **R server**. Second, you can download and install R and RStudio for free on your laptop or desktop computer.
 
-**Which version of R should you use?**
 
-The advantage of using the R server is that you do not need to install anything on your machine, you simply access it through your web browser. All  the extra packages and functions you need for this course will already be installed. We recommend using the server if you have a computer that you cannot install R on (e.g., a Chromebook), or if you have serious problems with installing R on your computer. 
+To load packages we use the function `library()`. Typically you would start any analysis script by loading all of the packages you need. 
 
-The advantage to installing R on your computer is that you do not need to be connected to the internet to use it, it is easier to save and manage your files, and there are no problems caused if the server crashes (which is rare, but does and has happened). 
+The [tidyverse](https://www.tidyverse.org/) is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures. This means the functions across the tidyverse are all designed to work together and make the process of data science easier.
 
-With the exception of how they save files, both versions are largely identical in how they work, however, after over a year  working remotely, we have concluded that **if you can install R on your computer, you should**. If your computer cannot install R, or if you have technical problems during the installation you cannot resolve, then you should use the server. However, the need to be connected to the internet and the inability to open e.g., assessment files directly on your computer if you use the server mean that it is worth trying to install it if you can.    
 
-### R server
+### Load the tidyverse
 
-You will find the link to the R server on Moodle. Please note that the R server is only for use by students and staff in the School of Psychology and Neuroscience. Sign in to the R server with your usual GUID and password. 
-
-### Installing R on your computer
-
-To use R on your computer, please see [Installing R](https://psyteachr.github.io/ug1-practical/installing-r.html) which has more detailed instructions and links to the files you need to download, as well as a links to a series of walkthroughs for installing R on different types of computers. 
-
-## Getting to know R Studio
-
-R Studio has a console that you can try out code in (appearing as the bottom left window in Figure \@ref(fig:img-rstudio)), there is a script editor (top left), a window showing functions and objects you have created in the “Environment” tab (top right window in the figure), and a window that shows plots, files packages, and help documentation (bottom right).
-
-<div class="figure" style="text-align: center">
-<img src="images/rstudio.png" alt="RStudio interface" width="100%" />
-<p class="caption">(\#fig:img-rstudio)RStudio interface</p>
-</div>
-
-You will learn more about how to use the features included in R Studio throughout this course, however, we highly recommend watching [RStudio Essentials 1](https://rstudio.com/resources/webinars/programming-part-1-writing-code-in-rstudio/) from the R Studio team. The video lasts ~30 minutes and gives a tour of the main parts of R Studio. 
-
-## Console vs. scripts
-
-When you first open up R Studio you won't see a script like above, there will just be a single pane on the left, which is the console. You can write code in the console to test it out, but it won't save anywhere. For this chapter, we'll use the console to show you some simple code examples but moving forward you'll save your code in a script file, and you'll see the extra pane appear.
-
-## Functions and arguments
-
-**Functions** in R execute specific tasks and normally take a number of **arguments** (if you're into linguistics you might want to think as these as verbs that require a subject and an object). You can look up all the arguments that a function takes by using the help documentation by using the format `?function`. Some arguments are required, and some are optional. Optional arguments will often use a default (normally specified in the help documentation) if you do not enter any value.
-
-As an example, let’s look at the help documentation for the function `rnorm()` which randomly generates a set of numbers with a normal distribution. 
-
-## Activity 1
-
-* Open up R Studio (either on the server or on your machine) and in the console, type the following code:  
-
-
-```r
-?rnorm
-```
-
-The help documentation for `rnorm()` should appear in the bottom right help panel. In the usage section, we see that `rnorm()` takes the following form:
-
-
-```r
-rnorm(n, mean = 0, sd = 1)
-```
-
-In the arguments section, there are explanations for each of the arguments. `n` is the number of observations we want to create, `mean` is the mean of the data points we will create and `sd` is the standard deviation of the set. In the details section it notes that if no values are entered for `mean` and `sd` it will use a default of 0 and 1 for these values. Because there is no default value for `n` it must be specified otherwise the code won't run.
-
-Let's try an example and just change the required argument `n` to ask R to produce 5 random numbers. 
-
-## Activity 2
-
-* Copy and paste the following code into the console.  
-
-
-```r
-set.seed(12042016)
-rnorm(n = 5)
-```
-
-```
-## [1] -0.2896163 -0.6428964  0.5829221 -0.3286728 -0.5110101
-```
-
-These numbers have a mean of 0 and an SD of 1. Now we can change the additional arguments to produce a different set of numbers.
-
-
-```r
-rnorm(n = 5, mean = 10, sd = 2)
-```
-
-```
-## [1] 13.320853  9.377956 10.235461  9.811793 13.019102
-```
-
-This time R has still produced 5 random numbers, but now this set of numbers has a mean of 10 and an sd of 2 as specified. Always remember to use the help documentation to help you understand what arguments a function requires.
-
-
-<div class="info">
-<p>If you're looking up examples of code online, you may often see code that starts with the function <code>set.seed()</code>. This function controls the random number generator - if you're using any functions that generate numbers randomly (such as <code>rnorm()</code>), running <code>set.seed()</code> will ensure that you get the same result (in some cases this may not be what you want to do). We call <code>set.seed()</code> in this example because it means that you will get the same random numbers as this book.</p>
-</div>
-
-## Argument names
-
-In the above examples, we have written out the argument names in our code (e.g., `n`, `mean`, `sd`), however, this is not strictly necessary. The following two lines of code would both produce the same result (although each time you run `rnorm()` it will produce a slightly different set of numbers, because it's random, but they would still have the same mean and SD):
-
-
-```r
-rnorm(n = 6, mean = 3, sd = 1)
-rnorm(6, 3, 1)
-```
-
-Importantly, if you do not write out the argument names, R will use the default order of arguments, that is for `rnorm` it will assume that the first number you enter is `n`. the second number is `mean` and the third number is `sd`. 
-
-If you write out the argument names then you can write the arguments in whatever order you like:
-
-
-```r
-rnorm(sd = 1, n = 6, mean = 3)
-```
-
-When you are first learning R, you may find it useful to write out the argument names as it can help you remember and understand what each part of the function is doing. However, as your skills progress you may find it quicker to omit the argument names and you will also see examples of code online that do not use argument names so it is important to be able to understand which argument each bit of code is referring to (or look up the help documentation to check).
-
-In this course, we will always write out the argument names the first time we use each function, however, in subsequent uses they may be omitted.
-
-## Tab auto-complete
-
-One very useful feature of R Studio is the tab auto-complete for functions (see Figure \@ref(fig:img-autocomplete)). If you write the name of the function and then press the tab key, R Studio will show you the arguments that function takes along with a brief description. If you press enter on the argument name it will fill in the name for you, just like auto-complete on your phone. This is incredibly useful when you are first learning R and you should remember to use this feature frequently. 
-
-<div class="figure" style="text-align: center">
-<img src="images/autocomplete.png" alt="Tab auto-complete" width="100%" />
-<p class="caption">(\#fig:img-autocomplete)Tab auto-complete</p>
-</div>
-
-## Base R and packages {#packages}
-
-When you install R you will have access to a range of functions including options for data wrangling and statistical analysis. The functions that are included in the default installation are typically referred to as **Base R** and there is a useful cheat sheet that shows many Base R functions [here](https://www.rstudio.com/wp-content/uploads/2016/05/base-r.pdf).
-
-However, the power of R is that it is extendable and open source - put simply, if a function doesn't exist or doesn't work very well, anyone can create a new **package** that contains data and code to allow you to perform new tasks. You may find it useful to think of Base R as the default apps that come on your phone and packages as additional apps that you need to download separately.
-
-## Activity 3: Install the tidyverse (optional)
-
-In order to use a package, you must first install it. The following code installs the package `tidyverse`, a package we will use very frequently in this course.
-
-* If you are working on your own computer, use the below code to install the tidyverse. **You do not need to do this if you are working on the server or if you are using the computers in the Boyd Orr building**.  
-
-
-```r
-install.packages("tidyverse")
-```
-
-You only need to install a package once, however, each time you start R you need to load the packages you want to use, in a similar way that you need to install an app on your phone once, but you need to open it every time you want to use it.
-
-<div class="danger">
-<p>If you get an error message that says something like "WARNING: Rtools is required to build R packages" you may need to download and install an extra bit of software called <a href="https://cran.r-project.org/bin/windows/Rtools/">Rtools</a>.</p>
-</div>
-
-To load packages we use the function `library()`. Typically you would start any analysis script by loading all of the packages you need, but we will come back to that in the next chapter.
-
-## Activity 4: Load the tidyverse
-
-* Run the below code to load the tidyverse. You can do this regardless of whether you are using your own computer or the server.  
+Run the below code to load the tidyverse. You can do this regardless of whether you are using your own computer or the cloud.  
 
 
 ```r
 library(tidyverse)
 ```
 
-You will get what looks like an error message - it's not. It's just R telling you what it's done.
+You will get what looks like an error message - it's not. It's just R telling you what it's done. You should **read this** it gives you a full list of the packages it has made available to you. One of these should look familiar to you from last week?
 
-Now that we've loaded the `tidyverse` package we can use any of the functions it contains but remember, you need to run the `library()` function every time you start R.
+<select class='webex-select'><option value='blank'></option><option value='answer'>ggplot2</option><option value=''>tibble</option><option value=''>tidyr</option><option value=''>dplyr</option></select>
 
+Now that we've loaded the `tidyverse` package we can use **any** of the functions it contains but remember, you need to run the `library()` function every time you start R.
+
+
+<div class='webex-solution'><button>Install the tidyverse. You DO NOT need to do this on RStudio Cloud.</button>
+
+
+In order to use a package, you must first install it. The following code installs the package tidyverse, a package we will use very frequently.
+
+If you are working on your own computer, use the below code to install the tidyverse.
+
+
+
+```r
+install.packages("tidyverse")
+```
+
+
+
+You only need to install a package once, however, each time you start R you need to load the packages you want to use, in a similar way that you need to install an app on your phone once, but you need to open it every time you want to use it.
+
+
+</div>
+ 
+<br>
+
+<div class="danger">
+<p>If you get an error message that says something like "WARNING: Rtools is required to build R packages" you may need to download and install an extra bit of software called <a href="https://cran.r-project.org/bin/windows/Rtools/">Rtools</a>.</p>
+</div>
 
 ## Package updates
 
@@ -248,8 +130,8 @@ mean(data)
 
 ```
 ## [1] 45
-## Time difference of -132 days
-## [1] 17.66644
+## Time difference of -207 days
+## [1] 16.43366
 ```
 
 Finally, you can store the result of these operations in a new object:
@@ -449,11 +331,630 @@ You should use the form `package::function`, for example `dplyr::select`. Rememb
 </div>
   
 
-**Question 4.** Which of the following is most likely to be an argument? <select class='webex-select'><option value='blank'></option><option value='answer'>35</option><option value=''>read_csv()</option><option value=''><-</option></select>
+**Question 4.** Which of the following is most likely to be an argument? <select class='webex-select'><option value='blank'></option><option value='answer'>35</option><option value=''><-</option><option value=''>read_csv()</option></select>
 
-**Question 5.** An easy way to spot functions is to look for <select class='webex-select'><option value='blank'></option><option value='answer'>brackets</option><option value=''>numbers</option><option value=''>computers</option></select>.
+**Question 5.** An easy way to spot functions is to look for <select class='webex-select'><option value='blank'></option><option value='answer'>brackets</option><option value=''>computers</option><option value=''>numbers</option></select>.
 
-**Question 6.** The job of `<-` is to send the output from the function to a/an <select class='webex-select'><option value='blank'></option><option value=''>argument</option><option value=''>assignment</option><option value='answer'>object</option></select>.
+**Question 6.** The job of `<-` is to send the output from the function to a/an <select class='webex-select'><option value='blank'></option><option value='answer'>object</option><option value=''>argument</option><option value=''>assignment</option></select>.
+
+# Working with data
+
+In this workshop we work through the journey of importing and tidying data. Once we have a curated and cleaned dataset we can work on generating insights from the data.
+
+We are going to be working as though we are in the latter stages of a research project, where data has been collected, possibly over several years, to test against our hypotheses.
+
+We have chosen to continue working with a dataset you have been introduced to already - the Palmer Penguins dataset. Previously we loaded a cleaned dataset, very quickly using an R package. Today we will be working in a more realistic scenario - uploading out dataset to our R workspace.
+
+## Meet the Penguins
+
+This data, taken from the `palmerpenguins` (@R-palmerpenguins) package was originally published by @Antarctic. 
+
+The palmer penguins data contains size measurements, clutch observations, and blood isotope ratios for three penguin species observed on three islands in the Palmer Archipelago, Antarctica over a study period of three years.
+
+<img src="images/gorman-penguins.jpg" title="Photo of three penguin species, Chinstrap, Gentoo, Adelie" alt="Photo of three penguin species, Chinstrap, Gentoo, Adelie" width="80%" style="display: block; margin: auto;" />
+
+These data were collected from 2007 - 2009 by Dr. Kristen Gorman with the Palmer Station Long Term Ecological Research Program, part of the US Long Term Ecological Research Network. The data were imported directly from the Environmental Data Initiative (EDI) Data Portal, and are available for use by CC0 license (“No Rights Reserved”) in accordance with the Palmer Station Data Policy. We gratefully acknowledge Palmer Station LTER and the US LTER Network. Special thanks to Marty Downs (Director, LTER Network Office) for help regarding the data license & use. Here is our intrepid package co-author, Dr. Gorman, in action collecting some penguin data:
+
+<img src="images/penguin-expedition.jpg" title="Photo of Dr Gorman in the middle of a flock of penguins" alt="Photo of Dr Gorman in the middle of a flock of penguins" width="80%" style="display: block; margin: auto;" />
+
+Here is a map of the study site
+
+<img src="images/antarctica-map.png" title="Antarctic Peninsula and the Palmer Field Station" alt="Antarctic Peninsula and the Palmer Field Station" width="80%" style="display: block; margin: auto;" />
+
+### Insights from data
+
+This dataset is relatively simple, as there aren't too many variables to consider. But there are a reasonably large number of datapoints (individual penguins) making it possible to generate insights. 
+
+However, there are some specific and rather common problems in this data. Problems that we need to work through *before* we can start to make any visuals or try to draw any conclusions. There are some problems with the variable names, there are some problems with some of the values. There are problems that one of the response variables isn't actually encoded on the dataset (we have to make it). 
+
+Today we are going to 
+
+* Formulate clear research questions
+
+* Import our dataset
+
+* Learn how to prepare our RStudio Project workspace
+
+* Learn how to clean, tidy and manipulate our data to allow tables, graphs and analyses to be run
+
+Don't worry if you don't understand exactly what each function does at the moment, or struggle to remember every concept we are introduced to. We will cover these again, in lots more detail as we progress. The main point is to get familiar with our process for handling data and organising our projects.
+
+## The Question?
+
+Imagine that you are a Penguin biologist. Chilly. 
+
+Imagine that you want to know more about the feeding habits of the different penguin species in the Antarctic. You also wish to characterise features such as bill morphology, and body size and compare them across species. Adelie and Chinstrap penguins are off-shore, shallow diving foragers, while Gentoo's feed closer inshort and are deep-divers. We might expect that we can find some features of Gentoo's that align with their different lifestyle/feeding habits.
+
+With simple measuring techniques and identification skills we can sex the penguins, identify their species and take simple non-invasive measurements of features such as body size, flipper length and bill dimensions. You also recently read a paper about the ratios of different Nitrogen and Carbon isotopes in blood, and how these can be used to infer the types of prey that are forming an organism's diet. 
+
+### Hypotheses
+
+These hypotheses are fairly basic, we have not included directionality or specific expecations of the magnitude of the difference. This would come from doing more research on the subject area. 
 
 
+* The bill lengths/depths ratio to body size of Gentoo penguins will be different to Adelie and Chinstrap penguins. 
 
+* Gentoo penguins will have a different N and carbon isotope ratio than Adelie and Chinstrap penguins.
+
+
+## Preparing the data
+
+Imagine we have completed our practical study and have our data. The data is probably distributed in lots of places, originally notes collected in the field were probably on paper & notebooks. Then someone will have taken time to transcribe those into a spreadsheet. This will almost certainly have been done by typing all the data in by hand. 
+
+It is very important for us to know how we would like our data to be organised at the end. We are going to learn how to organise data using the *tidy* format^[(http://vita.had.co.nz/papers/tidy-data.pdf)]. This is because we are going to use the `tidyverse` packages by @tidyverse2019. This is an opinionated, but highly effective method for generating reproducible analyses with a wide-range of data manipulation tools. Tidy data is an easy format for computers to read. 
+
+### Tidy data
+
+Here 'tidy' refers to a specific structure that lets us manipulate and visualise data with ease. In a tidy dataset each *variable* is in one column and each row contains one *observation*. Each cell of the table/spreadsheet contains the *values*. Obe observation you might make about tidy data is it is quite long - it generates a lot of rows of data. 
+
+<img src="images/tidy-1.png" title="tidy data overview" alt="tidy data overview" width="80%" style="display: block; margin: auto;" />
+
+Typing data in, using any spreadsheet program (e.g. Excel, Google sheets), if we type in the penguin data, we would make each row contain one observation about one penguin. If we made a second observation about a penguin (say in the next year of the study) it would get a new row in the dataset. You are probably thinking this is a lot of typing and a lot of repetition - and you are right! But this format allows the computer to easily make summaries at any level. 
+
+If the data we input to R is "untidy" then we have to spend a little bit of time tidying, we will explore this more later.
+
+Once data has been typed up into a spreadsheet and double/triple-checked against the original paper records, then they are saved as a 'comma-separated values (CSV)' file-type. These files are the simplest form of database, no coloured cells, no formulae, no text formatting. Each row is a row of the data, each value of a row (previously separate columns) is separated by a comma. 
+
+It is convenient to use something like Excel to type in our data - its much more usefully friendly than trying to tpye something in csv format. But we don't save files in the Excel format because they have a nasty habit of formatting or even losing data when the file gets large enough ^[https://www.theguardian.com/politics/2020/oct/05/how-excel-may-have-caused-loss-of-16000-covid-tests-in-england]. 
+If you need to add data to a csv file, you can always open it in an Excel-like program and add more information. 
+
+<div class="figure" style="text-align: center">
+<img src="images/excel_csv.png" alt="excel view, csv view" width="80%" />
+<p class="caption">(\#fig:unnamed-chunk-16)Top image: Penguins data viewed in Excel, Bottom image: Penguins data in native csv format</p>
+</div>
+
+It is possible to import data into R in an Excel format, but I recommend sticking with csv formats. Any spreadsheet can be easily converted with the *Save As..* command. 
+
+### The dataset
+
+For today's workshop we want to acquire the dataset to work on it. We can retrieve the file we need from here (https://github.com/UEABIO/5023Y_Workshop/blob/main/data/penguins_raw.csv).
+
+<div class="figure" style="text-align: center">
+<img src="images/penguin_github.png" alt="Click on the copy raw contents button" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-17)Click on the copy raw contents button</p>
+</div>
+
+We then need to 
+
+1. Select the copy raw contents button
+
+2. Open a blank notepad
+
+3. Paste the contents
+
+4. Save the file as 'penguin_data.csv'
+
+5. Open the newly saved file in Excel and take a look
+
+We can see a dataset with 345 rows (including the headers) and 17 variables
+
+* **Study name**: an identifier for the year in which sets of observations were made
+
+* **Region**: the area in which the observation was recorded
+
+* **Island**: the specific island where the observation was recorded
+
+* **Stage**: Denotes reproductive stage of the penguin
+
+* **Individual** ID: the unique ID of the individual
+
+* **Clutch completion**: if the study nest observed with a full clutch e.g. 2 eggs
+
+* **Date egg**: the date at which the study nest observed with 1 egg
+
+* **Culmen length**: length of the dorsal ridge of the bird's bill (mm)
+
+* **Culmen depth**: depth of the dorsal ridge of the bird's bill (mm)
+
+* **Flipper Length**: length of bird's flipper (mm)
+
+* **Body Mass**: Bird's mass in (g)
+
+* **Sex**: Denotes the sex of the bird
+
+* **Delta 15N** : the ratio of stable Nitrogen isotopes 15N:14N from blood sample
+
+* **Delta 13C**: the ratio of stable Carbon isotopes 13C:12C from blood sample
+
+
+## Prepare the RStudio workspace
+
+Now we should have our question, we understand more about where the data came from, and we have our data in a CSV format. 
+
+The next step of our workflow is to have a well organised project space. RStudio Cloud does a lot of the hard work for you, each new data project can be set up with its own Project space. 
+
+We will define a project as a series of linked questions that uses one (or sometimes several) datasets. For example a coursework assignment for a particular module would be its own project, or eventually your final year research project. 
+
+A Project will contain several files, possibly organised into sub-folders containing data, R scripts and final outputs. You might want to keep any information (wider reading) you have gathered that is relevant to your project. 
+
+Open the Week Two - workflow project on RStudio Cloud.
+
+Within this project you will notice there is already one file *.Rproj*. This is an R project file, this is a very useful feature, it interacts with R to tell it you are working in a very specific place on the computer (in this case the cloud server we have dialed into). It means R will automatically treat the location of your project file as the 'working directory' and makes importing and exporting easier^[More on projects can be found in the R4DS book (https://r4ds.had.co.nz/workflow-projects.html)]. 
+
+### Organise
+
+Now we are going to organise our workspace, first its always a good first step to go to Tools > Project options and switch all of the options for saving and loading .Rdata to 'No'
+
+Then we create the following folders:
+
+* data
+
+* scripts
+
+* figures
+
+<div class="rmdwarning">
+<p>Make sure you type these <strong>exactly</strong> as printed here - remember that to R is case-sensitive so 'data' and 'Data' are two different things!</p>
+</div>
+
+Having these separate subfolders within our project helps keep things tidy, means it's harder to lose things, and lets you easily tell R exactly where to go to retrieve data.  
+
+Now do you remember where you saved the 'penguin_data.csv' file? I hope so!!! Go to the upload button in the Files tab of RStudio Cloud and tell it where the file is located on your local computer and upload it to the 'data' folder you have made in your Project. 
+
+<div class="figure" style="text-align: center">
+<img src="images/project.png" alt="An example of a typical R project set-up" width="80%" />
+<p class="caption">(\#fig:unnamed-chunk-19)An example of a typical R project set-up</p>
+</div>
+
+### Create a new R script
+
+Let's now create a new R script file in which we will write instructions and store comments for manipulating data, developing tables and figures. Use the File > New Script menu item and select an R Script. 
+
+Add the following:
+
+
+```r
+# An analysis of the bill dimensions of male and female Adelie, Gentoo and Chinstrap penguins. 
+
+# Data first published in  Gorman, KB, TD Williams, and WR Fraser. 2014. “Ecological Sexual Dimorphism and Environmental Variability Within a Community of Antarctic Penguins (Genus Pygoscelis).” PLos One 9 (3): e90081. https://doi.org/10.1371/journal.pone.0090081.
+```
+
+Then load the following add-on package to the R script, just underneath these comments. Tidyverse isn't actually one package, but a bundle of many different packages that play well together - for example it *includes* `ggplot2` which we used in the last session, so we don't have to call that separately
+
+
+```r
+library(tidyverse) # tidy data packages
+library(janitor) # cleaning variable names
+```
+
+```
+## Warning: package 'janitor' was built under R version 3.6.3
+```
+
+```
+## 
+## Attaching package: 'janitor'
+```
+
+```
+## The following objects are masked from 'package:stats':
+## 
+##     chisq.test, fisher.test
+```
+
+```r
+library(lubridate) # make sure dates are processed properly
+```
+
+```
+## Warning: package 'lubridate' was built under R version 3.6.3
+```
+
+```
+## 
+## Attaching package: 'lubridate'
+```
+
+```
+## The following objects are masked from 'package:base':
+## 
+##     date, intersect, setdiff, union
+```
+
+Now save this file in the scripts folder and call it *penguin_measurements.R*
+
+## Get the data into R
+
+Now we are *finally* ready to import the data into R. 
+
+Add the following code to your script, then starting at line 1 - ask your script to run in order, library function first as the `read_csv()` function is from an add-on package `readr`
+
+
+```r
+# read in the data from the data folder in my project
+penguins <- read_csv("data/penguins_data.csv")
+```
+
+```
+Error!
+
+```
+
+Houston we have a problem! We got an error!!! blah blah does not exist in current working directory
+
+This usually happens if we told R to look in the wrong place, or didn't give it the correct name of what to look for. Can you spot what the mistake was?
+
+Edit your existing line of script to replace it with the proper file name and run the command again. 
+
+
+```r
+# read in the data from the data folder in my project
+penguins <- read_csv("data/penguins_data.csv")
+```
+
+```
+Parsed with column specification:
+cols(
+  studyName = col_character(),
+  `Sample Number` = col_double(),
+  Species = col_character(),
+  Region = col_character(),
+  Island = col_character(),
+  Stage = col_character(),
+  `Individual ID` = col_character(),
+  `Clutch Completion` = col_character(),
+  `Date Egg` = col_character(),
+  `Culmen Length (mm)` = col_double(),
+  `Culmen Depth (mm)` = col_double(),
+  `Flipper Length (mm)` = col_double(),
+  `Body Mass (g)` = col_character(),
+  Sex = col_character(),
+  `Delta 15 N (o/oo)` = col_double(),
+  `Delta 13 C (o/oo)` = col_double(),
+  Comments = col_character()
+)
+```
+
+Great, no error this time, the `read_csv()` function has read the data and we <- assigned this data to the object `penguins`. If you look in the environment pane you should see the object `penguins`. 
+
+The lines printed in the R console tell us the names of the columns that were identified in the file and the type of variable R thinks it is 
+
+* `col_character()` means the column contains letters or words
+
+* `col_double()` means the column contains numbers
+
+<div class="question">
+<p>Have a look - do all of these seem correct to you? If not we should fix these, and we will get onto that in a little bit.</p>
+</div>
+
+### View and refine
+
+So we know our data is in R, and we know the columns and names have been imported. But we still don't know whether all of our values imported, or whether it captured all the rows. 
+
+There are lots of different ways to view and check data. One useful method is `glimpse`
+
+
+```r
+# check the structure of the data
+glimpse(penguins)
+```
+
+When we run `glimpse()` we get several lines of output. The number of observations "rows", the number of variables "columns". Check this against the csv file you have - they should be the same. In the next lines we see variable names and the type of data. 
+
+We should be able to see by now, that all is not well!!!  `Body Mass (g)` is being treated as character (string), as is `Date Egg`, meaning R thinks these contain letters and words instead of numbers and dates. 
+
+Other ways to view the data
+
+* type `penguins` into the Console
+
+* type `view(penguins)` this will open a spreadsheet in a new tab
+
+* type `head(penguins)` will show the first 10 lines of the data, rather than the whole dataset
+
+> **Note - `view()` lets you do cool stuff like reorder rows and quickly scroll through the dataset without affecting the underlying data. 
+
+### Data management
+
+We've imported the data, checked it and found some inconsistencies. 
+
+This is where we start to use some of the core functions from `tidyverse`.
+
+If R thinks `Body Mass (g)` is a character variable, then it probably contains some words as well as numbers. So let's have a look at this and compare it to a variable which has been processed correctly
+
+
+```r
+# get the first 10 rows of the Flipper Length and Body Mass variables
+penguins %>% 
+  select(`Flipper Length (mm)`, 
+         `Body Mass (g)`) %>% 
+  head(10) # 10 rows
+```
+
+<img src="images/NA.png" width="80%" style="display: block; margin: auto;" />
+
+> **Note - What is the %>% ??? It's known as a pipe. It sends the results of one line of code to the next. So the data penguins is sent to the `select` function which picks only those variables we want. The result of this is then sent to the `head` function which with the argument for number of rows set to 10, prints the top 10 rows. 
+
+> The other way to write this series of functions would be to use brackets and the rules of BODMAS:
+
+```
+head(select(penguins, `Flipper Length (mm)`, `Body Mass (g)`),10)
+```
+> Hopefully you agree that the pipes make the code a lot more human-reader friendly. More on pipes later
+
+So what's the problem with our data? in the Flipper length variable, missing observations have been correctly marked as `NA` signifying missing data. R can handle missing data just fine. However, in thew Body mass variable, it looks as though someone has actually typed "na" in observations where the data is missing. Here R has failed to recognise an `NA` and has read it as a word instead. This is because `read_csv()` looks for gaps or `NA` but not "na". 
+
+No problem this is an easy fix. Head back to your script and make the following edit the line for data importing
+
+
+```r
+# read in the penguins data, specify that NA strings can be "na" or "NA"
+penguins <- read_csv("data/penguin_data.csv", na=c("na","NA"))
+```
+
+Now re-check your data using the same lines of code from before.
+All ok now? 
+
+## Dataframes and tibbles
+
+A quick sidebar on how R stores data. When we imported the data into R it ws put into an object called a **tibble** which is a type of **dataframe**. 
+
+Let's have a quick go at making our own **tibble** from scratch. 
+
+Make a new script called 'TibbleTrouble.R' in the scripts folder as before. 
+
+At the top of this new script put 
+
+
+```r
+# just me messing about making tibbles
+
+# libraries
+library(tidyverse)
+
+# make some variables, when we have a one dimensional object like this it is known as an atomic vector!
+person <- c("Mark", "Phil", "Becky", "Tony")
+hobby <- c("kickboxing", "coding", "dog walking", "car boot sales")
+awesomeness <- c(1,100,1,1)
+```
+
+The function `c` lets you 'concatenate' or link each of these arguments together into a single vector.
+
+Now we put these vectors together, where they become the variables in a new tibble
+
+
+```r
+# make a tibble
+my_data <- tibble(person, hobby, awesomeness)
+my_data
+```
+
+```
+# A tibble: 4 x 3
+  person hobby          awesomeness
+  <chr>  <chr>                <dbl>
+1 Mark   kickboxing               1
+2 Phil   coding                 100
+3 Becky  dog walking              1
+4 Tony   car boot sales           1
+```
+Have a go at messing about with your script and figure out what each of these does, add comments and save your script.
+
+
+```r
+# Some R functions for looking at tibbles and dataframes I will comment next to each one with what it does
+
+head(my_data, n=2)
+tail(my_data, n=1)
+nrow(my_data)
+ncol(my_data)
+colnames(my_data)
+view(my_data)
+glimpse(my_data)
+str(my_data)
+```
+
+## Clean and tidy
+
+Back to your penguins script. 
+
+We have checked the data imported correctly, now its time to *clean and tidy* the data. 
+
+### Tidy
+
+In this example our data is already in `tidy` format i.e. one observation per row. We will cover what to do if data isn't tidy later.
+
+### Clean
+
+Here are a few things we might want to do to our data to make it 'clean'. 
+
+* Refine variable names
+
+* Format dates and times
+
+* Rename some values
+
+* Check for any duplicate records
+
+* Check for any implausible data or typos
+
+* Check and deal with missing values
+
+> **Note - Remember because we are doing everything in a script, the original data remains unchanged. This means we have data integrity, and a clear record of what we did to tidy and clean a dataset in order to produce summaries and data visuals
+
+### Refine variable names
+
+Often we might want to change the names of our variables. They might be non-intuitive, or too long. Our data has a couple of issues:
+
+* Some of the names contain spaces
+
+* Some of the names contain brackets
+
+Let's correct these quickly
+
+
+```r
+#clean all variable names to snake_case using the clean_names function from the janitor package
+# note we are using assign <- to overwrite the old version of penguins with a version that has updated names
+# this changes the data in our R workspace but not the original csv file
+
+penguins <- penguins %>% #
+  janitor::clean_names()
+
+colnames(penguins) # quickly check the new variable names
+```
+
+
+The `clean_names` function quickly converts all variable names into snake case. The N and C blood isotope ratio names are still quite long though, so let's clean those with `dplyr::rename()` where "new_name" = "old_name".
+
+
+```r
+# shorten the variable names for N and C isotope blood samples
+
+penguins <- penguins %>% 
+  rename("delta_15n"="delta_15_n_o_oo",  # use rename from the dplyr package
+         "delta_13c"="delat_13_c_o_oo")
+```
+
+### Dates
+
+We can also see there is a `date_egg` variable. If you check it (using any of the new functions you have learned), you should see that it all looks like its been inputted correctly, but R is treating it as words, rather than assigning it a date value. We can fix that with the `lubridate` package. If we use the function `dmy` then we tell R this is date data in date/month/year format. 
+
+
+```r
+# use dmy from stringr package to encode date properly
+penguins <- penguins %>% 
+  mutate(date_egg_proper=dmy(date_egg))
+```
+
+
+Here we use the `mutate` function from `dplyr` to create a new variable called `date_egg_proper` based on the output of converting the characters in `date_egg` to date format. The original variable is left intact, if we had specified the "new" variable was also called `date_egg` then it would have overwritten the original variable. 
+
+### Rename some values
+
+Sometimes we may want to rename the values in our variables in order to make a shorthand that is easier to follow.
+
+
+```r
+# use mutate and case_when for an if-else statement that changes the names of the values in a variable
+penguins <- penguins %>% 
+  mutate(species = case_when(species == "Adelie Penguin (Pygoscelis adeliae)" ~ "Adelie",
+                             species == "Gentoo penguin (Pygoscelis papua)" ~ "Gentoo",
+                             species == "Chinstrap penguin (Pygoscelis antarctica)" ~ "Chinstrap"))
+```
+
+### Check for duplication
+
+It is very easy when inputting data to make mistakes, copy something in twice for example, or if someone did a lot of copy-pasting to assemble a spreadsheet (yikes!). We can check this pretty quickly
+
+
+```r
+# check for duplicate rows in the data
+penguins %>% 
+  duplicated() %>% # produces a list of TRUE/FALSE statements for duplicated or not
+  sum() # sums all the TRUE statements
+```
+
+```
+[1] 0
+```
+Great! 
+
+### Check for typos or implausible values
+
+We can also  explore our data for very obvious typos by checking for implausibly small or large values
+
+
+```r
+# use summarise to make calculations
+penguins %>% 
+  summarise(min=min(body_mass_g, na.rm=TRUE), 
+            max=max(body_mass_g, na.rm=TRUE))
+```
+
+The minimum weight for our penguins is 2.7kg, and the max is 6.3kg - not outrageous. If the min had come out at 27g we might have been suspicious. We will use `summarise` again to calculate other metrics in the future. 
+
+<div class="information">
+<p>our first data insight, the difference the smallest adult penguin in our dataset is nearly half the size of the largest penguin.</p>
+</div>
+We can also look for typos by asking R to produce all of the distinct values in a variable. This is more useful for categorical data, where we expect there to be only a few distinct categories
+
+
+```r
+penguins %>% 
+  distinct(sex)
+```
+Here if someone had mistyped e.g. 'FMALE' it would be obvious. We could do the same thing (and probably should have before we changed the names) for species. 
+
+### Missing values: NA
+
+There are multiple ways to check for missing values in our data
+
+
+```r
+# Get a sum of how many observations are missing in our dataframe
+penguins %>% 
+  is.na() %>% 
+  sum()
+```
+
+But this doesn't tell us where these are, fortunately the function `summary` does this easily
+
+
+```r
+# produce a summary of our data
+summary(penguins)
+```
+
+This provides a quick breakdown of the max and min for all numeric variables, as well as a list of how many missing observations there are for each one. As we can see there appear to be two missing observations for measurements in body mass, bill lengths, flipper lengths and several more for blood measures. We don't know for sure without inspecting our data further, *but* it is likely that the two birds are missing multiple measurements, and that several more were measured but didn't have their blood drawn. 
+
+We will leave the NA's alone for now, but it's useful to know how many we have. 
+
+We've now got a clean & tidy dataset!! 
+
+## Summing up
+
+### What we learned
+
+There was a lot of preparation here, and we haven't really got close to make any major insights. But you have: 
+
+* Organised your project space
+
+* Dealt with file formats
+
+* Put data into a specific location and imported into R
+
+* Checked the data import
+
+* Cleaned and tidied the data
+
+You have also been introduced to the `tidyverse` and two of its packages
+
+* `readr` @R-readr
+
+* `dplyr` @R-dplyr
+
+As well as:
+
+* `janitor` @R-janitor
+
+* `lubridate` @R-lubridate
+
+### Quitting
+
+<div class="warning">
+<p>Remember to <strong>save</strong> your RScript before you leave. And ideally don't save your .Rdata!</p>
+</div>
+
+* Close your RStudio Cloud Browser
+
+* Go to Blackboard to complete this week's quiz!

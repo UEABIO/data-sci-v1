@@ -1,7 +1,7 @@
 --- 
 title: "5023Y"
 author: "Philip T. Leftwich"
-date: "2022-05-13"
+date: "2022-07-27"
 subtitle: Data Science for Biologists
 site: bookdown::bookdown_site
 documentclass: book
@@ -81,5 +81,3 @@ The workshops are the best way to learn, they teach you the practical skills you
 ### Lectures
 
 Lectures will be recorded, but Q&A and interactions will be best achieved if you can attend in-person. If you have any worries or concerns about your ability to attend in-person teaching sessions please let me know. 
-
-

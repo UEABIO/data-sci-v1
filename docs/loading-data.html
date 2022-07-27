@@ -4,17 +4,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 4 Loading data | 5023Y</title>
+<title>Chapter 5 Loading data | 5023Y</title>
 <meta name="author" content="Philip T. Leftwich">
 <meta name="description" content="Part of becoming a psychologist is asking questions and gathering data to enable you to answer these questions effectively. It is very important that you understand all aspects of the research...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 4 Loading data | 5023Y">
+<meta property="og:title" content="Chapter 5 Loading data | 5023Y">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://ueabio.github.io/data-sci/loading-data.html">
 <meta property="og:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
 <meta property="og:description" content="Part of becoming a psychologist is asking questions and gathering data to enable you to answer these questions effectively. It is very important that you understand all aspects of the research...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 4 Loading data | 5023Y">
+<meta name="twitter:title" content="Chapter 5 Loading data | 5023Y">
 <meta name="twitter:description" content="Part of becoming a psychologist is asking questions and gathering data to enable you to answer these questions effectively. It is very important that you understand all aspects of the research...">
 <meta name="twitter:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.13/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -85,22 +85,23 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Overview</a></li>
-<li><a class="" href="introduction-to-r.html"><span class="header-section-number">1</span> Introduction to R</a></li>
-<li><a class="" href="programming-basics.html"><span class="header-section-number">2</span> Programming basics</a></li>
-<li><a class="" href="ref1.html"><span class="header-section-number">3</span> Intro to R</a></li>
-<li><a class="active" href="loading-data.html"><span class="header-section-number">4</span> Loading data</a></li>
-<li><a class="" href="data-wrangling-1.html"><span class="header-section-number">5</span> Data wrangling 1</a></li>
-<li><a class="" href="data-wrangling-2.html"><span class="header-section-number">6</span> Data wrangling 2</a></li>
-<li><a class="" href="intro-to-data-viz.html"><span class="header-section-number">7</span> Intro to Data Viz</a></li>
-<li><a class="" href="scatterplots.html"><span class="header-section-number">8</span> Scatterplots</a></li>
-<li><a class="" href="aq-data-and-recap.html"><span class="header-section-number">9</span> AQ data and recap</a></li>
-<li><a class="" href="reshaping-data.html"><span class="header-section-number">10</span> Reshaping data</a></li>
-<li><a class="" href="pipes.html"><span class="header-section-number">11</span> Pipes</a></li>
-<li><a class="" href="mega-pipe.html"><span class="header-section-number">12</span> Mega pipe</a></li>
-<li><a class="" href="intro-to-probability.html"><span class="header-section-number">13</span> Intro to Probability</a></li>
-<li><a class="" href="probability-continued.html"><span class="header-section-number">14</span> Probability continued</a></li>
-<li><a class="" href="simulation.html"><span class="header-section-number">15</span> Simulation</a></li>
-<li><a class="" href="project-analysis.html"><span class="header-section-number">16</span> Project analysis</a></li>
+<li><a class="" href="introduction-to-r-and-rstudio.html"><span class="header-section-number">1</span> Introduction to R and RStudio</a></li>
+<li><a class="" href="introduction-to-the-tidyverse.html"><span class="header-section-number">2</span> Introduction to the tidyverse</a></li>
+<li><a class="" href="working-with-data.html"><span class="header-section-number">3</span> Working with data</a></li>
+<li><a class="" href="ref1.html"><span class="header-section-number">4</span> Intro to R</a></li>
+<li><a class="active" href="loading-data.html"><span class="header-section-number">5</span> Loading data</a></li>
+<li><a class="" href="data-wrangling-1.html"><span class="header-section-number">6</span> Data wrangling 1</a></li>
+<li><a class="" href="data-wrangling-2.html"><span class="header-section-number">7</span> Data wrangling 2</a></li>
+<li><a class="" href="intro-to-data-viz.html"><span class="header-section-number">8</span> Intro to Data Viz</a></li>
+<li><a class="" href="scatterplots.html"><span class="header-section-number">9</span> Scatterplots</a></li>
+<li><a class="" href="aq-data-and-recap.html"><span class="header-section-number">10</span> AQ data and recap</a></li>
+<li><a class="" href="reshaping-data.html"><span class="header-section-number">11</span> Reshaping data</a></li>
+<li><a class="" href="pipes.html"><span class="header-section-number">12</span> Pipes</a></li>
+<li><a class="" href="mega-pipe.html"><span class="header-section-number">13</span> Mega pipe</a></li>
+<li><a class="" href="intro-to-probability.html"><span class="header-section-number">14</span> Intro to Probability</a></li>
+<li><a class="" href="probability-continued.html"><span class="header-section-number">15</span> Probability continued</a></li>
+<li><a class="" href="simulation.html"><span class="header-section-number">16</span> Simulation</a></li>
+<li><a class="" href="project-analysis.html"><span class="header-section-number">17</span> Project analysis</a></li>
 <li class="book-part">Appendices</li>
 <li><a class="" href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></li>
 <li><a class="" href="updating-r-rstudio-and-packages.html"><span class="header-section-number">B</span> Updating R, RStudio, and packages</a></li>
@@ -115,40 +116,40 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="loading-data" class="section level1" number="4">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="loading-data" class="section level1" number="5">
 <h1>
-<span class="header-section-number">4</span> Loading data<a class="anchor" aria-label="anchor" href="#loading-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5</span> Loading data<a class="anchor" aria-label="anchor" href="#loading-data"><i class="fas fa-link"></i></a>
 </h1>
 <p>Part of becoming a psychologist is asking questions and gathering data to enable you to answer these questions effectively. It is very important that you understand all aspects of the research process such as experimental design, ethics, data management and visualisation.</p>
 <p>In this chapter, you will continue to develop reproducible scripts. This means scripts that completely and transparently perform an analysis from start to finish in a way that yields the same result for different people using the same software on different computers. And transparency is a key value of science, as embodied in the “trust but verify” motto. When you do things reproducibly, others can understand and check your work.</p>
 <p>This benefits science, but there is a selfish reason, too: the most important person who will benefit from a reproducible script is your future self. When you return to an analysis after two weeks of vacation, you will thank your earlier self for doing things in a transparent, reproducible way, as you can easily pick up right where you left off.</p>
 <p>As part of your skill development, it is important that you work with data so that you can become confident and competent in your management and analysis of data. In all of your psychology data skills courses, we will work with real data that has been shared by other researchers.</p>
-<div id="getting-data-ready-to-work-with" class="section level2" number="4.1">
+<div id="getting-data-ready-to-work-with" class="section level2" number="5.1">
 <h2>
-<span class="header-section-number">4.1</span> Getting data ready to work with<a class="anchor" aria-label="anchor" href="#getting-data-ready-to-work-with"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.1</span> Getting data ready to work with<a class="anchor" aria-label="anchor" href="#getting-data-ready-to-work-with"><i class="fas fa-link"></i></a>
 </h2>
-<p>In this chapter you will learn how to load the packages required to work with our data. You'll then load the data into R Studio before getting it organised into a sensible format that relates to our research question. If you can't remember what packages are, go back and revise <a href="introduction-to-r.html#packages">1.10</a>.</p>
+<p>In this chapter you will learn how to load the packages required to work with our data. You'll then load the data into R Studio before getting it organised into a sensible format that relates to our research question. If you can't remember what packages are, go back and revise <a href="introduction-to-r-and-rstudio.html#packages">1.10</a>.</p>
 </div>
-<div id="walkthrough-video-1" class="section level2" number="4.2">
+<div id="walkthrough-video-1" class="section level2" number="5.2">
 <h2>
-<span class="header-section-number">4.2</span> Walkthrough video<a class="anchor" aria-label="anchor" href="#walkthrough-video-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.2</span> Walkthrough video<a class="anchor" aria-label="anchor" href="#walkthrough-video-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>There is a <a href="https://uofglasgow.zoom.us/rec/play/teIkYYMpGx6UZyRmnp6oFP9a0oR1pkAdyKDtrOS19PMrPzWFD6UM8kf1JPOA8BUCvdTjDD1TL0BY7fst.UJ5avFdQMYGeSE-b?startTime=1600350969000&amp;_x_zm_rtaid=tV6tnLfOQS6SzFo0htAAPg.1600855466001.bb934ef09570772957442af0f1cfb9b5&amp;_x_zm_rhtaid=682">walkthrough video</a> of this chapter available via Zoom.</p>
 <ul>
 <li>Video notes: this video was recorded in 2020 when we recommended using the server above installing R on your computer. With more experience of the server, we now strongly encourage you to install R on your computer if you can. There are no other differences between the video and this book chapter.</li>
 </ul>
 </div>
-<div id="stub-files" class="section level2" number="4.3">
+<div id="stub-files" class="section level2" number="5.3">
 <h2>
-<span class="header-section-number">4.3</span> Stub files<a class="anchor" aria-label="anchor" href="#stub-files"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.3</span> Stub files<a class="anchor" aria-label="anchor" href="#stub-files"><i class="fas fa-link"></i></a>
 </h2>
 <p>When you downloaded the data in Getting to know the data, you will have noticed that there were five Rmd files that all started with <code>stub-</code>. These stub files are set-up with code chunks for each activity of the chapter to help make your life a bit easier as you are first learning to code. We will take these away in Psych 1B but for this semester, you don't need to set up your own file, just open the relevant stub file for each chapter.</p>
 </div>
-<div id="activity-1-set-up" class="section level2" number="4.4">
+<div id="activity-1-set-up" class="section level2" number="5.4">
 <h2>
-<span class="header-section-number">4.4</span> Activity 1: Set-up<a class="anchor" aria-label="anchor" href="#activity-1-set-up"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.4</span> Activity 1: Set-up<a class="anchor" aria-label="anchor" href="#activity-1-set-up"><i class="fas fa-link"></i></a>
 </h2>
-<p>Before we begin working with the data we need to do some set-up. If you need help with any of these steps, you should refer to Chapter <a href="ref1.html#ref1">3</a>:</p>
+<p>Before we begin working with the data we need to do some set-up. If you need help with any of these steps, you should refer to Chapter <a href="ref1.html#ref1">4</a>:</p>
 <ul>
 <li>You should have already downloaded the data files and, if you are using the server, uploaded them to the R server as part of <a href="https://psyteachr.github.io/ug1-practical/ref1.html">Intro to R</a>, if you haven't done this, go back and work through that chapter now.</li>
 <li>Open R and ensure the environment is clear.</li>
@@ -159,33 +160,33 @@
 <li>Open the <code>stub-loading-data</code> file and ensure that the working directory is set to your Data Skills folder and that the two .csv data files are in your working directory (you should see them in the file pane).</li>
 </ul>
 </div>
-<div id="activity-2-load-in-the-package" class="section level2" number="4.5">
+<div id="activity-2-load-in-the-package" class="section level2" number="5.5">
 <h2>
-<span class="header-section-number">4.5</span> Activity 2: Load in the package<a class="anchor" aria-label="anchor" href="#activity-2-load-in-the-package"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.5</span> Activity 2: Load in the package<a class="anchor" aria-label="anchor" href="#activity-2-load-in-the-package"><i class="fas fa-link"></i></a>
 </h2>
 <p>Today we need to use the <code>tidyverse</code> package. You will use this package in almost every single chapter on this course as the functions it contains are those we use for data wrangling, descriptive statistics, and visualisation.</p>
 <ul>
 <li>To load the <code>tidyverse</code> type the following code into your <strong>code chunk</strong> (not the console) and then run it.</li>
 </ul>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
 </div>
-<div id="open-data" class="section level2" number="4.6">
+<div id="open-data" class="section level2" number="5.6">
 <h2>
-<span class="header-section-number">4.6</span> Open data<a class="anchor" aria-label="anchor" href="#open-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.6</span> Open data<a class="anchor" aria-label="anchor" href="#open-data"><i class="fas fa-link"></i></a>
 </h2>
 <p>For this chapter we are going to be using the real dataset that you looked at in Getting to Know the Data. Click the below link if you want a refresher of what the dataset contains.</p>
 <p><a href="https://openpsychologydata.metajnl.com/articles/10.5334/jopd.35/">Woodworth, R.J., O'Brien-Malone, A., Diamond, M.R. and Schüz, B., 2018. Data from, ‘Web-based Positive Psychology Interventions: A Reexamination of Effectiveness’. Journal of Open Psychology Data, 6(1).</a></p>
 </div>
-<div id="activity-3-read-in-data" class="section level2" number="4.7">
+<div id="activity-3-read-in-data" class="section level2" number="5.7">
 <h2>
-<span class="header-section-number">4.7</span> Activity 3: Read in data<a class="anchor" aria-label="anchor" href="#activity-3-read-in-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.7</span> Activity 3: Read in data<a class="anchor" aria-label="anchor" href="#activity-3-read-in-data"><i class="fas fa-link"></i></a>
 </h2>
 <p>Now we can read in the data. To do this we will use the function <code>read_csv()</code> that allows us to read in .csv files. There are also functions that allow you to read in .xlsx files and other formats, however in this course we will only use .csv files.</p>
 <ul>
 <li>First, we will create an object called <code>dat</code> that contains the data in the <code>ahi-cesd.csv</code> file. Then, we will create an object called <code>info</code> that contains the data in the <code>participant-info.csv</code>.</li>
 </ul>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span> <span class="op">(</span><span class="st">"ahi-cesd.csv"</span><span class="op">)</span>
 <span class="va">pinfo</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"participant-info.csv"</span><span class="op">)</span></code></pre></div>
 <div class="danger">
@@ -194,9 +195,9 @@ There is also a function called <code><a href="https://rdrr.io/r/utils/read.tabl
 </p>
 </div>
 </div>
-<div id="activity-4-check-your-data" class="section level2" number="4.8">
+<div id="activity-4-check-your-data" class="section level2" number="5.8">
 <h2>
-<span class="header-section-number">4.8</span> Activity 4: Check your data<a class="anchor" aria-label="anchor" href="#activity-4-check-your-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.8</span> Activity 4: Check your data<a class="anchor" aria-label="anchor" href="#activity-4-check-your-data"><i class="fas fa-link"></i></a>
 </h2>
 <p>You should now see that the objects <code>dat</code> and <code>pinfo</code> have appeared in the environment pane. Whenever you read data into R you should always do an initial check to see that your data looks like you expected. There are several ways you can do this, try them all out to see how the results differ.</p>
 <ul>
@@ -209,9 +210,9 @@ There is also a function called <code><a href="https://rdrr.io/r/utils/read.tabl
 <li>Just type the name of the object you want to view, e.g., <code>dat</code>.</li>
 </ul>
 </div>
-<div id="activity-5-join-the-files-together" class="section level2" number="4.9">
+<div id="activity-5-join-the-files-together" class="section level2" number="5.9">
 <h2>
-<span class="header-section-number">4.9</span> Activity 5: Join the files together<a class="anchor" aria-label="anchor" href="#activity-5-join-the-files-together"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.9</span> Activity 5: Join the files together<a class="anchor" aria-label="anchor" href="#activity-5-join-the-files-together"><i class="fas fa-link"></i></a>
 </h2>
 <p>We have two files, <code>dat</code> and <code>info</code> but what we really want is a single file that has both the data and the demographic information about the participants. R makes this very easy by using the function <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join()</a></code>.</p>
 <p>Remember to use the help function <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">?inner_join</a></code> if you want more information about how to use a function and to use tab auto-complete to help you write your code.</p>
@@ -219,19 +220,19 @@ There is also a function called <code><a href="https://rdrr.io/r/utils/read.tabl
 <ul>
 <li>Run this code and then view the new dataset using one of the methods from Activity 4.</li>
 </ul>
-<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">all_dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">dat</span>, <span class="co"># the first table you want to join</span>
                       y <span class="op">=</span> <span class="va">pinfo</span>, <span class="co"># the second table you want to join</span>
                       by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"id"</span>, <span class="st">"intervention"</span><span class="op">)</span><span class="op">)</span> <span class="co"># columns the two tables have in common</span></code></pre></div>
 </div>
-<div id="activity-6-pull-out-variables-of-interest" class="section level2" number="4.10">
+<div id="activity-6-pull-out-variables-of-interest" class="section level2" number="5.10">
 <h2>
-<span class="header-section-number">4.10</span> Activity 6: Pull out variables of interest<a class="anchor" aria-label="anchor" href="#activity-6-pull-out-variables-of-interest"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.10</span> Activity 6: Pull out variables of interest<a class="anchor" aria-label="anchor" href="#activity-6-pull-out-variables-of-interest"><i class="fas fa-link"></i></a>
 </h2>
 <p>Our final step is to pull our variables of interest. Very frequently, datasets will have more variables and data than you actually want to use and it can make life easier to create a new object with just the data you need.</p>
 <p>In this case, the file contains the responses to each individual question on both the AHI scale and the CESD scale as well as the total score (i.e., the sum of all the individual responses). For our analysis, all we care about is the total scores, as well as the demographic information about participants.</p>
 <p>To do this we use the <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code> function to create a new object named <code>summarydata</code>.</p>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">summarydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span>.data <span class="op">=</span> <span class="va">all_dat</span>, <span class="co"># name of the object to take data from</span>
                       <span class="va">ahiTotal</span>, <span class="va">cesdTotal</span>, <span class="va">sex</span>, <span class="va">age</span>, <span class="va">educ</span>, <span class="va">income</span>, <span class="va">occasion</span>,<span class="va">elapsed.days</span><span class="op">)</span> <span class="co"># all the columns you want to keep</span></code></pre></div>
 <div class="danger">
@@ -243,14 +244,14 @@ If you get an error message when using select that says <code>unused argument</c
 <li>Run the above code and then run <code><a href="https://rdrr.io/r/utils/head.html">head(summarydata)</a></code>. If everything has gone to plan it should look something like this:</li>
 </ul>
 </div>
-<div id="activity-7-visualise-the-data" class="section level2" number="4.11">
+<div id="activity-7-visualise-the-data" class="section level2" number="5.11">
 <h2>
-<span class="header-section-number">4.11</span> Activity 7: Visualise the data<a class="anchor" aria-label="anchor" href="#activity-7-visualise-the-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.11</span> Activity 7: Visualise the data<a class="anchor" aria-label="anchor" href="#activity-7-visualise-the-data"><i class="fas fa-link"></i></a>
 </h2>
 <p>As you're going to learn about more over this course, data visualisation is extremely important. Visualisations can be used to give you more information about your dataset, but they can also be used to mislead.</p>
 <p>We're going to look at how to write the code to produce simple visualisations in a few weeks, for now, we want to focus on how to read and interpret different kinds of graphs. Please feel free to play around with the code and change <code>TRUE</code> to <code>FALSE</code> and adjust the values and labels and see what happens but do not worry about understanding the code. Just copy and paste it.</p>
 <p>Copy, paste and run the below code to produce a bar graph that shows the number of female and male participants in the dataset.</p>
-<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">summarydata</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">sex</span><span class="op">)</span>, fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">sex</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>show.legend <span class="op">=</span> <span class="cn">FALSE</span>, alpha <span class="op">=</span> <span class="fl">.8</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_x_discrete</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Sex"</span><span class="op">)</span> <span class="op">+</span>
@@ -261,7 +262,7 @@ If you get an error message when using select that says <code>unused argument</c
 <option value="answer">More female participants</option>
 <option value="">More male participants</option></select></p>
 <p>Copy, paste, and run the below code to create violin-boxplots of happiness scores for each income group.</p>
-<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">summarydata</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">income</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">ahiTotal</span>, fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">income</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html">geom_violin</a></span><span class="op">(</span>trim <span class="op">=</span> <span class="cn">FALSE</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span>, alpha <span class="op">=</span> <span class="fl">.4</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">.2</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span>, alpha <span class="op">=</span> <span class="fl">.7</span><span class="op">)</span><span class="op">+</span>
@@ -284,17 +285,17 @@ If you get an error message when using select that says <code>unused argument</c
 <option value="">Average</option></select></p>
 <p>How many outliers does the Average income group have? <input class="webex-solveme nospaces" size="1" data-answer='["2"]'></p>
 <p>Finally, try knitting the file to HTML. And that's it, well done! Remember to save your Markdown in your Data Skills folder and make a note of any mistakes you made and how you fixed them.</p>
-<div id="finished-1" class="section level3" number="4.11.1">
+<div id="finished-1" class="section level3" number="5.11.1">
 <h3>
-<span class="header-section-number">4.11.1</span> Finished!<a class="anchor" aria-label="anchor" href="#finished-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.11.1</span> Finished!<a class="anchor" aria-label="anchor" href="#finished-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>Well done! You have started on your journey to become a confident and competent member of the open science community! To show us how competent you are you should now complete the homework for this week which follows the same instructions as this in-class activity but asks you to work with different variables. Always use the data skills materials and videos to help you complete the assessments!</p>
 <p>Finally, if you're working from the R server, we'd recommend that you download a copy of the changes you've made to <code>stub-loading-data</code> so that you have a backup.</p>
 </div>
 </div>
-<div id="debugging-tips-1" class="section level2" number="4.12">
+<div id="debugging-tips-1" class="section level2" number="5.12">
 <h2>
-<span class="header-section-number">4.12</span> Debugging tips<a class="anchor" aria-label="anchor" href="#debugging-tips-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.12</span> Debugging tips<a class="anchor" aria-label="anchor" href="#debugging-tips-1"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>When you downloaded and uploaded the files did you save the file names <strong>exactly</strong> as they were originally? If you download the file more than once you will find your computer may automatically add a number to the end of the file name. <code>data.csv</code> is not the same as <code>data(1).csv</code>. Pay close attention to names!</li>
@@ -305,15 +306,15 @@ If you get an error message when using select that says <code>unused argument</c
 <li>Have you accidentally deleted any back ticks (```) from the beginning or end of code chunks?</li>
 </ul>
 </div>
-<div id="debugging-exercises" class="section level2" number="4.13">
+<div id="debugging-exercises" class="section level2" number="5.13">
 <h2>
-<span class="header-section-number">4.13</span> Debugging exercises<a class="anchor" aria-label="anchor" href="#debugging-exercises"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.13</span> Debugging exercises<a class="anchor" aria-label="anchor" href="#debugging-exercises"><i class="fas fa-link"></i></a>
 </h2>
 <p>These exercises will produce errors. Try to solve the errors yourself, and then make a note of what the error message was and how you solved it - you might find it helpful to create a new file just for error solving notes. You will find that you make the same errors in R over and over again so whilst this might slow you down initially, it will greatly speed you up in the long-run.</p>
 <ol style="list-style-type: decimal">
 <li>Restart the R session (<code>Session - Restart R</code>). This should unload any packages you had loaded and also clear the environment. Make sure that the working directory is set to the right folder and then run the below code:</li>
 </ol>
-<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span> <span class="op">(</span><span class="st">"ahi-cesd.csv"</span><span class="op">)</span></code></pre></div>
 <p>This will produce the error <code>could not find function "read_csv"</code>. Once you figure out how to fix this error, make a note of it.</p>
 <div class="webex-solution">
@@ -325,7 +326,7 @@ Solution
 <ol start="2" style="list-style-type: decimal">
 <li>Make sure that the working directory is set to the right folder and then run the below code:</li>
 </ol>
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"ahi-cesd"</span><span class="op">)</span></code></pre></div>
 <p>This will produce the error <code>Error: 'ahi-cesd' does not exist in current working directory</code>. Once you figure out how to fix this error, make a note of it.</p>
@@ -338,7 +339,7 @@ Solution
 <ol start="3" style="list-style-type: decimal">
 <li>Make sure that the working directory is set to the right folder and then run the below code:</li>
 </ol>
-<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span> <span class="op">(</span><span class="st">"ahi-cesd.csv"</span><span class="op">)</span>
 <span class="va">pinfo</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"participant-info.csv"</span><span class="op">)</span>
@@ -354,9 +355,9 @@ Solution
 <p>If you want to join two tables that have mulitple columns in common, you need to use the <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> command to list all of the variables. The code above hasn't done this, it's just listed <code>id</code> and <code>intervention</code> without enclosing them with <code><a href="https://rdrr.io/r/base/c.html">c()</a></code>.</p>
 </div>
 </div>
-<div id="test-yourself" class="section level2" number="4.14">
+<div id="test-yourself" class="section level2" number="5.14">
 <h2>
-<span class="header-section-number">4.14</span> Test yourself<a class="anchor" aria-label="anchor" href="#test-yourself"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.14</span> Test yourself<a class="anchor" aria-label="anchor" href="#test-yourself"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li>When loading in a .csv file, which function should you use?</li>
@@ -569,28 +570,28 @@ $( document ).ready(function() {
   );
 });
 </script><div class="chapter-nav">
-<div class="prev"><a href="ref1.html"><span class="header-section-number">3</span> Intro to R</a></div>
-<div class="next"><a href="data-wrangling-1.html"><span class="header-section-number">5</span> Data wrangling 1</a></div>
+<div class="prev"><a href="ref1.html"><span class="header-section-number">4</span> Intro to R</a></div>
+<div class="next"><a href="data-wrangling-1.html"><span class="header-section-number">6</span> Data wrangling 1</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#loading-data"><span class="header-section-number">4</span> Loading data</a></li>
-<li><a class="nav-link" href="#getting-data-ready-to-work-with"><span class="header-section-number">4.1</span> Getting data ready to work with</a></li>
-<li><a class="nav-link" href="#walkthrough-video-1"><span class="header-section-number">4.2</span> Walkthrough video</a></li>
-<li><a class="nav-link" href="#stub-files"><span class="header-section-number">4.3</span> Stub files</a></li>
-<li><a class="nav-link" href="#activity-1-set-up"><span class="header-section-number">4.4</span> Activity 1: Set-up</a></li>
-<li><a class="nav-link" href="#activity-2-load-in-the-package"><span class="header-section-number">4.5</span> Activity 2: Load in the package</a></li>
-<li><a class="nav-link" href="#open-data"><span class="header-section-number">4.6</span> Open data</a></li>
-<li><a class="nav-link" href="#activity-3-read-in-data"><span class="header-section-number">4.7</span> Activity 3: Read in data</a></li>
-<li><a class="nav-link" href="#activity-4-check-your-data"><span class="header-section-number">4.8</span> Activity 4: Check your data</a></li>
-<li><a class="nav-link" href="#activity-5-join-the-files-together"><span class="header-section-number">4.9</span> Activity 5: Join the files together</a></li>
-<li><a class="nav-link" href="#activity-6-pull-out-variables-of-interest"><span class="header-section-number">4.10</span> Activity 6: Pull out variables of interest</a></li>
+<li><a class="nav-link" href="#loading-data"><span class="header-section-number">5</span> Loading data</a></li>
+<li><a class="nav-link" href="#getting-data-ready-to-work-with"><span class="header-section-number">5.1</span> Getting data ready to work with</a></li>
+<li><a class="nav-link" href="#walkthrough-video-1"><span class="header-section-number">5.2</span> Walkthrough video</a></li>
+<li><a class="nav-link" href="#stub-files"><span class="header-section-number">5.3</span> Stub files</a></li>
+<li><a class="nav-link" href="#activity-1-set-up"><span class="header-section-number">5.4</span> Activity 1: Set-up</a></li>
+<li><a class="nav-link" href="#activity-2-load-in-the-package"><span class="header-section-number">5.5</span> Activity 2: Load in the package</a></li>
+<li><a class="nav-link" href="#open-data"><span class="header-section-number">5.6</span> Open data</a></li>
+<li><a class="nav-link" href="#activity-3-read-in-data"><span class="header-section-number">5.7</span> Activity 3: Read in data</a></li>
+<li><a class="nav-link" href="#activity-4-check-your-data"><span class="header-section-number">5.8</span> Activity 4: Check your data</a></li>
+<li><a class="nav-link" href="#activity-5-join-the-files-together"><span class="header-section-number">5.9</span> Activity 5: Join the files together</a></li>
+<li><a class="nav-link" href="#activity-6-pull-out-variables-of-interest"><span class="header-section-number">5.10</span> Activity 6: Pull out variables of interest</a></li>
 <li>
-<a class="nav-link" href="#activity-7-visualise-the-data"><span class="header-section-number">4.11</span> Activity 7: Visualise the data</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#finished-1"><span class="header-section-number">4.11.1</span> Finished!</a></li></ul>
+<a class="nav-link" href="#activity-7-visualise-the-data"><span class="header-section-number">5.11</span> Activity 7: Visualise the data</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#finished-1"><span class="header-section-number">5.11.1</span> Finished!</a></li></ul>
 </li>
-<li><a class="nav-link" href="#debugging-tips-1"><span class="header-section-number">4.12</span> Debugging tips</a></li>
-<li><a class="nav-link" href="#debugging-exercises"><span class="header-section-number">4.13</span> Debugging exercises</a></li>
-<li><a class="nav-link" href="#test-yourself"><span class="header-section-number">4.14</span> Test yourself</a></li>
+<li><a class="nav-link" href="#debugging-tips-1"><span class="header-section-number">5.12</span> Debugging tips</a></li>
+<li><a class="nav-link" href="#debugging-exercises"><span class="header-section-number">5.13</span> Debugging exercises</a></li>
+<li><a class="nav-link" href="#test-yourself"><span class="header-section-number">5.14</span> Test yourself</a></li>
 </ul>
 
       <div class="book-extra">
@@ -608,7 +609,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-05-13.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-07-27.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

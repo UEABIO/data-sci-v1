@@ -84,5 +84,3 @@ knitr::include_graphics("images/wizard.png")
 ### Lectures
 
 Lectures will be recorded, but Q&A and interactions will be best achieved if you can attend in-person. If you have any worries or concerns about your ability to attend in-person teaching sessions please let me know. 
-
-

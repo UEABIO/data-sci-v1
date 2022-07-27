@@ -1,0 +1,786 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Chapter 3 Working with data | 5023Y</title>
+
+    <meta name="author" content="Philip T. Leftwich" />
+  
+   <meta name="description" content="This book ..." />
+   <meta name="generator" content="placeholder" />
+  <meta property="og:title" content="Chapter 3 Working with data | 5023Y" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://ueabio.github.io/data-sci" />
+  <meta property="og:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png" />
+  <meta property="og:description" content="This book ..." />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Working with data | 5023Y" />
+  
+  <meta name="twitter:description" content="This book ..." />
+  <meta name="twitter:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png" />
+  <!-- JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script>
+    <script src="libs/header-attrs-2.13/header-attrs.js"></script>
+    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
+    <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script>
+    <script src="libs/bs3compat-0.3.1.9000/transition.js"></script>
+    <script src="libs/bs3compat-0.3.1.9000/tabs.js"></script>
+    <script src="libs/bs3compat-0.3.1.9000/bs3compat.js"></script>
+    <link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet" />
+    <script src="libs/bs4_book-1.0.0/bs4_book.js"></script>
+    <script src="libs/font-awesome-5.13.0/js/script.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6NP3MF25W3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6NP3MF25W3');
+    </script>
+    <script language="javascript"> 
+        function toggle(id) {
+            var ele = document.getElementById("toggleText" + id);
+            var text = document.getElementById("displayText" + id);
+            var buttonText = text.innerHTML.replace("Show ", "");
+            buttonText = buttonText.replace("Hide ", "");
+            if(ele.style.display == "block") {
+                ele.style.display = "none";
+                text.innerHTML = "Show " + buttonText;
+            } else {
+                ele.style.display = "block";
+                text.innerHTML = "Hide " + buttonText;
+            }
+        } 
+    </script>
+
+    <script language="javascript">
+        function openCode(evt, codeName, id) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent" + id);
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks" + id);
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(codeName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+
+    <script language="javascript">
+        function hide(id){
+            document.getElementById(id).style.display = "none";
+        }
+    </script>
+    </script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script>
+
+  <!-- CSS -->
+    <link rel="stylesheet" href="include/psyteachr.css" />
+    <link rel="stylesheet" href="include/webex.css" />
+    <link rel="stylesheet" href="include/style.css" />
+  
+</head>
+
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book">
+    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Data Science for Biologists">5023Y</a>:
+        <small class="text-muted">Data Science for Biologists</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+      </form>
+
+      <nav aria-label="Table of contents">
+        <h2>Table of contents</h2>
+        <div id="book-toc"></div>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="#">View book source <i class="fab fa-github"></i></a></li></p>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="col-sm-12 col-md-9 col-lg-7" id="content">
+<div id="working-with-data" class="section level1" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Working with data</h1>
+<p>In this workshop we work through the journey of importing and tidying data. Once we have a curated and cleaned dataset we can work on generating insights from the data.</p>
+<p>We are going to be working as though we are in the latter stages of a research project, where data has been collected, possibly over several years, to test against our hypotheses.</p>
+<p>We have chosen to continue working with a dataset you have been introduced to already - the Palmer Penguins dataset. Previously we loaded a cleaned dataset, very quickly using an R package. Today we will be working in a more realistic scenario - uploading out dataset to our R workspace.</p>
+<div id="meet-the-penguins" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Meet the Penguins</h2>
+<p>This data, taken from the <code>palmerpenguins</code> (<span class="citation"><a href="references.html#ref-R-palmerpenguins" role="doc-biblioref">Horst et al.</a> (<a href="references.html#ref-R-palmerpenguins" role="doc-biblioref">2020</a>)</span>) package was originally published by <span class="citation"><a href="references.html#ref-Antarctic" role="doc-biblioref">Gorman et al.</a> (<a href="references.html#ref-Antarctic" role="doc-biblioref">2014</a>)</span>.</p>
+<p>The palmer penguins data contains size measurements, clutch observations, and blood isotope ratios for three penguin species observed on three islands in the Palmer Archipelago, Antarctica over a study period of three years.</p>
+<p><img src="images/gorman-penguins.jpg" title="Photo of three penguin species, Chinstrap, Gentoo, Adelie" alt="Photo of three penguin species, Chinstrap, Gentoo, Adelie" width="80%" style="display: block; margin: auto;" /></p>
+<p>These data were collected from 2007 - 2009 by Dr. Kristen Gorman with the Palmer Station Long Term Ecological Research Program, part of the US Long Term Ecological Research Network. The data were imported directly from the Environmental Data Initiative (EDI) Data Portal, and are available for use by CC0 license (“No Rights Reserved”) in accordance with the Palmer Station Data Policy. We gratefully acknowledge Palmer Station LTER and the US LTER Network. Special thanks to Marty Downs (Director, LTER Network Office) for help regarding the data license &amp; use. Here is our intrepid package co-author, Dr. Gorman, in action collecting some penguin data:</p>
+<p><img src="images/penguin-expedition.jpg" title="Photo of Dr Gorman in the middle of a flock of penguins" alt="Photo of Dr Gorman in the middle of a flock of penguins" width="80%" style="display: block; margin: auto;" /></p>
+<p>Here is a map of the study site</p>
+<p><img src="images/antarctica-map.png" title="Antarctic Peninsula and the Palmer Field Station" alt="Antarctic Peninsula and the Palmer Field Station" width="80%" style="display: block; margin: auto;" /></p>
+<div id="insights-from-data" class="section level3" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Insights from data</h3>
+<p>This dataset is relatively simple, as there aren't too many variables to consider. But there are a reasonably large number of datapoints (individual penguins) making it possible to generate insights.</p>
+<p>However, there are some specific and rather common problems in this data. Problems that we need to work through <em>before</em> we can start to make any visuals or try to draw any conclusions. There are some problems with the variable names, there are some problems with some of the values. There are problems that one of the response variables isn't actually encoded on the dataset (we have to make it).</p>
+<p>Today we are going to</p>
+<ul>
+<li><p>Formulate clear research questions</p></li>
+<li><p>Import our dataset</p></li>
+<li><p>Learn how to prepare our RStudio Project workspace</p></li>
+<li><p>Learn how to clean, tidy and manipulate our data to allow tables, graphs and analyses to be run</p></li>
+</ul>
+<p>Don't worry if you don't understand exactly what each function does at the moment, or struggle to remember every concept we are introduced to. We will cover these again, in lots more detail as we progress. The main point is to get familiar with our process for handling data and organising our projects.</p>
+</div>
+</div>
+<div id="the-question" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> The Question?</h2>
+<p>Imagine that you are a Penguin biologist. Chilly.</p>
+<p>Imagine that you want to know more about the feeding habits of the different penguin species in the Antarctic. You also wish to characterise features such as bill morphology, and body size and compare them across species. Adelie and Chinstrap penguins are off-shore, shallow diving foragers, while Gentoo's feed closer inshort and are deep-divers. We might expect that we can find some features of Gentoo's that align with their different lifestyle/feeding habits.</p>
+<p>With simple measuring techniques and identification skills we can sex the penguins, identify their species and take simple non-invasive measurements of features such as body size, flipper length and bill dimensions. You also recently read a paper about the ratios of different Nitrogen and Carbon isotopes in blood, and how these can be used to infer the types of prey that are forming an organism's diet.</p>
+<div id="hypotheses" class="section level3" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Hypotheses</h3>
+<p>These hypotheses are fairly basic, we have not included directionality or specific expecations of the magnitude of the difference. This would come from doing more research on the subject area.</p>
+<ul>
+<li><p>The bill lengths/depths ratio to body size of Gentoo penguins will be different to Adelie and Chinstrap penguins.</p></li>
+<li><p>Gentoo penguins will have a different N and carbon isotope ratio than Adelie and Chinstrap penguins.</p></li>
+</ul>
+</div>
+</div>
+<div id="preparing-the-data" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Preparing the data</h2>
+<p>Imagine we have completed our practical study and have our data. The data is probably distributed in lots of places, originally notes collected in the field were probably on paper &amp; notebooks. Then someone will have taken time to transcribe those into a spreadsheet. This will almost certainly have been done by typing all the data in by hand.</p>
+<p>It is very important for us to know how we would like our data to be organised at the end. We are going to learn how to organise data using the <em>tidy</em> format<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. This is because we are going to use the <code>tidyverse</code> packages by <span class="citation"><a href="references.html#ref-tidyverse2019" role="doc-biblioref">Wickham et al.</a> (<a href="references.html#ref-tidyverse2019" role="doc-biblioref">2019</a>)</span>. This is an opinionated, but highly effective method for generating reproducible analyses with a wide-range of data manipulation tools. Tidy data is an easy format for computers to read.</p>
+<div id="tidy-data" class="section level3" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Tidy data</h3>
+<p>Here 'tidy' refers to a specific structure that lets us manipulate and visualise data with ease. In a tidy dataset each <em>variable</em> is in one column and each row contains one <em>observation</em>. Each cell of the table/spreadsheet contains the <em>values</em>. Obe observation you might make about tidy data is it is quite long - it generates a lot of rows of data.</p>
+<p><img src="images/tidy-1.png" title="tidy data overview" alt="tidy data overview" width="80%" style="display: block; margin: auto;" /></p>
+<p>Typing data in, using any spreadsheet program (e.g. Excel, Google sheets), if we type in the penguin data, we would make each row contain one observation about one penguin. If we made a second observation about a penguin (say in the next year of the study) it would get a new row in the dataset. You are probably thinking this is a lot of typing and a lot of repetition - and you are right! But this format allows the computer to easily make summaries at any level.</p>
+<p>If the data we input to R is "untidy" then we have to spend a little bit of time tidying, we will explore this more later.</p>
+<p>Once data has been typed up into a spreadsheet and double/triple-checked against the original paper records, then they are saved as a 'comma-separated values (CSV)' file-type. These files are the simplest form of database, no coloured cells, no formulae, no text formatting. Each row is a row of the data, each value of a row (previously separate columns) is separated by a comma.</p>
+<p>It is convenient to use something like Excel to type in our data - its much more usefully friendly than trying to tpye something in csv format. But we don't save files in the Excel format because they have a nasty habit of formatting or even losing data when the file gets large enough.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
+If you need to add data to a csv file, you can always open it in an Excel-like program and add more information.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-16"></span>
+<img src="images/excel_csv.png" alt="excel view, csv view" width="80%" />
+<p class="caption">
+Figure 3.1: Top image: Penguins data viewed in Excel, Bottom image: Penguins data in native csv format
+</p>
+</div>
+<p>It is possible to import data into R in an Excel format, but I recommend sticking with csv formats. Any spreadsheet can be easily converted with the <em>Save As..</em> command.</p>
+</div>
+<div id="the-dataset" class="section level3" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> The dataset</h3>
+<p>For today's workshop we want to acquire the dataset to work on it. We can retrieve the file we need from here (<a href="https://github.com/UEABIO/5023Y_Workshop/blob/main/data/penguins_raw.csv" class="uri">https://github.com/UEABIO/5023Y_Workshop/blob/main/data/penguins_raw.csv</a>).</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-17"></span>
+<img src="images/penguin_github.png" alt="Click on the copy raw contents button" width="100%" />
+<p class="caption">
+Figure 3.2: Click on the copy raw contents button
+</p>
+</div>
+<p>We then need to</p>
+<ol style="list-style-type: decimal">
+<li><p>Select the copy raw contents button</p></li>
+<li><p>Open a blank notepad</p></li>
+<li><p>Paste the contents</p></li>
+<li><p>Save the file as 'penguin_data.csv'</p></li>
+<li><p>Open the newly saved file in Excel and take a look</p></li>
+</ol>
+<p>We can see a dataset with 345 rows (including the headers) and 17 variables</p>
+<ul>
+<li><p><strong>Study name</strong>: an identifier for the year in which sets of observations were made</p></li>
+<li><p><strong>Region</strong>: the area in which the observation was recorded</p></li>
+<li><p><strong>Island</strong>: the specific island where the observation was recorded</p></li>
+<li><p><strong>Stage</strong>: Denotes reproductive stage of the penguin</p></li>
+<li><p><strong>Individual</strong> ID: the unique ID of the individual</p></li>
+<li><p><strong>Clutch completion</strong>: if the study nest observed with a full clutch e.g. 2 eggs</p></li>
+<li><p><strong>Date egg</strong>: the date at which the study nest observed with 1 egg</p></li>
+<li><p><strong>Culmen length</strong>: length of the dorsal ridge of the bird's bill (mm)</p></li>
+<li><p><strong>Culmen depth</strong>: depth of the dorsal ridge of the bird's bill (mm)</p></li>
+<li><p><strong>Flipper Length</strong>: length of bird's flipper (mm)</p></li>
+<li><p><strong>Body Mass</strong>: Bird's mass in (g)</p></li>
+<li><p><strong>Sex</strong>: Denotes the sex of the bird</p></li>
+<li><p><strong>Delta 15N</strong> : the ratio of stable Nitrogen isotopes 15N:14N from blood sample</p></li>
+<li><p><strong>Delta 13C</strong>: the ratio of stable Carbon isotopes 13C:12C from blood sample</p></li>
+</ul>
+</div>
+</div>
+<div id="prepare-the-rstudio-workspace" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Prepare the RStudio workspace</h2>
+<p>Now we should have our question, we understand more about where the data came from, and we have our data in a CSV format.</p>
+<p>The next step of our workflow is to have a well organised project space. RStudio Cloud does a lot of the hard work for you, each new data project can be set up with its own Project space.</p>
+<p>We will define a project as a series of linked questions that uses one (or sometimes several) datasets. For example a coursework assignment for a particular module would be its own project, or eventually your final year research project.</p>
+<p>A Project will contain several files, possibly organised into sub-folders containing data, R scripts and final outputs. You might want to keep any information (wider reading) you have gathered that is relevant to your project.</p>
+<p>Open the Week Two - workflow project on RStudio Cloud.</p>
+<p>Within this project you will notice there is already one file <em>.Rproj</em>. This is an R project file, this is a very useful feature, it interacts with R to tell it you are working in a very specific place on the computer (in this case the cloud server we have dialed into). It means R will automatically treat the location of your project file as the 'working directory' and makes importing and exporting easier<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
+<div id="organise" class="section level3" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Organise</h3>
+<p>Now we are going to organise our workspace, first its always a good first step to go to Tools &gt; Project options and switch all of the options for saving and loading .Rdata to 'No'</p>
+<p>Then we create the following folders:</p>
+<ul>
+<li><p>data</p></li>
+<li><p>scripts</p></li>
+<li><p>figures</p></li>
+</ul>
+<div class="rmdwarning">
+<p>
+Make sure you type these <strong>exactly</strong> as printed here - remember that to R is case-sensitive so 'data' and 'Data' are two different things!
+</p>
+</div>
+<p>Having these separate subfolders within our project helps keep things tidy, means it's harder to lose things, and lets you easily tell R exactly where to go to retrieve data.</p>
+<p>Now do you remember where you saved the 'penguin_data.csv' file? I hope so!!! Go to the upload button in the Files tab of RStudio Cloud and tell it where the file is located on your local computer and upload it to the 'data' folder you have made in your Project.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-19"></span>
+<img src="images/Project.png" alt="An example of a typical R project set-up" width="80%" />
+<p class="caption">
+Figure 3.3: An example of a typical R project set-up
+</p>
+</div>
+</div>
+<div id="create-a-new-r-script" class="section level3" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Create a new R script</h3>
+<p>Let's now create a new R script file in which we will write instructions and store comments for manipulating data, developing tables and figures. Use the File &gt; New Script menu item and select an R Script.</p>
+<p>Add the following:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="working-with-data.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># An analysis of the bill dimensions of male and female Adelie, Gentoo and Chinstrap penguins. </span></span>
+<span id="cb17-2"><a href="working-with-data.html#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="working-with-data.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Data first published in  Gorman, KB, TD Williams, and WR Fraser. 2014. “Ecological Sexual Dimorphism and Environmental Variability Within a Community of Antarctic Penguins (Genus Pygoscelis).” PLos One 9 (3): e90081. https://doi.org/10.1371/journal.pone.0090081.</span></span></code></pre></div>
+<p>Then load the following add-on package to the R script, just underneath these comments. Tidyverse isn't actually one package, but a bundle of many different packages that play well together - for example it <em>includes</em> <code>ggplot2</code> which we used in the last session, so we don't have to call that separately</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="working-with-data.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># tidy data packages</span></span>
+<span id="cb18-2"><a href="working-with-data.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor) <span class="co"># cleaning variable names</span></span></code></pre></div>
+<pre><code>## Warning: package &#39;janitor&#39; was built under R version 3.6.3</code></pre>
+<pre><code>## 
+## Attaching package: &#39;janitor&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     chisq.test, fisher.test</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="working-with-data.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate) <span class="co"># make sure dates are processed properly</span></span></code></pre></div>
+<pre><code>## Warning: package &#39;lubridate&#39; was built under R version 3.6.3</code></pre>
+<pre><code>## 
+## Attaching package: &#39;lubridate&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     date, intersect, setdiff, union</code></pre>
+<p>Now save this file in the scripts folder and call it <em>penguin_measurements.R</em></p>
+</div>
+</div>
+<div id="get-the-data-into-r" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> Get the data into R</h2>
+<p>Now we are <em>finally</em> ready to import the data into R.</p>
+<p>Add the following code to your script, then starting at line 1 - ask your script to run in order, library function first as the <code>read_csv()</code> function is from an add-on package <code>readr</code></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="working-with-data.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read in the data from the data folder in my project</span></span>
+<span id="cb26-2"><a href="working-with-data.html#cb26-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/penguins_data.csv&quot;</span>)</span></code></pre></div>
+<pre><code>Error!
+</code></pre>
+<p>Houston we have a problem! We got an error!!! blah blah does not exist in current working directory</p>
+<p>This usually happens if we told R to look in the wrong place, or didn't give it the correct name of what to look for. Can you spot what the mistake was?</p>
+<p>Edit your existing line of script to replace it with the proper file name and run the command again.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="working-with-data.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read in the data from the data folder in my project</span></span>
+<span id="cb28-2"><a href="working-with-data.html#cb28-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/penguins_data.csv&quot;</span>)</span></code></pre></div>
+<pre><code>Parsed with column specification:
+cols(
+  studyName = col_character(),
+  `Sample Number` = col_double(),
+  Species = col_character(),
+  Region = col_character(),
+  Island = col_character(),
+  Stage = col_character(),
+  `Individual ID` = col_character(),
+  `Clutch Completion` = col_character(),
+  `Date Egg` = col_character(),
+  `Culmen Length (mm)` = col_double(),
+  `Culmen Depth (mm)` = col_double(),
+  `Flipper Length (mm)` = col_double(),
+  `Body Mass (g)` = col_character(),
+  Sex = col_character(),
+  `Delta 15 N (o/oo)` = col_double(),
+  `Delta 13 C (o/oo)` = col_double(),
+  Comments = col_character()
+)</code></pre>
+<p>Great, no error this time, the <code>read_csv()</code> function has read the data and we &lt;- assigned this data to the object <code>penguins</code>. If you look in the environment pane you should see the object <code>penguins</code>.</p>
+<p>The lines printed in the R console tell us the names of the columns that were identified in the file and the type of variable R thinks it is</p>
+<ul>
+<li><p><code>col_character()</code> means the column contains letters or words</p></li>
+<li><p><code>col_double()</code> means the column contains numbers</p></li>
+</ul>
+<div class="question">
+<p>
+Have a look - do all of these seem correct to you? If not we should fix these, and we will get onto that in a little bit.
+</p>
+</div>
+<div id="view-and-refine" class="section level3" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> View and refine</h3>
+<p>So we know our data is in R, and we know the columns and names have been imported. But we still don't know whether all of our values imported, or whether it captured all the rows.</p>
+<p>There are lots of different ways to view and check data. One useful method is <code>glimpse</code></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="working-with-data.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check the structure of the data</span></span>
+<span id="cb30-2"><a href="working-with-data.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(penguins)</span></code></pre></div>
+<p>When we run <code>glimpse()</code> we get several lines of output. The number of observations "rows", the number of variables "columns". Check this against the csv file you have - they should be the same. In the next lines we see variable names and the type of data.</p>
+<p>We should be able to see by now, that all is not well!!! <code>Body Mass (g)</code> is being treated as character (string), as is <code>Date Egg</code>, meaning R thinks these contain letters and words instead of numbers and dates.</p>
+<p>Other ways to view the data</p>
+<ul>
+<li><p>type <code>penguins</code> into the Console</p></li>
+<li><p>type <code>view(penguins)</code> this will open a spreadsheet in a new tab</p></li>
+<li><p>type <code>head(penguins)</code> will show the first 10 lines of the data, rather than the whole dataset</p></li>
+</ul>
+<blockquote>
+<p>**Note - <code>view()</code> lets you do cool stuff like reorder rows and quickly scroll through the dataset without affecting the underlying data.</p>
+</blockquote>
+</div>
+<div id="data-management" class="section level3" number="3.5.2">
+<h3><span class="header-section-number">3.5.2</span> Data management</h3>
+<p>We've imported the data, checked it and found some inconsistencies.</p>
+<p>This is where we start to use some of the core functions from <code>tidyverse</code>.</p>
+<p>If R thinks <code>Body Mass (g)</code> is a character variable, then it probably contains some words as well as numbers. So let's have a look at this and compare it to a variable which has been processed correctly</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="working-with-data.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the first 10 rows of the Flipper Length and Body Mass variables</span></span>
+<span id="cb31-2"><a href="working-with-data.html#cb31-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb31-3"><a href="working-with-data.html#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">`</span><span class="at">Flipper Length (mm)</span><span class="st">`</span>, </span>
+<span id="cb31-4"><a href="working-with-data.html#cb31-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Body Mass (g)</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-5"><a href="working-with-data.html#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>) <span class="co"># 10 rows</span></span></code></pre></div>
+<p><img src="images/NA.png" width="80%" style="display: block; margin: auto;" /></p>
+<blockquote>
+<p>**Note - What is the %&gt;% ??? It's known as a pipe. It sends the results of one line of code to the next. So the data penguins is sent to the <code>select</code> function which picks only those variables we want. The result of this is then sent to the <code>head</code> function which with the argument for number of rows set to 10, prints the top 10 rows.</p>
+</blockquote>
+<blockquote>
+<p>The other way to write this series of functions would be to use brackets and the rules of BODMAS:</p>
+</blockquote>
+<pre><code>head(select(penguins, `Flipper Length (mm)`, `Body Mass (g)`),10)</code></pre>
+<blockquote>
+<p>Hopefully you agree that the pipes make the code a lot more human-reader friendly. More on pipes later</p>
+</blockquote>
+<p>So what's the problem with our data? in the Flipper length variable, missing observations have been correctly marked as <code>NA</code> signifying missing data. R can handle missing data just fine. However, in thew Body mass variable, it looks as though someone has actually typed "na" in observations where the data is missing. Here R has failed to recognise an <code>NA</code> and has read it as a word instead. This is because <code>read_csv()</code> looks for gaps or <code>NA</code> but not "na".</p>
+<p>No problem this is an easy fix. Head back to your script and make the following edit the line for data importing</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="working-with-data.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read in the penguins data, specify that NA strings can be &quot;na&quot; or &quot;NA&quot;</span></span>
+<span id="cb33-2"><a href="working-with-data.html#cb33-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/penguin_data.csv&quot;</span>, <span class="at">na=</span><span class="fu">c</span>(<span class="st">&quot;na&quot;</span>,<span class="st">&quot;NA&quot;</span>))</span></code></pre></div>
+<p>Now re-check your data using the same lines of code from before.
+All ok now?</p>
+</div>
+</div>
+<div id="dataframes-and-tibbles" class="section level2" number="3.6">
+<h2><span class="header-section-number">3.6</span> Dataframes and tibbles</h2>
+<p>A quick sidebar on how R stores data. When we imported the data into R it ws put into an object called a <strong>tibble</strong> which is a type of <strong>dataframe</strong>.</p>
+<p>Let's have a quick go at making our own <strong>tibble</strong> from scratch.</p>
+<p>Make a new script called 'TibbleTrouble.R' in the scripts folder as before.</p>
+<p>At the top of this new script put</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="working-with-data.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># just me messing about making tibbles</span></span>
+<span id="cb34-2"><a href="working-with-data.html#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="working-with-data.html#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co"># libraries</span></span>
+<span id="cb34-4"><a href="working-with-data.html#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb34-5"><a href="working-with-data.html#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-6"><a href="working-with-data.html#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="co"># make some variables, when we have a one dimensional object like this it is known as an atomic vector!</span></span>
+<span id="cb34-7"><a href="working-with-data.html#cb34-7" aria-hidden="true" tabindex="-1"></a>person <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Mark&quot;</span>, <span class="st">&quot;Phil&quot;</span>, <span class="st">&quot;Becky&quot;</span>, <span class="st">&quot;Tony&quot;</span>)</span>
+<span id="cb34-8"><a href="working-with-data.html#cb34-8" aria-hidden="true" tabindex="-1"></a>hobby <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;kickboxing&quot;</span>, <span class="st">&quot;coding&quot;</span>, <span class="st">&quot;dog walking&quot;</span>, <span class="st">&quot;car boot sales&quot;</span>)</span>
+<span id="cb34-9"><a href="working-with-data.html#cb34-9" aria-hidden="true" tabindex="-1"></a>awesomeness <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">100</span>,<span class="dv">1</span>,<span class="dv">1</span>)</span></code></pre></div>
+<p>The function <code>c</code> lets you 'concatenate' or link each of these arguments together into a single vector.</p>
+<p>Now we put these vectors together, where they become the variables in a new tibble</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="working-with-data.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make a tibble</span></span>
+<span id="cb35-2"><a href="working-with-data.html#cb35-2" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(person, hobby, awesomeness)</span>
+<span id="cb35-3"><a href="working-with-data.html#cb35-3" aria-hidden="true" tabindex="-1"></a>my_data</span></code></pre></div>
+<pre><code># A tibble: 4 x 3
+  person hobby          awesomeness
+  &lt;chr&gt;  &lt;chr&gt;                &lt;dbl&gt;
+1 Mark   kickboxing               1
+2 Phil   coding                 100
+3 Becky  dog walking              1
+4 Tony   car boot sales           1</code></pre>
+<p>Have a go at messing about with your script and figure out what each of these does, add comments and save your script.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="working-with-data.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Some R functions for looking at tibbles and dataframes I will comment next to each one with what it does</span></span>
+<span id="cb37-2"><a href="working-with-data.html#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="working-with-data.html#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my_data, <span class="at">n=</span><span class="dv">2</span>)</span>
+<span id="cb37-4"><a href="working-with-data.html#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(my_data, <span class="at">n=</span><span class="dv">1</span>)</span>
+<span id="cb37-5"><a href="working-with-data.html#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(my_data)</span>
+<span id="cb37-6"><a href="working-with-data.html#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(my_data)</span>
+<span id="cb37-7"><a href="working-with-data.html#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(my_data)</span>
+<span id="cb37-8"><a href="working-with-data.html#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="fu">view</span>(my_data)</span>
+<span id="cb37-9"><a href="working-with-data.html#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(my_data)</span>
+<span id="cb37-10"><a href="working-with-data.html#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(my_data)</span></code></pre></div>
+</div>
+<div id="clean-and-tidy" class="section level2" number="3.7">
+<h2><span class="header-section-number">3.7</span> Clean and tidy</h2>
+<p>Back to your penguins script.</p>
+<p>We have checked the data imported correctly, now its time to <em>clean and tidy</em> the data.</p>
+<div id="tidy" class="section level3" number="3.7.1">
+<h3><span class="header-section-number">3.7.1</span> Tidy</h3>
+<p>In this example our data is already in <code>tidy</code> format i.e. one observation per row. We will cover what to do if data isn't tidy later.</p>
+</div>
+<div id="clean" class="section level3" number="3.7.2">
+<h3><span class="header-section-number">3.7.2</span> Clean</h3>
+<p>Here are a few things we might want to do to our data to make it 'clean'.</p>
+<ul>
+<li><p>Refine variable names</p></li>
+<li><p>Format dates and times</p></li>
+<li><p>Rename some values</p></li>
+<li><p>Check for any duplicate records</p></li>
+<li><p>Check for any implausible data or typos</p></li>
+<li><p>Check and deal with missing values</p></li>
+</ul>
+<blockquote>
+<p>**Note - Remember because we are doing everything in a script, the original data remains unchanged. This means we have data integrity, and a clear record of what we did to tidy and clean a dataset in order to produce summaries and data visuals</p>
+</blockquote>
+</div>
+<div id="refine-variable-names" class="section level3" number="3.7.3">
+<h3><span class="header-section-number">3.7.3</span> Refine variable names</h3>
+<p>Often we might want to change the names of our variables. They might be non-intuitive, or too long. Our data has a couple of issues:</p>
+<ul>
+<li><p>Some of the names contain spaces</p></li>
+<li><p>Some of the names contain brackets</p></li>
+</ul>
+<p>Let's correct these quickly</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="working-with-data.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">#clean all variable names to snake_case using the clean_names function from the janitor package</span></span>
+<span id="cb38-2"><a href="working-with-data.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co"># note we are using assign &lt;- to overwrite the old version of penguins with a version that has updated names</span></span>
+<span id="cb38-3"><a href="working-with-data.html#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co"># this changes the data in our R workspace but not the original csv file</span></span>
+<span id="cb38-4"><a href="working-with-data.html#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-5"><a href="working-with-data.html#cb38-5" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> <span class="co">#</span></span>
+<span id="cb38-6"><a href="working-with-data.html#cb38-6" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
+<span id="cb38-7"><a href="working-with-data.html#cb38-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-8"><a href="working-with-data.html#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(penguins) <span class="co"># quickly check the new variable names</span></span></code></pre></div>
+<p>The <code>clean_names</code> function quickly converts all variable names into snake case. The N and C blood isotope ratio names are still quite long though, so let's clean those with <code>dplyr::rename()</code> where "new_name" = "old_name".</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="working-with-data.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># shorten the variable names for N and C isotope blood samples</span></span>
+<span id="cb39-2"><a href="working-with-data.html#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="working-with-data.html#cb39-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb39-4"><a href="working-with-data.html#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">&quot;delta_15n&quot;</span><span class="ot">=</span><span class="st">&quot;delta_15_n_o_oo&quot;</span>,  <span class="co"># use rename from the dplyr package</span></span>
+<span id="cb39-5"><a href="working-with-data.html#cb39-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;delta_13c&quot;</span><span class="ot">=</span><span class="st">&quot;delat_13_c_o_oo&quot;</span>)</span></code></pre></div>
+</div>
+<div id="dates" class="section level3" number="3.7.4">
+<h3><span class="header-section-number">3.7.4</span> Dates</h3>
+<p>We can also see there is a <code>date_egg</code> variable. If you check it (using any of the new functions you have learned), you should see that it all looks like its been inputted correctly, but R is treating it as words, rather than assigning it a date value. We can fix that with the <code>lubridate</code> package. If we use the function <code>dmy</code> then we tell R this is date data in date/month/year format.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="working-with-data.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use dmy from stringr package to encode date properly</span></span>
+<span id="cb40-2"><a href="working-with-data.html#cb40-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb40-3"><a href="working-with-data.html#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date_egg_proper=</span><span class="fu">dmy</span>(date_egg))</span></code></pre></div>
+<p>Here we use the <code>mutate</code> function from <code>dplyr</code> to create a new variable called <code>date_egg_proper</code> based on the output of converting the characters in <code>date_egg</code> to date format. The original variable is left intact, if we had specified the "new" variable was also called <code>date_egg</code> then it would have overwritten the original variable.</p>
+</div>
+<div id="rename-some-values" class="section level3" number="3.7.5">
+<h3><span class="header-section-number">3.7.5</span> Rename some values</h3>
+<p>Sometimes we may want to rename the values in our variables in order to make a shorthand that is easier to follow.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="working-with-data.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use mutate and case_when for an if-else statement that changes the names of the values in a variable</span></span>
+<span id="cb41-2"><a href="working-with-data.html#cb41-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb41-3"><a href="working-with-data.html#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">species =</span> <span class="fu">case_when</span>(species <span class="sc">==</span> <span class="st">&quot;Adelie Penguin (Pygoscelis adeliae)&quot;</span> <span class="sc">~</span> <span class="st">&quot;Adelie&quot;</span>,</span>
+<span id="cb41-4"><a href="working-with-data.html#cb41-4" aria-hidden="true" tabindex="-1"></a>                             species <span class="sc">==</span> <span class="st">&quot;Gentoo penguin (Pygoscelis papua)&quot;</span> <span class="sc">~</span> <span class="st">&quot;Gentoo&quot;</span>,</span>
+<span id="cb41-5"><a href="working-with-data.html#cb41-5" aria-hidden="true" tabindex="-1"></a>                             species <span class="sc">==</span> <span class="st">&quot;Chinstrap penguin (Pygoscelis antarctica)&quot;</span> <span class="sc">~</span> <span class="st">&quot;Chinstrap&quot;</span>))</span></code></pre></div>
+</div>
+<div id="check-for-duplication" class="section level3" number="3.7.6">
+<h3><span class="header-section-number">3.7.6</span> Check for duplication</h3>
+<p>It is very easy when inputting data to make mistakes, copy something in twice for example, or if someone did a lot of copy-pasting to assemble a spreadsheet (yikes!). We can check this pretty quickly</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="working-with-data.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check for duplicate rows in the data</span></span>
+<span id="cb42-2"><a href="working-with-data.html#cb42-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb42-3"><a href="working-with-data.html#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">duplicated</span>() <span class="sc">%&gt;%</span> <span class="co"># produces a list of TRUE/FALSE statements for duplicated or not</span></span>
+<span id="cb42-4"><a href="working-with-data.html#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>() <span class="co"># sums all the TRUE statements</span></span></code></pre></div>
+<pre><code>[1] 0</code></pre>
+<p>Great!</p>
+</div>
+<div id="check-for-typos-or-implausible-values" class="section level3" number="3.7.7">
+<h3><span class="header-section-number">3.7.7</span> Check for typos or implausible values</h3>
+<p>We can also explore our data for very obvious typos by checking for implausibly small or large values</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="working-with-data.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use summarise to make calculations</span></span>
+<span id="cb44-2"><a href="working-with-data.html#cb44-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb44-3"><a href="working-with-data.html#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">min=</span><span class="fu">min</span>(body_mass_g, <span class="at">na.rm=</span><span class="cn">TRUE</span>), </span>
+<span id="cb44-4"><a href="working-with-data.html#cb44-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">max=</span><span class="fu">max</span>(body_mass_g, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code></pre></div>
+<p>The minimum weight for our penguins is 2.7kg, and the max is 6.3kg - not outrageous. If the min had come out at 27g we might have been suspicious. We will use <code>summarise</code> again to calculate other metrics in the future.</p>
+<div class="information">
+<p>
+our first data insight, the difference the smallest adult penguin in our dataset is nearly half the size of the largest penguin.
+</p>
+</div>
+<p>We can also look for typos by asking R to produce all of the distinct values in a variable. This is more useful for categorical data, where we expect there to be only a few distinct categories</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="working-with-data.html#cb45-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb45-2"><a href="working-with-data.html#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(sex)</span></code></pre></div>
+<p>Here if someone had mistyped e.g. 'FMALE' it would be obvious. We could do the same thing (and probably should have before we changed the names) for species.</p>
+</div>
+<div id="missing-values-na" class="section level3" number="3.7.8">
+<h3><span class="header-section-number">3.7.8</span> Missing values: NA</h3>
+<p>There are multiple ways to check for missing values in our data</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="working-with-data.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get a sum of how many observations are missing in our dataframe</span></span>
+<span id="cb46-2"><a href="working-with-data.html#cb46-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb46-3"><a href="working-with-data.html#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">is.na</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb46-4"><a href="working-with-data.html#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>()</span></code></pre></div>
+<p>But this doesn't tell us where these are, fortunately the function <code>summary</code> does this easily</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="working-with-data.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># produce a summary of our data</span></span>
+<span id="cb47-2"><a href="working-with-data.html#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(penguins)</span></code></pre></div>
+<p>This provides a quick breakdown of the max and min for all numeric variables, as well as a list of how many missing observations there are for each one. As we can see there appear to be two missing observations for measurements in body mass, bill lengths, flipper lengths and several more for blood measures. We don't know for sure without inspecting our data further, <em>but</em> it is likely that the two birds are missing multiple measurements, and that several more were measured but didn't have their blood drawn.</p>
+<p>We will leave the NA's alone for now, but it's useful to know how many we have.</p>
+<p>We've now got a clean &amp; tidy dataset!!</p>
+</div>
+</div>
+<div id="summing-up" class="section level2" number="3.8">
+<h2><span class="header-section-number">3.8</span> Summing up</h2>
+<div id="what-we-learned" class="section level3" number="3.8.1">
+<h3><span class="header-section-number">3.8.1</span> What we learned</h3>
+<p>There was a lot of preparation here, and we haven't really got close to make any major insights. But you have:</p>
+<ul>
+<li><p>Organised your project space</p></li>
+<li><p>Dealt with file formats</p></li>
+<li><p>Put data into a specific location and imported into R</p></li>
+<li><p>Checked the data import</p></li>
+<li><p>Cleaned and tidied the data</p></li>
+</ul>
+<p>You have also been introduced to the <code>tidyverse</code> and two of its packages</p>
+<ul>
+<li><p><code>readr</code> <span class="citation"><a href="references.html#ref-R-readr" role="doc-biblioref">Wickham, Hester, et al.</a> (<a href="references.html#ref-R-readr" role="doc-biblioref">2021</a>)</span></p></li>
+<li><p><code>dplyr</code> <span class="citation"><a href="references.html#ref-R-dplyr" role="doc-biblioref">Wickham, François, et al.</a> (<a href="references.html#ref-R-dplyr" role="doc-biblioref">2021</a>)</span></p></li>
+</ul>
+<p>As well as:</p>
+<ul>
+<li><p><code>janitor</code> <span class="citation"><a href="references.html#ref-R-janitor" role="doc-biblioref">Firke</a> (<a href="references.html#ref-R-janitor" role="doc-biblioref">2021</a>)</span></p></li>
+<li><p><code>lubridate</code> <span class="citation"><a href="references.html#ref-R-lubridate" role="doc-biblioref">Spinu et al.</a> (<a href="references.html#ref-R-lubridate" role="doc-biblioref">2021</a>)</span></p></li>
+</ul>
+</div>
+<div id="quitting-1" class="section level3" number="3.8.2">
+<h3><span class="header-section-number">3.8.2</span> Quitting</h3>
+<div class="warning">
+<p>
+Remember to <strong>save</strong> your RScript before you leave. And ideally don't save your .Rdata!
+</p>
+</div>
+<ul>
+<li><p>Close your RStudio Cloud Browser</p></li>
+<li><p>Go to Blackboard to complete this week's quiz!</p></li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>(<a href="http://vita.had.co.nz/papers/tidy-data.pdf" class="uri">http://vita.had.co.nz/papers/tidy-data.pdf</a>)<a href="working-with-data.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p><a href="https://www.theguardian.com/politics/2020/oct/05/how-excel-may-have-caused-loss-of-16000-covid-tests-in-england" class="uri">https://www.theguardian.com/politics/2020/oct/05/how-excel-may-have-caused-loss-of-16000-covid-tests-in-england</a><a href="working-with-data.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>More on projects can be found in the R4DS book (<a href="https://r4ds.had.co.nz/workflow-projects.html" class="uri">https://r4ds.had.co.nz/workflow-projects.html</a>)<a href="working-with-data.html#fnref3" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  if (t = document.getElementById("webex-total_correct")) {
+    var correct = document.getElementsByClassName("webex-correct").length;
+    var solvemes = document.getElementsByClassName("webex-solveme").length;
+    var radiogroups = document.getElementsByClassName("webex-radiogroup").length;
+    var selects = document.getElementsByClassName("webex-select").length;
+    
+    t.innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+  
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+  
+  var cl = this.classList
+  
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+  
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+  
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+  
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+  
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+  }
+  
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+  
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+  }
+
+  update_total_correct();
+}
+
+</script>
+<script>
+$( document ).ready(function() {
+  var cite = ' ';
+  var license = ' <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>';
+
+  $("footer div.row div:eq(1) p").html(
+    license
+  );
+});
+</script>
+
+  </main>
+
+  <div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page">
+      <h2>On this page</h2>
+      <div id="book-on-this-page"></div>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          <li><a id="book-source" href="#">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="#">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5">
+  <div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-07-27.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+
+
+</body>
+
+</html>
