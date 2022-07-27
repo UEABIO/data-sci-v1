@@ -162,11 +162,10 @@ To avoid accidentally overwriting a package with a later version, you should <st
 <span class="header-section-number">2.3</span> Objects<a class="anchor" aria-label="anchor" href="#objects"><i class="fas fa-link"></i></a>
 </h2>
 <p>A large part of your coding will involve creating and manipulating objects. Objects contain stuff. That stuff can be numbers, words, or the result of operations and analyses.You assign content to an object using <code><a href="https://rdrr.io/r/base/assignOps.html">&lt;-</a></code>.</p>
-</div>
-<div id="activity-5-create-some-objects" class="section level2" number="2.4">
-<h2>
-<span class="header-section-number">2.4</span> Activity 5: Create some objects<a class="anchor" aria-label="anchor" href="#activity-5-create-some-objects"><i class="fas fa-link"></i></a>
-</h2>
+<div id="activity-5-create-some-objects" class="section level3" number="2.3.1">
+<h3>
+<span class="header-section-number">2.3.1</span> Activity 5: Create some objects<a class="anchor" aria-label="anchor" href="#activity-5-create-some-objects"><i class="fas fa-link"></i></a>
+</h3>
 <ul>
 <li>Copy and paste the following code into the console, change the code so that it uses your own name and age and run it. You should see that <code>name</code>, <code>age</code>, <code>today</code>, <code>new_year</code>, and <code>data</code> appear in the environment pane.</li>
 </ul>
@@ -207,9 +206,10 @@ You may also see objects referred to as 'variables'. There is a difference betwe
 </p>
 </div>
 </div>
-<div id="looking-after-the-environment" class="section level2" number="2.5">
+</div>
+<div id="looking-after-the-environment" class="section level2" number="2.4">
 <h2>
-<span class="header-section-number">2.5</span> Looking after the environment<a class="anchor" aria-label="anchor" href="#looking-after-the-environment"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.4</span> Looking after the environment<a class="anchor" aria-label="anchor" href="#looking-after-the-environment"><i class="fas fa-link"></i></a>
 </h2>
 <p>If you've been writing a lot of code you may find that the environment pane (or workspace) has become cluttered with many objects. This can make it difficult to figure out which object you need and therefore you run the risk of using the wrong data frame. If you're working on a new dataset, or if you've tried lots of different code before getting the final version, it is good practice to remember to clear the environment to avoid using the wrong object. You can do this in several way.</p>
 <ol style="list-style-type: decimal">
@@ -224,9 +224,9 @@ Figure 2.2: Clearing the workspace
 </p>
 </div>
 </div>
-<div id="global-options" class="section level2" number="2.6">
+<div id="global-options" class="section level2" number="2.5">
 <h2>
-<span class="header-section-number">2.6</span> Global options<a class="anchor" aria-label="anchor" href="#global-options"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.5</span> Global options<a class="anchor" aria-label="anchor" href="#global-options"><i class="fas fa-link"></i></a>
 </h2>
 <p>By default, when you open R Studio it will show you what you were last working on, including your code and any objects you have created. This might sound helpful, but actually it tends to cause more problems than it's worth because it means that you risk accidentally using an old version of an object. We recommend changing the settings so that each time you start R Studio, it opens a fresh copy. You can do this by clicking <code>Tools</code> - <code>Global Options</code> and then deselecting boxes so that it looks like the below.</p>
 <div class="figure" style="text-align: center">
@@ -236,16 +236,15 @@ Figure 2.3: Global options
 </p>
 </div>
 </div>
-<div id="r-sessions" class="section level2" number="2.7">
+<div id="r-sessions" class="section level2" number="2.6">
 <h2>
-<span class="header-section-number">2.7</span> R sessions<a class="anchor" aria-label="anchor" href="#r-sessions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.6</span> R sessions<a class="anchor" aria-label="anchor" href="#r-sessions"><i class="fas fa-link"></i></a>
 </h2>
 <p>When you open up R and start writing code, loading packages, and creating objects, you're doing so in a new <strong>session</strong>. In addition to clearing the workspace, it can sometimes be useful to start a new session. This will happen automatically each time you start R on your computer, although sessions can persist on the server. If you find that your code isn't working and you can't figure out why, it might be worth starting a new session. This will clear the environment and detach all loaded packages - think of it like restarting your phone.</p>
-</div>
-<div id="activity-6" class="section level2" number="2.8">
-<h2>
-<span class="header-section-number">2.8</span> Activity 6<a class="anchor" aria-label="anchor" href="#activity-6"><i class="fas fa-link"></i></a>
-</h2>
+<div id="activity-6" class="section level3" number="2.6.1">
+<h3>
+<span class="header-section-number">2.6.1</span> Activity 6<a class="anchor" aria-label="anchor" href="#activity-6"><i class="fas fa-link"></i></a>
+</h3>
 <p>Click 'Session - Restart R'.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:img-session"></span>
@@ -254,9 +253,10 @@ Figure 2.4: The truth about programming
 </p>
 </div>
 </div>
-<div id="how-to-cite-r-and-rstudio" class="section level2" number="2.9">
+</div>
+<div id="how-to-cite-r-and-rstudio" class="section level2" number="2.7">
 <h2>
-<span class="header-section-number">2.9</span> How to cite R and RStudio<a class="anchor" aria-label="anchor" href="#how-to-cite-r-and-rstudio"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.7</span> How to cite R and RStudio<a class="anchor" aria-label="anchor" href="#how-to-cite-r-and-rstudio"><i class="fas fa-link"></i></a>
 </h2>
 <p>You may be some way off writing a scientific report where you have to cite and reference R, however, when the time comes it is important to do so to the people who built it (most of them for free!) credit. You should provide separate citations for R, RStudio, and the packages you use.</p>
 <p>To get the citation for the version of R you are using, simply run the <code><a href="https://rdrr.io/r/utils/citation.html">citation()</a></code> function which will always provide you with he most recent citation.</p>
@@ -302,18 +302,18 @@ Figure 2.4: The truth about programming
 ##     pages = {1686},
 ##     doi = {10.21105/joss.01686},
 ##   }</code></pre>
-<p>To generate the citation for the version of RStudio you are using, you can use the <code>RStudio.Vesion()</code> function:</p>
+<p>To generate the citation for the version of RStudio you are using, you can use the <code>RStudio.Version()</code> function:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">RStudio.Version</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>Finally, here's an example of how that might look in the write-up of your method section:</p>
 <blockquote>
-<p>Analysis was conducted using R (R Core Team, 2020), RStudio (Rstudio Team, 2020), and the tidyverse package (Wickham, 2017).</p>
+<p>Analysis was conducted using R ver 4.0.0 (R Core Team, 2020), RStudio (Rstudio Team, 2020), and the tidyverse range of packages (Wickham, 2017).</p>
 </blockquote>
 <p>As noted, you may not have to do this for a while, but come back to this when you do as it's important to give the open-source community credit for their work.</p>
 </div>
-<div id="help-and-additional-resources" class="section level2" number="2.10">
+<div id="help-and-additional-resources" class="section level2" number="2.8">
 <h2>
-<span class="header-section-number">2.10</span> Help and additional resources<a class="anchor" aria-label="anchor" href="#help-and-additional-resources"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.8</span> Help and additional resources<a class="anchor" aria-label="anchor" href="#help-and-additional-resources"><i class="fas fa-link"></i></a>
 </h2>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:img-kitteh"></span>
@@ -323,8 +323,9 @@ Figure 2.5: The truth about programming
 </div>
 <p>Getting good at programming really means getting good trying stuff out, searching for help online, and finding examples of code to copy. If you are having difficulty with any of the exercises contained in this book then you can ask for help on Teams, however, learning to problem-solve effectively is a key skill that you need to develop throughout this course.</p>
 <ul>
-<li>Use the help documentation. If you're struggling to understand how a function works, remember the <code>?function</code> command.</li>
+<li>Use the help documentation. If you're struggling to understand how a function works, remember the <code>?function</code> and <code>help()</code> command.</li>
 <li>If you get an error message, copy and paste it in to Google - it's very likely someone else has had the same problem.</li>
+<li>Rememver to ask for help on the course Yammer page</li>
 <li>In addition to these course materials there are a number of excellent resources for learning R:
 <ul>
 <li><a href="http://www.cookbook-r.com/">R Cookbook</a></li>
@@ -335,9 +336,9 @@ Figure 2.5: The truth about programming
 </li>
 </ul>
 </div>
-<div id="debugging-tips" class="section level2" number="2.11">
+<div id="debugging-tips" class="section level2" number="2.9">
 <h2>
-<span class="header-section-number">2.11</span> Debugging tips<a class="anchor" aria-label="anchor" href="#debugging-tips"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.9</span> Debugging tips<a class="anchor" aria-label="anchor" href="#debugging-tips"><i class="fas fa-link"></i></a>
 </h2>
 <p>A large part of coding is trying to figure why your code doesn't work and this is true whether you are a novice or an expert. As you progress through this course you should keep a record of mistakes you make and how you fixed them. In each chapter we will provide a number of common mistakes to look out for but you will undoubtedly make (and fix!) new mistakes yourself.</p>
 <ul>
@@ -346,11 +347,10 @@ Figure 2.5: The truth about programming
 <li>Is there a package conflict? Have you tried specifying the package and function with <code>package::function</code>?</li>
 <li>Is it definitely an error? Not all red text in R means an error - sometimes it is just giving you a message with information.</li>
 </ul>
-</div>
-<div id="activity-6-test-yourself" class="section level2" number="2.12">
-<h2>
-<span class="header-section-number">2.12</span> Activity 6: Test yourself<a class="anchor" aria-label="anchor" href="#activity-6-test-yourself"><i class="fas fa-link"></i></a>
-</h2>
+<div id="activity-7-test-yourself" class="section level3" number="2.9.1">
+<h3>
+<span class="header-section-number">2.9.1</span> Activity 7: Test yourself<a class="anchor" aria-label="anchor" href="#activity-7-test-yourself"><i class="fas fa-link"></i></a>
+</h3>
 <p><strong>Question 1.</strong> Why should you never include the code <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> in your analysis scripts? <select class="webex-select"><option value="blank"></option>
 <option value="">You should use library() instead</option>
 <option value="">Packages are already part of Base R</option>
@@ -400,6 +400,7 @@ Explain This Answer
 <option value="answer">object</option>
 <option value="">argument</option>
 <option value="">assignment</option></select>.</p>
+</div>
 </div>
 </div>
 <script>
