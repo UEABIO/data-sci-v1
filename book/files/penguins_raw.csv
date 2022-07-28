@@ -2,7 +2,7 @@ studyName,Sample Number,Species,Region,Island,Stage,Individual ID,Clutch Complet
 PAL0708,1,Adelie Penguin (Pygoscelis adeliae),Anvers,Torgersen,"Adult, 1 Egg Stage",N1A1,Yes,11/11/2007,39.1,18.7,181,3750,MALE,NA,NA,Not enough blood for isotopes.
 PAL0708,2,Adelie Penguin (Pygoscelis adeliae),Anvers,Torgersen,"Adult, 1 Egg Stage",N1A2,Yes,11/11/2007,39.5,17.4,186,3800,FEMALE,8.94956,-24.69454,NA
 PAL0708,3,Adelie Penguin (Pygoscelis adeliae),Anvers,Torgersen,"Adult, 1 Egg Stage",N2A1,Yes,16/11/2007,40.3,18,195,3250,FEMALE,8.36821,-25.33302,NA
-PAL0708,4,Adelie Penguin (Pygoscelis adeliae),Anvers,Torgersen,"Adult, 1 Egg Stage",N2A2,Yes,16/11/2007,NA,NA,NA,na,NA,NA,NA,Adult not sampled.
+PAL0708,4,Adelie Penguin (Pygoscelis adeliae),Anvers,Torgersen,"Adult, 1 Egg Stage",N2A2,Yes,16/11/2007,NA,NA,NA,NA,NA,NA,NA,Adult not sampled.
 PAL0708,5,Adelie Penguin (Pygoscelis adeliae),Anvers,Torgersen,"Adult, 1 Egg Stage",N3A1,Yes,16/11/2007,36.7,19.3,193,3450,FEMALE,8.76651,-25.32426,NA
 PAL0708,6,Adelie Penguin (Pygoscelis adeliae),Anvers,Torgersen,"Adult, 1 Egg Stage",N3A2,Yes,16/11/2007,39.3,20.6,190,3650,MALE,8.66496,-25.29805,NA
 PAL0708,7,Adelie Penguin (Pygoscelis adeliae),Anvers,Torgersen,"Adult, 1 Egg Stage",N4A1,No,15/11/2007,38.9,17.8,181,3625,FEMALE,9.18718,-25.21799,Nest never observed with full clutch.
@@ -91,12 +91,12 @@ PAL0809,89,Adelie Penguin (Pygoscelis adeliae),Anvers,Dream,"Adult, 1 Egg Stage"
 PAL0809,90,Adelie Penguin (Pygoscelis adeliae),Anvers,Dream,"Adult, 1 Egg Stage",N44A2,Yes,08/11/2008,38.9,18.8,190,3600,FEMALE,8.36936,-26.11199,NA
 PAL0809,91,Adelie Penguin (Pygoscelis adeliae),Anvers,Dream,"Adult, 1 Egg Stage",N45A1,Yes,14/11/2008,35.7,18,202,3550,FEMALE,8.46531,-26.05621,NA
 PAL0809,92,Adelie Penguin (Pygoscelis adeliae),Anvers,Dream,"Adult, 1 Egg Stage",N45A2,Yes,14/11/2008,41.1,18.1,205,4300,MALE,8.77018,-25.83352,NA
-PAL0809,93,Adelie Penguin (Pygoscelis adeliae),Anvers,Dream,"Adult, 1 Egg Stage",N46A1,Yes,05/11/2008,34,17.1,185,3400,FEMALE,8.01485,-26.69543,NA
+PAL0809,93,Adelie Penguin (Pygoscelis adeliae),Anvers,Dream,"Adult, 1 Egg Stage",N46A1,Yes,05/11/2008,34,17.1,185,3400,FEMALE,8.01485,-26.695430000000002,NA
 PAL0809,94,Adelie Penguin (Pygoscelis adeliae),Anvers,Dream,"Adult, 1 Egg Stage",N46A2,Yes,05/11/2008,39.6,18.1,186,4450,MALE,8.49915,-26.42406,NA
 PAL0809,95,Adelie Penguin (Pygoscelis adeliae),Anvers,Dream,"Adult, 1 Egg Stage",N48A1,Yes,17/11/2008,36.2,17.3,187,3300,FEMALE,8.90723,-26.30037,NA
 PAL0809,96,Adelie Penguin (Pygoscelis adeliae),Anvers,Dream,"Adult, 1 Egg Stage",N48A2,Yes,17/11/2008,40.8,18.9,208,4300,MALE,8.48204,-26.57941,NA
 PAL0809,97,Adelie Penguin (Pygoscelis adeliae),Anvers,Dream,"Adult, 1 Egg Stage",N49A1,Yes,08/11/2008,38.1,18.6,190,3700,FEMALE,8.10277,-26.50086,NA
-PAL0809,98,Adelie Penguin (Pygoscelis adeliae),Anvers,Dream,"Adult, 1 Egg Stage",N49A2,Yes,08/11/2008,40.3,18.5,196,4350,MALE,8.39459,-26.01152,NA
+PAL0809,98,Adelie Penguin (Pygoscelis adeliae),Anvers,Dream,"Adult, 1 Egg Stage",N49A2,Yes,08/11/2008,40.3,18.5,196,4350,MALE,8.3945900000000009,-26.01152,NA
 PAL0809,99,Adelie Penguin (Pygoscelis adeliae),Anvers,Dream,"Adult, 1 Egg Stage",N50A1,Yes,10/11/2008,33.1,16.1,178,2900,FEMALE,9.04218,-26.15775,NA
 PAL0809,100,Adelie Penguin (Pygoscelis adeliae),Anvers,Dream,"Adult, 1 Egg Stage",N50A2,Yes,10/11/2008,43.2,18.5,192,4100,MALE,8.97025,-26.03679,NA
 PAL0910,101,Adelie Penguin (Pygoscelis adeliae),Anvers,Biscoe,"Adult, 1 Egg Stage",N47A1,Yes,09/11/2009,35,17.9,192,3725,FEMALE,8.84451,-26.28055,NA
@@ -237,7 +237,7 @@ PAL0910,83,Gentoo penguin (Pygoscelis papua),Anvers,Biscoe,"Adult, 1 Egg Stage",
 PAL0910,84,Gentoo penguin (Pygoscelis papua),Anvers,Biscoe,"Adult, 1 Egg Stage",N6A2,Yes,15/11/2009,50,15.9,224,5350,MALE,8.20042,-26.39677,NA
 PAL0910,85,Gentoo penguin (Pygoscelis papua),Anvers,Biscoe,"Adult, 1 Egg Stage",N8A1,Yes,22/11/2009,44.9,13.8,212,4750,FEMALE,8.11238,-26.20372,NA
 PAL0910,86,Gentoo penguin (Pygoscelis papua),Anvers,Biscoe,"Adult, 1 Egg Stage",N8A2,Yes,22/11/2009,50.8,17.3,228,5600,MALE,8.27428,-26.30019,NA
-PAL0910,87,Gentoo penguin (Pygoscelis papua),Anvers,Biscoe,"Adult, 1 Egg Stage",N13A1,Yes,20/11/2009,43.4,14.4,218,4600,FEMALE,8.23468,-26.18599,NA
+PAL0910,87,Gentoo penguin (Pygoscelis papua),Anvers,Biscoe,"Adult, 1 Egg Stage",N13A1,Yes,20/11/2009,43.4,14.4,218,4600,FEMALE,8.2346800000000009,-26.18599,NA
 PAL0910,88,Gentoo penguin (Pygoscelis papua),Anvers,Biscoe,"Adult, 1 Egg Stage",N13A2,Yes,20/11/2009,51.3,14.2,218,5300,MALE,8.15426,-26.3433,NA
 PAL0910,89,Gentoo penguin (Pygoscelis papua),Anvers,Biscoe,"Adult, 1 Egg Stage",N14A1,Yes,25/11/2009,47.5,14,212,4875,FEMALE,8.12691,-26.23613,NA
 PAL0910,90,Gentoo penguin (Pygoscelis papua),Anvers,Biscoe,"Adult, 1 Egg Stage",N14A2,Yes,25/11/2009,52.1,17,230,5550,MALE,8.27595,-26.11657,NA
@@ -270,7 +270,7 @@ PAL0910,116,Gentoo penguin (Pygoscelis papua),Anvers,Biscoe,"Adult, 1 Egg Stage"
 PAL0910,117,Gentoo penguin (Pygoscelis papua),Anvers,Biscoe,"Adult, 1 Egg Stage",N36A1,Yes,01/12/2009,44.5,15.7,217,4875,NA,8.04111,-26.18444,Sexing primers did not amplify.
 PAL0910,118,Gentoo penguin (Pygoscelis papua),Anvers,Biscoe,"Adult, 1 Egg Stage",N36A2,Yes,01/12/2009,48.8,16.2,222,6000,MALE,8.33825,-25.88547,NA
 PAL0910,119,Gentoo penguin (Pygoscelis papua),Anvers,Biscoe,"Adult, 1 Egg Stage",N38A1,No,01/12/2009,47.2,13.7,214,4925,FEMALE,7.99184,-26.20538,Nest never observed with full clutch.
-PAL0910,120,Gentoo penguin (Pygoscelis papua),Anvers,Biscoe,"Adult, 1 Egg Stage",N38A2,No,01/12/2009,NA,NA,NA,na,NA,NA,NA,Adult not sampled. Nest never observed with full clutch.
+PAL0910,120,Gentoo penguin (Pygoscelis papua),Anvers,Biscoe,"Adult, 1 Egg Stage",N38A2,No,01/12/2009,NA,NA,NA,NA,NA,NA,NA,Adult not sampled. Nest never observed with full clutch.
 PAL0910,121,Gentoo penguin (Pygoscelis papua),Anvers,Biscoe,"Adult, 1 Egg Stage",N39A1,Yes,22/11/2009,46.8,14.3,215,4850,FEMALE,8.41151,-26.13832,NA
 PAL0910,122,Gentoo penguin (Pygoscelis papua),Anvers,Biscoe,"Adult, 1 Egg Stage",N39A2,Yes,22/11/2009,50.4,15.7,222,5750,MALE,8.30166,-26.04117,NA
 PAL0910,123,Gentoo penguin (Pygoscelis papua),Anvers,Biscoe,"Adult, 1 Egg Stage",N43A1,Yes,22/11/2009,45.2,14.8,212,5200,FEMALE,8.24246,-26.11969,NA
@@ -337,8 +337,8 @@ PAL0910,59,Chinstrap penguin (Pygoscelis antarctica),Anvers,Dream,"Adult, 1 Egg 
 PAL0910,60,Chinstrap penguin (Pygoscelis antarctica),Anvers,Dream,"Adult, 1 Egg Stage",N95A2,Yes,21/11/2009,45.6,19.4,194,3525,FEMALE,9.46985,-24.65786,NA
 PAL0910,61,Chinstrap penguin (Pygoscelis antarctica),Anvers,Dream,"Adult, 1 Egg Stage",N96A1,Yes,27/11/2009,51.9,19.5,206,3950,MALE,NA,-23.78767,No delta15N data received from lab.
 PAL0910,62,Chinstrap penguin (Pygoscelis antarctica),Anvers,Dream,"Adult, 1 Egg Stage",N96A2,Yes,27/11/2009,46.8,16.5,189,3650,FEMALE,9.65061,-24.48153,NA
-PAL0910,63,Chinstrap penguin (Pygoscelis antarctica),Anvers,Dream,"Adult, 1 Egg Stage",N98A1,Yes,19/11/2009,45.7,17,195,3650,FEMALE,9.26715,-24.31912,NA
-PAL0910,64,Chinstrap penguin (Pygoscelis antarctica),Anvers,Dream,"Adult, 1 Egg Stage",N98A2,Yes,19/11/2009,55.8,19.8,207,4000,MALE,9.70465,-24.53494,NA
+PAL0910,63,Chinstrap penguin (Pygoscelis antarctica),Anvers,Dream,"Adult, 1 Egg Stage",N98A1,Yes,19/11/2009,45.7,17,195,3650,FEMALE,9.2671500000000009,-24.31912,NA
+PAL0910,64,Chinstrap penguin (Pygoscelis antarctica),Anvers,Dream,"Adult, 1 Egg Stage",N98A2,Yes,19/11/2009,55.8,19.8,207,4000,MALE,9.7046500000000009,-24.53494,NA
 PAL0910,65,Chinstrap penguin (Pygoscelis antarctica),Anvers,Dream,"Adult, 1 Egg Stage",N99A1,No,21/11/2009,43.5,18.1,202,3400,FEMALE,9.37608,-24.40753,Nest never observed with full clutch.
 PAL0910,66,Chinstrap penguin (Pygoscelis antarctica),Anvers,Dream,"Adult, 1 Egg Stage",N99A2,No,21/11/2009,49.6,18.2,193,3775,MALE,9.4618,-24.70615,Nest never observed with full clutch.
 PAL0910,67,Chinstrap penguin (Pygoscelis antarctica),Anvers,Dream,"Adult, 1 Egg Stage",N100A1,Yes,21/11/2009,50.8,19,210,4100,MALE,9.98044,-24.68741,NA

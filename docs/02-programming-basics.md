@@ -1,5 +1,5 @@
 
-# Introduction to the tidyverse
+# Basic programming
 
 
 
@@ -11,9 +11,9 @@ To load packages we use the function `library()`. Typically you would start any 
 
 The [tidyverse](https://www.tidyverse.org/) is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures. This means the functions across the tidyverse are all designed to work together and make the process of data science easier.
 
-### Load the tidyverse
+## Using packages
 
-Run the below code to load the tidyverse. You can do this regardless of whether you are using your own computer or the cloud.  
+Run the below code to load the tidyverse package. You can do this regardless of whether you are using your own computer or the cloud.  
 
 
 ```r
@@ -61,7 +61,7 @@ In addition to updates to R and R Studio, the creators of packages also sometime
 <p>To avoid accidentally overwriting a package with a later version, you should <strong>never</strong> include <code>install.packages()</code> in your analysis scripts in case you, or someone else runs the code by mistake. Remember, the server will already have all of the packages you need for this course so you only need to install packages if you are using your own machine.</p>
 </div>
 
-## Package conflicts {#conflicts}
+## Package conflicts
 
 There are thousands of different R packages with even more functions. Unfortunately, sometimes different packages have the same function names. For example, the packages `dplyr` and `MASS` both have a function named `select()`. If you load both of these packages, R will produce a warning telling you that there is a conflict.
 
@@ -96,7 +96,7 @@ MASS::select()
 
 A large part of your coding will involve creating and manipulating objects. Objects contain stuff. That stuff can be numbers, words, or the result of operations and analyses.You assign content to an object using `<-`.
 
-### Activity 5: Create some objects
+### Activity 1: Create some objects
 
 * Copy and paste the following code into the console, change the code so that it uses your own name and age and run it. You should see that `name`, `age`, `today`, `new_year`, and `data` appear in the environment pane.  
 
@@ -150,6 +150,60 @@ You will constantly be creating objects throughout this course and you will lear
 <p>You may also see objects referred to as 'variables'. There is a difference between the two in programming terms, however, they are used synonymously very frequently.</p>
 </div>
 
+## Vectors
+
+## Dataframes and tibbles
+
+A quick sidebar on how R stores data. When we imported the data into R it is put into an object called a **tibble** which is a type of **dataframe**. 
+
+Let's have a quick go at making our own **tibble** from scratch. 
+
+
+
+```r
+# make some variables, when we have a one dimensional object like this it is known as an atomic vector!
+person <- c("Mark", "Phil", "Becky", "Tony")
+hobby <- c("kickboxing", "coding", "dog walking", "car boot sales")
+awesomeness <- c(1,100,1,1)
+```
+
+The function `c` lets you 'concatenate' or link each of these arguments together into a single vector.
+
+Now we put these vectors together, where they become the variables in a new tibble
+
+
+```r
+# make a tibble
+my_data <- tibble(person, hobby, awesomeness)
+my_data
+```
+
+```
+# A tibble: 4 x 3
+  person hobby          awesomeness
+  <chr>  <chr>                <dbl>
+1 Mark   kickboxing               1
+2 Phil   coding                 100
+3 Becky  dog walking              1
+4 Tony   car boot sales           1
+```
+Have a go at messing about with your script and figure out what each of these does, add comments and save your script.
+
+
+```r
+# Some R functions for looking at tibbles and dataframes I will comment next to each one with what it does
+
+head(my_data, n=2)
+tail(my_data, n=1)
+nrow(my_data)
+ncol(my_data)
+colnames(my_data)
+view(my_data)
+glimpse(my_data)
+str(my_data)
+```
+
+
 ## Looking after the environment
 
 If you've been writing a lot of code you may find that the environment pane (or workspace) has become cluttered with many objects. This can make it difficult to figure out which object you need and therefore you run the risk of using the wrong data frame. If you're working on a new dataset, or if you've tried lots of different code before getting the final version, it is good practice to remember to clear the environment to avoid using the wrong object. You can do this in several way.
@@ -178,7 +232,7 @@ By default, when you open R Studio it will show you what you were last working o
 
 When you open up R and start writing code, loading packages, and creating objects, you're doing so in a new **session**. In addition to clearing the workspace, it can sometimes be useful to start a new session. This will happen automatically each time you start R on your computer, although sessions can persist on the server. If you find that your code isn't working and you can't figure out why, it might be worth starting a new session. This will clear the environment and detach all loaded packages - think of it like restarting your phone.
 
-### Activity 6
+## Activity 2
 
 Click 'Session - Restart R'. 
 
@@ -289,7 +343,7 @@ A large part of coding is trying to figure why your code doesn't work and this i
 * Is there a package conflict? Have you tried specifying the package and function with `package::function`?
 * Is it definitely an error? Not all red text in R means an error - sometimes it is just giving you a message with information. 
 
-### Activity 7: Test yourself
+## Activity 7: Test yourself
 
 **Question 1.** Why should you never include the code `install.packages()` in your analysis scripts? <select class='webex-select'><option value='blank'></option><option value=''>You should use library() instead</option><option value=''>Packages are already part of Base R</option><option value='answer'>You (or someone else) may accidentally install a package update that stops your code working</option><option value=''>You already have the latest version of the package</option></select> 
 
@@ -337,7 +391,7 @@ You should use the form `package::function`, for example `dplyr::select`. Rememb
 
 **Question 6.** The job of `<-` is to send the output from the function to a/an <select class='webex-select'><option value='blank'></option><option value='answer'>object</option><option value=''>argument</option><option value=''>assignment</option></select>.
 
-# Working with data
+# Loading data
 
 
 
@@ -398,7 +452,7 @@ A Project will contain several files, possibly organised into sub-folders contai
 
 <div class="figure" style="text-align: center">
 <img src="images/project.png" alt="An example of a typical R project set-up" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-17)An example of a typical R project set-up</p>
+<p class="caption">(\#fig:unnamed-chunk-20)An example of a typical R project set-up</p>
 </div>
 
 Within this project you will notice there is already one file *.Rproj*. This is an R project file, this is a very useful feature, it interacts with R to tell it you are working in a very specific place on the computer (in this case the cloud server we have dialed into). It means R will automatically treat the location of your project file as the 'working directory' and makes importing and exporting easier^[More on projects can be found in the R4DS book (https://r4ds.had.co.nz/workflow-projects.html)]. 
@@ -439,7 +493,7 @@ In practice, that means we only use our data file for data entry and storage. Al
 
 <div class="figure" style="text-align: center">
 <img src="images/excel_csv.png" alt="excel view, csv view" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-20)Top image: Penguins data viewed in Excel, Bottom image: Penguins data in native csv format</p>
+<p class="caption">(\#fig:unnamed-chunk-23)Top image: Penguins data viewed in Excel, Bottom image: Penguins data in native csv format</p>
 </div>
 
 In raw format, each line of a CSV is separated by commas for different values. When you open this in a spreadsheet program like Excel it automatically converts those comma-separated values into tables and columns. 
@@ -455,7 +509,7 @@ In raw format, each line of a CSV is separated by commas for different values. W
 
 <div class="figure" style="text-align: center">
 <img src="images/upload.png" alt="File tab" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-21)Highlighted the buttons to upload files, and more options</p>
+<p class="caption">(\#fig:unnamed-chunk-24)Highlighted the buttons to upload files, and more options</p>
 </div>
 
 ## Activity 4: Make a script
@@ -497,9 +551,9 @@ Now we can read in the data. To do this we will use the function `read_csv()` th
 
 ```r
 # IMPORT DATA ----
-penguins_data <- read_csv ("data/penguins_raw.csv")
+penguins <- read_csv ("data/penguins_raw.csv")
 
-head(penguins_data) # check the first lines of the dataframe
+head(penguins) # check the data has loaded, prints first 10 rows of dataframe
 #__________________________----
 ```
 
@@ -511,450 +565,3 @@ head(penguins_data) # check the first lines of the dataframe
 ### Filepath
 
 
-
-## Activity 6: Clean the data
-
-We are going to learn how to organise data using the *tidy* format^[(http://vita.had.co.nz/papers/tidy-data.pdf)]. This is because we are using the `tidyverse` packages @R-tidyverse. This is an opinionated, but highly effective method for generating reproducible analyses with a wide-range of data manipulation tools. Tidy data is an easy format for computers to read. 
-
-Here 'tidy' refers to a specific structure that lets us manipulate and visualise data with ease. In a tidy dataset each *variable* is in one column and each row contains one *observation*. Each cell of the table/spreadsheet contains the *values*. One observation you might make about tidy data is it is quite long - it generates a lot of rows of data. 
-
-<img src="images/tidy-1.png" title="tidy data overview" alt="tidy data overview" width="80%" style="display: block; margin: auto;" />
-
-So we know our data is in R, and we know the columns and names have been imported. But we still don't know whether all of our values imported, or whether it captured all the rows. 
-
-There are lots of different ways to view and check data. One useful method is `glimpse`
-
-
-```r
-# CHECK DATA ----
-# check the data
-colnames(penguins_data)
-#__________________________----
-```
-
-When we run `colnames()` we get the identities of each column in our dataframe
-
-* **Study name**: an identifier for the year in which sets of observations were made
-
-* **Region**: the area in which the observation was recorded
-
-* **Island**: the specific island where the observation was recorded
-
-* **Stage**: Denotes reproductive stage of the penguin
-
-* **Individual** ID: the unique ID of the individual
-
-* **Clutch completion**: if the study nest observed with a full clutch e.g. 2 eggs
-
-* **Date egg**: the date at which the study nest observed with 1 egg
-
-* **Culmen length**: length of the dorsal ridge of the bird's bill (mm)
-
-* **Culmen depth**: depth of the dorsal ridge of the bird's bill (mm)
-
-* **Flipper Length**: length of bird's flipper (mm)
-
-* **Body Mass**: Bird's mass in (g)
-
-* **Sex**: Denotes the sex of the bird
-
-* **Delta 15N** : the ratio of stable Nitrogen isotopes 15N:14N from blood sample
-
-* **Delta 13C**: the ratio of stable Carbon isotopes 13C:12C from blood sample
-
-
-### Refine variable names
-
-Often we might want to change the names of our variables. They might be non-intuitive, or too long. Our data has a couple of issues:
-
-* Some of the names contain spaces
-
-* Some of the names contain brackets
-
-R does not like these so let's correct these quickly.
-
-
-```r
-# CLEAN DATA ----
-
-# clean all variable names to snake_case using the clean_names function from the janitor package
-# note we are using assign <- to overwrite the old version of penguins with a version that has updated names
-# this changes the data in our R workspace but NOT the original csv file
-
-penguins <- janitor::clean_names(penguins) # clean the column names
-
-colnames(penguins) # quickly check the new variable names
-```
-
-The `clean_names` function quickly converts all variable names into snake case. The N and C blood isotope ratio names are still quite long though, so let's clean those with `dplyr::rename()` where "new_name" = "old_name".
-
-
-```r
-# shorten the variable names for N and C isotope blood samples
-
-penguins <- rename(penguins,
-         "delta_15n"="delta_15_n_o_oo",  # use rename from the dplyr package
-         "delta_13c"="delta_13_c_o_oo")
-```
-
-
-### Check data format
-
-When we run `glimpse()` we get several lines of output. The number of observations "rows", the number of variables "columns". Check this against the csv file you have - they should be the same. In the next lines we see variable names and the type of data. 
-
-
-```r
-glimpse(penguins)
-```
-
-We can see a dataset with 345 rows (including the headers) and 17 variables
-It also provides information on the *type* of data in each column
-
-* `<chr>` - means character or text data
-
-* `<dbl>` - means numerical data
-
-Is `body_mass_g` in the correct data format?
-
-<select class='webex-select'><option value='blank'></option><option value='answer'>no</option><option value=''>yes</option></select>
-
-This is where we start to use some of the core functions from `tidyverse`.
-
-If R thinks `Body Mass (g)` is a character variable, then it probably contains some words as well as numbers. So let's have a look at this and compare it to another column that IS treated as numerical. 
-
-
-```r
-# check for the unique values in body_mass_g
-select(penguins, 
-       body_mass_g, 
-       flipper_length_mm)
-```
-
-<div class="info">
-<p>One feature that will quickly become apparent (and very useful), is that the first argument in every tidyverse function is always the dataframe. So <code>{r} select(.data = penguins,         body_mass_g,         flipper_length_mm)</code></p>
-</div>
-
-
-<img src="images/NA.png" width="80%" style="display: block; margin: auto;" />
-
-### Dates
-
-We can also see there is a `date_egg` variable. If you check it (using any of the new functions you have learned), you should see that it all looks like its been inputted correctly, but R is treating it as words, rather than assigning it a date value. We can fix that with the `lubridate` package. If we use the function `dmy` then we tell R this is date data in date/month/year format. 
-
-
-```r
-# use dmy from stringr package to encode date properly
-penguins <- penguins %>% 
-  mutate(date_egg_proper=dmy(date_egg))
-```
-
-
-Here we use the `mutate` function from `dplyr` to create a new variable called `date_egg_proper` based on the output of converting the characters in `date_egg` to date format. The original variable is left intact, if we had specified the "new" variable was also called `date_egg` then it would have overwritten the original variable. 
-
-### Rename some values
-
-Sometimes we may want to rename the values in our variables in order to make a shorthand that is easier to follow.
-
-
-```r
-# use mutate and case_when for an if-else statement that changes the names of the values in a variable
-penguins <- penguins %>% 
-  mutate(species = case_when(species == "Adelie Penguin (Pygoscelis adeliae)" ~ "Adelie",
-                             species == "Gentoo penguin (Pygoscelis papua)" ~ "Gentoo",
-                             species == "Chinstrap penguin (Pygoscelis antarctica)" ~ "Chinstrap"))
-```
-
-### Check for duplication
-
-It is very easy when inputting data to make mistakes, copy something in twice for example, or if someone did a lot of copy-pasting to assemble a spreadsheet (yikes!). We can check this pretty quickly
-
-
-```r
-# check for duplicate rows in the data
-penguins %>% 
-  duplicated() %>% # produces a list of TRUE/FALSE statements for duplicated or not
-  sum() # sums all the TRUE statements
-```
-
-```
-[1] 0
-```
-Great! 
-
-### Check for typos or implausible values
-
-We can also  explore our data for very obvious typos by checking for implausibly small or large values
-
-
-```r
-# use summarise to make calculations
-penguins %>% 
-  summarise(min=min(body_mass_g, na.rm=TRUE), 
-            max=max(body_mass_g, na.rm=TRUE))
-```
-
-The minimum weight for our penguins is 2.7kg, and the max is 6.3kg - not outrageous. If the min had come out at 27g we might have been suspicious. We will use `summarise` again to calculate other metrics in the future. 
-
-<div class="information">
-<p>our first data insight, the difference the smallest adult penguin in our dataset is nearly half the size of the largest penguin.</p>
-</div>
-We can also look for typos by asking R to produce all of the distinct values in a variable. This is more useful for categorical data, where we expect there to be only a few distinct categories
-
-
-```r
-penguins %>% 
-  distinct(sex)
-```
-Here if someone had mistyped e.g. 'FMALE' it would be obvious. We could do the same thing (and probably should have before we changed the names) for species. 
-
-### Missing values: NA
-
-There are multiple ways to check for missing values in our data
-
-
-```r
-# Get a sum of how many observations are missing in our dataframe
-penguins %>% 
-  is.na() %>% 
-  sum()
-```
-
-But this doesn't tell us where these are, fortunately the function `summary` does this easily
-
-
-```r
-# produce a summary of our data
-summary(penguins)
-```
-
-This provides a quick breakdown of the max and min for all numeric variables, as well as a list of how many missing observations there are for each one. As we can see there appear to be two missing observations for measurements in body mass, bill lengths, flipper lengths and several more for blood measures. We don't know for sure without inspecting our data further, *but* it is likely that the two birds are missing multiple measurements, and that several more were measured but didn't have their blood drawn. 
-
-We will leave the NA's alone for now, but it's useful to know how many we have. 
-
-We've now got a clean & tidy dataset!! 
-
-## Summing up
-
-## Figures
-
-
-
-## Preparing the data
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### View and refine
-
-So we know our data is in R, and we know the columns and names have been imported. But we still don't know whether all of our values imported, or whether it captured all the rows. 
-
-There are lots of different ways to view and check data. One useful method is `glimpse`
-
-
-```r
-# check the structure of the data
-glimpse(penguins)
-```
-
-When we run `glimpse()` we get several lines of output. The number of observations "rows", the number of variables "columns". Check this against the csv file you have - they should be the same. In the next lines we see variable names and the type of data. 
-
-We should be able to see by now, that all is not well!!!  `Body Mass (g)` is being treated as character (string), as is `Date Egg`, meaning R thinks these contain letters and words instead of numbers and dates. 
-
-Other ways to view the data
-
-* type `penguins` into the Console
-
-* type `view(penguins)` this will open a spreadsheet in a new tab
-
-* type `head(penguins)` will show the first 10 lines of the data, rather than the whole dataset
-
-> **Note - `view()` lets you do cool stuff like reorder rows and quickly scroll through the dataset without affecting the underlying data. 
-
-### Data management
-
-We've imported the data, checked it and found some inconsistencies. 
-
-This is where we start to use some of the core functions from `tidyverse`.
-
-If R thinks `Body Mass (g)` is a character variable, then it probably contains some words as well as numbers. So let's have a look at this and compare it to a variable which has been processed correctly
-
-
-```r
-# get the first 10 rows of the Flipper Length and Body Mass variables
-penguins %>% 
-  select(`Flipper Length (mm)`, 
-         `Body Mass (g)`) %>% 
-  head(10) # 10 rows
-```
-
-<img src="images/NA.png" width="80%" style="display: block; margin: auto;" />
-
-> **Note - What is the %>% ??? It's known as a pipe. It sends the results of one line of code to the next. So the data penguins is sent to the `select` function which picks only those variables we want. The result of this is then sent to the `head` function which with the argument for number of rows set to 10, prints the top 10 rows. 
-
-> The other way to write this series of functions would be to use brackets and the rules of BODMAS:
-
-```
-head(select(penguins, `Flipper Length (mm)`, `Body Mass (g)`),10)
-```
-> Hopefully you agree that the pipes make the code a lot more human-reader friendly. More on pipes later
-
-So what's the problem with our data? in the Flipper length variable, missing observations have been correctly marked as `NA` signifying missing data. R can handle missing data just fine. However, in thew Body mass variable, it looks as though someone has actually typed "na" in observations where the data is missing. Here R has failed to recognise an `NA` and has read it as a word instead. This is because `read_csv()` looks for gaps or `NA` but not the typed letters "na". 
-
-No problem this is an easy fix. Head back to your script and make the following edit the line for data importing
-
-
-```r
-# read in the penguins data, specify that NA strings can be "na" or "NA"
-penguins <- read_csv("data/penguin_data.csv", na=c("na","NA"))
-```
-
-Now re-check your data using the same lines of code from before.
-All ok now? 
-
-## Dataframes and tibbles
-
-A quick sidebar on how R stores data. When we imported the data into R it ws put into an object called a **tibble** which is a type of **dataframe**. 
-
-Let's have a quick go at making our own **tibble** from scratch. 
-
-Make a new script called 'TibbleTrouble.R' in the scripts folder as before. 
-
-At the top of this new script put 
-
-
-```r
-# just me messing about making tibbles
-
-# libraries
-library(tidyverse)
-
-# make some variables, when we have a one dimensional object like this it is known as an atomic vector!
-person <- c("Mark", "Phil", "Becky", "Tony")
-hobby <- c("kickboxing", "coding", "dog walking", "car boot sales")
-awesomeness <- c(1,100,1,1)
-```
-
-The function `c` lets you 'concatenate' or link each of these arguments together into a single vector.
-
-Now we put these vectors together, where they become the variables in a new tibble
-
-
-```r
-# make a tibble
-my_data <- tibble(person, hobby, awesomeness)
-my_data
-```
-
-```
-# A tibble: 4 x 3
-  person hobby          awesomeness
-  <chr>  <chr>                <dbl>
-1 Mark   kickboxing               1
-2 Phil   coding                 100
-3 Becky  dog walking              1
-4 Tony   car boot sales           1
-```
-Have a go at messing about with your script and figure out what each of these does, add comments and save your script.
-
-
-```r
-# Some R functions for looking at tibbles and dataframes I will comment next to each one with what it does
-
-head(my_data, n=2)
-tail(my_data, n=1)
-nrow(my_data)
-ncol(my_data)
-colnames(my_data)
-view(my_data)
-glimpse(my_data)
-str(my_data)
-```
-
-## Clean and tidy
-
-Back to your penguins script. 
-
-We have checked the data imported correctly, now its time to *clean and tidy* the data. 
-
-### Tidy
-
-In this example our data is already in `tidy` format i.e. one observation per row. We will cover what to do if data isn't tidy later.
-
-### Clean
-
-Here are a few things we might want to do to our data to make it 'clean'. 
-
-* Refine variable names
-
-* Format dates and times
-
-* Rename some values
-
-* Check for any duplicate records
-
-* Check for any implausible data or typos
-
-* Check and deal with missing values
-
-> **Note - Remember because we are doing everything in a script, the original data remains unchanged. This means we have data integrity, and a clear record of what we did to tidy and clean a dataset in order to produce summaries and data visuals
-
-
-
-### What we learned
-
-There was a lot of preparation here, and we haven't really got close to make any major insights. But you have: 
-
-* Organised your project space
-
-* Dealt with file formats
-
-* Put data into a specific location and imported into R
-
-* Checked the data import
-
-* Cleaned and tidied the data
-
-You have also been introduced to the `tidyverse` and two of its packages
-
-* `readr` @R-readr
-
-* `dplyr` @R-dplyr
-
-As well as:
-
-* `janitor` @R-janitor
-
-* `lubridate` @R-lubridate
-
-### Quitting
-
-<div class="warning">
-<p>Remember to <strong>save</strong> your RScript before you leave. And ideally don't save your .Rdata!</p>
-</div>
-
-* Close your RStudio Cloud Browser
-
-* Go to Blackboard to complete this week's quiz!

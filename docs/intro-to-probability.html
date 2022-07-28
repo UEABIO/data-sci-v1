@@ -20,46 +20,14 @@
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.13/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1.9000/transition.js"></script><script src="libs/bs3compat-0.3.1.9000/tabs.js"></script><script src="libs/bs3compat-0.3.1.9000/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/font-awesome-5.13.0/js/script.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NP3MF25W3"></script><script>
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/font-awesome-5.13.0/js/script.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NP3MF25W3"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
       gtag('config', 'G-6NP3MF25W3');
-    </script><script language="javascript"> 
-        function toggle(id) {
-            var ele = document.getElementById("toggleText" + id);
-            var text = document.getElementById("displayText" + id);
-            var buttonText = text.innerHTML.replace("Show ", "");
-            buttonText = buttonText.replace("Hide ", "");
-            if(ele.style.display == "block") {
-                ele.style.display = "none";
-                text.innerHTML = "Show " + buttonText;
-            } else {
-                ele.style.display = "block";
-                text.innerHTML = "Hide " + buttonText;
-            }
-        } 
-    </script><script language="javascript">
-        function openCode(evt, codeName, id) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent" + id);
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablinks" + id);
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(codeName).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
-    </script><script language="javascript">
-        function hide(id){
-            document.getElementById(id).style.display = "none";
-        }
-    </script><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/psyteachr.css">
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/psyteachr.css">
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="include/style.css">
 </head>
@@ -86,17 +54,17 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Overview</a></li>
 <li><a class="" href="introduction-to-r-and-rstudio.html"><span class="header-section-number">1</span> Introduction to R and RStudio</a></li>
-<li><a class="" href="introduction-to-the-tidyverse.html"><span class="header-section-number">2</span> Introduction to the tidyverse</a></li>
-<li><a class="" href="working-with-data.html"><span class="header-section-number">3</span> Working with data</a></li>
-<li><a class="" href="ref1.html"><span class="header-section-number">4</span> Intro to R</a></li>
-<li><a class="" href="loading-data.html"><span class="header-section-number">5</span> Loading data</a></li>
+<li><a class="" href="basic-programming.html"><span class="header-section-number">2</span> Basic programming</a></li>
+<li><a class="" href="loading-data.html"><span class="header-section-number">3</span> Loading data</a></li>
+<li><a class="" href="data-wrangling-part-one.html"><span class="header-section-number">4</span> Data wrangling part one</a></li>
+<li><a class="" href="loading-data-1.html"><span class="header-section-number">5</span> Loading data</a></li>
 <li><a class="" href="data-wrangling-1.html"><span class="header-section-number">6</span> Data wrangling 1</a></li>
 <li><a class="" href="data-wrangling-2.html"><span class="header-section-number">7</span> Data wrangling 2</a></li>
 <li><a class="" href="intro-to-data-viz.html"><span class="header-section-number">8</span> Intro to Data Viz</a></li>
 <li><a class="" href="scatterplots.html"><span class="header-section-number">9</span> Scatterplots</a></li>
 <li><a class="" href="aq-data-and-recap.html"><span class="header-section-number">10</span> AQ data and recap</a></li>
 <li><a class="" href="reshaping-data.html"><span class="header-section-number">11</span> Reshaping data</a></li>
-<li><a class="" href="pipes.html"><span class="header-section-number">12</span> Pipes</a></li>
+<li><a class="" href="pipes-1.html"><span class="header-section-number">12</span> Pipes</a></li>
 <li><a class="" href="mega-pipe.html"><span class="header-section-number">13</span> Mega pipe</a></li>
 <li><a class="active" href="intro-to-probability.html"><span class="header-section-number">14</span> Intro to Probability</a></li>
 <li><a class="" href="probability-continued.html"><span class="header-section-number">15</span> Probability continued</a></li>
@@ -140,7 +108,7 @@
 <p>Probability (<em>p</em>) is the extent to which an event is likely to occur and is represented by a number between 0 and 1. For example, the probability of flipping a coin and it landing on 'heads' would be estimated at <em>p = .5</em>, i.e., there is a 50% chance of getting a head when you flip a coin. Calculating the probability of any discrete event occurring can be formulated as:</p>
 <p><span class="math display">\[p = \frac{number \  of  \ ways \ the \ event \ could \  arise}{number \ of \ possible \ outcomes}\]</span>
 For example, what is the probability of randomly drawing your name out of a hat of 12 names where one name is definitely yours?</p>
-<div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb219"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fl">1</span><span class="op">/</span><span class="fl">12</span></code></pre></div>
 <pre><code>## [1] 0.08333333</code></pre>
 <p>The probability is .08, or to put it another way, there is an 8.3% chance that you would pull your name out of the hat.</p>
@@ -165,9 +133,9 @@ For example, what is the probability of randomly drawing your name out of a hat 
 <ul>
 <li>Time taken to run a marathon (in seconds): <select class="webex-select"><option value="blank"></option>
 <option value="">categorical</option>
-<option value="">ordinal</option>
 <option value="answer">ratio</option>
-<option value="">interval</option></select>
+<option value="">interval</option>
+<option value="">ordinal</option></select>
 </li>
 <li>Finishing position in marathon (e.g. 1st, 2nd, 3rd): <select class="webex-select"><option value="blank"></option>
 <option value="">interval</option>
@@ -177,15 +145,15 @@ For example, what is the probability of randomly drawing your name out of a hat 
 </li>
 <li>Which Sesame Street character a runner was dressed as: <select class="webex-select"><option value="blank"></option>
 <option value="">interval</option>
-<option value="answer">categorical</option>
 <option value="">ratio</option>
+<option value="answer">categorical</option>
 <option value="">ordinal</option></select>
 </li>
 <li>Temperature of a runner dressed in a cookie monster outfit (in degrees Celsius): <select class="webex-select"><option value="blank"></option>
+<option value="">categorical</option>
 <option value="">ordinal</option>
 <option value="">ratio</option>
-<option value="answer">interval</option>
-<option value="">categorical</option></select>
+<option value="answer">interval</option></select>
 </li>
 </ul>
 </div>
@@ -225,7 +193,7 @@ Figure 0.1: Probability of no. of heads from 10 coin tosses
 <button>
 Solution
 </button>
-<div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb221"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">heads10000</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">replicate</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10000</span>, expr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">1</span>, <span class="fl">10</span>, <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">data10000</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>heads <span class="op">=</span> <span class="va">heads10000</span><span class="op">)</span> <span class="op">%&gt;%</span>   <span class="co"># convert to a tibble</span>
@@ -269,12 +237,12 @@ Figure 6.3: A simulation of an experiment collecting height data from 2000 parti
 <p>Complete the sentences so that they are correct.</p>
 <ul>
 <li>In a normal distribution, the mean, median, and mode <select class="webex-select"><option value="blank"></option>
-<option value="answer">are all equal</option>
+<option value="">are always different</option>
 <option value="">sum to zero</option>
-<option value="">are always different</option></select>.</li>
+<option value="answer">are all equal</option></select>.</li>
 <li>In a normal distribution, the further away from the mean an observation is <select class="webex-select"><option value="blank"></option>
-<option value="answer">the lower its probability of occuring</option>
-<option value="">the higher its probability of occuring</option></select>.</li>
+<option value="">the higher its probability of occuring</option>
+<option value="answer">the lower its probability of occuring</option></select>.</li>
 <li>Whereas the binomial distribution is based on situations in which there are two possible outcomes, the normal distribution is based on situations in which the data <select class="webex-select"><option value="blank"></option>
 <option value="">is a categorical variable</option>
 <option value="">has three possible values</option>
@@ -520,7 +488,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-07-27.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-07-28.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

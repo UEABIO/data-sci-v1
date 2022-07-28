@@ -20,46 +20,14 @@
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.13/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1.9000/transition.js"></script><script src="libs/bs3compat-0.3.1.9000/tabs.js"></script><script src="libs/bs3compat-0.3.1.9000/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/font-awesome-5.13.0/js/script.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NP3MF25W3"></script><script>
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/font-awesome-5.13.0/js/script.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NP3MF25W3"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
       gtag('config', 'G-6NP3MF25W3');
-    </script><script language="javascript"> 
-        function toggle(id) {
-            var ele = document.getElementById("toggleText" + id);
-            var text = document.getElementById("displayText" + id);
-            var buttonText = text.innerHTML.replace("Show ", "");
-            buttonText = buttonText.replace("Hide ", "");
-            if(ele.style.display == "block") {
-                ele.style.display = "none";
-                text.innerHTML = "Show " + buttonText;
-            } else {
-                ele.style.display = "block";
-                text.innerHTML = "Hide " + buttonText;
-            }
-        } 
-    </script><script language="javascript">
-        function openCode(evt, codeName, id) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent" + id);
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablinks" + id);
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(codeName).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
-    </script><script language="javascript">
-        function hide(id){
-            document.getElementById(id).style.display = "none";
-        }
-    </script><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/psyteachr.css">
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/psyteachr.css">
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="include/style.css">
 </head>
@@ -86,17 +54,17 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Overview</a></li>
 <li><a class="" href="introduction-to-r-and-rstudio.html"><span class="header-section-number">1</span> Introduction to R and RStudio</a></li>
-<li><a class="" href="introduction-to-the-tidyverse.html"><span class="header-section-number">2</span> Introduction to the tidyverse</a></li>
-<li><a class="" href="working-with-data.html"><span class="header-section-number">3</span> Working with data</a></li>
-<li><a class="" href="ref1.html"><span class="header-section-number">4</span> Intro to R</a></li>
-<li><a class="" href="loading-data.html"><span class="header-section-number">5</span> Loading data</a></li>
+<li><a class="" href="basic-programming.html"><span class="header-section-number">2</span> Basic programming</a></li>
+<li><a class="" href="loading-data.html"><span class="header-section-number">3</span> Loading data</a></li>
+<li><a class="" href="data-wrangling-part-one.html"><span class="header-section-number">4</span> Data wrangling part one</a></li>
+<li><a class="" href="loading-data-1.html"><span class="header-section-number">5</span> Loading data</a></li>
 <li><a class="" href="data-wrangling-1.html"><span class="header-section-number">6</span> Data wrangling 1</a></li>
 <li><a class="" href="data-wrangling-2.html"><span class="header-section-number">7</span> Data wrangling 2</a></li>
 <li><a class="" href="intro-to-data-viz.html"><span class="header-section-number">8</span> Intro to Data Viz</a></li>
 <li><a class="" href="scatterplots.html"><span class="header-section-number">9</span> Scatterplots</a></li>
 <li><a class="" href="aq-data-and-recap.html"><span class="header-section-number">10</span> AQ data and recap</a></li>
 <li><a class="" href="reshaping-data.html"><span class="header-section-number">11</span> Reshaping data</a></li>
-<li><a class="" href="pipes.html"><span class="header-section-number">12</span> Pipes</a></li>
+<li><a class="" href="pipes-1.html"><span class="header-section-number">12</span> Pipes</a></li>
 <li><a class="" href="mega-pipe.html"><span class="header-section-number">13</span> Mega pipe</a></li>
 <li><a class="" href="intro-to-probability.html"><span class="header-section-number">14</span> Intro to Probability</a></li>
 <li><a class="active" href="probability-continued.html"><span class="header-section-number">15</span> Probability continued</a></li>
@@ -120,9 +88,9 @@
 <h1>
 <span class="header-section-number">15</span> Probability continued<a class="anchor" aria-label="anchor" href="#probability-continued"><i class="fas fa-link"></i></a>
 </h1>
-<div id="walkthrough-video-7" class="section level2" number="15.1">
+<div id="walkthrough-video-6" class="section level2" number="15.1">
 <h2>
-<span class="header-section-number">15.1</span> Walkthrough video<a class="anchor" aria-label="anchor" href="#walkthrough-video-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.1</span> Walkthrough video<a class="anchor" aria-label="anchor" href="#walkthrough-video-6"><i class="fas fa-link"></i></a>
 </h2>
 <p>There is a <a href="https://uofglasgow.zoom.us/rec/play/rVc_Tmlnf0Dy91IagmovoLweYJ3l07zspoplAp-YBva9QoKXpU80Oaxig8rPpdRxNeSEiytqOGTPEnTO.zM7txfYeGQtLB0eW?startTime=1614172419000&amp;_x_zm_rtaid=tcc9cAgYQoGenfNKyEL3fw.1639141352567.6f92c5b33a3f0efa952297c96905f7b7&amp;_x_zm_rhtaid=666">walkthrough video</a> of this chapter available via Zoom.</p>
 <ul>
@@ -160,7 +128,7 @@
 <li><p><code>prob</code>: the probability of ‘heads’ on one trial. Here chance is 50-50 which as a probability we state as 0.5 or .5</p></li>
 </ul>
 <p>Copy, paste and run the below code in a new code chunk:</p>
-<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">dbinom</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">5</span>, size <span class="op">=</span> <span class="fl">10</span>, prob <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></code></pre></div>
 <ul>
 <li>What is the probability of getting 5 heads out of 10 coin flips to 2 decimal places? <input class="webex-solveme nospaces" size="4" data-answer='["0.25",".25"]'><br>
@@ -180,7 +148,7 @@
 <p>This time we use <code><a href="https://rdrr.io/r/stats/Binomial.html">pbinom()</a></code> as we want to know the <strong>cumulative probability</strong> of getting a maximum of 2 heads from 10 coin flips. so we have set a cut-off point of 2 but we still have a probability of getting a heads of 0.5.</p>
 <p><strong>Note:</strong> <code><a href="https://rdrr.io/r/stats/Binomial.html">pbinom()</a></code> takes the arguments <code>size</code> and <code>prob</code> argument just like <code><a href="https://rdrr.io/r/stats/Binomial.html">dbinom()</a></code>. However, the first input argument is <code>q</code> rather than <code>x</code>. This is because in dbinom <code>x</code> is a fixed number, whereas <code>q</code> is all the possibilities <strong>up to</strong> a given number (e.g. 0, 1, 2).</p>
 <p>Copy, paste and run the below code in a new code chunk:</p>
-<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb223"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span>q <span class="op">=</span> <span class="fl">2</span>, size <span class="op">=</span> <span class="fl">10</span>, prob <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></code></pre></div>
 <ul>
 <li>What is the probability of getting a maximum of 2 heads on 10 coin flips to 2 decimal places? <input class="webex-solveme nospaces" size="4" data-answer='["0.05",".05"]'><br>
@@ -198,7 +166,7 @@
 </h2>
 <p>Let's try one more scenario with a cut-off point to make sure you have understood this. What is the probability of getting 7 or more heads on 10 flips?</p>
 <p>We can use the same function as in the previous example, however, there's an extra argument if we want to get the correct answer. Let's try running the code we used above but change <code>q = 2</code> to <code>q = 7</code>.</p>
-<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb224"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span>q <span class="op">=</span> <span class="fl">7</span>, size <span class="op">=</span> <span class="fl">10</span>, prob <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span> </code></pre></div>
 <pre><code>## [1] 0.9453125</code></pre>
 <p>This tells us that the probability is .95 or 95% - that doesn't seem right does it? The default behaviour for <code><a href="https://rdrr.io/r/stats/Binomial.html">pbinom()</a></code> is to calculate cumulative probability for the lower tail of the curve, i.e., if you specify <code>q = 2</code> it calculates the probability of all outcomes below 2. We specified <code>q = 7</code> which means that it's calculated the probability of getting an outcome of 0, 1, 2, 3, 4, 5, 6, and 7, the blue area in the below figure - which is obviously very high.</p>
@@ -210,7 +178,7 @@ Figure 14.1: Lower and upper tails
 </div>
 <p>To get the right answer, we have to add <code>lower.tail = FALSE</code> as we are interested in the upper tail of the distribution. Because we want the cumulative probability to include 7, we set <code>q = 6</code>. This will now calculate the cumulative probability of getting 7, 8, 9, or 10 heads out of 10 coin flips.</p>
 <p>Copy, paste and run the below code in a new code chunk:</p>
-<div class="sourceCode" id="cb195"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span>q <span class="op">=</span> <span class="fl">6</span>, size <span class="op">=</span> <span class="fl">10</span>, prob <span class="op">=</span> <span class="fl">.5</span>, lower.tail <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> </code></pre></div>
 <ul>
 <li>What is the probability of getting between 7 and 10 heads from 10 coin flips to 2 decimal places? <input class="webex-solveme nospaces" size="4" data-answer='["0.17",".17"]'><br>
@@ -230,7 +198,7 @@ Figure 14.1: Lower and upper tails
 <p>You have used the argument <code>prob</code> in the previous two functions, <code>dbinom</code> and <code>pbinom</code>, and it represents the probability of success on a single trial (here it is the probability of 'heads' in one coin flip, .5). For <code>qbinom</code>, <code>prob</code> still represents the probability of success in one trial, whereas <code>p</code> represents the overall probability of success across all trials. When you run <code>pbinom</code>, it calculates the number of heads that would give that probability.</p>
 <p>We know from looking at the binomial distribution above that sometimes even when the coin is fair, we won't get exactly 5/10 heads. Instead, we want to set a cut-off and in this example we will use the default cut-off for statistical significance in psychology, .05, or 5%.</p>
 <p>In other words, you ask it for the minimum number of successes (e.g. heads) to maintain an overall probability of .05, in 10 flips, when the probability of a success on any one flip is .5.</p>
-<div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb227"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">qbinom</a></span><span class="op">(</span>p <span class="op">=</span> <span class="fl">.05</span>, size <span class="op">=</span> <span class="fl">10</span>, prob <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 <p>And it tells you the answer is 2. If the magician flipped fewer than two heads out of ten, you could conclude that there is a less than 5% probability that would happen if the coin was fair and you would reject the null hypothesis that the coin was unbiased against heads and tell the magician to do one.</p>
@@ -244,7 +212,7 @@ Figure 14.1: Lower and upper tails
 <li>What would your cut-off be if you ran 10,000 trials? <input class="webex-solveme nospaces" size="4" data-answer='["4918"]'>
 </li>
 </ul>
-<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb229"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">qbinom</a></span><span class="op">(</span>p <span class="op">=</span> <span class="fl">.05</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1000</span>, <span class="fl">10000</span><span class="op">)</span>, prob <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span></code></pre></div>
 <p>Notice that the more trials you run, the more precise the estimates become, that is, the closer they are to the probability of success on a single flip (.5). Again this is a simplification, but think about how this relates to sample size in research studies, the more participants you have, the more precise your estimate will be.</p>
 <hr>
@@ -285,7 +253,7 @@ Figure 0.1: Binomial distribution app
 <button>
 Solution
 </button>
-<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">men</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100000</span>, mean <span class="op">=</span> <span class="fl">176.2</span>, sd <span class="op">=</span> <span class="fl">6.748</span><span class="op">)</span>
 <span class="va">women</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100000</span>, mean <span class="op">=</span> <span class="fl">163.8</span>, sd <span class="op">=</span> <span class="fl">6.931</span><span class="op">)</span>
 
@@ -320,7 +288,7 @@ Figure 6.2: Simulation of Scottish height data
 <li>
 <code>lower.tail</code> works as above and depends on whether you are interested in the upper or lower tail</li>
 </ul>
-<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span>q <span class="op">=</span> <span class="cn">NULL</span>, mean <span class="op">=</span> <span class="cn">NULL</span>, sd <span class="op">=</span> <span class="cn">NULL</span>, lower.tail <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
 <p>Replace the NULLs in the above code to calculate the probability of meeting a 16-24 y.o. Scottish woman who is taller than the average 16-24 y.o. Scottish man.</p>
 <ul>
@@ -369,7 +337,7 @@ Figure 6.2: Simulation of Scottish height data
 </h2>
 <p>In the previous examples we calculated the probability of a particular outcome. Now we want to calculate what outcome would be associated with a particular probability and we can use <code><a href="https://rdrr.io/r/stats/Normal.html">qnorm()</a></code> to do this.</p>
 <p><code><a href="https://rdrr.io/r/stats/Normal.html">qnorm()</a></code> is very similar to <code><a href="https://rdrr.io/r/stats/Normal.html">pnorm()</a></code> with one exception, rather than specifying <code>q</code> our known observation or quantile, instead we have to specify <code>p</code>, our known probability.</p>
-<div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span>p <span class="op">=</span> <span class="cn">NULL</span>, mean <span class="op">=</span> <span class="cn">NULL</span>, sd <span class="op">=</span> <span class="cn">NULL</span>, lower.tail <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
 <p>Replace the NULLs in the above code to calculate how tall a 16-24 y.o. Scottish man would have to be in order to be in the top 5% (i.e., p = .05) of the height distribution for Scottish men in his age group.</p>
 <p><strong>Visualise it!</strong></p>
@@ -381,15 +349,15 @@ Figure 6.2: Simulation of Scottish height data
 <h2>
 <span class="header-section-number">15.13</span> Activity solutions - Probability<a class="anchor" aria-label="anchor" href="#activity-solutions---probability"><i class="fas fa-link"></i></a>
 </h2>
-<div id="activity-2-3" class="section level3" number="15.13.1">
+<div id="activity-2-4" class="section level3" number="15.13.1">
 <h3>
-<span class="header-section-number">15.13.1</span> Activity 2<a class="anchor" aria-label="anchor" href="#activity-2-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.13.1</span> Activity 2<a class="anchor" aria-label="anchor" href="#activity-2-4"><i class="fas fa-link"></i></a>
 </h3>
 <div class="webex-solution">
 <button>
 Solution
 </button>
-<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb233"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fl">.25</span></code></pre></div>
 </div>
 </div>
@@ -401,7 +369,7 @@ Solution
 <button>
 Solution
 </button>
-<div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fl">.06</span></code></pre></div>
 </div>
 </div>
@@ -413,7 +381,7 @@ Solution
 <button>
 Solution
 </button>
-<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb235"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fl">.17</span></code></pre></div>
 </div>
 </div>
@@ -425,21 +393,21 @@ Solution
 <button>
 Solution
 </button>
-<div class="sourceCode" id="cb205"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fl">42</span>
 <span class="fl">474</span>
 <span class="fl">4918</span></code></pre></div>
 </div>
 </div>
-<div id="activity-6-3" class="section level3" number="15.13.5">
+<div id="activity-6-2" class="section level3" number="15.13.5">
 <h3>
-<span class="header-section-number">15.13.5</span> Activity 6<a class="anchor" aria-label="anchor" href="#activity-6-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.13.5</span> Activity 6<a class="anchor" aria-label="anchor" href="#activity-6-2"><i class="fas fa-link"></i></a>
 </h3>
 <div class="webex-solution">
 <button>
 Solution
 </button>
-<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span>q <span class="op">=</span> <span class="fl">176.2</span>, mean <span class="op">=</span> <span class="fl">163.8</span>, sd <span class="op">=</span> <span class="fl">6.931</span>, lower.tail <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
@@ -451,7 +419,7 @@ Solution
 <button>
 Solution
 </button>
-<div class="sourceCode" id="cb207"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span>q <span class="op">=</span> <span class="fl">181.12</span>, mean <span class="op">=</span> <span class="fl">176.2</span>, sd <span class="op">=</span> <span class="fl">6.748</span>, lower.tail <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
@@ -463,7 +431,7 @@ Solution
 <button>
 Solution
 </button>
-<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span>q <span class="op">=</span> <span class="fl">181.12</span>, mean <span class="op">=</span> <span class="fl">163.8</span>, sd <span class="op">=</span> <span class="fl">6.931</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
@@ -475,7 +443,7 @@ Solution
 <button>
 Solution
 </button>
-<div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span>p <span class="op">=</span> <span class="fl">.05</span>, mean <span class="op">=</span> <span class="fl">176.2</span>, sd <span class="op">=</span> <span class="fl">6.748</span>, lower.tail <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 </div>
 
@@ -668,7 +636,7 @@ $( document ).ready(function() {
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#probability-continued"><span class="header-section-number">15</span> Probability continued</a></li>
-<li><a class="nav-link" href="#walkthrough-video-7"><span class="header-section-number">15.1</span> Walkthrough video</a></li>
+<li><a class="nav-link" href="#walkthrough-video-6"><span class="header-section-number">15.1</span> Walkthrough video</a></li>
 <li><a class="nav-link" href="#activity-1-set-up-5"><span class="header-section-number">15.2</span> Activity 1: Set-up</a></li>
 <li><a class="nav-link" href="#activity-2-dbinom"><span class="header-section-number">15.3</span> Activity 2: dbinom()</a></li>
 <li><a class="nav-link" href="#activity-3-pbinom"><span class="header-section-number">15.4</span> Activity 3: pbinom()</a></li>
@@ -682,11 +650,11 @@ $( document ).ready(function() {
 <li><a class="nav-link" href="#activity-9-qnorm"><span class="header-section-number">15.12</span> Activity 9: qnorm()</a></li>
 <li>
 <a class="nav-link" href="#activity-solutions---probability"><span class="header-section-number">15.13</span> Activity solutions - Probability</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#activity-2-3"><span class="header-section-number">15.13.1</span> Activity 2</a></li>
+<li><a class="nav-link" href="#activity-2-4"><span class="header-section-number">15.13.1</span> Activity 2</a></li>
 <li><a class="nav-link" href="#activity-3-4"><span class="header-section-number">15.13.2</span> Activity 3</a></li>
 <li><a class="nav-link" href="#activity-4-5"><span class="header-section-number">15.13.3</span> Activity 4</a></li>
 <li><a class="nav-link" href="#activity-5-3"><span class="header-section-number">15.13.4</span> Activity 5</a></li>
-<li><a class="nav-link" href="#activity-6-3"><span class="header-section-number">15.13.5</span> Activity 6</a></li>
+<li><a class="nav-link" href="#activity-6-2"><span class="header-section-number">15.13.5</span> Activity 6</a></li>
 <li><a class="nav-link" href="#activity-7-1"><span class="header-section-number">15.13.6</span> Activity 7</a></li>
 <li><a class="nav-link" href="#activity-8-1"><span class="header-section-number">15.13.7</span> Activity 8</a></li>
 <li><a class="nav-link" href="#activity-9"><span class="header-section-number">15.13.8</span> Activity 9</a></li>
@@ -709,7 +677,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-07-27.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-07-28.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

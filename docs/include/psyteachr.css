@@ -1,6 +1,14 @@
 /* psyTeachR default styles. Do not edit this !! */
 /* (edit style.css for your own book styles) */
 
+:root {
+  --pink: #983E82;   /* hsl(315, 42%, 42%) */
+  --orange: #E2A458; /* hsl( 33, 70%, 62%) */
+  --yellow: #F5DC70; /* hsl( 49, 87%, 70%) */
+  --green: #59935B;  /* hsl(122, 25%, 46%) */
+  --blue: #467AAC;   /* hsl(209, 42%, 47%) */
+  --purple: #61589C; /* hsl(248, 28%, 48%) */
+}
 
 .chapter-nav .next, .chapter-nav .prev {
   box-shadow: none;
@@ -26,6 +34,11 @@
 .small_left { float: left; }
 .small_right img, .small_left img { max-width: 100%; }
 
+body {
+    margin:0;
+    padding:0;
+    overflow-x:hidden;
+}
 
 /* set styles for alert boxes */
 
