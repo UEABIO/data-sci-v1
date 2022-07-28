@@ -57,19 +57,6 @@
 <li><a class="active" href="basic-programming.html"><span class="header-section-number">2</span> Basic programming</a></li>
 <li><a class="" href="loading-data.html"><span class="header-section-number">3</span> Loading data</a></li>
 <li><a class="" href="data-wrangling-part-one.html"><span class="header-section-number">4</span> Data wrangling part one</a></li>
-<li><a class="" href="loading-data-1.html"><span class="header-section-number">5</span> Loading data</a></li>
-<li><a class="" href="data-wrangling-1.html"><span class="header-section-number">6</span> Data wrangling 1</a></li>
-<li><a class="" href="data-wrangling-2.html"><span class="header-section-number">7</span> Data wrangling 2</a></li>
-<li><a class="" href="intro-to-data-viz.html"><span class="header-section-number">8</span> Intro to Data Viz</a></li>
-<li><a class="" href="scatterplots.html"><span class="header-section-number">9</span> Scatterplots</a></li>
-<li><a class="" href="aq-data-and-recap.html"><span class="header-section-number">10</span> AQ data and recap</a></li>
-<li><a class="" href="reshaping-data.html"><span class="header-section-number">11</span> Reshaping data</a></li>
-<li><a class="" href="pipes-1.html"><span class="header-section-number">12</span> Pipes</a></li>
-<li><a class="" href="mega-pipe.html"><span class="header-section-number">13</span> Mega pipe</a></li>
-<li><a class="" href="intro-to-probability.html"><span class="header-section-number">14</span> Intro to Probability</a></li>
-<li><a class="" href="probability-continued.html"><span class="header-section-number">15</span> Probability continued</a></li>
-<li><a class="" href="simulation.html"><span class="header-section-number">16</span> Simulation</a></li>
-<li><a class="" href="project-analysis.html"><span class="header-section-number">17</span> Project analysis</a></li>
 <li class="book-part">Appendices</li>
 <li><a class="" href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></li>
 <li><a class="" href="updating-r-rstudio-and-packages.html"><span class="header-section-number">B</span> Updating R, RStudio, and packages</a></li>
@@ -169,6 +156,9 @@ To avoid accidentally overwriting a package with a later version, you should <st
 <span class="va">today</span> <span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">new_year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2022-01-01"</span><span class="op">)</span>
 <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span>, mean <span class="op">=</span> <span class="fl">15</span>, sd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
+<p>What function should we use if need help to understand the function <code><a href="https://rdrr.io/r/stats/Normal.html">rnorm()</a></code>?</p>
+<p><input class="webex-solveme nospaces" size="11" data-answer='["help(rnorm)"]'></p>
+<p>`</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:img-objects-enviro"></span>
 <img src="images/objects-enviro.png" alt="Objects in the environment" width="100%"><p class="caption">
@@ -205,6 +195,14 @@ You may also see objects referred to as 'variables'. There is a difference betwe
 <h2>
 <span class="header-section-number">2.5</span> Vectors<a class="anchor" aria-label="anchor" href="#vectors"><i class="fas fa-link"></i></a>
 </h2>
+<p>We have been working with R objects containing a single element of data, but we will more commonly work with vectors. A vector is a sequence of elements, <strong>all of the same data type</strong>. These could be logical, numerical, character etc.</p>
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">numeric_vector</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>
+
+<span class="va">character_vector</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"fruits"</span>, <span class="st">"vegetables"</span>, <span class="st">"seeds"</span><span class="op">)</span>
+
+<span class="va">logical_vector</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<p>The function <code>c</code> lets you 'concatenate' or link each of these separate elements together into a single vector.</p>
 </div>
 <div id="dataframes-and-tibbles" class="section level2" number="2.6">
 <h2>
@@ -212,14 +210,18 @@ You may also see objects referred to as 'variables'. There is a difference betwe
 </h2>
 <p>A quick sidebar on how R stores data. When we imported the data into R it is put into an object called a <strong>tibble</strong> which is a type of <strong>dataframe</strong>.</p>
 <p>Let's have a quick go at making our own <strong>tibble</strong> from scratch.</p>
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># make some variables, when we have a one dimensional object like this it is known as an atomic vector!</span>
 <span class="va">person</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Mark"</span>, <span class="st">"Phil"</span>, <span class="st">"Becky"</span>, <span class="st">"Tony"</span><span class="op">)</span>
 <span class="va">hobby</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"kickboxing"</span>, <span class="st">"coding"</span>, <span class="st">"dog walking"</span>, <span class="st">"car boot sales"</span><span class="op">)</span>
 <span class="va">awesomeness</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">100</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span></code></pre></div>
-<p>The function <code>c</code> lets you 'concatenate' or link each of these arguments together into a single vector.</p>
+<div class="try">
+<p>
+Use <code><a href="https://rdrr.io/r/utils/str.html">str()</a></code> on an object or vector to find out important information, like the data type, and how many elements it contains.
+</p>
+</div>
 <p>Now we put these vectors together, where they become the variables in a new tibble</p>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># make a tibble</span>
 <span class="va">my_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span><span class="va">person</span>, <span class="va">hobby</span>, <span class="va">awesomeness</span><span class="op">)</span>
 <span class="va">my_data</span></code></pre></div>
@@ -231,7 +233,7 @@ You may also see objects referred to as 'variables'. There is a difference betwe
 3 Becky  dog walking              1
 4 Tony   car boot sales           1</code></pre>
 <p>Have a go at messing about with your script and figure out what each of these does, add comments and save your script.</p>
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Some R functions for looking at tibbles and dataframes I will comment next to each one with what it does</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">my_data</span>, n<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
@@ -296,7 +298,7 @@ Figure 2.4: The truth about programming
 </h2>
 <p>You may be some way off writing a scientific report where you have to cite and reference R, however, when the time comes it is important to do so to the people who built it (most of them for free!) credit. You should provide separate citations for R, RStudio, and the packages you use.</p>
 <p>To get the citation for the version of R you are using, simply run the <code><a href="https://rdrr.io/r/utils/citation.html">citation()</a></code> function which will always provide you with he most recent citation.</p>
-<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/citation.html">citation</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## To cite R in publications use:
@@ -320,7 +322,7 @@ Figure 2.4: The truth about programming
 ## when using it for data analysis. See also 'citation("pkgname")' for
 ## citing R packages.</code></pre>
 <p>To generate the citation for any packages you are using, you can also use the <code><a href="https://rdrr.io/r/utils/citation.html">citation()</a></code> function with the name of the package you wish to cite.</p>
-<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/citation.html">citation</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##   Wickham et al., (2019). Welcome to the tidyverse. Journal of Open
@@ -339,7 +341,7 @@ Figure 2.4: The truth about programming
 ##     doi = {10.21105/joss.01686},
 ##   }</code></pre>
 <p>To generate the citation for the version of RStudio you are using, you can use the <code>RStudio.Version()</code> function:</p>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">RStudio.Version</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>Finally, here's an example of how that might look in the write-up of your method section:</p>
 <blockquote>
@@ -388,6 +390,10 @@ Figure 2.5: The truth about programming
 <h2>
 <span class="header-section-number">2.14</span> Activity 7: Test yourself<a class="anchor" aria-label="anchor" href="#activity-7-test-yourself"><i class="fas fa-link"></i></a>
 </h2>
+<div id="head-to-blackboard-when-complete-and-submit-your-answers-to-the-quiz." class="section level3" number="2.14.1">
+<h3>
+<span class="header-section-number">2.14.1</span> Head to Blackboard when complete and submit your answers to the quiz.<a class="anchor" aria-label="anchor" href="#head-to-blackboard-when-complete-and-submit-your-answers-to-the-quiz."><i class="fas fa-link"></i></a>
+</h3>
 <p><strong>Question 1.</strong> Why should you never include the code <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> in your analysis scripts? <select class="webex-select"><option value="blank"></option>
 <option value="">You should use library() instead</option>
 <option value="">Packages are already part of Base R</option>
@@ -400,7 +406,7 @@ Explain This Answer
 <p>Remember, when you run <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> it will always install the latest version of the package and it will overwrite any older versions of the package you may have installed.</p>
 </div>
 <p><br><strong>Question 2.</strong>What will the following code produce?</p>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">50</span>, <span class="fl">10</span><span class="op">)</span></code></pre></div>
 <p><select class="webex-select"><option value="blank"></option>
 <option value="">A dataset with 10 numbers that has a mean of 6 and an SD of 50</option>
@@ -437,6 +443,14 @@ Explain This Answer
 <option value="answer">object</option>
 <option value="">argument</option>
 <option value="">assignment</option></select>.</p>
+<p><strong>Question 7.</strong> A vector must always contain elements of the same data type (e.g logical, character, numeric) <select class="webex-select"><option value="blank"></option>
+<option value="answer">TRUE</option>
+<option value="">FALSE</option></select>.</p>
+<p><strong>Question 8.</strong> A dataframe/tibble must always contain elements of the same data type <select class="webex-select"><option value="blank"></option>
+<option value="answer">FALSE</option>
+<option value="">TRUE</option></select></p>
+
+</div>
 </div>
 </div>
 <script>
@@ -640,7 +654,9 @@ $( document ).ready(function() {
 <li><a class="nav-link" href="#how-to-cite-r-and-rstudio"><span class="header-section-number">2.11</span> How to cite R and RStudio</a></li>
 <li><a class="nav-link" href="#help-and-additional-resources"><span class="header-section-number">2.12</span> Help and additional resources</a></li>
 <li><a class="nav-link" href="#debugging-tips"><span class="header-section-number">2.13</span> Debugging tips</a></li>
-<li><a class="nav-link" href="#activity-7-test-yourself"><span class="header-section-number">2.14</span> Activity 7: Test yourself</a></li>
+<li>
+<a class="nav-link" href="#activity-7-test-yourself"><span class="header-section-number">2.14</span> Activity 7: Test yourself</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#head-to-blackboard-when-complete-and-submit-your-answers-to-the-quiz."><span class="header-section-number">2.14.1</span> Head to Blackboard when complete and submit your answers to the quiz.</a></li></ul>
+</li>
 </ul>
 
       <div class="book-extra">

@@ -109,6 +109,12 @@ new_year <- as.Date("2022-01-01")
 data <- rnorm(n = 10, mean = 15, sd = 3)
 ```
 
+What function should we use if need help to understand the function `rnorm()`?
+
+<input class='webex-solveme nospaces' size='11' data-answer='["help(rnorm)"]'/>
+
+`
+
 <div class="figure" style="text-align: center">
 <img src="images/objects-enviro.png" alt="Objects in the environment" width="100%" />
 <p class="caption">(\#fig:img-objects-enviro)Objects in the environment</p>
@@ -152,6 +158,19 @@ You will constantly be creating objects throughout this course and you will lear
 
 ## Vectors
 
+We have been working with R objects containing a single element of data, but we will more commonly work with vectors. A vector is a sequence of elements, **all of the same data type**. These could be logical, numerical, character etc.
+
+
+```r
+numeric_vector <- c(1,2,3)
+
+character_vector <- c("fruits", "vegetables", "seeds")
+
+logical_vector <- c(TRUE, TRUE, FALSE)
+```
+
+The function `c` lets you 'concatenate' or link each of these separate elements together into a single vector.
+
 ## Dataframes and tibbles
 
 A quick sidebar on how R stores data. When we imported the data into R it is put into an object called a **tibble** which is a type of **dataframe**. 
@@ -167,7 +186,9 @@ hobby <- c("kickboxing", "coding", "dog walking", "car boot sales")
 awesomeness <- c(1,100,1,1)
 ```
 
-The function `c` lets you 'concatenate' or link each of these arguments together into a single vector.
+<div class="try">
+<p>Use <code>str()</code> on an object or vector to find out important information, like the data type, and how many elements it contains.</p>
+</div>
 
 Now we put these vectors together, where they become the variables in a new tibble
 
@@ -344,6 +365,7 @@ A large part of coding is trying to figure why your code doesn't work and this i
 * Is it definitely an error? Not all red text in R means an error - sometimes it is just giving you a message with information. 
 
 ## Activity 7: Test yourself
+### Head to Blackboard when complete and submit your answers to the quiz.
 
 **Question 1.** Why should you never include the code `install.packages()` in your analysis scripts? <select class='webex-select'><option value='blank'></option><option value=''>You should use library() instead</option><option value=''>Packages are already part of Base R</option><option value='answer'>You (or someone else) may accidentally install a package update that stops your code working</option><option value=''>You already have the latest version of the package</option></select> 
 
@@ -391,177 +413,8 @@ You should use the form `package::function`, for example `dplyr::select`. Rememb
 
 **Question 6.** The job of `<-` is to send the output from the function to a/an <select class='webex-select'><option value='blank'></option><option value='answer'>object</option><option value=''>argument</option><option value=''>assignment</option></select>.
 
-# Loading data
+**Question 7.** A vector must always contain elements of the same data type (e.g logical, character, numeric) <select class='webex-select'><option value='blank'></option><option value='answer'>TRUE</option><option value=''>FALSE</option></select>.
 
-
-
-
-
-
-
-In this workshop we work through loading data. Once we have a curated and cleaned dataset we can work on generating insights from the data.
-
-As a biologist you should be used to asking questions and gathering data. It is also important that you learn all aspects of the research process. This includes responsible data management (understanding data files & spreadsheet organisation, keeping data safe) and data analysis.
-
-In this chapter we will look at the structure of data files, and how to read these with R. We will also continue to develop reproducible scripts. This means that we are writing scripts that are well organised and easy to read, and also making sure that our scripts are complete and capable of reproducing an analysis from start to finish. 
-
-Transparency and reproducibility are key values in scientific research, when you analyse data in a reproducible way it means that others can understand and check your work. It also means that the most important person can benefit from your work, YOU! When you return to an analysis after even a short break, you will be thanking your earlier self if you have worked in a clear and reproducible way, as you can pick up right where you left off.  
-
-
-## Meet the Penguins
-
-We have chosen to continue working with a dataset you have been introduced to already - the Palmer Penguins dataset. Previously we loaded a cleaned dataset, very quickly using an R package. Today we will be working in a more realistic scenario - uploading our data from a spreadsheet into our R workspace.
-
-This data, taken from the `palmerpenguins` (@R-palmerpenguins) package was originally published by @Antarctic. In our course we will work with real data that has been shared by other researchers.
-
-The palmer penguins data contains size measurements, clutch observations, and blood isotope ratios for three penguin species observed on three islands in the Palmer Archipelago, Antarctica over a study period of three years.
-
-<img src="images/gorman-penguins.jpg" title="Photo of three penguin species, Chinstrap, Gentoo, Adelie" alt="Photo of three penguin species, Chinstrap, Gentoo, Adelie" width="80%" style="display: block; margin: auto;" />
-
-These data were collected from 2007 - 2009 by Dr. Kristen Gorman with the Palmer Station Long Term Ecological Research Program, part of the US Long Term Ecological Research Network. The data were imported directly from the Environmental Data Initiative (EDI) Data Portal, and are available for use by CC0 license (“No Rights Reserved”) in accordance with the Palmer Station Data Policy. We gratefully acknowledge Palmer Station LTER and the US LTER Network. Special thanks to Marty Downs (Director, LTER Network Office) for help regarding the data license & use. Here is our intrepid package co-author, Dr. Gorman, in action collecting some penguin data:
-
-<img src="images/penguin-expedition.jpg" title="Photo of Dr Gorman in the middle of a flock of penguins" alt="Photo of Dr Gorman in the middle of a flock of penguins" width="80%" style="display: block; margin: auto;" />
-
-Here is a map of the study site
-
-<img src="images/antarctica-map.png" title="Antarctic Peninsula and the Palmer Field Station" alt="Antarctic Peninsula and the Palmer Field Station" width="80%" style="display: block; margin: auto;" />
-
-## Activity 1: Organising our workspace
-
-Before we can begin working with the data, we need to do some set-up. 
-
-* Go to RStudio Cloud and open this week's R project
-
-* Create the following folders using the + New Folder button in the Files tab
-
-  * data
-  * figures
-  * scripts
-
-<div class="warning">
-<p>R is case-sensitive so type everything exactly as printed here</p>
-</div>
-
-Having these separate subfolders within our project helps keep things tidy, means it's harder to lose things, and lets you easily tell R exactly where to go to retrieve data.  
-
-The next step of our workflow is to have a well organised project space. RStudio Cloud does a lot of the hard work for you, each new data project can be set up with its own Project space. 
-
-We will define a project as a series of linked questions that uses one (or sometimes several) datasets. For example a coursework assignment for a particular module would be its own project, or eventually your final year research project. 
-
-A Project will contain several files, possibly organised into sub-folders containing data, R scripts and final outputs. You might want to keep any information (wider reading) you have gathered that is relevant to your project.
-
-<div class="figure" style="text-align: center">
-<img src="images/project.png" alt="An example of a typical R project set-up" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-20)An example of a typical R project set-up</p>
-</div>
-
-Within this project you will notice there is already one file *.Rproj*. This is an R project file, this is a very useful feature, it interacts with R to tell it you are working in a very specific place on the computer (in this case the cloud server we have dialed into). It means R will automatically treat the location of your project file as the 'working directory' and makes importing and exporting easier^[More on projects can be found in the R4DS book (https://r4ds.had.co.nz/workflow-projects.html)]. 
-
-## Activity 2: Access our data
-
-Now that we have a project workspace, we are ready to import some data.
-
-* Use the link below to open a page in your browser with the data open
-
-* Right-click Save As to download in csv format to your computer (Make a note of **where** the file is being downloaded to e.g. Downloads)
-
-* Compare how the data looks in "raw" format to when you open the same data with Excel
-
-
-```{=html}
-<a href="https://raw.githubusercontent.com/UEABIO/data-sci-v1/main/book/files/penguins_raw.csv">
-<button class="btn btn-success"><i class="fa fa-save"></i> Download penguin data as csv</button>
-</a>
-```
-
-
-At first glance the data might look quite strange and messy. It has been stored as a **CSV** or comma-separated values file. CSV files are plain text files that can store large amounts of data, and can readily be imported into a spreadsheet or storage database. 
-
-These files are the simplest form of database, no coloured cells, no formulae, no text formatting. Each row is a row of the data, each value of a row (previously separate columns) is separated by a comma. 
-
-This file format helps us maintain an ethos **Keep Raw Data Raw** - 
-
-In many cases, the captured or collected data may be unique and impossible to reproduce, such as measurements in a lab or field observations. For this reason, they should be protected from any possible loss. Every time a change is made to a raw data file it threatens the integrity of that information.
-
-In practice, that means we only use our data file for data entry and storage. All the data manipulation, cleaning and analysis happens in R, using transparent and reproducible scripts.
-
-<div class="info">
-<p>We avoid saving files in the Excel format because they have a nasty habit of formatting or even losing data when the file gets large enough.</p>
-<p>[<a href="https://www.theguardian.com/politics/2020/oct/05/how-excel-may-have-caused-loss-of-16000-covid-tests-in-england" class="uri">https://www.theguardian.com/politics/2020/oct/05/how-excel-may-have-caused-loss-of-16000-covid-tests-in-england</a>].</p>
-<p>If you need to add data to a csv file, you can always open it in an Excel-like program and add more information, but remember to save it in the original csv format afterwards.</p>
-</div>
-
-<div class="figure" style="text-align: center">
-<img src="images/excel_csv.png" alt="excel view, csv view" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-23)Top image: Penguins data viewed in Excel, Bottom image: Penguins data in native csv format</p>
-</div>
-
-In raw format, each line of a CSV is separated by commas for different values. When you open this in a spreadsheet program like Excel it automatically converts those comma-separated values into tables and columns. 
-
-
-## Activity 3: Upload our data
-
-* The data is now in your Downloads folder on your computer
-
-* We need to upload the data to our remote cloud-server (RStudio Cloud), select the upload files to server button in the Files tab
-
-* Put your file into the data folder - if you make a mistake select the tickbox for your file, go to the cogs button and choose the option Move.
-
-<div class="figure" style="text-align: center">
-<img src="images/upload.png" alt="File tab" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-24)Highlighted the buttons to upload files, and more options</p>
-</div>
-
-## Activity 4: Make a script
-
-Let's now create a new R script file in which we will write instructions and store comments for manipulating data, developing tables and figures. Use the File > New Script menu item and select an R Script. 
-
-Add the following:
-
-
-```r
-#___________________________----
-# SET UP ---
-## An analysis of the bill dimensions of male and female Adelie, Gentoo and Chinstrap penguins ----
-
-### Data first published in  Gorman, KB, TD Williams, and WR Fraser. 2014. “Ecological Sexual Dimorphism and Environmental Variability Within a Community of Antarctic Penguins (Genus Pygoscelis).” PLos One 9 (3): e90081. https://doi.org/10.1371/journal.pone.0090081. ----
-#__________________________----
-```
-
-Then load the following add-on package to the R script, just underneath these comments. Tidyverse isn't actually one package, but a bundle of many different packages that play well together - for example it *includes* `ggplot2` which we used in the last session, so we don't have to call that separately
-
-
-```r
-# PACKAGES ----
-library(tidyverse) # tidy data packages
-library(janitor) # cleans variable names
-library(lubridate) # make sure dates are processed properly
-#__________________________----
-```
-
-<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
-Save this file inside the scripts folder and call it `01_import_penguins_data.R` </div></div>
-
-## Activity 5: Read in data
-
-Now we can read in the data. To do this we will use the function `read_csv()` that allows us to read in .csv files. There are also functions that allow you to read in .xlsx files and other formats, however in this course we will only use .csv files.
-
-* First, we will create an object called `penguins_data` that contains the data in the `penguins_raw.csv` file. 
-
-
-```r
-# IMPORT DATA ----
-penguins <- read_csv ("data/penguins_raw.csv")
-
-head(penguins) # check the data has loaded, prints first 10 rows of dataframe
-#__________________________----
-```
-
-
-<div class="danger">
-<p>There is also a function called <code>read.csv()</code>. Be very careful NOT to use this function instead of <code>read_csv()</code> as they have different ways of naming columns.</p>
-</div>
-
-### Filepath
+**Question 8.** A dataframe/tibble must always contain elements of the same data type <select class='webex-select'><option value='blank'></option><option value='answer'>FALSE</option><option value=''>TRUE</option></select>
 
 
