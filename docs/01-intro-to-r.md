@@ -13,9 +13,9 @@
 
 R is a programming language that you will write code in, and RStudio is an Integrated Development Environment (IDE) which makes working with R easier. Think of it as knowing English and using a plain text editor like NotePad to write a book versus using a word processor like Microsoft Word. You could do it, but it wouldn't look as good and it would be much harder without things like spell-checking and formatting. In a similar way, you can use R without R Studio but we wouldn't recommend it. The key thing to remember is that although you will do all of your work using RStudio for this course, you are actually using **two** pieces of software which means that from time-to-time, both of them may have separate updates.
 
-R and RStudio can be downloaded for free onto your personal computers (INSERT LINK), but for convenience we will use a classroom space on **RStudio Cloud**.
+R and RStudio can be downloaded for free onto your [personal computers](https://www.rstudio.com/products/rstudio/), but for convenience we will use a classroom space on **RStudio Cloud**.
 
-RStudio Cloud is a cloud-based service where we can log into remotely hosted servers that host our data analysis projects.
+[RStudio Cloud](https://rstudio.cloud/) is a cloud-based service where we can log into remotely hosted servers that host our data analysis projects.
 
 The advantage of using RStudio Cloud is that all the extra packages and functions you need for this course will already be installed. You can log-in to your workspace from any computer as long as you have an internet connection and remember you username and password. I can also "visit" your projects and help out when you get stuck, if they are hosted on RStudio Cloud.
 
@@ -41,7 +41,7 @@ Watch these short explainer videos to get used to navigating the environment.
 
 ## Getting to know RStudio
 
-R Studio has a console that you can try out code in (appearing as the bottom left window in Figure @ref(fig:img-rstudio)), there is a script editor (top left), a window showing functions and objects you have created in the "Environment" tab (top right window in the figure), and a window that shows plots, files packages, and help documentation (bottom right).
+R Studio has a console that you can try out code in (appearing as the bottom left window), there is a script editor (top left), a window showing functions and objects you have created in the "Environment" tab (top right window in the figure), and a window that shows plots, files packages, and help documentation (bottom right).
 
 <div class="figure" style="text-align: center">
 <img src="images/rstudio.png" alt="RStudio interface" width="100%" />
@@ -98,14 +98,18 @@ Hit Enter on your keyboard.
 
 -   What answer did you get?
 
-<button id="displayTextunnamed-chunk-4" onclick="javascript:toggle('unnamed-chunk-4');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-4" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div class='webex-solution'><button>Solution</button>
+
+
 
 ```r
 30
 ```
-</div></div></div>
+
+
+</div>
+
 
 The first line shows the request you made to R, the next line is R's response
 
@@ -128,14 +132,14 @@ Suppose you forget to hit the shift key when trying to type `+`, and as a result
 10 = 20
 ```
 
--   What answer did you get?
 
-<button id="displayTextunnamed-chunk-7" onclick="javascript:toggle('unnamed-chunk-7');">Show Solution</button>
-
-<div id="toggleTextunnamed-chunk-7" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div class='webex-solution'><button>What answer did you get?</button>
 
 Error in 10 = 20 : invalid (do_set) left-hand side to assignment
-</div></div></div>
+
+
+</div>
+
 
 What's happened here is that R has attempted to interpret `10 = 20` as a command, and spits out an error message because the command doesn't make any sense to it.
 
@@ -200,9 +204,9 @@ Raise a number to the power of another
 5^4
 ```
 
-As I'm sure everyone will probably remember the moment they read this, the act of multiplying a number $x$ by itself $n$ times is called "raising $x$ to the $n$-th power". Mathematically, this is written as $x^n$. Some values of $n$ have special names: in particular $x^2$ is called $x$-squared, and $x^3$ is called $x$-cubed. So, the 4th power of 5 is calculated like this: $$
-5^4 = 5 \times 5 \times 5 \times 5 
-$$
+As I'm sure everyone will probably remember the moment they read this, the act of multiplying a number $x$ by itself $n$ times is called "raising $x$ to the $n$-th power". Mathematically, this is written as $x^n$. Some values of $n$ have special names: in particular $x^2$ is called $x$-squared, and $x^3$ is called $x$-cubed. So, the 4th power of 5 is calculated like this: 
+
+$$5^4 = 5 \times 5 \times 5 \times 5 $$
 
 ### Perform some combos
 
@@ -269,12 +273,14 @@ Of course, so far R is just doing the calculations. I haven't asked it to explic
 2 + 2 == 4
 ```
 
-<button id="displayTextunnamed-chunk-21" onclick="javascript:toggle('unnamed-chunk-21');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-21" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div class='webex-solution'><button>Solution</button>
 
 TRUE
-</div></div></div>
+
+
+</div>
+
 
 What I've done here is use the ***equality operator***, `==`, to force R to make a "true or false" judgement.
 
@@ -326,10 +332,10 @@ If you perform this action you should be able to do two things
 
 -   You should be able to see that in the top right-hand pane in the **Environment** tab their is now an **object** called `a` with the value of `3`.
 
-    <div class="figure" style="text-align: center">
-    <img src="images/environment.png" alt="object a is now visible withe a value of 3 in the Environment Pane" width="100%" />
-    <p class="caption">(\#fig:img-environment)object a is now visible withe a value of 3 in the Environment Pane</p>
-    </div>
+<div class="figure" style="text-align: center">
+<img src="images/environment.png" alt="object a is now visible withe a value of 3 in the Environment Pane" width="100%" />
+<p class="caption">(\#fig:img-environment)object a is now visible withe a value of 3 in the Environment Pane</p>
+</div>
 
 -   You should be able to look at what a is by typing it into your Console and pressing Enter
 
@@ -340,16 +346,17 @@ If you perform this action you should be able to do two things
 a
 ```
 
-What output do you get when you type `a` into your console?
 
-<button id="displayTextunnamed-chunk-28" onclick="javascript:toggle('unnamed-chunk-28');">Show Solution</button>
+<div class='webex-solution'><button>What output do you get when you type a into your console?</button>
 
-<div id="toggleTextunnamed-chunk-28" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 3
 ```
-</div></div></div>
+
+
+</div>
+
 
 You can now call this object at *any time* during your R session and perform calculations with it.
 
@@ -358,14 +365,18 @@ You can now call this object at *any time* during your R session and perform cal
 2 * a
 ```
 
-<button id="displayTextunnamed-chunk-30" onclick="javascript:toggle('unnamed-chunk-30');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-30" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div class='webex-solution'><button>Solution</button>
+
 
 ```r
 6
 ```
-</div></div></div>
+
+
+</div>
+
+
 
 What happens if we assign a value to a named object that **already** exists in our R environment??? for example
 
@@ -402,12 +413,14 @@ c
 
 -   What is the value of `c`?
 
-<button id="displayTextunnamed-chunk-35" onclick="javascript:toggle('unnamed-chunk-35');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-35" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div class='webex-solution'><button>What is the value of c ?</button>
 
 [1] 15
-</div></div></div>
+
+
+</div>
+
 
 Look at the environment tab again - you should see it's starting to fill up now!
 
@@ -449,14 +462,14 @@ There's nothing wrong with making *lots* of errors. The trick is not to panic or
 
 ... and sometimes we need to walk away and come back later!
 
-Try typing the command `help()` into the R console, it should open a new tab on the bottom right. 
-
-
-Put a function or package into the brackets to get help with a specific topic 
+<div class="try">
+<p>Try typing the command <code>help()</code> into the R console, it should open a new tab on the bottom right.</p>
+<p>Put a function or package into the brackets to get help with a specific topic</p>
+</div>
 
 <div class="figure" style="text-align: center">
 <img src="images/Error.jpg" alt="R Error" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-38)courtesy of Allison Horst</p>
+<p class="caption">(\#fig:unnamed-chunk-39)courtesy of Allison Horst</p>
 </div>
 
 ## Functions
@@ -482,10 +495,10 @@ The arguments:
 
 **Arguments are the inputs we give to a function**. These arguments are in the form `name = value` the name specifies the argument, and the value is what we are providing to define the input. That is the first argument `x` is the number we would like to round, it has a value of 2.4326782647. The second argument `digits` is how we would like the number to be rounded and we specify 2. There is no limit to how many arguments a function *could* have.
 
-<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
-Copy and paste the following code into the console.  </div></div>
+<div class="try">
+<p>Copy and paste the following code into the console.</p>
+</div>
 
-\* In the console, type the following code:
 
 
 ```r
@@ -505,8 +518,9 @@ Read the 'Details' section to find out what happens when rounding when the last 
 
 Let's try an example and just change the required argument `digits`
 
-<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
-Copy and paste the following code into the console.  </div></div>
+<div class="try">
+<p>Copy and paste the following code into the console.</p>
+</div>
 
 
 ```r
@@ -538,8 +552,9 @@ What if we need the answer from a function in a later calculation. The answer is
 
 In this example we assign values to two R objects that we can then call inside our R function **as though we were putting numbers in directly**.
 
-<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
-Copy and paste the following code into the console.  </div></div>
+<div class="try">
+<p>Copy and paste the following code into the console.</p>
+</div>
 
 
 ```r
@@ -553,11 +568,15 @@ rounded_number <- round(x  = my_number,
 
 **What value is assigned to the R object `rounded_number`** **?**
 
-<button id="displayTextunnamed-chunk-45" onclick="javascript:toggle('unnamed-chunk-45');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-45" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div class='webex-solution'><button>Solution</button>
 
-[1] 2.433</div></div></div>
+
+[1] 2.433
+
+
+</div>
+
 
 ### More fun with functions
 
@@ -600,8 +619,9 @@ An R package is a container for various things including functions and data. The
 
 On RStudio Cloud I have already installed several add-on packages, all we need to do is use a simple function `library()` to load these packages into our workspace. Once this is complete we will have access to all the custom functions they contain.
 
-<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
-Copy and paste the following code into the console.  </div></div>
+<div class="try">
+<p>Copy and paste the following code into the console.</p>
+</div>
 
 
 ```r
@@ -626,8 +646,9 @@ Data visualisation is a core part of data science, and generating insights from 
 
 Today let's use some simple functions to produce a figure. We specify the data source, the variables to be used for the x and y axis and then the type of visual object to produce, colouring them by the species.
 
-<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
-Copy and paste the following code into the console.  </div></div>
+<div class="try">
+<p>Copy and paste the following code into the console.</p>
+</div>
 
 
 ```r
@@ -638,7 +659,7 @@ ggplot(data = penguins,aes(x = bill_length_mm, y = bill_depth_mm)) + geom_point(
 ## Warning: Removed 2 rows containing missing values (geom_point).
 ```
 
-<img src="01-intro-to-r_files/figure-html/unnamed-chunk-54-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="01-intro-to-r_files/figure-html/unnamed-chunk-55-1.png" width="100%" style="display: block; margin: auto;" />
 
 <div class="information">
 <p>You may have noticed R gave you a warning. Not the same as a big scary error, but R wants you to be aware of something.</p>
@@ -687,8 +708,9 @@ Annotating your instructions provides yourself and others insights into why you 
 
 We have already seen how to signal a comment with the `#` key. Everything in the line after a `#` is ignored by R and won't be treated as a command. You should also see that it is marked in a different colour in your script.
 
-<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
-Put the following comment in your script on line 1. </div></div>
+<div class="try">
+<p>Put the following comment in your script on line 1.</p>
+</div>
 
 
 ```r
@@ -706,20 +728,17 @@ We can also use `#` to produce Headers of different levels, if we follow these w
 
 To use the functions from a package in our script they must be loaded *before* we call on the functions or data they contain. So the most sensible place to put library calls for packages is at the very **top** of our script. So let's do that now,
 
-<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
-Add the commands`library(ggplot2)` and 
-`library(palmerpenguins)` to your script.
+<div class="try">
+<p>Add the commands<code>library(ggplot2)</code> and <code>library(palmerpenguins)</code> to your script.</p>
+<p>Think about how you would organise you script using the image above as a guide</p>
+<p>Put a comment next to each package explaining what it is for "Hint use the help() function".</p>
+<p>Use the document outline button to help organise your script.</p>
+</div>
 
-Think about how you would organise you script using the image above as a guide
 
-Put a comment next to each package explaining what it is for
-"Hint use the help() function".
+<div class='webex-solution'><button>Solution</button>
 
-Use the document outline button to help organise your script.  </div></div>
 
-<button id="displayTextunnamed-chunk-61" onclick="javascript:toggle('unnamed-chunk-61');">Show Solution</button>
-
-<div id="toggleTextunnamed-chunk-61" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 # I really love R
@@ -732,21 +751,22 @@ library(palmer penguins) # Palmer Archipelago Penguin Data
 
 # ______________----
 ```
-</div></div></div>
 
 
 <div class="info">
 <p>R Studio will interpret Unicode to present images that you can include in your scripts. It's not necessary, but a fun way to help organise your scripts.</p>
 </div>
 
+</div>
+
+
 ### Adding more code
 
-<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
-Add the below code into your script, underneath the sections you already have </div></div>
+<div class="try">
+<p>Add the below code into your script, underneath the sections you already have</p>
+</div>
 
 It is very similar to the code you ran earlier, but is preceded by `plot_1 <-`
-
-
 
 
 ```r
@@ -834,124 +854,3 @@ You could now safely quit R, and when you log on next time to this project, your
 -   Close your RStudio Cloud Browser
 
 -   Complete this week's short quiz!
-
-<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
-Produce a scatterplot of longevity` against `thorax`. What does the relationship look like? </div></div>
-
-<button id="displayTextunnamed-chunk-68" onclick="javascript:toggle('unnamed-chunk-68');">Show Solution</button>
-
-<div id="toggleTextunnamed-chunk-68" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body"><div class="tab"><button class="tablinksunnamed-chunk-68 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-68', 'unnamed-chunk-68');">Base R</button><button class="tablinksunnamed-chunk-68" onclick="javascript:openCode(event, 'option2unnamed-chunk-68', 'unnamed-chunk-68');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-68" class="tabcontentunnamed-chunk-68">
-
-```r
-plot(longevity ~ thorax, data = ff, 
-     pch=19, col='darkgrey')
-```
-
-
-The plot suggests that a linear relationship might exist between the two variables. So we can proceed by fitting a linear model in R.
-</div><div id="option2unnamed-chunk-68" class="tabcontentunnamed-chunk-68">
-
-```r
-ggplot(ff) +
-    geom_point(aes(x = thorax, y = longevity))
-```
-
-
-The plot suggests that a linear relationship might exist between the two variables. So we can proceed by fitting a linear model in R.
-</div><script> javascript:hide('option2unnamed-chunk-68') </script></div></div></div>
-
-<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
-1. Fit a linear model with lifespan as response variable and thorax length as explanatory variable.
-2. Display a summary of the fit, together with the 97% confidence interval for the estimated parameters.
-3. Show the diagnostic plots for the model. </div></div>
-
-<button id="displayTextunnamed-chunk-70" onclick="javascript:toggle('unnamed-chunk-70');">Show Solution</button>
-
-<div id="toggleTextunnamed-chunk-70" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
-
-```r
-fit <- lm(longevity ~ thorax, ff)
-summary(fit)
-confint(fit, level=0.97)
-par(mfrow=c(2, 2))
-plot(fit, pch=19, col='darkgrey')
-par(mfrow=c(1, 1))
-```
-</div></div></div>
-
-## Activity 1
-
-When you get the correct answer, the answer box will turn green. Sometimes this doesn't work on Internet Explorer or Edge so be sure to use Chrome or Firefox.
-
-1.  What is the output from 5\^4
-
-<input class='webex-solveme nospaces' size='3' data-answer='["625"]'/>
-
-2.  Put the brackets in the correct place to make this equation correct `4+2*8 = 48`
-
-<input class='webex-solveme nospaces' size='2' data-answer='["48"]'/>
-
-3.  What answer will you get when you type `2+2 = 4` into the R console?
-
-<select class='webex-select'><option value='blank'></option><option value=''>TRUE</option><option value=''>FALSE</option><option value='answer'>Error</option></select>
-
-<button id="displayTextunnamed-chunk-71" onclick="javascript:toggle('unnamed-chunk-71');">Show Solution</button>
-
-<div id="toggleTextunnamed-chunk-71" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
-
-If we wanted R to make a judgement we must use == not = otherwise we will get an Error message
-</div></div></div>
-
-4.  What symbol do I use if I want to **assign** a value or output of a function to an R object
-
-<input class='webex-solveme nospaces' size='2' data-answer='["<-"]'/>
-
-5.  What is the value of `a` if I ran the following commands?
-
-
-```r
-a <-  12*2
-
-a <- 5
-```
-
-<input class='webex-solveme nospaces' size='1' data-answer='["5"]'/>
-
-6.  Which of these variable naming conventions is **not** written correctly?
-
-<select class='webex-select'><option value='blank'></option><option value=''>snake_case</option><option value=''>camelCase</option><option value='answer'>Screaming_Snake_Case</option><option value=''>kebab-case</option></select>
-
-7.  What should I type into the R console if I want `help` with the `round()` function?
-
-<input class='webex-solveme nospaces' size='11' data-answer='["help(round)"]'/>
-
-8.  Which of these statements about function arguments **is not true**
-
-<select class='webex-select'><option value='blank'></option><option value=''>Arguments are the inputs we give to a function</option><option value='answer'>Values for R arguments must always be defined by the user</option><option value=''>Naming arguments supersedes position in a function</option><option value=''>There is no limit to the number of arguments a function could have</option></select>
-
-9.  Evaluate this statement "An R Package can contain code functions, data, or both."
-
-<select class='webex-select'><option value='blank'></option><option value='answer'>TRUE</option><option value=''>FALSE</option></select>
-
-### Head to Blackboard and submit your answers to the quiz to get your first Data Science Learning Badge.
-
-<h3 style = 'color:#003366;' id="webex-total_correct"></h3>
-
-
-
-## Activity 2
-
-
-```{=html}
-<a href="https://raw.githubusercontent.com/UEABIO/5023Y_Workshop/main/data/Challenger.csv">
-<button class="btn btn-success"><i class="fa fa-save"></i> Download as csv</button>
-</a>
-```
-
-1.  Download this R Script
-
-2.  Upload it to your workspace on RStudio Cloud
-
-3.  Rearrange the chunks of code to make a sensible pipeline
-
-4.  Save the file!

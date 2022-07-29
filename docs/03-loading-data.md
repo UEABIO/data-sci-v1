@@ -143,43 +143,7 @@ Then load the following add-on package to the R script, just underneath these co
 # PACKAGES ----
 library(tidyverse) # tidy data packages
 library(janitor) # cleans variable names
-```
-
-```
-## Warning: package 'janitor' was built under R version 3.6.3
-```
-
-```
-## 
-## Attaching package: 'janitor'
-```
-
-```
-## The following objects are masked from 'package:stats':
-## 
-##     chisq.test, fisher.test
-```
-
-```r
 library(lubridate) # make sure dates are processed properly
-```
-
-```
-## Warning: package 'lubridate' was built under R version 3.6.3
-```
-
-```
-## 
-## Attaching package: 'lubridate'
-```
-
-```
-## The following objects are masked from 'package:base':
-## 
-##     date, intersect, setdiff, union
-```
-
-```r
 #__________________________----
 ```
 

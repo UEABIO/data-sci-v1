@@ -2,7 +2,7 @@ fig:unnamed-chunk-2
 fig:img-rstudio
 fig:img-environment
 fig:unnamed-chunk-37
-fig:unnamed-chunk-38
+fig:unnamed-chunk-39
 fig:script
 fig:img-objects-enviro
 fig:img-broom
@@ -56,9 +56,6 @@ running-your-script
 making-an-output
 saving-your-script
 quitting
-activity-1
-head-to-blackboard-and-submit-your-answers-to-the-quiz-to-get-your-first-data-science-learning-badge.
-activity-2
 basic-programming
 using-packages
 package-updates
@@ -70,7 +67,7 @@ dataframes-and-tibbles
 looking-after-the-environment
 global-options
 r-sessions
-activity-2-1
+activity-2
 how-to-cite-r-and-rstudio
 help-and-additional-resources
 debugging-tips
@@ -104,6 +101,7 @@ working-with-dates
 rename-some-values
 check-for-duplication
 summarise
+group-by
 distinct
 missing-values-na
 finished

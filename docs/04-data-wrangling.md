@@ -437,6 +437,21 @@ The minimum weight for our penguins is 2.7kg, and the max is 6.3kg - not outrage
 <p>our first data insight, the difference the smallest adult penguin in our dataset is nearly half the size of the largest penguin.</p>
 </div>
 
+### Group By
+
+Many data analysis tasks can be approached using the “split-apply-combine” paradigm: split the data into groups, apply some analysis to each group, and then combine the results. `dplyr` makes this very easy with the `group_by()` function. In the `summarise` example above we were able to find the max-min body mass values for the penguins in our dataset. But what if we wanted to break that down by a grouping such as species of penguin. This is where `group_by()` comes in.
+
+
+```r
+penguins %>% 
+  group_by(species) %>%  # subsequent functions are perform "by group"
+  summarise(min=min(body_mass_g, na.rm=TRUE), 
+            max=max(body_mass_g, na.rm=TRUE))
+```
+
+Now we know a little more about our data, the max weight of our Gentoo penguins is much larger than the other two species. In fact, the minimum weight of a Gentoo penguin is not far off the max weight of the other two species. 
+
+
 ### Distinct
 
 We can also look for typos by asking R to produce all of the distinct values in a variable. This is more useful for categorical data, where we expect there to be only a few distinct categories
@@ -473,7 +488,7 @@ This provides a quick breakdown of the max and min for all numeric variables, as
 
 We will leave the NA's alone for now, but it's useful to know how many we have. 
 
-We've now got a clean & tidy dataset!! 
+We've now got a clean & tidy dataset, with a handful of first insights into the data. 
 
 
 ## Finished

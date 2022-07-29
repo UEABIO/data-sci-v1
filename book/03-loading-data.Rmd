@@ -144,7 +144,7 @@ Add the following:
 
 Then load the following add-on package to the R script, just underneath these comments. Tidyverse isn't actually one package, but a bundle of many different packages that play well together - for example it *includes* `ggplot2` which we used in the last session, so we don't have to call that separately
 
-```{r}
+```{r, eval = F}
 # PACKAGES ----
 library(tidyverse) # tidy data packages
 library(janitor) # cleans variable names

@@ -10,9 +10,9 @@
 
 R is a programming language that you will write code in, and RStudio is an Integrated Development Environment (IDE) which makes working with R easier. Think of it as knowing English and using a plain text editor like NotePad to write a book versus using a word processor like Microsoft Word. You could do it, but it wouldn't look as good and it would be much harder without things like spell-checking and formatting. In a similar way, you can use R without R Studio but we wouldn't recommend it. The key thing to remember is that although you will do all of your work using RStudio for this course, you are actually using **two** pieces of software which means that from time-to-time, both of them may have separate updates.
 
-R and RStudio can be downloaded for free onto your personal computers (INSERT LINK), but for convenience we will use a classroom space on **RStudio Cloud**.
+R and RStudio can be downloaded for free onto your [personal computers](https://www.rstudio.com/products/rstudio/), but for convenience we will use a classroom space on **RStudio Cloud**.
 
-RStudio Cloud is a cloud-based service where we can log into remotely hosted servers that host our data analysis projects.
+[RStudio Cloud](https://rstudio.cloud/) is a cloud-based service where we can log into remotely hosted servers that host our data analysis projects.
 
 The advantage of using RStudio Cloud is that all the extra packages and functions you need for this course will already be installed. You can log-in to your workspace from any computer as long as you have an internet connection and remember you username and password. I can also "visit" your projects and help out when you get stuck, if they are hosted on RStudio Cloud.
 
@@ -38,7 +38,7 @@ Watch these short explainer videos to get used to navigating the environment.
 
 ## Getting to know RStudio
 
-R Studio has a console that you can try out code in (appearing as the bottom left window in Figure @ref(fig:img-rstudio)), there is a script editor (top left), a window showing functions and objects you have created in the "Environment" tab (top right window in the figure), and a window that shows plots, files packages, and help documentation (bottom right).
+R Studio has a console that you can try out code in (appearing as the bottom left window), there is a script editor (top left), a window showing functions and objects you have created in the "Environment" tab (top right window in the figure), and a window that shows plots, files packages, and help documentation (bottom right).
 
 ```{r img-rstudio, echo=FALSE, fig.cap="RStudio interface"}
 
@@ -98,13 +98,13 @@ Hit Enter on your keyboard.
 
 -   What answer did you get?
 
-```{solution}
+`r hide("Solution")`
 
-``{r, eval = F, echo = T, results = 'asis'}
+```{r, eval = F, echo = T, results = 'asis'}
 30
-``
-
 ```
+
+`r unhide()`
 
 The first line shows the request you made to R, the next line is R's response
 
@@ -128,15 +128,12 @@ Suppose you forget to hit the shift key when trying to type `+`, and as a result
 10 = 20
 ```
 
--   What answer did you get?
-
-```{solution}
-
-``{r, eval = T, echo = F, results = 'asis'}
+`r hide("What answer did you get?")`
+```{r, eval = T, echo = F, results = 'asis'}
 cat("Error in 10 = 20 : invalid (do_set) left-hand side to assignment")
-``
-
 ```
+
+`r unhide()`
 
 What's happened here is that R has attempted to interpret `10 = 20` as a command, and spits out an error message because the command doesn't make any sense to it.
 
@@ -191,9 +188,9 @@ Raise a number to the power of another
 5^4
 ```
 
-As I'm sure everyone will probably remember the moment they read this, the act of multiplying a number $x$ by itself $n$ times is called "raising $x$ to the $n$-th power". Mathematically, this is written as $x^n$. Some values of $n$ have special names: in particular $x^2$ is called $x$-squared, and $x^3$ is called $x$-cubed. So, the 4th power of 5 is calculated like this: $$
-5^4 = 5 \times 5 \times 5 \times 5 
-$$
+As I'm sure everyone will probably remember the moment they read this, the act of multiplying a number $x$ by itself $n$ times is called "raising $x$ to the $n$-th power". Mathematically, this is written as $x^n$. Some values of $n$ have special names: in particular $x^2$ is called $x$-squared, and $x^3$ is called $x$-cubed. So, the 4th power of 5 is calculated like this: 
+
+$$5^4 = 5 \times 5 \times 5 \times 5 $$
 
 ### Perform some combos
 
@@ -252,13 +249,12 @@ Of course, so far R is just doing the calculations. I haven't asked it to explic
 2 + 2 == 4
 ```
 
-```{solution}
-
-``{r, eval = T, echo = F, results = 'asis'}
+`r hide("Solution")`
+```{r, eval = T, echo = F, results = 'asis'}
 cat("TRUE")
-``
-
 ```
+
+`r unhide()`
 
 What I've done here is use the ***equality operator***, `==`, to force R to make a "true or false" judgement.
 
@@ -307,10 +303,10 @@ If you perform this action you should be able to do two things
 
 -   You should be able to see that in the top right-hand pane in the **Environment** tab their is now an **object** called `a` with the value of `3`.
 
-    ```{r img-environment, echo=FALSE, fig.cap="object a is now visible withe a value of 3 in the Environment Pane"}
+```{r img-environment, echo=FALSE, fig.cap="object a is now visible withe a value of 3 in the Environment Pane"}
 
     knitr::include_graphics("images/environment.png")
-    ```
+```
 
 -   You should be able to look at what a is by typing it into your Console and pressing Enter
 
@@ -320,15 +316,12 @@ If you perform this action you should be able to do two things
 a
 ```
 
-What output do you get when you type `a` into your console?
-
-```{solution}
-
-``{r, eval = F, echo = T, results = 'asis'}
+`r hide("What output do you get when you type a into your console?")`
+```{r, eval = F, echo = T, results = 'asis'}
 3
-``
-
 ```
+
+`r unhide()`
 
 You can now call this object at *any time* during your R session and perform calculations with it.
 
@@ -336,13 +329,13 @@ You can now call this object at *any time* during your R session and perform cal
 2 * a
 ```
 
-```{solution}
-
-``{r, eval = F, echo = T, results = 'asis'}
+`r hide("Solution")`
+```{r, eval = F, echo = T, results = 'asis'}
 6
-``
-
 ```
+
+`r unhide()`
+
 
 What happens if we assign a value to a named object that **already** exists in our R environment??? for example
 
@@ -381,13 +374,12 @@ c
 
 -   What is the value of `c`?
 
-```{solution}
-
-``{r, eval = T, echo = F, results = 'asis'}
+`r hide("What is the value of c ?")`
+```{r, eval = T, echo = F, results = 'asis'}
 15
-``
-
 ```
+
+`r unhide()`
 
 Look at the environment tab again - you should see it's starting to fill up now!
 
@@ -436,7 +428,7 @@ There's nothing wrong with making *lots* of errors. The trick is not to panic or
 
 ... and sometimes we need to walk away and come back later!
 
-```{block, "try"}
+```{block, type = "try"}
 Try typing the command `help()` into the R console, it should open a new tab on the bottom right. 
 
 
@@ -469,14 +461,12 @@ The arguments:
 
 **Arguments are the inputs we give to a function**. These arguments are in the form `name = value` the name specifies the argument, and the value is what we are providing to define the input. That is the first argument `x` is the number we would like to round, it has a value of 2.4326782647. The second argument `digits` is how we would like the number to be rounded and we specify 2. There is no limit to how many arguments a function *could* have.
 
-```{task}
+```{block, type = "try"}
 Copy and paste the following code into the console. 
 ```
 
-\* In the console, type the following code:
 
 ```{r help-doc, eval=FALSE}
-
 
 help(round)
 
@@ -496,7 +486,7 @@ Read the 'Details' section to find out what happens when rounding when the last 
 
 Let's try an example and just change the required argument `digits`
 
-```{task}
+```{block, type = "try"}
 Copy and paste the following code into the console. 
 ```
 
@@ -523,7 +513,7 @@ What if we need the answer from a function in a later calculation. The answer is
 
 In this example we assign values to two R objects that we can then call inside our R function **as though we were putting numbers in directly**.
 
-```{task}
+```{block, type = "try"}
 Copy and paste the following code into the console. 
 ```
 
@@ -540,12 +530,13 @@ rounded_number <- round(x  = my_number,
 
 **What value is assigned to the R object `rounded_number`** **?**
 
-```{solution}
+`r hide("Solution")`
 
-``{r, eval = T, echo = F, results = 'asis'}
+```{r, eval = T, echo = F, results = 'asis'}
 2.433
-``
 ```
+
+`r unhide()`
 
 ### More fun with functions
 
@@ -586,7 +577,7 @@ An R package is a container for various things including functions and data. The
 
 On RStudio Cloud I have already installed several add-on packages, all we need to do is use a simple function `library()` to load these packages into our workspace. Once this is complete we will have access to all the custom functions they contain.
 
-```{task}
+```{block, type = "try"}
 Copy and paste the following code into the console. 
 ```
 
@@ -616,7 +607,7 @@ Data visualisation is a core part of data science, and generating insights from 
 
 Today let's use some simple functions to produce a figure. We specify the data source, the variables to be used for the x and y axis and then the type of visual object to produce, colouring them by the species.
 
-```{task}
+```{block, type = "try"}
 Copy and paste the following code into the console. 
 ```
 
@@ -677,7 +668,7 @@ Annotating your instructions provides yourself and others insights into why you 
 
 We have already seen how to signal a comment with the `#` key. Everything in the line after a `#` is ignored by R and won't be treated as a command. You should also see that it is marked in a different colour in your script.
 
-```{task}
+```{block, type = "try"}
 Put the following comment in your script on line 1.
 ```
 
@@ -697,7 +688,7 @@ knitr::include_graphics("images/organised script.png")
 
 To use the functions from a package in our script they must be loaded *before* we call on the functions or data they contain. So the most sensible place to put library calls for packages is at the very **top** of our script. So let's do that now,
 
-```{task}
+```{block, type = "try"}
 Add the commands`library(ggplot2)` and 
 `library(palmerpenguins)` to your script.
 
@@ -709,9 +700,9 @@ Put a comment next to each package explaining what it is for
 Use the document outline button to help organise your script. 
 ```
 
-```{solution}
+`r hide("Solution")`
 
-``{r, eval = F, echo = T, fig.height=6, fig.width=6, out.width = "60%"}
+```{r, eval = F, echo = T, fig.height=6, fig.width=6, out.width = "60%"}
 # I really love R
 # _______________----
 
@@ -721,7 +712,6 @@ library(ggplot2) # create elegant data visualisations
 library(palmer penguins) # Palmer Archipelago Penguin Data
 
 # ______________----
-``
 
 ```
 
@@ -731,16 +721,15 @@ library(palmer penguins) # Palmer Archipelago Penguin Data
 R Studio will interpret Unicode to present images that you can include in your scripts. It's not necessary, but a fun way to help organise your scripts. 
 
 ```
+`r unhide()`
 
 ### Adding more code
 
-```{task}
+```{block, type = "try"}
 Add the below code into your script, underneath the sections you already have
 ```
 
 It is very similar to the code you ran earlier, but is preceded by `plot_1 <-`
-
-
 
 ```{r , eval = F, echo = T, fig.height=6, fig.width=6, out.width = "60%"}
 # ________________----
@@ -838,129 +827,3 @@ You could now safely quit R, and when you log on next time to this project, your
 -   Close your RStudio Cloud Browser
 
 -   Complete this week's short quiz!
-
-```{task}
-Produce a scatterplot of longevity` against `thorax`. What does the relationship look like?
-```
-
-```{solution, multCode = T, cache = F}
-
-``{r, eval= F, echo =T, fig.height=6, fig.width=6, out.width = "60%"}
-plot(longevity ~ thorax, data = ff, 
-     pch=19, col='darkgrey')
-``
-
-
-The plot suggests that a linear relationship might exist between the two variables. So we can proceed by fitting a linear model in R.
-
-####
-
-
-``{r, eval = F, fig.height=6, fig.width=6}
-ggplot(ff) +
-    geom_point(aes(x = thorax, y = longevity))
-``
-
-
-The plot suggests that a linear relationship might exist between the two variables. So we can proceed by fitting a linear model in R.
-
-```
-
-```{task}
-1. Fit a linear model with lifespan as response variable and thorax length as explanatory variable.
-2. Display a summary of the fit, together with the 97% confidence interval for the estimated parameters.
-3. Show the diagnostic plots for the model.
-```
-
-```{solution}
-
-``{r, eval = F, echo = T, fig.height=6, fig.width=6, out.width = "60%"}
-fit <- lm(longevity ~ thorax, ff)
-summary(fit)
-confint(fit, level=0.97)
-par(mfrow=c(2, 2))
-plot(fit, pch=19, col='darkgrey')
-par(mfrow=c(1, 1))
-``
-
-```
-
-## Activity 1
-
-When you get the correct answer, the answer box will turn green. Sometimes this doesn't work on Internet Explorer or Edge so be sure to use Chrome or Firefox.
-
-1.  What is the output from 5\^4
-
-`r fitb(625)`
-
-2.  Put the brackets in the correct place to make this equation correct `4+2*8 = 48`
-
-`r fitb((4+2)*8)`
-
-3.  What answer will you get when you type `2+2 = 4` into the R console?
-
-`r mcq(c("TRUE", "FALSE", answer = "Error"))`
-
-```{solution}
-
-``{r, eval = T, echo = F, results = 'asis'}
-cat("If we wanted R to make a judgement we must use == not = otherwise we will get an Error message")
-``
-
-```
-
-4.  What symbol do I use if I want to **assign** a value or output of a function to an R object
-
-`r fitb("<-")`
-
-5.  What is the value of `a` if I ran the following commands?
-
-```{r, eval = FALSE}
-
-a <-  12*2
-
-a <- 5
-```
-
-`r fitb(5)`
-
-6.  Which of these variable naming conventions is **not** written correctly?
-
-`r mcq(c("snake_case", "camelCase", answer = "Screaming_Snake_Case", "kebab-case"))`
-
-7.  What should I type into the R console if I want `help` with the `round()` function?
-
-`r fitb ("help(round)")`
-
-8.  Which of these statements about function arguments **is not true**
-
-`r mcq(c("Arguments are the inputs we give to a function", answer = "Values for R arguments must always be defined by the user", "Naming arguments supersedes position in a function", "There is no limit to the number of arguments a function could have"))`
-
-9.  Evaluate this statement "An R Package can contain code functions, data, or both."
-
-`r mcq(c(answer = "TRUE", "FALSE"))`
-
-### Head to Blackboard and submit your answers to the quiz to get your first Data Science Learning Badge.
-
-`r total_correct (elem ="h3", args = "style = 'color:#003366;'")`
-
-## Activity 2
-
-```{r, eval = TRUE, echo = FALSE}
-downloadthis::download_link(
-  link = "https://raw.githubusercontent.com/UEABIO/5023Y_Workshop/main/data/Challenger.csv",
-  button_label = "Download as csv",
-  button_type = "success",
-  has_icon = TRUE,
-  icon = "fa fa-save",
-  self_contained = FALSE
-)
-```
-
-1.  Download this R Script
-
-2.  Upload it to your workspace on RStudio Cloud
-
-3.  Rearrange the chunks of code to make a sensible pipeline
-
-4.  Save the file!
