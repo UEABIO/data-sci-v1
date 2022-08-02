@@ -117,6 +117,13 @@ missing-values-na
 finished
 activity-reorganise-this-script
 submit-when-you-are-finished
+data-wrangling-part-two
+ggplot
+markdown
+github
+functions-1
+data-wrangling-part-two-1
+data-wrangling-part-two-2
 installing-r
 why-should-i-install-r-on-my-computer
 windows

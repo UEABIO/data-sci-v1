@@ -1,0 +1,6 @@
+
+# Data wrangling part two
+
+```{r, child='_setup.Rmd'}
+```
+

@@ -57,6 +57,13 @@
 <li><a class="" href="basic-programming.html"><span class="header-section-number">2</span> Basic programming</a></li>
 <li><a class="" href="loading-data.html"><span class="header-section-number">3</span> Loading data</a></li>
 <li><a class="active" href="data-wrangling-part-one.html"><span class="header-section-number">4</span> Data wrangling part one</a></li>
+<li><a class="" href="data-wrangling-part-two.html"><span class="header-section-number">5</span> Data wrangling part two</a></li>
+<li><a class="" href="ggplot.html"><span class="header-section-number">6</span> Ggplot</a></li>
+<li><a class="" href="markdown.html"><span class="header-section-number">7</span> Markdown</a></li>
+<li><a class="" href="github.html"><span class="header-section-number">8</span> Github</a></li>
+<li><a class="" href="functions-1.html"><span class="header-section-number">9</span> Functions</a></li>
+<li><a class="" href="data-wrangling-part-two-1.html"><span class="header-section-number">10</span> Data wrangling part two</a></li>
+<li><a class="" href="data-wrangling-part-two-2.html"><span class="header-section-number">11</span> Data wrangling part two</a></li>
 <li class="book-part">Appendices</li>
 <li><a class="" href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></li>
 <li><a class="" href="updating-r-rstudio-and-packages.html"><span class="header-section-number">B</span> Updating R, RStudio, and packages</a></li>
@@ -549,60 +556,6 @@ our first data insight, the difference the smallest adult penguin in our dataset
 </div>
 </div>
 
-
-
-<div class="chapter-nav">
-<div class="prev"><a href="loading-data.html"><span class="header-section-number">3</span> Loading data</a></div>
-<div class="next"><a href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#data-wrangling-part-one"><span class="header-section-number">4</span> Data wrangling part one</a></li>
-<li>
-<a class="nav-link" href="#load-your-workspace"><span class="header-section-number">4.1</span> Load your workspace</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#checklist"><span class="header-section-number">4.1.1</span> Checklist</a></li></ul>
-</li>
-<li>
-<a class="nav-link" href="#activity-1-change-column-names"><span class="header-section-number">4.2</span> Activity 1: Change column names</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#clean-names"><span class="header-section-number">4.2.1</span> Clean names</a></li>
-<li><a class="nav-link" href="#rename"><span class="header-section-number">4.2.2</span> Rename</a></li>
-<li><a class="nav-link" href="#glimpsecheck-data-format"><span class="header-section-number">4.2.3</span> glimpsecheck data format</a></li>
-</ul>
-</li>
-<li>
-<a class="nav-link" href="#dplyr-verbs"><span class="header-section-number">4.3</span> dplyr verbs</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#select"><span class="header-section-number">4.3.1</span> Select</a></li>
-<li><a class="nav-link" href="#filter"><span class="header-section-number">4.3.2</span> Filter</a></li>
-<li><a class="nav-link" href="#arrange"><span class="header-section-number">4.3.3</span> Arrange</a></li>
-<li><a class="nav-link" href="#mutate"><span class="header-section-number">4.3.4</span> Mutate</a></li>
-</ul>
-</li>
-<li><a class="nav-link" href="#pipes"><span class="header-section-number">4.4</span> Pipes</a></li>
-<li>
-<a class="nav-link" href="#working-with-dates"><span class="header-section-number">4.5</span> Working with dates</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#rename-some-values"><span class="header-section-number">4.5.1</span> Rename some values</a></li>
-<li><a class="nav-link" href="#check-for-duplication"><span class="header-section-number">4.5.2</span> Check for duplication</a></li>
-<li><a class="nav-link" href="#summarise"><span class="header-section-number">4.5.3</span> Summarise</a></li>
-<li><a class="nav-link" href="#group-by"><span class="header-section-number">4.5.4</span> Group By</a></li>
-<li><a class="nav-link" href="#distinct"><span class="header-section-number">4.5.5</span> Distinct</a></li>
-<li><a class="nav-link" href="#missing-values-na"><span class="header-section-number">4.5.6</span> Missing values: NA</a></li>
-</ul>
-</li>
-<li><a class="nav-link" href="#finished"><span class="header-section-number">4.6</span> Finished</a></li>
-<li>
-<a class="nav-link" href="#activity-reorganise-this-script"><span class="header-section-number">4.7</span> Activity: Reorganise this script</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#submit-when-you-are-finished"><span class="header-section-number">4.7.1</span> Submit when you are finished</a></li></ul>
-</li>
-</ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/UEABIO/data-sci/blob/main/book/04-data-wrangling.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/UEABIO/data-sci/edit/main/book/04-data-wrangling.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
-        </ul>
-</div>
-    </nav>
-</div>
-</div>
-
 <script>
 
 /* update total correct if #webex-total_correct exists */
@@ -782,10 +735,59 @@ $( document ).ready(function() {
     license
   );
 });
-</script>
+</script><div class="chapter-nav">
+<div class="prev"><a href="loading-data.html"><span class="header-section-number">3</span> Loading data</a></div>
+<div class="next"><a href="data-wrangling-part-two.html"><span class="header-section-number">5</span> Data wrangling part two</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#data-wrangling-part-one"><span class="header-section-number">4</span> Data wrangling part one</a></li>
+<li>
+<a class="nav-link" href="#load-your-workspace"><span class="header-section-number">4.1</span> Load your workspace</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#checklist"><span class="header-section-number">4.1.1</span> Checklist</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#activity-1-change-column-names"><span class="header-section-number">4.2</span> Activity 1: Change column names</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#clean-names"><span class="header-section-number">4.2.1</span> Clean names</a></li>
+<li><a class="nav-link" href="#rename"><span class="header-section-number">4.2.2</span> Rename</a></li>
+<li><a class="nav-link" href="#glimpsecheck-data-format"><span class="header-section-number">4.2.3</span> glimpsecheck data format</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#dplyr-verbs"><span class="header-section-number">4.3</span> dplyr verbs</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#select"><span class="header-section-number">4.3.1</span> Select</a></li>
+<li><a class="nav-link" href="#filter"><span class="header-section-number">4.3.2</span> Filter</a></li>
+<li><a class="nav-link" href="#arrange"><span class="header-section-number">4.3.3</span> Arrange</a></li>
+<li><a class="nav-link" href="#mutate"><span class="header-section-number">4.3.4</span> Mutate</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#pipes"><span class="header-section-number">4.4</span> Pipes</a></li>
+<li>
+<a class="nav-link" href="#working-with-dates"><span class="header-section-number">4.5</span> Working with dates</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#rename-some-values"><span class="header-section-number">4.5.1</span> Rename some values</a></li>
+<li><a class="nav-link" href="#check-for-duplication"><span class="header-section-number">4.5.2</span> Check for duplication</a></li>
+<li><a class="nav-link" href="#summarise"><span class="header-section-number">4.5.3</span> Summarise</a></li>
+<li><a class="nav-link" href="#group-by"><span class="header-section-number">4.5.4</span> Group By</a></li>
+<li><a class="nav-link" href="#distinct"><span class="header-section-number">4.5.5</span> Distinct</a></li>
+<li><a class="nav-link" href="#missing-values-na"><span class="header-section-number">4.5.6</span> Missing values: NA</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#finished"><span class="header-section-number">4.6</span> Finished</a></li>
+<li>
+<a class="nav-link" href="#activity-reorganise-this-script"><span class="header-section-number">4.7</span> Activity: Reorganise this script</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#submit-when-you-are-finished"><span class="header-section-number">4.7.1</span> Submit when you are finished</a></li></ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/UEABIO/data-sci/blob/main/book/04-data-wrangling.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/UEABIO/data-sci/edit/main/book/04-data-wrangling.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
 
 </div>
- <!-- .container -->
+</div> <!-- .container -->
 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 

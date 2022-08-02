@@ -4,18 +4,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>C Exporting files from the server | 5023Y</title>
+<title>Chapter 9 Functions | 5023Y</title>
 <meta name="author" content="Philip T. Leftwich">
-<meta name="description" content="If you are using the R server, you may need to export files to share them with other people or submit them for your assignments. First, make sure you have saved any changes you have made to the...">
+<meta name="description" content='/* update total correct if #webex-total_correct exists */ update_total_correct = function() {  console.log("webex: update total_correct");  if (t = document.getElementById("webex-total_correct"))...'>
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="C Exporting files from the server | 5023Y">
+<meta property="og:title" content="Chapter 9 Functions | 5023Y">
 <meta property="og:type" content="book">
-<meta property="og:url" content="https://ueabio.github.io/data-sci/exporting-files-from-the-server.html">
+<meta property="og:url" content="https://ueabio.github.io/data-sci/functions-1.html">
 <meta property="og:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
-<meta property="og:description" content="If you are using the R server, you may need to export files to share them with other people or submit them for your assignments. First, make sure you have saved any changes you have made to the...">
+<meta property="og:description" content='/* update total correct if #webex-total_correct exists */ update_total_correct = function() {  console.log("webex: update total_correct");  if (t = document.getElementById("webex-total_correct"))...'>
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C Exporting files from the server | 5023Y">
-<meta name="twitter:description" content="If you are using the R server, you may need to export files to share them with other people or submit them for your assignments. First, make sure you have saved any changes you have made to the...">
+<meta name="twitter:title" content="Chapter 9 Functions | 5023Y">
+<meta name="twitter:description" content='/* update total correct if #webex-total_correct exists */ update_total_correct = function() {  console.log("webex: update total_correct");  if (t = document.getElementById("webex-total_correct"))...'>
 <meta name="twitter:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.13/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -61,13 +61,13 @@
 <li><a class="" href="ggplot.html"><span class="header-section-number">6</span> Ggplot</a></li>
 <li><a class="" href="markdown.html"><span class="header-section-number">7</span> Markdown</a></li>
 <li><a class="" href="github.html"><span class="header-section-number">8</span> Github</a></li>
-<li><a class="" href="functions-1.html"><span class="header-section-number">9</span> Functions</a></li>
+<li><a class="active" href="functions-1.html"><span class="header-section-number">9</span> Functions</a></li>
 <li><a class="" href="data-wrangling-part-two-1.html"><span class="header-section-number">10</span> Data wrangling part two</a></li>
 <li><a class="" href="data-wrangling-part-two-2.html"><span class="header-section-number">11</span> Data wrangling part two</a></li>
 <li class="book-part">Appendices</li>
 <li><a class="" href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></li>
 <li><a class="" href="updating-r-rstudio-and-packages.html"><span class="header-section-number">B</span> Updating R, RStudio, and packages</a></li>
-<li><a class="active" href="exporting-files-from-the-server.html"><span class="header-section-number">C</span> Exporting files from the server</a></li>
+<li><a class="" href="exporting-files-from-the-server.html"><span class="header-section-number">C</span> Exporting files from the server</a></li>
 <li><a class="" href="symbols.html"><span class="header-section-number">D</span> Symbols</a></li>
 <li><a class="" href="license.html">License</a></li>
 <li><a class="" href="references.html">References</a></li>
@@ -78,17 +78,11 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="exporting-files-from-the-server" class="section level1" number="14">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="functions-1" class="section level1" number="9">
 <h1>
-<span class="header-section-number">C</span> Exporting files from the server<a class="anchor" aria-label="anchor" href="#exporting-files-from-the-server"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9</span> Functions<a class="anchor" aria-label="anchor" href="#functions-1"><i class="fas fa-link"></i></a>
 </h1>
-<p>If you are using the R server, you may need to export files to share them with other people or submit them for your assignments.</p>
-<ul>
-<li>First, make sure you have saved any changes you have made to the file. Do this by clicking "File - Save", Ctrl + S, or clicking the save icon. If all your changes have been saved, the save icon will be greyed out. If there are new unsaved changes, you will be able to click the icon.</li>
-<li>Select the file you and to download in the files pane (bottom right) by ticking the box next to it, then click "More - Export" and save the file to your computer.</li>
-<li>If you do not have R installed, DO NOT try to open it on your computer. If you do, it will open in Word, Endnote or similar, and it may corrupt your code. Only open the file if you have R and R Studio installed.</li>
-<li>If you want to double check that this file is definitely the right one to submit for an assignment, you can re-upload it to the server and open it again to make sure it has the answers in it.</li>
-</ul>
+
 </div>
 <script>
 
@@ -270,16 +264,16 @@ $( document ).ready(function() {
   );
 });
 </script><div class="chapter-nav">
-<div class="prev"><a href="updating-r-rstudio-and-packages.html"><span class="header-section-number">B</span> Updating R, RStudio, and packages</a></div>
-<div class="next"><a href="symbols.html"><span class="header-section-number">D</span> Symbols</a></div>
+<div class="prev"><a href="github.html"><span class="header-section-number">8</span> Github</a></div>
+<div class="next"><a href="data-wrangling-part-two-1.html"><span class="header-section-number">10</span> Data wrangling part two</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#exporting-files-from-the-server"><span class="header-section-number">C</span> Exporting files from the server</a></li></ul>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#functions-1"><span class="header-section-number">9</span> Functions</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/UEABIO/data-sci/blob/main/book/appendix-c-exporting-server.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/UEABIO/data-sci/edit/main/book/appendix-c-exporting-server.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/UEABIO/data-sci/blob/main/book/09-writing-functions.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/UEABIO/data-sci/edit/main/book/09-writing-functions.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>

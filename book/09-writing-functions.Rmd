@@ -1,0 +1,6 @@
+
+# Functions
+
+```{r, child='_setup.Rmd'}
+```
+
