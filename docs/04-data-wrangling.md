@@ -35,7 +35,7 @@ Think about some basic checks before you start your work today.
 
 We are going to learn how to organise data using the *tidy* format^[(http://vita.had.co.nz/papers/tidy-data.pdf)]. This is because we are using the `tidyverse` packages @R-tidyverse. This is an opinionated, but highly effective method for generating reproducible analyses with a wide-range of data manipulation tools. Tidy data is an easy format for computers to read. 
 
-Here 'tidy' refers to a specific structure that lets us manipulate and visualise data with ease. In a tidy dataset each *variable* is in one column and each row contains one *observation*. Each cell of the table/spreadsheet contains the *values*. One observation you might make about tidy data is it is quite long - it generates a lot of rows of data. 
+Here 'tidy' refers to a specific structure that lets us manipulate and visualise data with ease. In a tidy dataset each *variable* is in one column and each row contains one *observation*. Each cell of the table/spreadsheet contains the *values*. One observation you might make about tidy data is it is quite long - it generates a lot of rows of data - you might remember then that *tidy* data can be referred to as *long*-format data (as opposed to *wide* data). 
 
 <img src="images/tidy-1.png" title="tidy data overview" alt="tidy data overview" width="80%" style="display: block; margin: auto;" />
 
@@ -497,7 +497,6 @@ That was a lot of work! But remember you don't have to remember all of these fun
 
 Finally, make sure you have saved the changes made to your script 💾
 
-## Activity: Test Yourself
 
 ## Activity: Reorganise this script
 

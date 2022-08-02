@@ -147,7 +147,7 @@ Finally, you can store the result of these operations in a new object:
 decade <- age + 10
 ```
 
-<div class="try">
+<div class="info">
 <p>You may find it helpful to read <code>&lt;-</code> as <code>contains</code>, e.g., <code>name</code> contains the text <code>emily</code>.</p>
 </div>
 

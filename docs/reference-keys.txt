@@ -13,7 +13,7 @@ fig:img-session
 fig:img-kitteh
 fig:unnamed-chunk-6
 fig:unnamed-chunk-9
-fig:unnamed-chunk-10
+fig:unnamed-chunk-11
 tab:unnamed-chunk-7
 tab:unnamed-chunk-12
 fig:settings-general
@@ -87,7 +87,11 @@ activity-3-upload-our-data
 activity-4-make-a-script
 document-outline
 activity-5-read-in-data
-filepath
+filepaths
+directories
+home-directory
+working-directory
+absolute-vs-relative-filepaths
 activity-6-test-yourself
 head-to-blackboard-when-complete-and-submit-your-answers-to-the-quiz.-1
 data-wrangling-part-one
@@ -111,7 +115,6 @@ group-by
 distinct
 missing-values-na
 finished
-activity-test-yourself
 activity-reorganise-this-script
 submit-when-you-are-finished
 installing-r

@@ -106,6 +106,10 @@ In practice, that means we only use our data file for data entry and storage. Al
 
 In raw format, each line of a CSV is separated by commas for different values. When you open this in a spreadsheet program like Excel it automatically converts those comma-separated values into tables and columns. 
 
+<div class="info">
+<p>You are probably more used to working with Excel (.xls and .xlsx) file formats, but while these are widely supported, CSV files, as simple text formats are supported by ALL data interfaces. They are also not proprietary (e.g. the Excel format is owned by Microsoft), so by working with a .csv format your data is more open and accessible.</p>
+</div>
+
 
 ## Activity 3: Upload our data
 
@@ -117,7 +121,7 @@ In raw format, each line of a CSV is separated by commas for different values. W
 
 <div class="figure" style="text-align: center">
 <img src="images/upload.png" alt="File tab" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-10)Highlighted the buttons to upload files, and more options</p>
+<p class="caption">(\#fig:unnamed-chunk-11)Highlighted the buttons to upload files, and more options</p>
 </div>
 
 ## Activity 4: Make a script
@@ -171,7 +175,63 @@ head(penguins) # check the data has loaded, prints first 10 rows of dataframe
 <p>There is also a function called <code>read.csv()</code>. Be very careful NOT to use this function instead of <code>read_csv()</code> as they have different ways of naming columns.</p>
 </div>
 
-### Filepath
+## Filepaths
+
+In the example above the `read_csv()` function requires you to provide a filepath (in "quotes"), in order to tell R where the file you wish to read is located in this example there are two components
+
+* "data/" - specifies the directory in which to look for the file
+
+* "penguins_raw.csv" - specifies the name and format of the file
+
+### Directories
+
+A directory refers to a folder on a computer that has relationships to other folders. The term “directory” considers the relationship between that folder and the folders within and around it. Directories are hierarchical which means that they can exist within other folders as well as have folders exist within them.
+
+A "parent" directory is any folder that contains a subdirectory. For example your downloads folder is a directory, it is the parent directory to any subdirectories or files contained within it. 
+
+### Home directory
+
+The home directory on a computer is a directory defined by your operating system. The home directory is the primary directory for your user account on your computer. Your files are by default stored in your home directory.
+
+* On Windows, the home directory is typically `C:\Users\your-username`.
+
+* On Mac and Linux, the home directory is typically `/home/your-username`.
+
+### Working directory
+
+The working directory refers to the directory on your computer that a tool assumes is the starting place for all filepaths
+
+### Absolute vs Relative filepaths
+
+What has this got to do with working in R? 
+
+When you use any programming language, you have to specify filepaths in order for the program to find files to read-in or where to output files. 
+
+An **Absolute** file path is a path that contains the entire path to a file or directory starting from your Home directory and ending at the file or directory you wish to access e.g.
+
+`/home/your-username/project/data/penguins_raw.csv`
+
+The main drawbacks of using absolute file paths are:
+
+* If you share files, another user won’t have the same directory structure as you, so they will need to recreate the file paths
+
+* if you alter your directory structure, you’ll need to rewrite the paths
+
+* an absolute file path will likely be longer than a relative path, more of the backslashes will need to be edited, so there is more scope for error.
+
+As different computers can have different path constructions, any scripts that use absolute filepaths are not very reproducible. 
+
+A **Relative** filepath is the path that is relative to the working directory location on your computer. 
+
+When you use RStudio Projects, wherever the `.Rproj` file is located is set to the working directory. This means that if the `.Rproj` file is located in your `project folder` then the *relative* path to your data is:
+
+`data/penguins_raw.csv`
+
+This filepath is shorter *and* it means you could share your project with someone else and the script would run without any editing. 
+
+<div class="info">
+<p>For those of you using RStudio Cloud, remember you are working on a Linux OS cloud server, each of you will have a different absolute filepath - but the scripts for the project you are working on right now work because you are using relative filepaths</p>
+</div>
 
 ## Activity 6: Test yourself
 ### Head to Blackboard when complete and submit your answers to the quiz.
@@ -192,5 +252,27 @@ head(penguins) # check the data has loaded, prints first 10 rows of dataframe
 
 <select class='webex-select'><option value='blank'></option><option value='answer'>read_csv()</option><option value=''>read.csv()</option></select>
 
+**Question 5.** What format is the `penguins` data in?
 
+<select class='webex-select'><option value='blank'></option><option value=''>wide data</option><option value='answer'>long data</option></select>
+
+
+<div class='webex-solution'><button>Explain This Answer</button>
+
+Each column is a unique variable and each row is a unique observation so this data is in a long (tidy) format
+
+</div>
+  
+
+**Question 6.** The working directory for your projects is by default set to the location of?
+
+<select class='webex-select'><option value='blank'></option><option value=''>your data files</option><option value='answer'>the .Rproj file</option><option value=''>your R script</option></select>
+
+**Question 7.** Using the filepath `"data/penguins_raw.csv"` is an example of 
+
+<select class='webex-select'><option value='blank'></option><option value=''>an absolute filepath</option><option value='answer'>a relative filepath</option></select>
+
+**Question 8.** What operator do I need to use if I wish to assign the output of the `read_csv` function to an R object (rather than just print the dataframe into the console)?
+
+<input class='webex-solveme nospaces' size='2' data-answer='["<-"]'/>
 

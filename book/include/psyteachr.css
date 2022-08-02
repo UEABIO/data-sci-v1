@@ -71,7 +71,7 @@ body {
 }
 
 .try {
-  background-image: url("../images/alerts/rainbow.svg");
+  background-image: url("../images/alerts/try.svg");
   background-color: hsla(248, 28%, 48%, .1);
   border: 1px solid var(--purple);
   background-position: 0.5em -.25em;

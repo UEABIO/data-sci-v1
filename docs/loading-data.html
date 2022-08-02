@@ -161,6 +161,11 @@ Figure 3.2: Top image: Penguins data viewed in Excel, Bottom image: Penguins dat
 </p>
 </div>
 <p>In raw format, each line of a CSV is separated by commas for different values. When you open this in a spreadsheet program like Excel it automatically converts those comma-separated values into tables and columns.</p>
+<div class="info">
+<p>
+You are probably more used to working with Excel (.xls and .xlsx) file formats, but while these are widely supported, CSV files, as simple text formats are supported by ALL data interfaces. They are also not proprietary (e.g. the Excel format is owned by Microsoft), so by working with a .csv format your data is more open and accessible.
+</p>
+</div>
 </div>
 <div id="activity-3-upload-our-data" class="section level2" number="3.4">
 <h2>
@@ -172,7 +177,7 @@ Figure 3.2: Top image: Penguins data viewed in Excel, Bottom image: Penguins dat
 <li><p>Put your file into the data folder - if you make a mistake select the tickbox for your file, go to the cogs button and choose the option Move.</p></li>
 </ul>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-10"></span>
+<span style="display:block;" id="fig:unnamed-chunk-11"></span>
 <img src="images/upload.png" alt="File tab" width="80%"><p class="caption">
 Figure 3.3: Highlighted the buttons to upload files, and more options
 </p>
@@ -224,19 +229,72 @@ Figure 3.3: Highlighted the buttons to upload files, and more options
 There is also a function called <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code>. Be very careful NOT to use this function instead of <code>read_csv()</code> as they have different ways of naming columns.
 </p>
 </div>
-<div id="filepath" class="section level3" number="3.6.1">
-<h3>
-<span class="header-section-number">3.6.1</span> Filepath<a class="anchor" aria-label="anchor" href="#filepath"><i class="fas fa-link"></i></a>
-</h3>
 </div>
-</div>
-<div id="activity-6-test-yourself" class="section level2" number="3.7">
+<div id="filepaths" class="section level2" number="3.7">
 <h2>
-<span class="header-section-number">3.7</span> Activity 6: Test yourself<a class="anchor" aria-label="anchor" href="#activity-6-test-yourself"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.7</span> Filepaths<a class="anchor" aria-label="anchor" href="#filepaths"><i class="fas fa-link"></i></a>
 </h2>
-<div id="head-to-blackboard-when-complete-and-submit-your-answers-to-the-quiz.-1" class="section level3" number="3.7.1">
+<p>In the example above the <code>read_csv()</code> function requires you to provide a filepath (in "quotes"), in order to tell R where the file you wish to read is located in this example there are two components</p>
+<ul>
+<li><p>"data/" - specifies the directory in which to look for the file</p></li>
+<li><p>"penguins_raw.csv" - specifies the name and format of the file</p></li>
+</ul>
+<div id="directories" class="section level3" number="3.7.1">
 <h3>
-<span class="header-section-number">3.7.1</span> Head to Blackboard when complete and submit your answers to the quiz.<a class="anchor" aria-label="anchor" href="#head-to-blackboard-when-complete-and-submit-your-answers-to-the-quiz.-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.7.1</span> Directories<a class="anchor" aria-label="anchor" href="#directories"><i class="fas fa-link"></i></a>
+</h3>
+<p>A directory refers to a folder on a computer that has relationships to other folders. The term “directory” considers the relationship between that folder and the folders within and around it. Directories are hierarchical which means that they can exist within other folders as well as have folders exist within them.</p>
+<p>A "parent" directory is any folder that contains a subdirectory. For example your downloads folder is a directory, it is the parent directory to any subdirectories or files contained within it.</p>
+</div>
+<div id="home-directory" class="section level3" number="3.7.2">
+<h3>
+<span class="header-section-number">3.7.2</span> Home directory<a class="anchor" aria-label="anchor" href="#home-directory"><i class="fas fa-link"></i></a>
+</h3>
+<p>The home directory on a computer is a directory defined by your operating system. The home directory is the primary directory for your user account on your computer. Your files are by default stored in your home directory.</p>
+<ul>
+<li><p>On Windows, the home directory is typically <code>C:\Users\your-username</code>.</p></li>
+<li><p>On Mac and Linux, the home directory is typically <code>/home/your-username</code>.</p></li>
+</ul>
+</div>
+<div id="working-directory" class="section level3" number="3.7.3">
+<h3>
+<span class="header-section-number">3.7.3</span> Working directory<a class="anchor" aria-label="anchor" href="#working-directory"><i class="fas fa-link"></i></a>
+</h3>
+<p>The working directory refers to the directory on your computer that a tool assumes is the starting place for all filepaths</p>
+</div>
+<div id="absolute-vs-relative-filepaths" class="section level3" number="3.7.4">
+<h3>
+<span class="header-section-number">3.7.4</span> Absolute vs Relative filepaths<a class="anchor" aria-label="anchor" href="#absolute-vs-relative-filepaths"><i class="fas fa-link"></i></a>
+</h3>
+<p>What has this got to do with working in R?</p>
+<p>When you use any programming language, you have to specify filepaths in order for the program to find files to read-in or where to output files.</p>
+<p>An <strong>Absolute</strong> file path is a path that contains the entire path to a file or directory starting from your Home directory and ending at the file or directory you wish to access e.g.</p>
+<p><code>/home/your-username/project/data/penguins_raw.csv</code></p>
+<p>The main drawbacks of using absolute file paths are:</p>
+<ul>
+<li><p>If you share files, another user won’t have the same directory structure as you, so they will need to recreate the file paths</p></li>
+<li><p>if you alter your directory structure, you’ll need to rewrite the paths</p></li>
+<li><p>an absolute file path will likely be longer than a relative path, more of the backslashes will need to be edited, so there is more scope for error.</p></li>
+</ul>
+<p>As different computers can have different path constructions, any scripts that use absolute filepaths are not very reproducible.</p>
+<p>A <strong>Relative</strong> filepath is the path that is relative to the working directory location on your computer.</p>
+<p>When you use RStudio Projects, wherever the <code>.Rproj</code> file is located is set to the working directory. This means that if the <code>.Rproj</code> file is located in your <code>project folder</code> then the <em>relative</em> path to your data is:</p>
+<p><code>data/penguins_raw.csv</code></p>
+<p>This filepath is shorter <em>and</em> it means you could share your project with someone else and the script would run without any editing.</p>
+<div class="info">
+<p>
+For those of you using RStudio Cloud, remember you are working on a Linux OS cloud server, each of you will have a different absolute filepath - but the scripts for the project you are working on right now work because you are using relative filepaths
+</p>
+</div>
+</div>
+</div>
+<div id="activity-6-test-yourself" class="section level2" number="3.8">
+<h2>
+<span class="header-section-number">3.8</span> Activity 6: Test yourself<a class="anchor" aria-label="anchor" href="#activity-6-test-yourself"><i class="fas fa-link"></i></a>
+</h2>
+<div id="head-to-blackboard-when-complete-and-submit-your-answers-to-the-quiz.-1" class="section level3" number="3.8.1">
+<h3>
+<span class="header-section-number">3.8.1</span> Head to Blackboard when complete and submit your answers to the quiz.<a class="anchor" aria-label="anchor" href="#head-to-blackboard-when-complete-and-submit-your-answers-to-the-quiz.-1"><i class="fas fa-link"></i></a>
 </h3>
 <p><strong>Question 1.</strong> In order to make your R project reproducible what filepath should you use?</p>
 <p><select class="webex-select"><option value="blank"></option>
@@ -254,6 +312,27 @@ There is also a function called <code><a href="https://rdrr.io/r/utils/read.tabl
 <p><select class="webex-select"><option value="blank"></option>
 <option value="answer">read_csv()</option>
 <option value="">read.csv()</option></select></p>
+<p><strong>Question 5.</strong> What format is the <code>penguins</code> data in?</p>
+<p><select class="webex-select"><option value="blank"></option>
+<option value="">wide data</option>
+<option value="answer">long data</option></select></p>
+<div class="webex-solution">
+<button>
+Explain This Answer
+</button>
+<p>Each column is a unique variable and each row is a unique observation so this data is in a long (tidy) format</p>
+</div>
+<p><strong>Question 6.</strong> The working directory for your projects is by default set to the location of?</p>
+<p><select class="webex-select"><option value="blank"></option>
+<option value="">your data files</option>
+<option value="answer">the .Rproj file</option>
+<option value="">your R script</option></select></p>
+<p><strong>Question 7.</strong> Using the filepath <code>"data/penguins_raw.csv"</code> is an example of</p>
+<p><select class="webex-select"><option value="blank"></option>
+<option value="">an absolute filepath</option>
+<option value="answer">a relative filepath</option></select></p>
+<p><strong>Question 8.</strong> What operator do I need to use if I wish to assign the output of the <code>read_csv</code> function to an R object (rather than just print the dataframe into the console)?</p>
+<p><input class="webex-solveme nospaces" size="2" data-answer='["&lt;-"]'></p>
 
 </div>
 </div>
@@ -452,11 +531,17 @@ $( document ).ready(function() {
 <li>
 <a class="nav-link" href="#activity-4-make-a-script"><span class="header-section-number">3.5</span> Activity 4: Make a script</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#document-outline"><span class="header-section-number">3.5.1</span> Document outline</a></li></ul>
 </li>
+<li><a class="nav-link" href="#activity-5-read-in-data"><span class="header-section-number">3.6</span> Activity 5: Read in data</a></li>
 <li>
-<a class="nav-link" href="#activity-5-read-in-data"><span class="header-section-number">3.6</span> Activity 5: Read in data</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#filepath"><span class="header-section-number">3.6.1</span> Filepath</a></li></ul>
+<a class="nav-link" href="#filepaths"><span class="header-section-number">3.7</span> Filepaths</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#directories"><span class="header-section-number">3.7.1</span> Directories</a></li>
+<li><a class="nav-link" href="#home-directory"><span class="header-section-number">3.7.2</span> Home directory</a></li>
+<li><a class="nav-link" href="#working-directory"><span class="header-section-number">3.7.3</span> Working directory</a></li>
+<li><a class="nav-link" href="#absolute-vs-relative-filepaths"><span class="header-section-number">3.7.4</span> Absolute vs Relative filepaths</a></li>
+</ul>
 </li>
 <li>
-<a class="nav-link" href="#activity-6-test-yourself"><span class="header-section-number">3.7</span> Activity 6: Test yourself</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#head-to-blackboard-when-complete-and-submit-your-answers-to-the-quiz.-1"><span class="header-section-number">3.7.1</span> Head to Blackboard when complete and submit your answers to the quiz.</a></li></ul>
+<a class="nav-link" href="#activity-6-test-yourself"><span class="header-section-number">3.8</span> Activity 6: Test yourself</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#head-to-blackboard-when-complete-and-submit-your-answers-to-the-quiz.-1"><span class="header-section-number">3.8.1</span> Head to Blackboard when complete and submit your answers to the quiz.</a></li></ul>
 </li>
 </ul>
 

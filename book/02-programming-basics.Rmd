@@ -129,7 +129,7 @@ decade <- age + 10
 
 ```
 
-```{block, type="try"}
+```{block, type="info"}
 You may find it helpful to read `<-` as `contains`, e.g., `name` contains the text `emily`.
 ```
 
