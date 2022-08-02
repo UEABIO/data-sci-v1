@@ -163,7 +163,7 @@ More on this later.
    <td style="text-align:left;"> reorder the rows </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> summarize() </td>
+   <td style="text-align:left;"> summarise() </td>
    <td style="text-align:left;"> reduce raw data to user defined summaries </td>
   </tr>
   <tr>

@@ -142,7 +142,7 @@ To avoid accidentally overwriting a package with a later version, you should <st
 <h2>
 <span class="header-section-number">2.4</span> Objects<a class="anchor" aria-label="anchor" href="#objects"><i class="fas fa-link"></i></a>
 </h2>
-<p>A large part of your coding will involve creating and manipulating objects. Objects contain stuff. That stuff can be numbers, words, or the result of operations and analyses.You assign content to an object using <code><a href="https://rdrr.io/r/base/assignOps.html">&lt;-</a></code>.</p>
+<p>A large part of your coding will involve creating and manipulating objects. Objects contain stuff, and we made our first R objects in the previous chapter. The values contained in an object can be numbers, words, or the result of operations and analyses.You assign content to an object using <code><a href="https://rdrr.io/r/base/assignOps.html">&lt;-</a></code>.</p>
 <div id="activity-1-create-some-objects" class="section level3" number="2.4.1">
 <h3>
 <span class="header-section-number">2.4.1</span> Activity 1: Create some objects<a class="anchor" aria-label="anchor" href="#activity-1-create-some-objects"><i class="fas fa-link"></i></a>
@@ -153,7 +153,7 @@ To avoid accidentally overwriting a package with a later version, you should <st
 <div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">name</span> <span class="op">&lt;-</span> <span class="st">"emily"</span>
 <span class="va">age</span> <span class="op">&lt;-</span> <span class="fl">16</span> <span class="op">+</span> <span class="fl">19</span> 
-<span class="va">today</span> <span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">today</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">new_year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2022-01-01"</span><span class="op">)</span>
 <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span>, mean <span class="op">=</span> <span class="fl">15</span>, sd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
 <p>What function should we use if need help to understand the function <code><a href="https://rdrr.io/r/stats/Normal.html">rnorm()</a></code>?</p>
@@ -195,7 +195,7 @@ You may also see objects referred to as 'variables'. There is a difference betwe
 <h2>
 <span class="header-section-number">2.5</span> Vectors<a class="anchor" aria-label="anchor" href="#vectors"><i class="fas fa-link"></i></a>
 </h2>
-<p>We have been working with R objects containing a single element of data, but we will more commonly work with vectors. A vector is a sequence of elements, <strong>all of the same data type</strong>. These could be logical, numerical, character etc.</p>
+<p>We have been working with R objects containing a single element of data, but we will more commonly work with vectors. A vector is a <em>sequence</em> of elements, <strong>all of the same data type</strong>. These could be logical, numerical, character etc.</p>
 <div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">numeric_vector</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>
 
@@ -208,19 +208,31 @@ You may also see objects referred to as 'variables'. There is a difference betwe
 <h2>
 <span class="header-section-number">2.6</span> Dataframes and tibbles<a class="anchor" aria-label="anchor" href="#dataframes-and-tibbles"><i class="fas fa-link"></i></a>
 </h2>
-<p>A quick sidebar on how R stores data. When we imported the data into R it is put into an object called a <strong>tibble</strong> which is a type of <strong>dataframe</strong>.</p>
+<p>No we have looked at R objects that contain:</p>
+<ul>
+<li><p>single elements of data</p></li>
+<li><p>multiple elements of the same data type - vectors</p></li>
+</ul>
+<p>But most often when we import data into R it is put into an object called a <strong>tibble</strong> which is a type of <strong>dataframe</strong>.</p>
+<div class="info">
+<p>
+A dataframe is data structure that organises data into a table. Dataframes can have a mix of different types of data in them. Each column in a dataframe is a different vector, and each row is a different element within the vectors.
+</p>
+</div>
 <p>Let's have a quick go at making our own <strong>tibble</strong> from scratch.</p>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># make some variables, when we have a one dimensional object like this it is known as an atomic vector!</span>
+<code class="sourceCode R"><span class="co"># make some variables/ vectors</span>
 <span class="va">person</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Mark"</span>, <span class="st">"Phil"</span>, <span class="st">"Becky"</span>, <span class="st">"Tony"</span><span class="op">)</span>
+
 <span class="va">hobby</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"kickboxing"</span>, <span class="st">"coding"</span>, <span class="st">"dog walking"</span>, <span class="st">"car boot sales"</span><span class="op">)</span>
+
 <span class="va">awesomeness</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">100</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span></code></pre></div>
 <div class="try">
 <p>
-Use <code><a href="https://rdrr.io/r/utils/str.html">str()</a></code> on an object or vector to find out important information, like the data type, and how many elements it contains.
+Use <code><a href="https://rdrr.io/r/utils/str.html">str()</a></code> on an object or vector to find out important information, like the data type of each vector and how many elements it contains.
 </p>
 </div>
-<p>Now we put these vectors together, where they become the variables in a new tibble</p>
+<p>Now we put these vectors together, where they become the variables in a new tibble using the function <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code></p>
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># make a tibble</span>
 <span class="va">my_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span><span class="va">person</span>, <span class="va">hobby</span>, <span class="va">awesomeness</span><span class="op">)</span>
@@ -232,9 +244,9 @@ Use <code><a href="https://rdrr.io/r/utils/str.html">str()</a></code> on an obje
 2 Phil   coding                 100
 3 Becky  dog walking              1
 4 Tony   car boot sales           1</code></pre>
-<p>Have a go at messing about with your script and figure out what each of these does, add comments and save your script.</p>
+<p>Have a go at messing about with your script and figure out what each of the functions below does.</p>
 <div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Some R functions for looking at tibbles and dataframes I will comment next to each one with what it does</span>
+<code class="sourceCode R"><span class="co"># Some R functions for looking at tibbles and dataframes</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">my_data</span>, n<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">my_data</span>, n<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
@@ -245,9 +257,83 @@ Use <code><a href="https://rdrr.io/r/utils/str.html">str()</a></code> on an obje
 <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">my_data</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">my_data</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="looking-after-the-environment" class="section level2" number="2.7">
+<div id="organising-data-in-wide-and-long-formats" class="section level2" number="2.7">
 <h2>
-<span class="header-section-number">2.7</span> Looking after the environment<a class="anchor" aria-label="anchor" href="#looking-after-the-environment"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.7</span> Organising data in wide and long formats<a class="anchor" aria-label="anchor" href="#organising-data-in-wide-and-long-formats"><i class="fas fa-link"></i></a>
+</h2>
+<p>There are two main conventions for dataframes in R, these are <em>wide</em> and <em>long</em> formats.</p>
+<ul>
+<li><p>A wide data format does not repeat values in the first column, data relating to the same "measured thing" are found in different columns</p></li>
+<li><p>A long data format is where we have a <strong>different</strong> column for each type of thing we have measures in our data. Each <em>variable</em> has a unique column.</p></li>
+</ul>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:img-shapes"></span>
+<img src="images/data_shapes.png" alt="A visual representation of long and wide format data shapes" width="100%"><p class="caption">
+Figure 2.2: A visual representation of long and wide format data shapes
+</p>
+</div>
+<p>While neither <em>wide</em> or <em>long</em> data is more correct than the other, we will work with <em>long</em> data as it is clearer how many distinct types of variables there are in our data <em>and</em> the tools we will be using from the <code>tidyverse</code> are designed to work with <em>long</em> data.</p>
+</div>
+<div id="using-pivot-functions" class="section level2" number="2.8">
+<h2>
+<span class="header-section-number">2.8</span> Using <code>pivot</code> functions<a class="anchor" aria-label="anchor" href="#using-pivot-functions"><i class="fas fa-link"></i></a>
+</h2>
+<p>There are functions found as part of the <code>tidyverse</code> that can help us to reshape data.</p>
+<ul>
+<li><p><code>pivot_wider()</code> - from <em>long</em> to <em>wide</em> format</p></li>
+<li><p><code>pivot_longer()</code> - from <em>wide</em> to <em>long</em> format</p></li>
+</ul>
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<code class="sourceCode R"> <span class="va">country</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span>, <span class="st">"z"</span><span class="op">)</span>
+ <span class="va">yr1960</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span><span class="op">)</span>
+ <span class="va">yr1970</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">13</span>, <span class="fl">23</span>, <span class="fl">33</span><span class="op">)</span>
+ <span class="va">yr2010</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">15</span>, <span class="fl">25</span>, <span class="fl">35</span><span class="op">)</span>
+
+<span class="va">country_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span><span class="va">country</span>, <span class="va">yr1960</span>, <span class="va">yr1970</span>, <span class="va">yr2010</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">pivot_longer</span><span class="op">(</span>data <span class="op">=</span> <span class="va">country_data</span>,
+             cols <span class="op">=</span> <span class="va">yr1960</span><span class="op">:</span><span class="va">yr2010</span>,
+             names_to <span class="op">=</span> <span class="st">"year"</span>,
+             names_prefix <span class="op">=</span> <span class="st">"yr"</span>,
+             values_to <span class="op">=</span> <span class="st">"metric"</span><span class="op">)</span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:img-pivot"></span>
+<img src="images/tidyr_pivot.png" alt="Reshaping data with pivot" width="100%"><p class="caption">
+Figure 2.3: Reshaping data with pivot
+</p>
+</div>
+<p>To <em>save</em> these changes to your data format, you must assign this to an object, and you have two options</p>
+<ul>
+<li><p>Use the same name as the original R object, this will <em>overwrite</em> the original with the new format</p></li>
+<li><p>Use a <em>new</em> name for the reformatted data both R objects will exist in your Environment</p></li>
+</ul>
+<p>Neither is more <em>correct</em> than the other but be aware of what you are doing.</p>
+<div id="overwrite-the-original-object" class="section level3" number="2.8.1">
+<h3>
+<span class="header-section-number">2.8.1</span> Overwrite the original object<a class="anchor" aria-label="anchor" href="#overwrite-the-original-object"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">country_data</span> <span class="op">&lt;-</span> <span class="fu">pivot_longer</span><span class="op">(</span>data <span class="op">=</span> <span class="va">country_data</span>,
+             cols <span class="op">=</span> <span class="va">yr1960</span><span class="op">:</span><span class="va">yr2010</span>,
+             names_to <span class="op">=</span> <span class="st">"year"</span>,
+             names_prefix <span class="op">=</span> <span class="st">"yr"</span>,
+             values_to <span class="op">=</span> <span class="st">"metric"</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="create-a-new-r-object" class="section level3" number="2.8.2">
+<h3>
+<span class="header-section-number">2.8.2</span> Create a new r object<a class="anchor" aria-label="anchor" href="#create-a-new-r-object"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">long_country_data</span> <span class="op">&lt;-</span> <span class="fu">pivot_longer</span><span class="op">(</span>data <span class="op">=</span> <span class="va">country_data</span>,
+             cols <span class="op">=</span> <span class="va">yr1960</span><span class="op">:</span><span class="va">yr2010</span>,
+             names_to <span class="op">=</span> <span class="st">"year"</span>,
+             names_prefix <span class="op">=</span> <span class="st">"yr"</span>,
+             values_to <span class="op">=</span> <span class="st">"metric"</span><span class="op">)</span></code></pre></div>
+</div>
+</div>
+<div id="looking-after-the-environment" class="section level2" number="2.9">
+<h2>
+<span class="header-section-number">2.9</span> Looking after the environment<a class="anchor" aria-label="anchor" href="#looking-after-the-environment"><i class="fas fa-link"></i></a>
 </h2>
 <p>If you've been writing a lot of code you may find that the environment pane (or workspace) has become cluttered with many objects. This can make it difficult to figure out which object you need and therefore you run the risk of using the wrong data frame. If you're working on a new dataset, or if you've tried lots of different code before getting the final version, it is good practice to remember to clear the environment to avoid using the wrong object. You can do this in several way.</p>
 <ol style="list-style-type: decimal">
@@ -258,47 +344,47 @@ Use <code><a href="https://rdrr.io/r/utils/str.html">str()</a></code> on an obje
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:img-broom"></span>
 <img src="images/broom.png" alt="Clearing the workspace" width="100%"><p class="caption">
-Figure 2.2: Clearing the workspace
+Figure 2.4: Clearing the workspace
 </p>
 </div>
 </div>
-<div id="global-options" class="section level2" number="2.8">
+<div id="global-options" class="section level2" number="2.10">
 <h2>
-<span class="header-section-number">2.8</span> Global options<a class="anchor" aria-label="anchor" href="#global-options"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.10</span> Global options<a class="anchor" aria-label="anchor" href="#global-options"><i class="fas fa-link"></i></a>
 </h2>
 <p>By default, when you open R Studio it will show you what you were last working on, including your code and any objects you have created. This might sound helpful, but actually it tends to cause more problems than it's worth because it means that you risk accidentally using an old version of an object. We recommend changing the settings so that each time you start R Studio, it opens a fresh copy. You can do this by clicking <code>Tools</code> - <code>Global Options</code> and then deselecting boxes so that it looks like the below.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:img-options"></span>
 <img src="images/global_options.jpg" alt="Global options" width="100%"><p class="caption">
-Figure 2.3: Global options
+Figure 2.5: Global options
 </p>
 </div>
 </div>
-<div id="r-sessions" class="section level2" number="2.9">
+<div id="r-sessions" class="section level2" number="2.11">
 <h2>
-<span class="header-section-number">2.9</span> R sessions<a class="anchor" aria-label="anchor" href="#r-sessions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.11</span> R sessions<a class="anchor" aria-label="anchor" href="#r-sessions"><i class="fas fa-link"></i></a>
 </h2>
 <p>When you open up R and start writing code, loading packages, and creating objects, you're doing so in a new <strong>session</strong>. In addition to clearing the workspace, it can sometimes be useful to start a new session. This will happen automatically each time you start R on your computer, although sessions can persist on the server. If you find that your code isn't working and you can't figure out why, it might be worth starting a new session. This will clear the environment and detach all loaded packages - think of it like restarting your phone.</p>
 </div>
-<div id="activity-2" class="section level2" number="2.10">
+<div id="activity-2" class="section level2" number="2.12">
 <h2>
-<span class="header-section-number">2.10</span> Activity 2<a class="anchor" aria-label="anchor" href="#activity-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.12</span> Activity 2<a class="anchor" aria-label="anchor" href="#activity-2"><i class="fas fa-link"></i></a>
 </h2>
 <p>Click 'Session - Restart R'.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:img-session"></span>
 <img src="images/new_session.png" alt="The truth about programming" width="100%"><p class="caption">
-Figure 2.4: The truth about programming
+Figure 2.6: The truth about programming
 </p>
 </div>
 </div>
-<div id="how-to-cite-r-and-rstudio" class="section level2" number="2.11">
+<div id="how-to-cite-r-and-rstudio" class="section level2" number="2.13">
 <h2>
-<span class="header-section-number">2.11</span> How to cite R and RStudio<a class="anchor" aria-label="anchor" href="#how-to-cite-r-and-rstudio"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.13</span> How to cite R and RStudio<a class="anchor" aria-label="anchor" href="#how-to-cite-r-and-rstudio"><i class="fas fa-link"></i></a>
 </h2>
 <p>You may be some way off writing a scientific report where you have to cite and reference R, however, when the time comes it is important to do so to the people who built it (most of them for free!) credit. You should provide separate citations for R, RStudio, and the packages you use.</p>
 <p>To get the citation for the version of R you are using, simply run the <code><a href="https://rdrr.io/r/utils/citation.html">citation()</a></code> function which will always provide you with he most recent citation.</p>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/citation.html">citation</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## To cite R in publications use:
@@ -322,7 +408,7 @@ Figure 2.4: The truth about programming
 ## when using it for data analysis. See also 'citation("pkgname")' for
 ## citing R packages.</code></pre>
 <p>To generate the citation for any packages you are using, you can also use the <code><a href="https://rdrr.io/r/utils/citation.html">citation()</a></code> function with the name of the package you wish to cite.</p>
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/citation.html">citation</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##   Wickham et al., (2019). Welcome to the tidyverse. Journal of Open
@@ -341,7 +427,7 @@ Figure 2.4: The truth about programming
 ##     doi = {10.21105/joss.01686},
 ##   }</code></pre>
 <p>To generate the citation for the version of RStudio you are using, you can use the <code>RStudio.Version()</code> function:</p>
-<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">RStudio.Version</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>Finally, here's an example of how that might look in the write-up of your method section:</p>
 <blockquote>
@@ -349,14 +435,14 @@ Figure 2.4: The truth about programming
 </blockquote>
 <p>As noted, you may not have to do this for a while, but come back to this when you do as it's important to give the open-source community credit for their work.</p>
 </div>
-<div id="help-and-additional-resources" class="section level2" number="2.12">
+<div id="help-and-additional-resources" class="section level2" number="2.14">
 <h2>
-<span class="header-section-number">2.12</span> Help and additional resources<a class="anchor" aria-label="anchor" href="#help-and-additional-resources"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.14</span> Help and additional resources<a class="anchor" aria-label="anchor" href="#help-and-additional-resources"><i class="fas fa-link"></i></a>
 </h2>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:img-kitteh"></span>
 <img src="images/kitteh.PNG" alt="The truth about programming" width="100%"><p class="caption">
-Figure 2.5: The truth about programming
+Figure 2.7: The truth about programming
 </p>
 </div>
 <p>Getting good at programming really means getting good trying stuff out, searching for help online, and finding examples of code to copy. If you are having difficulty with any of the exercises contained in this book then you can ask for help on Teams, however, learning to problem-solve effectively is a key skill that you need to develop throughout this course.</p>
@@ -374,9 +460,9 @@ Figure 2.5: The truth about programming
 </li>
 </ul>
 </div>
-<div id="debugging-tips" class="section level2" number="2.13">
+<div id="debugging-tips" class="section level2" number="2.15">
 <h2>
-<span class="header-section-number">2.13</span> Debugging tips<a class="anchor" aria-label="anchor" href="#debugging-tips"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.15</span> Debugging tips<a class="anchor" aria-label="anchor" href="#debugging-tips"><i class="fas fa-link"></i></a>
 </h2>
 <p>A large part of coding is trying to figure why your code doesn't work and this is true whether you are a novice or an expert. As you progress through this course you should keep a record of mistakes you make and how you fixed them. In each chapter we will provide a number of common mistakes to look out for but you will undoubtedly make (and fix!) new mistakes yourself.</p>
 <ul>
@@ -386,13 +472,13 @@ Figure 2.5: The truth about programming
 <li>Is it definitely an error? Not all red text in R means an error - sometimes it is just giving you a message with information.</li>
 </ul>
 </div>
-<div id="activity-7-test-yourself" class="section level2" number="2.14">
+<div id="activity-7-test-yourself" class="section level2" number="2.16">
 <h2>
-<span class="header-section-number">2.14</span> Activity 7: Test yourself<a class="anchor" aria-label="anchor" href="#activity-7-test-yourself"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.16</span> Activity 7: Test yourself<a class="anchor" aria-label="anchor" href="#activity-7-test-yourself"><i class="fas fa-link"></i></a>
 </h2>
-<div id="head-to-blackboard-when-complete-and-submit-your-answers-to-the-quiz." class="section level3" number="2.14.1">
+<div id="head-to-blackboard-when-complete-and-submit-your-answers-to-the-quiz." class="section level3" number="2.16.1">
 <h3>
-<span class="header-section-number">2.14.1</span> Head to Blackboard when complete and submit your answers to the quiz.<a class="anchor" aria-label="anchor" href="#head-to-blackboard-when-complete-and-submit-your-answers-to-the-quiz."><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.16.1</span> Head to Blackboard when complete and submit your answers to the quiz.<a class="anchor" aria-label="anchor" href="#head-to-blackboard-when-complete-and-submit-your-answers-to-the-quiz."><i class="fas fa-link"></i></a>
 </h3>
 <p><strong>Question 1.</strong> Why should you never include the code <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> in your analysis scripts? <select class="webex-select"><option value="blank"></option>
 <option value="">You should use library() instead</option>
@@ -406,7 +492,7 @@ Explain This Answer
 <p>Remember, when you run <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> it will always install the latest version of the package and it will overwrite any older versions of the package you may have installed.</p>
 </div>
 <p><br><strong>Question 2.</strong>What will the following code produce?</p>
-<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">50</span>, <span class="fl">10</span><span class="op">)</span></code></pre></div>
 <p><select class="webex-select"><option value="blank"></option>
 <option value="">A dataset with 10 numbers that has a mean of 6 and an SD of 50</option>
@@ -647,15 +733,22 @@ $( document ).ready(function() {
 </li>
 <li><a class="nav-link" href="#vectors"><span class="header-section-number">2.5</span> Vectors</a></li>
 <li><a class="nav-link" href="#dataframes-and-tibbles"><span class="header-section-number">2.6</span> Dataframes and tibbles</a></li>
-<li><a class="nav-link" href="#looking-after-the-environment"><span class="header-section-number">2.7</span> Looking after the environment</a></li>
-<li><a class="nav-link" href="#global-options"><span class="header-section-number">2.8</span> Global options</a></li>
-<li><a class="nav-link" href="#r-sessions"><span class="header-section-number">2.9</span> R sessions</a></li>
-<li><a class="nav-link" href="#activity-2"><span class="header-section-number">2.10</span> Activity 2</a></li>
-<li><a class="nav-link" href="#how-to-cite-r-and-rstudio"><span class="header-section-number">2.11</span> How to cite R and RStudio</a></li>
-<li><a class="nav-link" href="#help-and-additional-resources"><span class="header-section-number">2.12</span> Help and additional resources</a></li>
-<li><a class="nav-link" href="#debugging-tips"><span class="header-section-number">2.13</span> Debugging tips</a></li>
+<li><a class="nav-link" href="#organising-data-in-wide-and-long-formats"><span class="header-section-number">2.7</span> Organising data in wide and long formats</a></li>
 <li>
-<a class="nav-link" href="#activity-7-test-yourself"><span class="header-section-number">2.14</span> Activity 7: Test yourself</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#head-to-blackboard-when-complete-and-submit-your-answers-to-the-quiz."><span class="header-section-number">2.14.1</span> Head to Blackboard when complete and submit your answers to the quiz.</a></li></ul>
+<a class="nav-link" href="#using-pivot-functions"><span class="header-section-number">2.8</span> Using pivot functions</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#overwrite-the-original-object"><span class="header-section-number">2.8.1</span> Overwrite the original object</a></li>
+<li><a class="nav-link" href="#create-a-new-r-object"><span class="header-section-number">2.8.2</span> Create a new r object</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#looking-after-the-environment"><span class="header-section-number">2.9</span> Looking after the environment</a></li>
+<li><a class="nav-link" href="#global-options"><span class="header-section-number">2.10</span> Global options</a></li>
+<li><a class="nav-link" href="#r-sessions"><span class="header-section-number">2.11</span> R sessions</a></li>
+<li><a class="nav-link" href="#activity-2"><span class="header-section-number">2.12</span> Activity 2</a></li>
+<li><a class="nav-link" href="#how-to-cite-r-and-rstudio"><span class="header-section-number">2.13</span> How to cite R and RStudio</a></li>
+<li><a class="nav-link" href="#help-and-additional-resources"><span class="header-section-number">2.14</span> Help and additional resources</a></li>
+<li><a class="nav-link" href="#debugging-tips"><span class="header-section-number">2.15</span> Debugging tips</a></li>
+<li>
+<a class="nav-link" href="#activity-7-test-yourself"><span class="header-section-number">2.16</span> Activity 7: Test yourself</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#head-to-blackboard-when-complete-and-submit-your-answers-to-the-quiz."><span class="header-section-number">2.16.1</span> Head to Blackboard when complete and submit your answers to the quiz.</a></li></ul>
 </li>
 </ul>
 
@@ -674,7 +767,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-07-29.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-08-02.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

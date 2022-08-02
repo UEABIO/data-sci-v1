@@ -4,6 +4,7 @@
 ```{r, child='_setup.Rmd'}
 ```
 
+
 To load packages we use the function `library()`. Typically you would start any analysis script by loading all of the packages you need. 
 
 The [tidyverse](https://www.tidyverse.org/) is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures. This means the functions across the tidyverse are all designed to work together and make the process of data science easier.
@@ -78,7 +79,7 @@ MASS::select()
 
 ## Objects
 
-A large part of your coding will involve creating and manipulating objects. Objects contain stuff. That stuff can be numbers, words, or the result of operations and analyses.You assign content to an object using `<-`.
+A large part of your coding will involve creating and manipulating objects. Objects contain stuff, and we made our first R objects in the previous chapter. The values contained in an object can be numbers, words, or the result of operations and analyses.You assign content to an object using `<-`.
 
 ### Activity 1: Create some objects
 
@@ -88,7 +89,7 @@ A large part of your coding will involve creating and manipulating objects. Obje
 
 name <- "emily"
 age <- 16 + 19 
-today <-Sys.Date()
+today <- Sys.Date()
 new_year <- as.Date("2022-01-01")
 data <- rnorm(n = 10, mean = 15, sd = 3)
 
@@ -142,7 +143,7 @@ You may also see objects referred to as 'variables'. There is a difference betwe
 
 ## Vectors
 
-We have been working with R objects containing a single element of data, but we will more commonly work with vectors. A vector is a sequence of elements, **all of the same data type**. These could be logical, numerical, character etc.
+We have been working with R objects containing a single element of data, but we will more commonly work with vectors. A vector is a *sequence* of elements, **all of the same data type**. These could be logical, numerical, character etc.
 
 ```{r}
 numeric_vector <- c(1,2,3)
@@ -157,23 +158,36 @@ The function `c` lets you 'concatenate' or link each of these separate elements 
 
 ## Dataframes and tibbles
 
-A quick sidebar on how R stores data. When we imported the data into R it is put into an object called a **tibble** which is a type of **dataframe**. 
+No we have looked at R objects that contain:
+
+* single elements of data
+
+* multiple elements of the same data type - vectors
+
+
+But most often when we import data into R it is put into an object called a **tibble** which is a type of **dataframe**. 
+
+```{block, type = "info"}
+A dataframe is data structure that organises data into a table.  Dataframes can have a mix of different types of data in them. 
+Each column in a dataframe is a different vector, and each row is a different element within the vectors.
+```
 
 Let's have a quick go at making our own **tibble** from scratch. 
 
-
 ```{r, eval = F}
-# make some variables, when we have a one dimensional object like this it is known as an atomic vector!
+# make some variables/ vectors
 person <- c("Mark", "Phil", "Becky", "Tony")
+
 hobby <- c("kickboxing", "coding", "dog walking", "car boot sales")
+
 awesomeness <- c(1,100,1,1)
 ```
 
 ```{block, type = "try"}
-Use `str()` on an object or vector to find out important information, like the data type, and how many elements it contains.
+Use `str()` on an object or vector to find out important information, like the data type of each vector and how many elements it contains.
 ```
 
-Now we put these vectors together, where they become the variables in a new tibble
+Now we put these vectors together, where they become the variables in a new tibble using the function `tibble()`
 
 ```{r, eval = F}
 # make a tibble
@@ -190,10 +204,10 @@ my_data
 3 Becky  dog walking              1
 4 Tony   car boot sales           1
 ```
-Have a go at messing about with your script and figure out what each of these does, add comments and save your script.
+Have a go at messing about with your script and figure out what each of the functions below does. 
 
 ```{r, eval = F}
-# Some R functions for looking at tibbles and dataframes I will comment next to each one with what it does
+# Some R functions for looking at tibbles and dataframes
 
 head(my_data, n=2)
 tail(my_data, n=1)
@@ -207,6 +221,92 @@ str(my_data)
 
 ```
 
+
+## Organising data in wide and long formats
+
+There are two main conventions for dataframes in R, these are *wide* and *long* formats. 
+
+* A wide data format does not repeat values in the first column, data relating to the same "measured thing" are found in different columns
+
+* A long data format is where we have a **different** column for each type of thing we have measures in our data. Each *variable* has a unique column. 
+
+
+```{r img-shapes, echo=FALSE, fig.cap="A visual representation of long and wide format data shapes"}
+
+knitr::include_graphics("images/data_shapes.png")
+
+```
+
+While neither *wide* or *long* data is more correct than the other, we will work with *long* data as it is clearer how many distinct types of variables there are in our data *and* the tools we will be using from the `tidyverse` are designed to work with *long* data.
+
+## Using `pivot` functions
+
+There are functions found as part of the `tidyverse` that can help us to reshape data. 
+
+* `pivot_wider()` - from *long* to *wide* format
+
+* `pivot_longer()` - from *wide* to *long* format
+
+```{r, eval = F}
+ country <- c("x", "y", "z")
+ yr1960 <-  c(10, 20, 30)
+ yr1970 <-  c(13, 23, 33)
+ yr2010 <-  c(15, 25, 35)
+
+country_data <- tibble(country, yr1960, yr1970, yr2010)
+
+```
+
+
+
+```{r pivot-data, eval = F}
+
+pivot_longer(data = country_data,
+             cols = yr1960:yr2010,
+             names_to = "year",
+             names_prefix = "yr",
+             values_to = "metric")
+
+```
+
+```{r img-pivot, echo=FALSE, fig.cap="Reshaping data with pivot"}
+
+knitr::include_graphics("images/tidyr_pivot.png")
+
+```
+
+
+To *save* these changes to your data format, you must assign this to an object, and you have two options
+
+* Use the same name as the original R object, this will *overwrite* the original with the new format
+
+* Use a *new* name for the reformatted data both R objects will exist in your Environment
+
+Neither is more *correct* than the other but be aware of what you are doing.
+
+
+### Overwrite the original object 
+
+```{r, eval = F}
+country_data <- pivot_longer(data = country_data,
+             cols = yr1960:yr2010,
+             names_to = "year",
+             names_prefix = "yr",
+             values_to = "metric")
+
+```
+
+### Create a new r object
+
+```{r, eval = F}
+
+long_country_data <- pivot_longer(data = country_data,
+             cols = yr1960:yr2010,
+             names_to = "year",
+             names_prefix = "yr",
+             values_to = "metric")
+
+```
 
 ## Looking after the environment
 

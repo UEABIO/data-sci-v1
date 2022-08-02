@@ -5,6 +5,8 @@ fig:unnamed-chunk-37
 fig:unnamed-chunk-39
 fig:script
 fig:img-objects-enviro
+fig:img-shapes
+fig:img-pivot
 fig:img-broom
 fig:img-options
 fig:img-session
@@ -64,6 +66,10 @@ objects
 activity-1-create-some-objects
 vectors
 dataframes-and-tibbles
+organising-data-in-wide-and-long-formats
+using-pivot-functions
+overwrite-the-original-object
+create-a-new-r-object
 looking-after-the-environment
 global-options
 r-sessions
