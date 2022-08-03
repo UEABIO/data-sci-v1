@@ -58,12 +58,12 @@
 <li><a class="" href="loading-data.html"><span class="header-section-number">3</span> Loading data</a></li>
 <li><a class="active" href="data-wrangling-part-one.html"><span class="header-section-number">4</span> Data wrangling part one</a></li>
 <li><a class="" href="data-wrangling-part-two.html"><span class="header-section-number">5</span> Data wrangling part two</a></li>
-<li><a class="" href="ggplot.html"><span class="header-section-number">6</span> Ggplot</a></li>
+<li><a class="" href="ggplot.html"><span class="header-section-number">6</span> ggplot</a></li>
 <li><a class="" href="markdown.html"><span class="header-section-number">7</span> Markdown</a></li>
 <li><a class="" href="github.html"><span class="header-section-number">8</span> Github</a></li>
 <li><a class="" href="functions-1.html"><span class="header-section-number">9</span> Functions</a></li>
-<li><a class="" href="data-wrangling-part-two-1.html"><span class="header-section-number">10</span> Data wrangling part two</a></li>
-<li><a class="" href="data-wrangling-part-two-2.html"><span class="header-section-number">11</span> Data wrangling part two</a></li>
+<li><a class="" href="data-insights-part-one.html"><span class="header-section-number">10</span> Data Insights part one</a></li>
+<li><a class="" href="data-insights-part-two.html"><span class="header-section-number">11</span> Data insights part two</a></li>
 <li class="book-part">Appendices</li>
 <li><a class="" href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></li>
 <li><a class="" href="updating-r-rstudio-and-packages.html"><span class="header-section-number">B</span> Updating R, RStudio, and packages</a></li>
@@ -98,7 +98,7 @@
 </h3>
 <ul>
 <li><p>Are there objects already in your Enviroment pane? <a href="basic-programming.html#global-options">There shouldn't be</a>, if there are use <code><a href="https://rdrr.io/r/base/rm.html">rm(list=ls())</a></code></p></li>
-<li><p>Re-run your script from line 1 to the last line</p></li>
+<li><p>Re-run your script from <a href="loading-data.html#activity-4-make-a-script">last time</a> from line 1 to the last line</p></li>
 <li><p>Check for any warning or error messages</p></li>
 <li><p>Add the code from today's session as we go</p></li>
 </ul>
@@ -261,7 +261,9 @@ create a new variable
 <p>For example I might wish to create a simplified dataset that only contains <code>species</code>, <code>sex</code>, <code>flipper_length_mm</code> and <code>body_mass_g</code>.</p>
 <p>Run the below code to select only those columns</p>
 <div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span>.data <span class="op">=</span> <span class="va">penguins</span>, <span class="co"># the data object</span>
+<code class="sourceCode R"><span class="co"># DPLYR VERBS ----</span>
+
+<span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span>.data <span class="op">=</span> <span class="va">penguins</span>, <span class="co"># the data object</span>
        <span class="va">species</span>, <span class="va">sex</span>, <span class="va">flipper_length_mm</span>, <span class="va">body_mass_g</span><span class="op">)</span> <span class="co"># the variables you want to select</span></code></pre></div>
 <p>Alternatively you could tell R the columns you <strong>don't</strong> want e.g.</p>
 <div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
@@ -443,8 +445,8 @@ Arrange the data from HIGHEST to LOWEST flipper lengths.</p>
 <p>We can also see in <code>penguins</code> there is a <code>date_egg</code> variable. If you check it (using <code>glimpse</code> or any of the new functions you have learned), you should see that it all looks like its been inputted correctly, but R is treating it as words, rather than assigning it a date value.</p>
 <p>Is <code>date_egg</code> in the correct format?
 <select class="webex-select"><option value="blank"></option>
-<option value="answer">yes</option>
-<option value="">no</option></select></p>
+<option value="">yes</option>
+<option value="answer">no</option></select></p>
 <p>We can fix that with the <code>lubridate</code> package. If we use the function <code>dmy</code> then we tell R this is date data in date/month/year format.</p>
 <div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">penguins</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op">%&gt;%</span> 
@@ -527,7 +529,8 @@ our first data insight, the difference the smallest adult penguin in our dataset
 <p>But this doesn't tell us where these are, fortunately the function <code>summary</code> does this easily</p>
 <div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># produce a summary of our data</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span>
+<span class="co">#__________________________----</span></code></pre></div>
 <p>This provides a quick breakdown of the max and min for all numeric variables, as well as a list of how many missing observations there are for each one. As we can see there appear to be two missing observations for measurements in body mass, bill lengths, flipper lengths and several more for blood measures. We don't know for sure without inspecting our data further, <em>but</em> it is likely that the two birds are missing multiple measurements, and that several more were measured but didn't have their blood drawn.</p>
 <p>We will leave the NA's alone for now, but it's useful to know how many we have.</p>
 <p>We've now got a clean &amp; tidy dataset, with a handful of first insights into the data.</p>
@@ -544,6 +547,8 @@ our first data insight, the difference the smallest adult penguin in our dataset
 <h2>
 <span class="header-section-number">4.7</span> Activity: Reorganise this script<a class="anchor" aria-label="anchor" href="#activity-reorganise-this-script"><i class="fas fa-link"></i></a>
 </h2>
+<p>Using the link below take the text and copy/paste into a <strong>new</strong> R script and save this as <code>YYYY_MM_DD_workshop_4_jumbled_script.R</code></p>
+<p>All of the correct lines of code, comments and document markers are present, but not in the correct order. Can you unscramble them to produce a sensible output and a clear document outline?</p>
 <div id="submit-when-you-are-finished" class="section level3" number="4.7.1">
 <h3>
 <span class="header-section-number">4.7.1</span> Submit when you are finished<a class="anchor" aria-label="anchor" href="#submit-when-you-are-finished"><i class="fas fa-link"></i></a>
@@ -792,7 +797,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-08-02.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-08-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

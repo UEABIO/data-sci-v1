@@ -122,8 +122,8 @@ ggplot
 markdown
 github
 functions-1
-data-wrangling-part-two-1
-data-wrangling-part-two-2
+data-insights-part-one
+data-insights-part-two
 installing-r
 why-should-i-install-r-on-my-computer
 windows

@@ -22,7 +22,7 @@ Think about some basic checks before you start your work today.
 
 * Are there objects already in your Enviroment pane? [There shouldn't be](#global-options), if there are use `rm(list=ls())`
 
-* Re-run your script from line 1 to the last line
+* Re-run your script from [last time](#activity-4-make-a-script) from line 1 to the last line
 
 * Check for any warning or error messages
 
@@ -164,6 +164,9 @@ For example I might wish to create a simplified dataset that only contains `spec
 Run the below code to select only those columns
 
 ```{r, eval = F}
+
+# DPLYR VERBS ----
+
 select(.data = penguins, # the data object
        species, sex, flipper_length_mm, body_mass_g) # the variables you want to select
 
@@ -201,7 +204,6 @@ filter(.data = new_penguins, species == "Adelie Penguin (Pygoscelis adeliae)")
 Filter is quite a complicate function, and uses several differe operators to assess the way in which it should apply a filter.
 
 ```{r, eval = TRUE, echo = FALSE, warning = FALSE, message = FALSE}
-
 
 Operator <- c("A < B", "A <= B", "A > B", "A >= B", "A == B", "A != B", "A %in% B")
 
@@ -320,12 +322,11 @@ Arrange the data from HIGHEST to LOWEST flipper lengths.
 We can also see in `penguins` there is a `date_egg` variable. If you check it (using `glimpse` or any of the new functions you have learned), you should see that it all looks like its been inputted correctly, but R is treating it as words, rather than assigning it a date value. 
 
 Is `date_egg` in the correct format?
-`r mcq(c(answer = "yes", "no"))`
+`r mcq(c("yes", answer = "no"))`
 
 We can fix that with the `lubridate` package. If we use the function `dmy` then we tell R this is date data in date/month/year format. 
 
 ```{r, eval = F}
-
 penguins <- penguins %>% 
   mutate(date_egg_proper = lubridate::dmy(date_egg))
 ```
@@ -424,7 +425,7 @@ But this doesn't tell us where these are, fortunately the function `summary` doe
 ```{r, eval = F}
 # produce a summary of our data
 summary(penguins)
-
+#__________________________----
 ```
 
 This provides a quick breakdown of the max and min for all numeric variables, as well as a list of how many missing observations there are for each one. As we can see there appear to be two missing observations for measurements in body mass, bill lengths, flipper lengths and several more for blood measures. We don't know for sure without inspecting our data further, *but* it is likely that the two birds are missing multiple measurements, and that several more were measured but didn't have their blood drawn. 
@@ -442,6 +443,9 @@ Finally, make sure you have saved the changes made to your script 💾
 
 
 ## Activity: Reorganise this script
+Using the link below take the text and copy/paste into a **new** R script and save this as `YYYY_MM_DD_workshop_4_jumbled_script.R` 
+
+All of the correct lines of code, comments and document markers are present, but not in the correct order. Can you unscramble them to produce a sensible output and a clear document outline?
 
 ### Submit when you are finished
 

@@ -251,7 +251,7 @@ For those of you using RStudio Cloud, remember you are working on a Linux OS clo
 
 **Question 3.** What should always be the first set of functions in our script? `?()`
 
-`r fitb(library())`
+`r fitb("library()")`
 
 **Question 4.** When reading in data to R we should use
 
