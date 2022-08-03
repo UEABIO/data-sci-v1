@@ -515,4 +515,18 @@ All of the correct lines of code, comments and document markers are present, but
 </a>
 ```
 
+<div class='webex-solution'><button>Solution</button>
+
+
+If you want to check your answers (or are just completely stuck) then click here before submitting
+
+
+```{=html}
+<a href="https://raw.githubusercontent.com/UEABIO/data-sci-v1/main/book/files/unjumbled_script.R">
+<button class="btn btn-success"><i class="fa fa-save"></i> Unjumbled script</button>
+</a>
+```
+
+
+</div>
 

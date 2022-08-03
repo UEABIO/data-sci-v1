@@ -110,7 +110,7 @@ new_year <- as.Date("2022-01-01")
 data <- rnorm(n = 10, mean = 15, sd = 3)
 ```
 
-What function should we use if need help to understand the function `rnorm()`?
+What command should we use if you need `help` to understand the function `rnorm()`?
 
 <input class='webex-solveme nospaces' size='11' data-answer='["help(rnorm)"]'/>
 

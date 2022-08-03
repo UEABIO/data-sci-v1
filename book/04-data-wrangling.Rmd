@@ -459,5 +459,19 @@ downloadthis::download_link(
   self_contained = FALSE
 )
 ```
+`r hide("Solution")`
 
+If you want to check your answers (or are just completely stuck) then click here before submitting
 
+```{r, eval = TRUE, echo = FALSE}
+downloadthis::download_link(
+  link = "https://raw.githubusercontent.com/UEABIO/data-sci-v1/main/book/files/unjumbled_script.R",
+  button_label = "Unjumbled script",
+  button_type = "success",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+`r unhide()`

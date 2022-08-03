@@ -187,6 +187,10 @@ In the example above the `read_csv()` function requires you to provide a filepat
 
 A directory refers to a folder on a computer that has relationships to other folders. The term “directory” considers the relationship between that folder and the folders within and around it. Directories are hierarchical which means that they can exist within other folders as well as have folders exist within them.
 
+<div class="info">
+<p>No idea what directories or files are? You are not alone <a href="https://www.theverge.com/22684730/students-file-folder-directory-structure-education-gen-z">File not Found</a></p>
+</div>
+
 A "parent" directory is any folder that contains a subdirectory. For example your downloads folder is a directory, it is the parent directory to any subdirectories or files contained within it. 
 
 ### Home directory

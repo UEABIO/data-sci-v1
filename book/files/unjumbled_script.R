@@ -5,14 +5,6 @@
 
 #__________________________----
 
-# 🧹 TIDY ----
-
-
-  filter(Tree == 1,
-         Orange_filtered <- Orange %>%
-         age < 1200)
-#__________________________----
-
 # 📦 PACKAGES ----
 library(tidyverse) # tidy data packages
 
@@ -26,10 +18,19 @@ str(Orange) # check structure of dataframe
 
 #__________________________----
 
+# 🧹 TIDY ----
+
+Orange_filtered <- Orange %>%
+  filter(Tree == 1,
+         age < 1200)
+#__________________________----
+
 # 📊PLOT ----
 
 ggplot(data = Orange_filtered,
-       geom_point()+
+       aes(x = age,
            y = circumference))+
+  geom_point()+
   geom_line()
-aes(x = age,
+
+
