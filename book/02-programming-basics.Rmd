@@ -417,7 +417,7 @@ cat("Remember, when you run `install.packages()` it will always install the late
 ```
 `r unhide()` 
 <br>
-**Question 2.**What will the following code produce?
+**Question 2.** What will the following code produce?
   
 ```{r, eval = FALSE}
 

@@ -64,6 +64,8 @@
 <li><a class="" href="functions-1.html"><span class="header-section-number">9</span> Functions</a></li>
 <li><a class="" href="data-insights-part-one.html"><span class="header-section-number">10</span> Data Insights part one</a></li>
 <li><a class="" href="data-insights-part-two.html"><span class="header-section-number">11</span> Data insights part two</a></li>
+<li class="book-part">Advanced topics</li>
+<li><a class="" href="mixed-models.html"><span class="header-section-number">12</span> Mixed models</a></li>
 <li class="book-part">Appendices</li>
 <li><a class="active" href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></li>
 <li><a class="" href="updating-r-rstudio-and-packages.html"><span class="header-section-number">B</span> Updating R, RStudio, and packages</a></li>
@@ -74,22 +76,22 @@
 </ul>
 
         <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/UEABIO/data-sci">View book source <i class="fab fa-github"></i></a></p>
+          <p><a id="book-repo" href="https://github.com/UEABIO/data-sci-v1">View book source <i class="fab fa-github"></i></a></p>
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="installing-r" class="section level1" number="12">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="installing-r" class="section level1" number="13">
 <h1>
 <span class="header-section-number">A</span> Installing <code>R</code><a class="anchor" aria-label="anchor" href="#installing-r"><i class="fas fa-link"></i></a>
 </h1>
-<div id="why-should-i-install-r-on-my-computer" class="section level2" number="12.1">
+<div id="why-should-i-install-r-on-my-computer" class="section level2" number="13.1">
 <h2>
 <span class="header-section-number">A.1</span> Why should I install R on my computer?<a class="anchor" aria-label="anchor" href="#why-should-i-install-r-on-my-computer"><i class="fas fa-link"></i></a>
 </h2>
 <p>The R Server cuts down on a lot of installation problems and it means that you have all the packages and functions you need already installed. However, it requires an internet connection to use and additional when it comes time to submit your R assessments, if you don't have R on your computer it means that you won't be able to open the files you download from the server to check they're ok before you submit them.</p>
 <p>There are some great detailed walkthrough videos by <a href="https://www.youtube.com/playlist?list=PLRPB0ZzEYegOZivdelOuEn-R-XUN-DOjd">Danielle Narvarro on YouTube</a> re: how to install R on both Windows and Mac.</p>
 </div>
-<div id="windows" class="section level2" number="12.2">
+<div id="windows" class="section level2" number="13.2">
 <h2>
 <span class="header-section-number">A.2</span> Windows<a class="anchor" aria-label="anchor" href="#windows"><i class="fas fa-link"></i></a>
 </h2>
@@ -100,11 +102,11 @@
 <li><a href="https://cran.r-project.org/bin/windows/Rtools/">RTools</a></li>
 </ul>
 <p>Once you've installed all three programs, restart your computer. Then, open RStudio (not R) and run the below code:</p>
-<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></code></pre></div>
 <p>This will install the <code>tidyverse</code> package on your computer. If you have any problems installing R, please book into a GTA session as they should be able to help you with any installation problems.</p>
 </div>
-<div id="mac" class="section level2" number="12.3">
+<div id="mac" class="section level2" number="13.3">
 <h2>
 <span class="header-section-number">A.3</span> Mac<a class="anchor" aria-label="anchor" href="#mac"><i class="fas fa-link"></i></a>
 </h2>
@@ -121,11 +123,11 @@
 <p>If you have any issues installing R on your Mac, first, we recommend that you watch the <a href="https://www.youtube.com/watch?v=ay25o485YXs&amp;list=PLRPB0ZzEYegOZivdelOuEn-R-XUN-DOjd&amp;index=1&amp;t=113s">walkthrough by Danielle Navarro</a>.</p>
 <p>If you have further issues on Mac, you may find this video helpful <a href="https://www.youtube.com/watch?v=90IdULVGmYY">walkthrough video</a>. Additionally, if you are using a Mac with the Catalina OS, we also recommend you read this <a href="https://psyteachr.github.io/FAQ/installing-r-and-rstudio.html#i-am-using-macos-10.15-catalina">troubleshooting guide</a></p>
 <p>Once you've installed all three programs, restart your computer. Then, open RStudio (not R) and run the below code:</p>
-<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></code></pre></div>
 <p>This will install the <code>tidyverse</code> package on your computer. If you have any problems installing R, please book into a GTA session as they should be able to help you with any installation problems.</p>
 </div>
-<div id="chromebooks" class="section level2" number="12.4">
+<div id="chromebooks" class="section level2" number="13.4">
 <h2>
 <span class="header-section-number">A.4</span> Chromebooks<a class="anchor" aria-label="anchor" href="#chromebooks"><i class="fas fa-link"></i></a>
 </h2>
@@ -147,12 +149,12 @@ Figure A.2: RStudio Code settings
 </p>
 </div>
 </div>
-<div id="installing-latex" class="section level2" number="12.5">
+<div id="installing-latex" class="section level2" number="13.5">
 <h2>
 <span class="header-section-number">A.5</span> Installing LaTeX<a class="anchor" aria-label="anchor" href="#installing-latex"><i class="fas fa-link"></i></a>
 </h2>
 <p>You can install the LaTeX typesetting system to produce PDF reports from RStudio. Without this additional installation, you will be able to produce reports in HTML but not PDF. This course will not require you to make PDFs. To generate PDF reports, you will additionally need to install <code class="package">tinytex</code> <span class="citation">(<a href="references.html#ref-R-tinytex" role="doc-biblioref">Xie, 2021</a>)</span> and run the following code:</p>
-<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">tinytex</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tinytex/man/install_tinytex.html">install_tinytex</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 
 </div>
@@ -337,7 +339,7 @@ $( document ).ready(function() {
   );
 });
 </script><div class="chapter-nav">
-<div class="prev"><a href="data-insights-part-two.html"><span class="header-section-number">11</span> Data insights part two</a></div>
+<div class="prev"><a href="mixed-models.html"><span class="header-section-number">12</span> Mixed models</a></div>
 <div class="next"><a href="updating-r-rstudio-and-packages.html"><span class="header-section-number">B</span> Updating R, RStudio, and packages</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
@@ -352,8 +354,8 @@ $( document ).ready(function() {
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/UEABIO/data-sci/blob/main/book/appendix-a-installing-r.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/UEABIO/data-sci/edit/main/book/appendix-a-installing-r.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/UEABIO/data-sci-v1/blob/main/book/appendix-a-installing-r.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/UEABIO/data-sci-v1/edit/main/book/appendix-a-installing-r.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
@@ -365,7 +367,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-08-03.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-08-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

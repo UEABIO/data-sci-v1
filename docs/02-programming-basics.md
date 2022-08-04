@@ -473,7 +473,7 @@ Remember, when you run `install.packages()` it will always install the latest ve
 </div>
  
 <br>
-**Question 2.**What will the following code produce?
+**Question 2.** What will the following code produce?
   
 
 ```r

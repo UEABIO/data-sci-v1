@@ -4,6 +4,15 @@
 ```{r, child='_setup.Rmd'}
 ```
 
+```{r, echo = F, warning = F, message = F}
+library(tidyverse)
+library(janitor)
+library(lubridate)
+library(here)
+
+penguins <- read_csv(here("book", "files", "penguins_raw.csv"))
+```
+
 It may surprise you to learn that scientists actually spend far more time cleaning and preparing their data than they spend actually analysing it. This means completing tasks such as cleaning up bad values, changing the structure of dataframes, reducing the data down to a subset of observations, and producing data summaries. 
 
 Many people seem to operate under the assumption that the only option for data cleaning is the painstaking and time-consuming cutting and pasting of data within a spreadsheet program like Excel. We have witnessed students and colleagues waste days, weeks, and even months manually transforming their data in Excel, cutting, copying, and pasting data. Fixing up your data by hand is not only a terrible use of your time, but it is error-prone and not reproducible. Additionally, in this age where we can easily collect massive datasets online, you will not be able to organise, clean, and prepare these by hand.
@@ -79,7 +88,7 @@ When we run `colnames()` we get the identities of each column in our dataframe
 * **Delta 13C**: the ratio of stable Carbon isotopes 13C:12C from blood sample
 
 
-### Clean names
+### Clean column names
 
 Often we might want to change the names of our variables. They might be non-intuitive, or too long. Our data has a couple of issues:
 
@@ -91,7 +100,7 @@ Often we might want to change the names of our variables. They might be non-intu
 
 This dataframe  does not like these so let's correct these quickly. R is case-sensitive and also doesn't like spaces or brackets in variable names
 
-```{r, eval = F}
+```{r, eval = T, warning = F, message = F}
 # CLEAN DATA ----
 
 # clean all variable names to snake_case using the clean_names function from the janitor package
@@ -105,11 +114,11 @@ colnames(penguins) # quickly check the new variable names
 
 ```
 
-### Rename
+### Rename columns (manually)
 
 The `clean_names` function quickly converts all variable names into snake case. The N and C blood isotope ratio names are still quite long though, so let's clean those with `dplyr::rename()` where "new_name" = "old_name".
 
-```{r, eval = F}
+```{r, eval = T, warning = F, message = F}
 # shorten the variable names for N and C isotope blood samples
 
 penguins <- rename(penguins,
@@ -118,7 +127,7 @@ penguins <- rename(penguins,
 
 ```
 
-### `glimpse`check data format 
+### glimpse: check data format 
 
 When we run `glimpse()` we get several lines of output. The number of observations "rows", the number of variables "columns". Check this against the csv file you have - they should be the same. In the next lines we see variable names and the type of data. 
 
@@ -133,11 +142,22 @@ It also provides information on the *type* of data in each column
 
 * `<dbl>` - means numerical data
 
-Which variable might not be in an appropriate data format?
-`r fitb ("date_egg")`
-More on this later.
+### Rename text values
+
+Sometimes we may want to rename the values in our variables in order to make a shorthand that is easier to follow. This is changing the **values** in our columns, not the column names. 
+
+```{r, eval = T, warning = F, message = F}
+# use mutate and case_when for an if-else statement that changes the names of the values in a variable
+penguins <- penguins %>% 
+  mutate(species = case_when(species == "Adelie Penguin (Pygoscelis adeliae)" ~ "Adelie",
+                             species == "Gentoo penguin (Pygoscelis papua)" ~ "Gentoo",
+                             species == "Chinstrap penguin (Pygoscelis antarctica)" ~ "Chinstrap"))
+
+```
 
 ## dplyr verbs
+
+In this section we will be introduced to some of the most commonly used data wrangling functions, these come from the `dplyr` package (part of the `tidyverse`). These are functions you are likely to become *very* familiar with. 
 
 ```{r, eval = TRUE, echo = FALSE, warning = FALSE, message = FALSE}
 library(kableExtra)
@@ -317,35 +337,8 @@ Arrange the data from HIGHEST to LOWEST flipper lengths.
 
 `r unhide()`
 
-## Working with dates
 
-We can also see in `penguins` there is a `date_egg` variable. If you check it (using `glimpse` or any of the new functions you have learned), you should see that it all looks like its been inputted correctly, but R is treating it as words, rather than assigning it a date value. 
-
-Is `date_egg` in the correct format?
-`r mcq(c("yes", answer = "no"))`
-
-We can fix that with the `lubridate` package. If we use the function `dmy` then we tell R this is date data in date/month/year format. 
-
-```{r, eval = F}
-penguins <- penguins %>% 
-  mutate(date_egg_proper = lubridate::dmy(date_egg))
-```
-
-
-Here we use the `mutate` function from `dplyr` to create a new variable called `date_egg_proper` based on the output of converting the characters in `date_egg` to date format. The original variable is left intact, if we had specified the "new" variable was also called `date_egg` then it would have overwritten the original variable. 
-
-### Rename some values
-
-Sometimes we may want to rename the values in our variables in order to make a shorthand that is easier to follow.
-
-```{r, eval = F}
-# use mutate and case_when for an if-else statement that changes the names of the values in a variable
-penguins <- penguins %>% 
-  mutate(species = case_when(species == "Adelie Penguin (Pygoscelis adeliae)" ~ "Adelie",
-                             species == "Gentoo penguin (Pygoscelis papua)" ~ "Gentoo",
-                             species == "Chinstrap penguin (Pygoscelis antarctica)" ~ "Chinstrap"))
-
-```
+## A few more handy functions
 
 ### Check for duplication
 
@@ -422,6 +415,8 @@ penguins %>%
 
 But this doesn't tell us where these are, fortunately the function `summary` does this easily
 
+## `Summary`
+
 ```{r, eval = F}
 # produce a summary of our data
 summary(penguins)
@@ -439,7 +434,9 @@ We've now got a clean & tidy dataset, with a handful of first insights into the 
 
 That was a lot of work! But remember you don't have to remember all of these functions, remember this chapter when you do more data wrangling in the future. Also bookmark the [RStudio Cheatsheets Page](https://www.rstudio.com/resources/cheatsheets/). 
 
-Finally, make sure you have saved the changes made to your script 💾
+Finally, make sure you have saved the changes made to your script 💾 & make sure your workspace is set **not** to save objects from the environment *between* sessions @global-options. 
+
+We want our script to be our record of work and progress, and not to be confused by a cluttered R Environment. 
 
 
 ## Activity: Reorganise this script
@@ -475,3 +472,8 @@ downloadthis::download_link(
 ```
 
 `r unhide()`
+
+
+```{r}
+save(penguins, file = here("book", "files", "chapter4.RData"))
+```

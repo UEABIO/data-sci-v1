@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 5 Data wrangling part two | 5023Y</title>
 <meta name="author" content="Philip T. Leftwich">
-<meta name="description" content='/* update total correct if #webex-total_correct exists */ update_total_correct = function() {  console.log("webex: update total_correct");  if (t = document.getElementById("webex-total_correct"))...'>
+<meta name="description" content="5.1 Load your workspace You should have a workspace ready to work with the Palmer penguins data. Load this workspace now. Think about some basic checks before you start your work today.  5.1.1...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 5 Data wrangling part two | 5023Y">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://ueabio.github.io/data-sci/data-wrangling-part-two.html">
 <meta property="og:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
-<meta property="og:description" content='/* update total correct if #webex-total_correct exists */ update_total_correct = function() {  console.log("webex: update total_correct");  if (t = document.getElementById("webex-total_correct"))...'>
+<meta property="og:description" content="5.1 Load your workspace You should have a workspace ready to work with the Palmer penguins data. Load this workspace now. Think about some basic checks before you start your work today.  5.1.1...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 5 Data wrangling part two | 5023Y">
-<meta name="twitter:description" content='/* update total correct if #webex-total_correct exists */ update_total_correct = function() {  console.log("webex: update total_correct");  if (t = document.getElementById("webex-total_correct"))...'>
+<meta name="twitter:description" content="5.1 Load your workspace You should have a workspace ready to work with the Palmer penguins data. Load this workspace now. Think about some basic checks before you start your work today.  5.1.1...">
 <meta name="twitter:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.13/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -64,6 +64,8 @@
 <li><a class="" href="functions-1.html"><span class="header-section-number">9</span> Functions</a></li>
 <li><a class="" href="data-insights-part-one.html"><span class="header-section-number">10</span> Data Insights part one</a></li>
 <li><a class="" href="data-insights-part-two.html"><span class="header-section-number">11</span> Data insights part two</a></li>
+<li class="book-part">Advanced topics</li>
+<li><a class="" href="mixed-models.html"><span class="header-section-number">12</span> Mixed models</a></li>
 <li class="book-part">Appendices</li>
 <li><a class="" href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></li>
 <li><a class="" href="updating-r-rstudio-and-packages.html"><span class="header-section-number">B</span> Updating R, RStudio, and packages</a></li>
@@ -74,7 +76,7 @@
 </ul>
 
         <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/UEABIO/data-sci">View book source <i class="fab fa-github"></i></a></p>
+          <p><a id="book-repo" href="https://github.com/UEABIO/data-sci-v1">View book source <i class="fab fa-github"></i></a></p>
         </div>
       </nav>
 </div>
@@ -82,7 +84,525 @@
 <h1>
 <span class="header-section-number">5</span> Data wrangling part two<a class="anchor" aria-label="anchor" href="#data-wrangling-part-two"><i class="fas fa-link"></i></a>
 </h1>
+<div id="load-your-workspace-1" class="section level2" number="5.1">
+<h2>
+<span class="header-section-number">5.1</span> Load your workspace<a class="anchor" aria-label="anchor" href="#load-your-workspace-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>You should have a workspace ready to work with the Palmer penguins data. Load this workspace now.</p>
+<p>Think about some basic checks before you start your work today.</p>
+<div id="checklist-1" class="section level3" number="5.1.1">
+<h3>
+<span class="header-section-number">5.1.1</span> Checklist<a class="anchor" aria-label="anchor" href="#checklist-1"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li><p>Are there objects already in your Enviroment pane? <a href="basic-programming.html#global-options">There shouldn't be</a>, if there are use <code><a href="https://rdrr.io/r/base/rm.html">rm(list=ls())</a></code></p></li>
+<li><p>Re-run your script from <a href="data-wrangling-part-one.html#data-wrangling-part-one">last time</a> from line 1 to the last line</p></li>
+<li><p>Check for any warning or error messages</p></li>
+<li><p>Add the code from today's session as we go</p></li>
+</ul>
+</div>
+</div>
+<div id="more-summary-tools" class="section level2" number="5.2">
+<h2>
+<span class="header-section-number">5.2</span> More summary tools<a class="anchor" aria-label="anchor" href="#more-summary-tools"><i class="fas fa-link"></i></a>
+</h2>
+<p>Very often we want to make calculations aobut groups of observations, such as the mean or median. We are often interested in comparing responses among groups. For example, we previously found the number of distinct penguins in our entire dataset</p>
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/n_distinct.html">n_distinct</a></span><span class="op">(</span><span class="va">individual_id</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>Now consider when the groups are subsets of observations, as when we find out the number of penguins in each species and sex.</p>
+<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span>, <span class="va">sex</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/n_distinct.html">n_distinct</a></span><span class="op">(</span><span class="va">individual_id</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>As we progress, not only are we learning how to use our data wrangling tools. We are also gaining insights into our data.</p>
+<p><strong>Question</strong> How many female Adelie penguins are in our dataset?</p>
+<p><input class="webex-solveme nospaces" size="2" data-answer='["65"]'></p>
+<p><br></p>
+<p><strong>Question</strong> How many Gentoo penguins <strong>did not</strong> have their sex recorded?</p>
+<p><input class="webex-solveme nospaces" size="1" data-answer='["5"]'></p>
+<p><br></p>
+<p>We are using summarise and group_by a lot! They are very powerful functions:</p>
+<ul>
+<li><p><code>group_by</code> adds <em>grouping</em> information into a data object, so that subsequent calculations happen on a <em>group-specific</em> basis.</p></li>
+<li><p><code>summarise</code> is a data aggregation function thart calculates summaries of one or more variables, and it will do this separately for any groups defined by <code>group_by</code></p></li>
+</ul>
+<div id="using-summarise" class="section level3" number="5.2.1">
+<h3>
+<span class="header-section-number">5.2.1</span> Using summarise()<a class="anchor" aria-label="anchor" href="#using-summarise"><i class="fas fa-link"></i></a>
+</h3>
+<p><code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> has a whole list of useful functions for producing <em>descriptive</em> statistics</p>
+<div class="inline-table"><table class="table" style="font-size: 16px; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+<span id="tab:unnamed-chunk-4">Table 5.1: </span>Useful summarise functions
+</caption>
+<thead><tr>
+<th style="text-align:left;">
+verb
+</th>
+<th style="text-align:left;">
+action
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+mean(), median()
+</td>
+<td style="text-align:left;">
+Center data
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+sd(), IQR()
+</td>
+<td style="text-align:left;">
+Spread of data
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+min(), max(), quantile()
+</td>
+<td style="text-align:left;">
+Range of data
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+first(), last(), nth()
+</td>
+<td style="text-align:left;">
+Position
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+n(), n_distinct()
+</td>
+<td style="text-align:left;">
+Count
+</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><p><code>min</code> and <code>max</code> to calculate minimum and maximum values of a numeric vector</p></li>
+<li><p><code>mean</code> and <code>median</code> to calculate averages of a numeric vector</p></li>
+<li><p><code>sd</code> and <code>var</code> calculate standard deviation and variance of a numeric vector</p></li>
+</ul>
+<p>Using <code>summarise</code> we can calculate the mean flipper and bill lengths of our penguins:</p>
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>
+    mean_flipper_length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">flipper_length_mm</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>,
+     mean_bill_length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="info">
+<p>
+Note - we provide informative names for ourselves on the left side of the <code><a href="https://rdrr.io/r/base/assignOps.html">=</a></code>
+</p>
+<p>
+When performing calculations in summarise it is important to set <code>na.rm = TRUE</code>, this removes missing values from the calculation
+</p>
+</div>
+<div class="try">
+<p>
+What happens when you try to produce calculations that include <code>NA</code>? e.g <code>NA</code> + 4 or <code>NA</code> * 5
+</p>
+</div>
+<p>We can use several functions in <code>summarise</code>. Which means we can string several calculations together in a single step, and generate more insights into our data.</p>
+<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>n<span class="op">=</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>, <span class="co"># number of rows of data</span>
+            num_penguins <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/n_distinct.html">n_distinct</a></span><span class="op">(</span><span class="va">individual_id</span><span class="op">)</span>, <span class="co"># number of unique individuals</span>
+            mean_flipper_length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">flipper_length_mm</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>, <span class="co"># mean flipper length</span>
+            prop_female <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">sex</span> <span class="op">==</span> <span class="st">"FEMALE"</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="co"># proportion of observations that are coded as female</span></code></pre></div>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<ul>
+<li>There are 190 unique IDs and 344 total observations so it would appear that there are roughly twice as many observations as unique individuals. The sex ratio is roughly even (48% female) and the average flipper length is 201 mm.</li>
+</ul>
+</div>
+</div>
+<div id="summarize-across-columns" class="section level3" number="5.2.2">
+<h3>
+<span class="header-section-number">5.2.2</span> Summarize <code>across</code> columns<a class="anchor" aria-label="anchor" href="#summarize-across-columns"><i class="fas fa-link"></i></a>
+</h3>
+<p><code>across</code> has two arguments, <code>.cols</code> and <code>.fns</code>.</p>
+<ul>
+<li><p>The <code>.cols</code> argument lets you select the columns you wish to apply functions to</p></li>
+<li><p>The <code>.fns</code> argument applies the required function to all of the selected columns.</p></li>
+</ul>
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Across ----</span>
+<span class="co"># The mean of ALL numeric columns in the data, where(is.numeric == TRUE) hunts for numeric columns</span>
 
+<span class="va">penguins</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span>.cols <span class="op">=</span> <span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>, 
+                   .fns <span class="op">=</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">.</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>The above example calculates the means of any &amp; all numeric variables in the dataset.</p>
+<p>The below example is a slightly complicated way of running the n_distinct for summarise. The <code>.cols()</code> looks for any column that contains the word "penguin" and then runs the <code><a href="https://dplyr.tidyverse.org/reference/n_distinct.html">n_distinct()</a></code>command on these</p>
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># number of distinct penguins, as only one column contains the word penguin</span>
+<span class="co"># the argument contains looks for columns that match a character expression</span>
+
+<span class="va">penguins</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span>.cols <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span><span class="op">(</span><span class="st">"individual"</span><span class="op">)</span>, 
+                   .fns <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/n_distinct.html">n_distinct</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="group_by-revisited" class="section level3" number="5.2.3">
+<h3>
+<span class="header-section-number">5.2.3</span> group_by revisited<a class="anchor" aria-label="anchor" href="#group_by-revisited"><i class="fas fa-link"></i></a>
+</h3>
+<p>The <code>group_by</code> function provides the ability to separate our summary functions according to any subgroups we wish to make. The real magic happens when we pair this with <code>summarise</code> and <code>mutate</code>.</p>
+<p>In this example, by grouping on the individual penguin ids, then summarising by n - we can see how many times each penguin was monitored in the course of this study.</p>
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">penguin_stats</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">penguin_id</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>num<span class="op">=</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="info">
+<p>
+Remember the actions of <code>group_by</code> are "invisible". Subsequent functions are applied in a "grouped by" manner - but the dataframe itself looks unchanged.
+</p>
+</div>
+</div>
+<div id="more-than-one-grouping-variable" class="section level3" number="5.2.4">
+<h3>
+<span class="header-section-number">5.2.4</span> More than one grouping variable<a class="anchor" aria-label="anchor" href="#more-than-one-grouping-variable"><i class="fas fa-link"></i></a>
+</h3>
+<p>What if we need to calculate by more than one variable at a time?
+No problem we can submit several arguments:</p>
+<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">penguins_grouped</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">sex</span>, <span class="va">species</span><span class="op">)</span></code></pre></div>
+<p>We can then calculate the mean flipper length of penguins in each of the six combinations</p>
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">penguins_grouped</span> <span class="op">%&gt;%</span> 
+<span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_flipper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">flipper_length_mm</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>Now the first row of our summary table shows us the mean flipper length (in mm) for female Adelie penguins. There are eight rows in total, six unique combinations and two rows where the sex of the penguins was not recorded(<code>NA</code>)</p>
+</div>
+<div id="using-group_by-with-mutate" class="section level3" number="5.2.5">
+<h3>
+<span class="header-section-number">5.2.5</span> using group_by with mutate<a class="anchor" aria-label="anchor" href="#using-group_by-with-mutate"><i class="fas fa-link"></i></a>
+</h3>
+<p>So far we have only used <code>group_by</code> with the <code>summarise</code> function, but this doesn't always have to be the case.
+When <code>mutate</code> is used with <code>group_by</code>, the calculations occur by 'group'. Here's an example:</p>
+<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Using mutate and group_by ----</span>
+<span class="va">centered_penguins</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">sex</span>, <span class="va">species</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>flipper_centered <span class="op">=</span> <span class="va">flipper_length_mm</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">flipper_length_mm</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">centered_penguins</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">flipper_centered</span><span class="op">)</span>
+<span class="co"># Each row now returns a value for EACH penguin of how much greater/lesser than the group average (sex and species) its flipper is. </span></code></pre></div>
+<p>Here we are calculating a <strong>group centered mean</strong>, this new variable contains the <em>difference</em> between each observation and the mean of whichever group that observation is in.</p>
+</div>
+<div id="remove-group_by" class="section level3" number="5.2.6">
+<h3>
+<span class="header-section-number">5.2.6</span> remove group_by<a class="anchor" aria-label="anchor" href="#remove-group_by"><i class="fas fa-link"></i></a>
+</h3>
+<p>On occasion we may need to remove the grouping information from a dataset. This is often required when we string pipes together, when we need to work using a grouping structure, then revert back to the whole dataset again</p>
+<p>Look at our grouped dataframe, and we can see the information on groups is at the top of the data:</p>
+<pre><code># A tibble: 344 x 10
+# Groups:   sex, species [8]
+   species island bill_length_mm bill_depth_mm flipper_length_~ body_mass_g
+   &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;       &lt;dbl&gt;
+ 1 Adelie  Torge~           39.1          18.7              181        3750
+ 2 Adelie  Torge~           39.5          17.4              186        3800
+ 3 Adelie  Torge~           40.3          18                195        3250</code></pre>
+<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Run this command will remove the groups - but this is only saved if assigned BACK to an object</span>
+
+<span class="va">centered_penguins</span> <span class="op">&lt;-</span> <span class="va">centered_penguins</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span>
+
+<span class="va">centered_penguins</span></code></pre></div>
+<p>Look at this output - you can see the information on groups has now been removed from the data.</p>
+</div>
+</div>
+<div id="working-with-character-strings" class="section level2" number="5.3">
+<h2>
+<span class="header-section-number">5.3</span> Working with character strings<a class="anchor" aria-label="anchor" href="#working-with-character-strings"><i class="fas fa-link"></i></a>
+</h2>
+<p>Datasets often contain words, and we call these words "(character) strings".</p>
+<p>Often these aren't quite how we want them to be, but we can manipulate these as much as we like. Functions in the package <code>stringr</code>, are fantastic. And the number of different types of manipulations are endless!</p>
+<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Stringr ----</span>
+
+<span class="fu">str_replace_all</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"e"</span><span class="op">=</span> <span class="st">"E"</span><span class="op">)</span><span class="op">)</span>
+<span class="co"># replace all character "e" with "E"</span></code></pre></div>
+<div id="more-stringr" class="section level3" number="5.3.1">
+<h3>
+<span class="header-section-number">5.3.1</span> More stringr<a class="anchor" aria-label="anchor" href="#more-stringr"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>species<span class="op">=</span><span class="fu">str_to_upper</span><span class="op">(</span><span class="va">species</span><span class="op">)</span><span class="op">)</span>
+<span class="co"># Capitalise all letters</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>species<span class="op">=</span><span class="fu">str_remove_all</span><span class="op">(</span><span class="va">species</span>, <span class="st">"e"</span><span class="op">)</span><span class="op">)</span>
+<span class="co"># remove every character "e" from selected variables</span></code></pre></div>
+<p>We can also trim leading or trailing empty spaces with <code>str_trim</code>. These are often problematic and difficult to spot e.g.</p>
+<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>label<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"penguin"</span>, <span class="st">" penguin"</span>, <span class="st">"penguin "</span><span class="op">)</span><span class="op">)</span> 
+<span class="va">df2</span> <span class="co"># make a test dataframe</span></code></pre></div>
+<p>We can easily imagine a scenario where data is manually input, and trailing or leading spaces are left in. These are difficult to spot by eye - but problematic because as far as R is concerned these are different values. We can use the function <code>distinct</code> to return the names of all the different levels it can find in this dataframe.</p>
+<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df2</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>If we pipe the data throught the <code>str_trim</code> function to remove any gaps, then pipe this on to <code>distinct</code> again - by removing the whitespace, R now recognises just one level to this data.</p>
+<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df2</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>label<span class="op">=</span><span class="fu">str_trim</span><span class="op">(</span><span class="va">label</span>, side<span class="op">=</span><span class="st">"both"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>A quick example of how to extract partial strings according to a pattern is to use <code>str_detect</code>. Combined with <code>filter</code> it is possible to subset a dataframe by searching for all the strings that match provided information, such as all the penguin IDs that start with "N1"</p>
+<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu">str_detect</span><span class="op">(</span><span class="va">individual_id</span>, <span class="st">"N1"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="separate" class="section level3" number="5.3.2">
+<h3>
+<span class="header-section-number">5.3.2</span> separate<a class="anchor" aria-label="anchor" href="#separate"><i class="fas fa-link"></i></a>
+</h3>
+<p>Sometimes a string might contain two pieces of information in one. This does not confirm to our tidy data principles. But we can easily separate the information with <code>separate()</code> from the <code>tidyr</code> package.</p>
+<p>First we produce some made-up data</p>
+<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>label<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a-1"</span>, <span class="st">"a-2"</span>, <span class="st">"a-3"</span><span class="op">)</span><span class="op">)</span> 
+<span class="co">#make a one column tibble</span>
+<span class="va">df</span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+label
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+a-1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+a-2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+a-3
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df</span> <span class="op">%&gt;%</span> 
+  <span class="fu">separate</span><span class="op">(</span><span class="va">label</span>, <span class="co"># name of variable</span>
+           <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"treatment"</span>, <span class="st">"replicate"</span><span class="op">)</span>, <span class="co"># new column names</span>
+           sep<span class="op">=</span><span class="st">"-"</span><span class="op">)</span> <span class="co"># the character to mark where the separation occurs</span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+treatment
+</th>
+<th style="text-align:left;">
+replicate
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:left;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:left;">
+3
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p>We started with one variable called <code>label</code> and then split it into two variables, <code>treatment</code> and <code>replicate</code>, with the split made where <code><a href="https://rdrr.io/r/base/Arithmetic.html">-</a></code> occurs.
+The opposite of this function is <code>unite()</code></p>
+</div>
+</div>
+<div id="changing-data-formats" class="section level2" number="5.4">
+<h2>
+<span class="header-section-number">5.4</span> Changing data formats<a class="anchor" aria-label="anchor" href="#changing-data-formats"><i class="fas fa-link"></i></a>
+</h2>
+<p>In the previous <a href="@glimpse-check-data-format">worksheet</a>, we used <code><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse()</a></code> to check the format of each of our variables. One of our variables <code>date_egg</code> isn't in a very helpful format. It has been read as a character string, this means there is no intrinsic order or values attached to the dates. Most likely this has happened because of the "/" symbols. When we have clearly non-numerical symbols in our variables, R will default to treating these as character variables.</p>
+<p>Luckily we can fix this using <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> and <code>str_remove_all()</code></p>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+Remove the all the "/" elements from the <code>date_egg</code> variable
+</div>
+</div>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<p>Check your code</p>
+<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># DATES ----</span>
+<span class="va">penguins</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>date_egg <span class="op">=</span> <span class="fu">str_remove_all</span><span class="op">(</span><span class="va">date_egg</span>, <span class="st">"/"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+</div>
+<p><strong>Question</strong> Does this now mean the <code>date_egg</code> variable is being treated as numeric? <code>r</code></p>
+<p><select class="webex-select"><option value="blank"></option>
+<option value="">yes</option>
+<option value="answer">no</option></select></p>
+<div class="webex-solution">
+<button>
+Explain This Answer
+</button>
+<p>Data formats are set only when reading the data in for the first time, if we wish to change them, then we need to do so explicitly using mutate()</p>
+<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># add the as.numeric() function</span>
+<span class="va">penguins</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>date_egg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu">str_remove_all</span><span class="op">(</span><span class="va">date_egg</span>, <span class="st">"/"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="info">
+<p>
+There are as.numeric(), as.character(), as.logical() functions to convert data formats, these will only work if there are no "illegal" characters. So you may need to remove these first, as in the examples above.
+</p>
+</div>
+</div>
+<p><br></p>
+</div>
+<div id="working-with-dates" class="section level2" number="5.5">
+<h2>
+<span class="header-section-number">5.5</span> Working with dates<a class="anchor" aria-label="anchor" href="#working-with-dates"><i class="fas fa-link"></i></a>
+</h2>
+<p>We now know that we can change data formats easily, but treating date as strictly numeric is problematic, it won't account for number of days in months or number of months in a year.</p>
+<p>Additionally there's a lot of different ways to write the same date:</p>
+<ul>
+<li><p>13-10-2019</p></li>
+<li><p>10-13-2019</p></li>
+<li><p>13-10-19</p></li>
+<li><p>13th Oct 2019</p></li>
+<li><p>2019-10-13</p></li>
+</ul>
+<p>This variability makes it difficult to tell our software how to read the information, luckily we can use the functions in the <code>lubridate</code> package.</p>
+<p>Depending on how we interpret the date ordering in a file, we can use <code><a href="https://lubridate.tidyverse.org/reference/ymd.html">ymd()</a></code>, <code><a href="https://lubridate.tidyverse.org/reference/ymd.html">ydm()</a></code>, <code><a href="https://lubridate.tidyverse.org/reference/ymd.html">mdy()</a></code>, <code><a href="https://lubridate.tidyverse.org/reference/ymd.html">dmy()</a></code></p>
+<ul>
+<li>
+<strong>Question</strong> What is the appropriate function to use on the <code>date_egg</code> variable?</li>
+</ul>
+<p><input class="webex-solveme nospaces" size="5" data-answer='["dmy()"]'></p>
+<div class="warning">
+<p>
+If you get a warning that some dates could not be parsed, then you might find the date has been inconsistently entered into the dataset.
+</p>
+<p>
+Pay attention to warning and error messages
+</p>
+</div>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">penguins</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>date_egg_proper <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">dmy</a></span><span class="op">(</span><span class="va">date_egg</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>Here we use the <code>mutate</code> function from <code>dplyr</code> to create a <em>new variable</em> called <code>date_egg_proper</code> based on the output of converting the characters in <code>date_egg</code> to date format. The original variable is left intact, if we had specified the "new" variable was also called <code>date_egg</code> then it would have overwritten the original variable.</p>
+</div>
+<p>Once we have established our date data, we are able to perform calculations. Such as the date range across which our data was collected.</p>
+<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>min_date<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">date_egg_proper</span><span class="op">)</span>,
+            max_date<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">date_egg_proper</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div id="calculations-with-dates" class="section level3" number="5.5.1">
+<h3>
+<span class="header-section-number">5.5.1</span> Calculations with dates<a class="anchor" aria-label="anchor" href="#calculations-with-dates"><i class="fas fa-link"></i></a>
+</h3>
+<p>How many times was each penguin measured, and across what total time period?</p>
+<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">individual_id</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>first_observation<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">date_egg_proper</span><span class="op">)</span>, 
+            last_observation<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">date_egg_proper</span><span class="op">)</span>, 
+            study_duration <span class="op">=</span> <span class="va">last_observation</span><span class="op">-</span><span class="va">first_observation</span>, 
+            n<span class="op">=</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>Cool we can also convert intervals such as days into weeks, months or years with <code><a href="https://lubridate.tidyverse.org/reference/duration.html">dweeks(1)</a></code>, <code><a href="https://lubridate.tidyverse.org/reference/duration.html">dmonths(1)</a></code>, <code><a href="https://lubridate.tidyverse.org/reference/duration.html">dyears(1)</a></code>.</p>
+<p>As with all cool functions, you should check out the RStudio <a href="https://www.rstudio.com/resources/cheatsheets/">cheat sheet</a> for more information. Date type data is common in datasets, and learning to work with it is a useful skill.</p>
+<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">individual_id</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>first_observation<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">date_egg_proper</span><span class="op">)</span>, 
+            last_observation<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">date_egg_proper</span><span class="op">)</span>, 
+            study_duration_years <span class="op">=</span> <span class="op">(</span><span class="va">last_observation</span><span class="op">-</span><span class="va">first_observation</span><span class="op">)</span><span class="op">/</span><span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/duration.html">dyears</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, 
+            n<span class="op">=</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">study_duration_years</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+</div>
+</div>
+<div id="factors" class="section level2" number="5.6">
+<h2>
+<span class="header-section-number">5.6</span> Factors<a class="anchor" aria-label="anchor" href="#factors"><i class="fas fa-link"></i></a>
+</h2>
+<p>In R, factors are a class of data that allow for ordered categories with a fixed set of acceptable values.</p>
+<p>Typically, you would convert a column from character or numeric class to a factor if you want to set an intrinsic order to the values (“levels”) so they can be displayed non-alphabetically in plots and tables.</p>
+<p>Another common use of factors is to standardise the legends of plots so they do not fluctuate if certain values are temporarily absent from the data.</p>
+<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">penguins</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>flipper_range <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span><span class="va">flipper_length_mm</span> <span class="op">&lt;=</span> <span class="fl">190</span> <span class="op">~</span> <span class="st">"small"</span>,
+                                   <span class="va">flipper_length_mm</span> <span class="op">&gt;</span><span class="fl">190</span> <span class="op">&amp;</span> <span class="va">flipper_length_mm</span> <span class="op">&lt;</span> <span class="fl">213</span> <span class="op">~</span> <span class="st">"medium"</span>,
+                                   <span class="va">flipper_length_mm</span> <span class="op">&gt;=</span> <span class="fl">213</span> <span class="op">~</span> <span class="st">"large"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>If we make a barplot, the order of the values on the x axis will typically be in alphabetical order for any character data</p>
+<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">flipper_range</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="05-data-wrangling-part-2_files/figure-html/unnamed-chunk-37-1.png" width="100%" style="display: block; margin: auto;"></div>
+<p>To convert a character or numeric column to class factor, you can use any function from the <code>forcats</code> package (many are detailed below). They will convert to class factor and then also perform or allow certain ordering of the levels - for example using <code>fct_relevel()</code> lets you manually specify the level order. The function <code>as_factor()</code> simply converts the class without any further capabilities.</p>
+<p>The <code>base R</code> function <code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code> converts a column to factor and allows you to manually specify the order of the levels, as a character vector to its levels = argument.</p>
+<p>Below we use <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> and <code>fct_relevel()</code> to convert the column flipper_range from class character to class factor.</p>
+<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">penguins</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>flipper_range <span class="op">=</span> <span class="fu">fct_relevel</span><span class="op">(</span><span class="va">flipper_range</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">$</span><span class="va">flipper_range</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] "large"  "medium" "small"</code></pre>
+<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Correct the code in your script with this version</span>
+<span class="va">penguins</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>flipper_range <span class="op">=</span> <span class="fu">fct_relevel</span><span class="op">(</span><span class="va">flipper_range</span>, <span class="st">"small"</span>, <span class="st">"medium"</span>, <span class="st">"large"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">flipper_range</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="05-data-wrangling-part-2_files/figure-html/unnamed-chunk-41-1.png" width="100%" style="display: block; margin: auto;"></div>
+</div>
+<div id="insights" class="section level2" number="5.7">
+<h2>
+<span class="header-section-number">5.7</span> Insights<a class="anchor" aria-label="anchor" href="#insights"><i class="fas fa-link"></i></a>
+</h2>
+
+</div>
 </div>
 <script>
 
@@ -268,12 +788,39 @@ $( document ).ready(function() {
 <div class="next"><a href="ggplot.html"><span class="header-section-number">6</span> ggplot</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#data-wrangling-part-two"><span class="header-section-number">5</span> Data wrangling part two</a></li></ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#data-wrangling-part-two"><span class="header-section-number">5</span> Data wrangling part two</a></li>
+<li>
+<a class="nav-link" href="#load-your-workspace-1"><span class="header-section-number">5.1</span> Load your workspace</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#checklist-1"><span class="header-section-number">5.1.1</span> Checklist</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#more-summary-tools"><span class="header-section-number">5.2</span> More summary tools</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#using-summarise"><span class="header-section-number">5.2.1</span> Using summarise()</a></li>
+<li><a class="nav-link" href="#summarize-across-columns"><span class="header-section-number">5.2.2</span> Summarize across columns</a></li>
+<li><a class="nav-link" href="#group_by-revisited"><span class="header-section-number">5.2.3</span> group_by revisited</a></li>
+<li><a class="nav-link" href="#more-than-one-grouping-variable"><span class="header-section-number">5.2.4</span> More than one grouping variable</a></li>
+<li><a class="nav-link" href="#using-group_by-with-mutate"><span class="header-section-number">5.2.5</span> using group_by with mutate</a></li>
+<li><a class="nav-link" href="#remove-group_by"><span class="header-section-number">5.2.6</span> remove group_by</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#working-with-character-strings"><span class="header-section-number">5.3</span> Working with character strings</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#more-stringr"><span class="header-section-number">5.3.1</span> More stringr</a></li>
+<li><a class="nav-link" href="#separate"><span class="header-section-number">5.3.2</span> separate</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#changing-data-formats"><span class="header-section-number">5.4</span> Changing data formats</a></li>
+<li>
+<a class="nav-link" href="#working-with-dates"><span class="header-section-number">5.5</span> Working with dates</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#calculations-with-dates"><span class="header-section-number">5.5.1</span> Calculations with dates</a></li></ul>
+</li>
+<li><a class="nav-link" href="#factors"><span class="header-section-number">5.6</span> Factors</a></li>
+<li><a class="nav-link" href="#insights"><span class="header-section-number">5.7</span> Insights</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/UEABIO/data-sci/blob/main/book/05-data-wrangling-part-2.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/UEABIO/data-sci/edit/main/book/05-data-wrangling-part-2.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/UEABIO/data-sci-v1/blob/main/book/05-data-wrangling-part-2.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/UEABIO/data-sci-v1/edit/main/book/05-data-wrangling-part-2.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
@@ -285,7 +832,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-08-03.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-08-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

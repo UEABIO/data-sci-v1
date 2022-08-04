@@ -7,6 +7,8 @@
 
 
 
+
+
 It may surprise you to learn that scientists actually spend far more time cleaning and preparing their data than they spend actually analysing it. This means completing tasks such as cleaning up bad values, changing the structure of dataframes, reducing the data down to a subset of observations, and producing data summaries. 
 
 Many people seem to operate under the assumption that the only option for data cleaning is the painstaking and time-consuming cutting and pasting of data within a spreadsheet program like Excel. We have witnessed students and colleagues waste days, weeks, and even months manually transforming their data in Excel, cutting, copying, and pasting data. Fixing up your data by hand is not only a terrible use of your time, but it is error-prone and not reproducible. Additionally, in this age where we can easily collect massive datasets online, you will not be able to organise, clean, and prepare these by hand.
@@ -81,7 +83,7 @@ When we run `colnames()` we get the identities of each column in our dataframe
 * **Delta 13C**: the ratio of stable Carbon isotopes 13C:12C from blood sample
 
 
-### Clean names
+### Clean column names
 
 Often we might want to change the names of our variables. They might be non-intuitive, or too long. Our data has a couple of issues:
 
@@ -106,7 +108,16 @@ penguins <- janitor::clean_names(penguins) # clean the column names
 colnames(penguins) # quickly check the new variable names
 ```
 
-### Rename
+```
+##  [1] "study_name"        "sample_number"     "species"          
+##  [4] "region"            "island"            "stage"            
+##  [7] "individual_id"     "clutch_completion" "date_egg"         
+## [10] "culmen_length_mm"  "culmen_depth_mm"   "flipper_length_mm"
+## [13] "body_mass_g"       "sex"               "delta_15_n_o_oo"  
+## [16] "delta_13_c_o_oo"   "comments"
+```
+
+### Rename columns (manually)
 
 The `clean_names` function quickly converts all variable names into snake case. The N and C blood isotope ratio names are still quite long though, so let's clean those with `dplyr::rename()` where "new_name" = "old_name".
 
@@ -119,7 +130,7 @@ penguins <- rename(penguins,
          "delta_13c"="delta_13_c_o_oo")
 ```
 
-### `glimpse`check data format 
+### glimpse: check data format 
 
 When we run `glimpse()` we get several lines of output. The number of observations "rows", the number of variables "columns". Check this against the csv file you have - they should be the same. In the next lines we see variable names and the type of data. 
 
@@ -135,14 +146,25 @@ It also provides information on the *type* of data in each column
 
 * `<dbl>` - means numerical data
 
-Which variable might not be in an appropriate data format?
-<input class='webex-solveme nospaces' size='8' data-answer='["date_egg"]'/>
-More on this later.
+### Rename text values
+
+Sometimes we may want to rename the values in our variables in order to make a shorthand that is easier to follow. This is changing the **values** in our columns, not the column names. 
+
+
+```r
+# use mutate and case_when for an if-else statement that changes the names of the values in a variable
+penguins <- penguins %>% 
+  mutate(species = case_when(species == "Adelie Penguin (Pygoscelis adeliae)" ~ "Adelie",
+                             species == "Gentoo penguin (Pygoscelis papua)" ~ "Gentoo",
+                             species == "Chinstrap penguin (Pygoscelis antarctica)" ~ "Chinstrap"))
+```
 
 ## dplyr verbs
 
+In this section we will be introduced to some of the most commonly used data wrangling functions, these come from the `dplyr` package (part of the `tidyverse`). These are functions you are likely to become *very* familiar with. 
+
 <table class="table" style="font-size: 16px; width: auto !important; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">(\#tab:unnamed-chunk-7)dplyr verbs</caption>
+<caption style="font-size: initial !important;">(\#tab:unnamed-chunk-9)dplyr verbs</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> verb </th>
@@ -227,7 +249,7 @@ filter(.data = new_penguins, species == "Adelie Penguin (Pygoscelis adeliae)")
 Filter is quite a complicate function, and uses several differe operators to assess the way in which it should apply a filter.
 
 <table class="table" style="font-size: 16px; width: auto !important; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">(\#tab:unnamed-chunk-12)Boolean expressions</caption>
+<caption style="font-size: initial !important;">(\#tab:unnamed-chunk-14)Boolean expressions</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> Operator </th>
@@ -373,36 +395,8 @@ Arrange the data from HIGHEST to LOWEST flipper lengths.
 </div>
 
 
-## Working with dates
 
-We can also see in `penguins` there is a `date_egg` variable. If you check it (using `glimpse` or any of the new functions you have learned), you should see that it all looks like its been inputted correctly, but R is treating it as words, rather than assigning it a date value. 
-
-Is `date_egg` in the correct format?
-<select class='webex-select'><option value='blank'></option><option value=''>yes</option><option value='answer'>no</option></select>
-
-We can fix that with the `lubridate` package. If we use the function `dmy` then we tell R this is date data in date/month/year format. 
-
-
-```r
-penguins <- penguins %>% 
-  mutate(date_egg_proper = lubridate::dmy(date_egg))
-```
-
-
-Here we use the `mutate` function from `dplyr` to create a new variable called `date_egg_proper` based on the output of converting the characters in `date_egg` to date format. The original variable is left intact, if we had specified the "new" variable was also called `date_egg` then it would have overwritten the original variable. 
-
-### Rename some values
-
-Sometimes we may want to rename the values in our variables in order to make a shorthand that is easier to follow.
-
-
-```r
-# use mutate and case_when for an if-else statement that changes the names of the values in a variable
-penguins <- penguins %>% 
-  mutate(species = case_when(species == "Adelie Penguin (Pygoscelis adeliae)" ~ "Adelie",
-                             species == "Gentoo penguin (Pygoscelis papua)" ~ "Gentoo",
-                             species == "Chinstrap penguin (Pygoscelis antarctica)" ~ "Chinstrap"))
-```
+## A few more handy functions
 
 ### Check for duplication
 
@@ -480,6 +474,8 @@ penguins %>%
 
 But this doesn't tell us where these are, fortunately the function `summary` does this easily
 
+## `Summary`
+
 
 ```r
 # produce a summary of our data
@@ -498,7 +494,9 @@ We've now got a clean & tidy dataset, with a handful of first insights into the 
 
 That was a lot of work! But remember you don't have to remember all of these functions, remember this chapter when you do more data wrangling in the future. Also bookmark the [RStudio Cheatsheets Page](https://www.rstudio.com/resources/cheatsheets/). 
 
-Finally, make sure you have saved the changes made to your script 💾
+Finally, make sure you have saved the changes made to your script 💾 & make sure your workspace is set **not** to save objects from the environment *between* sessions @global-options. 
+
+We want our script to be our record of work and progress, and not to be confused by a cluttered R Environment. 
 
 
 ## Activity: Reorganise this script
@@ -530,3 +528,9 @@ If you want to check your answers (or are just completely stuck) then click here
 
 </div>
 
+
+
+
+```r
+save(penguins, file = here("book", "files", "chapter4.RData"))
+```
