@@ -327,16 +327,22 @@ knitr::include_graphics("images/broom.png")
 
 By default, when you open R Studio it will show you what you were last working on, including your code and any objects you have created. This might sound helpful, but actually it tends to cause more problems than it's worth because it means that you risk accidentally using an old version of an object. We recommend changing the settings so that each time you start R Studio, it opens a fresh copy. You can do this by clicking `Tools` -  `Global Options` and then deselecting boxes so that it looks like the below.
 
-```{r img-options, echo=FALSE, fig.cap="Global options"}
+```{r img-options, echo=FALSE, fig.cap="Set these options to increase reproducibility"}
 
-knitr::include_graphics("images/global_options.jpg")
+knitr::include_graphics("images/session.png")
+
+```
+```{block, type = "warning"}
+
+Restore .RData into workspace at startup `r mcq(c("checked", answer = "unchecked"))`
+
+Save workspace to .RData on exit `r mcq(c("Always", answer = "Never", "Ask))`
 
 ```
 
-
 ## R sessions
 
-When you open up R and start writing code, loading packages, and creating objects, you're doing so in a new **session**. In addition to clearing the workspace, it can sometimes be useful to start a new session. This will happen automatically each time you start R on your computer, although sessions can persist on the server. If you find that your code isn't working and you can't figure out why, it might be worth starting a new session. This will clear the environment and detach all loaded packages - think of it like restarting your phone.
+When you open up R and start writing code, loading packages, and creating objects, you're doing so in a new **session**. In addition to clearing the workspace, it can sometimes be useful to start a new session. This will happen automatically each time you start R on your computer, although sessions can persist on the cloud. If you find that your code isn't working and you can't figure out why, it might be worth starting a new session. This will clear the environment and detach all loaded packages - think of it like restarting your phone.
 
 ## Activity 2
 

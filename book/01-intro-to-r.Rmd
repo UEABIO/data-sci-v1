@@ -827,3 +827,60 @@ You could now safely quit R, and when you log on next time to this project, your
 -   Close your RStudio Cloud Browser
 
 -   Complete this week's short quiz!
+
+## Activity 1
+
+### Head to Blackboard when complete and submit your answers to the quiz to get your first Data Science Learning Badge.
+
+When you get the correct answer, the answer box will turn green. Sometimes this doesn't work on Internet Explorer or Edge so be sure to use Chrome or Firefox.
+
+**Question 1.**  What is the output from 5\^4
+
+`r fitb(625)`
+
+**Question 2.**  Put the brackets in the correct place to make this equation correct `4+2*8 = 48`
+
+`r fitb((4+2)*8)`
+
+**Question 3.**  What answer will you get when you type `2+2 = 4` into the R console?
+
+`r mcq(c("TRUE", "FALSE", answer = "Error"))`
+
+`r hide("Solution")`
+
+```{r, eval = T, echo = F, results = 'asis'}
+cat("If we wanted R to make a judgement we must use == not = otherwise we will get an Error message")
+```
+
+`r unhide()`
+
+**Question 4.**  What symbol do I use if I want to **assign** a value or output of a function to an R object
+
+`r fitb("<-")`
+
+**Question 5.**  What is the value of `a` if I ran the following commands?
+
+```{r, eval = FALSE}
+
+a <-  12*2
+
+a <- 5
+```
+
+`r fitb(5)`
+
+**Question 6.**  Which of these variable naming conventions is **not** written correctly?
+
+`r mcq(c("snake_case", "camelCase", answer = "Screaming_Snake_Case", "kebab-case"))`
+
+**Question 7.**  What should I type into the R console if I want `help` with the `round()` function?
+
+`r fitb ("help(round)")`
+
+**Question 8.**  Which of these statements about function arguments **is not true**
+
+`r mcq(c("Arguments are the inputs we give to a function", answer = "Values for R arguments must always be defined by the user", "Naming arguments supersedes position in a function", "There is no limit to the number of arguments a function could have"))`
+
+**Question 9.**  Evaluate this statement "An R Package can contain code functions, data, or both."
+
+`r mcq(c(answer = "TRUE", "FALSE"))`

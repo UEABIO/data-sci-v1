@@ -15,7 +15,7 @@ Think about some basic checks before you start your work today.
 
 ### Checklist
 
-* Are there objects already in your Enviroment pane? [There shouldn't be](#global-options), if there are use `rm(list=ls())`
+* Are there objects already in your Environment pane? [There shouldn't be](#global-options), if there are use `rm(list=ls())`
 
 * Re-run your script from [last time](#data-wrangling-part-one) from line 1 to the last line
 
@@ -66,8 +66,9 @@ We are using summarise and group_by a lot! They are very powerful functions:
 
 `summarise()` has a whole list of useful functions for producing *descriptive* statistics
 
-<table class="table" style="font-size: 16px; width: auto !important; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">(\#tab:unnamed-chunk-4)Useful summarise functions</caption>
+<div class="kable-table">
+
+<table>
  <thead>
   <tr>
    <th style="text-align:left;"> verb </th>
@@ -98,6 +99,8 @@ We are using summarise and group_by a lot! They are very powerful functions:
 </tbody>
 </table>
 
+</div>
+
 * `min` and `max` to calculate minimum and maximum values of a numeric vector
 
 * `mean` and `median` to calculate averages of a numeric vector
@@ -111,7 +114,7 @@ Using `summarise` we can calculate the mean flipper and bill lengths of our peng
 penguins %>% 
   summarise(
     mean_flipper_length = mean(flipper_length_mm, na.rm=TRUE),
-     mean_bill_length = mean(bill_length_mm, na.rm=TRUE))
+     mean_culmen_length = mean(culmen_length_mm, na.rm=TRUE))
 ```
 
 <div class="info">
@@ -244,7 +247,7 @@ Look at our grouped dataframe, and we can see the information on groups is at th
 ```
 # A tibble: 344 x 10
 # Groups:   sex, species [8]
-   species island bill_length_mm bill_depth_mm flipper_length_~ body_mass_g
+   species island culmen_length_mm culmen_depth_mm flipper_length_~ body_mass_g
    <chr>   <chr>           <dbl>         <dbl>            <dbl>       <dbl>
  1 Adelie  Torge~           39.1          18.7              181        3750
  2 Adelie  Torge~           39.5          17.4              186        3800
@@ -545,9 +548,9 @@ penguins %>%
 
 ## Factors
 
-In R, factors are a class of data that allow for ordered categories with a fixed set of acceptable values. 
+In R, factors are a class of data that allow for **ordered categories** with a fixed set of acceptable values. 
 
-Typically, you would convert a column from character or numeric class to a factor if you want to set an intrinsic order to the values (“levels”) so they can be displayed non-alphabetically in plots and tables. 
+Typically, you would convert a column from character or numeric class to a factor if you want to set an intrinsic order to the values (“levels”) so they can be displayed non-alphabetically in plots and tables, or for use in linear model analyses (more on this later). 
 
 Another common use of factors is to standardise the legends of plots so they do not fluctuate if certain values are temporarily absent from the data.
 
@@ -572,9 +575,10 @@ penguins %>%
 
 <img src="05-data-wrangling-part-2_files/figure-html/unnamed-chunk-37-1.png" width="100%" style="display: block; margin: auto;" />
 
-To convert a character or numeric column to class factor, you can use any function from the `forcats` package (many are detailed below). They will convert to class factor and then also perform or allow certain ordering of the levels - for example using `forcats::fct_relevel()` lets you manually specify the level order. The function `as_factor()` simply converts the class without any further capabilities.
+To convert a character or numeric column to class factor, you can use any function from the `forcats` package. They will convert to class factor and then also perform or allow certain ordering of the levels - for example using `forcats::fct_relevel()` lets you manually specify the level order. 
+The function `as_factor()` simply converts the class without any further capabilities.
 
-The `base R` function `factor()` converts a column to factor and allows you to manually specify the order of the levels, as a character vector to its levels = argument.
+The `base R` function `factor()` converts a column to factor and allows you to manually specify the order of the levels, as a character vector to its `levels =` argument.
 
 Below we use `mutate()` and `fct_relevel()` to convert the column flipper_range from class character to class factor. 
 
@@ -600,6 +604,8 @@ penguins <- penguins %>%
   mutate(flipper_range = fct_relevel(flipper_range, "small", "medium", "large"))
 ```
 
+Now when we call a plot, we can see that the x axis categories match the intrinsic order we have specified with our factor levels. 
+
 
 ```r
 penguins %>% 
@@ -609,4 +615,67 @@ penguins %>%
 
 <img src="05-data-wrangling-part-2_files/figure-html/unnamed-chunk-41-1.png" width="100%" style="display: block; margin: auto;" />
 
-## Insights
+## Activity: Test yourself
+### Head to Blackboard when complete and submit your answers to the quiz.
+
+**Question 1.** In order to subset a data by **rows** I should use the function <select class='webex-select'><option value='blank'></option><option value=''>select()</option><option value='answer'>filter()</option><option value=''>group_by()</option></select>
+
+**Question 2.** In order to subset a data by **columns** I should use the function <select class='webex-select'><option value='blank'></option><option value='answer'>select()</option><option value=''>filter()</option><option value=''>group_by()</option></select>
+
+**Question 3.** In order to make a new column I should use the function <select class='webex-select'><option value='blank'></option><option value=''>group_by()</option><option value=''>select()</option><option value='answer'>mutate()</option><option value=''>arrange()</option></select>
+
+**Question 4.** Which operator should I use to send the output from line of code into the next line? <input class='webex-solveme nospaces' size='3' data-answer='["%>%"]'/>
+
+**Question 5.** What will be the outcome of the following line of code?
+
+
+```r
+penguins %>% 
+  filter(species == "Adelie")
+```
+
+<select class='webex-select'><option value='blank'></option><option value=''>The penguins dataframe object is reduced to include only Adelie penguins from now on</option><option value='answer'>A new filtered dataframe of only Adelie penguins will be printed into the console</option></select>
+
+
+<div class='webex-solution'><button>Explain this answer</button>
+
+
+Unless the output of a series of functions is "assigned" to an object using `<-` it will not be saved, the results will be immediately printed. This code would have to be modified to the below in order to create a new filtered object `penguins_filtered`
+
+
+```r
+penguins_filtered <- penguins %>% 
+  filter(species == "Adelie")
+```
+
+
+</div>
+
+
+<br>
+
+
+**Question 5.** What is the main point of a data "pipe"?
+
+<select class='webex-select'><option value='blank'></option><option value=''>The code runs faster</option><option value='answer'>The code is easier to read</option></select>
+
+
+**Question 6.** The naming convention outputted by the function `janitor::clean_names() is 
+<select class='webex-select'><option value='blank'></option><option value='answer'>snake_case</option><option value=''>camelCase</option><option value=''>SCREAMING_SNAKE_CASE</option><option value=''>kebab-case</option></select>
+
+
+**Question 7.** Which package provides useful functions for manipulating character strings? 
+
+<select class='webex-select'><option value='blank'></option><option value='answer'>stringr</option><option value=''>ggplot2</option><option value=''>lubridate</option><option value=''>forcats</option></select>
+
+**Question 8.** Which package provides useful functions for manipulating dates? 
+
+<select class='webex-select'><option value='blank'></option><option value=''>stringr</option><option value=''>ggplot2</option><option value='answer'>lubridate</option><option value=''>forcats</option></select>
+
+
+**Question 9.** If we do not specify a character variable as a factor, then ordering will default to what?
+
+<select class='webex-select'><option value='blank'></option><option value=''>numerical</option><option value='answer'>alphabetical</option><option value=''>order in the dataframe</option></select>
+
+
+

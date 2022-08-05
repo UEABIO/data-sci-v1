@@ -72,17 +72,6 @@ library(dplyr)
 library(MASS)
 ```
 
-```
-## 
-## Attaching package: 'MASS'
-```
-
-```
-## The following object is masked from 'package:dplyr':
-## 
-##     select
-```
-
 In this case, R is telling you that the function `select()` in the `dplyr` package is being hidden (or 'masked') by another function with the same name. If you were to try and use `select()`, R would use the function from the package that was loaded most recently - in this case it would use the function from `MASS`.
 
 If you want to specify which package you want to use for a particular function you can use code in the format `package::function`, for example:
@@ -136,8 +125,8 @@ mean(data)
 
 ```
 ## [1] 45
-## Time difference of -207 days
-## [1] 16.43366
+## Time difference of -216 days
+## [1] 16.63193
 ```
 
 Finally, you can store the result of these operations in a new object:
@@ -339,14 +328,17 @@ If you've been writing a lot of code you may find that the environment pane (or 
 By default, when you open R Studio it will show you what you were last working on, including your code and any objects you have created. This might sound helpful, but actually it tends to cause more problems than it's worth because it means that you risk accidentally using an old version of an object. We recommend changing the settings so that each time you start R Studio, it opens a fresh copy. You can do this by clicking `Tools` -  `Global Options` and then deselecting boxes so that it looks like the below.
 
 <div class="figure" style="text-align: center">
-<img src="images/global_options.jpg" alt="Global options" width="100%" />
-<p class="caption">(\#fig:img-options)Global options</p>
+<img src="images/session.png" alt="Set these options to increase reproducibility" width="100%" />
+<p class="caption">(\#fig:img-options)Set these options to increase reproducibility</p>
 </div>
-
+<div class="warning">
+<p>Restore .RData into workspace at startup <code>r mcq(c("checked", answer = "unchecked"))</code></p>
+<p>Save workspace to .RData on exit <code>r mcq(c("Always", answer = "Never", "Ask))</code></p>
+</div>
 
 ## R sessions
 
-When you open up R and start writing code, loading packages, and creating objects, you're doing so in a new **session**. In addition to clearing the workspace, it can sometimes be useful to start a new session. This will happen automatically each time you start R on your computer, although sessions can persist on the server. If you find that your code isn't working and you can't figure out why, it might be worth starting a new session. This will clear the environment and detach all loaded packages - think of it like restarting your phone.
+When you open up R and start writing code, loading packages, and creating objects, you're doing so in a new **session**. In addition to clearing the workspace, it can sometimes be useful to start a new session. This will happen automatically each time you start R on your computer, although sessions can persist on the cloud. If you find that your code isn't working and you can't figure out why, it might be worth starting a new session. This will clear the environment and detach all loaded packages - think of it like restarting your phone.
 
 ## Activity 2
 
@@ -502,13 +494,13 @@ You should use the form `package::function`, for example `dplyr::select`. Rememb
 </div>
   
 
-**Question 4.** Which of the following is most likely to be an argument? <select class='webex-select'><option value='blank'></option><option value='answer'>35</option><option value=''><-</option><option value=''>read_csv()</option></select>
+**Question 4.** Which of the following is most likely to be an argument? <select class='webex-select'><option value='blank'></option><option value=''>read_csv()</option><option value='answer'>35</option><option value=''><-</option></select>
 
-**Question 5.** An easy way to spot functions is to look for <select class='webex-select'><option value='blank'></option><option value='answer'>brackets</option><option value=''>computers</option><option value=''>numbers</option></select>.
+**Question 5.** An easy way to spot functions is to look for <select class='webex-select'><option value='blank'></option><option value=''>computers</option><option value='answer'>brackets</option><option value=''>numbers</option></select>.
 
-**Question 6.** The job of `<-` is to send the output from the function to a/an <select class='webex-select'><option value='blank'></option><option value='answer'>object</option><option value=''>argument</option><option value=''>assignment</option></select>.
+**Question 6.** The job of `<-` is to send the output from the function to a/an <select class='webex-select'><option value='blank'></option><option value='answer'>object</option><option value=''>assignment</option><option value=''>argument</option></select>.
 
-**Question 7.** A vector must always contain elements of the same data type (e.g logical, character, numeric) <select class='webex-select'><option value='blank'></option><option value='answer'>TRUE</option><option value=''>FALSE</option></select>.
+**Question 7.** A vector must always contain elements of the same data type (e.g logical, character, numeric) <select class='webex-select'><option value='blank'></option><option value=''>FALSE</option><option value='answer'>TRUE</option></select>.
 
 **Question 8.** A dataframe/tibble must always contain elements of the same data type <select class='webex-select'><option value='blank'></option><option value='answer'>FALSE</option><option value=''>TRUE</option></select>
 

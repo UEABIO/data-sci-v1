@@ -655,10 +655,6 @@ Today let's use some simple functions to produce a figure. We specify the data s
 ggplot(data = penguins,aes(x = bill_length_mm, y = bill_depth_mm)) + geom_point(aes(colour=species)) 
 ```
 
-```
-## Warning: Removed 2 rows containing missing values (geom_point).
-```
-
 <img src="01-intro-to-r_files/figure-html/unnamed-chunk-55-1.png" width="100%" style="display: block; margin: auto;" />
 
 <div class="information">
@@ -854,3 +850,62 @@ You could now safely quit R, and when you log on next time to this project, your
 -   Close your RStudio Cloud Browser
 
 -   Complete this week's short quiz!
+
+## Activity 1
+
+### Head to Blackboard when complete and submit your answers to the quiz to get your first Data Science Learning Badge.
+
+When you get the correct answer, the answer box will turn green. Sometimes this doesn't work on Internet Explorer or Edge so be sure to use Chrome or Firefox.
+
+**Question 1.**  What is the output from 5\^4
+
+<input class='webex-solveme nospaces' size='3' data-answer='["625"]'/>
+
+**Question 2.**  Put the brackets in the correct place to make this equation correct `4+2*8 = 48`
+
+<input class='webex-solveme nospaces' size='2' data-answer='["48"]'/>
+
+**Question 3.**  What answer will you get when you type `2+2 = 4` into the R console?
+
+<select class='webex-select'><option value='blank'></option><option value=''>TRUE</option><option value=''>FALSE</option><option value='answer'>Error</option></select>
+
+
+<div class='webex-solution'><button>Solution</button>
+
+
+If we wanted R to make a judgement we must use == not = otherwise we will get an Error message
+
+
+</div>
+
+
+**Question 4.**  What symbol do I use if I want to **assign** a value or output of a function to an R object
+
+<input class='webex-solveme nospaces' size='2' data-answer='["<-"]'/>
+
+**Question 5.**  What is the value of `a` if I ran the following commands?
+
+
+```r
+a <-  12*2
+
+a <- 5
+```
+
+<input class='webex-solveme nospaces' size='1' data-answer='["5"]'/>
+
+**Question 6.**  Which of these variable naming conventions is **not** written correctly?
+
+<select class='webex-select'><option value='blank'></option><option value=''>snake_case</option><option value=''>camelCase</option><option value='answer'>Screaming_Snake_Case</option><option value=''>kebab-case</option></select>
+
+**Question 7.**  What should I type into the R console if I want `help` with the `round()` function?
+
+<input class='webex-solveme nospaces' size='11' data-answer='["help(round)"]'/>
+
+**Question 8.**  Which of these statements about function arguments **is not true**
+
+<select class='webex-select'><option value='blank'></option><option value=''>Arguments are the inputs we give to a function</option><option value='answer'>Values for R arguments must always be defined by the user</option><option value=''>Naming arguments supersedes position in a function</option><option value=''>There is no limit to the number of arguments a function could have</option></select>
+
+**Question 9.**  Evaluate this statement "An R Package can contain code functions, data, or both."
+
+<select class='webex-select'><option value='blank'></option><option value='answer'>TRUE</option><option value=''>FALSE</option></select>

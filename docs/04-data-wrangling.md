@@ -25,7 +25,7 @@ Think about some basic checks before you start your work today.
 
 ### Checklist
 
-* Are there objects already in your Enviroment pane? [There shouldn't be](#global-options), if there are use `rm(list=ls())`
+* Are there objects already in your Environment pane? [There shouldn't be](#global-options), if there are use `rm(list=ls())`
 
 * Re-run your script from [last time](#activity-4-make-a-script) from line 1 to the last line
 
@@ -534,6 +534,3 @@ If you want to check your answers (or are just completely stuck) then click here
 
 
 
-```r
-save(penguins, file = here("book", "files", "chapter4.RData"))
-```

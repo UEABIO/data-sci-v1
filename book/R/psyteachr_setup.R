@@ -9,6 +9,8 @@ suppressPackageStartupMessages({
 # default knitr options
 knitr::opts_chunk$set(
   echo       = TRUE,
+  warning    = FALSE,
+  message    = FALSE,
   results    = "hold",
   out.width  = '100%',
   fig.width  = 8,

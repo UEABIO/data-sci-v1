@@ -1,11 +1,5 @@
 base
-methods
-grDevices
 extrafont
-datasets
-utils
-graphics
-stats
 tidyverse
 ggplot2
 tibble
