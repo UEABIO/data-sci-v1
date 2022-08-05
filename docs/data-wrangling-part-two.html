@@ -578,7 +578,7 @@ Solution
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">flipper_range</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="05-data-wrangling-part-2_files/figure-html/unnamed-chunk-37-1.png" width="100%" style="display: block; margin: auto;"></div>
-<p>To convert a character or numeric column to class factor, you can use any function from the <code>forcats</code> package (many are detailed below). They will convert to class factor and then also perform or allow certain ordering of the levels - for example using <code>fct_relevel()</code> lets you manually specify the level order. The function <code>as_factor()</code> simply converts the class without any further capabilities.</p>
+<p>To convert a character or numeric column to class factor, you can use any function from the <code>forcats</code> package (many are detailed below). They will convert to class factor and then also perform or allow certain ordering of the levels - for example using <code><a href="https://forcats.tidyverse.org/reference/fct_relevel.html">forcats::fct_relevel()</a></code> lets you manually specify the level order. The function <code>as_factor()</code> simply converts the class without any further capabilities.</p>
 <p>The <code>base R</code> function <code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code> converts a column to factor and allows you to manually specify the order of the levels, as a character vector to its levels = argument.</p>
 <p>Below we use <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> and <code>fct_relevel()</code> to convert the column flipper_range from class character to class factor.</p>
 <div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
@@ -832,7 +832,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-08-04.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-08-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

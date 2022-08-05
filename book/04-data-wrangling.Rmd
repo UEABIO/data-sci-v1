@@ -167,11 +167,11 @@ verb <- c( "select()","filter()", "arrange()", "summarise()", "group_by()", "mut
 action <- c("take a subset of columns","take a subset of rows",  "reorder the rows", "reduce raw data to user defined summaries", "group the rows by a specified column", "create a new variable")
 
 box <- tibble(verb, action)
-
-box %>% 
-   kbl(caption = "dplyr verbs", 
-    booktabs = T) %>% 
-   kable_styling(full_width = FALSE, font_size=16)
+box
+# box %>% 
+#   kbl(caption = "dplyr verbs", 
+#    booktabs = T) %>% 
+#   kable_styling(full_width = FALSE, font_size=16)
 
 ```
 

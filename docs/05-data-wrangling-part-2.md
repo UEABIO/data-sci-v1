@@ -572,7 +572,7 @@ penguins %>%
 
 <img src="05-data-wrangling-part-2_files/figure-html/unnamed-chunk-37-1.png" width="100%" style="display: block; margin: auto;" />
 
-To convert a character or numeric column to class factor, you can use any function from the `forcats` package (many are detailed below). They will convert to class factor and then also perform or allow certain ordering of the levels - for example using `fct_relevel()` lets you manually specify the level order. The function `as_factor()` simply converts the class without any further capabilities.
+To convert a character or numeric column to class factor, you can use any function from the `forcats` package (many are detailed below). They will convert to class factor and then also perform or allow certain ordering of the levels - for example using `forcats::fct_relevel()` lets you manually specify the level order. The function `as_factor()` simply converts the class without any further capabilities.
 
 The `base R` function `factor()` converts a column to factor and allows you to manually specify the order of the levels, as a character vector to its levels = argument.
 

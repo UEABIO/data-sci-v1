@@ -163,8 +163,9 @@ penguins <- penguins %>%
 
 In this section we will be introduced to some of the most commonly used data wrangling functions, these come from the `dplyr` package (part of the `tidyverse`). These are functions you are likely to become *very* familiar with. 
 
-<table class="table" style="font-size: 16px; width: auto !important; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">(\#tab:unnamed-chunk-9)dplyr verbs</caption>
+<div class="kable-table">
+
+<table>
  <thead>
   <tr>
    <th style="text-align:left;"> verb </th>
@@ -198,6 +199,8 @@ In this section we will be introduced to some of the most commonly used data wra
   </tr>
 </tbody>
 </table>
+
+</div>
 
 ### Select
 
