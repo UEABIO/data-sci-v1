@@ -4,9 +4,6 @@
 
 
 
-
-
-
 ## Load your workspace
 
 You should have a workspace ready to work with the Palmer penguins data. Load this workspace now. 

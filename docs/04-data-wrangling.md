@@ -6,9 +6,6 @@
 
 
 
-
-
-
 It may surprise you to learn that scientists actually spend far more time cleaning and preparing their data than they spend actually analysing it. This means completing tasks such as cleaning up bad values, changing the structure of dataframes, reducing the data down to a subset of observations, and producing data summaries. 
 
 Many people seem to operate under the assumption that the only option for data cleaning is the painstaking and time-consuming cutting and pasting of data within a spreadsheet program like Excel. We have witnessed students and colleagues waste days, weeks, and even months manually transforming their data in Excel, cutting, copying, and pasting data. Fixing up your data by hand is not only a terrible use of your time, but it is error-prone and not reproducible. Additionally, in this age where we can easily collect massive datasets online, you will not be able to organise, clean, and prepare these by hand.
@@ -380,6 +377,7 @@ penguins %>%
   filter(sex == "MALE") %>% 
   arrange(desc(flipper_length_mm))
 ```
+
 The reason that this function is called a pipe is because it 'pipes' the data through to the next function. When you wrote the code previously, the first argument of each function was the dataset you wanted to work on. When you use pipes it will automatically take the data from the previous line of code so you don't need to specify it again.
 
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
@@ -397,6 +395,13 @@ Arrange the data from HIGHEST to LOWEST flipper lengths.
 
 </div>
 
+
+<div class="info">
+<p>From R version 4 onwards there is now a "native pipe" <code>|&gt;</code></p>
+<p>This doesn't require the tidyverse <code>magrittr</code> package or any other packages to load and use.</p>
+<p>For this coursebook I have chosen to continue to use the <code>tidyverse</code> pipe <code>%&gt;%</code> for the time being it is likely to be much more familiar in other tutorials, and website usages. The native pipe also behaves "slightly" differently, and this could cause some confusion.</p>
+<p>If you want to read about some of the operational differences, <a href="https://www.infoworld.com/article/3621369/use-the-new-r-pipe-built-into-r-41.html">this site</a> does a good job of explaining</p>
+</div>
 
 
 ## A few more handy functions

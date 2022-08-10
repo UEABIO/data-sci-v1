@@ -5,9 +5,6 @@
 
 
 
-
-
-
 To load packages we use the function `library()`. Typically you would start any analysis script by loading all of the packages you need. 
 
 The [tidyverse](https://www.tidyverse.org/) is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures. This means the functions across the tidyverse are all designed to work together and make the process of data science easier.

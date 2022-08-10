@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 7 Markdown | 5023Y</title>
 <meta name="author" content="Philip T. Leftwich">
-<meta name="description" content='/* update total correct if #webex-total_correct exists */ update_total_correct = function() {  console.log("webex: update total_correct");  if (t = document.getElementById("webex-total_correct"))...'>
+<meta name="description" content="R Markdown is a widely-used tool for creating automated, reproducible, and share-worthy outputs, such as reports. It can generate static or interactive outputs, in Word, pdf, html, powerpoint, and...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 7 Markdown | 5023Y">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://ueabio.github.io/data-sci/markdown.html">
 <meta property="og:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
-<meta property="og:description" content='/* update total correct if #webex-total_correct exists */ update_total_correct = function() {  console.log("webex: update total_correct");  if (t = document.getElementById("webex-total_correct"))...'>
+<meta property="og:description" content="R Markdown is a widely-used tool for creating automated, reproducible, and share-worthy outputs, such as reports. It can generate static or interactive outputs, in Word, pdf, html, powerpoint, and...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 7 Markdown | 5023Y">
-<meta name="twitter:description" content='/* update total correct if #webex-total_correct exists */ update_total_correct = function() {  console.log("webex: update total_correct");  if (t = document.getElementById("webex-total_correct"))...'>
+<meta name="twitter:description" content="R Markdown is a widely-used tool for creating automated, reproducible, and share-worthy outputs, such as reports. It can generate static or interactive outputs, in Word, pdf, html, powerpoint, and...">
 <meta name="twitter:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.13/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -27,6 +27,38 @@
       gtag('js', new Date());
 
       gtag('config', 'G-6NP3MF25W3');
+    </script><script language="javascript"> 
+        function toggle(id) {
+            var ele = document.getElementById("toggleText" + id);
+            var text = document.getElementById("displayText" + id);
+            var buttonText = text.innerHTML.replace("Show ", "");
+            buttonText = buttonText.replace("Hide ", "");
+            if(ele.style.display == "block") {
+                ele.style.display = "none";
+                text.innerHTML = "Show " + buttonText;
+            } else {
+                ele.style.display = "block";
+                text.innerHTML = "Hide " + buttonText;
+            }
+        } 
+    </script><script language="javascript">
+        function openCode(evt, codeName, id) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent" + id);
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks" + id);
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(codeName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script><script language="javascript">
+        function hide(id){
+            document.getElementById(id).style.display = "none";
+        }
     </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/psyteachr.css">
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="include/style.css">
@@ -66,7 +98,7 @@
 <li><a class="" href="data-insights-part-two.html"><span class="header-section-number">11</span> Data insights part two</a></li>
 <li class="book-part">Advanced topics</li>
 <li><a class="" href="mixed-models.html"><span class="header-section-number">12</span> Mixed models</a></li>
-<li><a class="" href="non-linear-modelling.html"><span class="header-section-number">13</span> Non-linear modelling</a></li>
+<li><a class="" href="generalised-additive-models.html"><span class="header-section-number">13</span> Generalised Additive Models</a></li>
 <li><a class="" href="structural-equation-modelling.html"><span class="header-section-number">14</span> Structural equation modelling</a></li>
 <li><a class="" href="unsupervised-machine-learning.html"><span class="header-section-number">15</span> Unsupervised Machine Learning</a></li>
 <li class="book-part">Appendices</li>
@@ -74,6 +106,7 @@
 <li><a class="" href="updating-r-rstudio-and-packages.html"><span class="header-section-number">B</span> Updating R, RStudio, and packages</a></li>
 <li><a class="" href="exporting-files-from-the-server.html"><span class="header-section-number">C</span> Exporting files from the server</a></li>
 <li><a class="" href="symbols.html"><span class="header-section-number">D</span> Symbols</a></li>
+<li><a class="" href="baser.html"><span class="header-section-number">E</span> Base R vs. Tidyverse</a></li>
 <li><a class="" href="license.html">License</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
@@ -87,8 +120,395 @@
 <h1>
 <span class="header-section-number">7</span> Markdown<a class="anchor" aria-label="anchor" href="#markdown"><i class="fas fa-link"></i></a>
 </h1>
+<div class="inline-figure"><img src="images/rmarkdownoutputformats.png" width="100%" style="display: block; margin: auto;"></div>
+<p>R Markdown is a widely-used tool for creating automated, reproducible, and share-worthy outputs, such as reports. It can generate static or interactive outputs, in Word, pdf, html, powerpoint, and other formats.</p>
+<p>An R Markdown script combines R code and text such that the script actually becomes your output document. You can create an entire formatted document, including narrative text (can be dynamic to change based on your data), tables, figures, bullets/numbers, bibliographies, etc.</p>
+<p>Documents produced with Rmarkdown, allow analyses to be included easily - and make the link between raw data, analysis &amp; and a published report <em>completely reproducible</em>.</p>
+<p>With Rmarkdown we can make reproducible html, word, pdf, powerpoints or websites and dashboards<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;(&lt;a href="https://rmarkdown.rstudio.com/lesson-9.html" class="uri"&gt;https://rmarkdown.rstudio.com/lesson-9.html&lt;/a&gt;)&lt;/p&gt;'><sup>3</sup></a></p>
+<p><strong>To make your Rmd publish - hit the knit button at the top of the doc</strong></p>
+<div id="format" class="section level3" number="7.0.1">
+<h3>
+<span class="header-section-number">7.0.1</span> Format<a class="anchor" aria-label="anchor" href="#format"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li><p>Go to RStudio Cloud and open <strong>Week 5 - Rmarkdown</strong></p></li>
+<li><p>Follow the instructions carefully - and assemble your Rmarkdown file bit by bit - when prompted to 'knit' the document do it. We will then observed the results and might make changes.</p></li>
+</ul>
+</div>
+<div id="background-to-rmarkdown" class="section level2" number="7.1">
+<h2>
+<span class="header-section-number">7.1</span> Background to Rmarkdown<a class="anchor" aria-label="anchor" href="#background-to-rmarkdown"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li><p>Markdown is a “language” that allows you to write a document using plain text, that can be converted to html and other formats. It is not specific to R. Files written in Markdown have a ‘.md’ extension.</p></li>
+<li><p>R Markdown: is a variation on markdown that is specific to R - it allows you to write a document using markdown to produce text and to embed R code and display their outputs. R Markdown files have ‘.Rmd’ extension.</p></li>
+<li><p>rmarkdown - the package: This is used by R to render the .Rmd file into the desired output. It’s focus is converting the markdown (text) syntax, so we also need…</p></li>
+<li><p>knitr: This R package will read the code chunks, execute it, and ‘knit’ it back into the document. This is how tables and graphs are included alongside the text.</p></li>
+<li><p>Pandoc: Finally, pandoc actually convert the output into word/pdf/powerpoint etc. It is a software separate from R but is installed automatically with RStudio.</p></li>
+</ul>
+<p>Most of this process happens in the background (you do not need to know all these steps!) and it involves feeding the .Rmd file to knitr, which executes the R code chunks and creates a new .md (markdown) file which includes the R code and its rendered output. The .md file is then processed by pandoc to create the finished product: a Microsoft Word document, HTML file, powerpoint document, pdf, etc.
+When using RStudio Cloud - all of these features are pre-loaded - if you take your R journey further in the future and install a copy of R and RStudio on your own computer you might have to do a little setting up to get this working.</p>
+<div class="inline-figure"><img src="images/0_rmd.png" width="80%" style="display: block; margin: auto;"></div>
+</div>
+<div id="starting-a-new-rmd-file" class="section level2" number="7.2">
+<h2>
+<span class="header-section-number">7.2</span> Starting a new Rmd file<a class="anchor" aria-label="anchor" href="#starting-a-new-rmd-file"><i class="fas fa-link"></i></a>
+</h2>
+<p>In RStudio, if you open a new R markdown file, start with ‘File’, then ‘New file’ then ‘R markdown…’.</p>
+<p>R Studio will give you some output options to pick from. In the example below we select “HTML” because we want to create an html document. The title and the author names are not important. If the output document type you want is not one of these, don’t worry - you can just pick any one and change it in the script later.</p>
+<p><strong>For now open the markdown file which I have made in the Markdown sub-folder</strong>.</p>
+<div class="warning">
+<p>
+The working directory for .rmd files is a little different to working with scripts.
+</p>
+<p>
+With a .Rmd file, the working directory is wherever the Rmd file itself is saved.
+</p>
+<p>
+For example if you have your .Rmd file in a subfolder ~/markdownfiles/markdown.Rmd the code for read_csv("data/data.csv") within the markdown will look for a .csv file in a subfolder called data <em>inside</em> the <code>markdownfiles</code> folder and not the root project folder where the .RProj file lives.
+</p>
+<p>
+So we have two options when using .Rmd files
+</p>
+<ol style="list-style-type: decimal">
+<li>
+<p>
+Don't put the .Rmd file in a subfolder and make sure it lives in the same directory as your .RProj file
+</p>
+</li>
+<li>
+<p>
+Use the <code>here</code> package to describe file locations - more later
+</p>
+</li>
+</ol>
+</div>
+</div>
+<div id="r-markdown-parts" class="section level2" number="7.3">
+<h2>
+<span class="header-section-number">7.3</span> R Markdown parts<a class="anchor" aria-label="anchor" href="#r-markdown-parts"><i class="fas fa-link"></i></a>
+</h2>
+<p>An R Markdown document can be edited in RStudio just like a standard R script. When you start a new R Markdown script, RStudio tries to be helpful by showing a template which explains the different section of an R Markdown script.</p>
+<p>The below is what appears when starting a new Rmd script intended to produce an html output.</p>
+<div class="inline-figure"><img src="images/templatermd.png" width="80%" style="display: block; margin: auto;"></div>
+<p>As you can see, there are three basic components to any Rmd file: YAML, Markdown text, and R code chunks.</p>
+<div class="inline-figure"><img src="images/rmarkdown_translation.png" width="100%" style="display: block; margin: auto;"></div>
+<div id="yaml" class="section level3" number="7.3.1">
+<h3>
+<span class="header-section-number">7.3.1</span> YAML<a class="anchor" aria-label="anchor" href="#yaml"><i class="fas fa-link"></i></a>
+</h3>
+<p>Referred to as the ‘YAML metadata’ or just ‘YAML’, this is at the top of the R Markdown document. This section of the script will tell your Rmd file <strong>what type of output to produce</strong>, formatting preferences, and other metadata such as document title, author, and date.
+In the example above, because we clicked that our default output would be an html file, we can see that the YAML says output: <code>html_document</code>. However we can also change this to say <code>powerpoint_presentation</code> or <code>word_document</code> or even <code>pdf_document</code>.</p>
+<div class="try">
+<p>
+Can you edit the YAML in the Rmarkdown file in the markdown folder to have your name as author, today's date and the title of the file should be called "Darwin's Maize Plants".
+</p>
+</div>
+</div>
+<div id="text" class="section level3" number="7.3.2">
+<h3>
+<span class="header-section-number">7.3.2</span> Text<a class="anchor" aria-label="anchor" href="#text"><i class="fas fa-link"></i></a>
+</h3>
+<p>This is the narrative of your document, including the titles and headings. It is written in the “markdown” language, which is used across many different software.</p>
+<p>Below are the core ways to write this text. See more extensive documentation available on R Markdown “cheatsheets” at the RStudio website<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;(&lt;a href="https://www.rstudio.com/resources/cheatsheets/" class="uri"&gt;https://www.rstudio.com/resources/cheatsheets/&lt;/a&gt;)&lt;/p&gt;'><sup>4</sup></a>.</p>
+<div id="new-lines" class="section level4" number="7.3.2.1">
+<h4>
+<span class="header-section-number">7.3.2.1</span> New lines<a class="anchor" aria-label="anchor" href="#new-lines"><i class="fas fa-link"></i></a>
+</h4>
+<p>Uniquely in R Markdown, to initiate a new line, enter *two spaces** at the end of the previous line and then Enter/Return.</p>
+</div>
+<div id="text-emphasis" class="section level4" number="7.3.2.2">
+<h4>
+<span class="header-section-number">7.3.2.2</span> Text emphasis<a class="anchor" aria-label="anchor" href="#text-emphasis"><i class="fas fa-link"></i></a>
+</h4>
+<p>Surround your normal text with these characters to change how it appears in the output.</p>
+<p>Underscores (_text_) or single asterisk (*text*) to <em>italicise</em></p>
+<p>Double asterisks (**text**) for <strong>bold</strong> text</p>
+<p>Back-ticks (`text`) to display text as <code>code</code></p>
+<p>The actual appearance of the font can be set by using specific templates (specified in the YAML metadata).</p>
+</div>
+<div id="titles-and-headings" class="section level4" number="7.3.2.3">
+<h4>
+<span class="header-section-number">7.3.2.3</span> Titles and headings<a class="anchor" aria-label="anchor" href="#titles-and-headings"><i class="fas fa-link"></i></a>
+</h4>
+<p>A hash symbol in a text portion of a R Markdown script creates a heading. This is different than in a chunk of R code in the script, in which a hash symbol is a mechanism to comment/annotate/de-activate, as in a normal R script.</p>
+<p>Different heading levels are established with different numbers of hash symbols at the start of a new line. One hash symbol is a title or primary heading. Two hash symbols are a second-level heading. Third- and fourth-level headings can be made with successively more hash symbols.</p>
+<pre><code>
+# First-level heading / title
+
+## Second level heading  
+
+### Third-level heading
+</code></pre>
+</div>
+<div id="bullets-and-numbering" class="section level4" number="7.3.2.4">
+<h4>
+<span class="header-section-number">7.3.2.4</span> Bullets and numbering<a class="anchor" aria-label="anchor" href="#bullets-and-numbering"><i class="fas fa-link"></i></a>
+</h4>
+<p>Use asterisks (*) to created a bullets list. Finish the previous sentence, enter two spaces, Enter/Return twice, and then start your bullets. Include a space between the asterisk and your bullet text. After each bullet enter two spaces and then Enter/Return. Sub-bullets work the same way but are indented. Numbers work the same way but instead of an asterisk, write 1), 2), etc. Below is how your R Markdown script text might look.</p>
+<p>Here are my bullets (there are two spaces after this colon):</p>
+<pre><code>* Bullet 1 (followed by two spaces and Enter/Return)  
+* Bullet 2 (followed by two spaces and Enter/Return)  
+  * Sub-bullet 1 (followed by two spaces and Enter/Return)  
+  * Sub-bullet 2 (followed by two spaces and Enter/Return)  </code></pre>
+</div>
+</div>
+<div id="code-chunks" class="section level3" number="7.3.3">
+<h3>
+<span class="header-section-number">7.3.3</span> Code Chunks<a class="anchor" aria-label="anchor" href="#code-chunks"><i class="fas fa-link"></i></a>
+</h3>
+<p>Sections of the script that are dedicated to running R code are called “chunks”. This is where you may load packages, import data, and perform the actual data management and visualisation. There may be many code chunks, so they can help you organize your R code into parts, perhaps interspersed with text. To note: These ‘chunks’ will appear to have a slightly different background colour from the narrative part of the document.</p>
+<p>Each chunk is opened with a line that starts with three back-ticks, and curly brackets that contain parameters for the chunk ({ }). The chunk ends with three more back-ticks.</p>
+<div class="inline-figure"><img src="images/chunk.png" width="80%" style="display: block; margin: auto;"></div>
+<p>You can create a new chunk by typing it out yourself, by using the keyboard shortcut “Ctrl + Alt + i” (or Cmd + Shift + r in Mac), or by clicking the green ‘insert a new code chunk’ icon at the top of your script editor.</p>
+<p>Some notes about the contents of the curly brackets { }:</p>
+<p>They start with ‘r’ to indicate that the language name within the chunk is R</p>
+<p>After the r you can optionally write a chunk “name” – these are not necessary but can help you organise your work. Note that if you name your chunks, you should ALWAYS use unique names or else R will <em>complain</em> when you try to render.</p>
+<p>The curly brackets can include other options too, written as tag=value, such as:</p>
+<ul>
+<li><p>eval = FALSE to not run the R code</p></li>
+<li><p>echo = FALSE to not print the chunk’s R source code in the output document</p></li>
+<li><p>warning = FALSE to not print warnings produced by the R code</p></li>
+<li><p>message = FALSE to not print any messages produced by the R code</p></li>
+<li><p>include = either TRUE/FALSE whether to include chunk outputs (e.g. plots) in the document</p></li>
+<li><p>out.width = and out.height = - size of ouput e.g. out.width = "75%"</p></li>
+<li><p>fig.align = "center" adjust how a figure is aligned across the page</p></li>
+<li><p>fig.show='hold' if your chunk prints multiple figures and you want them printed next to each other (pair with out.width = c("33%", "67%").</p></li>
+</ul>
+<p>A chunk header must be written in <strong>one line</strong></p>
+<p>Try to avoid periods, underscores, and spaces. Use hyphens ( - ) instead if you need a separator.</p>
+<p>Read more extensively about the knitr options here<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;(&lt;a href="https://yihui.org/knitr/options/" class="uri"&gt;https://yihui.org/knitr/options/&lt;/a&gt;)&lt;/p&gt;'><sup>5</sup></a>.</p>
+<p>There are also two arrows at the top right of each chunk, which are useful to run code within a chunk, or all code in prior chunks. Hover over them to see what they do.</p>
+</div>
+<div id="here" class="section level3" number="7.3.4">
+<h3>
+<span class="header-section-number">7.3.4</span> <code>here</code><a class="anchor" aria-label="anchor" href="#here"><i class="fas fa-link"></i></a>
+</h3>
+<p>The package <code>here</code> <span class="citation"><a href="references.html#ref-R-here" role="doc-biblioref">Müller</a> (<a href="references.html#ref-R-here" role="doc-biblioref">2020</a>)</span> and its function <code><a href="https://here.r-lib.org//reference/here.html">here()</a></code> make it easy to tell R where to find and to save your files - in essence, it builds file paths.</p>
+<p>This is how <code><a href="https://here.r-lib.org//reference/here.html">here()</a></code> works within an R project:</p>
+<ul>
+<li><p>When the here package is first loaded within the R project, it places a small file called “.here” in the root folder of your R project as a “benchmark” or “anchor”</p></li>
+<li><p>In your scripts, to reference a file in the R project’s sub-folders, you use the function <code><a href="https://here.r-lib.org//reference/here.html">here()</a></code> to build the file path in relation to that anchor</p></li>
+<li><p>To build the file path, write the names of folders beyond the root, within quotes, separated by commas, finally ending with the file name and file extension as shown below</p></li>
+<li><p><code><a href="https://here.r-lib.org//reference/here.html">here()</a></code> file paths can be used for both importing and exporting</p></li>
+</ul>
+<p>So when you use <code><a href="https://here.r-lib.org//reference/here.html">here()</a></code> wrapped inside other functions for importing/exporting (like <code>read_csv()</code> or <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave()</a></code>) if you include <code><a href="https://here.r-lib.org//reference/here.html">here()</a></code> you can still use the RProject location as the root directory when 'knitting' Rmarkdown files, even if your markdown is tidied away into a separate markdown folder.</p>
+<div class="try">
+<p>
+Can you take the code below and put it into an R code chunk?
+</p>
+<p>
+Try your first "knit" to make a document.
+</p>
+</div>
+</div>
+</div>
+<div id="activity-1.-knit-your-first-document" class="section level2" number="7.4">
+<h2>
+<span class="header-section-number">7.4</span> Activity 1. Knit your first document<a class="anchor" aria-label="anchor" href="#activity-1.-knit-your-first-document"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/">here</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+
+<span class="va">darwin</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"darwin.csv"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">darwin</span></code></pre></div>
+<div class="inline-figure"><img src="images/markdown_output.png" width="120%" style="display: block; margin: auto;"></div>
+<p>This has worked, but it looks quite messy, mostly because messages and warnings produced alongside our R functions are printed in the final document</p>
+</div>
+<div id="activity-2.-can-you-edit-the-r-chunk-so-that-the-code-and-any-warningsmessages-are-invisible.-but-the-code-output-is-still-printed" class="section level2" number="7.5">
+<h2>
+<span class="header-section-number">7.5</span> Activity 2. Can you edit the R chunk so that the code and any warnings/messages are invisible. But the code output is still printed?<a class="anchor" aria-label="anchor" href="#activity-2.-can-you-edit-the-r-chunk-so-that-the-code-and-any-warningsmessages-are-invisible.-but-the-code-output-is-still-printed"><i class="fas fa-link"></i></a>
+</h2>
+<p>Once you have made your edits to the <a href="@code-chunks">chunk options</a> try hitting 'knit' again.</p>
+<div id="global-options-1" class="section level3" number="7.5.1">
+<h3>
+<span class="header-section-number">7.5.1</span> Global options<a class="anchor" aria-label="anchor" href="#global-options-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>For global options to be applied to all chunks in the script, you can set this up within your very first R code chunk in the script.
+This is very handy if you know you will want the majority of your code chunks to behave in the same way.
+For instance, so that only the outputs are shown for each code chunk and not the code itself, you can include this command in the R code chunk (and set this chunk to <code>include = false</code>):</p>
+<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/knitr/man/opts_chunk.html">opts_chunk</a></span><span class="op">$</span><span class="fu">set</span><span class="op">(</span>echo <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> </code></pre></div>
+</div>
+<div id="in-text-code" class="section level3" number="7.5.2">
+<h3>
+<span class="header-section-number">7.5.2</span> In-text code<a class="anchor" aria-label="anchor" href="#in-text-code"><i class="fas fa-link"></i></a>
+</h3>
+<p>You can also include minimal R code within back-ticks. Within the back-ticks, begin the code with “r” and a space, so RStudio knows to evaluate the code as R code. See the example below.</p>
+<p>` r Sys.Date()`</p>
+<p>When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead: 2022-08-10</p>
+<p>The example above is simple (showing the current date), but using the same syntax you can display values produced by more complex R code (e.g. to calculate the min, median, max of a column). You can also integrate R objects or values that were created in R code chunks <em>earlier</em> in the script.</p>
+<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">average_height</span> <span class="op">&lt;-</span> <span class="va">darwin</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_self<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Self</span><span class="op">)</span>,
+            mean_cross<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Cross</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>The average height of the self-crossed plants is ` r average_height [,1]`cm while the outcrossed plants are ` r average_height [,2]`cm, so on average the outcrossed plants are ` r average_height [,2]- average_height [,1]`cm taller.</p>
+<div class="try">
+<p>
+Can you include the above code block and make sure it runs without the code being visible?
+</p>
+<p>
+Underneath include the text - it should produce the code outputs in the knitted doc.
+</p>
+<p>
+Try it!
+</p>
+</div>
+</div>
+</div>
+<div id="static-images" class="section level2" number="7.6">
+<h2>
+<span class="header-section-number">7.6</span> Static images<a class="anchor" aria-label="anchor" href="#static-images"><i class="fas fa-link"></i></a>
+</h2>
+<p>You can include images in your R Markdown in several ways:</p>
+<p>knitr::include_graphics("path/to/image.png")</p>
+<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span><span class="st">"../data/images/darwin.png"</span><span class="op">)</span>
+<span class="co"># ../ is necessary here because in order to organise the file path starting in the markdown folder, directing it to go UP to the parent folder then down through data/images</span></code></pre></div>
+<p>Alternatively we could use the <code><a href="https://here.r-lib.org//reference/here.html">here()</a></code> function - which means it doesn't matter where our markdown file 'lives'.</p>
+<p>knitr::include_graphics(here::here("path", "to", "image.png"))</p>
+<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"images"</span>, <span class="st">"darwin.png"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="rmdquestion">
+<p>
+Can you get your document to knit with this new image included?
+</p>
+</div>
+</div>
+<div id="ggplot" class="section level2" number="7.7">
+<h2>
+<span class="header-section-number">7.7</span> ggplot<a class="anchor" aria-label="anchor" href="#ggplot"><i class="fas fa-link"></i></a>
+</h2>
+<p><a href="https://benjaminlouis-stat.fr/en/blog/2020-05-21-astuces-ggplot-rmarkdown/" class="uri">https://benjaminlouis-stat.fr/en/blog/2020-05-21-astuces-ggplot-rmarkdown/</a></p>
+</div>
+<div id="tables" class="section level2" number="7.8">
+<h2>
+<span class="header-section-number">7.8</span> Tables<a class="anchor" aria-label="anchor" href="#tables"><i class="fas fa-link"></i></a>
+</h2>
+<p>To create and manage able objects, we first pass the data frame through the <code>kable()</code> function. The package <code>kableExtra</code> <span class="citation"><a href="references.html#ref-R-kableExtra" role="doc-biblioref">Zhu</a> (<a href="references.html#ref-R-kableExtra" role="doc-biblioref">2020</a>)</span> gives us lots of extra styling options.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;(&lt;a href="https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html" class="uri"&gt;https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html&lt;/a&gt;)&lt;/p&gt;'><sup>6</sup></a></p>
+<div class="try">
+<p>
+Can you get this working? Add the library call for <code>kableExtra</code> to the first chunk of your Rmd file, then make a chunk for the below at the bottom of your file and hit knit to test.
+</p>
+</div>
+<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">darwin</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_self<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Self</span><span class="op">)</span>,
+            mean_cross<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Cross</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">kbl</span><span class="op">(</span>caption<span class="op">=</span><span class="st">"Table 1. example table caption"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">kable_styling</span><span class="op">(</span>bootstrap_options <span class="op">=</span> <span class="st">"striped"</span>, full_width <span class="op">=</span> <span class="cn">F</span>, position <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="self-contained-documents" class="section level2" number="7.9">
+<h2>
+<span class="header-section-number">7.9</span> Self-contained documents<a class="anchor" aria-label="anchor" href="#self-contained-documents"><i class="fas fa-link"></i></a>
+</h2>
+<p>For a relatively simple report, you may elect to organize your R Markdown script such that it is “self-contained” and does not involve any external scripts.</p>
+<p>Everything you need to run the R markdown is imported or created within the Rmd file, including all the code chunks and package loading. This “self-contained” approach is appropriate when you do not need to do much data processing (e.g. it brings in a clean or semi-clean data file) and the rendering of the R Markdown will not take too long.</p>
+<p>In this scenario, one logical organization of the R Markdown script might be:</p>
+<ul>
+<li><p>Set global knitr options</p></li>
+<li><p>Load packages</p></li>
+<li><p>Import data</p></li>
+<li><p>Process data</p></li>
+<li><p>Produce outputs (tables, plots, etc.)</p></li>
+<li><p>Save outputs, <em>if applicable</em> (.csv, .png, etc.)</p></li>
+</ul>
+</div>
+<div id="source-files" class="section level2" number="7.10">
+<h2>
+<span class="header-section-number">7.10</span> Source files<a class="anchor" aria-label="anchor" href="#source-files"><i class="fas fa-link"></i></a>
+</h2>
+<p>One variation of the “self-contained” approach is to have R Markdown code chunks “source” (run) other R scripts.</p>
+<p>This can make your R Markdown script less cluttered, more simple, and easier to organize. It can also help if you want to display final figures at the beginning of the report.</p>
+<p>In this approach, the final R Markdown script simply combines pre-processed outputs into a document.</p>
+<pre><code><a href="https://rdrr.io/r/base/source.html">source(here("scripts", "your-script.R"))</a></code></pre>
+<div class="try">
+<p>
+Can you try it for yourself? There is a pre-written script in your R project, just use the source command to read in this script - then you can call objects made externally - in this case a penguin plot - put the code block in and hit knit.
+</p>
+</div>
+<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"scripts"</span>, <span class="st">"penguin script.R"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">scat</span> <span class="co">### object generated in penguin script</span></code></pre></div>
+</div>
+<div id="activity-3-test-yourself" class="section level2" number="7.11">
+<h2>
+<span class="header-section-number">7.11</span> Activity 3: Test yourself<a class="anchor" aria-label="anchor" href="#activity-3-test-yourself"><i class="fas fa-link"></i></a>
+</h2>
+<div id="head-to-blackboard-when-complete-and-submit-your-document." class="section level3" number="7.11.1">
+<h3>
+<span class="header-section-number">7.11.1</span> Head to Blackboard when complete and submit your document.<a class="anchor" aria-label="anchor" href="#head-to-blackboard-when-complete-and-submit-your-document."><i class="fas fa-link"></i></a>
+</h3>
+<p>The data found in "darwin.csv" was originally collected by Charles Darwin and published in <em>The effects of cross and self-fertilisation in the vegetable kingdom</em>, in 1876. In this publication he described how he produced seeds of <em>Zea mays</em> (maize) that were fertilised with pollen from the same individual (inbreeding) or by crossing to a different plant (outbreeding). Pairs of seeds were then taken from self-fertilised and crossed plants and germinated in pots, and the height of the young seedlings measured as a proxy for their fitness. Darwin wanted to know whether inbreeding reduced their fitness.</p>
+<div class="try">
+<p>
+Can you make your first reproducible document?
+</p>
+</div>
+<ul>
+<li><p>Write a short background on this subject 250-300 words on the data and the experimental hypothesis (use some of the information above)</p></li>
+<li>
+<p>Write a results section on this data including:</p>
+<ul>
+<li><p>A figure of the individual data points</p></li>
+<li><p>A summary results table with the mean and s.d. for the plants</p></li>
+<li><p>Write a summary of the results where the figures and table are referenced but you <em>must</em> describe the results too. e.g.</p></li>
+</ul>
+</li>
+</ul>
+<p>"Results are shown in Figure 1" is <strong>not ok</strong></p>
+<p>But <em>in your own words</em> describe the direction and effect size of any differences and then refer to Figures and tables</p>
+<p>"The mean height of self-crossed plants is <em>x</em> and the mean height of crossed plants is <em>y</em>, meaning on average self-crossed plants are... which may indicate that ... (Figure 1, Table 1)"</p>
+<ul>
+<li>knit your rmarkdown as a <strong>pdf</strong> and submit to Blackboard.</li>
+</ul>
+<div class="info">
+<p>
+Remember your code blocks MUST be in the right order!!!
+</p>
+</div>
+</div>
+</div>
+<div id="summing-up-rmarkdown" class="section level2" number="7.12">
+<h2>
+<span class="header-section-number">7.12</span> Summing up Rmarkdown<a class="anchor" aria-label="anchor" href="#summing-up-rmarkdown"><i class="fas fa-link"></i></a>
+</h2>
+<div id="what-we-learned-1" class="section level3" number="7.12.1">
+<h3>
+<span class="header-section-number">7.12.1</span> What we learned<a class="anchor" aria-label="anchor" href="#what-we-learned-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>You have learned</p>
+<ul>
+<li><p>How to use markdown</p></li>
+<li><p>How to embed R chunks, to produce code, figures and analyses</p></li>
+<li><p>How to organise projects with <code>here</code></p></li>
+<li><p>How to knit to pdf and html outputs</p></li>
+<li><p>How to make simple tables</p></li>
+</ul>
+<p>You have used</p>
+<ul>
+<li><p><code>knitr</code> as part of Rmarkdown</p></li>
+<li><p><code>kableExtra</code> <span class="citation"><a href="references.html#ref-R-kableExtra" role="doc-biblioref">Zhu</a> (<a href="references.html#ref-R-kableExtra" role="doc-biblioref">2020</a>)</span></p></li>
+<li><p><code>here</code> <span class="citation"><a href="references.html#ref-R-here" role="doc-biblioref">Müller</a> (<a href="references.html#ref-R-here" role="doc-biblioref">2020</a>)</span></p></li>
+</ul>
+</div>
+<div id="further-reading-guides-and-tips" class="section level3" number="7.12.2">
+<h3>
+<span class="header-section-number">7.12.2</span> Further Reading, Guides and tips<a class="anchor" aria-label="anchor" href="#further-reading-guides-and-tips"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li><p><a href="https://www.rstudio.com/resources/cheatsheets/">R Cheat Sheets</a></p></li>
+<li><p><span class="citation"><a href="references.html#ref-xie2015" role="doc-biblioref">Xie</a> (<a href="references.html#ref-xie2015" role="doc-biblioref">2015</a>)</span> Dynamic documents with Rmarkdown</p></li>
+</ul>
+<p><em>The fully comprehensive guide</em></p>
+<p>(<a href="https://rmarkdown.rstudio.com/articles_intro.html" class="uri">https://rmarkdown.rstudio.com/articles_intro.html</a>)</p>
+<p>(<a href="https://rmarkdown.rstudio.com/authoring_quick_tour.html" class="uri">https://rmarkdown.rstudio.com/authoring_quick_tour.html</a>)</p>
 
 </div>
+</div>
+</div>
+
 <script>
 
 /* update total correct if #webex-total_correct exists */
@@ -273,7 +693,42 @@ $( document ).ready(function() {
 <div class="next"><a href="github.html"><span class="header-section-number">8</span> Github</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#markdown"><span class="header-section-number">7</span> Markdown</a></li></ul>
+      <ul class="nav navbar-nav">
+<li>
+<a class="nav-link" href="#markdown"><span class="header-section-number">7</span> Markdown</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#format"><span class="header-section-number">7.0.1</span> Format</a></li></ul>
+</li>
+<li><a class="nav-link" href="#background-to-rmarkdown"><span class="header-section-number">7.1</span> Background to Rmarkdown</a></li>
+<li><a class="nav-link" href="#starting-a-new-rmd-file"><span class="header-section-number">7.2</span> Starting a new Rmd file</a></li>
+<li>
+<a class="nav-link" href="#r-markdown-parts"><span class="header-section-number">7.3</span> R Markdown parts</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#yaml"><span class="header-section-number">7.3.1</span> YAML</a></li>
+<li><a class="nav-link" href="#text"><span class="header-section-number">7.3.2</span> Text</a></li>
+<li><a class="nav-link" href="#code-chunks"><span class="header-section-number">7.3.3</span> Code Chunks</a></li>
+<li><a class="nav-link" href="#here"><span class="header-section-number">7.3.4</span> here</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#activity-1.-knit-your-first-document"><span class="header-section-number">7.4</span> Activity 1. Knit your first document</a></li>
+<li>
+<a class="nav-link" href="#activity-2.-can-you-edit-the-r-chunk-so-that-the-code-and-any-warningsmessages-are-invisible.-but-the-code-output-is-still-printed"><span class="header-section-number">7.5</span> Activity 2. Can you edit the R chunk so that the code and any warnings/messages are invisible. But the code output is still printed?</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#global-options-1"><span class="header-section-number">7.5.1</span> Global options</a></li>
+<li><a class="nav-link" href="#in-text-code"><span class="header-section-number">7.5.2</span> In-text code</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#static-images"><span class="header-section-number">7.6</span> Static images</a></li>
+<li><a class="nav-link" href="#ggplot"><span class="header-section-number">7.7</span> ggplot</a></li>
+<li><a class="nav-link" href="#tables"><span class="header-section-number">7.8</span> Tables</a></li>
+<li><a class="nav-link" href="#self-contained-documents"><span class="header-section-number">7.9</span> Self-contained documents</a></li>
+<li><a class="nav-link" href="#source-files"><span class="header-section-number">7.10</span> Source files</a></li>
+<li>
+<a class="nav-link" href="#activity-3-test-yourself"><span class="header-section-number">7.11</span> Activity 3: Test yourself</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#head-to-blackboard-when-complete-and-submit-your-document."><span class="header-section-number">7.11.1</span> Head to Blackboard when complete and submit your document.</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#summing-up-rmarkdown"><span class="header-section-number">7.12</span> Summing up Rmarkdown</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#what-we-learned-1"><span class="header-section-number">7.12.1</span> What we learned</a></li>
+<li><a class="nav-link" href="#further-reading-guides-and-tips"><span class="header-section-number">7.12.2</span> Further Reading, Guides and tips</a></li>
+</ul>
+</li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
@@ -290,7 +745,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-08-05.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-08-10.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

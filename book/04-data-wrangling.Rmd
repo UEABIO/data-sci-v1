@@ -322,6 +322,7 @@ penguins %>%
   filter(sex == "MALE") %>% 
   arrange(desc(flipper_length_mm))
 ```
+
 The reason that this function is called a pipe is because it 'pipes' the data through to the next function. When you wrote the code previously, the first argument of each function was the dataset you wanted to work on. When you use pipes it will automatically take the data from the previous line of code so you don't need to specify it again.
 
 ```{task}
@@ -336,6 +337,20 @@ Filter to keep only those observations labelled as sex equals male AND THEN
 Arrange the data from HIGHEST to LOWEST flipper lengths.
 
 `r unhide()`
+
+```{block, type = "info"}
+
+From R version 4 onwards there is now a "native pipe" `|>`
+
+This doesn't require the tidyverse `magrittr` package or any other packages to load and use. 
+
+For this coursebook I have chosen to continue to use the `tidyverse` pipe `%>%` for the time being it is likely to be much more familiar in other tutorials, and website usages. The native pipe also behaves "slightly" differently, and this could cause some confusion. 
+
+If you want to read about some of the operational differences, [this site](https://www.infoworld.com/article/3621369/use-the-new-r-pipe-built-into-r-41.html) does a good job of explaining 
+
+
+
+```
 
 
 ## A few more handy functions

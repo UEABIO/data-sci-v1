@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>E Base R vs. Tidyverse | 5023Y</title>
+<meta name="author" content="Philip T. Leftwich">
+<meta name="description" content='library(tidyverse)  E.1 Extract variables  Show Solution   Solution   Base R  tidyverse  iris$Sepal.Length # single variable iris[, c("Species", "Petal.Width")] # by name iris[, c(5, 4)] # by...'>
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="E Base R vs. Tidyverse | 5023Y">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://ueabio.github.io/data-sci/baser.html">
+<meta property="og:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
+<meta property="og:description" content='library(tidyverse)  E.1 Extract variables  Show Solution   Solution   Base R  tidyverse  iris$Sepal.Length # single variable iris[, c("Species", "Petal.Width")] # by name iris[, c(5, 4)] # by...'>
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="E Base R vs. Tidyverse | 5023Y">
+<meta name="twitter:description" content='library(tidyverse)  E.1 Extract variables  Show Solution   Solution   Base R  tidyverse  iris$Sepal.Length # single variable iris[, c("Species", "Petal.Width")] # by name iris[, c(5, 4)] # by...'>
+<meta name="twitter:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.13/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1.9000/transition.js"></script><script src="libs/bs3compat-0.3.1.9000/tabs.js"></script><script src="libs/bs3compat-0.3.1.9000/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/font-awesome-5.13.0/js/script.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NP3MF25W3"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6NP3MF25W3');
+    </script><script language="javascript"> 
+        function toggle(id) {
+            var ele = document.getElementById("toggleText" + id);
+            var text = document.getElementById("displayText" + id);
+            var buttonText = text.innerHTML.replace("Show ", "");
+            buttonText = buttonText.replace("Hide ", "");
+            if(ele.style.display == "block") {
+                ele.style.display = "none";
+                text.innerHTML = "Show " + buttonText;
+            } else {
+                ele.style.display = "block";
+                text.innerHTML = "Hide " + buttonText;
+            }
+        } 
+    </script><script language="javascript">
+        function openCode(evt, codeName, id) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent" + id);
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks" + id);
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(codeName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script><script language="javascript">
+        function hide(id){
+            document.getElementById(id).style.display = "none";
+        }
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/psyteachr.css">
+<link rel="stylesheet" href="include/webex.css">
+<link rel="stylesheet" href="include/style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Data Science for Biologists">5023Y</a>:
+        <small class="text-muted">Data Science for Biologists</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Overview</a></li>
+<li><a class="" href="introduction-to-r-and-rstudio.html"><span class="header-section-number">1</span> Introduction to R and RStudio</a></li>
+<li><a class="" href="basic-programming.html"><span class="header-section-number">2</span> Basic programming</a></li>
+<li><a class="" href="loading-data.html"><span class="header-section-number">3</span> Loading data</a></li>
+<li><a class="" href="data-wrangling-part-one.html"><span class="header-section-number">4</span> Data wrangling part one</a></li>
+<li><a class="" href="data-wrangling-part-two.html"><span class="header-section-number">5</span> Data wrangling part two</a></li>
+<li><a class="" href="data-visualisation-with-ggplot2.html"><span class="header-section-number">6</span> Data visualisation with ggplot2</a></li>
+<li><a class="" href="markdown.html"><span class="header-section-number">7</span> Markdown</a></li>
+<li><a class="" href="github.html"><span class="header-section-number">8</span> Github</a></li>
+<li><a class="" href="functions-1.html"><span class="header-section-number">9</span> Functions</a></li>
+<li><a class="" href="data-insights-part-one.html"><span class="header-section-number">10</span> Data Insights part one</a></li>
+<li><a class="" href="data-insights-part-two.html"><span class="header-section-number">11</span> Data insights part two</a></li>
+<li class="book-part">Advanced topics</li>
+<li><a class="" href="mixed-models.html"><span class="header-section-number">12</span> Mixed models</a></li>
+<li><a class="" href="generalised-additive-models.html"><span class="header-section-number">13</span> Generalised Additive Models</a></li>
+<li><a class="" href="structural-equation-modelling.html"><span class="header-section-number">14</span> Structural equation modelling</a></li>
+<li><a class="" href="unsupervised-machine-learning.html"><span class="header-section-number">15</span> Unsupervised Machine Learning</a></li>
+<li class="book-part">Appendices</li>
+<li><a class="" href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></li>
+<li><a class="" href="updating-r-rstudio-and-packages.html"><span class="header-section-number">B</span> Updating R, RStudio, and packages</a></li>
+<li><a class="" href="exporting-files-from-the-server.html"><span class="header-section-number">C</span> Exporting files from the server</a></li>
+<li><a class="" href="symbols.html"><span class="header-section-number">D</span> Symbols</a></li>
+<li><a class="active" href="baser.html"><span class="header-section-number">E</span> Base R vs. Tidyverse</a></li>
+<li><a class="" href="license.html">License</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/UEABIO/data-sci-v1">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="baser" class="section level1" number="20">
+<h1>
+<span class="header-section-number">E</span> Base R vs. Tidyverse<a class="anchor" aria-label="anchor" href="#baser"><i class="fas fa-link"></i></a>
+</h1>
+<div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
+<div id="extract-variables" class="section level2" number="20.1">
+<h2>
+<span class="header-section-number">E.1</span> Extract variables<a class="anchor" aria-label="anchor" href="#extract-variables"><i class="fas fa-link"></i></a>
+</h2>
+<button id="displayTextunnamed-chunk-3" onclick="javascript:toggle('unnamed-chunk-3');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-3" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="tab">
+<button class="tablinksunnamed-chunk-3 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-3', 'unnamed-chunk-3');">
+Base R
+</button>
+<button class="tablinksunnamed-chunk-3" onclick="javascript:openCode(event, 'option2unnamed-chunk-3', 'unnamed-chunk-3');">
+<tt>tidyverse</tt>
+</button>
+</div>
+<div id="option1unnamed-chunk-3" class="tabcontentunnamed-chunk-3">
+<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span> <span class="co"># single variable</span>
+<span class="va">iris</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Species"</span>, <span class="st">"Petal.Width"</span><span class="op">)</span><span class="op">]</span> <span class="co"># by name</span>
+<span class="va">iris</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">4</span><span class="op">)</span><span class="op">]</span>  <span class="co"># by column index</span></code></pre></div>
+</div>
+<div id="option2unnamed-chunk-3" class="tabcontentunnamed-chunk-3">
+<div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Species</span><span class="op">)</span>
+<span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Species</span>, <span class="va">Petal.Width</span><span class="op">)</span> <span class="co"># by name</span>
+<span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fl">5</span>, <span class="fl">4</span><span class="op">)</span>  <span class="co"># by column index</span></code></pre></div>
+</div>
+<script> javascript:hide('option2unnamed-chunk-3') </script>
+</div>
+</div>
+</div>
+</div>
+<div id="make-new-variables" class="section level2" number="20.2">
+<h2>
+<span class="header-section-number">E.2</span> Make new variables<a class="anchor" aria-label="anchor" href="#make-new-variables"><i class="fas fa-link"></i></a>
+</h2>
+<button id="displayTextunnamed-chunk-4" onclick="javascript:toggle('unnamed-chunk-4');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-4" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="tab">
+<button class="tablinksunnamed-chunk-4 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-4', 'unnamed-chunk-4');">
+Base R
+</button>
+<button class="tablinksunnamed-chunk-4" onclick="javascript:openCode(event, 'option2unnamed-chunk-4', 'unnamed-chunk-4');">
+<tt>tidyverse</tt>
+</button>
+</div>
+<div id="option1unnamed-chunk-4" class="tabcontentunnamed-chunk-4">
+<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">iris</span><span class="op">$</span><span class="va">Petal.Ratio</span> <span class="op">&lt;-</span> <span class="va">iris</span><span class="op">$</span><span class="va">Petal.Length</span><span class="op">/</span><span class="va">iris</span><span class="op">$</span><span class="va">Petal.Width</span>
+
+<span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Ratio</span> <span class="op">&lt;-</span> <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span><span class="op">/</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span></code></pre></div>
+</div>
+<div id="option2unnamed-chunk-4" class="tabcontentunnamed-chunk-4">
+<div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">iris</span>, 
+       Petal.Ratio <span class="op">=</span> <span class="va">Petal.Length</span><span class="op">/</span><span class="va">Petal.Width</span>,
+       Sepal.Ratio <span class="op">=</span> <span class="va">Sepal.Length</span><span class="op">/</span><span class="va">Sepal.Width</span><span class="op">)</span></code></pre></div>
+</div>
+<script> javascript:hide('option2unnamed-chunk-4') </script>
+</div>
+</div>
+</div>
+<p>Extract observations (rows)</p>
+<button id="displayTextunnamed-chunk-5" onclick="javascript:toggle('unnamed-chunk-5');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-5" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="tab">
+<button class="tablinksunnamed-chunk-5 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-5', 'unnamed-chunk-5');">
+Base R
+</button>
+<button class="tablinksunnamed-chunk-5" onclick="javascript:openCode(event, 'option2unnamed-chunk-5', 'unnamed-chunk-5');">
+<tt>tidyverse</tt>
+</button>
+</div>
+<div id="option1unnamed-chunk-5" class="tabcontentunnamed-chunk-5">
+<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Using [,]</span>
+<span class="va">iris</span><span class="op">[</span><span class="va">iris</span><span class="op">$</span><span class="va">Petal.Width</span> <span class="op">&gt;</span> <span class="fl">0.5</span> <span class="op">&amp;</span> <span class="va">iris</span><span class="op">$</span><span class="va">Species</span> <span class="op">==</span> <span class="st">"setosa"</span>, <span class="op">]</span>
+
+<span class="co"># Using subset (works very much like dplyr::filter)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Petal.Width</span> <span class="op">&gt;</span> <span class="fl">0.5</span> <span class="op">&amp;</span> <span class="va">Species</span> <span class="op">==</span> <span class="st">"setosa"</span><span class="op">)</span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Sepal.Length
+</th>
+<th style="text-align:right;">
+Sepal.Width
+</th>
+<th style="text-align:right;">
+Petal.Length
+</th>
+<th style="text-align:right;">
+Petal.Width
+</th>
+<th style="text-align:left;">
+Species
+</th>
+<th style="text-align:right;">
+Petal.Ratio
+</th>
+<th style="text-align:right;">
+Sepal.Ratio
+</th>
+</tr></thead>
+<tbody><tr>
+<td style="text-align:left;">
+44
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+3.5
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+0.6
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+<td style="text-align:right;">
+2.666667
+</td>
+<td style="text-align:right;">
+1.428571
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Sepal.Length
+</th>
+<th style="text-align:right;">
+Sepal.Width
+</th>
+<th style="text-align:right;">
+Petal.Length
+</th>
+<th style="text-align:right;">
+Petal.Width
+</th>
+<th style="text-align:left;">
+Species
+</th>
+<th style="text-align:right;">
+Petal.Ratio
+</th>
+<th style="text-align:right;">
+Sepal.Ratio
+</th>
+</tr></thead>
+<tbody><tr>
+<td style="text-align:left;">
+44
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+3.5
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+0.6
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+<td style="text-align:right;">
+2.666667
+</td>
+<td style="text-align:right;">
+1.428571
+</td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+<div id="option2unnamed-chunk-5" class="tabcontentunnamed-chunk-5">
+<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Petal.Width</span> <span class="op">&gt;</span> <span class="fl">0.5</span> <span class="op">&amp;</span> <span class="va">Species</span> <span class="op">==</span> <span class="st">"setosa"</span><span class="op">)</span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:right;">
+Sepal.Length
+</th>
+<th style="text-align:right;">
+Sepal.Width
+</th>
+<th style="text-align:right;">
+Petal.Length
+</th>
+<th style="text-align:right;">
+Petal.Width
+</th>
+<th style="text-align:left;">
+Species
+</th>
+<th style="text-align:right;">
+Petal.Ratio
+</th>
+<th style="text-align:right;">
+Sepal.Ratio
+</th>
+</tr></thead>
+<tbody><tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+3.5
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+0.6
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+<td style="text-align:right;">
+2.666667
+</td>
+<td style="text-align:right;">
+1.428571
+</td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+<script> javascript:hide('option2unnamed-chunk-5') </script>
+</div>
+</div>
+</div>
+</div>
+<div id="arrange-observations-rows" class="section level2" number="20.3">
+<h2>
+<span class="header-section-number">E.3</span> Arrange observations (rows)<a class="anchor" aria-label="anchor" href="#arrange-observations-rows"><i class="fas fa-link"></i></a>
+</h2>
+<button id="displayTextunnamed-chunk-6" onclick="javascript:toggle('unnamed-chunk-6');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-6" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="tab">
+<button class="tablinksunnamed-chunk-6 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-6', 'unnamed-chunk-6');">
+Base R
+</button>
+<button class="tablinksunnamed-chunk-6" onclick="javascript:openCode(event, 'option2unnamed-chunk-6', 'unnamed-chunk-6');">
+<tt>tidyverse</tt>
+</button>
+</div>
+<div id="option1unnamed-chunk-6" class="tabcontentunnamed-chunk-6">
+<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># descending order of species (alphabetic) followed by ascending order of Petal.Width</span>
+<span class="va">iris</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Petal.Width</span><span class="op">)</span> , <span class="op">]</span></code></pre></div>
+</div>
+<div id="option2unnamed-chunk-6" class="tabcontentunnamed-chunk-6">
+<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># descending order of species (alphabetic) followed by ascending order of Petal.Width</span>
+<span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span>, <span class="va">Petal.Width</span><span class="op">)</span> </code></pre></div>
+</div>
+<script> javascript:hide('option2unnamed-chunk-6') </script>
+</div>
+</div>
+</div>
+</div>
+<div id="summarise-observations-rows" class="section level2" number="20.4">
+<h2>
+<span class="header-section-number">E.4</span> Summarise observations (rows)<a class="anchor" aria-label="anchor" href="#summarise-observations-rows"><i class="fas fa-link"></i></a>
+</h2>
+<button id="displayTextunnamed-chunk-7" onclick="javascript:toggle('unnamed-chunk-7');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-7" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="tab">
+<button class="tablinksunnamed-chunk-7 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-7', 'unnamed-chunk-7');">
+Base R
+</button>
+<button class="tablinksunnamed-chunk-7" onclick="javascript:openCode(event, 'option2unnamed-chunk-7', 'unnamed-chunk-7');">
+<tt>tidyverse</tt>
+</button>
+</div>
+<div id="option1unnamed-chunk-7" class="tabcontentunnamed-chunk-7">
+<div class="sourceCode" id="cb195"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Manually create a data.frame</span>
+<span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Petal.Length.mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Petal.Length</span><span class="op">)</span>,
+           Petal.Length.sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Petal.Length</span><span class="op">)</span>,
+           Sepal.Length.mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span><span class="op">)</span>,
+           Sepal.Length.sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:right;">
+Petal.Length.mean
+</th>
+<th style="text-align:right;">
+Petal.Length.sd
+</th>
+<th style="text-align:right;">
+Sepal.Length.mean
+</th>
+<th style="text-align:right;">
+Sepal.Length.sd
+</th>
+</tr></thead>
+<tbody><tr>
+<td style="text-align:right;">
+3.758
+</td>
+<td style="text-align:right;">
+1.765298
+</td>
+<td style="text-align:right;">
+5.843333
+</td>
+<td style="text-align:right;">
+0.8280661
+</td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+<div id="option2unnamed-chunk-7" class="tabcontentunnamed-chunk-7">
+<div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="va">iris</span>, 
+          Petal.Length.mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Petal.Length</span><span class="op">)</span>,
+          Petal.Length.sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">Petal.Length</span><span class="op">)</span>,
+          Sepal.Length.mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Sepal.Length</span><span class="op">)</span>,
+          Sepal.Length.sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:right;">
+Petal.Length.mean
+</th>
+<th style="text-align:right;">
+Petal.Length.sd
+</th>
+<th style="text-align:right;">
+Sepal.Length.mean
+</th>
+<th style="text-align:right;">
+Sepal.Length.sd
+</th>
+</tr></thead>
+<tbody><tr>
+<td style="text-align:right;">
+3.758
+</td>
+<td style="text-align:right;">
+1.765298
+</td>
+<td style="text-align:right;">
+5.843333
+</td>
+<td style="text-align:right;">
+0.8280661
+</td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+<script> javascript:hide('option2unnamed-chunk-7') </script>
+</div>
+</div>
+</div>
+</div>
+<div id="grouped-operations" class="section level2" number="20.5">
+<h2>
+<span class="header-section-number">E.5</span> Grouped operations<a class="anchor" aria-label="anchor" href="#grouped-operations"><i class="fas fa-link"></i></a>
+</h2>
+<button id="displayTextunnamed-chunk-8" onclick="javascript:toggle('unnamed-chunk-8');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-8" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="tab">
+<button class="tablinksunnamed-chunk-8 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-8', 'unnamed-chunk-8');">
+Base R
+</button>
+<button class="tablinksunnamed-chunk-8" onclick="javascript:openCode(event, 'option2unnamed-chunk-8', 'unnamed-chunk-8');">
+<tt>tidyverse</tt>
+</button>
+</div>
+<div id="option1unnamed-chunk-8" class="tabcontentunnamed-chunk-8">
+<div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># First operate in the data.frame by group (split-apply)</span>
+<span class="va">mtcars_by</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/by.html">by</a></span><span class="op">(</span><span class="va">mtcars</span>, 
+   INDICES <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">cyl</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span><span class="op">)</span>,
+   FUN <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span>
+     <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>cyl <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">cyl</span><span class="op">)</span>,
+                gear <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">gear</span><span class="op">)</span>,
+                mpg.mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">mpg</span><span class="op">)</span>,
+                mpg.sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">mpg</span><span class="op">)</span>,
+                wt.mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">wt</span><span class="op">)</span>,
+                wt.sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">wt</span><span class="op">)</span><span class="op">)</span>
+   <span class="op">}</span><span class="op">)</span>
+
+<span class="co"># Then combine the results into a data.frame</span>
+<span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="va">mtcars_by</span><span class="op">)</span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:right;">
+cyl
+</th>
+<th style="text-align:right;">
+gear
+</th>
+<th style="text-align:right;">
+mpg.mean
+</th>
+<th style="text-align:right;">
+mpg.sd
+</th>
+<th style="text-align:right;">
+wt.mean
+</th>
+<th style="text-align:right;">
+wt.sd
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+21.500
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+2.465000
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+19.750
+</td>
+<td style="text-align:right;">
+2.3334524
+</td>
+<td style="text-align:right;">
+3.337500
+</td>
+<td style="text-align:right;">
+0.1732412
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+15.050
+</td>
+<td style="text-align:right;">
+2.7743959
+</td>
+<td style="text-align:right;">
+4.104083
+</td>
+<td style="text-align:right;">
+0.7683069
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+26.925
+</td>
+<td style="text-align:right;">
+4.8073604
+</td>
+<td style="text-align:right;">
+2.378125
+</td>
+<td style="text-align:right;">
+0.6006243
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+19.750
+</td>
+<td style="text-align:right;">
+1.5524175
+</td>
+<td style="text-align:right;">
+3.093750
+</td>
+<td style="text-align:right;">
+0.4131460
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+28.200
+</td>
+<td style="text-align:right;">
+3.1112698
+</td>
+<td style="text-align:right;">
+1.826500
+</td>
+<td style="text-align:right;">
+0.4433560
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+19.700
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+2.770000
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+15.400
+</td>
+<td style="text-align:right;">
+0.5656854
+</td>
+<td style="text-align:right;">
+3.370000
+</td>
+<td style="text-align:right;">
+0.2828427
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div id="option2unnamed-chunk-8" class="tabcontentunnamed-chunk-8">
+<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mtcars</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">cyl</span>, <span class="va">gear</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mpg.mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span>,
+            mpg.sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span>,
+            wt.mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">wt</span><span class="op">)</span>,
+            wt.sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">wt</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># remove any groupings from downstream analysis</span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:right;">
+cyl
+</th>
+<th style="text-align:right;">
+gear
+</th>
+<th style="text-align:right;">
+mpg.mean
+</th>
+<th style="text-align:right;">
+mpg.sd
+</th>
+<th style="text-align:right;">
+wt.mean
+</th>
+<th style="text-align:right;">
+wt.sd
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+21.500
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+2.465000
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+26.925
+</td>
+<td style="text-align:right;">
+4.8073604
+</td>
+<td style="text-align:right;">
+2.378125
+</td>
+<td style="text-align:right;">
+0.6006243
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+28.200
+</td>
+<td style="text-align:right;">
+3.1112698
+</td>
+<td style="text-align:right;">
+1.826500
+</td>
+<td style="text-align:right;">
+0.4433560
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+19.750
+</td>
+<td style="text-align:right;">
+2.3334524
+</td>
+<td style="text-align:right;">
+3.337500
+</td>
+<td style="text-align:right;">
+0.1732412
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+19.750
+</td>
+<td style="text-align:right;">
+1.5524175
+</td>
+<td style="text-align:right;">
+3.093750
+</td>
+<td style="text-align:right;">
+0.4131460
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+19.700
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+2.770000
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+15.050
+</td>
+<td style="text-align:right;">
+2.7743959
+</td>
+<td style="text-align:right;">
+4.104083
+</td>
+<td style="text-align:right;">
+0.7683069
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+15.400
+</td>
+<td style="text-align:right;">
+0.5656854
+</td>
+<td style="text-align:right;">
+3.370000
+</td>
+<td style="text-align:right;">
+0.2828427
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<script> javascript:hide('option2unnamed-chunk-8') </script>
+</div>
+</div>
+</div>
+</div>
+<div id="create-new-columns-as-calculations" class="section level2" number="20.6">
+<h2>
+<span class="header-section-number">E.6</span> Create new columns as calculations<a class="anchor" aria-label="anchor" href="#create-new-columns-as-calculations"><i class="fas fa-link"></i></a>
+</h2>
+<button id="displayTextunnamed-chunk-9" onclick="javascript:toggle('unnamed-chunk-9');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-9" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="tab">
+<button class="tablinksunnamed-chunk-9 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-9', 'unnamed-chunk-9');">
+Base R
+</button>
+<button class="tablinksunnamed-chunk-9" onclick="javascript:openCode(event, 'option2unnamed-chunk-9', 'unnamed-chunk-9');">
+<tt>tidyverse</tt>
+</button>
+</div>
+<div id="option1unnamed-chunk-9" class="tabcontentunnamed-chunk-9">
+<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># First operate in the data.frame by group (split-apply)</span>
+<span class="va">iris_by</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/by.html">by</a></span><span class="op">(</span><span class="va">iris</span>, 
+              INDICES <span class="op">=</span> <span class="va">iris</span><span class="op">$</span><span class="va">Species</span>, 
+              FUN <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span>
+                <span class="va">x</span><span class="op">$</span><span class="va">Petal.Width.centered</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">$</span><span class="va">Petal.Width</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">Petal.Width</span><span class="op">)</span>
+                <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+              <span class="op">}</span><span class="op">)</span>
+
+<span class="co"># Then combine the results into a data.frame</span>
+<span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="va">iris_by</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="option2unnamed-chunk-9" class="tabcontentunnamed-chunk-9">
+<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">iris</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Petal.Width.centered <span class="op">=</span> <span class="va">Petal.Width</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Petal.Width</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># remove any groupings from downstream analysis</span></code></pre></div>
+</div>
+<script> javascript:hide('option2unnamed-chunk-9') </script>
+</div>
+</div>
+</div>
+</div>
+<div id="filter-rows-with-conditions-evaluated-by-group" class="section level2" number="20.7">
+<h2>
+<span class="header-section-number">E.7</span> Filter rows with conditions evaluated by group<a class="anchor" aria-label="anchor" href="#filter-rows-with-conditions-evaluated-by-group"><i class="fas fa-link"></i></a>
+</h2>
+<button id="displayTextunnamed-chunk-10" onclick="javascript:toggle('unnamed-chunk-10');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-10" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="tab">
+<button class="tablinksunnamed-chunk-10 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-10', 'unnamed-chunk-10');">
+Base R
+</button>
+<button class="tablinksunnamed-chunk-10" onclick="javascript:openCode(event, 'option2unnamed-chunk-10', 'unnamed-chunk-10');">
+<tt>tidyverse</tt>
+</button>
+</div>
+<div id="option1unnamed-chunk-10" class="tabcontentunnamed-chunk-10">
+<div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># First operate in the data.frame by group (split-apply)</span>
+<span class="va">widest_petals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/by.html">by</a></span><span class="op">(</span><span class="va">iris</span>, 
+                    INDICES <span class="op">=</span> <span class="va">iris</span><span class="op">$</span><span class="va">Species</span>, 
+                    FUN <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span>
+                      <span class="va">x</span><span class="op">[</span><span class="va">x</span><span class="op">$</span><span class="va">Petal.Width</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">Petal.Width</span><span class="op">)</span>, <span class="op">]</span> 
+                    <span class="op">}</span><span class="op">)</span>
+
+<span class="co"># Then combine the results into a data.frame</span>
+<span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="va">widest_petals</span><span class="op">)</span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Sepal.Length
+</th>
+<th style="text-align:right;">
+Sepal.Width
+</th>
+<th style="text-align:right;">
+Petal.Length
+</th>
+<th style="text-align:right;">
+Petal.Width
+</th>
+<th style="text-align:left;">
+Species
+</th>
+<th style="text-align:right;">
+Petal.Ratio
+</th>
+<th style="text-align:right;">
+Sepal.Ratio
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+setosa
+</td>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+3.5
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+0.6
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+<td style="text-align:right;">
+2.666667
+</td>
+<td style="text-align:right;">
+1.428571
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+versicolor
+</td>
+<td style="text-align:right;">
+5.9
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:right;">
+4.8
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:left;">
+versicolor
+</td>
+<td style="text-align:right;">
+2.666667
+</td>
+<td style="text-align:right;">
+1.843750
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+virginica.101
+</td>
+<td style="text-align:right;">
+6.3
+</td>
+<td style="text-align:right;">
+3.3
+</td>
+<td style="text-align:right;">
+6.0
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:left;">
+virginica
+</td>
+<td style="text-align:right;">
+2.400000
+</td>
+<td style="text-align:right;">
+1.909091
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+virginica.110
+</td>
+<td style="text-align:right;">
+7.2
+</td>
+<td style="text-align:right;">
+3.6
+</td>
+<td style="text-align:right;">
+6.1
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:left;">
+virginica
+</td>
+<td style="text-align:right;">
+2.440000
+</td>
+<td style="text-align:right;">
+2.000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+virginica.145
+</td>
+<td style="text-align:right;">
+6.7
+</td>
+<td style="text-align:right;">
+3.3
+</td>
+<td style="text-align:right;">
+5.7
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:left;">
+virginica
+</td>
+<td style="text-align:right;">
+2.280000
+</td>
+<td style="text-align:right;">
+2.030303
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div id="option2unnamed-chunk-10" class="tabcontentunnamed-chunk-10">
+<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">iris</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Petal.Width</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">Petal.Width</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:right;">
+Sepal.Length
+</th>
+<th style="text-align:right;">
+Sepal.Width
+</th>
+<th style="text-align:right;">
+Petal.Length
+</th>
+<th style="text-align:right;">
+Petal.Width
+</th>
+<th style="text-align:left;">
+Species
+</th>
+<th style="text-align:right;">
+Petal.Ratio
+</th>
+<th style="text-align:right;">
+Sepal.Ratio
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+3.5
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+0.6
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+<td style="text-align:right;">
+2.666667
+</td>
+<td style="text-align:right;">
+1.428571
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5.9
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:right;">
+4.8
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:left;">
+versicolor
+</td>
+<td style="text-align:right;">
+2.666667
+</td>
+<td style="text-align:right;">
+1.843750
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6.3
+</td>
+<td style="text-align:right;">
+3.3
+</td>
+<td style="text-align:right;">
+6.0
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:left;">
+virginica
+</td>
+<td style="text-align:right;">
+2.400000
+</td>
+<td style="text-align:right;">
+1.909091
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7.2
+</td>
+<td style="text-align:right;">
+3.6
+</td>
+<td style="text-align:right;">
+6.1
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:left;">
+virginica
+</td>
+<td style="text-align:right;">
+2.440000
+</td>
+<td style="text-align:right;">
+2.000000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6.7
+</td>
+<td style="text-align:right;">
+3.3
+</td>
+<td style="text-align:right;">
+5.7
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:left;">
+virginica
+</td>
+<td style="text-align:right;">
+2.280000
+</td>
+<td style="text-align:right;">
+2.030303
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<script> javascript:hide('option2unnamed-chunk-10') </script>
+</div>
+</div>
+</div>
+</div>
+<div id="pivot-data" class="section level2" number="20.8">
+<h2>
+<span class="header-section-number">E.8</span> Pivot data<a class="anchor" aria-label="anchor" href="#pivot-data"><i class="fas fa-link"></i></a>
+</h2>
+<button id="displayTextunnamed-chunk-11" onclick="javascript:toggle('unnamed-chunk-11');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-11" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="tab">
+<button class="tablinksunnamed-chunk-11 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-11', 'unnamed-chunk-11');">
+Base R
+</button>
+<button class="tablinksunnamed-chunk-11" onclick="javascript:openCode(event, 'option2unnamed-chunk-11', 'unnamed-chunk-11');">
+<tt>tidyverse</tt>
+</button>
+</div>
+<div id="option1unnamed-chunk-11" class="tabcontentunnamed-chunk-11">
+<div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/reshape.html">reshape</a></span><span class="op">(</span><span class="va">iris</span>, 
+        varying <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Sepal.Length"</span>, <span class="st">"Sepal.Width"</span>, <span class="st">"Petal.Length"</span>, <span class="st">"Petal.Width"</span><span class="op">)</span>,
+        timevar <span class="op">=</span> <span class="st">"trait"</span>,
+        idvar <span class="op">=</span> <span class="st">"id"</span>,
+        v.names <span class="op">=</span> <span class="st">"measurement"</span>,
+        direction <span class="op">=</span> <span class="st">"long"</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="option2unnamed-chunk-11" class="tabcontentunnamed-chunk-11">
+<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">iris</span> <span class="op">%&gt;%</span> 
+ <span class="fu">pivot_longer</span><span class="op">(</span>cols <span class="op">=</span> <span class="va">Sepal.Length</span><span class="op">:</span><span class="va">Petal.Width</span>, values_to <span class="op">=</span> <span class="st">"measurement"</span>, names_to <span class="op">=</span> <span class="st">"trait"</span> <span class="op">)</span></code></pre></div>
+</div>
+<script> javascript:hide('option2unnamed-chunk-11') </script>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  if (t = document.getElementById("webex-total_correct")) {
+    var correct = document.getElementsByClassName("webex-correct").length;
+    var solvemes = document.getElementsByClassName("webex-solveme").length;
+    var radiogroups = document.getElementsByClassName("webex-radiogroup").length;
+    var selects = document.getElementsByClassName("webex-select").length;
+    
+    t.innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+  
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+  
+  var cl = this.classList
+  
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+  
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+  
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+  
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+  
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+  }
+  
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+  
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+  }
+
+  update_total_correct();
+}
+
+</script><script>
+$( document ).ready(function() {
+  var cite = ' ';
+  var license = ' <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>';
+
+  $("footer div.row div:eq(1) p").html(
+    license
+  );
+});
+</script><div class="chapter-nav">
+<div class="prev"><a href="symbols.html"><span class="header-section-number">D</span> Symbols</a></div>
+<div class="next"><a href="license.html">License</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#baser"><span class="header-section-number">E</span> Base R vs. Tidyverse</a></li>
+<li><a class="nav-link" href="#extract-variables"><span class="header-section-number">E.1</span> Extract variables</a></li>
+<li><a class="nav-link" href="#make-new-variables"><span class="header-section-number">E.2</span> Make new variables</a></li>
+<li><a class="nav-link" href="#arrange-observations-rows"><span class="header-section-number">E.3</span> Arrange observations (rows)</a></li>
+<li><a class="nav-link" href="#summarise-observations-rows"><span class="header-section-number">E.4</span> Summarise observations (rows)</a></li>
+<li><a class="nav-link" href="#grouped-operations"><span class="header-section-number">E.5</span> Grouped operations</a></li>
+<li><a class="nav-link" href="#create-new-columns-as-calculations"><span class="header-section-number">E.6</span> Create new columns as calculations</a></li>
+<li><a class="nav-link" href="#filter-rows-with-conditions-evaluated-by-group"><span class="header-section-number">E.7</span> Filter rows with conditions evaluated by group</a></li>
+<li><a class="nav-link" href="#pivot-data"><span class="header-section-number">E.8</span> Pivot data</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/UEABIO/data-sci-v1/blob/main/book/appendix-e-base-r.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/UEABIO/data-sci-v1/edit/main/book/appendix-e-base-r.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-08-10.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

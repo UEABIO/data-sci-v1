@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 12 Mixed models | 5023Y</title>
 <meta name="author" content="Philip T. Leftwich">
-<meta name="description" content='/* update total correct if #webex-total_correct exists */ update_total_correct = function() {  console.log("webex: update total_correct");  if (t = document.getElementById("webex-total_correct"))...'>
+<meta name="description" content="12.1 What is mixed modelling and why do we need it? Ecological and biological data is often complicated and messy. We can have lots of grouping factors like populations, data collection sites that...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 12 Mixed models | 5023Y">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://ueabio.github.io/data-sci/mixed-models.html">
 <meta property="og:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
-<meta property="og:description" content='/* update total correct if #webex-total_correct exists */ update_total_correct = function() {  console.log("webex: update total_correct");  if (t = document.getElementById("webex-total_correct"))...'>
+<meta property="og:description" content="12.1 What is mixed modelling and why do we need it? Ecological and biological data is often complicated and messy. We can have lots of grouping factors like populations, data collection sites that...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 12 Mixed models | 5023Y">
-<meta name="twitter:description" content='/* update total correct if #webex-total_correct exists */ update_total_correct = function() {  console.log("webex: update total_correct");  if (t = document.getElementById("webex-total_correct"))...'>
+<meta name="twitter:description" content="12.1 What is mixed modelling and why do we need it? Ecological and biological data is often complicated and messy. We can have lots of grouping factors like populations, data collection sites that...">
 <meta name="twitter:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.13/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -27,6 +27,38 @@
       gtag('js', new Date());
 
       gtag('config', 'G-6NP3MF25W3');
+    </script><script language="javascript"> 
+        function toggle(id) {
+            var ele = document.getElementById("toggleText" + id);
+            var text = document.getElementById("displayText" + id);
+            var buttonText = text.innerHTML.replace("Show ", "");
+            buttonText = buttonText.replace("Hide ", "");
+            if(ele.style.display == "block") {
+                ele.style.display = "none";
+                text.innerHTML = "Show " + buttonText;
+            } else {
+                ele.style.display = "block";
+                text.innerHTML = "Hide " + buttonText;
+            }
+        } 
+    </script><script language="javascript">
+        function openCode(evt, codeName, id) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent" + id);
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks" + id);
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(codeName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script><script language="javascript">
+        function hide(id){
+            document.getElementById(id).style.display = "none";
+        }
     </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/psyteachr.css">
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="include/style.css">
@@ -66,7 +98,7 @@
 <li><a class="" href="data-insights-part-two.html"><span class="header-section-number">11</span> Data insights part two</a></li>
 <li class="book-part">Advanced topics</li>
 <li><a class="active" href="mixed-models.html"><span class="header-section-number">12</span> Mixed models</a></li>
-<li><a class="" href="non-linear-modelling.html"><span class="header-section-number">13</span> Non-linear modelling</a></li>
+<li><a class="" href="generalised-additive-models.html"><span class="header-section-number">13</span> Generalised Additive Models</a></li>
 <li><a class="" href="structural-equation-modelling.html"><span class="header-section-number">14</span> Structural equation modelling</a></li>
 <li><a class="" href="unsupervised-machine-learning.html"><span class="header-section-number">15</span> Unsupervised Machine Learning</a></li>
 <li class="book-part">Appendices</li>
@@ -74,6 +106,7 @@
 <li><a class="" href="updating-r-rstudio-and-packages.html"><span class="header-section-number">B</span> Updating R, RStudio, and packages</a></li>
 <li><a class="" href="exporting-files-from-the-server.html"><span class="header-section-number">C</span> Exporting files from the server</a></li>
 <li><a class="" href="symbols.html"><span class="header-section-number">D</span> Symbols</a></li>
+<li><a class="" href="baser.html"><span class="header-section-number">E</span> Base R vs. Tidyverse</a></li>
 <li><a class="" href="license.html">License</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
@@ -87,6 +120,107 @@
 <h1>
 <span class="header-section-number">12</span> Mixed models<a class="anchor" aria-label="anchor" href="#mixed-models"><i class="fas fa-link"></i></a>
 </h1>
+<div id="what-is-mixed-modelling-and-why-do-we-need-it" class="section level2" number="12.1">
+<h2>
+<span class="header-section-number">12.1</span> What is mixed modelling and why do we need it?<a class="anchor" aria-label="anchor" href="#what-is-mixed-modelling-and-why-do-we-need-it"><i class="fas fa-link"></i></a>
+</h2>
+<p>Ecological and biological data is often complicated and messy. We can have lots of <strong>grouping factors</strong> like populations, data collection sites that mean our data has clusters so that our data points are not truly <strong>independent</strong>. This is where <strong>mixed models</strong> are useful, these combine <strong>fixed</strong> and <strong>random</strong> effects to help us deal with messy data, structured data, and they help us save degrees of freedom. They are incredibly useful, but frequently tricky to implement well!</p>
+<div id="fixed-effects" class="section level3" number="12.1.1">
+<h3>
+<span class="header-section-number">12.1.1</span> Fixed effects<a class="anchor" aria-label="anchor" href="#fixed-effects"><i class="fas fa-link"></i></a>
+</h3>
+<p>So far in our statistics we have dealt only with <strong>fixed effects</strong></p>
+<p><strong>Fixed effects</strong> are variables that are constant, or have a constant effect on the individual. For example we can argue that the effect of species on average body mass is constant, and does not change. It could be argued that these variables <em>could</em> change over time, but for research and experimental purposes are constant. We assume that the values of a fixed variable in one study should be the same as values in another study.</p>
+</div>
+<div id="random-effects" class="section level3" number="12.1.2">
+<h3>
+<span class="header-section-number">12.1.2</span> Random effects<a class="anchor" aria-label="anchor" href="#random-effects"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Random effects</strong>, these are the opposite of fixed effects. These variables have <em>unpredictable</em> effects, for example this could be the sample sites. It is perfectly plausible that data collected within different sites are more similar to each other than data from different sites.</p>
+<p>Unlike fixed effects we assume these values are samples drawn from a larger population of values. We are often not interested in the explicit effect of this variable, but we expect it to have an effect on the dependent variable and wish to account for it. These could be any of a number of grouping variables, for example:</p>
+<ul>
+<li><p>Study-site</p></li>
+<li><p>Repeated measurements in an individual</p></li>
+<li><p>Experimental replications</p></li>
+</ul>
+</div>
+</div>
+<div id="the-data" class="section level2" number="12.2">
+<h2>
+<span class="header-section-number">12.2</span> The data<a class="anchor" aria-label="anchor" href="#the-data"><i class="fas fa-link"></i></a>
+</h2>
+<p>We are going to look at bacterial growth in four different growth media. We ran this experiment five times, in five different microbial growth cabinets</p>
+<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">bacteria</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="simple-model" class="section level2" number="12.3">
+<h2>
+<span class="header-section-number">12.3</span> Simple model<a class="anchor" aria-label="anchor" href="#simple-model"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="covariates" class="section level2" number="12.4">
+<h2>
+<span class="header-section-number">12.4</span> Covariates<a class="anchor" aria-label="anchor" href="#covariates"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="mixed-model" class="section level2" number="12.5">
+<h2>
+<span class="header-section-number">12.5</span> Mixed model<a class="anchor" aria-label="anchor" href="#mixed-model"><i class="fas fa-link"></i></a>
+</h2>
+<div id="random-slopes" class="section level3" number="12.5.1">
+<h3>
+<span class="header-section-number">12.5.1</span> Random slopes<a class="anchor" aria-label="anchor" href="#random-slopes"><i class="fas fa-link"></i></a>
+</h3>
+<p>Rats data - Exeter</p>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+<ol style="list-style-type: decimal"><li>Plot a scatterplot of <code>Alcohol</code> vs <code>TotalPhenols</code> and colour data points by <code>WineType</code>
+</li></ol>
+</div>
+</div>
+
+<button id="displayTextunnamed-chunk-4" onclick="javascript:toggle('unnamed-chunk-4');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-4" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="tab">
+<button class="tablinksunnamed-chunk-4 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-4', 'unnamed-chunk-4');">
+Base R
+</button>
+<button class="tablinksunnamed-chunk-4" onclick="javascript:openCode(event, 'option2unnamed-chunk-4', 'unnamed-chunk-4');">
+<tt>tidyverse</tt>
+</button>
+</div>
+<div id="option1unnamed-chunk-4" class="tabcontentunnamed-chunk-4">
+<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="advanced-1-mixed-models_files/figure-html/unnamed-chunk-6-1.png" width="100%" style="display: block; margin: auto;"></div>
+</div>
+<div id="option2unnamed-chunk-4" class="tabcontentunnamed-chunk-4">
+<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">cars</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="advanced-1-mixed-models_files/figure-html/unnamed-chunk-7-1.png" width="100%" style="display: block; margin: auto;"></div>
+</div>
+<script> javascript:hide('option2unnamed-chunk-4') </script>
+</div>
+</div>
+</div>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<p>Something</p>
+</div>
+</div>
+</div>
 </div>
 <script>
 
@@ -269,10 +403,24 @@ $( document ).ready(function() {
 });
 </script><div class="chapter-nav">
 <div class="prev"><a href="data-insights-part-two.html"><span class="header-section-number">11</span> Data insights part two</a></div>
-<div class="next"><a href="non-linear-modelling.html"><span class="header-section-number">13</span> Non-linear modelling</a></div>
+<div class="next"><a href="generalised-additive-models.html"><span class="header-section-number">13</span> Generalised Additive Models</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#mixed-models"><span class="header-section-number">12</span> Mixed models</a></li></ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#mixed-models"><span class="header-section-number">12</span> Mixed models</a></li>
+<li>
+<a class="nav-link" href="#what-is-mixed-modelling-and-why-do-we-need-it"><span class="header-section-number">12.1</span> What is mixed modelling and why do we need it?</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#fixed-effects"><span class="header-section-number">12.1.1</span> Fixed effects</a></li>
+<li><a class="nav-link" href="#random-effects"><span class="header-section-number">12.1.2</span> Random effects</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#the-data"><span class="header-section-number">12.2</span> The data</a></li>
+<li><a class="nav-link" href="#simple-model"><span class="header-section-number">12.3</span> Simple model</a></li>
+<li><a class="nav-link" href="#covariates"><span class="header-section-number">12.4</span> Covariates</a></li>
+<li>
+<a class="nav-link" href="#mixed-model"><span class="header-section-number">12.5</span> Mixed model</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#random-slopes"><span class="header-section-number">12.5.1</span> Random slopes</a></li></ul>
+</li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
@@ -289,7 +437,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-08-05.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-08-10.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

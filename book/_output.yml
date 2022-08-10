@@ -9,6 +9,7 @@ bookdown::bs4_book:
   includes:
     in_header:
     - include/header.html
+    - '_toggle.html'
     after_body:
     - include/webex.js
     - include/script.js

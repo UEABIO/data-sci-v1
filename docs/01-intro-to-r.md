@@ -4,9 +4,6 @@
 
 
 
-
-
-
 -   R is the name of the programming language we will learn on this course.
 
 -   RStudio is a convenient interface which we will be using throughout the course in order to learn how to organise data, produce accurate data analyses & data visualisations.

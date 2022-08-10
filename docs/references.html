@@ -27,6 +27,38 @@
       gtag('js', new Date());
 
       gtag('config', 'G-6NP3MF25W3');
+    </script><script language="javascript"> 
+        function toggle(id) {
+            var ele = document.getElementById("toggleText" + id);
+            var text = document.getElementById("displayText" + id);
+            var buttonText = text.innerHTML.replace("Show ", "");
+            buttonText = buttonText.replace("Hide ", "");
+            if(ele.style.display == "block") {
+                ele.style.display = "none";
+                text.innerHTML = "Show " + buttonText;
+            } else {
+                ele.style.display = "block";
+                text.innerHTML = "Hide " + buttonText;
+            }
+        } 
+    </script><script language="javascript">
+        function openCode(evt, codeName, id) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent" + id);
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks" + id);
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(codeName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script><script language="javascript">
+        function hide(id){
+            document.getElementById(id).style.display = "none";
+        }
     </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/psyteachr.css">
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="include/style.css">
@@ -66,7 +98,7 @@
 <li><a class="" href="data-insights-part-two.html"><span class="header-section-number">11</span> Data insights part two</a></li>
 <li class="book-part">Advanced topics</li>
 <li><a class="" href="mixed-models.html"><span class="header-section-number">12</span> Mixed models</a></li>
-<li><a class="" href="non-linear-modelling.html"><span class="header-section-number">13</span> Non-linear modelling</a></li>
+<li><a class="" href="generalised-additive-models.html"><span class="header-section-number">13</span> Generalised Additive Models</a></li>
 <li><a class="" href="structural-equation-modelling.html"><span class="header-section-number">14</span> Structural equation modelling</a></li>
 <li><a class="" href="unsupervised-machine-learning.html"><span class="header-section-number">15</span> Unsupervised Machine Learning</a></li>
 <li class="book-part">Appendices</li>
@@ -74,6 +106,7 @@
 <li><a class="" href="updating-r-rstudio-and-packages.html"><span class="header-section-number">B</span> Updating R, RStudio, and packages</a></li>
 <li><a class="" href="exporting-files-from-the-server.html"><span class="header-section-number">C</span> Exporting files from the server</a></li>
 <li><a class="" href="symbols.html"><span class="header-section-number">D</span> Symbols</a></li>
+<li><a class="" href="baser.html"><span class="header-section-number">E</span> Base R vs. Tidyverse</a></li>
 <li><a class="" href="license.html">License</a></li>
 <li><a class="active" href="references.html">References</a></li>
 </ul>
@@ -94,6 +127,9 @@ Gorman, K., Williams, T., &amp; Fraser, W. (2014). Ecological sexual dimorphism 
 <div id="ref-R-palmerpenguins" class="csl-entry">
 Horst, A., Hill, A., &amp; Gorman, K. (2020). <em>Palmerpenguins: Palmer archipelago (antarctica) penguin data</em>. <a href="https://CRAN.R-project.org/package=palmerpenguins">https://CRAN.R-project.org/package=palmerpenguins</a>
 </div>
+<div id="ref-R-here" class="csl-entry">
+Müller, K. (2020). <em>Here: A simpler way to find your files</em>. <a href="https://CRAN.R-project.org/package=here">https://CRAN.R-project.org/package=here</a>
+</div>
 <div id="ref-R-patchwork" class="csl-entry">
 Pedersen, T. L. (2020). <em>Patchwork: The composer of plots</em>. <a href="https://CRAN.R-project.org/package=patchwork">https://CRAN.R-project.org/package=patchwork</a>
 </div>
@@ -103,11 +139,21 @@ Wickham, H. (2021). <em>Tidyverse: Easily install and load the tidyverse</em>. <
 <div id="ref-R-ggplot2" class="csl-entry">
 Wickham, H., Chang, W., Henry, L., Pedersen, T. L., Takahashi, K., Wilke, C., Woo, K., Yutani, H., &amp; Dunnington, D. (2021). <em>ggplot2: Create elegant data visualisations using the grammar of graphics</em>. <a href="https://CRAN.R-project.org/package=ggplot2">https://CRAN.R-project.org/package=ggplot2</a>
 </div>
+<div id="ref-xie2015" class="csl-entry">
+Xie, Y. (2015). <em>Dynamic documents with <span>R</span> and knitr</em> (2nd ed.). Chapman; Hall/CRC. <a href="http://yihui.name/knitr/">http://yihui.name/knitr/</a>
+</div>
 <div id="ref-R-tinytex" class="csl-entry">
 Xie, Y. (2021). <em>Tinytex: Helper functions to install and maintain TeX live, and compile LaTeX documents</em>. <a href="https://github.com/yihui/tinytex">https://github.com/yihui/tinytex</a>
 </div>
+<div id="ref-R-kableExtra" class="csl-entry">
+Zhu, H. (2020). <em>kableExtra: Construct complex table with kable and pipe syntax</em>. <a href="https://CRAN.R-project.org/package=kableExtra">https://CRAN.R-project.org/package=kableExtra</a>
 </div>
 </div>
+</div>
+
+
+
+
 
 
 
@@ -316,7 +362,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-08-05.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-08-10.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

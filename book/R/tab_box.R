@@ -1,0 +1,124 @@
+library(knitr)
+## set knitr options
+opts_chunk$set(cache = TRUE, tidy = F, fig.align = "center", fig.width = 5, fig.height = 5, multCode = F, titles = c("Base R", ifelse(opts_knit$get("rmarkdown.pandoc.to") != "latex", "<tt>tidyverse</tt>", "\\texttt{tidyverse}")))
+## variables to help save latex answers for appendix
+taskCtr <- 0
+solLabels <- list()
+## custom engine for tasks
+knit_engines$set(task = function(options) {
+  ## increment counter
+  assign("taskCtr", taskCtr + 1, pos = 1)
+  solLabels[[taskCtr]] <- c(taskCtr, NA, NA)
+  assign("solLabels", solLabels, pos = 1)
+  ## knit child
+  out <- gsub("``", "```", options$code)
+  out <- knit_child(text = out)
+  ## extract header if provided
+  headerName <- ifelse(length(options$title) > 0, options$title, "Task")
+  ## set up output
+  if(opts_knit$get("rmarkdown.pandoc.to") != "latex") {
+    out <- paste("<div class=\"panel panel-default\"><div class=\"panel-heading\">", headerName, "</div><div class=\"panel-body\">", out, "</div></div>")
+  } else {
+    out <- paste0("\\hypertarget{tsk", taskCtr, "}{}\\bblockT[", headerName, "]{\\phantomsection\\label{sol", taskCtr, "}", taskCtr, "}\n", out, "\n\\eblockT\n")
+  }
+  out
+})
+## custom engine for solutions
+knit_engines$set(solution = function(options) {
+  if(!options$multCode) {
+    out <- gsub("``", "```", options$code)
+    out <- knit_child(text = out)
+    ## extract header if provided
+    headerName <- ifelse(length(options$title) > 0, options$title, "Solution")
+    if(opts_knit$get("rmarkdown.pandoc.to") != "latex") {
+      out <- paste0("<button id=\"displayText", options$label, "\" onclick=\"javascript:toggle('", options$label, "');\">Show ", headerName, "</button>\n\n<div id=\"toggleText", options$label, "\" style=\"display: none\"><div class=\"panel panel-default\"><div class=\"panel-heading panel-heading1\"> ", headerName, " </div><div class=\"panel-body\">", out, "</div></div></div>\n")
+    } else {
+      solLabels[[taskCtr]][2] <- out
+      solLabels[[taskCtr]][3] <- headerName
+      assign("solLabels", solLabels, pos = 1)
+      out <- paste0("\\hyperlink{sol", taskCtr, "}{\\buttonS{Show ", headerName, " on P\\colpageref{tsk", taskCtr, "}}}")
+    }
+    return(out)
+  } else {
+    ## split code
+    code <- grep("####", options$code)
+    if(length(code) != 1){
+      stop(paste("Can't split chunk", options$label, "into two equal parts"))
+    }
+    code <- list(options$code[1:(code - 1)], options$code[(code + 1):length(options$code)])
+    out <- lapply(code, function(x){
+      gsub("``", "```", x)
+    })
+    # tempTidy <- options$tidy
+    # tempTidyOpts <- options$tidy.opts
+    out <- lapply(out, function(x) {
+      if(opts_knit$get("rmarkdown.pandoc.to") != "latex") {
+        return(knit_child(text = x))
+      } else {
+        # opts_chunk$set(tidy = T, tidy.opts = list(width.cutoff = 20))
+        x <- knit_child(text = x)
+        return(x)
+      }
+    })
+    ## extract header if provided
+    headerName <- ifelse(length(options$title) > 0, options$title, "Solution")
+    ## extract headers if provided
+    if(length(options$titles) == 2){
+      headerNames <- options$titles
+    } else {
+      headerNames <- paste("Option", 1:2)
+    }
+    # opts_chunk$set(tidy = tempTidy, tidy.opts = tempTidyOpts)
+    if(opts_knit$get("rmarkdown.pandoc.to") != "latex") {
+      out <- paste0("<div class=\"tab\"><button class=\"tablinks", options$label, " active\" onclick=\"javascript:openCode(event, 'option1", options$label, "', '", options$label, "');\">", headerNames[1], "</button><button class=\"tablinks", options$label, "\" onclick=\"javascript:openCode(event, 'option2", options$label, "', '", options$label, "');\">", headerNames[2], "</button></div><div id=\"option1", options$label, "\" class=\"tabcontent", options$label, "\">", out[[1]], "</div><div id=\"option2", options$label, "\" class=\"tabcontent", options$label, "\">", out[[2]], "</div><script> javascript:hide('option2", options$label, "') </script>")
+      out <- paste0("<button id=\"displayText", options$label, "\" onclick=\"javascript:toggle('", options$label, "');\">Show ", headerName, "</button>\n\n<div id=\"toggleText", options$label, "\" style=\"display: none\"><div class=\"panel panel-default\"><div class=\"panel-heading panel-heading1\"> ", headerName, " </div><div class=\"panel-body\">", out, "</div></div></div>\n")
+      return(out)
+    } else {
+      out <- paste0("\\bmp\n\\bblockST{", headerNames[1], "}\n", out[[1]], "\n\\eblockST\n\\emp\n\\hspace{0\\textwidth}\n\\bmp\\bblockST{", headerNames[2], "}\n", out[[2]], "\n\\eblockST\n\\emp\n")
+      solLabels[[taskCtr]][2] <- out
+      solLabels[[taskCtr]][3] <- headerName
+      assign("solLabels", solLabels, pos = 1)
+      out <- paste0("\\hyperlink{sol", taskCtr, "}{\\buttonS{Show ", headerName, " on P\\colpageref{tsk", taskCtr, "}}}")
+    }
+    return(out)
+  }
+})
+
+
+
+## custom engine for tabbed box
+knit_engines$set(multCode = function(options) {
+  ## split code
+  code <- grep("####", options$code)
+  if(length(code) != 1){
+    stop(paste("Can't split chunk", options$label, "into two equal parts"))
+  }
+  code <- list(options$code[1:(code - 1)], options$code[(code + 1):length(options$code)])
+  out <- lapply(code, function(x){
+    gsub("``", "```", x)
+  })
+  # tempTidy <- options$tidy
+  # tempTidyOpts <- options$tidy.opts
+  out <- lapply(out, function(x) {
+    if(opts_knit$get("rmarkdown.pandoc.to") != "latex") {
+      return(knit_child(text = x))
+    } else {
+      # opts_chunk$set(tidy = T, tidy.opts = list(width.cutoff = 20))
+      x <- knit_child(text = x)
+      return(x)
+    }
+  })
+  ## extract headers if provided
+  if(length(options$titles) == 2){
+    headerNames <- options$titles
+  } else {
+    headerNames <- paste("Option", 1:2)
+  }
+  # opts_chunk$set(tidy = tempTidy, tidy.opts = tempTidyOpts)
+  if(opts_knit$get("rmarkdown.pandoc.to") != "latex") {
+    out <- paste0("<div class=\"tab\"><button class=\"tablinks", options$label, " active\" onclick=\"javascript:openCode(event, 'option1", options$label, "', '", options$label, "');\">", headerNames[1], "</button><button class=\"tablinks", options$label, "\" onclick=\"javascript:openCode(event, 'option2", options$label, "', '", options$label, "');\">", headerNames[2], "</button></div><div id=\"option1", options$label, "\" class=\"tabcontent", options$label, "\">", out[[1]], "</div><div id=\"option2", options$label, "\" class=\"tabcontent", options$label, "\">", out[[2]], "</div><script> javascript:hide('option2", options$label, "') </script>")
+  } else {
+    out <- paste0("\\bmp\n\\bblockST{", headerNames[1], "}\n", out[[1]], "\n\\eblockST\n\\emp\n\\hspace{0\\textwidth}\n\\bmp\\bblockST{", headerNames[2], "}\n", out[[2]], "\n\\eblockST\n\\emp\n")
+  }
+  return(out)
+})

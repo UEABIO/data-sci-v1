@@ -6,9 +6,6 @@
 
 
 
-
-
-
 ## Intro to grammar
 
 <div class="figure" style="text-align: center">
@@ -650,6 +647,10 @@ ggsave("figures/YYYYMMDD_ggplot_workshop_final_plot.png", dpi=300)
 
 <div class="warning">
 <p>Make sure you have saved your script! Remember to Download your image file from RStudio Cloud onto YOUR computer so that it is available for upload to Blackboard.</p>
+</div>
+
+<div class="info">
+<p>run <code>SessionInfo()</code> at the end of your script to gather the packages and versions you have been using. This is very useful for when you <a href="#how-to-cite-r-and-rstudio">cite R versions and packages</a> when writing reports later.</p>
 </div>
 
 ## Summing up ggplot

@@ -4,9 +4,6 @@
 
 
 
-
-
-
 In this workshop we work through loading data. Once we have a curated and cleaned dataset we can work on generating insights from the data.
 
 As a biologist you should be used to asking questions and gathering data. It is also important that you learn all aspects of the research process. This includes responsible data management (understanding data files & spreadsheet organisation, keeping data safe) and data analysis.
