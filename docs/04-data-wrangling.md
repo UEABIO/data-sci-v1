@@ -502,7 +502,7 @@ We've now got a clean & tidy dataset, with a handful of first insights into the 
 
 That was a lot of work! But remember you don't have to remember all of these functions, remember this chapter when you do more data wrangling in the future. Also bookmark the [RStudio Cheatsheets Page](https://www.rstudio.com/resources/cheatsheets/). 
 
-Finally, make sure you have saved the changes made to your script 💾 & make sure your workspace is set **not** to save objects from the environment *between* sessions @global-options. 
+Finally, make sure you have saved the changes made to your script 💾 & make sure your workspace is set **not** to save objects from the environment [*between* sessions](#global-options). 
 
 We want our script to be our record of work and progress, and not to be confused by a cluttered R Environment. 
 

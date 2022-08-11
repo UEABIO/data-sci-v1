@@ -35,7 +35,9 @@ Think about some basic checks before you start your work today.
 <p>Today we are going to make a NEW R script in the same project space as we have previously been working. This is part of organising our workspace so that our analysis workflow is <a href="#activity-1-organising-our-workspace">well documented and easy to follow</a></p>
 </div>
 
-* Open a **new** R script
+* Open a **new** R script - we are moving on from data wrangling to data visualisation
+
+* Save this file in the scripts folder and call it `02_visualisation_penguins.R`
 
 * Add the following to your script and run it:
 
@@ -653,7 +655,11 @@ ggsave("figures/YYYYMMDD_ggplot_workshop_final_plot.png", dpi=300)
 <p>run <code>SessionInfo()</code> at the end of your script to gather the packages and versions you have been using. This is very useful for when you <a href="#how-to-cite-r-and-rstudio">cite R versions and packages</a> when writing reports later.</p>
 </div>
 
-## Summing up ggplot
+## Finished
+
+* Make sure you have **saved your script 💾** in the ["scripts" folder](#activity-1-organising-our-workspace).
+
+* Make sure your workspace is set **not** to save objects from the environment [*between* sessions](#global-options).
 
 ### What we learned
 

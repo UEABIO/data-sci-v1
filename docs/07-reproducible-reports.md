@@ -1,9 +1,12 @@
 
 # Markdown
 
+
+
+
 <img src="images/rmarkdownoutputformats.png" width="100%" style="display: block; margin: auto;" />
 
-R Markdown is a widely-used tool for creating automated, reproducible, and share-worthy outputs, such as reports. It can generate static or interactive outputs, in Word, pdf, html, powerpoint, and other formats.
+R Markdown is a widely-used tool for creating automated, reproducible, and share-worthy outputs, such as reports. It can generate static or interactive outputs, in Word, pdf, html, Powerpoint, and other formats.
 
 An R Markdown script combines R code and text such that the script actually becomes your output document. You can create an entire formatted document, including narrative text (can be dynamic to change based on your data), tables, figures, bullets/numbers, bibliographies, etc.
 
@@ -15,7 +18,7 @@ With Rmarkdown we can make reproducible html, word, pdf, powerpoints or websites
 
 ### Format
 
-* Go to RStudio Cloud and open **Week 5 - Rmarkdown**
+* Go to RStudio Cloud and open your workspace from last time.
 
 * Follow the instructions carefully - and assemble your Rmarkdown file bit by bit - when prompted to 'knit' the document do it. We will then observed the results and might make changes.
 
@@ -31,8 +34,11 @@ With Rmarkdown we can make reproducible html, word, pdf, powerpoints or websites
 
 * Pandoc: Finally, pandoc actually convert the output into word/pdf/powerpoint etc. It is a software separate from R but is installed automatically with RStudio.
 
-Most of this process happens in the background (you do not need to know all these steps!) and it involves feeding the .Rmd file to knitr, which executes the R code chunks and creates a new .md (markdown) file which includes the R code and its rendered output. The .md file is then processed by pandoc to create the finished product: a Microsoft Word document, HTML file, powerpoint document, pdf, etc. 
-When using RStudio Cloud - all of these features are pre-loaded - if you take your R journey further in the future and install a copy of R and RStudio on your own computer you might have to do a little setting up to get this working. 
+Most of this process happens in the background (you do not need to know all these steps!) and it involves feeding the `.Rmd` file to `knitr`, which executes the R code chunks and creates a new `.md` (Markdown) file which includes the R code **and its rendered output**. 
+
+The .md file is then processed by pandoc to create the finished product: a Microsoft Word document, HTML file, Powerpoint document, pdf, etc. 
+
+When using RStudio Cloud - all of these features are pre-loaded - if you take your R journey further in the future and install a copy of R and RStudio on your own computer you might have to do a little setting up to get this working (see Appendices). 
 
 <img src="images/0_rmd.png" width="80%" style="display: block; margin: auto;" />
 
@@ -42,19 +48,25 @@ In RStudio, if you open a new R markdown file, start with ‘File’, then ‘Ne
 
 R Studio will give you some output options to pick from. In the example below we select “HTML” because we want to create an html document. The title and the author names are not important. If the output document type you want is not one of these, don’t worry - you can just pick any one and change it in the script later.
 
-**For now open the markdown file which I have made in the Markdown sub-folder**. 
+## Activity 1: Make an Rmarkdown file
 
-<div class="warning">
+
+* Create a new Rmarkdown file.
+
+* Save this (without changes) to **the same location as your `.Rproj` file** name it `contained_report_penguins.Rmd`.
+
+* We have moved from visualisation to reproducible report making.
+ 
+<div class="info">
 <p>The working directory for .rmd files is a little different to working with scripts.</p>
-<p>With a .Rmd file, the working directory is wherever the Rmd file itself is saved.</p>
-<p>For example if you have your .Rmd file in a subfolder ~/markdownfiles/markdown.Rmd the code for read_csv("data/data.csv") within the markdown will look for a .csv file in a subfolder called data <em>inside</em> the <code>markdownfiles</code> folder and not the root project folder where the .RProj file lives.</p>
+<p>With a .Rmd file, the <strong>working directory is wherever the Rmd file itself is saved</strong>.</p>
+<p>For example if you have your .Rmd file in a subfolder ~/markdownfiles/markdown.Rmd the code for read_csv("data/data.csv") within the markdown will look for a <code>.csv</code> file in a subfolder called data <em>inside</em> the 'markdown' folder and not the root project folder where the <code>.RProj</code> file lives.</p>
 <p>So we have two options when using .Rmd files</p>
 <ol style="list-style-type: decimal">
-<li><p>Don't put the .Rmd file in a subfolder and make sure it lives in the same directory as your .RProj file</p></li>
+<li><p>Don't put the .Rmd file in a subfolder and make sure it lives in the same directory as your .RProj file - that way relative filepaths are the same between R scripts and Rmarkdown files</p></li>
 <li><p>Use the <code>here</code> package to describe file locations - more later</p></li>
 </ol>
 </div>
-
 
 ## R Markdown parts
 
@@ -64,17 +76,24 @@ The below is what appears when starting a new Rmd script intended to produce an 
 
 <img src="images/templatermd.png" width="80%" style="display: block; margin: auto;" />
 
-As you can see, there are three basic components to any Rmd file: YAML, Markdown text, and R code chunks.
+As you can see, there are three basic components to any Rmd file: 
+
+* YAML
+
+* Markdown text
+
+* R code chunks.
 
 <img src="images/rmarkdown_translation.png" width="100%" style="display: block; margin: auto;" />
 
 ### YAML
 
-Referred to as the ‘YAML metadata’ or just ‘YAML’, this is at the top of the R Markdown document. This section of the script will tell your Rmd file **what type of output to produce**, formatting preferences, and other metadata such as document title, author, and date. 
+Referred to as the ‘YAML metadata’ or just ‘YAML’, it is a recursive acronym that stands for "YAML ain't Markdown Language". It is found at the top of the R Markdown document. This section of the script will tell your Rmd file **what type of output to produce**, formatting preferences, and other metadata such as document title, author, and date. 
+
 In the example above, because we clicked that our default output would be an html file, we can see that the YAML says output: `html_document`. However we can also change this to say `powerpoint_presentation` or `word_document` or even `pdf_document`.
 
 <div class="try">
-<p>Can you edit the YAML in the Rmarkdown file in the markdown folder to have your name as author, today's date and the title of the file should be called "Darwin's Maize Plants".</p>
+<p>Can you edit the YAML in the Rmarkdown file in the markdown folder to have your name as author, today's date and the title of the file should be called "Penguins of the Palmer Archipelago, Antarctica".</p>
 </div>
 
 ### Text
@@ -95,7 +114,7 @@ Underscores (\_text\_) or single asterisk (\*text\*) to *italicise*
 
 Double asterisks (\*\*text\*\*) for **bold** text
 
-Back-ticks  (\`text\`) to display text as `code`
+Back-ticks  (\` text \`) to display text as `code`
 
 The actual appearance of the font can be set by using specific templates (specified in the YAML metadata).
 
@@ -108,7 +127,7 @@ Different heading levels are established with different numbers of hash symbols 
 
 ```
 
-# First-level heading / title
+# First-level heading / Title
 
 ## Second level heading  
 
@@ -133,85 +152,71 @@ Here are my bullets (there are two spaces after this colon):
 
 Sections of the script that are dedicated to running R code are called “chunks”. This is where you may load packages, import data, and perform the actual data management and visualisation. There may be many code chunks, so they can help you organize your R code into parts, perhaps interspersed with text. To note: These ‘chunks’ will appear to have a slightly different background colour from the narrative part of the document.
 
-Each chunk is opened with a line that starts with three back-ticks, and curly brackets that contain parameters for the chunk ({ }). The chunk ends with three more back-ticks.
+Each chunk is opened with a line that starts with three back-ticks, and curly brackets that contain parameters for the chunk \{ \}. The chunk ends with three more back-ticks.
 
-<img src="images/chunk.png" width="80%" style="display: block; margin: auto;" />
+````md
+```{r}
+
+```
+````
 
 You can create a new chunk by typing it out yourself, by using the keyboard shortcut “Ctrl + Alt + i” (or Cmd + Shift + r in Mac), or by clicking the green ‘insert a new code chunk’ icon at the top of your script editor.
 
-Some notes about the contents of the curly brackets { }:
+<div class="info">
+<p>Some notes about the contents of the curly brackets { }:</p>
+<p>They start with ‘r’ to indicate that the language name within this chunk is <strong>R</strong>. It is possible to include other programming language chunks here such as <strong>SQL</strong>, <strong>Python</strong> or <strong>Bash</strong>.</p>
+<p>After the r you can optionally write a chunk “name” – these are not necessary but can help you organise your work. Note that if you name your chunks, you should ALWAYS use unique names or else R will <em>complain</em> when you try to render.</p>
+<p>After the language name and optional chunk name put a comma, then you can include other options too, written as <code>tag=value</code>, such as:</p>
+<ul>
+<li><p>eval = FALSE to not run the R code</p></li>
+<li><p>echo = FALSE to not print the chunk’s R source code in the output document</p></li>
+<li><p>warning = FALSE to not print warnings produced by the R code</p></li>
+<li><p>message = FALSE to not print any messages produced by the R code</p></li>
+<li><p>include = either TRUE/FALSE whether to include chunk outputs (e.g. plots) in the document</p></li>
+<li><p>out.width = and out.height = - size of ouput e.g. out.width = "75%"</p></li>
+<li><p>fig.align = "center" adjust how a figure is aligned across the page</p></li>
+<li><p>fig.show='hold' if your chunk prints multiple figures and you want them printed next to each other (pair with out.width = c("33%", "67%").</p></li>
+</ul>
+</div>
 
-They start with ‘r’ to indicate that the language name within the chunk is R
+* A chunk header must be written in **one line**
 
-After the r you can optionally write a chunk “name” – these are not necessary but can help you organise your work. Note that if you name your chunks, you should ALWAYS use unique names or else R will *complain* when you try to render.
-
-The curly brackets can include other options too, written as tag=value, such as:
-
-* eval = FALSE to not run the R code
-
-* echo = FALSE to not print the chunk’s R source code in the output document
-
-* warning = FALSE to not print warnings produced by the R code
-
-* message = FALSE to not print any messages produced by the R code
-
-* include = either TRUE/FALSE whether to include chunk outputs (e.g. plots) in the document
-
-* out.width = and out.height = - size of ouput e.g. out.width = "75%"
-
-* fig.align = "center" adjust how a figure is aligned across the page
-
-* fig.show='hold' if your chunk prints multiple figures and you want them printed next to each other (pair with out.width = c("33%", "67%").
-
-
-A chunk header must be written in **one line**
-
-Try to avoid periods, underscores, and spaces. Use hyphens ( - ) instead if you need a separator.
+* Try to avoid periods, underscores, and spaces. Use hyphens ( - ) instead if you need a separator.
 
 Read more extensively about the knitr options here^[(https://yihui.org/knitr/options/)].
 
 There are also two arrows at the top right of each chunk, which are useful to run code within a chunk, or all code in prior chunks. Hover over them to see what they do.
 
-### `here`
-
-The package `here` @R-here and its function `here()` make it easy to tell R where to find and to save your files - in essence, it builds file paths.
-
-This is how `here()` works within an R project:
-
-- When the here package is first loaded within the R project, it places a small file called “.here” in the root folder of your R project as a “benchmark” or “anchor”
-
-- In your scripts, to reference a file in the R project’s sub-folders, you use the function `here()` to build the file path in relation to that anchor
-
-- To build the file path, write the names of folders beyond the root, within quotes, separated by commas, finally ending with the file name and file extension as shown below
-
-- `here()` file paths can be used for both importing and exporting
-
-So when you use `here()` wrapped inside other functions for importing/exporting (like `read_csv()` or `ggsave()`) if you include `here()` you can still use the RProject location as the root directory when 'knitting' Rmarkdown files, even if your markdown is tidied away into a separate markdown folder.
+## Activity 2: Knit your first document
 
 <div class="try">
-<p>Can you take the code below and put it into an R code chunk?</p>
 <p>Try your first "knit" to make a document.</p>
 </div>
 
-## Activity 1. Knit your first document
+Knit the template document provided when you opened the new Rmd file. Make a note of the different R chunks, how they are processed and what the outputs look like.
+
+**Question 1.** The global option for this document is set to show the R code used to render chunks <select class='webex-select'><option value='blank'></option><option value='answer'>TRUE</option><option value=''>FALSE</option></select>
 
 
-```r
-library(here)
-library(tidyverse)
+<div class='webex-solution'><button>Explain This Answer</button>
 
-darwin <- read_csv(here("data", "darwin.csv"))
-darwin
-```
+knitr::opts_chunk$set(echo = TRUE)
 
-<img src="images/markdown_output.png" width="120%" style="display: block; margin: auto;" />
+</div>
+ 
 
-This has worked, but it looks quite messy, mostly because messages and warnings produced alongside our R functions are printed in the final document
+**Question 2.** Options set in individual code chunks override the global options <select class='webex-select'><option value='blank'></option><option value='answer'>TRUE</option><option value=''>FALSE</option></select>
 
 
-## Activity 2. Can you edit the R chunk so that the code and any warnings/messages are invisible. But the code output is still printed?
+<div class='webex-solution'><button>Explain This Answer</button>
 
-Once you have made your edits to the [chunk options](@code-chunks) try hitting 'knit' again. 
+In the second chunk we see echo = FALSE and this has prevented the code from being printed, we only see the rendered output
+
+</div>
+ 
+<br>
+**Question 3.** If we wanted to see the R code, but **not** its output we need to select what combo of code chunk options? <select class='webex-select'><option value='blank'></option><option value=''>echo = TRUE, eval = TRUE</option><option value=''>echo = FALSE, eval = FALSE</option><option value='answer'>echo = TRUE, eval = FALSE</option><option value=''>echo = FALSE, eval = TRUE</option></select>
+
 
 ### Global options
 
@@ -226,81 +231,21 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ### In-text code
 
-
 You can also include minimal R code within back-ticks. Within the back-ticks, begin the code with “r” and a space, so RStudio knows to evaluate the code as R code. See the example below.
 
 \` r Sys.Date()\`
 
-When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead: 2022-08-10
-
-The example above is simple (showing the current date), but using the same syntax you can display values produced by more complex R code (e.g. to calculate the min, median, max of a column). You can also integrate R objects or values that were created in R code chunks *earlier* in the script.
-
-
-```r
-average_height <- darwin %>% 
-  summarise(mean_self=mean(Self),
-            mean_cross=mean(Cross))
-```
-
-The average height of the self-crossed plants is \` r average_height [,1]\`cm while the outcrossed plants are \` r average_height [,2]\`cm, so on average the outcrossed plants are \` r average_height [,2]- average_height [,1]\`cm taller. 
+When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead: 2022-08-11
 
 <div class="try">
-<p>Can you include the above code block and make sure it runs without the code being visible?</p>
-<p>Underneath include the text - it should produce the code outputs in the knitted doc.</p>
-<p>Try it!</p>
+<p>Having added some in-line code, try re-knitting your .Rmd file, what is the output?</p>
 </div>
 
-## Static images
-
-You can include images in your R Markdown in several ways:
-
-knitr::include_graphics("path/to/image.png")
-
-
-```r
-knitr::include_graphics("../data/images/darwin.png")
-# ../ is necessary here because in order to organise the file path starting in the markdown folder, directing it to go UP to the parent folder then down through data/images
-```
-
-Alternatively we could use the `here()` function - which means it doesn't matter where our markdown file 'lives'. 
-
-knitr::include_graphics(here::here("path", "to", "image.png"))
-
-
-```r
-knitr::include_graphics(here("data", "images", "darwin.png"))
-```
-
-<div class="rmdquestion">
-<p>Can you get your document to knit with this new image included?</p>
-</div>
-
-
-## ggplot
-
-https://benjaminlouis-stat.fr/en/blog/2020-05-21-astuces-ggplot-rmarkdown/
-
-## Tables
-
-To create and manage able objects, we first pass the data frame through the `kable()` function. The package `kableExtra` @R-kableExtra gives us lots of extra styling options.^[(https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html)]
-
-<div class="try">
-<p>Can you get this working? Add the library call for <code>kableExtra</code> to the first chunk of your Rmd file, then make a chunk for the below at the bottom of your file and hit knit to test.</p>
-</div>
-
-
-```r
-darwin %>% 
-  summarise(mean_self=mean(Self),
-            mean_cross=mean(Cross)) %>% 
-  kbl(caption="Table 1. example table caption") %>% 
-  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
-```
-
-
-## Self-contained documents
+## Activity 3: Generating a self-contained report from data
 
 For a relatively simple report, you may elect to organize your R Markdown script such that it is “self-contained” and does not involve any external scripts.
+
+**Set up your Rmd file to 'read' the penguins data file.**
 
 Everything you need to run the R markdown is imported or created within the Rmd file, including all the code chunks and package loading. This “self-contained” approach is appropriate when you do not need to do much data processing (e.g. it brings in a clean or semi-clean data file) and the rendering of the R Markdown will not take too long.
 
@@ -318,61 +263,224 @@ In this scenario, one logical organization of the R Markdown script might be:
 
 * Save outputs, *if applicable* (.csv, .png, etc.)
 
+<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
+Remove your example code blocks from the document and replace them with the ones below, then knit. </div></div>
+
+
+````md
+```{r, include=FALSE}
+# GLOBAL KNITR OPTIONS ----
+knitr::opts_chunk$set(echo = TRUE)
+# ____________________----
+
+# PACKAGES ----
+library(tidyverse)
+
+```
+````
+
+````md
+```{r, include=FALSE}
+# READ DATA ----
+
+penguins <- read_csv("data/penguins_raw.csv")
+
+head(penguins)
+
+```
+````
+
+
+### `here`
+
+The package `here` @R-here and its function `here()` make it easy to tell R where to find and to save your files - in essence, it builds file paths. It becomes especially useful for dealing with the alternate filepaths generated by .Rmd files, but can be used for exporting/importing any scripts, functions or data. 
+
+This is how `here()` works within an R project:
+
+- When the `here` package is first loaded within the R project, it places a small file called “.here” in the root folder of your R project as a “benchmark” or “anchor”
+
+- In your scripts, to reference a file in the R project’s sub-folders, you use the function `here()` to build the file path in relation to that anchor
+
+- To build the file path, write the names of folders beyond the root, within quotes, separated by commas, finally ending with the file name and file extension as shown below
+
+- `here()` file paths can be used for both importing and exporting
+
+So when you use `here()` wrapped inside other functions for importing/exporting (like `read_csv()` or `ggsave()`) if you include `here()` you can still use the RProject location as the root directory when 'knitting' Rmarkdown files, even if your markdown is tidied away into a **separate sub-folder**.
+
+This means your previous relative filepaths could be replaced with
+
+````md
+```{r, include=FALSE}
+# GLOBAL KNITR OPTIONS ----
+knitr::opts_chunk$set(echo = TRUE)
+# ____________________----
+
+# PACKAGES ----
+library(tidyverse)
+library(here)
+
+```
+````
+
+````md
+```{r, include=FALSE}
+# READ DATA ----
+
+penguins <- read_csv(here("data", "penguins_raw.csv"))
+
+head(penguins)
+
+```
+````
+
+
+<div class="warning">
+<p>You might want start using the <code>here()</code> from now on to read in and export data from scripts. Make sure you are consistent in whether you use <code>here()</code> heuristic file paths or relative file paths across all files in a project - otherwise you might encounter errors.</p>
+</div>
+
+## Activity 4: Can you change the global options of your Rmd file so that it doesn't display any code, warnings or messages?
+
+Once you have made your edits to the [chunk options](#code-chunks) try hitting 'knit' again. 
+
+
+## Static images
+
+You can include images in your R Markdown in several ways:
+
+knitr::include_graphics("path/to/image.png")
+
+
+```r
+knitr::include_graphics("../images/darwin.png")
+
+knitr::include_graphics(here("images", "darwin.png")
+```
+
+
+## ggplot
+
+https://benjaminlouis-stat.fr/en/blog/2020-05-21-astuces-ggplot-rmarkdown/
+
+## Tables
+
+To create and manage able objects, we first pass the data frame through the `kable()` function. The package `kableExtra` @R-kableExtra gives us lots of extra styling options.^[(https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html)]
+
+<div class="try">
+<p>Can you get this working? Add the library call for <code>kableExtra</code> to the first chunk of your Rmd file, then make a chunk for the below at the bottom of your file and hit knit to test.</p>
+</div>
+
+
+
+
+```r
+penguins %>% 
+  group_by(Species) %>% 
+  summarise(`Body Mass (g)`= mean(`Body Mass (g)`, na.rm = T),
+            `Flipper Length (mm)`= mean(`Flipper Length (mm)`, na.rm = T)) %>% 
+  kbl(caption = "Mean Body mass (g) and flipper length (mm) for three species of Penguin in the Palmer Archipelago") %>% 
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+```
+
+<table class="table table-striped" style="width: auto !important; ">
+<caption>(\#tab:unnamed-chunk-19)Mean Body mass (g) and flipper length (mm) for three species of Penguin in the Palmer Archipelago</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Species </th>
+   <th style="text-align:right;"> Body Mass (g) </th>
+   <th style="text-align:right;"> Flipper Length (mm) </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Adelie Penguin (Pygoscelis adeliae) </td>
+   <td style="text-align:right;"> 3700.662 </td>
+   <td style="text-align:right;"> 189.9536 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Chinstrap penguin (Pygoscelis antarctica) </td>
+   <td style="text-align:right;"> 3733.088 </td>
+   <td style="text-align:right;"> 195.8235 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Gentoo penguin (Pygoscelis papua) </td>
+   <td style="text-align:right;"> 5076.016 </td>
+   <td style="text-align:right;"> 217.1870 </td>
+  </tr>
+</tbody>
+</table>
+
 ## Source files
 
 One variation of the “self-contained” approach is to have R Markdown code chunks “source” (run) other R scripts. 
 
 This can make your R Markdown script less cluttered, more simple, and easier to organize. It can also help if you want to display final figures at the beginning of the report. 
 
-In this approach, the final R Markdown script simply combines pre-processed outputs into a document.
+In this approach, the final R Markdown script simply combines pre-processed outputs into a document. We already used the `source()` function to feed R objects from one script to another, now we can do the same thing to our report. 
+
+The advantage is all the data cleaning and organising happens "elsewhere" and we don't need to repeat our code. If you make any changes in your analysis scripts, these will be reflected by changes in your report the next time you compile (knit) it. 
 
 ```
-source(here("scripts", "your-script.R"))
+source("scripts/your-script.R")
 ```
+
+## Activity 5: 
+
+* Create a new Rmarkdown file (in the reports folder).
+
+* Save this (without changes) to the same folder as your `.Rproj` file and call it `03_linked_report_penguins.Rmd`.
 
 <div class="try">
-<p>Can you try it for yourself? There is a pre-written script in your R project, just use the source command to read in this script - then you can call objects made externally - in this case a penguin plot - put the code block in and hit knit.</p>
+<p>We will now source the pre-written scripts for data loading and wrangling in your R project, just use the source command to read in this script - then you can call objects made externally - in this case a penguin plot - put the code block in and hit knit.</p>
 </div>
 
+````md
+```{r, include=FALSE}
+# GLOBAL KNITR OPTIONS ----
+knitr::opts_chunk$set(echo = TRUE)
+# ____________________----
 
-```r
-source(here("scripts", "penguin script.R"))
-scat ### object generated in penguin script
+# PACKAGES ----
+library(tidyverse)
+
+
 ```
+````
+
+````md
+```{r, include=FALSE}
+# READ DATA ----
+
+source("scripts/02_visualisation_penguins.R")
+
+#___________________________----
+
+# PLOT ----
+
+ (p1+p2)/p3+
+  plot_layout(guides = "collect") 
+
+```
+````
 
 
-## Activity 3: Test yourself
+## Activity 6: Test yourself
+
+Let's make another reproducible report. 
+
+* Make a new .rmd file `YYYYMMDD_surname_5023Y_rmd_workshop.Rmd`
+
+* Make any summary figure you want from the penguins data with `ggplot`
+
+* Make a summary table with `summarise` and `kableExtra`
+
+* Write a few sentences explaining what you are presenting
+
+* Knit the report to **pdf**
+
+* Use chunk options to optimise your figure layout and text and make it so that raw code and rendered outputs are visible.
+
 ### Head to Blackboard when complete and submit your document.
 
-The data found in "darwin.csv" was originally collected by Charles Darwin and published in *The effects of cross and self-fertilisation in the vegetable kingdom*, in 1876. In this publication he described how he produced seeds of *Zea mays* (maize) that were fertilised with pollen from the same individual (inbreeding) or by crossing to a different plant (outbreeding). Pairs of seeds were then taken from self-fertilised and crossed plants and germinated in pots, and the height of the young seedlings measured as a proxy for their fitness. Darwin wanted to know whether inbreeding reduced their fitness. 
-
-<div class="try">
-<p>Can you make your first reproducible document?</p>
-</div>
-
-* Write a short background on this subject 250-300 words on the data and the experimental hypothesis (use some of the information above)
-
-* Write a results section on this data including:
-
-    * A figure of the individual data points
-    
-    * A summary results table with the mean and s.d. for the plants
-    
-    * Write a summary of the results where the figures and table are referenced but you *must* describe the results too. e.g. 
-    
-    
-"Results are shown in Figure 1" is **not ok**
-
-But *in your own words* describe the direction and effect size of any differences and then refer to Figures and tables
-
-"The mean height of self-crossed plants is *x* and the mean height of crossed plants is *y*, meaning on average self-crossed plants are... which may indicate that ... (Figure 1, Table 1)"
-
-    
-* knit your rmarkdown as a **pdf** and submit to Blackboard. 
-
-<div class="info">
-<p>Remember your code blocks MUST be in the right order!!!</p>
-</div>
 
 ## Summing up Rmarkdown
 

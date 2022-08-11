@@ -612,6 +612,12 @@ penguins %>%
 
 <img src="05-data-wrangling-part-2_files/figure-html/unnamed-chunk-41-1.png" width="100%" style="display: block; margin: auto;" />
 
+## Finished
+
+* Make sure you have **saved your script 💾** in the ["scripts" folder](#activity-1-organising-our-workspace).
+
+* Make sure your workspace is set **not** to save objects from the environment [*between* sessions](#global-options).
+
 ## Activity: Test yourself
 ### Head to Blackboard when complete and submit your answers to the quiz.
 
