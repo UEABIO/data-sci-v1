@@ -4,6 +4,8 @@
 
 
 
+
+
 <img src="images/rmarkdownoutputformats.png" width="100%" style="display: block; margin: auto;" />
 
 R Markdown is a widely-used tool for creating automated, reproducible, and share-worthy outputs, such as reports. It can generate static or interactive outputs, in Word, pdf, html, Powerpoint, and other formats.
@@ -215,7 +217,7 @@ In the second chunk we see echo = FALSE and this has prevented the code from bei
 </div>
  
 <br>
-**Question 3.** If we wanted to see the R code, but **not** its output we need to select what combo of code chunk options? <select class='webex-select'><option value='blank'></option><option value=''>echo = TRUE, eval = TRUE</option><option value=''>echo = FALSE, eval = FALSE</option><option value='answer'>echo = TRUE, eval = FALSE</option><option value=''>echo = FALSE, eval = TRUE</option></select>
+**Question 3.** If we wanted to see the R code, but **not** its output we need to select what combo of code chunk options? <select class='webex-select'><option value='blank'></option><option value=''>echo = TRUE, eval = TRUE</option><option value=''>echo = FALSE, eval = TRUE</option><option value='answer'>echo = TRUE, eval = FALSE</option><option value=''>echo = FALSE, eval = FALSE</option></select>
 
 
 ### Global options
@@ -235,7 +237,7 @@ You can also include minimal R code within back-ticks. Within the back-ticks, be
 
 \` r Sys.Date()\`
 
-When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead: 2022-08-11
+When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead: 2022-08-17
 
 <div class="try">
 <p>Having added some in-line code, try re-knitting your .Rmd file, what is the output?</p>
@@ -359,6 +361,97 @@ knitr::include_graphics(here("images", "darwin.png")
 
 ## ggplot
 
+### Size options for figures
+
+Options `fig.width` and `fig.height` enable to set width and height of R produced figures. The default value is set to **7 (inches)**. When I play with these options, I prefer using only one of them (`fig.width`) in association with another one, `fig.asp`, which sets the *height-to-width* ratio of the figure. It’s easier in my mind to play with this ratio than to give a width and a height separately. The default value of fig.asp is NULL but I often set it to `(0.8)`, which often corresponds to the expected result.
+
+Size options of figures produced by R have consequences on relative sizes of elements in this figures. For a `ggplot2` figure, these elements will remain to the size defined in the used theme, whatever the chosen size of the figure. Therefore a huge size can lead to a very small text and vice versa.
+
+<div class="info">
+<p>The base font size is 11 pts by default. You can change it with the <code>base_size</code> argument in the theme you’re using.</p>
+</div>
+
+
+```r
+penguin_colours <- c("darkolivegreen4", "darkorchid3", "goldenrod1")
+
+plot <- penguins %>% 
+  ggplot(aes(x=flipper_length_mm, 
+             y = body_mass_g))+
+  geom_point(aes(colour=species))+
+  scale_color_manual(values=penguin_colours)+
+  theme_minimal(base_size = 11)
+```
+
+````md
+```{r fig.asp = 0.8, fig.width = 3}
+plot
+# figure elements are too big
+```
+````
+<img src="07-reproducible-reports_files/figure-html/unnamed-chunk-20-1.png" width="100%" style="display: block; margin: auto;" />
+
+````md
+```{r fig.asp = 0.8, fig.width = 10}
+plot
+# figure elements are too small
+```
+````
+
+<img src="07-reproducible-reports_files/figure-html/unnamed-chunk-21-1.png" width="100%" style="display: block; margin: auto;" />
+
+To find the result you like, you’ll need to combine sizes set in your theme and set in the chunk options. With my customised theme, the default size (`7`) looks good to me.
+
+````md
+```{r fig.asp = 0.8, fig.width = 7}
+plot
+```
+````
+
+<img src="07-reproducible-reports_files/figure-html/unnamed-chunk-22-1.png" width="100%" style="display: block; margin: auto;" />
+
+When texts axis are longer or when figures is overloaded, you can choose bigger size (8 or 9) to relatively reduce the figure elements. it’s worth noting that for the text sizes, you can also modify the base size in your theme to obtain similar figures.
+
+````md
+```{r fig.asp = 0.8, fig.width = 7}
+plot + theme(base_size = 14)
+# figure width stays the same, but modify the text size in ggplot
+```
+````
+
+<img src="07-reproducible-reports_files/figure-html/unnamed-chunk-23-1.png" width="100%" style="display: block; margin: auto;" />
+
+### Size of final figure in document
+
+Figures made with R in a R Markdown document are exported (by default in png format) and then inserted into the final rendered document. Options `out.width` and `out.height` enable us to choose the size of the figure in the final document.
+
+It is rare I need to re-scale height-to-width ratio after the figures were produced with R and this ratio is kept if you modify only one option therefore I only use `out.width`. i like to use percentage to define the size of output figures. For example with a size set to 50%
+
+````md
+```{r fig.asp = 0.8, fig.width = 7, out.width = "50%}
+plot 
+# The final rendered size of the image changes according to out.width
+```
+````
+
+<img src="07-reproducible-reports_files/figure-html/unnamed-chunk-24-1.png" width="50%" style="display: block; margin: auto;" />
+
+### Changing default values of chunk options
+
+You can also change default values of chunk options by writing this at the beginning of your R Markdown document.
+
+````md
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+ fig.width = 6,
+ fig.asp = 0.8,
+ out.width = "80%"
+)
+```
+````
+
+These values will be applied for all chunks unless you specify other value in a chunk locally. You can set values often used (which differ from the default one) and avoid repeating them for each chunk.
+
 https://benjaminlouis-stat.fr/en/blog/2020-05-21-astuces-ggplot-rmarkdown/
 
 ## Tables
@@ -382,7 +475,7 @@ penguins %>%
 ```
 
 <table class="table table-striped" style="width: auto !important; ">
-<caption>(\#tab:unnamed-chunk-19)Mean Body mass (g) and flipper length (mm) for three species of Penguin in the Palmer Archipelago</caption>
+<caption>(\#tab:unnamed-chunk-27)Mean Body mass (g) and flipper length (mm) for three species of Penguin in the Palmer Archipelago</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> Species </th>

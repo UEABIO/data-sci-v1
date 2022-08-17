@@ -16,3 +16,5 @@ rvest
 xml2
 kableExtra
 glossary
+janitor
+lubridate
