@@ -13,13 +13,13 @@ Git and GitHub are a big part of the data science community. We can use GitHub i
 
 2) Manage our analysis projects so that all parts of it: 
 
-  * Data
+    🔢 Data
   
-  * Scripts
+    ✍ ️Scripts
   
-  * Figures
+    📊 Figures
   
-  * Reports
+    📝 Reports
   
 Are version controlled and open access
 
@@ -30,13 +30,17 @@ Are version controlled and open access
 5) Build up your own library of projects to show what you can do in Data Science
 
 
-Watch [this video](https://www.youtube.com/watch?v=w3jLJU7DT5E) *before* or *after* today's session
+### What is Github?
+
+Watch this video *before* or *after* today's session:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/w3jLJU7DT5E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### Will this be fun?
 
 No.
 
-Using GitHub and version control is a bit like cleaning your teeth. It's not exactly fun, but it's good for you and it promotes excellent hygiene. It also only takes about 2 minutes. 
+Using GitHub and version control is a bit like cleaning your teeth. It's not exactly fun, but it's good for you and it promotes excellent hygiene. It also only takes about two minutes. 
 
 When we talk a about projects on GitHub we refer to Repositories / repos.
 
@@ -44,31 +48,31 @@ Repos on GitHub are the same unit as an RStudio Project - it's a place where you
 
 The way in which we will set up our RStudio Projects will now have a few extra steps to it
 
-* Make a new GitHub repository (or *fork* an existing one)
+1) Make a new GitHub repository (or *fork* an existing one)
 
-* Make a New project on RStudio Cloud - selecting the *from GitHub Repository* option 
+2) Make a New project on RStudio Cloud - selecting the *from GitHub Repository* option 
 
-* Clone your GitHub repo into an RStudio Project
+3) Clone your GitHub repo into an RStudio Project
 
-* Make sure RStudio and Github can *talk* to each other
+4) Make sure RStudio and Github can *talk* to each other
 
-* Go about your normal business
+5) Go about your normal business:
 
-* When it comes to *saving* your files, you will also periodically make a **commit** - this takes a multi-file *snapshot* of your *entire* project
+  * When it comes to *saving* your files, you will also periodically make a **commit** - this takes a multi-file *snapshot* of your *entire* project
 
-* At the end of a session **push** your changes to GitHub.
+  * At the end of a session **push** your changes to GitHub.
 
 These changes to working with RStudio will feel a little different at first, but will quickly become routine - and are a big step forward in your Data Science skills. 
 
 ### The Payoff
 
-* **A portfolio** build up a library of data science projects you can show off
+* **A portfolio:** build up a library of data science projects you can show off
 
-* **be keen** track the development of R packages on GitHUb
+* **be keen:** track the development of R packages on GitHUb
 
-* **version control** keep a safe archive of all your edits and changes
+* **version control:** keep a safe archive of all your edits and changes
 
-* **play with others** easy ways to collaborate on data science projects
+* **play with others:** easy ways to collaborate on data science projects
 
 For the full rundown on how to use Git and R you can't go wrong with checking out [Happy Git](https://happygitwithr.com/)
 
@@ -89,7 +93,7 @@ Head to [GitHub](https://github.com/) and sign up for a free account.
 </div>
 
 
-## **Exercise 1.** Fork & clone an existing repo on GitHub, make edits, push back
+## **Activity 1:** Fork & clone an existing repo on GitHub, make edits, push back
 
 **a.** Go to [github.com](https://github.com/) and log in (you need your own account - for sign up with your uea.ac.uk e-mail)
 
@@ -209,8 +213,15 @@ The background colours tells you whether the text has been added (green) or remo
  
 Repositories (repos) on GitHub are the same unit as an RStudio Project - it's a place where you can easily store all information/data/etc. related to whatever project you're working on.
  
-When we create a Repository in GitHub and have it communicating with a Project in RStudio, then we can get (**pull**) information from GitHub to RStudio, or **push** information from RStudio to GitHub where it is safely stored and/or our collaborators can access it. It also keeps a *complete history* of updated versions that can be accessed/reviewed by you and your collaborators at any time, from anywhere, as long as you have the internet.
+When we create a Repository in GitHub and have it communicating with a Project in RStudio, then we can changes moving in two directions
 
+* **pull** information *from* GitHub *to* RStudio
+
+or 
+
+* **push** information *from* RStudio *to* GitHub where it is safely stored and/or our collaborators can access it. 
+
+Github also keeps a *complete history* of different versions of each file that can be accessed/reviewed by you and your collaborators at any time, from anywhere, as long as you have the internet.
 
 I have mentioned the term **commit** a few times (\@ref(glossary-github)). The fundamental unit of work in Git is a commit. A commit takes a snapshot of your code at a specified point in time. 
 
@@ -220,34 +231,57 @@ You create a commit in two stages:
 
 2. You **commit** the staged files, describing the changes with a message.
 
-To create a new commit, **save** your files, then select files for inclusion by *staging* them, tick the checkbox and then select the commit box
+### Stage 
+
+
+```box
+The staging section allows you to have finescale control over the files that are included with each commit. So in theory you could separate changes made in different files into different commitments. 
+
+```
+
+First **save** your files, then select files for inclusion by *staging* them, tick the checkbox and then select the commit box.
 
 <img src="images/stage_step_4.png" width="100%" style="display: block; margin: auto;" />
 
-A new window will open - and you will see the diffs in the bottom pane, and all the files you have selected for the latest commit. 
+A new window will open 'Review Changes' - and you will see the **diffs** in the bottom pane, and all the files you have selected for the latest commit. 
 
 ### Commit
 
-You now need to write a **commit message**. This should be short but meaningful
+In this new 'Review Changes' window you will see the list of files that were staged in the last window. 
 
-<img src="images/stage_step_5.png" width="100%" style="display: block; margin: auto;" />
+If you click on a file name you see the changes that have been made highlighted in the bottom panel. Added content is highlighted in green, removed content is highlighted in red. 
+
+To **commit** these changes (take a snapshot) you must enter a mandatory commit message in the "commit message" box. 
 
 
-Describe the **why**, not the what. Git stores all the associated differences between commits, the message doesn’t need to say exactly what changed. Instead it should provide a summary that focuses on the **reasons** for the change. Make this understandable for someone else!
+<div class="figure" style="text-align: center">
+<img src="images/stage_step_5.png" alt="Green = added content, Red = deleted content" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-14)Green = added content, Red = deleted content</p>
+</div>
 
-Once you click commit a new window will open that summarises your commit - and you can close this
+The commit message should be short but meaningful (to you or any collaborators)
+
+Describe the **why**, not the what. Git stores all the associated differences between commits, the message doesn’t need to say exactly what changed - this is kept track of for you by Git. Instead it should provide a summary that focuses on the **reasons** for the change. Make this understandable for someone else!
+
+It is tradition to enter the very first message of a new project as "First Commit". 
+
+Once you click > commit, a new window will open that summarises your commit - and you can close this
 
 <img src="images/stage_step_6.png" width="100%" style="display: block; margin: auto;" />
-
 
 ### Push
 
 At the moment, all of your commits are *local*, in order to send them to GitHub you have to select **Push** at this point your github credentials need to be in place - if you get prompted to provide these, close the windows and follow the steps [here](#talking-to-github) before trying again. 
 
-Your git pane will be empty at this point - but there is a little message at the top detailing how many commits you are *ahead* of the master repo on GitHub. 
+Your git pane will be empty at this point - but there is a little message at the top detailing how many commits you are *ahead* of the master repo on GitHub. If this says your branch is one or more commits ahead of the master, then your commits are still local and haven't been pushed yet.
 
 <img src="images/stage_step_7.png" width="100%" style="display: block; margin: auto;" />
 
+To confirm the changes you made to the project have been pushed to Github, open your GitHub page (get the link in Tools > Project Options > Git/SVN). 
+
+You should see all your files listed, alongside the file names you will see your last commit message *and* when you made the commit.
+
+<img src="images/git-link.png" width="100%" style="display: block; margin: auto;" />
 
 ### A couple of general tips:
 
@@ -260,38 +294,14 @@ Your git pane will be empty at this point - but there is a little message at the
 </div>
 
 
-### Turn back time with Git
-
-````md
-"If I could turn back time,
-
-If I could find a way,
-
-I'd take back those commits that have hurt you,
-
-And you'd stay" - Cher
-````
-
-Once you start using Git with RStudio - you get a whole bunch of different options for undoing changes, correcting mistakes and turning back time to previous versions! 
-
-* To undo changes between commits you can select the diff option and remove lines one-by-one
-
-* Right-click on a file in the Git pane and select the revert option will undo all changes between this and the previous commit **beware** cannot be undone.
-
-If you don't catch a mistake right away you can select the history button and **pull** previous commits from GitHub.
-
-<img src="images/git-history.png" width="5%" style="display: block; margin: auto auto auto 0;" />
-
-
-
-## **Exercise 2.** GitHub Classrooms enabled R Projects with subfolders
+## **Activity 2:** GitHub Classrooms enabled R Projects with subfolders
 
 GitHub Classrooms is a way for me to set repos as assigments - when you accept an assignment on GitHub Classroom it *automatically* forks a private repo for you. 
 
 You should make regular commits and pushes to save your work as you go - and I will be grading your project repositories on GitHub classrooms when you do your assignment work. 
 
 <div class="warning">
-<p>When you accept an assignment on GitHub classrooms - the repo won't appear on your main profile, this is because it belongs to our class rather than you. You can always find it by searching through your Organisations - <strong>but</strong> it's probably easiest just to make a bookmark/make a note of your unique URL for each assignment.</p>
+<p>When you accept an assignment on GitHub classrooms - the repo won't appear on your main profile, this is because it belongs to our class rather than you. You can always find it by searching through your Organisations - <strong>but</strong> it's probably easiest just check the URL in Project Options on RStudio</p>
 </div>
 
 **a.** Follow this [invite link](https://classroom.github.com/a/QFt76-i2)
@@ -403,6 +413,103 @@ If you want to find your repos on GitHub then you can use the direct URL (if you
 
 <img src="images/classroom-organisation.png" width="100%" style="display: block; margin: auto;" />
 
+## Git History
+
+So far we have used Git to track, stage and commit our file changes to GitHub. Now we will look briefly at how to review our changes and what to do if we want to revert any changes.
+
+### Commit History
+
+To view your commit history in RStudio, simply click on the 'History' button 🕒 in the Git Panel.
+
+This window is split in two parts. The top pane lists every commit you have made in this repository, with their associated messsages (top to bottom, most recent to last). 
+
+Click on any commit and the bottom pane shows you the changes you made compared to the previous commit, there is also a summary of who made the commit, the commit message and the date it was made. 
+
+There is also an SHA (Secure Hash Algorithm), this is a unique identifier for the commit, and Parent SHA which identifies the commit that immediately preceded it. 
+
+You **can** also review your commit history on Github by clicking on the 'commits' link in the repository
+
+### Reverting changes
+
+One of the most powerful things about Git is the ability to revert to previous versions of files, if you made a mistake, broke something, or just changed your mind! 
+
+How you do this depends on what stage you are at in making your changes. We'll go through each of these scenarios in turn.
+
+#### Changes saved but not staged, committed or pushed
+
+If you have saved changes to your file, but not yet staged them, you can click on the offending file in the Git pane and select 'revert'. This will roll back the file  to your last 'commit' (warning reverting cannot be undone).
+
+Changes can be made to *part* of a file by opening the 'Diff' window. Select the line you wish to discard by double-clicking the line and select 'Discard line/chunk'
+
+#### Staged but not committed
+
+Simply unclick the staged check box, then revert as described above.
+
+#### Staged and committed but not pushed
+
+If you made a mistake or forgot to include a file in your last commit, you can fix your mistake, save the changes and tick the box 'Amend previous commit' in the 'Review Changes' pane.
+
+If you want to make a change that was several commits ago there are two options:
+
+* **Option 1** - easier but not *very Git* 🤷
+
+Look in your commit history in RStudio - find the commit you want to go back to and click the 'View file @' button to show file contents.
+
+Copy the contents of the file to clipboard and paste into your current file. Save, stage, commit as normal.
+
+* **Option 2** - Go to Git history, find the commit and write down the SHA. 
+
+Now go to the **Terminal** tab (next to Console) and type
+
+```
+git checkout <SHA> <filename>
+```
+
+This might look something like this
+
+```
+git checkout 2b4693d1 first_doc.Rmd
+```
+
+This command will copy the selected file from the past and replace it in the present. You may be asked if you want to reload the file now (say yes). Then stage, commit as usual. 
+
+#### Staged, committed and pushed
+
+You could use either of the strategies described above, although if you are using the Terminal there is now a better command `git revert`. 
+
+First you need to identify the SHA of the commit you want to revert to as before. Then use the `git revert` command in the Terminal. Adding the `--no-commit` option stops us having to deal with intermediate commits. Adding `..HEAD` tells GIT to make this old commit the new/old "HEAD" or lead of the project. 
+
+```
+git revert --no-commit d27e79f1..HEAD
+
+```
+
+## Collaborate with Git
+
+GitHub is great for collaboration. It can seem a little scary or complicated at first, but it's totally worth it! 
+
+Github works as a *distributed system* this means each person working on a project has their own copy. Changes are then merged together in the remote repository on GitHub. 
+
+For small projects we can use exactly the same system as above. Everybody connects their local repository to the same remote one. 
+
+* **Pull** the repository at the start of *each* session to make sure you are working on the most up to-date version.
+
+* Work on your aspect of the project, staging, committing and pushing as you go. 
+
+For small projects this works well if each person has their own files to work on, but if two people are working on the same file *at the same time* this can cause a 'merge conflict'. So for bigger projects each collaborator creates a copy (fork) of the repository, then a **pull request** must be sent to the owner of the main repository to incorporate any changes, this includes a review step before these changes are integrated. 
+
+## Final Git tips
+
+Reminders:
+
+* Commit often, and push at the end of a session
+
+* If you don't want to track a file in your repository (maybe you aren't working with that in a collaboration) you can get Git to ignore by right-click and selecting Ignore. 
+
+* Check the Github repo online to make sure changes are being pushed
+
+* If it all goes wrong! And you trash your project! That's ok, as long as your GitHub repository online is good the final option is to delete your RStudio project on your computer or RStudio Cloud and clone the project from GitHub again! 
+
 ## Glossary-GitHub
 
 <table>
@@ -473,7 +580,7 @@ If you want to find your repos on GitHub then you can use the direct URL (if you
 
 ### What we learned
 
-You have learned
+You have learned:
 
 * How to fork and clone GitHub Projects
 
@@ -483,12 +590,14 @@ You have learned
 
 * How to use version control, with stage, commit and push
 
+* Remember to bookmark [Happy Git](https://happygitwithr.com/)
+
 You have used
 
 * `gitcreds` @R-gitcreds
 
 * `usethis` @R-usethis
 
-
+## Activity 3: Test yourself
 
 

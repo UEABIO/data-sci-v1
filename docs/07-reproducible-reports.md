@@ -197,7 +197,7 @@ There are also two arrows at the top right of each chunk, which are useful to ru
 
 Knit the template document provided when you opened the new Rmd file. Make a note of the different R chunks, how they are processed and what the outputs look like.
 
-**Question 1.** The global option for this document is set to show the R code used to render chunks <select class='webex-select'><option value='blank'></option><option value=''>FALSE</option><option value='answer'>TRUE</option></select>
+**Question 1.** The global option for this document is set to show the R code used to render chunks <select class='webex-select'><option value='blank'></option><option value='answer'>TRUE</option><option value=''>FALSE</option></select>
 
 
 <div class='webex-solution'><button>Explain This Answer</button>
@@ -237,7 +237,7 @@ You can also include minimal R code within back-ticks. Within the back-ticks, be
 
 \` r Sys.Date()\`
 
-When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead: 2022-08-17
+When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead: 2022-08-18
 
 <div class="try">
 <p>Having added some in-line code, try re-knitting your .Rmd file, what is the output?</p>
