@@ -102,14 +102,16 @@
 <li><a class="" href="introduction-to-linear-models.html"><span class="header-section-number">13</span> Introduction to Linear Models</a></li>
 <li><a class="" href="testing.html"><span class="header-section-number">14</span> Testing</a></li>
 <li><a class="" href="regression.html"><span class="header-section-number">15</span> Regression</a></li>
-<li><a class="" href="regression-1.html"><span class="header-section-number">16</span> Regression</a></li>
-<li><a class="" href="anova.html"><span class="header-section-number">17</span> ANOVA</a></li>
+<li><a class="" href="anova.html"><span class="header-section-number">16</span> ANOVA</a></li>
+<li><a class="" href="multivariate-linear-models.html"><span class="header-section-number">17</span> Multivariate linear models</a></li>
+<li><a class="" href="complex-models.html"><span class="header-section-number">18</span> Complex models</a></li>
+<li><a class="" href="generalized-linear-models.html"><span class="header-section-number">19</span> Generalized Linear Models</a></li>
 <li class="book-part">Advanced topics</li>
-<li><a class="" href="mixed-models.html"><span class="header-section-number">18</span> Mixed models</a></li>
-<li><a class="" href="generalised-additive-models.html"><span class="header-section-number">19</span> Generalised Additive Models</a></li>
-<li><a class="" href="survival-models.html"><span class="header-section-number">20</span> Survival models</a></li>
-<li><a class="" href="unsupervised-machine-learning.html"><span class="header-section-number">21</span> Unsupervised Machine Learning</a></li>
-<li><a class="" href="power-analysis.html"><span class="header-section-number">22</span> Power analysis</a></li>
+<li><a class="" href="mixed-models.html"><span class="header-section-number">20</span> Mixed models</a></li>
+<li><a class="" href="generalised-additive-models.html"><span class="header-section-number">21</span> Generalised Additive Models</a></li>
+<li><a class="" href="survival-models.html"><span class="header-section-number">22</span> Survival models</a></li>
+<li><a class="" href="unsupervised-machine-learning.html"><span class="header-section-number">23</span> Unsupervised Machine Learning</a></li>
+<li><a class="" href="power-analysis.html"><span class="header-section-number">24</span> Power analysis</a></li>
 <li class="book-part">Appendices</li>
 <li><a class="" href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></li>
 <li><a class="active" href="updating-r-rstudio-and-packages.html"><span class="header-section-number">B</span> Updating R, RStudio, and packages</a></li>
@@ -125,12 +127,12 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="updating-r-rstudio-and-packages" class="section level1" number="24">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="updating-r-rstudio-and-packages" class="section level1" number="26">
 <h1>
 <span class="header-section-number">B</span> Updating R, RStudio, and packages<a class="anchor" aria-label="anchor" href="#updating-r-rstudio-and-packages"><i class="fas fa-link"></i></a>
 </h1>
 <p>From time-to-time, updated version of R, RStudio, and the packages you use (e.g., ggplot) will become available. Remember that each of these are separate, so they each have a different process and come with different considerations. We recommend updating to the latest version of all three at the start of each academic year.</p>
-<div id="updating-rstudio" class="section level2" number="24.1">
+<div id="updating-rstudio" class="section level2" number="26.1">
 <h2>
 <span class="header-section-number">B.1</span> Updating RStudio<a class="anchor" aria-label="anchor" href="#updating-rstudio"><i class="fas fa-link"></i></a>
 </h2>
@@ -144,13 +146,13 @@ Figure B.1: Updating RStudio
 </div>
 <p>If an update is available, it will prompt you to download it and you can install it as usual.</p>
 </div>
-<div id="updating-packages" class="section level2" number="24.2">
+<div id="updating-packages" class="section level2" number="26.2">
 <h2>
 <span class="header-section-number">B.2</span> Updating packages<a class="anchor" aria-label="anchor" href="#updating-packages"><i class="fas fa-link"></i></a>
 </h2>
 <p>Package developers will occasionally release updates to their packages. This is typically to add in new functions to the package, or to fix or amend existing functions. <strong>Be aware that some package updates may cause your previous code to stop working</strong>. This does not tend to happen with minor updates to packages, but occasionally with major updates, you can have serious issues if the developer has made fundamental changes to how the code works. For this reason, we recommend updating all your packages once at the beginning of each academic year (or semester) - don't do it before an assessment or deadline just in case!</p>
 <p>To update an individual package, the easiest way is to use the <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> function, as this always installs the most recent version of the package.</p>
-<div class="sourceCode" id="cb407"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb505"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></code></pre></div>
 <p>To update multiple packages, or indeed all packages, RStudio provides helpful tools. Click <code>Tools - Check for Package Updates</code>. A dialogue box will appear and you can select the packages you wish to update. Be aware that if you select all packages, this may take some time and you will be unable to use R whilst the process completes.</p>
 <div class="figure" style="text-align: center">
@@ -161,7 +163,7 @@ Figure B.2: Updating packages with RStudio
 </div>
 <p>Occasionally, you might have a few problem packages that seemingly refuse to update, for me, <code>rlang</code> and <code>vctrs</code> cause me no end of trouble. These aren't packages that you will likely every explicitly load, but they're required beneath the surface for R to do things like knit your Markdown files etc.</p>
 <p>If you try to update a package and get an error message that says something like <code>Warning in install.packages : installation of package ‘vctrs’ had non-zero exit status</code> or perhaps <code>Error in loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]) :  namespace 'rlang' 0.4.9 is being loaded, but &gt;= 0.4.10 is required</code> one solution I have found is to manually uninstall the package, restart R, and then install the package new, rather than trying to update an existing version. The <code>installr</code> package also has a useful function for uninstalling packages.</p>
-<div class="sourceCode" id="cb408"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb506"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Load installr</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">installr</span><span class="op">)</span>
 
@@ -173,12 +175,12 @@ Figure B.2: Updating packages with RStudio
 
 <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"package"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="updating-r" class="section level2" number="24.3">
+<div id="updating-r" class="section level2" number="26.3">
 <h2>
 <span class="header-section-number">B.3</span> Updating R<a class="anchor" aria-label="anchor" href="#updating-r"><i class="fas fa-link"></i></a>
 </h2>
 <p>Finally, you may also wish to update R itself. The key thing to be aware of is that when you update R, if you just download the latest version from the website, you will lose all your packages. The easiest way to update R and not cause yourself a huge headache is to use the <code>installr</code> package. When you use the <code>updateR()</code> function, a series of dialogue boxes will appear. These should be fairly self-explanatory but there is a <a href="https://www.r-statistics.com/2015/06/a-step-by-step-screenshots-tutorial-for-upgrading-r-on-windows/">full step-by-step guide available</a> for how to use <code>installr</code>, the important bit is to select "Yes" when it asked if you would like to copy your packages from the older version of R.</p>
-<div class="sourceCode" id="cb409"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb507"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Install the installr package</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"installr"</span><span class="op">)</span>
 

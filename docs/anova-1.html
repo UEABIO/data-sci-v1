@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 19 ANOVA | 5023Y</title>
+<meta name="author" content="Philip T. Leftwich">
+<meta name="description" content="19.1 Analysis of Variance (ANOVA) So far we have used linear models for analyses between two 'categorical' explanatory variables e.g. t-tests, and for regression with two 'continuous' variables....">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 19 ANOVA | 5023Y">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://ueabio.github.io/data-sci/anova-1.html">
+<meta property="og:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
+<meta property="og:description" content="19.1 Analysis of Variance (ANOVA) So far we have used linear models for analyses between two 'categorical' explanatory variables e.g. t-tests, and for regression with two 'continuous' variables....">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 19 ANOVA | 5023Y">
+<meta name="twitter:description" content="19.1 Analysis of Variance (ANOVA) So far we have used linear models for analyses between two 'categorical' explanatory variables e.g. t-tests, and for regression with two 'continuous' variables....">
+<meta name="twitter:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.13/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1.9000/transition.js"></script><script src="libs/bs3compat-0.3.1.9000/tabs.js"></script><script src="libs/bs3compat-0.3.1.9000/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/font-awesome-5.13.0/js/script.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NP3MF25W3"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6NP3MF25W3');
+    </script><script language="javascript"> 
+        function toggle(id) {
+            var ele = document.getElementById("toggleText" + id);
+            var text = document.getElementById("displayText" + id);
+            var buttonText = text.innerHTML.replace("Show ", "");
+            buttonText = buttonText.replace("Hide ", "");
+            if(ele.style.display == "block") {
+                ele.style.display = "none";
+                text.innerHTML = "Show " + buttonText;
+            } else {
+                ele.style.display = "block";
+                text.innerHTML = "Hide " + buttonText;
+            }
+        } 
+    </script><script language="javascript">
+        function openCode(evt, codeName, id) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent" + id);
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks" + id);
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(codeName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script><script language="javascript">
+        function hide(id){
+            document.getElementById(id).style.display = "none";
+        }
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/psyteachr.css">
+<link rel="stylesheet" href="include/webex.css">
+<link rel="stylesheet" href="include/style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Data Science for Biologists">5023Y</a>:
+        <small class="text-muted">Data Science for Biologists</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Overview</a></li>
+<li class="book-part">R Programming</li>
+<li><a class="" href="introduction-to-r-and-rstudio.html"><span class="header-section-number">1</span> Introduction to R and RStudio</a></li>
+<li><a class="" href="basic-programming.html"><span class="header-section-number">2</span> Basic programming</a></li>
+<li><a class="" href="loading-data.html"><span class="header-section-number">3</span> Loading data</a></li>
+<li><a class="" href="data-wrangling-part-one.html"><span class="header-section-number">4</span> Data wrangling part one</a></li>
+<li><a class="" href="data-wrangling-part-two.html"><span class="header-section-number">5</span> Data wrangling part two</a></li>
+<li><a class="" href="data-visualisation-with-ggplot2.html"><span class="header-section-number">6</span> Data visualisation with ggplot2</a></li>
+<li><a class="" href="markdown.html"><span class="header-section-number">7</span> Markdown</a></li>
+<li><a class="" href="github.html"><span class="header-section-number">8</span> Github</a></li>
+<li><a class="" href="functions-1.html"><span class="header-section-number">9</span> Functions</a></li>
+<li><a class="" href="data-insights-part-one.html"><span class="header-section-number">10</span> Data Insights part one</a></li>
+<li><a class="" href="data-insights-part-two.html"><span class="header-section-number">11</span> Data insights part two</a></li>
+<li class="book-part">Statistics</li>
+<li><a class="" href="introduction-to-statistics.html"><span class="header-section-number">12</span> Introduction to statistics</a></li>
+<li><a class="" href="introduction-to-linear-models.html"><span class="header-section-number">13</span> Introduction to Linear Models</a></li>
+<li><a class="" href="testing.html"><span class="header-section-number">14</span> Testing</a></li>
+<li><a class="" href="regression.html"><span class="header-section-number">15</span> Regression</a></li>
+<li><a class="" href="anova.html"><span class="header-section-number">16</span> ANOVA</a></li>
+<li><a class="" href="multivariate-linear-models.html"><span class="header-section-number">17</span> Multivariate linear models</a></li>
+<li><a class="" href="complex-models.html"><span class="header-section-number">18</span> Complex models</a></li>
+<li><a class="active" href="anova-1.html"><span class="header-section-number">19</span> ANOVA</a></li>
+<li class="book-part">Advanced topics</li>
+<li><a class="" href="mixed-models.html"><span class="header-section-number">20</span> Mixed models</a></li>
+<li><a class="" href="generalised-additive-models.html"><span class="header-section-number">21</span> Generalised Additive Models</a></li>
+<li><a class="" href="survival-models.html"><span class="header-section-number">22</span> Survival models</a></li>
+<li><a class="" href="unsupervised-machine-learning.html"><span class="header-section-number">23</span> Unsupervised Machine Learning</a></li>
+<li><a class="" href="power-analysis.html"><span class="header-section-number">24</span> Power analysis</a></li>
+<li class="book-part">Appendices</li>
+<li><a class="" href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></li>
+<li><a class="" href="updating-r-rstudio-and-packages.html"><span class="header-section-number">B</span> Updating R, RStudio, and packages</a></li>
+<li><a class="" href="exporting-files-from-the-server.html"><span class="header-section-number">C</span> Exporting files from the server</a></li>
+<li><a class="" href="symbols.html"><span class="header-section-number">D</span> Symbols</a></li>
+<li><a class="" href="baser.html"><span class="header-section-number">E</span> Base R vs. Tidyverse</a></li>
+<li><a class="" href="license.html">License</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/UEABIO/data-sci-v1">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="anova-1" class="section level1" number="19">
+<h1>
+<span class="header-section-number">19</span> ANOVA<a class="anchor" aria-label="anchor" href="#anova-1"><i class="fas fa-link"></i></a>
+</h1>
+<div id="analysis-of-variance-anova-1" class="section level2" number="19.1">
+<h2>
+<span class="header-section-number">19.1</span> Analysis of Variance (ANOVA)<a class="anchor" aria-label="anchor" href="#analysis-of-variance-anova-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>So far we have used linear models for analyses between <em>two</em> 'categorical' explanatory variables e.g. <em>t</em>-tests, and for regression with <em>two</em> 'continuous' variables. However, as designs become more complicated, the number of comparisons can quickly become overwhelming, working with estimates and intervals alone can become harder.</p>
+<p>As designs become more elaborate the number of pairwise <em>t</em>-tests rapidly increases, and therefore our risk of false positives (Type I errors). It is therefore useful to have a complementary approach that first asks if there is any support for a difference between the different means <em>before</em> diving into multiple comparisons. This approach is called <em>analysis of variance</em> (ANOVA), and although it tends to be associated with categorical data, we will see in the following chapters that the ANOVA is just another type of linear model, so this approach can also be extended to included continuous variables.</p>
+</div>
+<div id="maize-data-1" class="section level2" number="19.2">
+<h2>
+<span class="header-section-number">19.2</span> Maize data<a class="anchor" aria-label="anchor" href="#maize-data-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Our simple linear model for the maize data was:</p>
+<pre><code>lsmodel1 &lt;- lm(height ~ type, data = darwin)</code></pre>
+<p>This structure of fitting a linear model, with one explanatory variable is also known as a one-way ANOVA. The general strategy of the ANOVA is to quantify the overall variability in the data set and then to divide it into the variability between and within the groups. We can also refer to this as the 'signal-to-noise' ratio, or the variability explained by the slope of the linear model, vs unexplained variance.</p>
+<p>The more of the variation explained by our fitted linear model, the more confident we can be that we have detected a real effect in our estimates of mean differences. This method of fitting a model is called ordinary least squares.</p>
+<p>The least squares model first quantifies the total amount of variation (total sum of squares, SST) by measuring the difference from the individual data points to a reference point (usually the 'grand' mean, see below).</p>
+<p>Next the model quantifies a fitted slope, it aims to produce a slope that produces the least amount of squared residuals to the data points (sum of squares of the regression/ANOVA, SSR/A).</p>
+<p>This then leaves the residual unexplained variation (sum of squares of the error, SSE).</p>
+<p>In this way the model is splitting the overall variability (SST) into signal (SSR) and noise (SSE):</p>
+<p><span class="math display">\[ SST = SSR + SSE \]</span></p>
+<p>Remember:</p>
+<ul>
+<li><p>SST = the sum of squared differences between the data points and the grand mean</p></li>
+<li><p>SSR = the sum of the squared differences between the grand mean and the predicted position on the linear model</p></li>
+<li><p>SSE = the sum of the squared differences between the predicted position and the observed position</p></li>
+</ul>
+<div class="inline-figure"><img src="19-Generalized-Linear-Models_files/figure-html/unnamed-chunk-4-1.png" width="100%" height="200%" style="display: block; margin: auto;"></div>
+<div class="info">
+<p>
+Least squares quantifies A) total least squares, B) treatment least squares, C) error sum of squares (SST, SSR, SSE). The vertical lines measure the distances, which are then squared and summed. SST is calculated by measuring to the intercept, SSR is calculated by measuring the distance of the estimates to the intercept, SSE is calculated by measuring the distance to the estimates
+</p>
+</div>
+<div id="the-anova-table-1" class="section level3" number="19.2.1">
+<h3>
+<span class="header-section-number">19.2.1</span> The ANOVA table<a class="anchor" aria-label="anchor" href="#the-anova-table-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>If we want to get the ANOVA table for a linear model we can use the <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> function:</p>
+<div class="sourceCode" id="cb455"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lsmodel1</span><span class="op">)</span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Df
+</th>
+<th style="text-align:right;">
+Sum Sq
+</th>
+<th style="text-align:right;">
+Mean Sq
+</th>
+<th style="text-align:right;">
+F value
+</th>
+<th style="text-align:right;">
+Pr(&gt;F)
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+type
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+51.35208
+</td>
+<td style="text-align:right;">
+51.352083
+</td>
+<td style="text-align:right;">
+5.939518
+</td>
+<td style="text-align:right;">
+0.0214145
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Residuals
+</td>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:right;">
+242.08333
+</td>
+<td style="text-align:right;">
+8.645833
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p>Compare this to the output you get when you use the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function. You should see that the <em>F</em>-value <em>P</em>-value and df are all exactly the same. The ANOVA table actually has <em>far</em> less information in it, as it contains no information about the biology (estimates in difference, or uncertainty such as standard errors etc.). It is amazing how many times you will see these tables reported, even though they contain the <em>least</em> interesting part of the analysis.</p>
+<p><strong>BUT</strong> they can help us simplify effects where there are more than two levels, but we need to learn how to use them appropriately.</p>
+<p>The ANOVA table has six columns and two rows of information.</p>
+<p>The first column contains the information source, here the signal/regression (first row) and error/noise (second row).</p>
+<p>The second column gives the degrees of freedom, in the first row this is the number of predictors(treatments) (<em>k - 1</em>, including intercept), and in the second row the residual degrees of freedom (<em>N - k</em>).</p>
+<p>The third column is the sum of squares in the first row this is the SSR, and the second row SSE (remember that SST = SSR + SSE).</p>
+<p>The fourth column is the <em>mean</em> sum of squares MSR = SSR/(k-1) &amp; MSE = SSE/(N-k). These are the average amounts of variability per treatment level.</p>
+<p>It's worth stopping briefly at this point and remembering that we have effectively pooled the SSE from <em>both</em> treatments to generate the MSE. Linear models always use this pooled variance approach, it can give them greater power for detecting effects with smaller sample sizes, but is the reason why we need homogeneity of variance as an assumption of our model.</p>
+<p>The fifth column is our <em>F</em> statistic (the signal-to-noise ratio). It is calculated by dividing the treatment variance by the residual error variance</p>
+<p><span class="math display">\[ F =\frac{SSR/(k-1)}{SSE/(N-k)} =  \frac{MSR}{MSE} \]</span>
+In our example <em>F</em> = 5.9, which means that the estimated signal is nearly six times larger than the estimated noise.</p>
+<p>We can then use this <em>F</em> value with our sample size and treatment levels to calculate the probability of observing this ratio of signal to noise if the null hypothesis that there were no effect of treatment is true.</p>
+<p>The probability value can be looked up in an ANOVA table, and is calculated from an <em>F</em> distribution. The <em>F</em>-test takes sample size into account, and the probability assigned takes into account the degrees of freedom of both the signal and noise.</p>
+<p>We can see this if we use the R function <code><a href="https://rdrr.io/r/stats/Fdist.html">pf()</a></code> that this should recreate the exact <em>P</em>-value we see in our ANOVA table.</p>
+<p>The first three arguments here are the <em>F</em>-value, degrees of freedom for the signal, and noise. The last argument is to set this as a two directional test.</p>
+<div class="sourceCode" id="cb456"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Fdist.html">pf</a></span><span class="op">(</span><span class="fl">5.9395</span>, <span class="fl">1</span>, <span class="fl">28</span>, lower.tail<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 0.02141466</code></pre>
+<p>It is common to see <em>P</em>-values reported with no supporting information (naked <em>P</em>-values). But it is impossible to interpret these without knowing:</p>
+<ol style="list-style-type: decimal">
+<li><p>what test they came from</p></li>
+<li><p>what the observed value of the test was</p></li>
+<li><p>the degrees of freedom.</p></li>
+</ol>
+<p>So the good (and conventional) way to report this result as an ANOVA would be:</p>
+<blockquote>
+<p>The height of the cross-pollinated plants was significantly taller than the height of the self-pollinated plants (<em>F</em><sub>1,28</sub> = 5.9, <em>P</em> = 0.02).</p>
+</blockquote>
+<p><strong>BUT</strong> we know that this way of reporting, emphasises the statistical tests and not the underlying biology. The report doesn't tell us anything about the heights of the plants, the estimated difference between them, or any measure of the uncertainty around this.</p>
+<blockquote>
+<p>The self pollinated maize plants measured an average of 17.6 [16-19.1] (mean[95% CI]) inches high, while the cross-pollinated plants had a mean height of 20.2 [18.6-21.7] inches - a difference of 2.6 [-0.4-4.8] inches (one-way ANOVA: <em>F</em><sub>1,28</sub> = 5.9, <em>P</em> = 0.02).</p>
+</blockquote>
+</div>
+</div>
+<div id="two-way-anova-1" class="section level2" number="19.3">
+<h2>
+<span class="header-section-number">19.3</span> Two-way ANOVA<a class="anchor" aria-label="anchor" href="#two-way-anova-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Two way ANOVA (as you might guess) includes <strong>two</strong> explanatory variables. Usually these are treatments of interest, but for this example we will stick with including the pair variable.</p>
+<div class="sourceCode" id="cb458"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">lsmodel2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">type</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">pair</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">darwin</span><span class="op">)</span></code></pre></div>
+<p>And we can look at this table using the <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> function again</p>
+<div class="sourceCode" id="cb459"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lsmodel2</span><span class="op">)</span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Df
+</th>
+<th style="text-align:right;">
+Sum Sq
+</th>
+<th style="text-align:right;">
+Mean Sq
+</th>
+<th style="text-align:right;">
+F value
+</th>
+<th style="text-align:right;">
+Pr(&gt;F)
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+type
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+51.35208
+</td>
+<td style="text-align:right;">
+51.352083
+</td>
+<td style="text-align:right;">
+4.6138501
+</td>
+<td style="text-align:right;">
+0.0497029
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+as.factor(pair)
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+86.26354
+</td>
+<td style="text-align:right;">
+6.161682
+</td>
+<td style="text-align:right;">
+0.5536109
+</td>
+<td style="text-align:right;">
+0.8597119
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Residuals
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+155.81979
+</td>
+<td style="text-align:right;">
+11.129985
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p>Note how some of the degrees of freedom which were initially in the residuals, have now been 'used' by the new term in the more complex model. And that some of the SSE has now been used by SSR explained by the pair term.</p>
+<div class="warning">
+<p>
+As we should already have been able to predict from the last time that we looked at this model structure, the pairing doesn't really do anything (<em>F</em> &gt; 1). If pairing did 'nothing' we would still expect an <em>F</em> ratio ~ 1. However, we can see that is actually quite a bit lower than this, and this implies a 'negative variance component' - it has actually <em>increased</em> the relative proportion of SSE compared to SSR here.
+</p>
+<p>
+When mean squares of the regression are smaller than the residuals it implies a problem with the experimental design. It could be a result of undersampling (more pairs are needed), however it could also be that these pairs were not sampled at random.
+</p>
+</div>
+</div>
+<div id="summary-10" class="section level2" number="19.4">
+<h2>
+<span class="header-section-number">19.4</span> Summary<a class="anchor" aria-label="anchor" href="#summary-10"><i class="fas fa-link"></i></a>
+</h2>
+<p>ANOVA tables can be built for any linear model. The tables partition the variance into signal(s) and noise, which can be compared using an <em>F</em>-test. For complex analyses where many pairwise comparisons could be performed, an initial <em>F</em>-test can provide the initial evidence for whether there are any differences at all, reducing the risk of overtesting and the false positives that can be generated.</p>
+</div>
+<div id="activity-4" class="section level2" number="19.5">
+<h2>
+<span class="header-section-number">19.5</span> Activity<a class="anchor" aria-label="anchor" href="#activity-4"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li><p>Set up an R project for your analysis</p></li>
+<li><p>Import, clean and analyse your data</p></li>
+<li><p>Test an experimental hypothesis</p></li>
+<li><p>Produce a data visual summary</p></li>
+</ul>
+<p>Now is the time to try and put your analysis skills into action. Below are instructions for importing data and setting up a new project to answer the question, does temperature affect frogspawn development? This is your chance to practice:</p>
+<p><strong>Q. How does frogspawn hatching time vary with temperature?</strong></p>
+<p>Imagine we ran a manipulative experiment.</p>
+<blockquote>
+<p>A manipulative study is one in which the experimenter changes something about the experimental study system and studies the effect of this change.</p>
+</blockquote>
+<p>We collected newly-layed frogspawn from a pond in the Italian Alps and we brought them back to the lab, where we divided them into 60 water containers. 20 of the containers’ water temperature was kept to 13°C, 20 containers were kept to 18°C and the remaining 20 containers were kept to 25°C. Having a high number of replicates increases our confidence that the expected difference between groups is due to the factor we are interested in. Here, temperature.</p>
+<p>We monitored each water container and we recorded hatching times (days until hatching of eggs) in a spreadsheet (here called frogs_messy_data.csv).</p>
+<a href="https://raw.githubusercontent.com/UEABIO/data-sci-v1/main/book/files/frogs_messy_data.csv">
+<button class="btn btn-success"><i class="fa fa-save"></i> Download frogs_messy_data as csv</button>
+</a>
+<ul>
+<li><p>Our response variable is Hatching_time.</p></li>
+<li><p>Our explanatory variable is Temperature, with 3 levels: 13°C, 18°C and 25°C.</p></li>
+</ul>
+<p>We want to compare the means of 3 independent groups (13°C, 18°C and 25°C temperature groups) and we have one continuous response variable (Hatching time in days) and one categorical explanatory variable (Temperature). One-way ANOVA is the appropriate analysis!</p>
+<div id="hypothesis-2" class="section level3" number="19.5.1">
+<h3>
+<span class="header-section-number">19.5.1</span> Hypothesis<a class="anchor" aria-label="anchor" href="#hypothesis-2"><i class="fas fa-link"></i></a>
+</h3>
+<p>Always make a hypothesis and prediction, before you delve into the data analysis.</p>
+<p>A hypothesis is a tentative answer to a well-framed question, referring to a mechanistic explanation of the expected pattern. It can be verified via predictions, which can be tested by making additional observations and performing experiments.</p>
+<p>This should be backed up by some level of knowledge about your study system.</p>
+<p>In our case, knowing that frogspawn takes around 2-3 weeks to hatch under optimal temperatures (15-20°C), we can hypothesize that the lower the temperature, the longer it will take for frogspawn to hatch. Our hypothesis can therefore be: mean frogspawn hatching time will vary with temperature level. We can predict that given our temperature range, at the highest temperature (25°C) hatching time will be reduced.</p>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+<p>After setting up your R project, import and tidy your dataset.</p>
+<p>Hint: check your data is in a tidy format.</p>
+Remember to organise your analysis script - use the document outline feature to help you.
+</div>
+</div>
+<button id="displayTextunnamed-chunk-14" onclick="javascript:toggle('unnamed-chunk-14');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-14" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb460"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#___________________________----</span>
+
+<span class="co"># SET UP ----</span>
+<span class="co">## An analysis of the development time of frogspawn in response to water temperature ----</span>
+<span class="co">#___________________________----</span>
+
+<span class="co"># PACKAGES ----</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="co">#___________________________----</span>
+
+<span class="co"># IMPORT DATA ----</span>
+<span class="va">frogs</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/frogs_messy_data.csv"</span><span class="op">)</span>
+<span class="co">#___________________________----</span>
+
+<span class="co"># TIDY DATA ----</span>
+<span class="va">frogs</span> <span class="op">&lt;-</span> <span class="va">frogs</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span><span class="st">"13"</span> <span class="op">=</span> <span class="va">Temperature13</span>,
+         <span class="st">"18"</span> <span class="op">=</span> <span class="va">Temperature18</span>,
+         <span class="st">"25"</span> <span class="op">=</span> <span class="va">Temperature25</span>,
+         frogspawn_id <span class="op">=</span> <span class="va">`Frogspawn sample id`</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">pivot_longer</span><span class="op">(</span><span class="va">`13`</span><span class="op">:</span><span class="va">`25`</span>, names_to<span class="op">=</span><span class="st">"temperature"</span>, values_to<span class="op">=</span><span class="st">"days"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">days</span><span class="op">)</span>
+<span class="co">#___________________________----</span></code></pre></div>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+With the data tidied can you produce a <strong>linear model</strong>, check its assumptions and interpret its findings?
+</div>
+</div>
+<button id="displayTextunnamed-chunk-16" onclick="javascript:toggle('unnamed-chunk-16');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-16" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb461"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># ANALYSIS ----</span>
+<span class="va">lsmodel_frogs1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">days</span> <span class="op">~</span> <span class="va">temperature</span>, data <span class="op">=</span> <span class="va">frogs</span><span class="op">)</span>
+
+<span class="co"># summary(lsmodel_frogs1)</span>
+
+<span class="co"># anova(lsmodel_frogs1)</span>
+
+<span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">lsmodel_frogs1</span>, conf.int <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+<span class="co">#___________________________----</span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+term
+</th>
+<th style="text-align:right;">
+estimate
+</th>
+<th style="text-align:right;">
+std.error
+</th>
+<th style="text-align:right;">
+statistic
+</th>
+<th style="text-align:right;">
+p.value
+</th>
+<th style="text-align:right;">
+conf.low
+</th>
+<th style="text-align:right;">
+conf.high
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+26.3
+</td>
+<td style="text-align:right;">
+0.2571777
+</td>
+<td style="text-align:right;">
+102.26394
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+25.785011
+</td>
+<td style="text-align:right;">
+26.814989
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+temperature18
+</td>
+<td style="text-align:right;">
+-5.3
+</td>
+<td style="text-align:right;">
+0.3637041
+</td>
+<td style="text-align:right;">
+-14.57228
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+-6.028305
+</td>
+<td style="text-align:right;">
+-4.571695
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+temperature25
+</td>
+<td style="text-align:right;">
+-10.1
+</td>
+<td style="text-align:right;">
+0.3637041
+</td>
+<td style="text-align:right;">
+-27.76982
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+-10.828305
+</td>
+<td style="text-align:right;">
+-9.371695
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+Can you check the assumptions of your model?
+</div>
+</div>
+<button id="displayTextunnamed-chunk-18" onclick="javascript:toggle('unnamed-chunk-18');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-18" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="tab">
+<button class="tablinksunnamed-chunk-18 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-18', 'unnamed-chunk-18');">
+Base R
+</button>
+<button class="tablinksunnamed-chunk-18" onclick="javascript:openCode(event, 'option2unnamed-chunk-18', 'unnamed-chunk-18');">
+<tt>tidyverse</tt>
+</button>
+</div>
+<div id="option1unnamed-chunk-18" class="tabcontentunnamed-chunk-18">
+<div class="sourceCode" id="cb462"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">lsmodel_frogs1</span><span class="op">)</span></code></pre></div>
+<p><img src="19-Generalized-Linear-Models_files/figure-html/unnamed-chunk-26-1.png" width="100%" style="display: block; margin: auto;"><img src="19-Generalized-Linear-Models_files/figure-html/unnamed-chunk-26-2.png" width="100%" style="display: block; margin: auto;"><img src="19-Generalized-Linear-Models_files/figure-html/unnamed-chunk-26-3.png" width="100%" style="display: block; margin: auto;"><img src="19-Generalized-Linear-Models_files/figure-html/unnamed-chunk-26-4.png" width="100%" style="display: block; margin: auto;"></p>
+</div>
+<div id="option2unnamed-chunk-18" class="tabcontentunnamed-chunk-18">
+<div class="sourceCode" id="cb463"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">performance</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html">check_model</a></span><span class="op">(</span><span class="va">lsmodel_frogs1</span>,
+                         check <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"qq"</span>, <span class="st">"outliers"</span>, <span class="st">"homogeneity"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="19-Generalized-Linear-Models_files/figure-html/unnamed-chunk-27-1.png" width="100%" style="display: block; margin: auto;"></div>
+</div>
+<script> javascript:hide('option2unnamed-chunk-18') </script>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+Can you produce a suitable Figure for this dataset?
+</div>
+</div>
+<button id="displayTextunnamed-chunk-20" onclick="javascript:toggle('unnamed-chunk-20');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-20" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<p>There are multiple ways to present the same data, equally valid, but emphasising different concepts. For example this first figure uses a boxplot and data points to illustrate the differences. Remember the median and IQR are essentially descriptive statistics, not inferential.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-28"></span>
+<img src="19-Generalized-Linear-Models_files/figure-html/unnamed-chunk-28-1.png" alt="Frogspawn hatching times at 13, 18 and 25 degrees Celsius. Boxplot displays median, hinges are first and third quartiles, whiskers extend from the hinge to 1.5X the interquartile range. Points represent individual frogspawns." width="100%"><p class="caption">
+Figure 16.1: Frogspawn hatching times at 13, 18 and 25 degrees Celsius. Boxplot displays median, hinges are first and third quartiles, whiskers extend from the hinge to 1.5X the interquartile range. Points represent individual frogspawns.
+</p>
+</div>
+<p>Whereas the next figure, uses the <code><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html">emmeans()</a></code> package to produce estimate means and confidence intervals from the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> and therefore is the produce of inferential statistics, this figure illustrates the estimates of our model rather than the parameters of our sample.</p>
+<p>Neither method is 'best'.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-29"></span>
+<img src="19-Generalized-Linear-Models_files/figure-html/unnamed-chunk-29-1.png" alt="Time to hatching is inversely related to temperature in frogspawn. Circles represent estimated mean hatching times with 95% confidence intervals from a one-way ANOVA (F~1,28~ = 385.9, P &lt; 0.001). Dashed lines indicate the slope of the mean difference between 13-18 degrees and 13-25 degrees Celsius. Faded points represent individual data points." width="100%"><p class="caption">
+Figure 16.2: Time to hatching is inversely related to temperature in frogspawn. Circles represent estimated mean hatching times with 95% confidence intervals from a one-way ANOVA (F<sub>1,28</sub> = 385.9, P &lt; 0.001). Dashed lines indicate the slope of the mean difference between 13-18 degrees and 13-25 degrees Celsius. Faded points represent individual data points.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+Can you write a summary of the <strong>Results</strong>?
+</div>
+</div>
+<button id="displayTextunnamed-chunk-22" onclick="javascript:toggle('unnamed-chunk-22');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-22" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<p>Increasing temperatures had a clear effect on reducing the time taken for frogspawn to hatch (one-way ANOVA: <em>F</em><sub>2,57</sub> = 385.9, <em>P</em> &lt; 0.001). At 13<span class="math inline">\(^\circ\)</span> C the mean time to hatching was 26.3 days [25.8-26.8 95% CI], this reduced by an average of 5.3 days [4.57 - 6.02] at 18<span class="math inline">\(^\circ\)</span> C and by 10.1 days [9.37 - 10.82] at 25<span class="math inline">\(^\circ\)</span> C.</p>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+
+
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  if (t = document.getElementById("webex-total_correct")) {
+    var correct = document.getElementsByClassName("webex-correct").length;
+    var solvemes = document.getElementsByClassName("webex-solveme").length;
+    var radiogroups = document.getElementsByClassName("webex-radiogroup").length;
+    var selects = document.getElementsByClassName("webex-select").length;
+    
+    t.innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+  
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+  
+  var cl = this.classList
+  
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+  
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+  
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+  
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+  
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+  }
+  
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+  
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+  }
+
+  update_total_correct();
+}
+
+</script><script>
+$( document ).ready(function() {
+  var cite = ' ';
+  var license = ' <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>';
+
+  $("footer div.row div:eq(1) p").html(
+    license
+  );
+});
+</script><div class="chapter-nav">
+<div class="prev"><a href="complex-models.html"><span class="header-section-number">18</span> Complex models</a></div>
+<div class="next"><a href="mixed-models.html"><span class="header-section-number">20</span> Mixed models</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#anova-1"><span class="header-section-number">19</span> ANOVA</a></li>
+<li><a class="nav-link" href="#analysis-of-variance-anova-1"><span class="header-section-number">19.1</span> Analysis of Variance (ANOVA)</a></li>
+<li>
+<a class="nav-link" href="#maize-data-1"><span class="header-section-number">19.2</span> Maize data</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#the-anova-table-1"><span class="header-section-number">19.2.1</span> The ANOVA table</a></li></ul>
+</li>
+<li><a class="nav-link" href="#two-way-anova-1"><span class="header-section-number">19.3</span> Two-way ANOVA</a></li>
+<li><a class="nav-link" href="#summary-10"><span class="header-section-number">19.4</span> Summary</a></li>
+<li>
+<a class="nav-link" href="#activity-4"><span class="header-section-number">19.5</span> Activity</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#hypothesis-2"><span class="header-section-number">19.5.1</span> Hypothesis</a></li></ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/UEABIO/data-sci-v1/blob/main/book/19-Generalized-Linear-Models.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/UEABIO/data-sci-v1/edit/main/book/19-Generalized-Linear-Models.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-08-31.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

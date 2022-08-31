@@ -1,0 +1,2237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 17 Multivariate linear models | 5023Y</title>
+<meta name="author" content="Philip T. Leftwich">
+<meta name="description" content="So far we have worked almost exclusively with single explanatory variables either continuous (regression) or categorical (t-test or ANOVA). But what about analyses where we have more than one...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 17 Multivariate linear models | 5023Y">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://ueabio.github.io/data-sci/multivariate-linear-models.html">
+<meta property="og:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
+<meta property="og:description" content="So far we have worked almost exclusively with single explanatory variables either continuous (regression) or categorical (t-test or ANOVA). But what about analyses where we have more than one...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 17 Multivariate linear models | 5023Y">
+<meta name="twitter:description" content="So far we have worked almost exclusively with single explanatory variables either continuous (regression) or categorical (t-test or ANOVA). But what about analyses where we have more than one...">
+<meta name="twitter:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.13/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1.9000/transition.js"></script><script src="libs/bs3compat-0.3.1.9000/tabs.js"></script><script src="libs/bs3compat-0.3.1.9000/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/font-awesome-5.13.0/js/script.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NP3MF25W3"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6NP3MF25W3');
+    </script><script language="javascript"> 
+        function toggle(id) {
+            var ele = document.getElementById("toggleText" + id);
+            var text = document.getElementById("displayText" + id);
+            var buttonText = text.innerHTML.replace("Show ", "");
+            buttonText = buttonText.replace("Hide ", "");
+            if(ele.style.display == "block") {
+                ele.style.display = "none";
+                text.innerHTML = "Show " + buttonText;
+            } else {
+                ele.style.display = "block";
+                text.innerHTML = "Hide " + buttonText;
+            }
+        } 
+    </script><script language="javascript">
+        function openCode(evt, codeName, id) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent" + id);
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks" + id);
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(codeName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script><script language="javascript">
+        function hide(id){
+            document.getElementById(id).style.display = "none";
+        }
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/psyteachr.css">
+<link rel="stylesheet" href="include/webex.css">
+<link rel="stylesheet" href="include/style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Data Science for Biologists">5023Y</a>:
+        <small class="text-muted">Data Science for Biologists</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Overview</a></li>
+<li class="book-part">R Programming</li>
+<li><a class="" href="introduction-to-r-and-rstudio.html"><span class="header-section-number">1</span> Introduction to R and RStudio</a></li>
+<li><a class="" href="basic-programming.html"><span class="header-section-number">2</span> Basic programming</a></li>
+<li><a class="" href="loading-data.html"><span class="header-section-number">3</span> Loading data</a></li>
+<li><a class="" href="data-wrangling-part-one.html"><span class="header-section-number">4</span> Data wrangling part one</a></li>
+<li><a class="" href="data-wrangling-part-two.html"><span class="header-section-number">5</span> Data wrangling part two</a></li>
+<li><a class="" href="data-visualisation-with-ggplot2.html"><span class="header-section-number">6</span> Data visualisation with ggplot2</a></li>
+<li><a class="" href="markdown.html"><span class="header-section-number">7</span> Markdown</a></li>
+<li><a class="" href="github.html"><span class="header-section-number">8</span> Github</a></li>
+<li><a class="" href="functions-1.html"><span class="header-section-number">9</span> Functions</a></li>
+<li><a class="" href="data-insights-part-one.html"><span class="header-section-number">10</span> Data Insights part one</a></li>
+<li><a class="" href="data-insights-part-two.html"><span class="header-section-number">11</span> Data insights part two</a></li>
+<li class="book-part">Statistics</li>
+<li><a class="" href="introduction-to-statistics.html"><span class="header-section-number">12</span> Introduction to statistics</a></li>
+<li><a class="" href="introduction-to-linear-models.html"><span class="header-section-number">13</span> Introduction to Linear Models</a></li>
+<li><a class="" href="testing.html"><span class="header-section-number">14</span> Testing</a></li>
+<li><a class="" href="regression.html"><span class="header-section-number">15</span> Regression</a></li>
+<li><a class="" href="anova.html"><span class="header-section-number">16</span> ANOVA</a></li>
+<li><a class="active" href="multivariate-linear-models.html"><span class="header-section-number">17</span> Multivariate linear models</a></li>
+<li><a class="" href="complex-models.html"><span class="header-section-number">18</span> Complex models</a></li>
+<li><a class="" href="generalized-linear-models.html"><span class="header-section-number">19</span> Generalized Linear Models</a></li>
+<li class="book-part">Advanced topics</li>
+<li><a class="" href="mixed-models.html"><span class="header-section-number">20</span> Mixed models</a></li>
+<li><a class="" href="generalised-additive-models.html"><span class="header-section-number">21</span> Generalised Additive Models</a></li>
+<li><a class="" href="survival-models.html"><span class="header-section-number">22</span> Survival models</a></li>
+<li><a class="" href="unsupervised-machine-learning.html"><span class="header-section-number">23</span> Unsupervised Machine Learning</a></li>
+<li><a class="" href="power-analysis.html"><span class="header-section-number">24</span> Power analysis</a></li>
+<li class="book-part">Appendices</li>
+<li><a class="" href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></li>
+<li><a class="" href="updating-r-rstudio-and-packages.html"><span class="header-section-number">B</span> Updating R, RStudio, and packages</a></li>
+<li><a class="" href="exporting-files-from-the-server.html"><span class="header-section-number">C</span> Exporting files from the server</a></li>
+<li><a class="" href="symbols.html"><span class="header-section-number">D</span> Symbols</a></li>
+<li><a class="" href="baser.html"><span class="header-section-number">E</span> Base R vs. Tidyverse</a></li>
+<li><a class="" href="license.html">License</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/UEABIO/data-sci-v1">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="multivariate-linear-models" class="section level1" number="17">
+<h1>
+<span class="header-section-number">17</span> Multivariate linear models<a class="anchor" aria-label="anchor" href="#multivariate-linear-models"><i class="fas fa-link"></i></a>
+</h1>
+<p>So far we have worked almost exclusively with single explanatory variables either continuous (regression) or categorical (t-test or ANOVA). But what about analyses where we have more than one possible explanatory variable? Extra terms can easily be incorporated into linear models in order to test this.</p>
+<div id="factorial-linear-models" class="section level2" number="17.1">
+<h2>
+<span class="header-section-number">17.1</span> Factorial linear models<a class="anchor" aria-label="anchor" href="#factorial-linear-models"><i class="fas fa-link"></i></a>
+</h2>
+<blockquote>
+<p>The example data is the response of above ground plant biomass production of grassland plots in relation to two resource addition treatments. The addition of Fertiliser to the soil and the addition of Light to the grassland understorey. If biomass is limited by the nutrients in the soil, we would expect the addition of fertiliser to increase production. If biomass is limited by low levels of light caused by plant crowding we would expect an addition of light to increase biomass.</p>
+</blockquote>
+<a href="https://raw.githubusercontent.com/UEABIO/data-sci-v1/main/book/files/biomass.csv">
+<button class="btn btn-success"><i class="fa fa-save"></i> Download biomass data as csv</button>
+</a>
+<div class="sourceCode" id="cb396"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">biomass</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"book"</span>, <span class="st">"files"</span>, <span class="st">"biomass.csv"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>You should first check the data and look at the top rows, we can see that this shows the application or non-application of fertiliser and light additions, because <em>all four</em> possible combinations are present, this is known as a <em>fully factorial design</em>:</p>
+<ul>
+<li><p>control (F- L-, no added light or fertiliser)</p></li>
+<li><p>fertiliser (F+ L-)</p></li>
+<li><p>light (F- L+)</p></li>
+<li><p>addition of both (F+ L+)</p></li>
+</ul>
+<p>Close inspection of the dataset shows that the same data is presented in <em>two</em> ways:</p>
+<ul>
+<li><p>Column 1 shows the status of Fertiliser only (F +/-) (two levels)</p></li>
+<li><p>Column 2 shows the status of Light only (L +/-) (two levels)</p></li>
+<li><p>Column 3 shows whether fertiliser <strong>and</strong> light have been applied (four levels, a combination of the previous two columns)</p></li>
+<li><p>Column 4 shows the biomass</p></li>
+</ul>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+Use your R data wrangling skills to check the data after import.
+</div>
+</div>
+<button id="displayTextunnamed-chunk-6" onclick="javascript:toggle('unnamed-chunk-6');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-6" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb397"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># check the structure of the data</span>
+<span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">biomass</span><span class="op">)</span>
+
+<span class="co"># check data is in a tidy format</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">biomass</span><span class="op">)</span>
+
+<span class="co"># check variable names</span>
+<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">biomass</span><span class="op">)</span>
+
+<span class="co"># check for duplication</span>
+<span class="va">biomass</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">)</span>
+
+<span class="co"># check for typos - by looking at impossible values</span>
+<span class="va">biomass</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>min<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">Biomass.m2</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>, 
+            max<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">Biomass.m2</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co"># check for typos by looking at distinct characters/values</span>
+<span class="va">biomass</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">Fert</span><span class="op">)</span>
+
+<span class="va">biomass</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">Light</span><span class="op">)</span>
+
+<span class="va">biomass</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">FL</span><span class="op">)</span>
+
+<span class="co"># missing values</span>
+<span class="va">biomass</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">)</span>
+
+<span class="co"># quick summary</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">biomass</span><span class="op">)</span></code></pre></div>
+<pre><code>## Rows: 64
+## Columns: 4
+## $ Fert       &lt;chr&gt; "F-", "F-", "F-", "F-", "F-", "F-", "F-", "F-", "F-", "F-",~
+## $ Light      &lt;chr&gt; "L-", "L-", "L-", "L-", "L-", "L-", "L-", "L-", "L-", "L-",~
+## $ FL         &lt;chr&gt; "F-L-", "F-L-", "F-L-", "F-L-", "F-L-", "F-L-", "F-L-", "F-~
+## $ Biomass.m2 &lt;dbl&gt; 254.2, 202.0, 392.4, 455.3, 359.1, 386.5, 355.2, 323.1, 373~</code></pre>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+Fert
+</th>
+<th style="text-align:left;">
+Light
+</th>
+<th style="text-align:left;">
+FL
+</th>
+<th style="text-align:right;">
+Biomass.m2
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+F-
+</td>
+<td style="text-align:left;">
+L-
+</td>
+<td style="text-align:left;">
+F-L-
+</td>
+<td style="text-align:right;">
+254.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F-
+</td>
+<td style="text-align:left;">
+L-
+</td>
+<td style="text-align:left;">
+F-L-
+</td>
+<td style="text-align:right;">
+202.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F-
+</td>
+<td style="text-align:left;">
+L-
+</td>
+<td style="text-align:left;">
+F-L-
+</td>
+<td style="text-align:right;">
+392.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F-
+</td>
+<td style="text-align:left;">
+L-
+</td>
+<td style="text-align:left;">
+F-L-
+</td>
+<td style="text-align:right;">
+455.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F-
+</td>
+<td style="text-align:left;">
+L-
+</td>
+<td style="text-align:left;">
+F-L-
+</td>
+<td style="text-align:right;">
+359.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F-
+</td>
+<td style="text-align:left;">
+L-
+</td>
+<td style="text-align:left;">
+F-L-
+</td>
+<td style="text-align:right;">
+386.5
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<pre><code>## [1] "Fert"       "Light"      "FL"         "Biomass.m2"
+## [1] 0</code></pre>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:right;">
+min
+</th>
+<th style="text-align:right;">
+max
+</th>
+</tr></thead>
+<tbody><tr>
+<td style="text-align:right;">
+152.3
+</td>
+<td style="text-align:right;">
+750.4
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+Fert
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+F-
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+Light
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+L-
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+L+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+FL
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+F-L-
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F+L-
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F-L+
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F+L+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<pre><code>## [1] 0
+##      Fert              Light                FL              Biomass.m2   
+##  Length:64          Length:64          Length:64          Min.   :152.3  
+##  Class :character   Class :character   Class :character   1st Qu.:370.1  
+##  Mode  :character   Mode  :character   Mode  :character   Median :425.9  
+##                                                           Mean   :441.6  
+##                                                           3rd Qu.:517.2  
+##                                                           Max.   :750.4</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="data-summary" class="section level2" number="17.2">
+<h2>
+<span class="header-section-number">17.2</span> Data summary<a class="anchor" aria-label="anchor" href="#data-summary"><i class="fas fa-link"></i></a>
+</h2>
+<p>So we have 64 observations with four variables, the last column is the response variable (biomass) and the other three columns are <em>two</em> different ways of indicating the experimental design.</p>
+<ul>
+<li><p>If we use column 3 - we are treating the design as though it is a one-way ANOVA (with four levels)</p></li>
+<li><p>If we use columns 1 &amp; 2 - we are treating this as a <em>factorial design</em></p></li>
+</ul>
+<p>We will look at the two different ways to analyse this data then, and the pros and cons of these two approaches.</p>
+</div>
+<div id="one-way-anova" class="section level2" number="17.3">
+<h2>
+<span class="header-section-number">17.3</span> One-way ANOVA<a class="anchor" aria-label="anchor" href="#one-way-anova"><i class="fas fa-link"></i></a>
+</h2>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-7"></span>
+<img src="17-Multiple-regression_files/figure-html/unnamed-chunk-7-1.png" alt="Boxplot and individual biomass values (black points) with treatment means (red diamonds)" width="100%"><p class="caption">
+Figure 17.1: Boxplot and individual biomass values (black points) with treatment means (red diamonds)
+</p>
+</div>
+<p>Plotting the data and superimposing mean values produces the graph shown above. Now we are confident there is a difference in our sample means, we can begin a linear model to quantify this and test it against a null hypothesis.</p>
+<p>If we use the <code>FL</code> column as a predictor then this is equivalent to a four-level one way ANOVA.</p>
+<div class="sourceCode" id="cb401"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ls_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Biomass.m2</span> <span class="op">~</span> <span class="va">FL</span>, data <span class="op">=</span> <span class="va">biomass</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">ls_1</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Biomass.m2 ~ FL, data = biomass)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -233.619  -42.842    1.356   67.961  175.381 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   355.79      23.14  15.376  &lt; 2e-16 ***
+## FLF-L+         30.12      32.72   0.921  0.36095    
+## FLF+L-         93.69      32.72   2.863  0.00577 ** 
+## FLF+L+        219.23      32.72   6.699 8.13e-09 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 92.56 on 60 degrees of freedom
+## Multiple R-squared:  0.4686, Adjusted R-squared:  0.442 
+## F-statistic: 17.63 on 3 and 60 DF,  p-value: 2.528e-08</code></pre>
+<p>We can see that the control treatment (F- L-) is the intercept with a mean of 356g and standard error of 23g. The Light treatment adds an average of 30g to the biomass (but this close to the standard error of this estimated mean difference - 32.72g). In contrast the addition of fertiliser adds 93g to the biomass.</p>
+<p>If we wanted to get the precise confidence intervals we could use <code><a href="https://generics.r-lib.org/reference/tidy.html">broom::tidy(ls_1, conf.int = T)</a></code> or <code><a href="https://rdrr.io/r/stats/confint.html">confint(ls1)</a></code>.</p>
+<p>We can visualise these differences with a coefficient plot, and see clearly that adding light by itself produce a slight increase in the mean biomass of our samples <strong>but</strong> the 95% confidence interval includes zero, so we don't have any real confidence that this is a consistent/true effect.</p>
+<div class="sourceCode" id="cb403"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">GGally</span><span class="fu">::</span><span class="fu"><a href="https://ggobi.github.io/ggally/reference/ggcoef_model.html">ggcoef_model</a></span><span class="op">(</span><span class="va">ls_1</span>,
+                      show_p_values<span class="op">=</span><span class="cn">FALSE</span>,
+                      signif_stars <span class="op">=</span> <span class="cn">FALSE</span>,
+                     conf.level<span class="op">=</span><span class="fl">0.95</span><span class="op">)</span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-9"></span>
+<img src="17-Multiple-regression_files/figure-html/unnamed-chunk-9-1.png" alt="Effects of light and fertiliser treatments on biomass relative to an untreated control (error bars = 95% CI)" width="100%"><p class="caption">
+Figure 3.2: Effects of light and fertiliser treatments on biomass relative to an untreated control (error bars = 95% CI)
+</p>
+</div>
+<p>But what about the fourth level - combined fertiliser and light treatments? If there is no interaction (combined effect) between light and fertiliser then we would expect the average biomass difference caused by the light and the and the average biomass difference caused by fertiliser to <em>add together</em> to approximately the value found in the combined treatment.</p>
+<p>In other words if one treatment has an effect size of <em>A</em>, and another treatment has an effect size of <em>B</em>, then ANOVA predicts that in combination the effect size of the combined treatments is <em>A + B</em>.</p>
+<div class="sourceCode" id="cb404"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># combine the average mean differences of the light effect and fertiliser effect</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">ls_1</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">ls_1</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span> 
+
+<span class="co"># compare this to the average difference of the combined treatment</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">ls_1</span><span class="op">)</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span></code></pre></div>
+<pre><code>##   FLF-L+ 
+## 123.8187 
+##  FLF+L+ 
+## 219.225</code></pre>
+<p>In this example we can see clearly that combining the separate treatments <strong>does not</strong> add up to the combined value. The mean biomass of the combined treatment is well above the additive prediction.</p>
+<p>The mean biomass of the combined treatment is well above what we would expect from the additive effects alone. This suggests there may be a <em>positive interaction</em> (that light and fertiliser treatments produce a sum effect that is greater than could be predicted by looking at their individual effects).</p>
+<p>Using our one-way ANOVA design we are able to accurately estimate the mean difference between the controlled group and the combined treatment group. <strong>But</strong> we cannot really say anything concrete about the <em>strength of the interaction effect</em> e.g. is their a true interaction? how confident can we be in this effect? How does the strength of the interaction effect compare to the main effects?</p>
+<p>In contrast to the one-way ANOVA approach, a factorial design lets us test and compare additive effects and interaction effects</p>
+</div>
+<div id="testing-for-interactions" class="section level2" number="17.4">
+<h2>
+<span class="header-section-number">17.4</span> Testing for interactions<a class="anchor" aria-label="anchor" href="#testing-for-interactions"><i class="fas fa-link"></i></a>
+</h2>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-11"></span>
+<img src="17-Multiple-regression_files/figure-html/unnamed-chunk-11-1.png" alt="Left an illustration of an additive model, Right an illustration of a model with an interaction effect." width="100%"><p class="caption">
+Figure 3.3: Left an illustration of an additive model, Right an illustration of a model with an interaction effect.
+</p>
+</div>
+<p>When the data can be best explained by an additive model, we expect new terms to shift the intercept up or down but the slope of the line to remain the same. An interaction effect <em>changes</em> the relationship as such we should see <em>different</em> gradients.</p>
+<div class="try">
+<p>
+Look at the figure and determine whether you think there is evidence for an interaction effect?
+</p>
+</div>
+<div class="sourceCode" id="cb406"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">biomass</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Fert</span>, y<span class="op">=</span><span class="va">Biomass.m2</span>, colour <span class="op">=</span> <span class="va">Light</span>, fill <span class="op">=</span> <span class="va">Light</span>, group <span class="op">=</span> <span class="va">Light</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span>width<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary</a></span><span class="op">(</span>
+        geom <span class="op">=</span> <span class="st">"point"</span>,
+        fun <span class="op">=</span> <span class="st">"mean"</span>,
+        size <span class="op">=</span> <span class="fl">3</span>,
+        shape <span class="op">=</span> <span class="fl">23</span>
+    <span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary</a></span><span class="op">(</span>
+        geom <span class="op">=</span> <span class="st">"line"</span>,
+        fun <span class="op">=</span> <span class="st">"mean"</span>,
+        size <span class="op">=</span> <span class="fl">1</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>
+    <span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="17-Multiple-regression_files/figure-html/unnamed-chunk-13-1.png" width="100%" style="display: block; margin: auto;"></div>
+<p>To produce an interactive model, we need to use the <em>separate</em> factors for fertiliser and light rather than the single <code>fl</code> factor. When we make this model, we include the main effects of <code>Light</code> and <code>Fert</code>, if the additive model explains sufficient variance then this will be enough, but if we suspect an interaction term we add this as <code>Light:Fert</code> written out as follows:</p>
+<div class="sourceCode" id="cb407"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ls_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Biomass.m2</span> <span class="op">~</span> <span class="va">Fert</span> <span class="op">+</span> <span class="co"># main effect</span>
+             <span class="va">Light</span> <span class="op">+</span> <span class="co"># main effect</span>
+             <span class="va">Fert</span><span class="op">:</span><span class="va">Light</span>, <span class="co"># interaction term</span>
+           data <span class="op">=</span> <span class="va">biomass</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">ls_2</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Biomass.m2 ~ Fert + Light + Fert:Light, data = biomass)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -233.619  -42.842    1.356   67.961  175.381 
+## 
+## Coefficients:
+##                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)      355.79      23.14  15.376  &lt; 2e-16 ***
+## FertF+            93.69      32.72   2.863  0.00577 ** 
+## LightL+           30.13      32.72   0.921  0.36095    
+## FertF+:LightL+    95.41      46.28   2.062  0.04359 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 92.56 on 60 degrees of freedom
+## Multiple R-squared:  0.4686, Adjusted R-squared:  0.442 
+## F-statistic: 17.63 on 3 and 60 DF,  p-value: 2.528e-08</code></pre>
+<p>Notice the estimates of the mean differences are the same as the previous one-way ANOVA model. The fourth line now indicates <em>how much of an effect the two factors interacting changes the mean</em>. Also note the standard error is larger, there is less power to accurately estimate an interaction over a main effect.</p>
+<div class="sourceCode" id="cb409"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">GGally</span><span class="fu">::</span><span class="fu"><a href="https://ggobi.github.io/ggally/reference/ggcoef_model.html">ggcoef_model</a></span><span class="op">(</span><span class="va">ls_2</span>,
+                      show_p_values<span class="op">=</span><span class="cn">FALSE</span>,
+                      signif_stars <span class="op">=</span> <span class="cn">FALSE</span>,
+                     conf.level<span class="op">=</span><span class="fl">0.95</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="17-Multiple-regression_files/figure-html/unnamed-chunk-15-1.png" width="100%" style="display: block; margin: auto;"></div>
+<p>When we use a factorial combination, the last line of the table of coefficients estimates the size of the interaction effect at around 95g. So if combining the light and fertilisation treatments produced a biomass equivalent to their additive predictions, the estimate of the interaction would be <em>zero</em>. Instead it is <strong>95g more than we would expect from the additive effects alone</strong>. This means in order to work out the estimated biomass for the treatment of light and fertiliser we must sum the additive effects of <code>Light</code>+ <code>Fert</code> and the interaction effect <code>Light:Fert</code>.</p>
+<div id="model-estimates-and-confidence-intervals" class="section level3" number="17.4.1">
+<h3>
+<span class="header-section-number">17.4.1</span> Model estimates and confidence intervals<a class="anchor" aria-label="anchor" href="#model-estimates-and-confidence-intervals"><i class="fas fa-link"></i></a>
+</h3>
+<p>When we compare this to our one-way ANOVA model, we must add the single terms and the interaction term, this should add up to the combined treatment from our first model:</p>
+<div class="sourceCode" id="cb410"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># model 1</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">ls_1</span><span class="op">)</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span>
+
+<span class="co"># model 2</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">ls_2</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">ls_2</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">ls_2</span><span class="op">)</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span></code></pre></div>
+<pre><code>##  FLF+L+ 
+## 219.225 
+##  FertF+ 
+## 219.225</code></pre>
+<div class="warning">
+<p>
+Don't make the mistake of looking at the main effect of light treatment, and reporting there is no effect because the uncertainty intervals cross zero. The main effect of light gives the average effect across the two fertiliser treatments. However, because of the interaction effect, we know this doesn't tell the whole story - whether light has an effect depends on whether fertiliser has been applied.
+</p>
+<p>
+So, if you have a significant interaction term, you must consider the main effects, regardless of whether they are significant on their own.
+</p>
+</div>
+</div>
+</div>
+<div id="anova-tables" class="section level2" number="17.5">
+<h2>
+<span class="header-section-number">17.5</span> ANOVA tables<a class="anchor" aria-label="anchor" href="#anova-tables"><i class="fas fa-link"></i></a>
+</h2>
+<p>So you have made a linear model with an interaction term, how do you report whether this interaction is significant? How do you report the main effect terms when there is an interaction present?</p>
+<ol style="list-style-type: decimal">
+<li><strong>Start with the interaction</strong></li>
+</ol>
+<p>In previous chapters we ran the <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> function directly on our linear model. This works well for simple &amp; 'balanced' designs (there are equal sample sizes in each level of a factor), but can be misleading with <a href="https://mcfromnz.wordpress.com/2011/03/02/anova-type-iiiiii-ss-explained/">'unbalanced' designs or models with complex interactions</a>.</p>
+<p>In order to report an <em>F</em> statistic for the interaction effect, we need to carry out an <em>F</em>-test of two models, one <em>with</em> and one <em>without</em> the interaction effect. This is easy with the function <code><a href="https://rdrr.io/r/stats/add1.html">drop1()</a></code></p>
+<div class="sourceCode" id="cb412"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/add1.html">drop1</a></span><span class="op">(</span><span class="va">ls_2</span>, test <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Df
+</th>
+<th style="text-align:right;">
+Sum of Sq
+</th>
+<th style="text-align:right;">
+RSS
+</th>
+<th style="text-align:right;">
+AIC
+</th>
+<th style="text-align:right;">
+F value
+</th>
+<th style="text-align:right;">
+Pr(&gt;F)
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+&lt;none&gt;
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+513997.7
+</td>
+<td style="text-align:right;">
+583.4298
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fert:Light
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+36409.41
+</td>
+<td style="text-align:right;">
+550407.1
+</td>
+<td style="text-align:right;">
+585.8099
+</td>
+<td style="text-align:right;">
+4.250144
+</td>
+<td style="text-align:right;">
+0.0435871
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p>This <em>F</em>-test is testing the <em>null hypothesis</em> that there is no true interaction effect. The significance test rejects the null hypothesis (just). The <code><a href="https://rdrr.io/r/stats/add1.html">drop1()</a></code> function also provides the <strong>Akaike information criterion (AIC)</strong>, an alternative method of model selection (more on this later).</p>
+<p>We could now write this up as follows:</p>
+<blockquote>
+<p>There was an interactive effect of light and fertiliser treatments (ANOVA <em>F</em><sub>1,60</sub> = 4.25, <em>P</em> = 0.044) in which combining treatments produced substantially more biomass (95.4g [95% CI: 2.8 - 188]) than expected from the additive effects alone (Fertiliser 93.7g [28.2 - 159.2], Light 30.1g [-35.3 - 95.6]).</p>
+</blockquote>
+<p>Do not make the mistake of <em>just</em> reporting the statistics, the interesting bit is the size of the effect (estimate) and the uncertainty (confidence intervals).</p>
+<div class="warning">
+<p>
+Remember to check the assumptions of your full model
+</p>
+</div>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>Main effects</strong></li>
+</ol>
+<p>A good thing about the <code><a href="https://rdrr.io/r/stats/add1.html">drop1()</a></code> function is that if there are interactions in the model, it stops there. This is because if the interaction effect is significant, then the main effects must be included, even if they aren't significant on their own. We can make further models to test the main effects <strong>but</strong> these are less important because we already know the interaction term provides the main result.</p>
+<p>If we decide to include reports of the main effect then estimates and confidence intervals should come from the <em>full</em> model, but we need to produce an interaction free model to produce accurate <em>F</em>-values (especially for unbalanced designs, see below).</p>
+<div class="sourceCode" id="cb413"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># we have to remove the interaction term before we can keep using drop1()</span>
+
+<span class="va">ls_3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Biomass.m2</span> <span class="op">~</span> <span class="va">Fert</span> <span class="op">+</span> <span class="va">Light</span>, data <span class="op">=</span> <span class="va">biomass</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/stats/add1.html">drop1</a></span><span class="op">(</span><span class="va">ls_3</span>, test <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Df
+</th>
+<th style="text-align:right;">
+Sum of Sq
+</th>
+<th style="text-align:right;">
+RSS
+</th>
+<th style="text-align:right;">
+AIC
+</th>
+<th style="text-align:right;">
+F value
+</th>
+<th style="text-align:right;">
+Pr(&gt;F)
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+&lt;none&gt;
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+550407.1
+</td>
+<td style="text-align:right;">
+585.8099
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fert
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+319889.22
+</td>
+<td style="text-align:right;">
+870296.4
+</td>
+<td style="text-align:right;">
+613.1332
+</td>
+<td style="text-align:right;">
+35.45238
+</td>
+<td style="text-align:right;">
+0.0000001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Light
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+96915.47
+</td>
+<td style="text-align:right;">
+647322.6
+</td>
+<td style="text-align:right;">
+594.1899
+</td>
+<td style="text-align:right;">
+10.74086
+</td>
+<td style="text-align:right;">
+0.0017322
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="warning">
+<p>
+You can use this reduced model to get F values, BUT reports of estimates should come from the full model.
+</p>
+</div>
+</div>
+<div id="balancedunbalanced-designs" class="section level2" number="17.6">
+<h2>
+<span class="header-section-number">17.6</span> Balanced/Unbalanced designs<a class="anchor" aria-label="anchor" href="#balancedunbalanced-designs"><i class="fas fa-link"></i></a>
+</h2>
+<div class="warning">
+<p>
+In an unbalanced design when you run the anova() function on your model, the order in which your variables were included can have an effect e.g.
+</p>
+<p>
+lm(Fert + Light) would give a different anova table to
+</p>
+<p>
+lm(Light + Fert)
+</p>
+</div>
+<p>In the examples above, you are unlikely to find much of a difference between running the <code><a href="https://rdrr.io/r/stats/add1.html">drop1()</a></code> function or <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> on the complex or reduced models. This is because these designs are 'balanced' (equal numbers in each level of a predictor). When designs are not balanced then the order matters when we use <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> - this is because the sum of squares is calculated sequentially (in the order of the formula), and so we could get different results depending on the order in which we assemble predictors into our model!</p>
+<div id="practice" class="section level3" number="17.6.1">
+<h3>
+<span class="header-section-number">17.6.1</span> Practice<a class="anchor" aria-label="anchor" href="#practice"><i class="fas fa-link"></i></a>
+</h3>
+<p>Let's start by making a deliberately unbalanced dataset</p>
+<div class="sourceCode" id="cb414"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># make three vectors and combine them into a new tibble</span>
+
+<span class="va">height</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">50</span>,<span class="fl">57</span>,<span class="fl">91</span>,<span class="fl">94</span>,<span class="fl">102</span>,<span class="fl">110</span>,<span class="fl">57</span>,<span class="fl">71</span>,<span class="fl">85</span>,<span class="fl">105</span>,<span class="fl">120</span><span class="op">)</span>
+<span class="va">size</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"small"</span>, <span class="fl">2</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"large"</span>, <span class="fl">4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"small"</span>, <span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"large"</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<span class="va">treatment</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Control"</span>, <span class="fl">6</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Removal"</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">unbalanced</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span><span class="va">height</span>, <span class="va">size</span>, <span class="va">treatment</span><span class="op">)</span>
+
+<span class="va">unbalanced</span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:right;">
+height
+</th>
+<th style="text-align:left;">
+size
+</th>
+<th style="text-align:left;">
+treatment
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:left;">
+small
+</td>
+<td style="text-align:left;">
+Control
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+57
+</td>
+<td style="text-align:left;">
+small
+</td>
+<td style="text-align:left;">
+Control
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+91
+</td>
+<td style="text-align:left;">
+large
+</td>
+<td style="text-align:left;">
+Control
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+94
+</td>
+<td style="text-align:left;">
+large
+</td>
+<td style="text-align:left;">
+Control
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+102
+</td>
+<td style="text-align:left;">
+large
+</td>
+<td style="text-align:left;">
+Control
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:left;">
+large
+</td>
+<td style="text-align:left;">
+Control
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+57
+</td>
+<td style="text-align:left;">
+small
+</td>
+<td style="text-align:left;">
+Removal
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+71
+</td>
+<td style="text-align:left;">
+small
+</td>
+<td style="text-align:left;">
+Removal
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+85
+</td>
+<td style="text-align:left;">
+small
+</td>
+<td style="text-align:left;">
+Removal
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+105
+</td>
+<td style="text-align:left;">
+large
+</td>
+<td style="text-align:left;">
+Removal
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+120
+</td>
+<td style="text-align:left;">
+large
+</td>
+<td style="text-align:left;">
+Removal
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+Produce a linear model testing size and treatment against height. Try making two models swapping the order for including the two predictors and compare them with anova()
+</div>
+</div>
+<button id="displayTextunnamed-chunk-25" onclick="javascript:toggle('unnamed-chunk-25');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-25" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb415"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">model_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">treatment</span> <span class="op">+</span> <span class="va">size</span>, data <span class="op">=</span> <span class="va">unbalanced</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">model_1</span><span class="op">)</span>
+
+<span class="va">model_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">size</span> <span class="op">+</span> <span class="va">treatment</span>, data <span class="op">=</span> <span class="va">unbalanced</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">model_2</span><span class="op">)</span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Df
+</th>
+<th style="text-align:right;">
+Sum Sq
+</th>
+<th style="text-align:right;">
+Mean Sq
+</th>
+<th style="text-align:right;">
+F value
+</th>
+<th style="text-align:right;">
+Pr(&gt;F)
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+treatment
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+35.34545
+</td>
+<td style="text-align:right;">
+35.34545
+</td>
+<td style="text-align:right;">
+0.3724701
+</td>
+<td style="text-align:right;">
+0.5585952
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+size
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4846.04211
+</td>
+<td style="text-align:right;">
+4846.04211
+</td>
+<td style="text-align:right;">
+51.0675541
+</td>
+<td style="text-align:right;">
+0.0000975
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Residuals
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+759.15789
+</td>
+<td style="text-align:right;">
+94.89474
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Df
+</th>
+<th style="text-align:right;">
+Sum Sq
+</th>
+<th style="text-align:right;">
+Mean Sq
+</th>
+<th style="text-align:right;">
+F value
+</th>
+<th style="text-align:right;">
+Pr(&gt;F)
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+size
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4291.2121
+</td>
+<td style="text-align:right;">
+4291.21212
+</td>
+<td style="text-align:right;">
+45.220760
+</td>
+<td style="text-align:right;">
+0.0001489
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+treatment
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+590.1754
+</td>
+<td style="text-align:right;">
+590.17544
+</td>
+<td style="text-align:right;">
+6.219264
+</td>
+<td style="text-align:right;">
+0.0372980
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Residuals
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+759.1579
+</td>
+<td style="text-align:right;">
+94.89474
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+Compare these two anova tables. Same data, same predictors, but a different conclusion just because of the order the terms were included in the model!
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+Now compare your two models with the drop1() function
+</div>
+</div>
+<button id="displayTextunnamed-chunk-27" onclick="javascript:toggle('unnamed-chunk-27');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-27" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb416"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/add1.html">drop1</a></span><span class="op">(</span><span class="va">model_1</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/add1.html">drop1</a></span><span class="op">(</span><span class="va">model_2</span><span class="op">)</span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Df
+</th>
+<th style="text-align:right;">
+Sum of Sq
+</th>
+<th style="text-align:right;">
+RSS
+</th>
+<th style="text-align:right;">
+AIC
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+&lt;none&gt;
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+759.1579
+</td>
+<td style="text-align:right;">
+52.57746
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+treatment
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+590.1754
+</td>
+<td style="text-align:right;">
+1349.3333
+</td>
+<td style="text-align:right;">
+56.90418
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+size
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4846.0421
+</td>
+<td style="text-align:right;">
+5605.2000
+</td>
+<td style="text-align:right;">
+72.56910
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Df
+</th>
+<th style="text-align:right;">
+Sum of Sq
+</th>
+<th style="text-align:right;">
+RSS
+</th>
+<th style="text-align:right;">
+AIC
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+&lt;none&gt;
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+759.1579
+</td>
+<td style="text-align:right;">
+52.57746
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+size
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4846.0421
+</td>
+<td style="text-align:right;">
+5605.2000
+</td>
+<td style="text-align:right;">
+72.56910
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+treatment
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+590.1754
+</td>
+<td style="text-align:right;">
+1349.3333
+</td>
+<td style="text-align:right;">
+56.90418
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p>Because the drop1 function drops one term from the model, then adds it back in and drops a new one it doesn't matter what order they were included.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="post-hoc" class="section level2" number="17.7">
+<h2>
+<span class="header-section-number">17.7</span> post-hoc<a class="anchor" aria-label="anchor" href="#post-hoc"><i class="fas fa-link"></i></a>
+</h2>
+<p>In this example it is unnecessary to spend time looking at pairwise comparisons between the four possible levels, the interesting finding is to report the strength of the interaction effect. <strong>But</strong> it is possible to generate estimated means, and produce pairwise comparisons with the <code><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html">emmeans()</a></code> package</p>
+<div class="sourceCode" id="cb417"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">emmeans</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html">emmeans</a></span><span class="op">(</span><span class="va">ls_2</span>, specs <span class="op">=</span> <span class="va">pairwise</span> <span class="op">~</span> <span class="va">Light</span> <span class="op">+</span> <span class="va">Fert</span> <span class="op">+</span> <span class="va">Light</span><span class="op">:</span><span class="va">Fert</span><span class="op">)</span>
+<span class="co"># including the argument pairwise in front of the ~ prompts the post-hoc pairwise comparisons.</span>
+ <span class="co"># $emmeans contains the estimate mean values for each possible combination (with confidence intervals)</span>
+ <span class="co"># $ contrasts contains tukey test post hoc comparisons between levels</span></code></pre></div>
+<pre><code>## $emmeans
+##  Light Fert emmean   SE df lower.CL upper.CL
+##  L-    F-      356 23.1 60      310      402
+##  L+    F-      386 23.1 60      340      432
+##  L-    F+      449 23.1 60      403      496
+##  L+    F+      575 23.1 60      529      621
+## 
+## Confidence level used: 0.95 
+## 
+## $contrasts
+##  contrast          estimate   SE df t.ratio p.value
+##  (L- F-) - (L+ F-)    -30.1 32.7 60 -0.921  0.7940 
+##  (L- F-) - (L- F+)    -93.7 32.7 60 -2.863  0.0287 
+##  (L- F-) - (L+ F+)   -219.2 32.7 60 -6.699  &lt;.0001 
+##  (L+ F-) - (L- F+)    -63.6 32.7 60 -1.943  0.2215 
+##  (L+ F-) - (L+ F+)   -189.1 32.7 60 -5.779  &lt;.0001 
+##  (L- F+) - (L+ F+)   -125.5 32.7 60 -3.836  0.0017 
+## 
+## P value adjustment: tukey method for comparing a family of 4 estimates</code></pre>
+</div>
+<div id="continuous-linear-models" class="section level2" number="17.8">
+<h2>
+<span class="header-section-number">17.8</span> Continuous Linear Models<a class="anchor" aria-label="anchor" href="#continuous-linear-models"><i class="fas fa-link"></i></a>
+</h2>
+<p>The previous section looked at an interaction between two categorical variables, we can also examine interactions between a factor and a continuous variable. Often referred to as ANCOVA.</p>
+<a href="https://raw.githubusercontent.com/UEABIO/data-sci-v1/main/book/files/pollution.csv">
+<button class="btn btn-success"><i class="fa fa-save"></i> Download pollution data as csv</button>
+</a>
+<div class="sourceCode" id="cb419"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">pollution</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"book"</span>, <span class="st">"files"</span>, <span class="st">"pollution.csv"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<blockquote>
+<p>The data is from an experimental study of the effects of low-level atmospheric pollutants and drought on agricultural yields. The experiment aimed to see how the yields soya bean (William variety), were affected by stress and Ozone levels. Your task is to first determine whether there is any evidence of an interaction effect, and if not report the effects of the two predictors separately.</p>
+</blockquote>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+Explore the data!
+</div>
+</div>
+<button id="displayTextunnamed-chunk-32" onclick="javascript:toggle('unnamed-chunk-32');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-32" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb420"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># check the structure of the data</span>
+<span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">pollution</span><span class="op">)</span>
+
+<span class="co"># check data is in a tidy format</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">pollution</span><span class="op">)</span>
+
+<span class="co"># check variable names</span>
+<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">pollution</span><span class="op">)</span>
+
+<span class="co"># check for duplication</span>
+<span class="va">pollution</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">)</span>
+
+<span class="co"># check for typos - by looking at impossible values</span>
+<span class="co"># quick summary</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">biomass</span><span class="op">)</span>
+
+<span class="co"># check for typos by looking at distinct characters/values</span>
+<span class="va">pollution</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">Stress</span><span class="op">)</span>
+
+
+<span class="co"># missing values</span>
+<span class="va">biomass</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<pre><code>## Rows: 30
+## Columns: 4
+## $ Stress  &lt;chr&gt; "Well-watered", "Well-watered", "Well-watered", "Well-watered"~
+## $ SO2     &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.02, 0.02, 0.02, 0.02, 0.02, 0.~
+## $ O3      &lt;dbl&gt; 0.02, 0.05, 0.07, 0.08, 0.10, 0.02, 0.05, 0.07, 0.08, 0.10, 0.~
+## $ William &lt;dbl&gt; 8.623533, 8.690642, 8.360071, 8.151910, 8.032685, 8.535426, 8.~</code></pre>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+Stress
+</th>
+<th style="text-align:right;">
+SO2
+</th>
+<th style="text-align:right;">
+O3
+</th>
+<th style="text-align:right;">
+William
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Well-watered
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.02
+</td>
+<td style="text-align:right;">
+8.623533
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Well-watered
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.05
+</td>
+<td style="text-align:right;">
+8.690642
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Well-watered
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.07
+</td>
+<td style="text-align:right;">
+8.360071
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Well-watered
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.08
+</td>
+<td style="text-align:right;">
+8.151910
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Well-watered
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.10
+</td>
+<td style="text-align:right;">
+8.032685
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Well-watered
+</td>
+<td style="text-align:right;">
+0.02
+</td>
+<td style="text-align:right;">
+0.02
+</td>
+<td style="text-align:right;">
+8.535426
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<pre><code>## [1] "Stress"  "SO2"     "O3"      "William"
+## [1] 0
+##      Fert              Light                FL              Biomass.m2   
+##  Length:64          Length:64          Length:64          Min.   :152.3  
+##  Class :character   Class :character   Class :character   1st Qu.:370.1  
+##  Mode  :character   Mode  :character   Mode  :character   Median :425.9  
+##                                                           Mean   :441.6  
+##                                                           3rd Qu.:517.2  
+##                                                           Max.   :750.4</code></pre>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+Stress
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Well-watered
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Stressed
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<pre><code>## [1] 0</code></pre>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+Visualise the data
+</div>
+</div>
+<button id="displayTextunnamed-chunk-34" onclick="javascript:toggle('unnamed-chunk-34');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-34" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb424"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">pollution</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">O3</span>, y <span class="op">=</span> <span class="va">William</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">Stress</span><span class="op">)</span><span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">Ozone</span><span class="op">~</span><span class="va">mu</span><span class="op">~</span><span class="va">L</span><span class="op">~</span><span class="va">L</span><span class="op">^</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>,
+       y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">Log</span><span class="op">~</span><span class="va">Yield</span><span class="op">~</span><span class="op">(</span><span class="va">kg</span><span class="op">~</span><span class="va">ha</span><span class="op">^</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="17-Multiple-regression_files/figure-html/unnamed-chunk-48-1.png" width="100%" style="display: block; margin: auto;"></div>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+Model the data
+</div>
+</div>
+<button id="displayTextunnamed-chunk-36" onclick="javascript:toggle('unnamed-chunk-36');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-36" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb425"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">William_ls1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">William</span> <span class="op">~</span> <span class="va">O3</span> <span class="op">+</span> <span class="va">Stress</span> <span class="op">+</span> <span class="va">O3</span><span class="op">:</span><span class="va">Stress</span>, data <span class="op">=</span> <span class="va">pollution</span><span class="op">)</span>
+
+<span class="va">William_ls1</span> <span class="op">%&gt;%</span> 
+    <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span>conf.int <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+term
+</th>
+<th style="text-align:right;">
+estimate
+</th>
+<th style="text-align:right;">
+std.error
+</th>
+<th style="text-align:right;">
+statistic
+</th>
+<th style="text-align:right;">
+p.value
+</th>
+<th style="text-align:right;">
+conf.low
+</th>
+<th style="text-align:right;">
+conf.high
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+8.4902296
+</td>
+<td style="text-align:right;">
+0.0974956
+</td>
+<td style="text-align:right;">
+87.0832015
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+8.2898245
+</td>
+<td style="text-align:right;">
+8.6906347
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+O3
+</td>
+<td style="text-align:right;">
+-6.4671581
+</td>
+<td style="text-align:right;">
+1.4014008
+</td>
+<td style="text-align:right;">
+-4.6147812
+</td>
+<td style="text-align:right;">
+0.0000929
+</td>
+<td style="text-align:right;">
+-9.3477788
+</td>
+<td style="text-align:right;">
+-3.5865375
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+StressWell-watered
+</td>
+<td style="text-align:right;">
+0.2642307
+</td>
+<td style="text-align:right;">
+0.1378796
+</td>
+<td style="text-align:right;">
+1.9163870
+</td>
+<td style="text-align:right;">
+0.0663707
+</td>
+<td style="text-align:right;">
+-0.0191849
+</td>
+<td style="text-align:right;">
+0.5476463
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+O3:StressWell-watered
+</td>
+<td style="text-align:right;">
+-1.3472822
+</td>
+<td style="text-align:right;">
+1.9818801
+</td>
+<td style="text-align:right;">
+-0.6798001
+</td>
+<td style="text-align:right;">
+0.5026393
+</td>
+<td style="text-align:right;">
+-5.4210950
+</td>
+<td style="text-align:right;">
+2.7265306
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+It looks as though there is no strong evidence here for an interaction effect, but before we proceed any further we should check that the model is a good fit for our data.
+</div>
+</div>
+</div>
+<div id="check-the-model-fit" class="section level3" number="17.8.1">
+<h3>
+<span class="header-section-number">17.8.1</span> Check the model fit<a class="anchor" aria-label="anchor" href="#check-the-model-fit"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb426"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">performance</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html">check_model</a></span><span class="op">(</span><span class="va">William_ls1</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="17-Multiple-regression_files/figure-html/unnamed-chunk-37-1.png" width="100%" style="display: block; margin: auto;"></div>
+<p>Everything looks pretty good, so now we could go ahead and simplify our model.</p>
+<div class="sourceCode" id="cb427"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/add1.html">drop1</a></span><span class="op">(</span><span class="va">William_ls1</span>, test <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Df
+</th>
+<th style="text-align:right;">
+Sum of Sq
+</th>
+<th style="text-align:right;">
+RSS
+</th>
+<th style="text-align:right;">
+AIC
+</th>
+<th style="text-align:right;">
+F value
+</th>
+<th style="text-align:right;">
+Pr(&gt;F)
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+&lt;none&gt;
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.5698523
+</td>
+<td style="text-align:right;">
+-110.9073
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+O3:Stress
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.0101286
+</td>
+<td style="text-align:right;">
+0.5799809
+</td>
+<td style="text-align:right;">
+-112.3787
+</td>
+<td style="text-align:right;">
+0.4621281
+</td>
+<td style="text-align:right;">
+0.5026393
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="sourceCode" id="cb428"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">William_ls2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">William</span> <span class="op">~</span> <span class="va">O3</span> <span class="op">+</span> <span class="va">Stress</span>, data <span class="op">=</span> <span class="va">pollution</span><span class="op">)</span> </code></pre></div>
+<div class="sourceCode" id="cb429"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/add1.html">drop1</a></span><span class="op">(</span><span class="va">William_ls2</span>, test <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Df
+</th>
+<th style="text-align:right;">
+Sum of Sq
+</th>
+<th style="text-align:right;">
+RSS
+</th>
+<th style="text-align:right;">
+AIC
+</th>
+<th style="text-align:right;">
+F value
+</th>
+<th style="text-align:right;">
+Pr(&gt;F)
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+&lt;none&gt;
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.5799809
+</td>
+<td style="text-align:right;">
+-112.37872
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+O3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.1381194
+</td>
+<td style="text-align:right;">
+1.7181003
+</td>
+<td style="text-align:right;">
+-81.79934
+</td>
+<td style="text-align:right;">
+52.98317
+</td>
+<td style="text-align:right;">
+0.0000001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Stress
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.2376424
+</td>
+<td style="text-align:right;">
+0.8176233
+</td>
+<td style="text-align:right;">
+-104.07653
+</td>
+<td style="text-align:right;">
+11.06303
+</td>
+<td style="text-align:right;">
+0.0025466
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+Write up the results
+</div>
+</div>
+<button id="displayTextunnamed-chunk-42" onclick="javascript:toggle('unnamed-chunk-42');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-42" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+I hypothesised that plants under stress might react more negatively to pollution than non-stressed plants, however when tested I found no evidence of a negative interation effect between stress and Ozone levels (<em>F</em><sub>1,27</sub> = 0.4621, <em>P</em> = 0.5). Individually however, while well-watered plants had higher yields than stressed plants (mean 0.178 [95% CI: 0.0682 - 0.288]) (<em>F</em><sub>1,28</sub> = 11, <em>P</em> = 0.003), there was a much larger effect of Ozone, where every unit increase (<span class="math inline">\(\mu\)</span>L L<sup>-1</sup>) produced a mean decrease in yield of 7.14 kg ha<sup>-1</sup> [5.13 - 9.15] (<em>F</em><sub>1,28</sub> = 53, <em>P</em> &lt; 0.001).
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="summary-8" class="section level2" number="17.9">
+<h2>
+<span class="header-section-number">17.9</span> Summary<a class="anchor" aria-label="anchor" href="#summary-8"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li><p>Always have a good hypothesis for including an interaction</p></li>
+<li><p>When models have significant interaction effects you must always consider the main terms even if they are not significant by themselves</p></li>
+<li><p>Report <em>F</em> values from interactions as a priority</p></li>
+<li><p><strong>IF</strong> interactions are significant then estimates should come from the full model, while <em>F</em>-values should come from a reduced model (for main effects). <strong>IF</strong> interaction terms are not significant they can be removed (model simplification).</p></li>
+<li><p>Use <code><a href="https://rdrr.io/r/stats/add1.html">drop1()</a></code> to avoid mistakes when using an unbalanced experiment design</p></li>
+<li><p>Always report estimates and effect sizes - this is the important bit - and easy to lose sight of when models get more complicated</p></li>
+</ul>
+</div>
+</div>
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  if (t = document.getElementById("webex-total_correct")) {
+    var correct = document.getElementsByClassName("webex-correct").length;
+    var solvemes = document.getElementsByClassName("webex-solveme").length;
+    var radiogroups = document.getElementsByClassName("webex-radiogroup").length;
+    var selects = document.getElementsByClassName("webex-select").length;
+    
+    t.innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+  
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+  
+  var cl = this.classList
+  
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+  
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+  
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+  
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+  
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+  }
+  
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+  
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+  }
+
+  update_total_correct();
+}
+
+</script><script>
+$( document ).ready(function() {
+  var cite = ' ';
+  var license = ' <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>';
+
+  $("footer div.row div:eq(1) p").html(
+    license
+  );
+});
+</script><div class="chapter-nav">
+<div class="prev"><a href="anova.html"><span class="header-section-number">16</span> ANOVA</a></div>
+<div class="next"><a href="complex-models.html"><span class="header-section-number">18</span> Complex models</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#multivariate-linear-models"><span class="header-section-number">17</span> Multivariate linear models</a></li>
+<li><a class="nav-link" href="#factorial-linear-models"><span class="header-section-number">17.1</span> Factorial linear models</a></li>
+<li><a class="nav-link" href="#data-summary"><span class="header-section-number">17.2</span> Data summary</a></li>
+<li><a class="nav-link" href="#one-way-anova"><span class="header-section-number">17.3</span> One-way ANOVA</a></li>
+<li>
+<a class="nav-link" href="#testing-for-interactions"><span class="header-section-number">17.4</span> Testing for interactions</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#model-estimates-and-confidence-intervals"><span class="header-section-number">17.4.1</span> Model estimates and confidence intervals</a></li></ul>
+</li>
+<li><a class="nav-link" href="#anova-tables"><span class="header-section-number">17.5</span> ANOVA tables</a></li>
+<li>
+<a class="nav-link" href="#balancedunbalanced-designs"><span class="header-section-number">17.6</span> Balanced/Unbalanced designs</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#practice"><span class="header-section-number">17.6.1</span> Practice</a></li></ul>
+</li>
+<li><a class="nav-link" href="#post-hoc"><span class="header-section-number">17.7</span> post-hoc</a></li>
+<li>
+<a class="nav-link" href="#continuous-linear-models"><span class="header-section-number">17.8</span> Continuous Linear Models</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#check-the-model-fit"><span class="header-section-number">17.8.1</span> Check the model fit</a></li></ul>
+</li>
+<li><a class="nav-link" href="#summary-8"><span class="header-section-number">17.9</span> Summary</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/UEABIO/data-sci-v1/blob/main/book/17-Multiple-regression.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/UEABIO/data-sci-v1/edit/main/book/17-Multiple-regression.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-08-31.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

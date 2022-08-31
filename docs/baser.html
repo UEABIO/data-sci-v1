@@ -102,14 +102,16 @@
 <li><a class="" href="introduction-to-linear-models.html"><span class="header-section-number">13</span> Introduction to Linear Models</a></li>
 <li><a class="" href="testing.html"><span class="header-section-number">14</span> Testing</a></li>
 <li><a class="" href="regression.html"><span class="header-section-number">15</span> Regression</a></li>
-<li><a class="" href="regression-1.html"><span class="header-section-number">16</span> Regression</a></li>
-<li><a class="" href="anova.html"><span class="header-section-number">17</span> ANOVA</a></li>
+<li><a class="" href="anova.html"><span class="header-section-number">16</span> ANOVA</a></li>
+<li><a class="" href="multivariate-linear-models.html"><span class="header-section-number">17</span> Multivariate linear models</a></li>
+<li><a class="" href="complex-models.html"><span class="header-section-number">18</span> Complex models</a></li>
+<li><a class="" href="generalized-linear-models.html"><span class="header-section-number">19</span> Generalized Linear Models</a></li>
 <li class="book-part">Advanced topics</li>
-<li><a class="" href="mixed-models.html"><span class="header-section-number">18</span> Mixed models</a></li>
-<li><a class="" href="generalised-additive-models.html"><span class="header-section-number">19</span> Generalised Additive Models</a></li>
-<li><a class="" href="survival-models.html"><span class="header-section-number">20</span> Survival models</a></li>
-<li><a class="" href="unsupervised-machine-learning.html"><span class="header-section-number">21</span> Unsupervised Machine Learning</a></li>
-<li><a class="" href="power-analysis.html"><span class="header-section-number">22</span> Power analysis</a></li>
+<li><a class="" href="mixed-models.html"><span class="header-section-number">20</span> Mixed models</a></li>
+<li><a class="" href="generalised-additive-models.html"><span class="header-section-number">21</span> Generalised Additive Models</a></li>
+<li><a class="" href="survival-models.html"><span class="header-section-number">22</span> Survival models</a></li>
+<li><a class="" href="unsupervised-machine-learning.html"><span class="header-section-number">23</span> Unsupervised Machine Learning</a></li>
+<li><a class="" href="power-analysis.html"><span class="header-section-number">24</span> Power analysis</a></li>
 <li class="book-part">Appendices</li>
 <li><a class="" href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></li>
 <li><a class="" href="updating-r-rstudio-and-packages.html"><span class="header-section-number">B</span> Updating R, RStudio, and packages</a></li>
@@ -125,13 +127,13 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="baser" class="section level1" number="27">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="baser" class="section level1" number="29">
 <h1>
 <span class="header-section-number">E</span> Base R vs. Tidyverse<a class="anchor" aria-label="anchor" href="#baser"><i class="fas fa-link"></i></a>
 </h1>
-<div class="sourceCode" id="cb410"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb508"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
-<div id="extract-variables" class="section level2" number="27.1">
+<div id="extract-variables" class="section level2" number="29.1">
 <h2>
 <span class="header-section-number">E.1</span> Extract variables<a class="anchor" aria-label="anchor" href="#extract-variables"><i class="fas fa-link"></i></a>
 </h2>
@@ -153,13 +155,13 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-3" class="tabcontentunnamed-chunk-3">
-<div class="sourceCode" id="cb411"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb509"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span> <span class="co"># single variable</span>
 <span class="va">iris</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Species"</span>, <span class="st">"Petal.Width"</span><span class="op">)</span><span class="op">]</span> <span class="co"># by name</span>
 <span class="va">iris</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">4</span><span class="op">)</span><span class="op">]</span>  <span class="co"># by column index</span></code></pre></div>
 </div>
 <div id="option2unnamed-chunk-3" class="tabcontentunnamed-chunk-3">
-<div class="sourceCode" id="cb412"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb510"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Species</span><span class="op">)</span>
 <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Species</span>, <span class="va">Petal.Width</span><span class="op">)</span> <span class="co"># by name</span>
 <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fl">5</span>, <span class="fl">4</span><span class="op">)</span>  <span class="co"># by column index</span></code></pre></div>
@@ -169,7 +171,7 @@ Base R
 </div>
 </div>
 </div>
-<div id="make-new-variables" class="section level2" number="27.2">
+<div id="make-new-variables" class="section level2" number="29.2">
 <h2>
 <span class="header-section-number">E.2</span> Make new variables<a class="anchor" aria-label="anchor" href="#make-new-variables"><i class="fas fa-link"></i></a>
 </h2>
@@ -191,13 +193,13 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-4" class="tabcontentunnamed-chunk-4">
-<div class="sourceCode" id="cb413"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb511"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">iris</span><span class="op">$</span><span class="va">Petal.Ratio</span> <span class="op">&lt;-</span> <span class="va">iris</span><span class="op">$</span><span class="va">Petal.Length</span><span class="op">/</span><span class="va">iris</span><span class="op">$</span><span class="va">Petal.Width</span>
 
 <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Ratio</span> <span class="op">&lt;-</span> <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span><span class="op">/</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span></code></pre></div>
 </div>
 <div id="option2unnamed-chunk-4" class="tabcontentunnamed-chunk-4">
-<div class="sourceCode" id="cb414"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb512"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">iris</span>, 
        Petal.Ratio <span class="op">=</span> <span class="va">Petal.Length</span><span class="op">/</span><span class="va">Petal.Width</span>,
        Sepal.Ratio <span class="op">=</span> <span class="va">Sepal.Length</span><span class="op">/</span><span class="va">Sepal.Width</span><span class="op">)</span></code></pre></div>
@@ -225,7 +227,7 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-5" class="tabcontentunnamed-chunk-5">
-<div class="sourceCode" id="cb415"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb513"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Using [,]</span>
 <span class="va">iris</span><span class="op">[</span><span class="va">iris</span><span class="op">$</span><span class="va">Petal.Width</span> <span class="op">&gt;</span> <span class="fl">0.5</span> <span class="op">&amp;</span> <span class="va">iris</span><span class="op">$</span><span class="va">Species</span> <span class="op">==</span> <span class="st">"setosa"</span>, <span class="op">]</span>
 
@@ -343,7 +345,7 @@ setosa
 </div>
 </div>
 <div id="option2unnamed-chunk-5" class="tabcontentunnamed-chunk-5">
-<div class="sourceCode" id="cb416"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb514"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Petal.Width</span> <span class="op">&gt;</span> <span class="fl">0.5</span> <span class="op">&amp;</span> <span class="va">Species</span> <span class="op">==</span> <span class="st">"setosa"</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
@@ -401,7 +403,7 @@ setosa
 </div>
 </div>
 </div>
-<div id="arrange-observations-rows" class="section level2" number="27.3">
+<div id="arrange-observations-rows" class="section level2" number="29.3">
 <h2>
 <span class="header-section-number">E.3</span> Arrange observations (rows)<a class="anchor" aria-label="anchor" href="#arrange-observations-rows"><i class="fas fa-link"></i></a>
 </h2>
@@ -423,12 +425,12 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-6" class="tabcontentunnamed-chunk-6">
-<div class="sourceCode" id="cb417"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb515"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># descending order of species (alphabetic) followed by ascending order of Petal.Width</span>
 <span class="va">iris</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Petal.Width</span><span class="op">)</span> , <span class="op">]</span></code></pre></div>
 </div>
 <div id="option2unnamed-chunk-6" class="tabcontentunnamed-chunk-6">
-<div class="sourceCode" id="cb418"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb516"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># descending order of species (alphabetic) followed by ascending order of Petal.Width</span>
 <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span>, <span class="va">Petal.Width</span><span class="op">)</span> </code></pre></div>
 </div>
@@ -437,7 +439,7 @@ Base R
 </div>
 </div>
 </div>
-<div id="summarise-observations-rows" class="section level2" number="27.4">
+<div id="summarise-observations-rows" class="section level2" number="29.4">
 <h2>
 <span class="header-section-number">E.4</span> Summarise observations (rows)<a class="anchor" aria-label="anchor" href="#summarise-observations-rows"><i class="fas fa-link"></i></a>
 </h2>
@@ -459,7 +461,7 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-7" class="tabcontentunnamed-chunk-7">
-<div class="sourceCode" id="cb419"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb517"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Manually create a data.frame</span>
 <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Petal.Length.mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Petal.Length</span><span class="op">)</span>,
            Petal.Length.sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Petal.Length</span><span class="op">)</span>,
@@ -499,7 +501,7 @@ Sepal.Length.sd
 </div>
 </div>
 <div id="option2unnamed-chunk-7" class="tabcontentunnamed-chunk-7">
-<div class="sourceCode" id="cb420"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb518"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="va">iris</span>, 
           Petal.Length.mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Petal.Length</span><span class="op">)</span>,
           Petal.Length.sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">Petal.Length</span><span class="op">)</span>,
@@ -543,7 +545,7 @@ Sepal.Length.sd
 </div>
 </div>
 </div>
-<div id="grouped-operations" class="section level2" number="27.5">
+<div id="grouped-operations" class="section level2" number="29.5">
 <h2>
 <span class="header-section-number">E.5</span> Grouped operations<a class="anchor" aria-label="anchor" href="#grouped-operations"><i class="fas fa-link"></i></a>
 </h2>
@@ -565,7 +567,7 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-8" class="tabcontentunnamed-chunk-8">
-<div class="sourceCode" id="cb421"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb519"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># First operate in the data.frame by group (split-apply)</span>
 <span class="va">mtcars_by</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/by.html">by</a></span><span class="op">(</span><span class="va">mtcars</span>, 
    INDICES <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">cyl</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span><span class="op">)</span>,
@@ -768,7 +770,7 @@ NA
 </div>
 </div>
 <div id="option2unnamed-chunk-8" class="tabcontentunnamed-chunk-8">
-<div class="sourceCode" id="cb422"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb520"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mtcars</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">cyl</span>, <span class="va">gear</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mpg.mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span>,
@@ -968,7 +970,7 @@ NA
 </div>
 </div>
 </div>
-<div id="create-new-columns-as-calculations" class="section level2" number="27.6">
+<div id="create-new-columns-as-calculations" class="section level2" number="29.6">
 <h2>
 <span class="header-section-number">E.6</span> Create new columns as calculations<a class="anchor" aria-label="anchor" href="#create-new-columns-as-calculations"><i class="fas fa-link"></i></a>
 </h2>
@@ -990,7 +992,7 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-9" class="tabcontentunnamed-chunk-9">
-<div class="sourceCode" id="cb423"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb521"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># First operate in the data.frame by group (split-apply)</span>
 <span class="va">iris_by</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/by.html">by</a></span><span class="op">(</span><span class="va">iris</span>, 
               INDICES <span class="op">=</span> <span class="va">iris</span><span class="op">$</span><span class="va">Species</span>, 
@@ -1003,7 +1005,7 @@ Base R
 <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="va">iris_by</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="option2unnamed-chunk-9" class="tabcontentunnamed-chunk-9">
-<div class="sourceCode" id="cb424"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb522"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">iris</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Petal.Width.centered <span class="op">=</span> <span class="va">Petal.Width</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Petal.Width</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -1014,7 +1016,7 @@ Base R
 </div>
 </div>
 </div>
-<div id="filter-rows-with-conditions-evaluated-by-group" class="section level2" number="27.7">
+<div id="filter-rows-with-conditions-evaluated-by-group" class="section level2" number="29.7">
 <h2>
 <span class="header-section-number">E.7</span> Filter rows with conditions evaluated by group<a class="anchor" aria-label="anchor" href="#filter-rows-with-conditions-evaluated-by-group"><i class="fas fa-link"></i></a>
 </h2>
@@ -1036,7 +1038,7 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-10" class="tabcontentunnamed-chunk-10">
-<div class="sourceCode" id="cb425"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb523"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># First operate in the data.frame by group (split-apply)</span>
 <span class="va">widest_petals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/by.html">by</a></span><span class="op">(</span><span class="va">iris</span>, 
                     INDICES <span class="op">=</span> <span class="va">iris</span><span class="op">$</span><span class="va">Species</span>, 
@@ -1209,7 +1211,7 @@ virginica
 </div>
 </div>
 <div id="option2unnamed-chunk-10" class="tabcontentunnamed-chunk-10">
-<div class="sourceCode" id="cb426"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb524"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">iris</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Petal.Width</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">Petal.Width</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -1363,7 +1365,7 @@ virginica
 </div>
 </div>
 </div>
-<div id="pivot-data" class="section level2" number="27.8">
+<div id="pivot-data" class="section level2" number="29.8">
 <h2>
 <span class="header-section-number">E.8</span> Pivot data<a class="anchor" aria-label="anchor" href="#pivot-data"><i class="fas fa-link"></i></a>
 </h2>
@@ -1385,7 +1387,7 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-11" class="tabcontentunnamed-chunk-11">
-<div class="sourceCode" id="cb427"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb525"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/reshape.html">reshape</a></span><span class="op">(</span><span class="va">iris</span>, 
         varying <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Sepal.Length"</span>, <span class="st">"Sepal.Width"</span>, <span class="st">"Petal.Length"</span>, <span class="st">"Petal.Width"</span><span class="op">)</span>,
         timevar <span class="op">=</span> <span class="st">"trait"</span>,
@@ -1394,7 +1396,7 @@ Base R
         direction <span class="op">=</span> <span class="st">"long"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="option2unnamed-chunk-11" class="tabcontentunnamed-chunk-11">
-<div class="sourceCode" id="cb428"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb526"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">iris</span> <span class="op">%&gt;%</span> 
  <span class="fu">pivot_longer</span><span class="op">(</span>cols <span class="op">=</span> <span class="va">Sepal.Length</span><span class="op">:</span><span class="va">Petal.Width</span>, values_to <span class="op">=</span> <span class="st">"measurement"</span>, names_to <span class="op">=</span> <span class="st">"trait"</span> <span class="op">)</span></code></pre></div>
 </div>
