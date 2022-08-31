@@ -1,6 +1,0 @@
-
-# Data insights part two
-
-```{r, child='_setup.Rmd'}
-```
-

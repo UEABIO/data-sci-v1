@@ -16,3 +16,8 @@ rvest
 xml2
 kableExtra
 glossary
+effectsize
+pwr
+Matrix
+lme4
+simr

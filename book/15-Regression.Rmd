@@ -1,0 +1,544 @@
+# Regression
+
+
+```{r, child='_setup.Rmd'}
+
+```
+
+
+
+```{r, eval=T, echo=F}
+library(tidyverse)
+library(rstatix)
+library(performance)
+
+```
+
+## Introduction to Regression
+
+So far we have used linear models for analyses between *two* 'categorical' explanatory variables e.g. *t*-tests. But what about when we have a 'continuous' explanatory variable? For that we need to use a regression analysis, luckily this is just another 'special case' of the linear model, so we can use the same `lm()` function we have already been using, and we can interpret the outputs in the same way. 
+
+## Linear regression
+
+Much like the *t*-test we have generating from our linear model, the regression analysis is interpreting the strength of the 'signal' (the change in mean values according to the explanatory variable), vs the amount of 'noise' (variance around the mean). 
+
+We would normally visualise a regression analysis with a scatter plot, with the explanatory (predictor, independent) variable on the x-axis and the response (dependent) variable on the y-axis. Individual data points are plotted, and we attempt to draw a straight-line relationship throught the cloud of data points. This line is the 'mean', and the variability around the mean is captured by calculated standard errors and confidence intervals from the variance. 
+
+The equation for the linear regression model is:
+
+$$ y = a + bx $$
+You may also note this is basically identical to the equation for a straight fit line $y = mx +c$. 
+
+Here: 
+
+* *y* is the predicted value of the response variable
+
+* *a* is the regression intercept (the value of *y* when *x* = 0)
+
+* *b* is the slope of the regression line
+
+* *x* is the value of the explanatory variable
+
+This formula explains the mean, you would need to include the unexplained residual error as a term to include our measure of uncertainty
+
+$$ y = a + bx + e $$
+
+The regression uses two values to fit a straight line. First we need a starting point, known as the regression intercept. For categorical predictors this is the mean value of *y* for one of our categories, for a regression this is the mean value of *y* when *x* = 0. We then need a gradient (how the value of *y* changes when the value of *x* changes). This allows us to draw a regression line. 
+
+A linear model analysis estimates the values of the intercept and gradient in order to predict values of *y* for given values of *x*. 
+
+## Data
+
+Here we are going to use example data from the Australian forestry industry, recording the density and hardness of 36 samples of wood from different tree species. Wood density is a fundamental property that is relatively easy to measure, timber hardness, is quantified as the 'the amount of force required to embed a 0.444" steel ball into the wood to half of its diameter'. 
+
+With regression, we can test the biological hypothesis that wood density can be used to predict timber hardness, and use this regression to predict timber hardness for new samples of known density. 
+
+Timber hardness is quantified using the 'Janka scale', and the data we are going to use today comes from an R package 'SemiPar' - once loaded you will then need to call the data using another function `data()` (note this is different to PalmerPenguins where the data was immediately available).
+
+```{r, eval=T, echo = FALSE}
+library(tidyverse)
+library(SemiPar)
+data(janka)
+```
+
+```{r, eval = TRUE, echo = FALSE}
+downloadthis::download_link(
+  link = "https://raw.githubusercontent.com/UEABIO/data-sci-v1/main/book/files/janka.csv",
+  button_label = "Download Janka data as csv",
+  button_type = "success",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+```{block, type  = "try"}
+
+Check the data is imported correctly and make sure it is 'tidy' with no obvious errors or missing data
+
+```
+
+```{task}
+Is there any visual evidence for a linear association between wood density and timber hardness?
+```
+
+```{solution}
+
+``{r}
+
+janka %>% 
+  ggplot(aes(x=dens, y=hardness))+
+  geom_point()
+
+``
+
+```
+
+## Correlation
+
+Wood density and timber hardness appear to be positively related, and the linear appears to be fairly linear. We can look at a simple strength of this association between dens and hardness using correlation
+
+```{solution, multCode = T}
+
+``{r}
+
+# cor() does not have a data option so need to use the with() function
+with(janka, cor(dens, hardness))
+``
+
+####
+
+``{r}
+library(rstatix)
+
+janka %>% 
+  cor_test(dens, hardness)
+
+``
+
+```
+
+
+Correlation coefficients range from -1 to 1 for perfectly negative to perfectly positive linear relationships. The relationship here appears to be strongly positive. Correlation looks at the **association** between two variables, but we want to go further - we are arguing that wood density *causes* higher values of timber hardness. In order to test that hypothesis we need to go further than correlation and use regression.
+
+## Regression in R
+
+We can fit the regression model in exactly the same way as we fit the linear model for Darwin's maize data. The *only* difference is that here our predictor variable is continuous rather than categorical. 
+
+```{block, type = "warning"}
+Be careful when ordering variables here:
+
+* the left of the 'tilde' is the response variable, 
+
+* on the right is the predictor. 
+
+Get them the wrong way round and it will reverse your hypothesis. 
+```
+
+```{r, eval=T}
+
+janka_ls1 <- lm(hardness ~ dens, data = janka) 
+
+```
+
+This linear model will estimate a 'line of best fit' using the method of 'least squares' to minimise the error sums of squares (the average distance between the data points and the regression line). 
+
+We can add a regression line to our ggplots very easily with the function `geom_smooth()`.
+
+```{r}
+janka %>% 
+  ggplot(aes(x=dens, y=hardness))+
+  geom_point()+
+  geom_smooth(method="lm")
+
+  # specify linear model method for line fitting
+
+```
+
+**Q. The blue line represents the regression line, and the shaded interval is the 95% confidence interval band. What do you notice about the width of the interval band as you move along the regression line?**
+
+`r hide("Explain this")`
+
+The 95% confidence interval band is narrowest in the middle and widest at either end of the regression line. But why?
+
+When performing a linear regression, there are **two** types of uncertainty in the prediction.
+
+First is the prediction of the overall mean of the estimate (ie the center of the fit). The second is the uncertainly in the estimate calculating the slope.
+
+So when you combine both uncertainties of the prediction there is a spread between the high and low estimates. The further away from the center of the data you get (in either direction), the uncertainty of the slope becomes a large and more noticeable factor, thus the limits widen.
+
+`r unhide()`
+
+### Summary
+
+```{r}
+janka_ls1 %>% 
+  broom::tidy()
+
+# base R summary(janka_ls1)
+
+```
+
+This output should look very familiar to you, because it's the same output produced for the analysis of the maize data. Including a column for the coefficient estimates, standard error, *t*-statistic and *P*-value. The first row is the intercept, and the second row is the difference in the mean from the intercept caused by our explanantory variable. 
+
+In many ways the intercept makes more intuitive sense in a regression model than a difference model. Here the intercept describes the value of *y* (timber hardness) when *x* (wood density) = 0. The standard error is standard error of this calculated mean value. The only wrinkle here is that that value of *y* is an impossible value - timber hardness obviously cannot be a negative value (anti-hardness???). This does not affect the fit of our line, it just means a regression line (being an infinite straight line) can move into impossible value ranges.
+
+One way in which the intercept can be made more valuable is to use a technique known as 'centering'. By subtracting the average (mean) value of *x* from every data point, the intercept (when *x* is 0) can effectively be right-shifted into the centre of the data. 
+
+```{task}
+Try it for yourself, use your data manipulation skills to 'center' the values of x then fit a new linear model.
+```
+
+```{solution}
+
+``{r}
+
+dens_mean <- janka %>% 
+  summarise(mean_dens=mean(dens))
+# 45.73333
+
+janka %>% 
+  mutate(centered_dens = dens-dens_mean[,1]) %>% 
+  lm(hardness ~ centered_dens, data = .) %>% 
+  broom::tidy()
+
+``
+
+```
+
+
+```{block, type = "info"}
+Note how the estimate for row 2 - the effect of density on timber hardness **has not** changed, but the intercept now represents the estimated mean timber hardness for the mean wood density e.g. at a density of $\rho$ = 45.73 the average timber hardness on the janka scale is 1469.
+```
+
+### the second row
+
+The second row is labelled 'dens'. Density is our explanatory variable, and the slope is estimated against it. So if 57.5 is the value of the regression slope (with its standard error) - then the timber hardness is predicted to **increase** by 57.5 on the janka scale for every unit change of density. 
+
+According to our model summary, this estimated change in the mean is statistically significant  - so for this effect size and sample size it is unlikely that we would observe this relationship if the null hypothesis (that we cannot predict timber hardness from wood density) were true. 
+
+### Confidence intervals
+
+Just like with the maize data, we can produce upper and lower bounds of confidence intervals: 
+
+```{r}
+broom::tidy(janka_ls1, conf.int=T, conf.level=0.95)
+
+# base r
+# confint(lsmodel1)
+```
+
+Here we can say that at $\alpha$ = 0.05 we think there is at least a 52.9 unit increase on the janka scale for every unit increase in density ($\rho$). Because our 95% confidence intervals do not span 0, we know that there is a significant relationship at $\alpha$ = 0.05. 
+
+### Effect size
+
+With a regression model, we can also produce a standardised effect size. The estimate and 95% confidence intervals are the amount of change being observed, but just like with the maize data we can produce a standardised measure of how strong the relationship is. This value is represented by $R^2$ : the proportion of the variation in the data explained by the linear regression analysis. 
+
+The value of $R^2$ can be found in the model summaries as follows
+
+```{r}
+janka_ls1 %>% 
+  broom::glance()
+
+# base r
+# summary(janka_ls1)
+
+```
+
+
+```{r, eval=T, echo=F}
+library(kableExtra)
+
+`r^2` <- c(0.1, 0.3, 0.5)
+`Effect size` <- c("small", "medium", "large")
+tibble_table <- tibble(`Effect size`, `r^2`)
+
+tibble_table %>% 
+    kbl(caption="R squared effect size") %>% 
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+
+## Assumptions
+
+Regression models make ALL the same assumptions as all linear models - that the unexplained variation around the regression line (the residuals) is approximately normally distributed, and has constant variance. And we can check this in the same way.
+
+Remember, the residuals are the *difference* between the observed values and the fitted values predicted by the model. Or in other words it is the *vertical* distance between a data point and the fitted value on the regression line. We can take a look at this with another function in the `broom` package `augment()`. This generates the predicted value for each data point according to the regression, and calculates the residuals for each data point. 
+
+```{solution, multCode = T}
+
+``{r}
+
+predict(janka_ls1)
+
+resid(janka_ls1)
+
+
+``
+
+####
+
+``{r}
+
+janka_ls1 %>% 
+  broom::augment()
+
+
+``
+
+```
+
+If we plot this, with a black fitted regression line and red dashed lines representing the residuals:
+
+```{r}
+
+augmented_ls1 <- janka_ls1 %>% 
+  broom::augment()
+
+augmented_ls1 %>% 
+    ggplot(aes(x=dens, 
+               y=.fitted))+
+    geom_line()+ 
+  geom_point(aes(x=dens, 
+                 y=hardness))+
+  geom_segment(aes(x=dens, 
+                   xend=dens, 
+                   y=.fitted, 
+                   yend=hardness), 
+               linetype="dashed", colour="red")
+```
+
+We can use this augmented data to really help us understand what residual variance looks like, and how it can be used to diagnose our models. A perfect model would mean that all of our residual values = 0, but this is incredibly unlikely to ever occur. Instead we would like to see 
+
+1) that there is a 'normal distribution' to the residuals e.g. more residuals close to the mean, and fewer further away in a rough z-distribution. 
+
+2) We also want to see homogeneity of the residuals e.g. it would be a bad model if the average error was greater at one end of the model than the other. This might mean we have more uncertainty in the slope of the line for large values over small values or vice versa. 
+
+```{r, eval=T}
+
+# A line connecting all the data points in order 
+p1 <- augmented_ls1 %>% 
+  ggplot(aes(x=dens, y=hardness))+
+  geom_line()+
+  ggtitle("Full Data")
+
+# Plotting the fitted values against the independent e.g. our regression line
+p2 <- augmented_ls1 %>% 
+  ggplot(aes(x=dens, y=.fitted))+
+  geom_line()+
+  ggtitle("Linear trend")
+
+# Plotting the residuals against the fitted values e.g. remaining variance
+p3 <- augmented_ls1 %>% 
+  ggplot(aes(x=.fitted, y=.resid))+
+  geom_hline(yintercept=0, colour="white", size=5)+
+  geom_line()+
+  ggtitle("Remaining \npattern")
+
+
+library(patchwork)
+p1+p2+p3
+
+```
+
+
+```{task}
+The above is an example of functional, but repetitive code - could you make a function that reduces the amount of code needed?
+
+HINT - to make sure your arguments for a ggplot are passed properly use this structure x=.data[[x]] , y = .data[[y]]
+```
+
+
+```{solution}
+
+``{r}
+
+model_plot <- function(data=augmented_ls1, 
+                       x="dens", 
+                       y="hardness", 
+                       title="Full data"){
+  ggplot(aes(x=.data[[x]], 
+             y=.data[[y]]), 
+         data=data)+
+  geom_line()+
+    theme_bw()+
+      ggtitle(title)
+}
+
+p1 <- model_plot()
+p2 <- model_plot(y=".fitted", title="Linear prediction")
+p3 <- model_plot(y=".resid", title="Remaining pattern")
+``
+
+```
+
+
+### Normal distribution
+
+We can use the same model diagnostic plots as we used for the maize data.
+Here you can see it is mostly pretty good, with just one or two data points outside of the confidence intervals
+
+```{solution, multCode = T}
+
+``{r, eval=T}
+plot(janka_ls1, which=c(2,2))
+``
+
+####
+
+``{r}
+performance::check_model(janka_ls1, check=c("normality","qq"))
+``
+
+```
+
+
+### Equal variance
+
+We can use the same model diagnostic plots as we used for the maize data. 
+You should see that this is similar to the `p3` plot we constructed manually. With the plot we constructed earlier we had the 'raw' residuals as a function of the fitted values. The plot we have produced now is the 'standardized residuals' - this is the raw residual divided by the standard deviation.
+
+Both plots suggests that the residuals **do not** have constant variance, broadly speaking the amount of variance *y* increases as *x* increases. This means we have less confidence in our predictions at high values of density. Later we will see what we can do to improve the fit of this model
+
+```{solution, multCode = T}
+
+``{r, eval=T}
+plot(janka_ls1, which=c(1,3))
+
+``
+
+####
+
+``{r}
+
+performance::check_model(janka_ls1, check="homogeneity")
+
+``
+
+```
+
+### Outliers
+
+Here we can see there is just one potential outlier. 
+
+```{solution, multCode = T}
+
+``{r}
+plot(janka_ls1, which=c(4,5))
+``
+
+####
+
+``{r, eval=T}
+performance::check_model(janka_ls1, check="outliers")
+
+``
+
+```
+
+
+## Prediction
+
+Using the coefficients of the intercept and the slope we can make predictions on new data. 
+The estimates of the intercept and the slope are:
+
+```{r}
+
+coef(janka_ls1)
+
+```
+
+
+Now imagine we have a new wood samples with a density of 65, how can we use the equation for a linear regression to predict what the timber hardness for this wood sample should be?
+
+$$ y = a + bx $$
+
+```{solution}
+
+``{r}
+# a + bx
+
+-1160.49970 + 57.50667 * 65
+
+``
+
+```
+
+
+Rather than work out the values manually, we can also use the coefficients of the model directly
+
+```{r}
+
+coef(janka_ls1)[1] + coef(janka_ls1)[2] * 65
+
+```
+
+
+But most of the time we are unlikely to want to work out predicted values by hand, instead we can use functions like `predict()` and `augment()`
+
+```{solution, multCode = T}
+
+``{r}
+
+predict(janka_ls1, newdata=list(dens=c(22,35,65)))
+``
+
+####
+
+``{r}
+
+broom::augment(janka_ls1, 
+               newdata=tibble(dens=c(22,35,65)))
+
+``
+
+```
+
+### Adding confidence intervals
+
+```{r}
+
+broom::augment(janka_ls1, newdata = tibble(dens=c(22,35,65), se=TRUE))
+
+```
+
+```{r}
+
+broom::augment(janka_ls1, newdata=tibble(dens=c(22,35,65), interval="confidence"))
+
+```
+
+
+
+```{task}
+can you plot the three new predicted values onto an existing figure to recreate the below? 
+```
+
+```{solution}
+
+``{r}
+
+pred_newdata <- broom::augment(janka_ls1, 
+               newdata=tibble(dens=c(22,35,65)))
+
+janka %>% 
+  ggplot(aes(x=dens, y=hardness))+
+  geom_point()+
+  geom_smooth(method="lm")+
+  geom_point(data=pred_newdata, aes(y=.fitted, x=dens), colour="red")+
+  geom_label(data=pred_newdata, (aes(y=(.fitted+10), x=(dens+3), label=round(.fitted, digits=0))))+
+  theme_bw()+
+  labs(x="Density", y="Timber Hardness")+
+  scale_x_continuous(limits=c(20,80), expand=expansion(add=c(0,5)))
+
+``
+
+```
+
+
+## Summary
+
+Linear model analyses can extend beyond testing differences of means in categorical groupings to test relationships with continuous variables. This is known as linear regression, where the relationship between the explanatory variable and response variable are modelled with the equation for a straight line. The intercept is the value of *y* when *x* = 0, often this isn't that useful, and we can use 'mean-centered' values if we wish to make the intercept more intuitive. 
+As with all linear models, regression assumes that the unexplained variability around the regression line, is normally distributed and has constant variance. 
+
+Once the regression has been fitted it is possible to predict values of *y* from values of *x*, the uncertainty around these predictions can be captured with confidence intervals. 

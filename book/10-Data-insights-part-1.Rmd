@@ -4,3 +4,985 @@
 ```{r, child='_setup.Rmd'}
 ```
 
+```{r, warning = FALSE, message = FALSE, echo = FALSE}
+load(here::here("book", "files", "chapter5.RData"))
+library(tidyverse)
+library(janitor)
+library(lubridate)
+library(patchwork)
+library(ggridges)
+```
+
+
+In these last chapters we are concentrating on generating insights into our data using visualisations and descriptive statistics. The easiest way to do this is to use questions as tools to guide your investigation. When you ask a question, the question focuses your attention on a specific part of your dataset and helps you decide which graphs, models, or transformations to make.
+
+For this exercise we will propose that our task is to generate insights into the body mass of our penguins, in order to answer the question
+
+* How is body mass associated with bill length and depth in penguins?
+
+In order to answer this question properly we should first understand our different variables and how they might relate to each other. 
+
+* Distribution of data types
+* Central tendency
+* Relationship between variables 
+* Confounding variables
+
+This inevitably leads to more and a variety of questions. Each new question that you ask will expose you to a *new aspect* of your data.
+
+### Data wrangling
+
+Importantly you should have already generated an understanding of the variables contained within your dataset during the [data wrangling](#data-wrangling-part-one) steps. Including: 
+
+* The number of variables
+
+* The data format of each variable
+
+* Checked for missing data
+
+* Checked for typos, duplications or other data errors
+
+* Cleaned column or factor names
+
+```{block, type = "warning"}
+
+It is very important to not lose site of the questions you are asking
+
+You should also play close attention to the data, and remind yourself **frequently** how many variables do you have and what are their names? 
+
+How many rows/observations do you have?
+
+Pay close attention to the outputs, errors and warnings from the R console. 
+
+```
+
+## Variable types
+
+A quick refresher:
+
+### Numerical
+
+You **should** already be familiar with the concepts of numerical and categorical data. **Numeric** variables have values that describe a measure or quantity. This is also known as quantitative data. We can subdivide numerical data further:
+
+* **Continuous numeric variables.** This is where observations can take any value within a range of numbers. Examples might include body mass (g), age, temperature or flipper length (mm). 
+While in theory these values can have any numbers, within a dataset they are likely bounded (set within a minimum/maximum of observed or measurable values), and the accuracy may only be as precise as the measurement protocol allows. 
+
+In a tibble these will be represented by the header `<dbl>`.
+
+* **Discrete numeric variables** Observations are numeric but restricted to *whole values* e.g. 1,2,3,4,5 etc. These are also known as **integers**. Discrete variables could include the number of individuals in a population, number of eggs laid etc. Anything where it would make no sense to describe in fractions e.g. a penguin cannot lay 2 and a half eggs. Counting!
+
+In a tibble these will be represented by the header `<int>`.
+
+### Categorical
+
+Values that describe a characteristic of data such as 'what type' or 'which category'. Categorical variables are mutually exclusive - one observation should not be able to fall into two categories at once - and should be exhaustive - there should not be data which does not *fit* a category (not the same as NA - not recorded). Categorical variables are qualitative, and often represented by non-numeric values such as words. It's a bad idea to represent categorical variables as numbers (R won't treat it correctly). Categorical variables can be defined further as:
+
+* **Nominal variables** Observations that can take values that are not logically ordered. Examples include Species or Sex in the Penguins data. 
+In a tibble these will be represented by the header `<chr>`.
+
+* **Ordinal variables** Observations can take values that can be logically ordered or ranked. Examples include - activity levels (sedentary, moderately active, very active); size classes (small, medium, large). 
+
+These will have to be coded manually see [Factors](#factors), and will then be represented in a tibble by the header `<fct>`
+
+It is important to order Ordinal variables in the their logical order value when plotting data visuals or tables. Nominal variables are more flexible and could be ordered in whatever pattern works best for your data ( by default they will plot alphabetically, but perhaps you could order them according to the values of another numeric variable). 
+
+## Quick view of variables
+
+Let's take a look at some of our variables, these functions will give a quick snapshot overview.
+
+```{r, eval=FALSE}
+glimpse(penguins)
+summary(penguins)
+```
+
+We can see that bill length contains numbers, and that many of these are fractions, but only down to 0.1mm. By comparison body mass all appear to be discrete number variables. Does this make body mass an integer? The underlying quantity (bodyweight) is clearly continuous, it is clearly possible for a penguin to weigh 3330.7g but it might *look* like an integer because of the way it was measured. This illustrates the importance of understanding the the type of variable you are working with - just looking at the values isn't enough. 
+
+On the other hand, how we choose to measure and record data *can* change the way it is presented in a dataset. If the researchers had decided to simply record small, medium and large classes of bodyweight, then we would be dealing with ordinal categorical variables (factors). These distinctions can become less clear if we start to deal with multiple classes of ordinal categories - for example if the researchers were measuring body mass to the nearest 10g. It might be reasonable to treat these as integers...
+
+## Categorical variables
+
+### Frequency
+
+```{r}
+penguins %>% 
+  group_by(species) %>% 
+  summarise(n = n())
+
+```
+
+
+It might be useful for us to make some quick data summaries here, like relative frequency
+
+```{r, eval=TRUE}
+prob_obs_species <- penguins %>% 
+  group_by(species) %>% 
+  summarise(n = n()) %>% 
+  mutate(prob_obs = n/sum(n))
+
+prob_obs_species
+
+```
+So about 44% of our sample is made up of observations from Adelie penguins. When it comes to making summaries about categorical data, that's about the best we can do, we can make observations about the most common categorical observations, and the relative proportions. 
+
+```{r}
+penguins %>% 
+  ggplot()+
+  geom_bar(aes(x=species))
+```
+
+This chart is ok - but can we make anything better?
+
+We could go for a stacked bar approach
+
+```{r}
+penguins %>% 
+  ggplot(aes(x="",
+             fill=species))+ 
+  # specify fill = species to ensure colours are defined by species
+  geom_bar(position="fill")+ 
+  # specify fill forces geom_bar to calculate percentages
+  scale_y_continuous(labels=scales::percent)+ 
+  #use scales package to turn y axis into percentages easily
+  labs(x="",
+       y="")+
+  theme_minimal()
+
+```
+
+This graph is OK *but not great*, the height of each section of the bar represents the relative proportions of each species in the dataset, but this type of chart becomes increasingly difficult to read as more categories are included. Colours become increasingly samey,and it is difficult to read where on the y-axis a category starts and stops, you then have to do some subtraction to work out the values. 
+
+The best graph is then probably the first one we made - with a few minor tweak we can rapidly improve this. 
+
+```{r, echo=FALSE, eval=TRUE}
+penguins %>% 
+  mutate(species=factor(species, levels=c("Adelie",
+                                          "Gentoo",
+                                          "Chinstrap"))) %>% 
+  # set as factor and provide levels
+  ggplot()+
+  geom_bar(aes(x=species),
+           fill="steelblue",
+           width=0.8)+
+  labs(x="Species",
+       y = "Number of observations")+
+  geom_text(data=prob_obs_species,
+            aes(y=(n+10),
+                x=species,
+                label=scales::percent(prob_obs)))+
+  coord_flip()+
+  theme_minimal()
+
+```
+This is an example of a figure we might use in a report or paper. Having cleaned up the theme, added some simple colour, made sure our labels are clear and descriptive, ordered our categories in ascending frequency order, and included some simple text of percentages to aid readability. 
+
+### Two categorical variables
+
+```{task}
+Think about what might be a suitable confounding variable to investigate and graph here?
+```
+
+
+Understanding how frequency is broken down by species and sex might be useful information to have. 
+
+```{r}
+penguins %>% 
+  group_by(species, sex) %>% 
+  summarise(n = n()) %>% 
+  mutate(prob_obs = n/sum(n))
+```
+
+## Continuous variables
+
+### Visualising distributions
+
+**Variation** is the tendency of the values of a variable to change from measurement to measurement. You can see variation easily in real life; if you measure any continuous variable twice, you will get two different results. This is true even if you measure quantities that are constant, like the speed of light. Each of your measurements will include a small amount of error that varies from measurement to measurement. Every variable has its own pattern of variation, which can reveal interesting information. The best way to understand that pattern is to visualise the distribution of the variable’s values.
+
+This is the script to plot a frequency distribution, we only specify an x variable, because we intend to plot a histogram, and the y variable is always the count of observations. Here we ask the data to be presented in 10 equally sized bins of data. In this case chopping the x axis range into 10 equal parts and counting the number of observations that fall within each one. 
+
+```{r}
+penguins %>% 
+  ggplot()+
+  geom_histogram(aes(x=body_mass_g),
+                 bins=10)
+```
+
+```{block, type = "try"}
+Change the value specified to the bins argument and observe how the figure changes. It is usually a very good idea to try more than one set of bins in order to have better insights into the data
+```
+
+To get the most out of your data, combine data you collected from the `summary()` function and the histogram here 
+
+* Which values are the most common? `r mcq(c("< 3500g", answer = "3500-4000g", "4000-4500g", "4500-5000g", "5000-5500g", "5500-6000g", ">6500g"))`
+
+* Which values are rare? Why? Does that match your expectations?
+`r mcq(c("< 3500g", "3500-4000g", "4000-4500g", "4500-5000g", "5000-5500g", "5500-6000g", answer = ">6500g"))`
+
+* Can you see any unusual patterns? `r mcq(c("Yes", answer = "No"))`
+
+* How many observations are missing body mass information? `r fitb("2")`
+
+
+```{solution}
+Penguins weighing less than 3kg and more than 6kg are rare. 
+The most common weight appears to be just under 4kg. 
+
+There appear to be more data points to the right of the peak of the histogram than there are too the left. E.g. the histogram is not symmetrical. But there is no evidence for any extreme outliers. 
+```
+
+#### Atypical values
+
+If you found atypical values at this point, you could decide to exclude them from the dataset (using `filter()`). BUT you should only do this at this stage if you have a very strong reason for believing this is a mistake in the data entry, rather than a true outlier. 
+
+### Central tendency
+
+Central tendency is a descriptive summary of a dataset through a single value that reflects the center of the data distribution. The three most widely used measures of central tendency are **mean**, **median** and **mode**.
+
+The **mean** is defined as the sum of all values of the variable divided by the total number of values. The **median** is the middle value. If N is odd and if N is even, it is the average of the two middle values. The **mode** is the most frequently occurring observation in a data set, but is arguable least useful for understanding biological datasets.
+
+We can find both the mean and median easily with the summarise function. The **mean** is usually the best measure of central tendency when the distribution is symmetrical, and the **mode** is the best measure when the distribution is asymmetrical/skewed. 
+
+```{r, eval=TRUE}
+penguin_body_mass_summary <- penguins %>% 
+    summarise(mean_body_mass=mean(body_mass_g, na.rm=T), 
+              sd = sd(body_mass_g, na.rm = T),
+              median_body_mass=median(body_mass_g, na.rm=T), 
+              iqr = IQR(body_mass_g, na.rm = T))
+
+penguin_body_mass_summary
+
+```
+
+```{r, fig.cap = "Red dashed line represents the mean, Black dashed line is the median value"}
+penguins %>% 
+ggplot()+
+  geom_histogram(aes(x=body_mass_g),
+               alpha=0.8,
+               bins = 10,
+               fill="steelblue",
+               colour="darkgrey")+
+   geom_vline(data=penguin_body_mass_summary,
+             aes(xintercept=mean_body_mass),
+             colour="red",
+             linetype="dashed")+
+     geom_vline(data=penguin_body_mass_summary,
+             aes(xintercept=median_body_mass),
+             colour="black",
+             linetype="dashed")+
+  labs(x = "Body mass (g)",
+       y = "Count")+
+  theme_classic()
+```
+
+With the information about the distribution, and positions of the mean and median, which of these two measures of central tendency is most appropriate for this data? `r mcq(c(answer = "mean", "median"))`
+
+```{solution}
+we can clearly see that the mean value has been significantly "right-shifted" by the long tail of the data distribution. However,this is much less apparent for the median. In this way we can say that the median is less sensitive to the distribution of the data than the mean is.
+```
+
+### Normal distribution
+
+From our histogram we can likely already tell whether we have normally distributed data. 
+
+```{block, type  ="info"}
+
+Normal distribution, also known as the "Gaussian distribution", is a probability distribution that is symmetric about the mean, showing that data near the mean are more frequent in occurrence than data far from the mean. In graphical form, the normal distribution appears as a "bell curve".
+```
+
+If our data follows a normal distribution, then we can predict the spread of our data, and the likelihood of observing a datapoint of any given value with only the mean and standard deviation. 
+
+Here we can simulate what a normally distributed dataset would look like with our sample size, mean and standard deviation.
+
+```{r}
+norm_mass <- rnorm(n = 344,
+      mean = 4201.754,
+      sd = 801.9545) %>% 
+  as_tibble()
+
+norm_mass %>% 
+  as_tibble() %>% 
+  ggplot()+
+  geom_histogram(aes(x = value),
+                 bins = 10)
+
+```
+
+#### QQ-plot
+
+A QQ plot is a classic way of checking whether a sample distribution is the same as another (or theoretical distribution). They look a bit odd at first, but they are actually fairly easy to understand, and very useful! The qqplot distributes your data on the y-axis, and a theoretical normal distribution on the x-axis. If the residuals follow a normal distribution, they should meet to produce a perfect diagonal line across the plot.
+
+Watch this video to see [QQ plots explained](https://www.youtube.com/watch?v=okjYjClSjOg)
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%", fig.cap = "Examples of qqplots with different deviations from a normal distribution"}
+knitr::include_graphics("images/qq_example.png")
+```
+
+In our example we can see that *most* of our residuals can be explained by a normal distribution, except at the low end of our data. 
+
+So the fit is not perfect, but it is also not terrible!
+
+```{r}
+ggplot(penguins, aes(sample = body_mass_g))+
+  stat_qq() + 
+  stat_qq_line()
+
+```
+
+**Q. How do we know how much deviation from an idealised distribution is ok?**
+
+```{r}
+penguins %>% 
+  pull(body_mass_g) %>% 
+  car::qqPlot()
+```
+
+The qqPlot() function from the R package car provides 95% confidence interval margins to help you determine how severely your quantiles deviate from your idealised distribution.
+
+
+
+### Variation
+
+Dispersion (how spread out the data is) is an important component towards understanding any numeric variable. While measures of central tendency are used to estimate the central value of a dataset, measures of dispersion are important for describing the spread of data. 
+
+Two data sets can have an equal mean (that is, measure of central tendency) but vastly different variability. 
+
+Important measures for dispersion are **range**, **interquartile range**, **variance** and **standard deviation**. 
+
+* The **range** is defined as the difference between the highest and lowest values in a dataset. The disadvantage of defining range as a measure of dispersion is that it does not take into account all values for calculation.
+
+* The **interquartile range** is defined as the difference between the third quartile denoted by 𝑸_𝟑   and the lower quartile denoted by  𝑸_𝟏 . 75% of observations lie below the third quartile and 25% of observations lie below the first quartile.
+
+* **Variance** is defined as the sum of squares of deviations from the mean, divided by the total number of observations. The standard deviation is the positive square root of the variance.  The **standard deviation** is preferred instead of variance as it has the same units as the original values.
+
+
+#### Interquartile range
+
+We used the IQR function in `summarise()` to find the interquartile range of the body mass variable.
+
+The IQR is also useful when applied to the summary plots 'box and whisker plots'. We can also calculate the values of the IQR margins, and add labels with `scales` @R-scales. 
+
+```{r}
+penguins %>%
+  summarise(q_body_mass = quantile(body_mass_g, c(0.25, 0.5, 0.75), na.rm=TRUE),
+            quantile = scales::percent(c(0.25, 0.5, 0.75))) # scales package allows easy converting from data values to perceptual properties
+
+```
+
+We can see for ourselves the IQR is obtained by subtracting the body mass at tht 75% quantile from the 25% quantile (4750-3550 = 1200).
+
+#### Standard deviation
+
+standard deviation (or σ) is a measure of how dispersed the data is in relation to the mean. Low standard deviation means data are clustered around the mean, and high standard deviation indicates data are more spread out. As such it makes sense only to use this when the mean is a good measure of our central tendency. 
+
+### Visualising dispersion
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%", fig.cap = "Examples of qqplots with different deviations from a normal distribution"}
+knitr::include_graphics("images/distribution_gif.gif")
+```
+
+```{r, out.width = "80%"}
+
+colour_fill <- "darkorange"
+colour_line <- "steelblue"
+lims <- c(0,7000)
+
+body_weight_plot <- function(){
+  
+  penguins %>% 
+  ggplot(aes(x="",
+             y= body_mass_g))+
+  labs(x= " ",
+       y = "Mass (g)")+
+  scale_y_continuous(limits = lims)+
+    theme_minimal()
+}
+
+plot_1 <- body_weight_plot()+
+  geom_jitter(fill = colour_fill,
+               colour = colour_line,
+               width = 0.2,
+              shape = 21)
+
+plot_2 <- body_weight_plot()+
+  geom_boxplot(fill = colour_fill,
+               colour = colour_line,
+               width = 0.4)
+
+plot_3 <- penguin_body_mass_summary %>% 
+  ggplot(aes(x = " ",
+             y = mean_body_mass))+
+  geom_bar(stat = "identity",
+           fill = colour_fill,
+           colour = colour_line,
+               width = 0.2)+
+  geom_errorbar(data = penguin_body_mass_summary,
+                aes(ymin = mean_body_mass - sd,
+                    ymax = mean_body_mass + sd),
+                colour = colour_line,
+                width = 0.1)+
+  labs(x = " ",
+       y = "Body mass (g)")+
+  scale_y_continuous(limits = lims)+
+  theme_minimal()
+
+
+plot_1 + plot_2 + plot_3 
+
+```
+
+We now have several compact representations of the body_mass_g including a histogram, boxplot and summary calculations. You can *and should* generate the same summaries for your other numeric variables. These tables and graphs provide the detail you need to understand the central tendency and dispersion of numeric variables. 
+
+### drop_na
+
+We first met `NA` back in [Chapter 4](#missing-values-na) and you will hopefully have noticed, either here or in those previous chapters, that missing values `NA` can really mess up our calculations. There are a few different ways we can deal with missing data:
+
+* `drop_na()` on everything before we start. This runs the risk that we lose **a lot** of data as *every* row, with an NA in *any column* will be removed
+
+* `drop_na()` on a particular variable. This is fine, but we should approach this cautiously - if we do this in a way where we write this data into a new object e.g. `penguins <- penguins %>% drop_na(body_mass_g)` then we have removed this data forever - perhaps we only want to drop those rows for a specific calculation - again they might contain useful information in other variables. 
+
+* `drop_na()` for a specific task - this is a more cautious approach **but** we need to be aware of another phenomena. Is the data **missing at random**? You might need to investigate *where* your missing values are in a dataset. Data that is truly **missing at random** can be removed from a dataset without introducing bias. However, if bad weather conditions meant that researchers could not get to a particular island to measure one set of penguins that data is **missing not at random** this should be treated with caution. If that island contained one particular species of penguin, it might mean we have complete data for only two out of three penguin species. There is nothing you can do about incomplete data other than be aware that data not missing at random could influence your distributions. 
+
+
+## Categorical and continuous variables
+
+It’s common to want to explore the distribution of a continuous variable broken down by a categorical variable. 
+
+```{task}
+Think about which other variables might affect body mass?
+```
+
+```{solution}
+
+``{r, echo = F}
+library(DiagrammeR)
+
+grViz("digraph {
+  
+graph[layout = dot, rankdir = LR]
+
+a[label = 'Body mass']
+b[label = 'Beak length']
+c[label = 'Species']
+d[label = 'Sex']
+
+c -> a
+d -> a
+
+}")
+``
+
+So it is reasonable to think that perhaps either species or sex might affect the morphology of beaks directly - or that these might affect body mass (so that if there is a direct relationship between mass and beak length, there will also be an indirect relationship with sex or species).
+
+```
+
+The best and simplest place to start exploring these possible relationships is by producing simple figures. 
+
+Let's start by looking at the distribution of body mass by species. 
+
+```{task}
+Produce a plot which allows you to look at the distribution of penguin body mass observations by species
+```
+
+```{solution}
+
+``{r}
+jitter_plot <- penguins %>% 
+    ggplot(aes(x = species,
+               y = body_mass_g))+
+    geom_jitter(shape = 21,
+                fill = colour_fill,
+                colour = colour_line,
+                width = 0.2)+
+  coord_flip()
+
+box_plot <- penguins %>% 
+    ggplot(aes(x = species,
+               y = body_mass_g))+
+    geom_boxplot(fill = colour_fill,
+                colour = colour_line,
+                width = 0.2)+
+  coord_flip()
+
+histogram_plot <- penguins %>% 
+    ggplot(aes(fill = species))+
+    geom_histogram(aes(x = body_mass_g,
+                       y = ..density..),
+                   position = "identity",
+                   alpha = 0.6,
+                colour = colour_line)
+
+jitter_plot/box_plot/histogram_plot
+  
+``
+
+So it is reasonable to think that perhaps either species or sex might affect body mass, and we can visualise this in a number of different ways. The last method, a density histogram, looks a little crowded now, so I will use the excellent `ggridges` package to help out
+
+```
+
+
+
+GGridges
+
+
+```{solution}
+
+
+``{r}
+library(ggridges)
+ggplot(penguins, aes(x = body_mass_g, y = species)) + 
+  ggridges::geom_density_ridges(fill = colour_fill,
+                colour = colour_line,
+                alpha = 0.8)
+``
+
+
+```
+
+**Q. Does each species have a data distribution that appears to be normally distributed?**
+
+* Gentoo `r mcq(c(answer = "Yes", "No"))`
+
+* Chinstrap `r mcq(c(answer = "Yes", "No"))`
+
+* Adelie `r mcq(c(answer = "Yes", "No"))`
+
+```{solution}
+
+``{r}
+penguins %>% 
+  group_split(species) %>% 
+  map(~ pull(.x, body_mass_g) 
+      %>% car::qqPlot())
+``
+
+While the Gentoo density plot appears to show two peaks, our qqplot indicates this does not deviate from what me might expect from a normal distribution. But we could still investigate whether there are "two populations" here. 
+
+```
+
+
+
+```{r}
+penguins %>% drop_na %>% ggplot(aes(x = body_mass_g, y = species)) + 
+    geom_density_ridges(aes(fill = sex),
+                        colour = colour_line,
+                        alpha = 0.8,
+                        bandwidth = 175)
+
+# try playing with the bandwidth argument - this behaves similar to binning which you should be familiar with from using geom_histogram
+
+```
+
+This is revealing some really interesting insights into the shape and distribution of body sizes in our penguin populations now. 
+
+For example:
+
+* Gentoo penguins appear to show strong sexual dimorphism with almost all males being larger than females (little overlap on density curves).
+
+* Gentoo males and females are on average larger than the other two penguin species
+
+* Gentoo females have two distinct peaks of body mass. 
+
+* Chinstrap penguins also show evidence of sexual dimorphism, though with greater overlap.
+
+* Adelie penguins have larger males than females on average, but a wide spread of male body mass, (possibly two groups?)
+
+Note how we are able to understand our data better, by spending time making data visuals. While descriptive data statistics (mean, median) and measures of variance (range, IQR, sd) are important. They are not substitutes for spending time thinking about data and making exploratory analyses. 
+
+# Data insights part two
+
+```{r, child='_setup.Rmd'}
+```
+
+## Two continuous variables
+
+## Complex interactions
+
+```{solution}
+
+``{r, echo = F}
+library(DiagrammeR)
+
+grViz("digraph {
+  
+graph[layout = dot, rankdir = LR]
+
+a[label = 'Body mass']
+b[label = 'Beak length']
+c[label = 'Species']
+d[label = 'Sex']
+
+a -> b 
+c -> b
+c -> a
+d -> b
+d -> a
+}")
+``
+
+So it is reasonable to think that perhaps either species or sex might affect the morphology of beaks directly - or that these might affect body mass (so that if there is a direct relationship between mass and beak length, there will also be an indirect relationship with sex or species).
+
+```
+
+
+
+In the previous chapter we looked at individual variables, and understanding the different types of data. We made numeric and graphical summaries of the distributions of features within each variable. This week we will continue to work in the same space, and extend our understanding to include relationships between variables. 
+
+Understanding the relationship between two or more variables is often the basis of most of our scientific questions. These might include comparing variables of the same type (numeric against numeric) or different types (numeric against categorical). In this chapter we will see how we can use descriptive statistics and visuals to explore associations
+
+## Associations between numerical variables
+
+### Correlations
+
+A common measure of association between two numerical variables is the **correlation coefficient**. The correlation metric is a numerical measure of the *strength of an association*
+
+There are several measures of correlation including:
+
+* **Pearson's correlation coefficient** : good for describing linear associations
+
+* **Spearman's rank correlation coefficient**: a rank ordered correlation - good for when the assumptions for Pearson's correlation is not met. 
+
+Pearson's correlation coefficient *r* is designed to measure the strength of a linear (straight line) association. Pearson's takes a value between -1 and 1. 
+
+* A value of 0 means there is no linear association between the variables
+
+* A value of 1 means there is a perfect *positive* association between the variables
+
+* A value of -1 means there is a perfect *negative* association between the variables
+
+A *perfect* association is one where we can predict the value of one variable with complete accuracy, just by knowing the value of the other variable. 
+
+
+We can use the `cor` function in R to calculate Pearson's correlation coefficient. 
+
+
+```{r, eval=TRUE}
+library(rstatix)
+
+penguins %>% 
+  cor_test(culmen_length_mm, culmen_depth_mm)
+
+```
+This tells us two features of the association. It's *sign* and *magnitude*. The coefficient is negative, so as bill length increases, bill depth decreases. The value -0.22 indicates that only about 22% of the variation in bill length can be explained by changes in bill depth (and *vice-versa*), suggesting that the variables are not closely related. 
+
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%", fig.cap= "Different relationships between two numeric variables. Each number represents the Pearson's correlation coefficient of each association"}
+knitr::include_graphics("images/correlation_examples.png")
+```
+
+* Because Pearson's coefficient is designed to summarise the strength of a linear relationship, this can be misleading if the relationship is *not linear* e.g. curved or humped. This is why it's always a good idea to plot the relationship *first* (see above).
+
+* Even when the relationship is linear, it doesn't tell us anything about the steepness of the association (see above). It *only* tells us how often a change in one variable can predict the change in the other *not* the value of that change. 
+
+This can be difficult to understand at first, so carefully consider the figure above. 
+
+* The first row above shows differing levels of the strength of association. If we drew a perfect straight line between two variables, how closely do the data points fit around this line. 
+
+* The second row shows a series of *perfect* linear relationships. We can accurately predict the value of one variable just by knowing the value of the other variable, but the steepness of the relationship in each example is very different. This is **important** because it means a perfect association can still have a small effect.
+
+* The third row shows a series of associations where there is *clearly* a relationship between the two variables, but it is also not linear so would be inappropriate for a Pearson's correlation. 
+
+### Non-linear correlations
+
+So what should we do if the relationship between our variables is non-linear? Instead of using Pearson's correlation coefficient we can calculate something called a **rank correlation**. 
+
+Instead of working with the raw values of our two variables we can use rank ordering instead. The idea is pretty simple if we start with the lowest vaule in a variable and order it as '1', then assign labels '2', '3' etc. as we ascend in rank order. We can see a way that this could be applied manually with the function `dense_rank` from dplyr below:
+
+
+```{r, eval=TRUE}
+penguins %>% select(culmen_length_mm, 
+                    culmen_depth_mm) %>% 
+  drop_na() %>% 
+  mutate(rank_length=dense_rank((culmen_length_mm)), 
+         rank_depth=dense_rank((culmen_depth_mm)))
+```
+
+Measures of rank correlation then are just a comparison of the rank orders between two variables, with a value between -1 and 1 just like Pearsons's. We already know from our Pearson's correlation coefficient, that we expect this relationship to be negative. So it should come as no surprise that the highest rank order values for bill_length_mm appear to be associated with lower rank order values for bill_depth_mm. 
+
+
+To calculate Spearman's $\rho$ 'rho' is pretty easy, you can use the cor functions again, but this time specify a hidden argument to `method="spearman"`. 
+
+```{r, eval=TRUE}
+penguins %>% 
+  cor_test(culmen_length_mm, culmen_depth_mm, method="spearman")
+
+```
+What we can see in this example is that Pearson's *r* and Spearman's $\rho$ are basically identical. 
+
+### Graphical summaries between numeric variables
+
+Correlation coefficients are a quick and simple way to attach a metric to the level of association between two variables. They are limited however in that a single number can never capture the every aspect of their relationship. This is why we visualise our data. 
+
+We have already covered scatter plots and `ggplot2()` extensively in previous chapters, so here we will just cover some of the different ways in which you could present the nature of a relationship
+
+```{r, eval=TRUE, message=FALSE, fig.cap = "A scatter plot of bill depth against bill length in mm"}
+length_depth_scatterplot <- ggplot(penguins, aes(x= culmen_length_mm, 
+                     y= culmen_depth_mm)) +
+    geom_point()
+
+length_depth_scatterplot
+
+```
+
+> **Note - Remember there are a number of different options available when constructing a plot including changing alpha to produce transparency if plots are lying on top of each other, colours (and shapes) to separate subgroups and ways to present third numerical variables such as setting aes(size=body_mass_g). 
+
+```{r, eval=TRUE, warning=FALSE, message=FALSE, fig.cap="Using patchwork we can easily arrange extra plots to fit as marginals - these could be boxplots, histograms or density plots"}
+library(patchwork) # package calls should be placed at the TOP of your script
+
+bill_depth_marginal <- penguins %>% 
+  ggplot()+
+  geom_density(aes(x=culmen_depth_mm), fill="darkgrey")+
+  theme_void()+
+  coord_flip() # this graph needs to be rotated
+
+bill_length_marginal <- penguins %>% 
+  ggplot()+
+  geom_density(aes(x=culmen_length_mm), fill="darkgrey")+
+  theme_void()
+
+layout <- "
+AA#
+BBC
+BBC"
+# layout is easiest to organise using a text distribution, where ABC equal the three plots in order, and the grid is how much space they take up. We could easily make the main plot bigger and marginals smaller with
+
+# layout <- "
+# AAA#
+# BBBC
+# BBBC"
+# BBBC
+
+bill_length_marginal+length_depth_scatterplot+bill_depth_marginal+ # order of plots is important
+  plot_layout(design=layout) # uses the layout argument defined above to arrange the size and position of plots
+
+
+
+```
+
+These efforts allow us to capture details about the spread and distribution of both variables **and** how they relate to each other. This figure provides us with insights into
+
+* The central tendency of each variable
+
+* The spread of data in each variable
+
+* The correlation between the two variables
+
+## Associations between categorical variables
+
+Exploring associations between different categorical variables is not quite as simple as the previous numeric-numeric examples. Generally speaking we are interested in whether different combinations of categories are uniformally distributed or show evidence of clustering leading to *over- or under-represented* combinations. 
+The simplest way to investigate this is to use `group_by` and `summarise` as we have used previously.
+
+```{r, eval=TRUE}
+island_species_summary <- penguins %>% 
+  group_by(island, species) %>% 
+  summarise(n=n(),
+            n_distinct=n_distinct(individual_id)) %>% 
+  ungroup() %>% # needed to remove group calculations
+  mutate(freq=n/sum(n)) # then calculates percentage of each group across WHOLE dataset
+
+island_species_summary
+```
+> **Note - remember that group_by() applies functions which comes after it in a group-specific pattern.
+
+What does the above tell us, that 168 observations were made on the Island of Biscoe, with three times as many Gentoo penguin observations made as Adelie penguins (remeber this is observations made, not individual penguins). When we account for penguin ID we see there are around twice as many Gentoo penguins recorded. We can see there are no Chinstrap penguins recorded on Biscoe. Conversely we can see that Gentoo penguins are **only** observed on Biscoe. 
+The island of Dream has two populations of Adelie and Chinstrap penguins of roughly equal size, while the island of Torgensen appears to have a population comprised only of Adelie penguins. 
+
+We could also use a bar chart in ggplot to represent this count data. 
+
+```{r, eval=TRUE}
+
+penguins%>% 
+  ggplot(aes(x=island, fill=species))+
+  geom_bar(position=position_dodge())+
+  coord_flip()
+
+```
+
+This is fine, but it looks a bit odd, because the bars expand to fill the available space on the category axis. Luckily there is an advanced version of the postion_dodge argument. 
+
+
+```{r, eval=TRUE}
+penguins%>% 
+  ggplot(aes(x=island, fill=species))+
+  geom_bar(position=position_dodge2(preserve="single"))+ 
+  #keeps bars to appropriate widths
+  coord_flip()
+
+```
+> **Note the default for bar charts would have been a stacked option, but we have already seen how that can produce graphs that are difficult to read. 
+
+An alternative approach would be to look at the 'relative proportions' of each population in our overall dataset. Using the same methods as we used previously when looking at single variables. Let's add in a few aesthetic tweaks to improve the look. 
+
+```{r, eval=TRUE, fig.cap="A dodged barplot showing the numbers and relative proportions of data observations recorded by penguin species and location"}
+
+penguins %>% 
+  ggplot(aes(x=island, fill=species))+
+  geom_bar(position=position_dodge2(preserve="single"))+ 
+  #keeps bars to appropriate widths
+    labs(x="Island",
+       y = "Number of observations")+
+  geom_text(data=island_species_summary, # use the data from the summarise object
+            aes(x=island,
+                y= n+10, # offset text to be slightly to the right of bar
+                group=species, # need species group to separate text
+                label=scales::percent(freq) # automatically add %
+                ),
+            position=position_dodge2(width=0.8))+ # set width of dodge
+  scale_fill_manual(values=c("cyan",
+                            "darkorange",
+                            "purple"
+                            ))+
+  coord_flip()+
+  theme_minimal()+
+  theme(legend.position="bottom") # put legend at the bottom of the graph
+
+```
+
+## Associations between Categorical-numerical variables
+
+```{r, eval=TRUE}
+penguins %>% 
+  ggplot(aes(x=species,
+             y=body_mass_g))+
+  geom_boxplot()+
+  labs(y="Body mass (g)",
+         x= "Species")
+
+```
+
+```{r, eval=TRUE}
+penguins %>% 
+  ggplot(aes(x=body_mass_g,
+             fill=species))+
+  geom_histogram(alpha=0.6,
+         bins=30,
+         position="identity")+
+  facet_wrap(~species,
+             ncol=1)
+```
+
+## Complexity
+
+### Simpson's Paradox
+
+Remember when we first correlated bill length and bill depth against each other we found an overall negative correlation of -0.22. However, this is because of a confounding variable we had not accounted for - species. 
+
+
+```{r, eval=TRUE, echo=FALSE, message=FALSE}
+
+bill_length_marginal+(length_depth_scatterplot+geom_smooth(method="lm", se=FALSE))+bill_depth_marginal+ # order of plots is important
+  plot_layout(design=layout)
+
+```
+
+This is another example of why carefully studying your data - and carefully considering those variables which are likely to affect each other are studied or controlled for. It is an entirely reasonable hypothesis that different penguin species might have different bill shapes that might make an overall trend misleading. We can easily check the effect of a categoricial variable on our two numeric variables by assigning the aesthetic colour. 
+
+```{r, eval =TRUE}
+
+colours <- c("cyan",
+             "darkorange",
+             "purple")
+
+length_depth_scatterplot_2 <- ggplot(penguins, aes(x= culmen_length_mm, 
+                     y= culmen_depth_mm,
+                     colour=species)) +
+    geom_point()+
+  geom_smooth(method="lm",
+              se=FALSE)+
+  scale_colour_manual(values=colours)+
+  theme_classic()+
+  theme(legend.position="none")+
+    labs(x="Bill length (mm)",
+         y="Bill depth (mm)")
+
+length_depth_scatterplot
+
+bill_depth_marginal_2 <- penguins %>% 
+  ggplot()+
+  geom_density(aes(x=culmen_depth_mm,
+                   fill=species),
+               alpha=0.5)+
+  scale_fill_manual(values=colours)+
+  theme_void()+
+  coord_flip() # this graph needs to be rotated
+
+bill_length_marginal_2 <- penguins %>% 
+  ggplot()+
+  geom_density(aes(x=culmen_length_mm,
+                   fill=species),
+               alpha=0.5)+
+  scale_fill_manual(values=colours)+
+  theme_void()+
+  theme(legend.position="none")
+
+layout2 <- "
+AAA#
+BBBC
+BBBC
+BBBC"
+
+bill_length_marginal_2+length_depth_scatterplot_2+bill_depth_marginal_2+ # order of plots is important
+  plot_layout(design=layout2) # uses the layout argument defined above to arrange the size and position of plots
+
+```
+
+We now clearly see a striking reversal of our previous trend, that in fact *within* each species of penguin there is an overall positive association between bill length and depth. 
+
+This should prompt us to re-evaluate our correlation metrics:
+
+```{r, eval=TRUE}
+penguins %>% 
+  group_by(species) %>% 
+  cor_test(culmen_length_mm, culmen_depth_mm)
+```
+
+We now see that the correlation values for all three species is >0.22 - indicating these associations are much closer than previously estimated. 
+
+
+### Three or more variables
+
+In the above example therefore, we saw the importance of exploring relationships among more than two variables at once. Broadly speaking there are two ways top do this
+
+1. Layer an extra aesthetic mapping onto ggplot - such as size, colour, or shape
+
+2. Use facets to construct multipanel plots according to the values of a categorical variable
+
+If we want we can also adopt both of these approaches at the same time:
+
+```{r, eval=TRUE, message=FALSE, warning=FALSE}
+penguins %>% 
+  drop_na(sex) %>% 
+ggplot(aes(x= culmen_length_mm, 
+                     y= culmen_depth_mm,
+                     colour=sex)) + # colour aesthetic set to sex
+    geom_point()+
+  geom_smooth(method="lm",
+              se=FALSE)+
+  scale_colour_manual(values=c("#1B9E77", "#D95F02"))+ # pick two colour scheme
+  theme_classic()+
+  theme(legend.position="none")+
+    labs(x="Bill length (mm)",
+         y="Bill depth (mm)")+
+  facet_wrap(~species, ncol=1) # specify plots are stacked split by species
+
+```
+
+Here we can see that the trends are the same across the different penguin sexes. Although by comparing the slopes of the lines, lengths of the lines and amounts of overlap we can make insights into how "sexually dimorphic" these different species are e.g. in terms of beak morphology do some species show greater differences between males and females than others?
+
+## Summing up
+
+This is our last data handling workshop. We have built up towards being able to discover and examine relationships and differences among variables in our data. You now have the skills to handle many different types of data, tidy it, and produce visuals to generate insight and communicate this to others. 
+
+A note of caution is required - it is very easy to spot and identify patterns.
+
+When you do spot a trend, difference or relationship, it is important to recognise that you may not have enough evidence to assign a reason behind this observation. As scientists it is important to develope hypotheses based on knowledge and understanding, this can help (sometimes) with avoiding spurious associations. 
+
+Sometimes we may see a pattern in our data, but it has likely occurred due to random chance, rather than as a result of an underlying process. This is where formal statistical analysis, to quantitatively assess the evidence, assess probability and study effect sizes can be incredibly powerful. We will delve into these exciting topics next term. 
+
+That's it! Thank you for taking the time to get this far. Be kind to yourself if you found it difficult. You have done incredibly well.
+
+Have some more praise!!!!
+
+```{r}
+praise::praise()
+```
+```
+[1] "You are spectaculaR!"
+```

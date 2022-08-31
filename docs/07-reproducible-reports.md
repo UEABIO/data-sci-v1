@@ -8,13 +8,13 @@
 
 <img src="images/rmarkdownoutputformats.png" width="100%" style="display: block; margin: auto;" />
 
-R Markdown is a widely-used tool for creating automated, reproducible, and share-worthy outputs, such as reports. It can generate static or interactive outputs, in Word, pdf, html, Powerpoint, and other formats.
+R Markdown is a widely-used tool for creating automated, reproducible, and share-worthy outputs, such as reports. It can generate static or interactive outputs, in Word, pdf, html, Powerpoint slides, and many other formats.
 
 An R Markdown script combines R code and text such that the script actually becomes your output document. You can create an entire formatted document, including narrative text (can be dynamic to change based on your data), tables, figures, bullets/numbers, bibliographies, etc.
 
 Documents produced with Rmarkdown, allow analyses to be included easily - and make the link between raw data, analysis & and a published report *completely reproducible*.
 
-With Rmarkdown we can make reproducible html, word, pdf, powerpoints or websites and dashboards^[(https://rmarkdown.rstudio.com/lesson-9.html)]
+With Rmarkdown we can make reproducible html, word, pdf, powerpoints or websites and dashboards^[(https://rmarkdown.rstudio.com/gallery.html)]
 
 **To make your Rmd publish - hit the knit button at the top of the doc**
 
@@ -237,7 +237,7 @@ You can also include minimal R code within back-ticks. Within the back-ticks, be
 
 \` r Sys.Date()\`
 
-When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead: 2022-08-18
+When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead: 2022-08-31
 
 <div class="try">
 <p>Having added some in-line code, try re-knitting your .Rmd file, what is the output?</p>
@@ -516,7 +516,7 @@ The advantage is all the data cleaning and organising happens "elsewhere" and we
 source("scripts/your-script.R")
 ```
 
-## Activity 5: 
+## Activity 5: Connecting scripts and reports
 
 * Create a new Rmarkdown file (in the reports folder).
 

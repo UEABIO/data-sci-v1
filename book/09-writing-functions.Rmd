@@ -19,6 +19,18 @@ https://r-coder.com/function-r/#Input_arguments_in_R_functions
 
 http://faculty.washington.edu/kenrice/rintro/intro17sess09v2.pdf
 
+https://jennybc.github.io/purrr-tutorial/ls01_map-name-position-shortcuts.html
+
+https://malco.io/slides/hs_purrr/#17
+
+https://malcolmbarrett.shinyapps.io/purrr_exercises/
+
+https://www.jumpingrivers.com/blog/custom-colour-palettes-for-ggplot2/
+
+https://www.rebeccabarter.com/blog/2019-08-19_purrr/#simplest-usage-repeated-looping-with-map
+
+
+
 In this chapter we are going to look at two processes that streamline our code and make it more efficient. The principle behind this is to try and make **DRY** code.
 
 So what the flip is **DRY** code anyway? It stands for **D**on't **R**epeat **Y**ourself. It's aimed at reducing the repetition and number of lines of code in your scripts. 
@@ -83,11 +95,17 @@ Use the custom function below to add ten to each element of this vector
 vector <- c(1,5,10)
 ```
 
+Here we are making a function, remember `input_data` is a placeholder for real values that will be supplied *later*. 
+
+In this example we are telling R that *when* we provide data (a value) in the position of the argument `input_data` it should add 1 to this, and return the result:
+
 ```{r}
-add_one <- function(.x) {
-  return(.x + 1)
+add_one <- function(input_data) {
+  return(input_data + 1)
 }
 ```
+
+Let's try our new function out on the vector we made.
 
 ```{r}
 
@@ -102,7 +120,11 @@ add_one(vector)
 * Complete this function by filling in input_data for the `sum()`, and then filling in the remaining empty parentheses with the appropriate object names.
 
 * Now create an object containing a set of numerical values and call it `my_combined_values`. Then try out your new function on this object, which will compute the square root of the objects sum.
-    
+
+```{task}
+Finish writing the function below
+```
+ 
 ```{r, eval = F}
 # Use the instructions above to complete the function below
 my_function_name <- function(input_data){
@@ -117,7 +139,6 @@ my_combined_values <- c(,)
 my_function_name(my_combined_values)
 
 ```
-
 
 
 ```{solution}
@@ -154,6 +175,10 @@ A really good way to organise your functions is to organise them into a separate
 ### Activity 2: More functions
 
 It might surprise you to know that there is no prebuilt function for standard error in base R, but we can build our own!
+
+```{block, type = "info"}
+Here you can see we replaced `input_data` with `.x` as the name of our argument. These placeholders can have whatever name we like to choose, but we should avoid using names that match any R objects we make in our project
+```
 
 ```{r}
 
@@ -225,7 +250,8 @@ What happens when you DO NOT put something in the brackets when using this funct
 
 ``{r, eval = FALSE}
 
-say_morning()
+Error in paste("Good morning", x) : 
+  argument "x" is missing, with no default
 
 ``
 
@@ -270,14 +296,15 @@ What functions would you use to extract the heaviest male from this dataset? Try
 ```{solution}
 
 ``{r}
-find_largest_male <- function(df){
-  dros_male <- filter(df, df[,2]=="male")
-  head(arrange(dros_male, desc(dros_male[,3])),n=1)
+find_largest_male <- function(df){ 
+  df %>% 
+    filter(sex == "male") %>% 
+    arrange(., desc(weight_mg)) %>% 
+    head(., n=1)
 }
 
-# Note that this uses dplyr functions, so this would need to be loaded for this to work, this is an example of a dependency!
-
 ``
+
 ```
 
 
@@ -289,15 +316,15 @@ Now we have a basic function we can work to refine and extend it. What if we mad
 ```{solution}
 
 ``{r}
-find_largest_fly <- function(df, n=1, s=c("male", "female") ){
-  drossex <- filter(df, sex %in% s )
-  head(arrange(drossex, desc(drossex[,3])),n=n)
+find_largest_fly <- function(df,  n=1, s=c("male", "female") ){ 
+  df %>% 
+    filter(sex == s) %>% 
+    arrange(., desc(weight_mg)) %>% 
+    head(., n=n)
 }
 ``
 
 ```
-
-
 
 ## Custom ggplot themes
 
@@ -372,11 +399,18 @@ With this function set, I can now use it for as many figures as I wish. To use i
 
 I could then easily use `source("custom_theme_function.R")` to make this available to any scripts I was using. 
 
-```{r, eval=TRUE, fig.width = 10}
+```{r, eval=TRUE, fig.width = 7}
 plot+
 theme_custom()
 
 ```
+
+```{block, type = "info"}
+
+Functions are about 'abstracting' a command, so it can be used more than once. If you are having trouble writing a function, start by writing a standard set of commands as you would to solve a specific problem. Then work backwards to turn this into a function.
+
+```
+
 
 ### Writing Packages
 

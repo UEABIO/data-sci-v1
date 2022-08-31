@@ -244,9 +244,9 @@ While neither *wide* or *long* data is more correct than the other, we will work
 
 There are functions found as part of the `tidyverse` that can help us to reshape data. 
 
-* `pivot_wider()` - from *long* to *wide* format
+* `tidyr::pivot_wider()` - from *long* to *wide* format
 
-* `pivot_longer()` - from *wide* to *long* format
+* `tidyr::pivot_longer()` - from *wide* to *long* format
 
 
 ```r

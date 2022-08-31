@@ -14,6 +14,18 @@ https://r-coder.com/function-r/#Input_arguments_in_R_functions
 
 http://faculty.washington.edu/kenrice/rintro/intro17sess09v2.pdf
 
+https://jennybc.github.io/purrr-tutorial/ls01_map-name-position-shortcuts.html
+
+https://malco.io/slides/hs_purrr/#17
+
+https://malcolmbarrett.shinyapps.io/purrr_exercises/
+
+https://www.jumpingrivers.com/blog/custom-colour-palettes-for-ggplot2/
+
+https://www.rebeccabarter.com/blog/2019-08-19_purrr/#simplest-usage-repeated-looping-with-map
+
+
+
 In this chapter we are going to look at two processes that streamline our code and make it more efficient. The principle behind this is to try and make **DRY** code.
 
 So what the flip is **DRY** code anyway? It stands for **D**on't **R**epeat **Y**ourself. It's aimed at reducing the repetition and number of lines of code in your scripts. 
@@ -78,12 +90,18 @@ Use the custom function below to add ten to each element of this vector </div></
 vector <- c(1,5,10)
 ```
 
+Here we are making a function, remember `input_data` is a placeholder for real values that will be supplied *later*. 
+
+In this example we are telling R that *when* we provide data (a value) in the position of the argument `input_data` it should add 1 to this, and return the result:
+
 
 ```r
-add_one <- function(.x) {
-  return(.x + 1)
+add_one <- function(input_data) {
+  return(input_data + 1)
 }
 ```
+
+Let's try our new function out on the vector we made.
 
 
 ```r
@@ -101,7 +119,10 @@ add_one(vector)
 * Complete this function by filling in input_data for the `sum()`, and then filling in the remaining empty parentheses with the appropriate object names.
 
 * Now create an object containing a set of numerical values and call it `my_combined_values`. Then try out your new function on this object, which will compute the square root of the objects sum.
-    
+
+<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
+Finish writing the function below </div></div>
+ 
 
 ```r
 # Use the instructions above to complete the function below
@@ -118,10 +139,9 @@ my_function_name(my_combined_values)
 ```
 
 
+<button id="displayTextunnamed-chunk-11" onclick="javascript:toggle('unnamed-chunk-11');">Show Solution</button>
 
-<button id="displayTextunnamed-chunk-10" onclick="javascript:toggle('unnamed-chunk-10');">Show Solution</button>
-
-<div id="toggleTextunnamed-chunk-10" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-11" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 # Use the instructions above to complete the function below
@@ -152,6 +172,10 @@ my_function_name(my_combined_values)
 ### Activity 2: More functions
 
 It might surprise you to know that there is no prebuilt function for standard error in base R, but we can build our own!
+
+<div class="info">
+<p>Here you can see we replaced <code>input_data</code> with <code>.x</code> as the name of our argument. These placeholders can have whatever name we like to choose, but we should avoid using names that match any R objects we make in our project</p>
+</div>
 
 
 ```r
@@ -203,9 +227,9 @@ say_hello()
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
 What happens when you try to put something in the brackets when using this function? </div></div>
 
-<button id="displayTextunnamed-chunk-17" onclick="javascript:toggle('unnamed-chunk-17');">Show Solution</button>
+<button id="displayTextunnamed-chunk-19" onclick="javascript:toggle('unnamed-chunk-19');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-17" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-19" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 Error in say_hello( or something similar, this function has not been set with any arguments, therefore it doesn't know what to do with any values provided to it. </div></div></div>
 
 Now lets try a similar function, but we include an argument:
@@ -227,12 +251,13 @@ say_morning("Phil")
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
 What happens when you DO NOT put something in the brackets when using this function? </div></div>
 
-<button id="displayTextunnamed-chunk-20" onclick="javascript:toggle('unnamed-chunk-20');">Show Solution</button>
+<button id="displayTextunnamed-chunk-22" onclick="javascript:toggle('unnamed-chunk-22');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-20" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-22" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
-say_morning()
+Error in paste("Good morning", x) : 
+  argument "x" is missing, with no default
 ```
 </div></div></div>
 
@@ -276,18 +301,19 @@ dros_weight <- tibble(vial, sex, weight_mg)
 
 What functions would you use to extract the heaviest male from this dataset? Try and think that through first, then see if you can rework it into a function.
 
-<button id="displayTextunnamed-chunk-24" onclick="javascript:toggle('unnamed-chunk-24');">Show Solution</button>
+<button id="displayTextunnamed-chunk-26" onclick="javascript:toggle('unnamed-chunk-26');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-24" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-26" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
-find_largest_male <- function(df){
-  dros_male <- filter(df, df[,2]=="male")
-  head(arrange(dros_male, desc(dros_male[,3])),n=1)
+find_largest_male <- function(df){ 
+  df %>% 
+    filter(sex == "male") %>% 
+    arrange(., desc(weight_mg)) %>% 
+    head(., n=1)
 }
-
-# Note that this uses dplyr functions, so this would need to be loaded for this to work, this is an example of a dependency!
-```</div></div></div>
+```
+</div></div></div>
 
 
 #### Step 2.
@@ -295,19 +321,19 @@ find_largest_male <- function(df){
 Now we have a basic function we can work to refine and extend it. What if we made a function that could pick the largest Drosophila overall, or male or female depending on what we need?
 
 
-<button id="displayTextunnamed-chunk-25" onclick="javascript:toggle('unnamed-chunk-25');">Show Solution</button>
+<button id="displayTextunnamed-chunk-27" onclick="javascript:toggle('unnamed-chunk-27');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-25" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-27" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
-find_largest_fly <- function(df, n=1, s=c("male", "female") ){
-  drossex <- filter(df, sex %in% s )
-  head(arrange(drossex, desc(drossex[,3])),n=n)
+find_largest_fly <- function(df,  n=1, s=c("male", "female") ){ 
+  df %>% 
+    filter(sex == s) %>% 
+    arrange(., desc(weight_mg)) %>% 
+    head(., n=n)
 }
 ```
 </div></div></div>
-
-
 
 ## Custom ggplot themes
 
@@ -325,7 +351,7 @@ plot <- dros_weight %>%
 plot
 ```
 
-<img src="09-writing-functions_files/figure-html/unnamed-chunk-26-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="09-writing-functions_files/figure-html/unnamed-chunk-28-1.png" width="100%" style="display: block; margin: auto;" />
 
 With the addition of a title and `theme_classic()` we can improve the style quickly
 
@@ -336,14 +362,14 @@ plot+
   theme_classic()
 ```
 
-<img src="09-writing-functions_files/figure-html/unnamed-chunk-27-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="09-writing-functions_files/figure-html/unnamed-chunk-29-1.png" width="100%" style="display: block; margin: auto;" />
 
 But I **still** want to make some more changes, rather than do this work for one figure, and potentially have to repeat this several times for subsequent figures, I can decide to make a new function instead. 
 
 
 ```r
 # custom theme sets defaults for font and size, but these can be changed without changing the function
-theme_custom <- function(base_size=10, base_family="serif"){
+theme_custom <- function(base_size=12, base_family="serif"){
   theme_classic(base_size = base_size, 
                 base_family = base_family,
                 ) +
@@ -389,7 +415,12 @@ plot+
 theme_custom()
 ```
 
-<img src="09-writing-functions_files/figure-html/unnamed-chunk-29-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="09-writing-functions_files/figure-html/unnamed-chunk-31-1.png" width="100%" style="display: block; margin: auto;" />
+
+<div class="info">
+<p>Functions are about 'abstracting' a command, so it can be used more than once. If you are having trouble writing a function, start by writing a standard set of commands as you would to solve a specific problem. Then work backwards to turn this into a function.</p>
+</div>
+
 
 ### Writing Packages
 
@@ -488,7 +519,7 @@ output
 ```
 
 ```
-## [1] 0.3797134 0.2739145 0.3344583 0.1778409
+## [1]  0.2002984 -0.1185998 -0.2140987  0.3083093
 ```
 
 ### Exercise for For Loops
@@ -537,7 +568,7 @@ vulture_scatter <- ggplot(vultureITCR, aes(x = year, y = abundance, colour = Cou
 vulture_scatter
 ```
 
-<img src="09-writing-functions_files/figure-html/unnamed-chunk-37-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="09-writing-functions_files/figure-html/unnamed-chunk-40-1.png" width="100%" style="display: block; margin: auto;" />
 
 We can use custom themes (like the one you made earlier) to quickly update figures
 
@@ -546,7 +577,7 @@ We can use custom themes (like the one you made earlier) to quickly update figur
 vulture_scatter+theme_custom()
 ```
 
-<img src="09-writing-functions_files/figure-html/unnamed-chunk-38-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="09-writing-functions_files/figure-html/unnamed-chunk-41-1.png" width="100%" style="display: block; margin: auto;" />
 
 Now let's take a look at using functions and loops to help us build figures. 
 
@@ -610,7 +641,7 @@ house_sparrow_scatter+
   plot_layout(design=layout)
 ```
 
-<img src="09-writing-functions_files/figure-html/unnamed-chunk-41-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="09-writing-functions_files/figure-html/unnamed-chunk-44-1.png" width="100%" style="display: block; margin: auto;" />
 
 This is ok, but arguably still requires a lot of code repetition. We have used the same lines of code four times to recreate four plots that are functionally the same. If we want to make any changes to the look of our plots we have to make four separate edits & mistakes can easily creep in. 
 
@@ -648,7 +679,7 @@ for (i in 1:length(Sp_list)) {
 }
 ```
 
-<img src="09-writing-functions_files/figure-html/unnamed-chunk-43-1.png" width="100%" style="display: block; margin: auto;" /><img src="09-writing-functions_files/figure-html/unnamed-chunk-43-2.png" width="100%" style="display: block; margin: auto;" /><img src="09-writing-functions_files/figure-html/unnamed-chunk-43-3.png" width="100%" style="display: block; margin: auto;" /><img src="09-writing-functions_files/figure-html/unnamed-chunk-43-4.png" width="100%" style="display: block; margin: auto;" />
+<img src="09-writing-functions_files/figure-html/unnamed-chunk-46-1.png" width="100%" style="display: block; margin: auto;" /><img src="09-writing-functions_files/figure-html/unnamed-chunk-46-2.png" width="100%" style="display: block; margin: auto;" /><img src="09-writing-functions_files/figure-html/unnamed-chunk-46-3.png" width="100%" style="display: block; margin: auto;" /><img src="09-writing-functions_files/figure-html/unnamed-chunk-46-4.png" width="100%" style="display: block; margin: auto;" />
 
 So now we have a new object `my_plots` which is a list containing the four plots. This loop allowed us to code the details of our figures once, then iterate across four different groups.
 
@@ -658,7 +689,7 @@ wrap_plots(my_plots)+
   plot_layout(design=layout) 
 ```
 
-<img src="09-writing-functions_files/figure-html/unnamed-chunk-44-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="09-writing-functions_files/figure-html/unnamed-chunk-47-1.png" width="100%" style="display: block; margin: auto;" />
 
 ```r
 #wrap_plots function from patchwork can take a list of ggplots
@@ -823,7 +854,7 @@ LPI %>%
   coord_flip()
 ```
 
-<img src="09-writing-functions_files/figure-html/unnamed-chunk-48-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="09-writing-functions_files/figure-html/unnamed-chunk-51-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 Now you have a simple grasp of `purrr` you should see that we have a list containing species objects, and an anonymous function ~ggplot on the right. We can use this to quickly make four plots, just like we did with our for loops. 
@@ -843,7 +874,7 @@ my_plots_2 <-
 wrap_plots(my_plots_2)+plot_layout(design=layout)
 ```
 
-<img src="09-writing-functions_files/figure-html/unnamed-chunk-49-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="09-writing-functions_files/figure-html/unnamed-chunk-52-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## More Practice
 

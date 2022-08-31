@@ -4,3 +4,3417 @@
 
 
 
+
+
+
+In these last chapters we are concentrating on generating insights into our data using visualisations and descriptive statistics. The easiest way to do this is to use questions as tools to guide your investigation. When you ask a question, the question focuses your attention on a specific part of your dataset and helps you decide which graphs, models, or transformations to make.
+
+For this exercise we will propose that our task is to generate insights into the body mass of our penguins, in order to answer the question
+
+* How is body mass associated with bill length and depth in penguins?
+
+In order to answer this question properly we should first understand our different variables and how they might relate to each other. 
+
+* Distribution of data types
+* Central tendency
+* Relationship between variables 
+* Confounding variables
+
+This inevitably leads to more and a variety of questions. Each new question that you ask will expose you to a *new aspect* of your data.
+
+### Data wrangling
+
+Importantly you should have already generated an understanding of the variables contained within your dataset during the [data wrangling](#data-wrangling-part-one) steps. Including: 
+
+* The number of variables
+
+* The data format of each variable
+
+* Checked for missing data
+
+* Checked for typos, duplications or other data errors
+
+* Cleaned column or factor names
+
+<div class="warning">
+<p>It is very important to not lose site of the questions you are asking</p>
+<p>You should also play close attention to the data, and remind yourself <strong>frequently</strong> how many variables do you have and what are their names?</p>
+<p>How many rows/observations do you have?</p>
+<p>Pay close attention to the outputs, errors and warnings from the R console.</p>
+</div>
+
+## Variable types
+
+A quick refresher:
+
+### Numerical
+
+You **should** already be familiar with the concepts of numerical and categorical data. **Numeric** variables have values that describe a measure or quantity. This is also known as quantitative data. We can subdivide numerical data further:
+
+* **Continuous numeric variables.** This is where observations can take any value within a range of numbers. Examples might include body mass (g), age, temperature or flipper length (mm). 
+While in theory these values can have any numbers, within a dataset they are likely bounded (set within a minimum/maximum of observed or measurable values), and the accuracy may only be as precise as the measurement protocol allows. 
+
+In a tibble these will be represented by the header `<dbl>`.
+
+* **Discrete numeric variables** Observations are numeric but restricted to *whole values* e.g. 1,2,3,4,5 etc. These are also known as **integers**. Discrete variables could include the number of individuals in a population, number of eggs laid etc. Anything where it would make no sense to describe in fractions e.g. a penguin cannot lay 2 and a half eggs. Counting!
+
+In a tibble these will be represented by the header `<int>`.
+
+### Categorical
+
+Values that describe a characteristic of data such as 'what type' or 'which category'. Categorical variables are mutually exclusive - one observation should not be able to fall into two categories at once - and should be exhaustive - there should not be data which does not *fit* a category (not the same as NA - not recorded). Categorical variables are qualitative, and often represented by non-numeric values such as words. It's a bad idea to represent categorical variables as numbers (R won't treat it correctly). Categorical variables can be defined further as:
+
+* **Nominal variables** Observations that can take values that are not logically ordered. Examples include Species or Sex in the Penguins data. 
+In a tibble these will be represented by the header `<chr>`.
+
+* **Ordinal variables** Observations can take values that can be logically ordered or ranked. Examples include - activity levels (sedentary, moderately active, very active); size classes (small, medium, large). 
+
+These will have to be coded manually see [Factors](#factors), and will then be represented in a tibble by the header `<fct>`
+
+It is important to order Ordinal variables in the their logical order value when plotting data visuals or tables. Nominal variables are more flexible and could be ordered in whatever pattern works best for your data ( by default they will plot alphabetically, but perhaps you could order them according to the values of another numeric variable). 
+
+## Quick view of variables
+
+Let's take a look at some of our variables, these functions will give a quick snapshot overview.
+
+
+```r
+glimpse(penguins)
+summary(penguins)
+```
+
+We can see that bill length contains numbers, and that many of these are fractions, but only down to 0.1mm. By comparison body mass all appear to be discrete number variables. Does this make body mass an integer? The underlying quantity (bodyweight) is clearly continuous, it is clearly possible for a penguin to weigh 3330.7g but it might *look* like an integer because of the way it was measured. This illustrates the importance of understanding the the type of variable you are working with - just looking at the values isn't enough. 
+
+On the other hand, how we choose to measure and record data *can* change the way it is presented in a dataset. If the researchers had decided to simply record small, medium and large classes of bodyweight, then we would be dealing with ordinal categorical variables (factors). These distinctions can become less clear if we start to deal with multiple classes of ordinal categories - for example if the researchers were measuring body mass to the nearest 10g. It might be reasonable to treat these as integers...
+
+## Categorical variables
+
+### Frequency
+
+
+```r
+penguins %>% 
+  group_by(species) %>% 
+  summarise(n = n())
+```
+
+<div class="kable-table">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> species </th>
+   <th style="text-align:right;"> n </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Adelie </td>
+   <td style="text-align:right;"> 152 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Chinstrap </td>
+   <td style="text-align:right;"> 68 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Gentoo </td>
+   <td style="text-align:right;"> 124 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+
+It might be useful for us to make some quick data summaries here, like relative frequency
+
+
+```r
+prob_obs_species <- penguins %>% 
+  group_by(species) %>% 
+  summarise(n = n()) %>% 
+  mutate(prob_obs = n/sum(n))
+
+prob_obs_species
+```
+
+<div class="kable-table">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> species </th>
+   <th style="text-align:right;"> n </th>
+   <th style="text-align:right;"> prob_obs </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Adelie </td>
+   <td style="text-align:right;"> 152 </td>
+   <td style="text-align:right;"> 0.4418605 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Chinstrap </td>
+   <td style="text-align:right;"> 68 </td>
+   <td style="text-align:right;"> 0.1976744 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Gentoo </td>
+   <td style="text-align:right;"> 124 </td>
+   <td style="text-align:right;"> 0.3604651 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+So about 44% of our sample is made up of observations from Adelie penguins. When it comes to making summaries about categorical data, that's about the best we can do, we can make observations about the most common categorical observations, and the relative proportions. 
+
+
+```r
+penguins %>% 
+  ggplot()+
+  geom_bar(aes(x=species))
+```
+
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-7-1.png" width="100%" style="display: block; margin: auto;" />
+
+This chart is ok - but can we make anything better?
+
+We could go for a stacked bar approach
+
+
+```r
+penguins %>% 
+  ggplot(aes(x="",
+             fill=species))+ 
+  # specify fill = species to ensure colours are defined by species
+  geom_bar(position="fill")+ 
+  # specify fill forces geom_bar to calculate percentages
+  scale_y_continuous(labels=scales::percent)+ 
+  #use scales package to turn y axis into percentages easily
+  labs(x="",
+       y="")+
+  theme_minimal()
+```
+
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-8-1.png" width="100%" style="display: block; margin: auto;" />
+
+This graph is OK *but not great*, the height of each section of the bar represents the relative proportions of each species in the dataset, but this type of chart becomes increasingly difficult to read as more categories are included. Colours become increasingly samey,and it is difficult to read where on the y-axis a category starts and stops, you then have to do some subtraction to work out the values. 
+
+The best graph is then probably the first one we made - with a few minor tweak we can rapidly improve this. 
+
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-9-1.png" width="100%" style="display: block; margin: auto;" />
+This is an example of a figure we might use in a report or paper. Having cleaned up the theme, added some simple colour, made sure our labels are clear and descriptive, ordered our categories in ascending frequency order, and included some simple text of percentages to aid readability. 
+
+### Two categorical variables
+
+<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
+Think about what might be a suitable confounding variable to investigate and graph here? </div></div>
+
+
+Understanding how frequency is broken down by species and sex might be useful information to have. 
+
+
+```r
+penguins %>% 
+  group_by(species, sex) %>% 
+  summarise(n = n()) %>% 
+  mutate(prob_obs = n/sum(n))
+```
+
+<div class="kable-table">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> species </th>
+   <th style="text-align:left;"> sex </th>
+   <th style="text-align:right;"> n </th>
+   <th style="text-align:right;"> prob_obs </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Adelie </td>
+   <td style="text-align:left;"> FEMALE </td>
+   <td style="text-align:right;"> 73 </td>
+   <td style="text-align:right;"> 0.4802632 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Adelie </td>
+   <td style="text-align:left;"> MALE </td>
+   <td style="text-align:right;"> 73 </td>
+   <td style="text-align:right;"> 0.4802632 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Adelie </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 0.0394737 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Chinstrap </td>
+   <td style="text-align:left;"> FEMALE </td>
+   <td style="text-align:right;"> 34 </td>
+   <td style="text-align:right;"> 0.5000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Chinstrap </td>
+   <td style="text-align:left;"> MALE </td>
+   <td style="text-align:right;"> 34 </td>
+   <td style="text-align:right;"> 0.5000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Gentoo </td>
+   <td style="text-align:left;"> FEMALE </td>
+   <td style="text-align:right;"> 58 </td>
+   <td style="text-align:right;"> 0.4677419 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Gentoo </td>
+   <td style="text-align:left;"> MALE </td>
+   <td style="text-align:right;"> 61 </td>
+   <td style="text-align:right;"> 0.4919355 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Gentoo </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 0.0403226 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+## Continuous variables
+
+### Visualising distributions
+
+**Variation** is the tendency of the values of a variable to change from measurement to measurement. You can see variation easily in real life; if you measure any continuous variable twice, you will get two different results. This is true even if you measure quantities that are constant, like the speed of light. Each of your measurements will include a small amount of error that varies from measurement to measurement. Every variable has its own pattern of variation, which can reveal interesting information. The best way to understand that pattern is to visualise the distribution of the variable’s values.
+
+This is the script to plot a frequency distribution, we only specify an x variable, because we intend to plot a histogram, and the y variable is always the count of observations. Here we ask the data to be presented in 10 equally sized bins of data. In this case chopping the x axis range into 10 equal parts and counting the number of observations that fall within each one. 
+
+
+```r
+penguins %>% 
+  ggplot()+
+  geom_histogram(aes(x=body_mass_g),
+                 bins=10)
+```
+
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-12-1.png" width="100%" style="display: block; margin: auto;" />
+
+<div class="try">
+<p>Change the value specified to the bins argument and observe how the figure changes. It is usually a very good idea to try more than one set of bins in order to have better insights into the data</p>
+</div>
+
+To get the most out of your data, combine data you collected from the `summary()` function and the histogram here 
+
+* Which values are the most common? <select class='webex-select'><option value='blank'></option><option value=''>< 3500g</option><option value='answer'>3500-4000g</option><option value=''>4000-4500g</option><option value=''>4500-5000g</option><option value=''>5000-5500g</option><option value=''>5500-6000g</option><option value=''>>6500g</option></select>
+
+* Which values are rare? Why? Does that match your expectations?
+<select class='webex-select'><option value='blank'></option><option value=''>< 3500g</option><option value=''>3500-4000g</option><option value=''>4000-4500g</option><option value=''>4500-5000g</option><option value=''>5000-5500g</option><option value=''>5500-6000g</option><option value='answer'>>6500g</option></select>
+
+* Can you see any unusual patterns? <select class='webex-select'><option value='blank'></option><option value=''>Yes</option><option value='answer'>No</option></select>
+
+* How many observations are missing body mass information? <input class='webex-solveme nospaces' size='1' data-answer='["2"]'/>
+
+
+<button id="displayTextunnamed-chunk-14" onclick="javascript:toggle('unnamed-chunk-14');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-14" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+Penguins weighing less than 3kg and more than 6kg are rare. 
+The most common weight appears to be just under 4kg. 
+
+There appear to be more data points to the right of the peak of the histogram than there are too the left. E.g. the histogram is not symmetrical. But there is no evidence for any extreme outliers. </div></div></div>
+
+#### Atypical values
+
+If you found atypical values at this point, you could decide to exclude them from the dataset (using `filter()`). BUT you should only do this at this stage if you have a very strong reason for believing this is a mistake in the data entry, rather than a true outlier. 
+
+### Central tendency
+
+Central tendency is a descriptive summary of a dataset through a single value that reflects the center of the data distribution. The three most widely used measures of central tendency are **mean**, **median** and **mode**.
+
+The **mean** is defined as the sum of all values of the variable divided by the total number of values. The **median** is the middle value. If N is odd and if N is even, it is the average of the two middle values. The **mode** is the most frequently occurring observation in a data set, but is arguable least useful for understanding biological datasets.
+
+We can find both the mean and median easily with the summarise function. The **mean** is usually the best measure of central tendency when the distribution is symmetrical, and the **mode** is the best measure when the distribution is asymmetrical/skewed. 
+
+
+```r
+penguin_body_mass_summary <- penguins %>% 
+    summarise(mean_body_mass=mean(body_mass_g, na.rm=T), 
+              sd = sd(body_mass_g, na.rm = T),
+              median_body_mass=median(body_mass_g, na.rm=T), 
+              iqr = IQR(body_mass_g, na.rm = T))
+
+penguin_body_mass_summary
+```
+
+<div class="kable-table">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> mean_body_mass </th>
+   <th style="text-align:right;"> sd </th>
+   <th style="text-align:right;"> median_body_mass </th>
+   <th style="text-align:right;"> iqr </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 4201.754 </td>
+   <td style="text-align:right;"> 801.9545 </td>
+   <td style="text-align:right;"> 4050 </td>
+   <td style="text-align:right;"> 1200 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+
+```r
+penguins %>% 
+ggplot()+
+  geom_histogram(aes(x=body_mass_g),
+               alpha=0.8,
+               bins = 10,
+               fill="steelblue",
+               colour="darkgrey")+
+   geom_vline(data=penguin_body_mass_summary,
+             aes(xintercept=mean_body_mass),
+             colour="red",
+             linetype="dashed")+
+     geom_vline(data=penguin_body_mass_summary,
+             aes(xintercept=median_body_mass),
+             colour="black",
+             linetype="dashed")+
+  labs(x = "Body mass (g)",
+       y = "Count")+
+  theme_classic()
+```
+
+<div class="figure" style="text-align: center">
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-16-1.png" alt="Red dashed line represents the mean, Black dashed line is the median value" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-16)Red dashed line represents the mean, Black dashed line is the median value</p>
+</div>
+
+With the information about the distribution, and positions of the mean and median, which of these two measures of central tendency is most appropriate for this data? <select class='webex-select'><option value='blank'></option><option value='answer'>mean</option><option value=''>median</option></select>
+
+<button id="displayTextunnamed-chunk-17" onclick="javascript:toggle('unnamed-chunk-17');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-17" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+we can clearly see that the mean value has been significantly "right-shifted" by the long tail of the data distribution. However,this is much less apparent for the median. In this way we can say that the median is less sensitive to the distribution of the data than the mean is.</div></div></div>
+
+### Normal distribution
+
+From our histogram we can likely already tell whether we have normally distributed data. 
+
+<div class="info">
+<p>Normal distribution, also known as the "Gaussian distribution", is a probability distribution that is symmetric about the mean, showing that data near the mean are more frequent in occurrence than data far from the mean. In graphical form, the normal distribution appears as a "bell curve".</p>
+</div>
+
+If our data follows a normal distribution, then we can predict the spread of our data, and the likelihood of observing a datapoint of any given value with only the mean and standard deviation. 
+
+Here we can simulate what a normally distributed dataset would look like with our sample size, mean and standard deviation.
+
+
+```r
+norm_mass <- rnorm(n = 344,
+      mean = 4201.754,
+      sd = 801.9545) %>% 
+  as_tibble()
+
+norm_mass %>% 
+  as_tibble() %>% 
+  ggplot()+
+  geom_histogram(aes(x = value),
+                 bins = 10)
+```
+
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-19-1.png" width="100%" style="display: block; margin: auto;" />
+
+#### QQ-plot
+
+A QQ plot is a classic way of checking whether a sample distribution is the same as another (or theoretical distribution). They look a bit odd at first, but they are actually fairly easy to understand, and very useful! The qqplot distributes your data on the y-axis, and a theoretical normal distribution on the x-axis. If the residuals follow a normal distribution, they should meet to produce a perfect diagonal line across the plot.
+
+Watch this video to see [QQ plots explained](https://www.youtube.com/watch?v=okjYjClSjOg)
+
+<div class="figure" style="text-align: center">
+<img src="images/qq_example.png" alt="Examples of qqplots with different deviations from a normal distribution" width="80%" />
+<p class="caption">(\#fig:unnamed-chunk-20)Examples of qqplots with different deviations from a normal distribution</p>
+</div>
+
+In our example we can see that *most* of our residuals can be explained by a normal distribution, except at the low end of our data. 
+
+So the fit is not perfect, but it is also not terrible!
+
+
+```r
+ggplot(penguins, aes(sample = body_mass_g))+
+  stat_qq() + 
+  stat_qq_line()
+```
+
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-21-1.png" width="100%" style="display: block; margin: auto;" />
+
+**Q. How do we know how much deviation from an idealised distribution is ok?**
+
+
+```r
+penguins %>% 
+  pull(body_mass_g) %>% 
+  car::qqPlot()
+```
+
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-22-1.png" width="100%" style="display: block; margin: auto;" />
+
+```
+## [1] 170 186
+```
+
+The qqPlot() function from the R package car provides 95% confidence interval margins to help you determine how severely your quantiles deviate from your idealised distribution.
+
+
+
+### Variation
+
+Dispersion (how spread out the data is) is an important component towards understanding any numeric variable. While measures of central tendency are used to estimate the central value of a dataset, measures of dispersion are important for describing the spread of data. 
+
+Two data sets can have an equal mean (that is, measure of central tendency) but vastly different variability. 
+
+Important measures for dispersion are **range**, **interquartile range**, **variance** and **standard deviation**. 
+
+* The **range** is defined as the difference between the highest and lowest values in a dataset. The disadvantage of defining range as a measure of dispersion is that it does not take into account all values for calculation.
+
+* The **interquartile range** is defined as the difference between the third quartile denoted by 𝑸_𝟑   and the lower quartile denoted by  𝑸_𝟏 . 75% of observations lie below the third quartile and 25% of observations lie below the first quartile.
+
+* **Variance** is defined as the sum of squares of deviations from the mean, divided by the total number of observations. The standard deviation is the positive square root of the variance.  The **standard deviation** is preferred instead of variance as it has the same units as the original values.
+
+
+#### Interquartile range
+
+We used the IQR function in `summarise()` to find the interquartile range of the body mass variable.
+
+The IQR is also useful when applied to the summary plots 'box and whisker plots'. We can also calculate the values of the IQR margins, and add labels with `scales` @R-scales. 
+
+
+```r
+penguins %>%
+  summarise(q_body_mass = quantile(body_mass_g, c(0.25, 0.5, 0.75), na.rm=TRUE),
+            quantile = scales::percent(c(0.25, 0.5, 0.75))) # scales package allows easy converting from data values to perceptual properties
+```
+
+<div class="kable-table">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> q_body_mass </th>
+   <th style="text-align:left;"> quantile </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 3550 </td>
+   <td style="text-align:left;"> 25% </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 4050 </td>
+   <td style="text-align:left;"> 50% </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 4750 </td>
+   <td style="text-align:left;"> 75% </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+We can see for ourselves the IQR is obtained by subtracting the body mass at tht 75% quantile from the 25% quantile (4750-3550 = 1200).
+
+#### Standard deviation
+
+standard deviation (or σ) is a measure of how dispersed the data is in relation to the mean. Low standard deviation means data are clustered around the mean, and high standard deviation indicates data are more spread out. As such it makes sense only to use this when the mean is a good measure of our central tendency. 
+
+### Visualising dispersion
+
+<div class="figure" style="text-align: center">
+<img src="images/distribution_gif.gif" alt="Examples of qqplots with different deviations from a normal distribution" width="80%" />
+<p class="caption">(\#fig:unnamed-chunk-24)Examples of qqplots with different deviations from a normal distribution</p>
+</div>
+
+
+```r
+colour_fill <- "darkorange"
+colour_line <- "steelblue"
+lims <- c(0,7000)
+
+body_weight_plot <- function(){
+  
+  penguins %>% 
+  ggplot(aes(x="",
+             y= body_mass_g))+
+  labs(x= " ",
+       y = "Mass (g)")+
+  scale_y_continuous(limits = lims)+
+    theme_minimal()
+}
+
+plot_1 <- body_weight_plot()+
+  geom_jitter(fill = colour_fill,
+               colour = colour_line,
+               width = 0.2,
+              shape = 21)
+
+plot_2 <- body_weight_plot()+
+  geom_boxplot(fill = colour_fill,
+               colour = colour_line,
+               width = 0.4)
+
+plot_3 <- penguin_body_mass_summary %>% 
+  ggplot(aes(x = " ",
+             y = mean_body_mass))+
+  geom_bar(stat = "identity",
+           fill = colour_fill,
+           colour = colour_line,
+               width = 0.2)+
+  geom_errorbar(data = penguin_body_mass_summary,
+                aes(ymin = mean_body_mass - sd,
+                    ymax = mean_body_mass + sd),
+                colour = colour_line,
+                width = 0.1)+
+  labs(x = " ",
+       y = "Body mass (g)")+
+  scale_y_continuous(limits = lims)+
+  theme_minimal()
+
+
+plot_1 + plot_2 + plot_3 
+```
+
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-25-1.png" width="80%" style="display: block; margin: auto;" />
+
+We now have several compact representations of the body_mass_g including a histogram, boxplot and summary calculations. You can *and should* generate the same summaries for your other numeric variables. These tables and graphs provide the detail you need to understand the central tendency and dispersion of numeric variables. 
+
+### drop_na
+
+We first met `NA` back in [Chapter 4](#missing-values-na) and you will hopefully have noticed, either here or in those previous chapters, that missing values `NA` can really mess up our calculations. There are a few different ways we can deal with missing data:
+
+* `drop_na()` on everything before we start. This runs the risk that we lose **a lot** of data as *every* row, with an NA in *any column* will be removed
+
+* `drop_na()` on a particular variable. This is fine, but we should approach this cautiously - if we do this in a way where we write this data into a new object e.g. `penguins <- penguins %>% drop_na(body_mass_g)` then we have removed this data forever - perhaps we only want to drop those rows for a specific calculation - again they might contain useful information in other variables. 
+
+* `drop_na()` for a specific task - this is a more cautious approach **but** we need to be aware of another phenomena. Is the data **missing at random**? You might need to investigate *where* your missing values are in a dataset. Data that is truly **missing at random** can be removed from a dataset without introducing bias. However, if bad weather conditions meant that researchers could not get to a particular island to measure one set of penguins that data is **missing not at random** this should be treated with caution. If that island contained one particular species of penguin, it might mean we have complete data for only two out of three penguin species. There is nothing you can do about incomplete data other than be aware that data not missing at random could influence your distributions. 
+
+
+## Categorical and continuous variables
+
+It’s common to want to explore the distribution of a continuous variable broken down by a categorical variable. 
+
+<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
+Think about which other variables might affect body mass? </div></div>
+
+<button id="displayTextunnamed-chunk-27" onclick="javascript:toggle('unnamed-chunk-27');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-27" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+
+```{=html}
+<div id="htmlwidget-7517e8974eb30ac91559" style="width:100%;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7517e8974eb30ac91559">{"x":{"diagram":"digraph {\n  \ngraph[layout = dot, rankdir = LR]\n\na[label = \"Body mass\"]\nb[label = \"Beak length\"]\nc[label = \"Species\"]\nd[label = \"Sex\"]\n\nc -> a\nd -> a\n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+```
+
+So it is reasonable to think that perhaps either species or sex might affect the morphology of beaks directly - or that these might affect body mass (so that if there is a direct relationship between mass and beak length, there will also be an indirect relationship with sex or species).
+</div></div></div>
+
+The best and simplest place to start exploring these possible relationships is by producing simple figures. 
+
+Let's start by looking at the distribution of body mass by species. 
+
+<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
+Produce a plot which allows you to look at the distribution of penguin body mass observations by species </div></div>
+
+<button id="displayTextunnamed-chunk-29" onclick="javascript:toggle('unnamed-chunk-29');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-29" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+
+```r
+jitter_plot <- penguins %>% 
+    ggplot(aes(x = species,
+               y = body_mass_g))+
+    geom_jitter(shape = 21,
+                fill = colour_fill,
+                colour = colour_line,
+                width = 0.2)+
+  coord_flip()
+
+box_plot <- penguins %>% 
+    ggplot(aes(x = species,
+               y = body_mass_g))+
+    geom_boxplot(fill = colour_fill,
+                colour = colour_line,
+                width = 0.2)+
+  coord_flip()
+
+histogram_plot <- penguins %>% 
+    ggplot(aes(fill = species))+
+    geom_histogram(aes(x = body_mass_g,
+                       y = ..density..),
+                   position = "identity",
+                   alpha = 0.6,
+                colour = colour_line)
+
+jitter_plot/box_plot/histogram_plot
+```
+
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-53-1.png" width="100%" style="display: block; margin: auto;" />
+
+So it is reasonable to think that perhaps either species or sex might affect body mass, and we can visualise this in a number of different ways. The last method, a density histogram, looks a little crowded now, so I will use the excellent `ggridges` package to help out
+</div></div></div>
+
+
+
+GGridges
+
+
+<button id="displayTextunnamed-chunk-30" onclick="javascript:toggle('unnamed-chunk-30');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-30" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+
+```r
+library(ggridges)
+ggplot(penguins, aes(x = body_mass_g, y = species)) + 
+  ggridges::geom_density_ridges(fill = colour_fill,
+                colour = colour_line,
+                alpha = 0.8)
+```
+
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-53-1.png" width="100%" style="display: block; margin: auto;" />
+
+</div></div></div>
+
+**Q. Does each species have a data distribution that appears to be normally distributed?**
+
+* Gentoo <select class='webex-select'><option value='blank'></option><option value='answer'>Yes</option><option value=''>No</option></select>
+
+* Chinstrap <select class='webex-select'><option value='blank'></option><option value='answer'>Yes</option><option value=''>No</option></select>
+
+* Adelie <select class='webex-select'><option value='blank'></option><option value='answer'>Yes</option><option value=''>No</option></select>
+
+<button id="displayTextunnamed-chunk-31" onclick="javascript:toggle('unnamed-chunk-31');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-31" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+
+```r
+penguins %>% 
+  group_split(species) %>% 
+  map(~ pull(.x, body_mass_g) 
+      %>% car::qqPlot())
+```
+
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-54-1.png" width="100%" style="display: block; margin: auto;" /><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-54-2.png" width="100%" style="display: block; margin: auto;" /><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-54-3.png" width="100%" style="display: block; margin: auto;" />
+
+```
+## [[1]]
+## [1] 110 102
+## 
+## [[2]]
+## [1] 38 39
+## 
+## [[3]]
+## [1] 18 41
+```
+
+While the Gentoo density plot appears to show two peaks, our qqplot indicates this does not deviate from what me might expect from a normal distribution. But we could still investigate whether there are "two populations" here. 
+</div></div></div>
+
+
+
+
+```r
+penguins %>% drop_na %>% ggplot(aes(x = body_mass_g, y = species)) + 
+    geom_density_ridges(aes(fill = sex),
+                        colour = colour_line,
+                        alpha = 0.8,
+                        bandwidth = 175)
+```
+
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-32-1.png" width="100%" style="display: block; margin: auto;" />
+
+```r
+# try playing with the bandwidth argument - this behaves similar to binning which you should be familiar with from using geom_histogram
+```
+
+This is revealing some really interesting insights into the shape and distribution of body sizes in our penguin populations now. 
+
+For example:
+
+* Gentoo penguins appear to show strong sexual dimorphism with almost all males being larger than females (little overlap on density curves).
+
+* Gentoo males and females are on average larger than the other two penguin species
+
+* Gentoo females have two distinct peaks of body mass. 
+
+* Chinstrap penguins also show evidence of sexual dimorphism, though with greater overlap.
+
+* Adelie penguins have larger males than females on average, but a wide spread of male body mass, (possibly two groups?)
+
+Note how we are able to understand our data better, by spending time making data visuals. While descriptive data statistics (mean, median) and measures of variance (range, IQR, sd) are important. They are not substitutes for spending time thinking about data and making exploratory analyses. 
+
+# Data insights part two
+
+
+
+
+## Two continuous variables
+
+## Complex interactions
+
+<button id="displayTextunnamed-chunk-34" onclick="javascript:toggle('unnamed-chunk-34');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-34" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+
+```{=html}
+<div id="htmlwidget-e8974eb30ac915595fb4" style="width:100%;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e8974eb30ac915595fb4">{"x":{"diagram":"digraph {\n  \ngraph[layout = dot, rankdir = LR]\n\na[label = \"Body mass\"]\nb[label = \"Beak length\"]\nc[label = \"Species\"]\nd[label = \"Sex\"]\n\na -> b \nc -> b\nc -> a\nd -> b\nd -> a\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+```
+
+So it is reasonable to think that perhaps either species or sex might affect the morphology of beaks directly - or that these might affect body mass (so that if there is a direct relationship between mass and beak length, there will also be an indirect relationship with sex or species).
+</div></div></div>
+
+
+
+In the previous chapter we looked at individual variables, and understanding the different types of data. We made numeric and graphical summaries of the distributions of features within each variable. This week we will continue to work in the same space, and extend our understanding to include relationships between variables. 
+
+Understanding the relationship between two or more variables is often the basis of most of our scientific questions. These might include comparing variables of the same type (numeric against numeric) or different types (numeric against categorical). In this chapter we will see how we can use descriptive statistics and visuals to explore associations
+
+## Associations between numerical variables
+
+### Correlations
+
+A common measure of association between two numerical variables is the **correlation coefficient**. The correlation metric is a numerical measure of the *strength of an association*
+
+There are several measures of correlation including:
+
+* **Pearson's correlation coefficient** : good for describing linear associations
+
+* **Spearman's rank correlation coefficient**: a rank ordered correlation - good for when the assumptions for Pearson's correlation is not met. 
+
+Pearson's correlation coefficient *r* is designed to measure the strength of a linear (straight line) association. Pearson's takes a value between -1 and 1. 
+
+* A value of 0 means there is no linear association between the variables
+
+* A value of 1 means there is a perfect *positive* association between the variables
+
+* A value of -1 means there is a perfect *negative* association between the variables
+
+A *perfect* association is one where we can predict the value of one variable with complete accuracy, just by knowing the value of the other variable. 
+
+
+We can use the `cor` function in R to calculate Pearson's correlation coefficient. 
+
+
+
+```r
+library(rstatix)
+
+penguins %>% 
+  cor_test(culmen_length_mm, culmen_depth_mm)
+```
+
+<div class="kable-table">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> var1 </th>
+   <th style="text-align:left;"> var2 </th>
+   <th style="text-align:right;"> cor </th>
+   <th style="text-align:right;"> statistic </th>
+   <th style="text-align:right;"> p </th>
+   <th style="text-align:right;"> conf.low </th>
+   <th style="text-align:right;"> conf.high </th>
+   <th style="text-align:left;"> method </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> culmen_length_mm </td>
+   <td style="text-align:left;"> culmen_depth_mm </td>
+   <td style="text-align:right;"> -0.24 </td>
+   <td style="text-align:right;"> -4.459093 </td>
+   <td style="text-align:right;"> 1.12e-05 </td>
+   <td style="text-align:right;"> -0.3328072 </td>
+   <td style="text-align:right;"> -0.1323004 </td>
+   <td style="text-align:left;"> Pearson </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+This tells us two features of the association. It's *sign* and *magnitude*. The coefficient is negative, so as bill length increases, bill depth decreases. The value -0.22 indicates that only about 22% of the variation in bill length can be explained by changes in bill depth (and *vice-versa*), suggesting that the variables are not closely related. 
+
+
+<div class="figure" style="text-align: center">
+<img src="images/correlation_examples.png" alt="Different relationships between two numeric variables. Each number represents the Pearson's correlation coefficient of each association" width="80%" />
+<p class="caption">(\#fig:unnamed-chunk-36)Different relationships between two numeric variables. Each number represents the Pearson's correlation coefficient of each association</p>
+</div>
+
+* Because Pearson's coefficient is designed to summarise the strength of a linear relationship, this can be misleading if the relationship is *not linear* e.g. curved or humped. This is why it's always a good idea to plot the relationship *first* (see above).
+
+* Even when the relationship is linear, it doesn't tell us anything about the steepness of the association (see above). It *only* tells us how often a change in one variable can predict the change in the other *not* the value of that change. 
+
+This can be difficult to understand at first, so carefully consider the figure above. 
+
+* The first row above shows differing levels of the strength of association. If we drew a perfect straight line between two variables, how closely do the data points fit around this line. 
+
+* The second row shows a series of *perfect* linear relationships. We can accurately predict the value of one variable just by knowing the value of the other variable, but the steepness of the relationship in each example is very different. This is **important** because it means a perfect association can still have a small effect.
+
+* The third row shows a series of associations where there is *clearly* a relationship between the two variables, but it is also not linear so would be inappropriate for a Pearson's correlation. 
+
+### Non-linear correlations
+
+So what should we do if the relationship between our variables is non-linear? Instead of using Pearson's correlation coefficient we can calculate something called a **rank correlation**. 
+
+Instead of working with the raw values of our two variables we can use rank ordering instead. The idea is pretty simple if we start with the lowest vaule in a variable and order it as '1', then assign labels '2', '3' etc. as we ascend in rank order. We can see a way that this could be applied manually with the function `dense_rank` from dplyr below:
+
+
+
+```r
+penguins %>% select(culmen_length_mm, 
+                    culmen_depth_mm) %>% 
+  drop_na() %>% 
+  mutate(rank_length=dense_rank((culmen_length_mm)), 
+         rank_depth=dense_rank((culmen_depth_mm)))
+```
+
+<div class="kable-table">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> culmen_length_mm </th>
+   <th style="text-align:right;"> culmen_depth_mm </th>
+   <th style="text-align:right;"> rank_length </th>
+   <th style="text-align:right;"> rank_depth </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 39.1 </td>
+   <td style="text-align:right;"> 18.7 </td>
+   <td style="text-align:right;"> 43 </td>
+   <td style="text-align:right;"> 57 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 39.5 </td>
+   <td style="text-align:right;"> 17.4 </td>
+   <td style="text-align:right;"> 46 </td>
+   <td style="text-align:right;"> 44 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 40.3 </td>
+   <td style="text-align:right;"> 18.0 </td>
+   <td style="text-align:right;"> 52 </td>
+   <td style="text-align:right;"> 50 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 36.7 </td>
+   <td style="text-align:right;"> 19.3 </td>
+   <td style="text-align:right;"> 23 </td>
+   <td style="text-align:right;"> 63 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 39.3 </td>
+   <td style="text-align:right;"> 20.6 </td>
+   <td style="text-align:right;"> 45 </td>
+   <td style="text-align:right;"> 75 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 38.9 </td>
+   <td style="text-align:right;"> 17.8 </td>
+   <td style="text-align:right;"> 41 </td>
+   <td style="text-align:right;"> 48 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 39.2 </td>
+   <td style="text-align:right;"> 19.6 </td>
+   <td style="text-align:right;"> 44 </td>
+   <td style="text-align:right;"> 66 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 34.1 </td>
+   <td style="text-align:right;"> 18.1 </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 51 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 42.0 </td>
+   <td style="text-align:right;"> 20.2 </td>
+   <td style="text-align:right;"> 66 </td>
+   <td style="text-align:right;"> 72 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 37.8 </td>
+   <td style="text-align:right;"> 17.1 </td>
+   <td style="text-align:right;"> 32 </td>
+   <td style="text-align:right;"> 41 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 37.8 </td>
+   <td style="text-align:right;"> 17.3 </td>
+   <td style="text-align:right;"> 32 </td>
+   <td style="text-align:right;"> 43 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 41.1 </td>
+   <td style="text-align:right;"> 17.6 </td>
+   <td style="text-align:right;"> 59 </td>
+   <td style="text-align:right;"> 46 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 38.6 </td>
+   <td style="text-align:right;"> 21.2 </td>
+   <td style="text-align:right;"> 38 </td>
+   <td style="text-align:right;"> 79 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 34.6 </td>
+   <td style="text-align:right;"> 21.1 </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 78 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 36.6 </td>
+   <td style="text-align:right;"> 17.8 </td>
+   <td style="text-align:right;"> 22 </td>
+   <td style="text-align:right;"> 48 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 38.7 </td>
+   <td style="text-align:right;"> 19.0 </td>
+   <td style="text-align:right;"> 39 </td>
+   <td style="text-align:right;"> 60 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 42.5 </td>
+   <td style="text-align:right;"> 20.7 </td>
+   <td style="text-align:right;"> 71 </td>
+   <td style="text-align:right;"> 76 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 34.4 </td>
+   <td style="text-align:right;"> 18.4 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 54 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46.0 </td>
+   <td style="text-align:right;"> 21.5 </td>
+   <td style="text-align:right;"> 98 </td>
+   <td style="text-align:right;"> 80 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 37.8 </td>
+   <td style="text-align:right;"> 18.3 </td>
+   <td style="text-align:right;"> 32 </td>
+   <td style="text-align:right;"> 53 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 37.7 </td>
+   <td style="text-align:right;"> 18.7 </td>
+   <td style="text-align:right;"> 31 </td>
+   <td style="text-align:right;"> 57 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 35.9 </td>
+   <td style="text-align:right;"> 19.2 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 62 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 38.2 </td>
+   <td style="text-align:right;"> 18.1 </td>
+   <td style="text-align:right;"> 35 </td>
+   <td style="text-align:right;"> 51 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 38.8 </td>
+   <td style="text-align:right;"> 17.2 </td>
+   <td style="text-align:right;"> 40 </td>
+   <td style="text-align:right;"> 42 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 35.3 </td>
+   <td style="text-align:right;"> 18.9 </td>
+   <td style="text-align:right;"> 12 </td>
+   <td style="text-align:right;"> 59 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 40.6 </td>
+   <td style="text-align:right;"> 18.6 </td>
+   <td style="text-align:right;"> 54 </td>
+   <td style="text-align:right;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 40.5 </td>
+   <td style="text-align:right;"> 17.9 </td>
+   <td style="text-align:right;"> 53 </td>
+   <td style="text-align:right;"> 49 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 37.9 </td>
+   <td style="text-align:right;"> 18.6 </td>
+   <td style="text-align:right;"> 33 </td>
+   <td style="text-align:right;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 40.5 </td>
+   <td style="text-align:right;"> 18.9 </td>
+   <td style="text-align:right;"> 53 </td>
+   <td style="text-align:right;"> 59 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 39.5 </td>
+   <td style="text-align:right;"> 16.7 </td>
+   <td style="text-align:right;"> 46 </td>
+   <td style="text-align:right;"> 37 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 37.2 </td>
+   <td style="text-align:right;"> 18.1 </td>
+   <td style="text-align:right;"> 27 </td>
+   <td style="text-align:right;"> 51 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 39.5 </td>
+   <td style="text-align:right;"> 17.8 </td>
+   <td style="text-align:right;"> 46 </td>
+   <td style="text-align:right;"> 48 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 40.9 </td>
+   <td style="text-align:right;"> 18.9 </td>
+   <td style="text-align:right;"> 57 </td>
+   <td style="text-align:right;"> 59 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 36.4 </td>
+   <td style="text-align:right;"> 17.0 </td>
+   <td style="text-align:right;"> 20 </td>
+   <td style="text-align:right;"> 40 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 39.2 </td>
+   <td style="text-align:right;"> 21.1 </td>
+   <td style="text-align:right;"> 44 </td>
+   <td style="text-align:right;"> 78 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 38.8 </td>
+   <td style="text-align:right;"> 20.0 </td>
+   <td style="text-align:right;"> 40 </td>
+   <td style="text-align:right;"> 70 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 42.2 </td>
+   <td style="text-align:right;"> 18.5 </td>
+   <td style="text-align:right;"> 68 </td>
+   <td style="text-align:right;"> 55 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 37.6 </td>
+   <td style="text-align:right;"> 19.3 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:right;"> 63 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 39.8 </td>
+   <td style="text-align:right;"> 19.1 </td>
+   <td style="text-align:right;"> 49 </td>
+   <td style="text-align:right;"> 61 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 36.5 </td>
+   <td style="text-align:right;"> 18.0 </td>
+   <td style="text-align:right;"> 21 </td>
+   <td style="text-align:right;"> 50 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 40.8 </td>
+   <td style="text-align:right;"> 18.4 </td>
+   <td style="text-align:right;"> 56 </td>
+   <td style="text-align:right;"> 54 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 36.0 </td>
+   <td style="text-align:right;"> 18.5 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 55 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 44.1 </td>
+   <td style="text-align:right;"> 19.7 </td>
+   <td style="text-align:right;"> 84 </td>
+   <td style="text-align:right;"> 67 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 37.0 </td>
+   <td style="text-align:right;"> 16.9 </td>
+   <td style="text-align:right;"> 26 </td>
+   <td style="text-align:right;"> 39 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 39.6 </td>
+   <td style="text-align:right;"> 18.8 </td>
+   <td style="text-align:right;"> 47 </td>
+   <td style="text-align:right;"> 58 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 41.1 </td>
+   <td style="text-align:right;"> 19.0 </td>
+   <td style="text-align:right;"> 59 </td>
+   <td style="text-align:right;"> 60 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 37.5 </td>
+   <td style="text-align:right;"> 18.9 </td>
+   <td style="text-align:right;"> 29 </td>
+   <td style="text-align:right;"> 59 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 36.0 </td>
+   <td style="text-align:right;"> 17.9 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 49 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 42.3 </td>
+   <td style="text-align:right;"> 21.2 </td>
+   <td style="text-align:right;"> 69 </td>
+   <td style="text-align:right;"> 79 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 39.6 </td>
+   <td style="text-align:right;"> 17.7 </td>
+   <td style="text-align:right;"> 47 </td>
+   <td style="text-align:right;"> 47 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 40.1 </td>
+   <td style="text-align:right;"> 18.9 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:right;"> 59 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 35.0 </td>
+   <td style="text-align:right;"> 17.9 </td>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 49 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 42.0 </td>
+   <td style="text-align:right;"> 19.5 </td>
+   <td style="text-align:right;"> 66 </td>
+   <td style="text-align:right;"> 65 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 34.5 </td>
+   <td style="text-align:right;"> 18.1 </td>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 51 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 41.4 </td>
+   <td style="text-align:right;"> 18.6 </td>
+   <td style="text-align:right;"> 61 </td>
+   <td style="text-align:right;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 39.0 </td>
+   <td style="text-align:right;"> 17.5 </td>
+   <td style="text-align:right;"> 42 </td>
+   <td style="text-align:right;"> 45 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 40.6 </td>
+   <td style="text-align:right;"> 18.8 </td>
+   <td style="text-align:right;"> 54 </td>
+   <td style="text-align:right;"> 58 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 36.5 </td>
+   <td style="text-align:right;"> 16.6 </td>
+   <td style="text-align:right;"> 21 </td>
+   <td style="text-align:right;"> 36 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 37.6 </td>
+   <td style="text-align:right;"> 19.1 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:right;"> 61 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 35.7 </td>
+   <td style="text-align:right;"> 16.9 </td>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:right;"> 39 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 41.3 </td>
+   <td style="text-align:right;"> 21.1 </td>
+   <td style="text-align:right;"> 60 </td>
+   <td style="text-align:right;"> 78 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 37.6 </td>
+   <td style="text-align:right;"> 17.0 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:right;"> 40 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 41.1 </td>
+   <td style="text-align:right;"> 18.2 </td>
+   <td style="text-align:right;"> 59 </td>
+   <td style="text-align:right;"> 52 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 36.4 </td>
+   <td style="text-align:right;"> 17.1 </td>
+   <td style="text-align:right;"> 20 </td>
+   <td style="text-align:right;"> 41 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 41.6 </td>
+   <td style="text-align:right;"> 18.0 </td>
+   <td style="text-align:right;"> 63 </td>
+   <td style="text-align:right;"> 50 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 35.5 </td>
+   <td style="text-align:right;"> 16.2 </td>
+   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:right;"> 32 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 41.1 </td>
+   <td style="text-align:right;"> 19.1 </td>
+   <td style="text-align:right;"> 59 </td>
+   <td style="text-align:right;"> 61 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 35.9 </td>
+   <td style="text-align:right;"> 16.6 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 36 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 41.8 </td>
+   <td style="text-align:right;"> 19.4 </td>
+   <td style="text-align:right;"> 65 </td>
+   <td style="text-align:right;"> 64 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 33.5 </td>
+   <td style="text-align:right;"> 19.0 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 60 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 39.7 </td>
+   <td style="text-align:right;"> 18.4 </td>
+   <td style="text-align:right;"> 48 </td>
+   <td style="text-align:right;"> 54 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 39.6 </td>
+   <td style="text-align:right;"> 17.2 </td>
+   <td style="text-align:right;"> 47 </td>
+   <td style="text-align:right;"> 42 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 45.8 </td>
+   <td style="text-align:right;"> 18.9 </td>
+   <td style="text-align:right;"> 96 </td>
+   <td style="text-align:right;"> 59 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 35.5 </td>
+   <td style="text-align:right;"> 17.5 </td>
+   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:right;"> 45 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 42.8 </td>
+   <td style="text-align:right;"> 18.5 </td>
+   <td style="text-align:right;"> 74 </td>
+   <td style="text-align:right;"> 55 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 40.9 </td>
+   <td style="text-align:right;"> 16.8 </td>
+   <td style="text-align:right;"> 57 </td>
+   <td style="text-align:right;"> 38 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 37.2 </td>
+   <td style="text-align:right;"> 19.4 </td>
+   <td style="text-align:right;"> 27 </td>
+   <td style="text-align:right;"> 64 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 36.2 </td>
+   <td style="text-align:right;"> 16.1 </td>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:right;"> 31 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 42.1 </td>
+   <td style="text-align:right;"> 19.1 </td>
+   <td style="text-align:right;"> 67 </td>
+   <td style="text-align:right;"> 61 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 34.6 </td>
+   <td style="text-align:right;"> 17.2 </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 42 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 42.9 </td>
+   <td style="text-align:right;"> 17.6 </td>
+   <td style="text-align:right;"> 75 </td>
+   <td style="text-align:right;"> 46 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 36.7 </td>
+   <td style="text-align:right;"> 18.8 </td>
+   <td style="text-align:right;"> 23 </td>
+   <td style="text-align:right;"> 58 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 35.1 </td>
+   <td style="text-align:right;"> 19.4 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 64 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 37.3 </td>
+   <td style="text-align:right;"> 17.8 </td>
+   <td style="text-align:right;"> 28 </td>
+   <td style="text-align:right;"> 48 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 41.3 </td>
+   <td style="text-align:right;"> 20.3 </td>
+   <td style="text-align:right;"> 60 </td>
+   <td style="text-align:right;"> 73 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 36.3 </td>
+   <td style="text-align:right;"> 19.5 </td>
+   <td style="text-align:right;"> 19 </td>
+   <td style="text-align:right;"> 65 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 36.9 </td>
+   <td style="text-align:right;"> 18.6 </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:right;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 38.3 </td>
+   <td style="text-align:right;"> 19.2 </td>
+   <td style="text-align:right;"> 36 </td>
+   <td style="text-align:right;"> 62 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 38.9 </td>
+   <td style="text-align:right;"> 18.8 </td>
+   <td style="text-align:right;"> 41 </td>
+   <td style="text-align:right;"> 58 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 35.7 </td>
+   <td style="text-align:right;"> 18.0 </td>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:right;"> 50 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 41.1 </td>
+   <td style="text-align:right;"> 18.1 </td>
+   <td style="text-align:right;"> 59 </td>
+   <td style="text-align:right;"> 51 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 34.0 </td>
+   <td style="text-align:right;"> 17.1 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 41 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 39.6 </td>
+   <td style="text-align:right;"> 18.1 </td>
+   <td style="text-align:right;"> 47 </td>
+   <td style="text-align:right;"> 51 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 36.2 </td>
+   <td style="text-align:right;"> 17.3 </td>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:right;"> 43 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 40.8 </td>
+   <td style="text-align:right;"> 18.9 </td>
+   <td style="text-align:right;"> 56 </td>
+   <td style="text-align:right;"> 59 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 38.1 </td>
+   <td style="text-align:right;"> 18.6 </td>
+   <td style="text-align:right;"> 34 </td>
+   <td style="text-align:right;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 40.3 </td>
+   <td style="text-align:right;"> 18.5 </td>
+   <td style="text-align:right;"> 52 </td>
+   <td style="text-align:right;"> 55 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 33.1 </td>
+   <td style="text-align:right;"> 16.1 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 31 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 43.2 </td>
+   <td style="text-align:right;"> 18.5 </td>
+   <td style="text-align:right;"> 77 </td>
+   <td style="text-align:right;"> 55 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 35.0 </td>
+   <td style="text-align:right;"> 17.9 </td>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 49 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 41.0 </td>
+   <td style="text-align:right;"> 20.0 </td>
+   <td style="text-align:right;"> 58 </td>
+   <td style="text-align:right;"> 70 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 37.7 </td>
+   <td style="text-align:right;"> 16.0 </td>
+   <td style="text-align:right;"> 31 </td>
+   <td style="text-align:right;"> 30 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 37.8 </td>
+   <td style="text-align:right;"> 20.0 </td>
+   <td style="text-align:right;"> 32 </td>
+   <td style="text-align:right;"> 70 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 37.9 </td>
+   <td style="text-align:right;"> 18.6 </td>
+   <td style="text-align:right;"> 33 </td>
+   <td style="text-align:right;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 39.7 </td>
+   <td style="text-align:right;"> 18.9 </td>
+   <td style="text-align:right;"> 48 </td>
+   <td style="text-align:right;"> 59 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 38.6 </td>
+   <td style="text-align:right;"> 17.2 </td>
+   <td style="text-align:right;"> 38 </td>
+   <td style="text-align:right;"> 42 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 38.2 </td>
+   <td style="text-align:right;"> 20.0 </td>
+   <td style="text-align:right;"> 35 </td>
+   <td style="text-align:right;"> 70 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 38.1 </td>
+   <td style="text-align:right;"> 17.0 </td>
+   <td style="text-align:right;"> 34 </td>
+   <td style="text-align:right;"> 40 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 43.2 </td>
+   <td style="text-align:right;"> 19.0 </td>
+   <td style="text-align:right;"> 77 </td>
+   <td style="text-align:right;"> 60 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 38.1 </td>
+   <td style="text-align:right;"> 16.5 </td>
+   <td style="text-align:right;"> 34 </td>
+   <td style="text-align:right;"> 35 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 45.6 </td>
+   <td style="text-align:right;"> 20.3 </td>
+   <td style="text-align:right;"> 94 </td>
+   <td style="text-align:right;"> 73 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 39.7 </td>
+   <td style="text-align:right;"> 17.7 </td>
+   <td style="text-align:right;"> 48 </td>
+   <td style="text-align:right;"> 47 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 42.2 </td>
+   <td style="text-align:right;"> 19.5 </td>
+   <td style="text-align:right;"> 68 </td>
+   <td style="text-align:right;"> 65 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 39.6 </td>
+   <td style="text-align:right;"> 20.7 </td>
+   <td style="text-align:right;"> 47 </td>
+   <td style="text-align:right;"> 76 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 42.7 </td>
+   <td style="text-align:right;"> 18.3 </td>
+   <td style="text-align:right;"> 73 </td>
+   <td style="text-align:right;"> 53 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 38.6 </td>
+   <td style="text-align:right;"> 17.0 </td>
+   <td style="text-align:right;"> 38 </td>
+   <td style="text-align:right;"> 40 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 37.3 </td>
+   <td style="text-align:right;"> 20.5 </td>
+   <td style="text-align:right;"> 28 </td>
+   <td style="text-align:right;"> 74 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 35.7 </td>
+   <td style="text-align:right;"> 17.0 </td>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:right;"> 40 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 41.1 </td>
+   <td style="text-align:right;"> 18.6 </td>
+   <td style="text-align:right;"> 59 </td>
+   <td style="text-align:right;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 36.2 </td>
+   <td style="text-align:right;"> 17.2 </td>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:right;"> 42 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 37.7 </td>
+   <td style="text-align:right;"> 19.8 </td>
+   <td style="text-align:right;"> 31 </td>
+   <td style="text-align:right;"> 68 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 40.2 </td>
+   <td style="text-align:right;"> 17.0 </td>
+   <td style="text-align:right;"> 51 </td>
+   <td style="text-align:right;"> 40 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 41.4 </td>
+   <td style="text-align:right;"> 18.5 </td>
+   <td style="text-align:right;"> 61 </td>
+   <td style="text-align:right;"> 55 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 35.2 </td>
+   <td style="text-align:right;"> 15.9 </td>
+   <td style="text-align:right;"> 11 </td>
+   <td style="text-align:right;"> 29 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 40.6 </td>
+   <td style="text-align:right;"> 19.0 </td>
+   <td style="text-align:right;"> 54 </td>
+   <td style="text-align:right;"> 60 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 38.8 </td>
+   <td style="text-align:right;"> 17.6 </td>
+   <td style="text-align:right;"> 40 </td>
+   <td style="text-align:right;"> 46 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 41.5 </td>
+   <td style="text-align:right;"> 18.3 </td>
+   <td style="text-align:right;"> 62 </td>
+   <td style="text-align:right;"> 53 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 39.0 </td>
+   <td style="text-align:right;"> 17.1 </td>
+   <td style="text-align:right;"> 42 </td>
+   <td style="text-align:right;"> 41 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 44.1 </td>
+   <td style="text-align:right;"> 18.0 </td>
+   <td style="text-align:right;"> 84 </td>
+   <td style="text-align:right;"> 50 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 38.5 </td>
+   <td style="text-align:right;"> 17.9 </td>
+   <td style="text-align:right;"> 37 </td>
+   <td style="text-align:right;"> 49 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 43.1 </td>
+   <td style="text-align:right;"> 19.2 </td>
+   <td style="text-align:right;"> 76 </td>
+   <td style="text-align:right;"> 62 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 36.8 </td>
+   <td style="text-align:right;"> 18.5 </td>
+   <td style="text-align:right;"> 24 </td>
+   <td style="text-align:right;"> 55 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 37.5 </td>
+   <td style="text-align:right;"> 18.5 </td>
+   <td style="text-align:right;"> 29 </td>
+   <td style="text-align:right;"> 55 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 38.1 </td>
+   <td style="text-align:right;"> 17.6 </td>
+   <td style="text-align:right;"> 34 </td>
+   <td style="text-align:right;"> 46 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 41.1 </td>
+   <td style="text-align:right;"> 17.5 </td>
+   <td style="text-align:right;"> 59 </td>
+   <td style="text-align:right;"> 45 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 35.6 </td>
+   <td style="text-align:right;"> 17.5 </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 45 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 40.2 </td>
+   <td style="text-align:right;"> 20.1 </td>
+   <td style="text-align:right;"> 51 </td>
+   <td style="text-align:right;"> 71 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 37.0 </td>
+   <td style="text-align:right;"> 16.5 </td>
+   <td style="text-align:right;"> 26 </td>
+   <td style="text-align:right;"> 35 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 39.7 </td>
+   <td style="text-align:right;"> 17.9 </td>
+   <td style="text-align:right;"> 48 </td>
+   <td style="text-align:right;"> 49 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 40.2 </td>
+   <td style="text-align:right;"> 17.1 </td>
+   <td style="text-align:right;"> 51 </td>
+   <td style="text-align:right;"> 41 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 40.6 </td>
+   <td style="text-align:right;"> 17.2 </td>
+   <td style="text-align:right;"> 54 </td>
+   <td style="text-align:right;"> 42 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 32.1 </td>
+   <td style="text-align:right;"> 15.5 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 25 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 40.7 </td>
+   <td style="text-align:right;"> 17.0 </td>
+   <td style="text-align:right;"> 55 </td>
+   <td style="text-align:right;"> 40 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 37.3 </td>
+   <td style="text-align:right;"> 16.8 </td>
+   <td style="text-align:right;"> 28 </td>
+   <td style="text-align:right;"> 38 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 39.0 </td>
+   <td style="text-align:right;"> 18.7 </td>
+   <td style="text-align:right;"> 42 </td>
+   <td style="text-align:right;"> 57 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 39.2 </td>
+   <td style="text-align:right;"> 18.6 </td>
+   <td style="text-align:right;"> 44 </td>
+   <td style="text-align:right;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 36.6 </td>
+   <td style="text-align:right;"> 18.4 </td>
+   <td style="text-align:right;"> 22 </td>
+   <td style="text-align:right;"> 54 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 36.0 </td>
+   <td style="text-align:right;"> 17.8 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 48 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 37.8 </td>
+   <td style="text-align:right;"> 18.1 </td>
+   <td style="text-align:right;"> 32 </td>
+   <td style="text-align:right;"> 51 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 36.0 </td>
+   <td style="text-align:right;"> 17.1 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 41 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 41.5 </td>
+   <td style="text-align:right;"> 18.5 </td>
+   <td style="text-align:right;"> 62 </td>
+   <td style="text-align:right;"> 55 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46.1 </td>
+   <td style="text-align:right;"> 13.2 </td>
+   <td style="text-align:right;"> 99 </td>
+   <td style="text-align:right;"> 2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 50.0 </td>
+   <td style="text-align:right;"> 16.3 </td>
+   <td style="text-align:right;"> 133 </td>
+   <td style="text-align:right;"> 33 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 48.7 </td>
+   <td style="text-align:right;"> 14.1 </td>
+   <td style="text-align:right;"> 121 </td>
+   <td style="text-align:right;"> 11 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 50.0 </td>
+   <td style="text-align:right;"> 15.2 </td>
+   <td style="text-align:right;"> 133 </td>
+   <td style="text-align:right;"> 22 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 47.6 </td>
+   <td style="text-align:right;"> 14.5 </td>
+   <td style="text-align:right;"> 113 </td>
+   <td style="text-align:right;"> 15 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46.5 </td>
+   <td style="text-align:right;"> 13.5 </td>
+   <td style="text-align:right;"> 103 </td>
+   <td style="text-align:right;"> 5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 45.4 </td>
+   <td style="text-align:right;"> 14.6 </td>
+   <td style="text-align:right;"> 92 </td>
+   <td style="text-align:right;"> 16 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46.7 </td>
+   <td style="text-align:right;"> 15.3 </td>
+   <td style="text-align:right;"> 105 </td>
+   <td style="text-align:right;"> 23 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 43.3 </td>
+   <td style="text-align:right;"> 13.4 </td>
+   <td style="text-align:right;"> 78 </td>
+   <td style="text-align:right;"> 4 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46.8 </td>
+   <td style="text-align:right;"> 15.4 </td>
+   <td style="text-align:right;"> 106 </td>
+   <td style="text-align:right;"> 24 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 40.9 </td>
+   <td style="text-align:right;"> 13.7 </td>
+   <td style="text-align:right;"> 57 </td>
+   <td style="text-align:right;"> 7 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 49.0 </td>
+   <td style="text-align:right;"> 16.1 </td>
+   <td style="text-align:right;"> 123 </td>
+   <td style="text-align:right;"> 31 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 45.5 </td>
+   <td style="text-align:right;"> 13.7 </td>
+   <td style="text-align:right;"> 93 </td>
+   <td style="text-align:right;"> 7 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 48.4 </td>
+   <td style="text-align:right;"> 14.6 </td>
+   <td style="text-align:right;"> 118 </td>
+   <td style="text-align:right;"> 16 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 45.8 </td>
+   <td style="text-align:right;"> 14.6 </td>
+   <td style="text-align:right;"> 96 </td>
+   <td style="text-align:right;"> 16 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 49.3 </td>
+   <td style="text-align:right;"> 15.7 </td>
+   <td style="text-align:right;"> 126 </td>
+   <td style="text-align:right;"> 27 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 42.0 </td>
+   <td style="text-align:right;"> 13.5 </td>
+   <td style="text-align:right;"> 66 </td>
+   <td style="text-align:right;"> 5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 49.2 </td>
+   <td style="text-align:right;"> 15.2 </td>
+   <td style="text-align:right;"> 125 </td>
+   <td style="text-align:right;"> 22 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46.2 </td>
+   <td style="text-align:right;"> 14.5 </td>
+   <td style="text-align:right;"> 100 </td>
+   <td style="text-align:right;"> 15 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 48.7 </td>
+   <td style="text-align:right;"> 15.1 </td>
+   <td style="text-align:right;"> 121 </td>
+   <td style="text-align:right;"> 21 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 50.2 </td>
+   <td style="text-align:right;"> 14.3 </td>
+   <td style="text-align:right;"> 135 </td>
+   <td style="text-align:right;"> 13 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 45.1 </td>
+   <td style="text-align:right;"> 14.5 </td>
+   <td style="text-align:right;"> 89 </td>
+   <td style="text-align:right;"> 15 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46.5 </td>
+   <td style="text-align:right;"> 14.5 </td>
+   <td style="text-align:right;"> 103 </td>
+   <td style="text-align:right;"> 15 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46.3 </td>
+   <td style="text-align:right;"> 15.8 </td>
+   <td style="text-align:right;"> 101 </td>
+   <td style="text-align:right;"> 28 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 42.9 </td>
+   <td style="text-align:right;"> 13.1 </td>
+   <td style="text-align:right;"> 75 </td>
+   <td style="text-align:right;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46.1 </td>
+   <td style="text-align:right;"> 15.1 </td>
+   <td style="text-align:right;"> 99 </td>
+   <td style="text-align:right;"> 21 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 44.5 </td>
+   <td style="text-align:right;"> 14.3 </td>
+   <td style="text-align:right;"> 86 </td>
+   <td style="text-align:right;"> 13 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 47.8 </td>
+   <td style="text-align:right;"> 15.0 </td>
+   <td style="text-align:right;"> 115 </td>
+   <td style="text-align:right;"> 20 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 48.2 </td>
+   <td style="text-align:right;"> 14.3 </td>
+   <td style="text-align:right;"> 117 </td>
+   <td style="text-align:right;"> 13 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 50.0 </td>
+   <td style="text-align:right;"> 15.3 </td>
+   <td style="text-align:right;"> 133 </td>
+   <td style="text-align:right;"> 23 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 47.3 </td>
+   <td style="text-align:right;"> 15.3 </td>
+   <td style="text-align:right;"> 110 </td>
+   <td style="text-align:right;"> 23 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 42.8 </td>
+   <td style="text-align:right;"> 14.2 </td>
+   <td style="text-align:right;"> 74 </td>
+   <td style="text-align:right;"> 12 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 45.1 </td>
+   <td style="text-align:right;"> 14.5 </td>
+   <td style="text-align:right;"> 89 </td>
+   <td style="text-align:right;"> 15 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 59.6 </td>
+   <td style="text-align:right;"> 17.0 </td>
+   <td style="text-align:right;"> 164 </td>
+   <td style="text-align:right;"> 40 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 49.1 </td>
+   <td style="text-align:right;"> 14.8 </td>
+   <td style="text-align:right;"> 124 </td>
+   <td style="text-align:right;"> 18 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 48.4 </td>
+   <td style="text-align:right;"> 16.3 </td>
+   <td style="text-align:right;"> 118 </td>
+   <td style="text-align:right;"> 33 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 42.6 </td>
+   <td style="text-align:right;"> 13.7 </td>
+   <td style="text-align:right;"> 72 </td>
+   <td style="text-align:right;"> 7 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 44.4 </td>
+   <td style="text-align:right;"> 17.3 </td>
+   <td style="text-align:right;"> 85 </td>
+   <td style="text-align:right;"> 43 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 44.0 </td>
+   <td style="text-align:right;"> 13.6 </td>
+   <td style="text-align:right;"> 83 </td>
+   <td style="text-align:right;"> 6 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 48.7 </td>
+   <td style="text-align:right;"> 15.7 </td>
+   <td style="text-align:right;"> 121 </td>
+   <td style="text-align:right;"> 27 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 42.7 </td>
+   <td style="text-align:right;"> 13.7 </td>
+   <td style="text-align:right;"> 73 </td>
+   <td style="text-align:right;"> 7 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 49.6 </td>
+   <td style="text-align:right;"> 16.0 </td>
+   <td style="text-align:right;"> 129 </td>
+   <td style="text-align:right;"> 30 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 45.3 </td>
+   <td style="text-align:right;"> 13.7 </td>
+   <td style="text-align:right;"> 91 </td>
+   <td style="text-align:right;"> 7 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 49.6 </td>
+   <td style="text-align:right;"> 15.0 </td>
+   <td style="text-align:right;"> 129 </td>
+   <td style="text-align:right;"> 20 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 50.5 </td>
+   <td style="text-align:right;"> 15.9 </td>
+   <td style="text-align:right;"> 138 </td>
+   <td style="text-align:right;"> 29 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 43.6 </td>
+   <td style="text-align:right;"> 13.9 </td>
+   <td style="text-align:right;"> 81 </td>
+   <td style="text-align:right;"> 9 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 45.5 </td>
+   <td style="text-align:right;"> 13.9 </td>
+   <td style="text-align:right;"> 93 </td>
+   <td style="text-align:right;"> 9 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 50.5 </td>
+   <td style="text-align:right;"> 15.9 </td>
+   <td style="text-align:right;"> 138 </td>
+   <td style="text-align:right;"> 29 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 44.9 </td>
+   <td style="text-align:right;"> 13.3 </td>
+   <td style="text-align:right;"> 87 </td>
+   <td style="text-align:right;"> 3 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 45.2 </td>
+   <td style="text-align:right;"> 15.8 </td>
+   <td style="text-align:right;"> 90 </td>
+   <td style="text-align:right;"> 28 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46.6 </td>
+   <td style="text-align:right;"> 14.2 </td>
+   <td style="text-align:right;"> 104 </td>
+   <td style="text-align:right;"> 12 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 48.5 </td>
+   <td style="text-align:right;"> 14.1 </td>
+   <td style="text-align:right;"> 119 </td>
+   <td style="text-align:right;"> 11 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 45.1 </td>
+   <td style="text-align:right;"> 14.4 </td>
+   <td style="text-align:right;"> 89 </td>
+   <td style="text-align:right;"> 14 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 50.1 </td>
+   <td style="text-align:right;"> 15.0 </td>
+   <td style="text-align:right;"> 134 </td>
+   <td style="text-align:right;"> 20 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46.5 </td>
+   <td style="text-align:right;"> 14.4 </td>
+   <td style="text-align:right;"> 103 </td>
+   <td style="text-align:right;"> 14 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 45.0 </td>
+   <td style="text-align:right;"> 15.4 </td>
+   <td style="text-align:right;"> 88 </td>
+   <td style="text-align:right;"> 24 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 43.8 </td>
+   <td style="text-align:right;"> 13.9 </td>
+   <td style="text-align:right;"> 82 </td>
+   <td style="text-align:right;"> 9 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 45.5 </td>
+   <td style="text-align:right;"> 15.0 </td>
+   <td style="text-align:right;"> 93 </td>
+   <td style="text-align:right;"> 20 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 43.2 </td>
+   <td style="text-align:right;"> 14.5 </td>
+   <td style="text-align:right;"> 77 </td>
+   <td style="text-align:right;"> 15 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 50.4 </td>
+   <td style="text-align:right;"> 15.3 </td>
+   <td style="text-align:right;"> 137 </td>
+   <td style="text-align:right;"> 23 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 45.3 </td>
+   <td style="text-align:right;"> 13.8 </td>
+   <td style="text-align:right;"> 91 </td>
+   <td style="text-align:right;"> 8 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46.2 </td>
+   <td style="text-align:right;"> 14.9 </td>
+   <td style="text-align:right;"> 100 </td>
+   <td style="text-align:right;"> 19 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 45.7 </td>
+   <td style="text-align:right;"> 13.9 </td>
+   <td style="text-align:right;"> 95 </td>
+   <td style="text-align:right;"> 9 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 54.3 </td>
+   <td style="text-align:right;"> 15.7 </td>
+   <td style="text-align:right;"> 159 </td>
+   <td style="text-align:right;"> 27 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 45.8 </td>
+   <td style="text-align:right;"> 14.2 </td>
+   <td style="text-align:right;"> 96 </td>
+   <td style="text-align:right;"> 12 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 49.8 </td>
+   <td style="text-align:right;"> 16.8 </td>
+   <td style="text-align:right;"> 131 </td>
+   <td style="text-align:right;"> 38 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46.2 </td>
+   <td style="text-align:right;"> 14.4 </td>
+   <td style="text-align:right;"> 100 </td>
+   <td style="text-align:right;"> 14 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 49.5 </td>
+   <td style="text-align:right;"> 16.2 </td>
+   <td style="text-align:right;"> 128 </td>
+   <td style="text-align:right;"> 32 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 43.5 </td>
+   <td style="text-align:right;"> 14.2 </td>
+   <td style="text-align:right;"> 80 </td>
+   <td style="text-align:right;"> 12 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 50.7 </td>
+   <td style="text-align:right;"> 15.0 </td>
+   <td style="text-align:right;"> 140 </td>
+   <td style="text-align:right;"> 20 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 47.7 </td>
+   <td style="text-align:right;"> 15.0 </td>
+   <td style="text-align:right;"> 114 </td>
+   <td style="text-align:right;"> 20 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46.4 </td>
+   <td style="text-align:right;"> 15.6 </td>
+   <td style="text-align:right;"> 102 </td>
+   <td style="text-align:right;"> 26 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 48.2 </td>
+   <td style="text-align:right;"> 15.6 </td>
+   <td style="text-align:right;"> 117 </td>
+   <td style="text-align:right;"> 26 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46.5 </td>
+   <td style="text-align:right;"> 14.8 </td>
+   <td style="text-align:right;"> 103 </td>
+   <td style="text-align:right;"> 18 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46.4 </td>
+   <td style="text-align:right;"> 15.0 </td>
+   <td style="text-align:right;"> 102 </td>
+   <td style="text-align:right;"> 20 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 48.6 </td>
+   <td style="text-align:right;"> 16.0 </td>
+   <td style="text-align:right;"> 120 </td>
+   <td style="text-align:right;"> 30 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 47.5 </td>
+   <td style="text-align:right;"> 14.2 </td>
+   <td style="text-align:right;"> 112 </td>
+   <td style="text-align:right;"> 12 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 51.1 </td>
+   <td style="text-align:right;"> 16.3 </td>
+   <td style="text-align:right;"> 144 </td>
+   <td style="text-align:right;"> 33 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 45.2 </td>
+   <td style="text-align:right;"> 13.8 </td>
+   <td style="text-align:right;"> 90 </td>
+   <td style="text-align:right;"> 8 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 45.2 </td>
+   <td style="text-align:right;"> 16.4 </td>
+   <td style="text-align:right;"> 90 </td>
+   <td style="text-align:right;"> 34 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 49.1 </td>
+   <td style="text-align:right;"> 14.5 </td>
+   <td style="text-align:right;"> 124 </td>
+   <td style="text-align:right;"> 15 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 52.5 </td>
+   <td style="text-align:right;"> 15.6 </td>
+   <td style="text-align:right;"> 153 </td>
+   <td style="text-align:right;"> 26 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 47.4 </td>
+   <td style="text-align:right;"> 14.6 </td>
+   <td style="text-align:right;"> 111 </td>
+   <td style="text-align:right;"> 16 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 50.0 </td>
+   <td style="text-align:right;"> 15.9 </td>
+   <td style="text-align:right;"> 133 </td>
+   <td style="text-align:right;"> 29 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 44.9 </td>
+   <td style="text-align:right;"> 13.8 </td>
+   <td style="text-align:right;"> 87 </td>
+   <td style="text-align:right;"> 8 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 50.8 </td>
+   <td style="text-align:right;"> 17.3 </td>
+   <td style="text-align:right;"> 141 </td>
+   <td style="text-align:right;"> 43 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 43.4 </td>
+   <td style="text-align:right;"> 14.4 </td>
+   <td style="text-align:right;"> 79 </td>
+   <td style="text-align:right;"> 14 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 51.3 </td>
+   <td style="text-align:right;"> 14.2 </td>
+   <td style="text-align:right;"> 145 </td>
+   <td style="text-align:right;"> 12 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 47.5 </td>
+   <td style="text-align:right;"> 14.0 </td>
+   <td style="text-align:right;"> 112 </td>
+   <td style="text-align:right;"> 10 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 52.1 </td>
+   <td style="text-align:right;"> 17.0 </td>
+   <td style="text-align:right;"> 151 </td>
+   <td style="text-align:right;"> 40 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 47.5 </td>
+   <td style="text-align:right;"> 15.0 </td>
+   <td style="text-align:right;"> 112 </td>
+   <td style="text-align:right;"> 20 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 52.2 </td>
+   <td style="text-align:right;"> 17.1 </td>
+   <td style="text-align:right;"> 152 </td>
+   <td style="text-align:right;"> 41 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 45.5 </td>
+   <td style="text-align:right;"> 14.5 </td>
+   <td style="text-align:right;"> 93 </td>
+   <td style="text-align:right;"> 15 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 49.5 </td>
+   <td style="text-align:right;"> 16.1 </td>
+   <td style="text-align:right;"> 128 </td>
+   <td style="text-align:right;"> 31 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 44.5 </td>
+   <td style="text-align:right;"> 14.7 </td>
+   <td style="text-align:right;"> 86 </td>
+   <td style="text-align:right;"> 17 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 50.8 </td>
+   <td style="text-align:right;"> 15.7 </td>
+   <td style="text-align:right;"> 141 </td>
+   <td style="text-align:right;"> 27 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 49.4 </td>
+   <td style="text-align:right;"> 15.8 </td>
+   <td style="text-align:right;"> 127 </td>
+   <td style="text-align:right;"> 28 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46.9 </td>
+   <td style="text-align:right;"> 14.6 </td>
+   <td style="text-align:right;"> 107 </td>
+   <td style="text-align:right;"> 16 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 48.4 </td>
+   <td style="text-align:right;"> 14.4 </td>
+   <td style="text-align:right;"> 118 </td>
+   <td style="text-align:right;"> 14 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 51.1 </td>
+   <td style="text-align:right;"> 16.5 </td>
+   <td style="text-align:right;"> 144 </td>
+   <td style="text-align:right;"> 35 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 48.5 </td>
+   <td style="text-align:right;"> 15.0 </td>
+   <td style="text-align:right;"> 119 </td>
+   <td style="text-align:right;"> 20 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 55.9 </td>
+   <td style="text-align:right;"> 17.0 </td>
+   <td style="text-align:right;"> 162 </td>
+   <td style="text-align:right;"> 40 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 47.2 </td>
+   <td style="text-align:right;"> 15.5 </td>
+   <td style="text-align:right;"> 109 </td>
+   <td style="text-align:right;"> 25 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 49.1 </td>
+   <td style="text-align:right;"> 15.0 </td>
+   <td style="text-align:right;"> 124 </td>
+   <td style="text-align:right;"> 20 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 47.3 </td>
+   <td style="text-align:right;"> 13.8 </td>
+   <td style="text-align:right;"> 110 </td>
+   <td style="text-align:right;"> 8 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46.8 </td>
+   <td style="text-align:right;"> 16.1 </td>
+   <td style="text-align:right;"> 106 </td>
+   <td style="text-align:right;"> 31 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 41.7 </td>
+   <td style="text-align:right;"> 14.7 </td>
+   <td style="text-align:right;"> 64 </td>
+   <td style="text-align:right;"> 17 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 53.4 </td>
+   <td style="text-align:right;"> 15.8 </td>
+   <td style="text-align:right;"> 156 </td>
+   <td style="text-align:right;"> 28 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 43.3 </td>
+   <td style="text-align:right;"> 14.0 </td>
+   <td style="text-align:right;"> 78 </td>
+   <td style="text-align:right;"> 10 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 48.1 </td>
+   <td style="text-align:right;"> 15.1 </td>
+   <td style="text-align:right;"> 116 </td>
+   <td style="text-align:right;"> 21 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 50.5 </td>
+   <td style="text-align:right;"> 15.2 </td>
+   <td style="text-align:right;"> 138 </td>
+   <td style="text-align:right;"> 22 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 49.8 </td>
+   <td style="text-align:right;"> 15.9 </td>
+   <td style="text-align:right;"> 131 </td>
+   <td style="text-align:right;"> 29 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 43.5 </td>
+   <td style="text-align:right;"> 15.2 </td>
+   <td style="text-align:right;"> 80 </td>
+   <td style="text-align:right;"> 22 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 51.5 </td>
+   <td style="text-align:right;"> 16.3 </td>
+   <td style="text-align:right;"> 147 </td>
+   <td style="text-align:right;"> 33 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46.2 </td>
+   <td style="text-align:right;"> 14.1 </td>
+   <td style="text-align:right;"> 100 </td>
+   <td style="text-align:right;"> 11 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 55.1 </td>
+   <td style="text-align:right;"> 16.0 </td>
+   <td style="text-align:right;"> 160 </td>
+   <td style="text-align:right;"> 30 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 44.5 </td>
+   <td style="text-align:right;"> 15.7 </td>
+   <td style="text-align:right;"> 86 </td>
+   <td style="text-align:right;"> 27 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 48.8 </td>
+   <td style="text-align:right;"> 16.2 </td>
+   <td style="text-align:right;"> 122 </td>
+   <td style="text-align:right;"> 32 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 47.2 </td>
+   <td style="text-align:right;"> 13.7 </td>
+   <td style="text-align:right;"> 109 </td>
+   <td style="text-align:right;"> 7 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46.8 </td>
+   <td style="text-align:right;"> 14.3 </td>
+   <td style="text-align:right;"> 106 </td>
+   <td style="text-align:right;"> 13 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 50.4 </td>
+   <td style="text-align:right;"> 15.7 </td>
+   <td style="text-align:right;"> 137 </td>
+   <td style="text-align:right;"> 27 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 45.2 </td>
+   <td style="text-align:right;"> 14.8 </td>
+   <td style="text-align:right;"> 90 </td>
+   <td style="text-align:right;"> 18 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 49.9 </td>
+   <td style="text-align:right;"> 16.1 </td>
+   <td style="text-align:right;"> 132 </td>
+   <td style="text-align:right;"> 31 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46.5 </td>
+   <td style="text-align:right;"> 17.9 </td>
+   <td style="text-align:right;"> 103 </td>
+   <td style="text-align:right;"> 49 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 50.0 </td>
+   <td style="text-align:right;"> 19.5 </td>
+   <td style="text-align:right;"> 133 </td>
+   <td style="text-align:right;"> 65 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 51.3 </td>
+   <td style="text-align:right;"> 19.2 </td>
+   <td style="text-align:right;"> 145 </td>
+   <td style="text-align:right;"> 62 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 45.4 </td>
+   <td style="text-align:right;"> 18.7 </td>
+   <td style="text-align:right;"> 92 </td>
+   <td style="text-align:right;"> 57 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 52.7 </td>
+   <td style="text-align:right;"> 19.8 </td>
+   <td style="text-align:right;"> 154 </td>
+   <td style="text-align:right;"> 68 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 45.2 </td>
+   <td style="text-align:right;"> 17.8 </td>
+   <td style="text-align:right;"> 90 </td>
+   <td style="text-align:right;"> 48 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46.1 </td>
+   <td style="text-align:right;"> 18.2 </td>
+   <td style="text-align:right;"> 99 </td>
+   <td style="text-align:right;"> 52 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 51.3 </td>
+   <td style="text-align:right;"> 18.2 </td>
+   <td style="text-align:right;"> 145 </td>
+   <td style="text-align:right;"> 52 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46.0 </td>
+   <td style="text-align:right;"> 18.9 </td>
+   <td style="text-align:right;"> 98 </td>
+   <td style="text-align:right;"> 59 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 51.3 </td>
+   <td style="text-align:right;"> 19.9 </td>
+   <td style="text-align:right;"> 145 </td>
+   <td style="text-align:right;"> 69 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46.6 </td>
+   <td style="text-align:right;"> 17.8 </td>
+   <td style="text-align:right;"> 104 </td>
+   <td style="text-align:right;"> 48 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 51.7 </td>
+   <td style="text-align:right;"> 20.3 </td>
+   <td style="text-align:right;"> 148 </td>
+   <td style="text-align:right;"> 73 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 47.0 </td>
+   <td style="text-align:right;"> 17.3 </td>
+   <td style="text-align:right;"> 108 </td>
+   <td style="text-align:right;"> 43 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 52.0 </td>
+   <td style="text-align:right;"> 18.1 </td>
+   <td style="text-align:right;"> 150 </td>
+   <td style="text-align:right;"> 51 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 45.9 </td>
+   <td style="text-align:right;"> 17.1 </td>
+   <td style="text-align:right;"> 97 </td>
+   <td style="text-align:right;"> 41 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 50.5 </td>
+   <td style="text-align:right;"> 19.6 </td>
+   <td style="text-align:right;"> 138 </td>
+   <td style="text-align:right;"> 66 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 50.3 </td>
+   <td style="text-align:right;"> 20.0 </td>
+   <td style="text-align:right;"> 136 </td>
+   <td style="text-align:right;"> 70 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 58.0 </td>
+   <td style="text-align:right;"> 17.8 </td>
+   <td style="text-align:right;"> 163 </td>
+   <td style="text-align:right;"> 48 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46.4 </td>
+   <td style="text-align:right;"> 18.6 </td>
+   <td style="text-align:right;"> 102 </td>
+   <td style="text-align:right;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 49.2 </td>
+   <td style="text-align:right;"> 18.2 </td>
+   <td style="text-align:right;"> 125 </td>
+   <td style="text-align:right;"> 52 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 42.4 </td>
+   <td style="text-align:right;"> 17.3 </td>
+   <td style="text-align:right;"> 70 </td>
+   <td style="text-align:right;"> 43 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 48.5 </td>
+   <td style="text-align:right;"> 17.5 </td>
+   <td style="text-align:right;"> 119 </td>
+   <td style="text-align:right;"> 45 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 43.2 </td>
+   <td style="text-align:right;"> 16.6 </td>
+   <td style="text-align:right;"> 77 </td>
+   <td style="text-align:right;"> 36 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 50.6 </td>
+   <td style="text-align:right;"> 19.4 </td>
+   <td style="text-align:right;"> 139 </td>
+   <td style="text-align:right;"> 64 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46.7 </td>
+   <td style="text-align:right;"> 17.9 </td>
+   <td style="text-align:right;"> 105 </td>
+   <td style="text-align:right;"> 49 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 52.0 </td>
+   <td style="text-align:right;"> 19.0 </td>
+   <td style="text-align:right;"> 150 </td>
+   <td style="text-align:right;"> 60 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 50.5 </td>
+   <td style="text-align:right;"> 18.4 </td>
+   <td style="text-align:right;"> 138 </td>
+   <td style="text-align:right;"> 54 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 49.5 </td>
+   <td style="text-align:right;"> 19.0 </td>
+   <td style="text-align:right;"> 128 </td>
+   <td style="text-align:right;"> 60 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46.4 </td>
+   <td style="text-align:right;"> 17.8 </td>
+   <td style="text-align:right;"> 102 </td>
+   <td style="text-align:right;"> 48 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 52.8 </td>
+   <td style="text-align:right;"> 20.0 </td>
+   <td style="text-align:right;"> 155 </td>
+   <td style="text-align:right;"> 70 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 40.9 </td>
+   <td style="text-align:right;"> 16.6 </td>
+   <td style="text-align:right;"> 57 </td>
+   <td style="text-align:right;"> 36 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 54.2 </td>
+   <td style="text-align:right;"> 20.8 </td>
+   <td style="text-align:right;"> 158 </td>
+   <td style="text-align:right;"> 77 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 42.5 </td>
+   <td style="text-align:right;"> 16.7 </td>
+   <td style="text-align:right;"> 71 </td>
+   <td style="text-align:right;"> 37 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 51.0 </td>
+   <td style="text-align:right;"> 18.8 </td>
+   <td style="text-align:right;"> 143 </td>
+   <td style="text-align:right;"> 58 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 49.7 </td>
+   <td style="text-align:right;"> 18.6 </td>
+   <td style="text-align:right;"> 130 </td>
+   <td style="text-align:right;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 47.5 </td>
+   <td style="text-align:right;"> 16.8 </td>
+   <td style="text-align:right;"> 112 </td>
+   <td style="text-align:right;"> 38 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 47.6 </td>
+   <td style="text-align:right;"> 18.3 </td>
+   <td style="text-align:right;"> 113 </td>
+   <td style="text-align:right;"> 53 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 52.0 </td>
+   <td style="text-align:right;"> 20.7 </td>
+   <td style="text-align:right;"> 150 </td>
+   <td style="text-align:right;"> 76 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46.9 </td>
+   <td style="text-align:right;"> 16.6 </td>
+   <td style="text-align:right;"> 107 </td>
+   <td style="text-align:right;"> 36 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 53.5 </td>
+   <td style="text-align:right;"> 19.9 </td>
+   <td style="text-align:right;"> 157 </td>
+   <td style="text-align:right;"> 69 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 49.0 </td>
+   <td style="text-align:right;"> 19.5 </td>
+   <td style="text-align:right;"> 123 </td>
+   <td style="text-align:right;"> 65 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46.2 </td>
+   <td style="text-align:right;"> 17.5 </td>
+   <td style="text-align:right;"> 100 </td>
+   <td style="text-align:right;"> 45 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 50.9 </td>
+   <td style="text-align:right;"> 19.1 </td>
+   <td style="text-align:right;"> 142 </td>
+   <td style="text-align:right;"> 61 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 45.5 </td>
+   <td style="text-align:right;"> 17.0 </td>
+   <td style="text-align:right;"> 93 </td>
+   <td style="text-align:right;"> 40 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 50.9 </td>
+   <td style="text-align:right;"> 17.9 </td>
+   <td style="text-align:right;"> 142 </td>
+   <td style="text-align:right;"> 49 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 50.8 </td>
+   <td style="text-align:right;"> 18.5 </td>
+   <td style="text-align:right;"> 141 </td>
+   <td style="text-align:right;"> 55 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 50.1 </td>
+   <td style="text-align:right;"> 17.9 </td>
+   <td style="text-align:right;"> 134 </td>
+   <td style="text-align:right;"> 49 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 49.0 </td>
+   <td style="text-align:right;"> 19.6 </td>
+   <td style="text-align:right;"> 123 </td>
+   <td style="text-align:right;"> 66 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 51.5 </td>
+   <td style="text-align:right;"> 18.7 </td>
+   <td style="text-align:right;"> 147 </td>
+   <td style="text-align:right;"> 57 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 49.8 </td>
+   <td style="text-align:right;"> 17.3 </td>
+   <td style="text-align:right;"> 131 </td>
+   <td style="text-align:right;"> 43 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 48.1 </td>
+   <td style="text-align:right;"> 16.4 </td>
+   <td style="text-align:right;"> 116 </td>
+   <td style="text-align:right;"> 34 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 51.4 </td>
+   <td style="text-align:right;"> 19.0 </td>
+   <td style="text-align:right;"> 146 </td>
+   <td style="text-align:right;"> 60 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 45.7 </td>
+   <td style="text-align:right;"> 17.3 </td>
+   <td style="text-align:right;"> 95 </td>
+   <td style="text-align:right;"> 43 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 50.7 </td>
+   <td style="text-align:right;"> 19.7 </td>
+   <td style="text-align:right;"> 140 </td>
+   <td style="text-align:right;"> 67 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 42.5 </td>
+   <td style="text-align:right;"> 17.3 </td>
+   <td style="text-align:right;"> 71 </td>
+   <td style="text-align:right;"> 43 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 52.2 </td>
+   <td style="text-align:right;"> 18.8 </td>
+   <td style="text-align:right;"> 152 </td>
+   <td style="text-align:right;"> 58 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 45.2 </td>
+   <td style="text-align:right;"> 16.6 </td>
+   <td style="text-align:right;"> 90 </td>
+   <td style="text-align:right;"> 36 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 49.3 </td>
+   <td style="text-align:right;"> 19.9 </td>
+   <td style="text-align:right;"> 126 </td>
+   <td style="text-align:right;"> 69 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 50.2 </td>
+   <td style="text-align:right;"> 18.8 </td>
+   <td style="text-align:right;"> 135 </td>
+   <td style="text-align:right;"> 58 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 45.6 </td>
+   <td style="text-align:right;"> 19.4 </td>
+   <td style="text-align:right;"> 94 </td>
+   <td style="text-align:right;"> 64 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 51.9 </td>
+   <td style="text-align:right;"> 19.5 </td>
+   <td style="text-align:right;"> 149 </td>
+   <td style="text-align:right;"> 65 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 46.8 </td>
+   <td style="text-align:right;"> 16.5 </td>
+   <td style="text-align:right;"> 106 </td>
+   <td style="text-align:right;"> 35 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 45.7 </td>
+   <td style="text-align:right;"> 17.0 </td>
+   <td style="text-align:right;"> 95 </td>
+   <td style="text-align:right;"> 40 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 55.8 </td>
+   <td style="text-align:right;"> 19.8 </td>
+   <td style="text-align:right;"> 161 </td>
+   <td style="text-align:right;"> 68 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 43.5 </td>
+   <td style="text-align:right;"> 18.1 </td>
+   <td style="text-align:right;"> 80 </td>
+   <td style="text-align:right;"> 51 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 49.6 </td>
+   <td style="text-align:right;"> 18.2 </td>
+   <td style="text-align:right;"> 129 </td>
+   <td style="text-align:right;"> 52 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 50.8 </td>
+   <td style="text-align:right;"> 19.0 </td>
+   <td style="text-align:right;"> 141 </td>
+   <td style="text-align:right;"> 60 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 50.2 </td>
+   <td style="text-align:right;"> 18.7 </td>
+   <td style="text-align:right;"> 135 </td>
+   <td style="text-align:right;"> 57 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+Measures of rank correlation then are just a comparison of the rank orders between two variables, with a value between -1 and 1 just like Pearsons's. We already know from our Pearson's correlation coefficient, that we expect this relationship to be negative. So it should come as no surprise that the highest rank order values for bill_length_mm appear to be associated with lower rank order values for bill_depth_mm. 
+
+
+To calculate Spearman's $\rho$ 'rho' is pretty easy, you can use the cor functions again, but this time specify a hidden argument to `method="spearman"`. 
+
+
+```r
+penguins %>% 
+  cor_test(culmen_length_mm, culmen_depth_mm, method="spearman")
+```
+
+<div class="kable-table">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> var1 </th>
+   <th style="text-align:left;"> var2 </th>
+   <th style="text-align:right;"> cor </th>
+   <th style="text-align:right;"> statistic </th>
+   <th style="text-align:right;"> p </th>
+   <th style="text-align:left;"> method </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> culmen_length_mm </td>
+   <td style="text-align:left;"> culmen_depth_mm </td>
+   <td style="text-align:right;"> -0.22 </td>
+   <td style="text-align:right;"> 8145268 </td>
+   <td style="text-align:right;"> 3.51e-05 </td>
+   <td style="text-align:left;"> Spearman </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+What we can see in this example is that Pearson's *r* and Spearman's $\rho$ are basically identical. 
+
+### Graphical summaries between numeric variables
+
+Correlation coefficients are a quick and simple way to attach a metric to the level of association between two variables. They are limited however in that a single number can never capture the every aspect of their relationship. This is why we visualise our data. 
+
+We have already covered scatter plots and `ggplot2()` extensively in previous chapters, so here we will just cover some of the different ways in which you could present the nature of a relationship
+
+
+```r
+length_depth_scatterplot <- ggplot(penguins, aes(x= culmen_length_mm, 
+                     y= culmen_depth_mm)) +
+    geom_point()
+
+length_depth_scatterplot
+```
+
+<div class="figure" style="text-align: center">
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-39-1.png" alt="A scatter plot of bill depth against bill length in mm" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-39)A scatter plot of bill depth against bill length in mm</p>
+</div>
+
+> **Note - Remember there are a number of different options available when constructing a plot including changing alpha to produce transparency if plots are lying on top of each other, colours (and shapes) to separate subgroups and ways to present third numerical variables such as setting aes(size=body_mass_g). 
+
+
+```r
+library(patchwork) # package calls should be placed at the TOP of your script
+
+bill_depth_marginal <- penguins %>% 
+  ggplot()+
+  geom_density(aes(x=culmen_depth_mm), fill="darkgrey")+
+  theme_void()+
+  coord_flip() # this graph needs to be rotated
+
+bill_length_marginal <- penguins %>% 
+  ggplot()+
+  geom_density(aes(x=culmen_length_mm), fill="darkgrey")+
+  theme_void()
+
+layout <- "
+AA#
+BBC
+BBC"
+# layout is easiest to organise using a text distribution, where ABC equal the three plots in order, and the grid is how much space they take up. We could easily make the main plot bigger and marginals smaller with
+
+# layout <- "
+# AAA#
+# BBBC
+# BBBC"
+# BBBC
+
+bill_length_marginal+length_depth_scatterplot+bill_depth_marginal+ # order of plots is important
+  plot_layout(design=layout) # uses the layout argument defined above to arrange the size and position of plots
+```
+
+<div class="figure" style="text-align: center">
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-40-1.png" alt="Using patchwork we can easily arrange extra plots to fit as marginals - these could be boxplots, histograms or density plots" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-40)Using patchwork we can easily arrange extra plots to fit as marginals - these could be boxplots, histograms or density plots</p>
+</div>
+
+These efforts allow us to capture details about the spread and distribution of both variables **and** how they relate to each other. This figure provides us with insights into
+
+* The central tendency of each variable
+
+* The spread of data in each variable
+
+* The correlation between the two variables
+
+## Associations between categorical variables
+
+Exploring associations between different categorical variables is not quite as simple as the previous numeric-numeric examples. Generally speaking we are interested in whether different combinations of categories are uniformally distributed or show evidence of clustering leading to *over- or under-represented* combinations. 
+The simplest way to investigate this is to use `group_by` and `summarise` as we have used previously.
+
+
+```r
+island_species_summary <- penguins %>% 
+  group_by(island, species) %>% 
+  summarise(n=n(),
+            n_distinct=n_distinct(individual_id)) %>% 
+  ungroup() %>% # needed to remove group calculations
+  mutate(freq=n/sum(n)) # then calculates percentage of each group across WHOLE dataset
+
+island_species_summary
+```
+
+<div class="kable-table">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> island </th>
+   <th style="text-align:left;"> species </th>
+   <th style="text-align:right;"> n </th>
+   <th style="text-align:right;"> n_distinct </th>
+   <th style="text-align:right;"> freq </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Biscoe </td>
+   <td style="text-align:left;"> Adelie </td>
+   <td style="text-align:right;"> 44 </td>
+   <td style="text-align:right;"> 44 </td>
+   <td style="text-align:right;"> 0.1279070 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Biscoe </td>
+   <td style="text-align:left;"> Gentoo </td>
+   <td style="text-align:right;"> 124 </td>
+   <td style="text-align:right;"> 94 </td>
+   <td style="text-align:right;"> 0.3604651 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Dream </td>
+   <td style="text-align:left;"> Adelie </td>
+   <td style="text-align:right;"> 56 </td>
+   <td style="text-align:right;"> 56 </td>
+   <td style="text-align:right;"> 0.1627907 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Dream </td>
+   <td style="text-align:left;"> Chinstrap </td>
+   <td style="text-align:right;"> 68 </td>
+   <td style="text-align:right;"> 58 </td>
+   <td style="text-align:right;"> 0.1976744 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Torgersen </td>
+   <td style="text-align:left;"> Adelie </td>
+   <td style="text-align:right;"> 52 </td>
+   <td style="text-align:right;"> 52 </td>
+   <td style="text-align:right;"> 0.1511628 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+> **Note - remember that group_by() applies functions which comes after it in a group-specific pattern.
+
+What does the above tell us, that 168 observations were made on the Island of Biscoe, with three times as many Gentoo penguin observations made as Adelie penguins (remeber this is observations made, not individual penguins). When we account for penguin ID we see there are around twice as many Gentoo penguins recorded. We can see there are no Chinstrap penguins recorded on Biscoe. Conversely we can see that Gentoo penguins are **only** observed on Biscoe. 
+The island of Dream has two populations of Adelie and Chinstrap penguins of roughly equal size, while the island of Torgensen appears to have a population comprised only of Adelie penguins. 
+
+We could also use a bar chart in ggplot to represent this count data. 
+
+
+```r
+penguins%>% 
+  ggplot(aes(x=island, fill=species))+
+  geom_bar(position=position_dodge())+
+  coord_flip()
+```
+
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-42-1.png" width="100%" style="display: block; margin: auto;" />
+
+This is fine, but it looks a bit odd, because the bars expand to fill the available space on the category axis. Luckily there is an advanced version of the postion_dodge argument. 
+
+
+
+```r
+penguins%>% 
+  ggplot(aes(x=island, fill=species))+
+  geom_bar(position=position_dodge2(preserve="single"))+ 
+  #keeps bars to appropriate widths
+  coord_flip()
+```
+
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-43-1.png" width="100%" style="display: block; margin: auto;" />
+> **Note the default for bar charts would have been a stacked option, but we have already seen how that can produce graphs that are difficult to read. 
+
+An alternative approach would be to look at the 'relative proportions' of each population in our overall dataset. Using the same methods as we used previously when looking at single variables. Let's add in a few aesthetic tweaks to improve the look. 
+
+
+```r
+penguins %>% 
+  ggplot(aes(x=island, fill=species))+
+  geom_bar(position=position_dodge2(preserve="single"))+ 
+  #keeps bars to appropriate widths
+    labs(x="Island",
+       y = "Number of observations")+
+  geom_text(data=island_species_summary, # use the data from the summarise object
+            aes(x=island,
+                y= n+10, # offset text to be slightly to the right of bar
+                group=species, # need species group to separate text
+                label=scales::percent(freq) # automatically add %
+                ),
+            position=position_dodge2(width=0.8))+ # set width of dodge
+  scale_fill_manual(values=c("cyan",
+                            "darkorange",
+                            "purple"
+                            ))+
+  coord_flip()+
+  theme_minimal()+
+  theme(legend.position="bottom") # put legend at the bottom of the graph
+```
+
+<div class="figure" style="text-align: center">
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-44-1.png" alt="A dodged barplot showing the numbers and relative proportions of data observations recorded by penguin species and location" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-44)A dodged barplot showing the numbers and relative proportions of data observations recorded by penguin species and location</p>
+</div>
+
+## Associations between Categorical-numerical variables
+
+
+```r
+penguins %>% 
+  ggplot(aes(x=species,
+             y=body_mass_g))+
+  geom_boxplot()+
+  labs(y="Body mass (g)",
+         x= "Species")
+```
+
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-45-1.png" width="100%" style="display: block; margin: auto;" />
+
+
+```r
+penguins %>% 
+  ggplot(aes(x=body_mass_g,
+             fill=species))+
+  geom_histogram(alpha=0.6,
+         bins=30,
+         position="identity")+
+  facet_wrap(~species,
+             ncol=1)
+```
+
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-46-1.png" width="100%" style="display: block; margin: auto;" />
+
+## Complexity
+
+### Simpson's Paradox
+
+Remember when we first correlated bill length and bill depth against each other we found an overall negative correlation of -0.22. However, this is because of a confounding variable we had not accounted for - species. 
+
+
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-47-1.png" width="100%" style="display: block; margin: auto;" />
+
+This is another example of why carefully studying your data - and carefully considering those variables which are likely to affect each other are studied or controlled for. It is an entirely reasonable hypothesis that different penguin species might have different bill shapes that might make an overall trend misleading. We can easily check the effect of a categoricial variable on our two numeric variables by assigning the aesthetic colour. 
+
+
+```r
+colours <- c("cyan",
+             "darkorange",
+             "purple")
+
+length_depth_scatterplot_2 <- ggplot(penguins, aes(x= culmen_length_mm, 
+                     y= culmen_depth_mm,
+                     colour=species)) +
+    geom_point()+
+  geom_smooth(method="lm",
+              se=FALSE)+
+  scale_colour_manual(values=colours)+
+  theme_classic()+
+  theme(legend.position="none")+
+    labs(x="Bill length (mm)",
+         y="Bill depth (mm)")
+
+length_depth_scatterplot
+```
+
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-48-1.png" width="100%" style="display: block; margin: auto;" />
+
+```r
+bill_depth_marginal_2 <- penguins %>% 
+  ggplot()+
+  geom_density(aes(x=culmen_depth_mm,
+                   fill=species),
+               alpha=0.5)+
+  scale_fill_manual(values=colours)+
+  theme_void()+
+  coord_flip() # this graph needs to be rotated
+
+bill_length_marginal_2 <- penguins %>% 
+  ggplot()+
+  geom_density(aes(x=culmen_length_mm,
+                   fill=species),
+               alpha=0.5)+
+  scale_fill_manual(values=colours)+
+  theme_void()+
+  theme(legend.position="none")
+
+layout2 <- "
+AAA#
+BBBC
+BBBC
+BBBC"
+
+bill_length_marginal_2+length_depth_scatterplot_2+bill_depth_marginal_2+ # order of plots is important
+  plot_layout(design=layout2) # uses the layout argument defined above to arrange the size and position of plots
+```
+
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-48-2.png" width="100%" style="display: block; margin: auto;" />
+
+We now clearly see a striking reversal of our previous trend, that in fact *within* each species of penguin there is an overall positive association between bill length and depth. 
+
+This should prompt us to re-evaluate our correlation metrics:
+
+
+```r
+penguins %>% 
+  group_by(species) %>% 
+  cor_test(culmen_length_mm, culmen_depth_mm)
+```
+
+<div class="kable-table">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> species </th>
+   <th style="text-align:left;"> var1 </th>
+   <th style="text-align:left;"> var2 </th>
+   <th style="text-align:right;"> cor </th>
+   <th style="text-align:right;"> statistic </th>
+   <th style="text-align:right;"> p </th>
+   <th style="text-align:right;"> conf.low </th>
+   <th style="text-align:right;"> conf.high </th>
+   <th style="text-align:left;"> method </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Adelie </td>
+   <td style="text-align:left;"> culmen_length_mm </td>
+   <td style="text-align:left;"> culmen_depth_mm </td>
+   <td style="text-align:right;"> 0.39 </td>
+   <td style="text-align:right;"> 5.193285 </td>
+   <td style="text-align:right;"> 7e-07 </td>
+   <td style="text-align:right;"> 0.2472226 </td>
+   <td style="text-align:right;"> 0.5187796 </td>
+   <td style="text-align:left;"> Pearson </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Chinstrap </td>
+   <td style="text-align:left;"> culmen_length_mm </td>
+   <td style="text-align:left;"> culmen_depth_mm </td>
+   <td style="text-align:right;"> 0.65 </td>
+   <td style="text-align:right;"> 7.014647 </td>
+   <td style="text-align:right;"> 0e+00 </td>
+   <td style="text-align:right;"> 0.4917326 </td>
+   <td style="text-align:right;"> 0.7717134 </td>
+   <td style="text-align:left;"> Pearson </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Gentoo </td>
+   <td style="text-align:left;"> culmen_length_mm </td>
+   <td style="text-align:left;"> culmen_depth_mm </td>
+   <td style="text-align:right;"> 0.64 </td>
+   <td style="text-align:right;"> 9.244703 </td>
+   <td style="text-align:right;"> 0e+00 </td>
+   <td style="text-align:right;"> 0.5262952 </td>
+   <td style="text-align:right;"> 0.7365271 </td>
+   <td style="text-align:left;"> Pearson </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+We now see that the correlation values for all three species is >0.22 - indicating these associations are much closer than previously estimated. 
+
+
+### Three or more variables
+
+In the above example therefore, we saw the importance of exploring relationships among more than two variables at once. Broadly speaking there are two ways top do this
+
+1. Layer an extra aesthetic mapping onto ggplot - such as size, colour, or shape
+
+2. Use facets to construct multipanel plots according to the values of a categorical variable
+
+If we want we can also adopt both of these approaches at the same time:
+
+
+```r
+penguins %>% 
+  drop_na(sex) %>% 
+ggplot(aes(x= culmen_length_mm, 
+                     y= culmen_depth_mm,
+                     colour=sex)) + # colour aesthetic set to sex
+    geom_point()+
+  geom_smooth(method="lm",
+              se=FALSE)+
+  scale_colour_manual(values=c("#1B9E77", "#D95F02"))+ # pick two colour scheme
+  theme_classic()+
+  theme(legend.position="none")+
+    labs(x="Bill length (mm)",
+         y="Bill depth (mm)")+
+  facet_wrap(~species, ncol=1) # specify plots are stacked split by species
+```
+
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-50-1.png" width="100%" style="display: block; margin: auto;" />
+
+Here we can see that the trends are the same across the different penguin sexes. Although by comparing the slopes of the lines, lengths of the lines and amounts of overlap we can make insights into how "sexually dimorphic" these different species are e.g. in terms of beak morphology do some species show greater differences between males and females than others?
+
+## Summing up
+
+This is our last data handling workshop. We have built up towards being able to discover and examine relationships and differences among variables in our data. You now have the skills to handle many different types of data, tidy it, and produce visuals to generate insight and communicate this to others. 
+
+A note of caution is required - it is very easy to spot and identify patterns.
+
+When you do spot a trend, difference or relationship, it is important to recognise that you may not have enough evidence to assign a reason behind this observation. As scientists it is important to develope hypotheses based on knowledge and understanding, this can help (sometimes) with avoiding spurious associations. 
+
+Sometimes we may see a pattern in our data, but it has likely occurred due to random chance, rather than as a result of an underlying process. This is where formal statistical analysis, to quantitatively assess the evidence, assess probability and study effect sizes can be incredibly powerful. We will delve into these exciting topics next term. 
+
+That's it! Thank you for taking the time to get this far. Be kind to yourself if you found it difficult. You have done incredibly well.
+
+Have some more praise!!!!
+
+
+```r
+praise::praise()
+```
+
+```
+## [1] "You are wonderful!"
+```
+```
+[1] "You are spectaculaR!"
+```

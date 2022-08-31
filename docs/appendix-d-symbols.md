@@ -1,6 +1,6 @@
 # Symbols {#symbols}
 
-| Symbol | psyTeachR Term    | Also Known As     |
+| Symbol | Term              | Also Known As     |
 |:------:|:------------------|:------------------|
 | ()     | (round) brackets  | parentheses       |
 | []     | square brackets   | brackets          |
