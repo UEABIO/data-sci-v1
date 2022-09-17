@@ -1,28 +1,9 @@
 
-# Functions
+# Functions and Iteration
 
 
 
 
-
-
-https://swcarpentry.github.io/r-novice-inflammation/02-func-R/
-
-https://www.datamentor.io/r-programming/function/
-
-https://r-coder.com/function-r/#Input_arguments_in_R_functions
-
-http://faculty.washington.edu/kenrice/rintro/intro17sess09v2.pdf
-
-https://jennybc.github.io/purrr-tutorial/ls01_map-name-position-shortcuts.html
-
-https://malco.io/slides/hs_purrr/#17
-
-https://malcolmbarrett.shinyapps.io/purrr_exercises/
-
-https://www.jumpingrivers.com/blog/custom-colour-palettes-for-ggplot2/
-
-https://www.rebeccabarter.com/blog/2019-08-19_purrr/#simplest-usage-repeated-looping-with-map
 
 
 
@@ -40,9 +21,9 @@ Why is this useful?
 
 There are two broad ways we can DRY out our code: 
 
-1) Use Functions - functions contain code instructions, and we can re-use them for similar processes simply by changing the arguments. In R you can use pre-built functions and start building your own!
+1) Use **Functions** - functions contain code instructions, and we can re-use them for similar processes simply by changing the arguments. In R you can use pre-built functions and start building your own!
 
-2) Use Iteration - Apply functions to loop/repeat over different groups or lists.
+2) Use **Iteration** - Apply functions to loop or repeat over different groups or lists.
 
 
 ## Functions
@@ -76,7 +57,7 @@ R makes it easy to create user defined functions by using `function()`. Here is 
 
 * Give your function an object name and assign the function to it, e.g. `my_function_name <- function()`.
 
-* Within the parentheses you specify inputs and options just like how pre-written functions work, e.g. `function(input_data)`.
+* Within the parentheses you specify inputs and arguments just like how pre-written functions work, e.g. `function(input_data)`.
 
 * Next, put all the code you want your function to execute inside curly brackets like this: `function(input_data) {code to run}`
 
@@ -100,6 +81,13 @@ add_one <- function(input_data) {
   return(input_data + 1)
 }
 ```
+
+
+<div class="info">
+<p>Remember, when you make a function like the one above, nothing will happen until you use the function on same data!</p>
+</div>
+
+
 
 Let's try our new function out on the vector we made.
 
@@ -127,21 +115,21 @@ Finish writing the function below </div></div>
 ```r
 # Use the instructions above to complete the function below
 my_function_name <- function(input_data){
-  s <- sum( )
-  ss <- sqrt( )
-  return( )
+  s <- sum(__)
+  ss <- sqrt(__)
+  return(__)
 }
 
 # Create a new object and try out your new function
-my_combined_values <- c(,) 
+my_combined_values <- c(__,__) 
 
 my_function_name(my_combined_values)
 ```
 
 
-<button id="displayTextunnamed-chunk-11" onclick="javascript:toggle('unnamed-chunk-11');">Show Solution</button>
+<button id="displayTextunnamed-chunk-12" onclick="javascript:toggle('unnamed-chunk-12');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-11" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-12" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 # Use the instructions above to complete the function below
@@ -171,7 +159,7 @@ my_function_name(my_combined_values)
 
 ### Activity 2: More functions
 
-It might surprise you to know that there is no prebuilt function for standard error in base R, but we can build our own!
+It might surprise you to know that there is no pre-built function for standard error in base R, but we can build our own!
 
 <div class="info">
 <p>Here you can see we replaced <code>input_data</code> with <code>.x</code> as the name of our argument. These placeholders can have whatever name we like to choose, but we should avoid using names that match any R objects we make in our project</p>
@@ -227,9 +215,9 @@ say_hello()
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
 What happens when you try to put something in the brackets when using this function? </div></div>
 
-<button id="displayTextunnamed-chunk-19" onclick="javascript:toggle('unnamed-chunk-19');">Show Solution</button>
+<button id="displayTextunnamed-chunk-20" onclick="javascript:toggle('unnamed-chunk-20');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-19" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-20" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 Error in say_hello( or something similar, this function has not been set with any arguments, therefore it doesn't know what to do with any values provided to it. </div></div></div>
 
 Now lets try a similar function, but we include an argument:
@@ -251,9 +239,9 @@ say_morning("Phil")
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
 What happens when you DO NOT put something in the brackets when using this function? </div></div>
 
-<button id="displayTextunnamed-chunk-22" onclick="javascript:toggle('unnamed-chunk-22');">Show Solution</button>
+<button id="displayTextunnamed-chunk-23" onclick="javascript:toggle('unnamed-chunk-23');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-22" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-23" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 Error in paste("Good morning", x) : 
@@ -299,11 +287,48 @@ dros_weight <- tibble(vial, sex, weight_mg)
 
 #### Step 1.
 
-What functions would you use to extract the heaviest male from this dataset? Try and think that through first, then see if you can rework it into a function.
+What functions would you use to extract the heaviest male from this dataset? Try and think that through first.
 
-<button id="displayTextunnamed-chunk-26" onclick="javascript:toggle('unnamed-chunk-26');">Show Solution</button>
+<button id="displayTextunnamed-chunk-27" onclick="javascript:toggle('unnamed-chunk-27');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-26" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-27" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+
+```r
+  dros_weight %>% 
+    filter(sex == "male") %>% 
+    arrange(., desc(weight_mg)) %>% 
+    head(., n=1)
+```
+
+<div class="kable-table">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> vial </th>
+   <th style="text-align:left;"> sex </th>
+   <th style="text-align:right;"> weight_mg </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:left;"> male </td>
+   <td style="text-align:right;"> 0.2358928 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div></div></div>
+
+#### Step 2. 
+
+Abstract your lines of code to make a function. How could you remove the data and introduce a placeholder instead?
+
+<button id="displayTextunnamed-chunk-28" onclick="javascript:toggle('unnamed-chunk-28');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-28" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 find_largest_male <- function(df){ 
@@ -316,14 +341,16 @@ find_largest_male <- function(df){
 </div></div></div>
 
 
-#### Step 2.
+#### Step 3.
 
-Now we have a basic function we can work to refine and extend it. What if we made a function that could pick the largest Drosophila overall, or male or female depending on what we need?
+Now we have a basic function we can work to refine and extend it. 
+
+What if we made a function that could pick the largest Drosophila overall, or male or female depending on what we need?
 
 
-<button id="displayTextunnamed-chunk-27" onclick="javascript:toggle('unnamed-chunk-27');">Show Solution</button>
+<button id="displayTextunnamed-chunk-29" onclick="javascript:toggle('unnamed-chunk-29');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-27" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-29" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 find_largest_fly <- function(df,  n=1, s=c("male", "female") ){ 
@@ -335,7 +362,9 @@ find_largest_fly <- function(df,  n=1, s=c("male", "female") ){
 ```
 </div></div></div>
 
-## Custom ggplot themes
+## Examples
+
+### Custom ggplot themes
 
 It is often the case that we start to default to a particular 'style' for our figures, or you may be making several similar figures within a research paper. Creating custom functions can extend to making our own custom ggplot themes. You have probably already used theme variants such as `theme_bw()`, `theme_void()`, `theme_minimal()` - these are incredibly useful, but you might find you still wish to make consistent changes. 
 
@@ -351,7 +380,7 @@ plot <- dros_weight %>%
 plot
 ```
 
-<img src="09-writing-functions_files/figure-html/unnamed-chunk-28-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="09-writing-functions_files/figure-html/unnamed-chunk-30-1.png" width="100%" style="display: block; margin: auto;" />
 
 With the addition of a title and `theme_classic()` we can improve the style quickly
 
@@ -362,7 +391,7 @@ plot+
   theme_classic()
 ```
 
-<img src="09-writing-functions_files/figure-html/unnamed-chunk-29-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="09-writing-functions_files/figure-html/unnamed-chunk-31-1.png" width="100%" style="display: block; margin: auto;" />
 
 But I **still** want to make some more changes, rather than do this work for one figure, and potentially have to repeat this several times for subsequent figures, I can decide to make a new function instead. 
 
@@ -415,7 +444,7 @@ plot+
 theme_custom()
 ```
 
-<img src="09-writing-functions_files/figure-html/unnamed-chunk-31-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="09-writing-functions_files/figure-html/unnamed-chunk-33-1.png" width="100%" style="display: block; margin: auto;" />
 
 <div class="info">
 <p>Functions are about 'abstracting' a command, so it can be used more than once. If you are having trouble writing a function, start by writing a standard set of commands as you would to solve a specific problem. Then work backwards to turn this into a function.</p>
@@ -432,6 +461,12 @@ In the previous section we walked through some very basic writing of new functio
 ## Iteration
 
 We’ve seen how to write a function and how they can be used to create concise re-usable operations that can be applied multiple times in a script without having to copy and paste, but where functions really come into their own is when combined with iteration. Iteration is the process of running the same operation on a group of objects, further minimising code replication. 
+
+Here we will introduce two approaches to iterative operations - using for loops and using the package `purrr`.
+
+1. for loops iterate code across a series of inputs, but are less common in R than in other programming languages. Nevertheless, we introduce them here as a learning tool and reference
+
+2. The `purrr` package is the tidyverse approach to iterative operations - it works by “mapping” a function across many inputs (values, columns, datasets, etc.)
 
 
 ### For Loops
@@ -519,7 +554,7 @@ output
 ```
 
 ```
-## [1]  0.2002984 -0.1185998 -0.2140987  0.3083093
+## [1] -0.2188119 -0.2428444  0.2594478 -0.5014775
 ```
 
 ### Exercise for For Loops
@@ -568,7 +603,7 @@ vulture_scatter <- ggplot(vultureITCR, aes(x = year, y = abundance, colour = Cou
 vulture_scatter
 ```
 
-<img src="09-writing-functions_files/figure-html/unnamed-chunk-40-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="09-writing-functions_files/figure-html/unnamed-chunk-42-1.png" width="100%" style="display: block; margin: auto;" />
 
 We can use custom themes (like the one you made earlier) to quickly update figures
 
@@ -577,7 +612,7 @@ We can use custom themes (like the one you made earlier) to quickly update figur
 vulture_scatter+theme_custom()
 ```
 
-<img src="09-writing-functions_files/figure-html/unnamed-chunk-41-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="09-writing-functions_files/figure-html/unnamed-chunk-43-1.png" width="100%" style="display: block; margin: auto;" />
 
 Now let's take a look at using functions and loops to help us build figures. 
 
@@ -641,7 +676,7 @@ house_sparrow_scatter+
   plot_layout(design=layout)
 ```
 
-<img src="09-writing-functions_files/figure-html/unnamed-chunk-44-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="09-writing-functions_files/figure-html/unnamed-chunk-46-1.png" width="100%" style="display: block; margin: auto;" />
 
 This is ok, but arguably still requires a lot of code repetition. We have used the same lines of code four times to recreate four plots that are functionally the same. If we want to make any changes to the look of our plots we have to make four separate edits & mistakes can easily creep in. 
 
@@ -679,7 +714,7 @@ for (i in 1:length(Sp_list)) {
 }
 ```
 
-<img src="09-writing-functions_files/figure-html/unnamed-chunk-46-1.png" width="100%" style="display: block; margin: auto;" /><img src="09-writing-functions_files/figure-html/unnamed-chunk-46-2.png" width="100%" style="display: block; margin: auto;" /><img src="09-writing-functions_files/figure-html/unnamed-chunk-46-3.png" width="100%" style="display: block; margin: auto;" /><img src="09-writing-functions_files/figure-html/unnamed-chunk-46-4.png" width="100%" style="display: block; margin: auto;" />
+<img src="09-writing-functions_files/figure-html/unnamed-chunk-48-1.png" width="100%" style="display: block; margin: auto;" /><img src="09-writing-functions_files/figure-html/unnamed-chunk-48-2.png" width="100%" style="display: block; margin: auto;" /><img src="09-writing-functions_files/figure-html/unnamed-chunk-48-3.png" width="100%" style="display: block; margin: auto;" /><img src="09-writing-functions_files/figure-html/unnamed-chunk-48-4.png" width="100%" style="display: block; margin: auto;" />
 
 So now we have a new object `my_plots` which is a list containing the four plots. This loop allowed us to code the details of our figures once, then iterate across four different groups.
 
@@ -689,7 +724,7 @@ wrap_plots(my_plots)+
   plot_layout(design=layout) 
 ```
 
-<img src="09-writing-functions_files/figure-html/unnamed-chunk-47-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="09-writing-functions_files/figure-html/unnamed-chunk-49-1.png" width="100%" style="display: block; margin: auto;" />
 
 ```r
 #wrap_plots function from patchwork can take a list of ggplots
@@ -750,13 +785,30 @@ x
 
 A lot of functions in R are already vectorised and you don't even have to think about this concept. When we want more control over how this vectorization is applied, we have used the function `group_by()` It allows us to subset our data into hidden vectors, then command R to perform subsequent `dplyr` functions on each group separately. Because of the combined functionality of R's vectorization and dplyr's data tools you might find there is little need for loops. When we *do* wish to apply a function that isn't vectorize in the way we want - then tidyverse has an answer to this as well - purrr @R-purrr and the `map()` function
 
-### `map()`
+### Learn to purrr
 
-There are also a few other advantages to using `map()` - you can use it with pipes %>%, it handles errors better than normal for loops, and the syntax is quite clean and simple! 
+There are also a few other advantages to using `purrr::map()` - you can use it with pipes %>%, it handles errors better than normal for loops, and the syntax is quite clean and simple! 
 
 **Remember** purrr is a very tidyverse focused method of iteration, so understanding for loops can be useful if you end up learning other programming languages in the future. 
 
 **purrr** is more focused on the function, and less obviously focused on the looping aspect, as you might be able to see below.
+
+
+
+The basic syntax is map(`.x` = SEQUENCE, `.f` = FUNCTION, OTHER ARGUMENTS). In a bit more detail:
+
+* `.x` = are the inputs upon which the .f function will be iteratively applied - e.g. a vector of jurisdiction names, columns in a data frame, or a list of data frames
+
+* `.f` = is the function to apply to each element of the .x input - it could be a function like print() that already exists, or a custom function that you define. The function is often written after a tilde ~ (details below).
+A few more notes on syntax:
+
+* If the function needs no further arguments specified, it can be written with no parentheses and no tilde (e.g. `.f = mean`). To provide arguments that will be the same value for each iteration, provide them within `map()` but outside the `.f = argument`, such as the `na.rm = T` in `map(.x = my_list, .f = mean, na.rm=T)`.
+
+* You can use `.x` (or simply `.`) within the `.f = function` as a placeholder for the `.x` value of that iteration
+
+* Use tilde syntax (`~`) to have greater control over the function - write the function as normal with parentheses, such as: `map(.x = my_list, .f = ~mean(., na.rm = T))`. Use this syntax particularly if the value of an argument will change each iteration, or if it is the value `.x` itself.
+
+**The output of using` map()` is a list** - a list is an object class like a vector but whose elements can be of different classes. So, a list produced by `map()` could contain many data frames, or many vectors, many single values, or even many lists! There are alternative versions of `map()` explained below that produce other types of outputs (e.g. `map_dfr()` to produce a data frame, `map_chr()` to produce character vectors, and `map_dbl()` to produce numeric vectors).
 
 Basic `map()` will *always* return a list of values
 
@@ -765,6 +817,7 @@ Basic `map()` will *always* return a list of values
 * `map_dbl()` returns a double vector
 * `map_chr()` returns a character vector
 * `map_df()` returns a data frame
+
 
 
 ```r
@@ -781,11 +834,12 @@ typeof(map_dbl_result)
 
 ```
 ##         ...1        Class        Order  Common.Name Country.list       Region 
-##       182163           15          101         2948          360           10 
+##       182086           14          100         2947          357            9 
 ##       system        biome        realm         year    abundance 
-##            5           34           17           45        30913 
+##            4           33           16           45        30872 
 ## [1] "double"
 ```
+
 
 ```r
 # Apply n_distinct to all variables, returning a dataframe
@@ -819,17 +873,17 @@ is_tibble(map_df_result)
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:right;"> 182163 </td>
-   <td style="text-align:right;"> 15 </td>
-   <td style="text-align:right;"> 101 </td>
-   <td style="text-align:right;"> 2948 </td>
-   <td style="text-align:right;"> 360 </td>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 34 </td>
-   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 182086 </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 100 </td>
+   <td style="text-align:right;"> 2947 </td>
+   <td style="text-align:right;"> 357 </td>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 33 </td>
+   <td style="text-align:right;"> 16 </td>
    <td style="text-align:right;"> 45 </td>
-   <td style="text-align:right;"> 30913 </td>
+   <td style="text-align:right;"> 30872 </td>
   </tr>
 </tbody>
 </table>
@@ -838,6 +892,90 @@ is_tibble(map_df_result)
 
 ```
 ## [1] TRUE
+```
+
+
+## Reading and writing lots of files
+
+### Writing
+
+
+```r
+LPI_list <- LPI %>% 
+  group_split(Class)
+```
+
+
+I’ll also use `purrr::map()` to take the character values from the Class column itself for assigning names to the list. `map()` transforms an input by applying a function to each element of the input, and then returns a vector the same length as the input. In this immediate example, the input is the list_of_dfs and we apply the function `dplyr::pull()` to extract the Class variable from each data frame. We then repeat this approach to convert Class into character type with `as.character()` and take out a single value with `unique()`:
+
+
+```r
+  names(LPI_list) <- LPI_list %>%
+  purrr::map(~pull(.,Class)) %>% # Pull out Species variable
+  purrr::map(~as.character(.)) %>% # Convert factor to character
+  purrr::map(~unique(.)) # Set this as names for list members
+
+names(LPI_list)
+```
+```
+ [1] "Actinopterygii"            "Amphibia"                  "Aves"                      "Cephalaspidomorphi"       
+ [5] "Cetacea"                   "Chondrichthyes"            "Elasmobranchii"            "Holocephali"              
+ [9] "Mammalia"                  "Myxini"                    "Perciformes"               "Reptilia"                 
+[13] "Sarcopterygii"             "Testudinidae"              "updated by Nancy - Feb/02"
+
+```
+
+Exporting the list of data frames into multiple CSV files will take a few more lines of code, but is relatively straightforward. There are three main steps:
+
+1. Define a function that tells R what the names for each CSV file should be, which I’ve called output_csv() below. The data argument will take in a data frame whilst the names argument will take in a character string that will form part of the file name for the individual CSV file.
+
+2. Create a named list where the names match the arguments of the function you’ve just defined (data and names), and should contain the objects that you would like to pass through to the function for the respective arguments. In this case, list_of_dfs will provide the three data frames, and names(list_of_dfs) will provide the names of those three data frames. This is necessary for running pmap(), which in my view is basically a super-powered version of map() that lets you iterate over multiple inputs simultaneously.
+
+3. `pmap()` will then iterate through the two sets of inputs through output_csv() (the inputs are used as arguments), which then writes the three CSV files with the file names you want. For the “writing” function, you could either use write_csv() from readr (part of tidyverse) or fwrite() from data.table, depending on your workflow / style.
+
+
+
+```r
+# Step 1
+# Define a function for exporting csv with the desired file names and into the right path
+output_csv <- function(data, names){ 
+    folder_path <- "../data/"
+    
+    write_csv(data, paste0(folder_path, "class-", names, ".csv"))
+  }
+
+# Step 2
+list(data = LPI_list,
+     names = names(LPI_list)) %>% 
+  
+# Step 3
+  purrr::pmap(output_csv) 
+```
+
+
+
+### Reading
+
+The method for reading CSV files into a directory is slightly different, as you’ll need to find a way to identify or create a character vector of names of all the files that you want to load into R. To do this, we’ll use `list.files()`, which produces a character vector of the names of files or directories in the named directory:
+
+
+```r
+list.files(path="../data/", pattern = "*.csv", full.names = T)
+```
+```
+ [1] "class-Actinopterygii.csv"     "class-Amphibia.csv"           "class-Aves.csv"               "class-Cephalaspidomorphi.csv"
+ [5] "class-Cetacea.csv"            "class-Chondrichthyes.csv"     "class-Elasmobranchii.csv"     "class-Holocephali.csv"       
+ [9] "class-Mammalia.csv"           "class-Myxini.csv"             "class-Perciformes.csv"        "class-Reptilia.csv"          
+[13] "class-Sarcopterygii.csv"      "class-Testudinidae.csv"
+
+```
+
+The code below takes that list of files, pipes it to a `map_df()` function that runs read_csv on each file, then outputs everything toa dataframe
+
+
+```r
+LPI <- list.files(path="../data/", pattern = "*.csv", full.names = T) %>% 
+     map_df(~read_csv(.))
 ```
 
 I think `map_df` is extremely useful because you can feed it’s output directly into a ggplot2 call:
@@ -854,7 +992,7 @@ LPI %>%
   coord_flip()
 ```
 
-<img src="09-writing-functions_files/figure-html/unnamed-chunk-51-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="09-writing-functions_files/figure-html/unnamed-chunk-58-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 Now you have a simple grasp of `purrr` you should see that we have a list containing species objects, and an anonymous function ~ggplot on the right. We can use this to quickly make four plots, just like we did with our for loops. 
@@ -874,15 +1012,102 @@ my_plots_2 <-
 wrap_plots(my_plots_2)+plot_layout(design=layout)
 ```
 
-<img src="09-writing-functions_files/figure-html/unnamed-chunk-52-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="09-writing-functions_files/figure-html/unnamed-chunk-59-1.png" width="100%" style="display: block; margin: auto;" />
 
-## More Practice
 
-If you want to play with basic coding more, try some of these other tutorials, if you try them, let me know how you get on! 
 
-[Importing Hospital Records](https://www.gerkelab.com/blog/2018/09/import-directory-csv-purrr-readr/)
+## Activity 4: Test yourself
 
-[Bioinformatics and Lists](https://sanderwuyts.com/en/blog/purrr-tutorial/)
+**Question 1.** Predict the output of the following when executed in R:
+
+
+```r
+foo=function(d,n,max){
+   nums=seq(from=1, by=d, length.out=n)
+   return(nums[nums <= max])
+}
+foo(4,5,10)
+```
+
+<select class='webex-select'><option value='blank'></option><option value=''>4, 5, 10</option><option value='answer'>1, 5, 9</option><option value=''>4, 8, 12</option></select>
+
+
+**Question 2.** Predict the output of the following when executed in R:
+
+
+```r
+fum=function(a,b) {
+  a = a[a<b]
+  return(a)
+}
+
+fum(3:7,(1:5)^2)
+```
+
+<select class='webex-select'><option value='blank'></option><option value='answer'>5, 6, 7</option><option value=''>3, 4, 5, 6, 7</option><option value=''>3, 4</option></select>
+
+
+**Question 3.** Write a function that adds two numbers and divides the results by 2.
+
+<button id="displayTextunnamed-chunk-62" onclick="javascript:toggle('unnamed-chunk-62');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-62" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+
+```r
+addtwo <- function(num1, num2){
+(num1 + num2)/2
+}
+```
+</div></div></div>
+
+
+**Question 4.**  Recode values of a datase. tFor example, if you have a survey of age data, you may want to convert any crazy values (like anything below 0 or above 100) to NA. Write a function called recode.integer() with 3 arguments: x, lb, and ub. We’ll assume that x is a numeric vector. The function should look at the values of x, convert any values below lb and above ub to NA, and then return the resulting vector. Here is the function in action:
+
+Some hints: there are multiple ways to solve this. 
+
+
+```r
+vector <- c(-5:30)
+```
+
+
+
+```r
+recode.integer(x = vector,
+               lb = 0,
+               ub = 10)
+```
+
+<button id="displayTextunnamed-chunk-65" onclick="javascript:toggle('unnamed-chunk-65');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-65" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+
+```r
+recode.integer <- function(x, lb, ub){
+  x[x<lb] <- NA
+  x[x>ub] <- NA
+  return(x)
+}
+```
+
+```r
+recode.integer <- function(x, lb, ub){
+    x <- x %>% as_tibble() %>% 
+      mutate(value = replace(value, value<lb, NA)) %>% 
+      mutate(value = replace(value, value>ub, NA))
+return(x)}
+
+recode.numeric <- function(x, lb, ub){
+x <- if_else(x < lb, NA_integer_, x)
+x <- if_else(x > ub, NA_integer_, x)
+return(x)
+}
+```
+</div></div></div>
+
+## Activity 5
+
+If you are hungry for more `map()` then check out [this blogpost](https://www.rebeccabarter.com/blog/2019-08-19_purrr/#simplest-usage-repeated-looping-with-map)
 
 ## Summary
 

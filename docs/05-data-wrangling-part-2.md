@@ -4,6 +4,8 @@
 
 
 
+
+
 ## Load your workspace
 
 You should have a workspace ready to work with the Palmer penguins data. Load this workspace now. 
@@ -18,11 +20,15 @@ Think about some basic checks before you start your work today.
 
 * Check for any warning or error messages
 
-* Add the code from today's session as we go
+* Add the code from today's session to your script as we go
 
 ## More summary tools
 
-Very often we want to make calculations aobut groups of observations, such as the mean or median. We are often interested in comparing responses among groups. For example, we previously found the number of distinct penguins in our entire dataset
+Very often we want to make calculations aobut groups of observations, such as the mean or median. We are often interested in comparing responses among groups. For example, we previously found the number of distinct penguins in our entire dataset.
+
+<div class="try">
+<p>Add these new lines of code to your script as you try them. Comment out # and add short descriptions of what you are achieving with them</p>
+</div>
 
 
 ```r
@@ -488,14 +494,17 @@ Depending on how we interpret the date ordering in a file, we can use `ymd()`, `
 </div>
 
 
+
 <div class='webex-solution'><button>Solution</button>
 
 
 
+
 ```r
-penguins <- penguins %>% 
+penguins <- penguins %>%
   mutate(date_egg_proper = lubridate::dmy(date_egg))
 ```
+
 
 Here we use the `mutate` function from `dplyr` to create a *new variable* called `date_egg_proper` based on the output of converting the characters in `date_egg` to date format. The original variable is left intact, if we had specified the "new" variable was also called `date_egg` then it would have overwritten the original variable. 
 
@@ -570,7 +579,7 @@ penguins %>%
   geom_bar()
 ```
 
-<img src="05-data-wrangling-part-2_files/figure-html/unnamed-chunk-37-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="05-data-wrangling-part-2_files/figure-html/unnamed-chunk-39-1.png" width="100%" style="display: block; margin: auto;" />
 
 To convert a character or numeric column to class factor, you can use any function from the `forcats` package. They will convert to class factor and then also perform or allow certain ordering of the levels - for example using `forcats::fct_relevel()` lets you manually specify the level order. 
 The function `as_factor()` simply converts the class without any further capabilities.
@@ -610,7 +619,7 @@ penguins %>%
   geom_bar()
 ```
 
-<img src="05-data-wrangling-part-2_files/figure-html/unnamed-chunk-41-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="05-data-wrangling-part-2_files/figure-html/unnamed-chunk-43-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Finished
 
@@ -619,7 +628,7 @@ penguins %>%
 * Make sure your workspace is set **not** to save objects from the environment [*between* sessions](#global-options).
 
 ## Activity: Test yourself
-### Head to Blackboard when complete and submit your answers to the quiz.
+
 
 **Question 1.** In order to subset a data by **rows** I should use the function <select class='webex-select'><option value='blank'></option><option value=''>select()</option><option value='answer'>filter()</option><option value=''>group_by()</option></select>
 

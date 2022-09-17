@@ -25,7 +25,7 @@ favicon: images/logos/favicon.ico
 # automatically create a bib database for R packages
 # add any packages you want to cite here
 knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'palmerpenguins', 'lubridate', 'janitor', 'rstatix', 'ggsci', 'wesanderson', 'colorBlindness', 'patchwork', 'here', 'kableExtra', 'plotly', 'gitcreds', 'usethis', 'ggridges', 'scales', 'purrr', 'tinytex'
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'palmerpenguins', 'lubridate', 'janitor', 'rstatix', 'ggsci', 'wesanderson', 'colorBlindness', 'patchwork', 'here', 'kableExtra', 'plotly', 'gitcreds', 'usethis', 'ggridges', 'scales', 'purrr', 'tinytex', 'gt'
 ), 'packages.bib')
 
 ```

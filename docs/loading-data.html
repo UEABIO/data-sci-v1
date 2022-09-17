@@ -94,7 +94,7 @@
 <li><a class="" href="data-visualisation-with-ggplot2.html"><span class="header-section-number">6</span> Data visualisation with ggplot2</a></li>
 <li><a class="" href="markdown.html"><span class="header-section-number">7</span> Markdown</a></li>
 <li><a class="" href="github.html"><span class="header-section-number">8</span> Github</a></li>
-<li><a class="" href="functions-1.html"><span class="header-section-number">9</span> Functions</a></li>
+<li><a class="" href="functions-and-iteration.html"><span class="header-section-number">9</span> Functions and Iteration</a></li>
 <li><a class="" href="data-insights-part-one.html"><span class="header-section-number">10</span> Data Insights part one</a></li>
 <li><a class="" href="data-insights-part-two.html"><span class="header-section-number">11</span> Data insights part two</a></li>
 <li class="book-part">Statistics</li>
@@ -139,7 +139,6 @@
 <h2>
 <span class="header-section-number">3.1</span> Meet the Penguins<a class="anchor" aria-label="anchor" href="#meet-the-penguins"><i class="fas fa-link"></i></a>
 </h2>
-<p>We have chosen to continue working with a dataset you have been introduced to already - the Palmer Penguins dataset. Previously we loaded a cleaned dataset, very quickly using an R package. Today we will be working in a more realistic scenario - uploading our data from a spreadsheet into our R workspace.</p>
 <p>This data, taken from the <code>palmerpenguins</code> (<span class="citation"><a href="references.html#ref-R-palmerpenguins" role="doc-biblioref">Horst et al.</a> (<a href="references.html#ref-R-palmerpenguins" role="doc-biblioref">2020</a>)</span>) package was originally published by <span class="citation"><a href="references.html#ref-Antarctic" role="doc-biblioref">Gorman et al.</a> (<a href="references.html#ref-Antarctic" role="doc-biblioref">2014</a>)</span>. In our course we will work with real data that has been shared by other researchers.</p>
 <p>The palmer penguins data contains size measurements, clutch observations, and blood isotope ratios for three penguin species observed on three islands in the Palmer Archipelago, Antarctica over a study period of three years.</p>
 <div class="inline-figure"><img src="images/gorman-penguins.jpg" title="Photo of three penguin species, Chinstrap, Gentoo, Adelie" alt="Photo of three penguin species, Chinstrap, Gentoo, Adelie" width="80%" style="display: block; margin: auto;"></div>
@@ -154,12 +153,12 @@
 </h2>
 <p>Before we can begin working with the data, we need to do some set-up.</p>
 <ul>
-<li><p>Go to RStudio Cloud and open this week's R project</p></li>
+<li><p>Go to RStudio Cloud and open the <code>Penguins</code> R project</p></li>
 <li>
 <p>Create the following folders using the + New Folder button in the Files tab</p>
 <ul>
 <li>data</li>
-<li>figures</li>
+<li>outputs</li>
 <li>scripts</li>
 </ul>
 </li>
@@ -171,7 +170,7 @@ R is case-sensitive so type everything exactly as printed here
 </div>
 <p>Having these separate subfolders within our project helps keep things tidy, means it's harder to lose things, and lets you easily tell R exactly where to go to retrieve data.</p>
 <p>The next step of our workflow is to have a well organised project space. RStudio Cloud does a lot of the hard work for you, each new data project can be set up with its own Project space.</p>
-<p>We will define a project as a series of linked questions that uses one (or sometimes several) datasets. For example a coursework assignment for a particular module would be its own project, or eventually your final year research project.</p>
+<p>We will define a project as a series of linked questions that uses one (or sometimes several) datasets. For example a coursework assignment for a particular module would be its own project, a series of linked experiments or particular research project might be its own project.</p>
 <p>A Project will contain several files, possibly organised into sub-folders containing data, R scripts and final outputs. You might want to keep any information (wider reading) you have gathered that is relevant to your project.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-6"></span>
@@ -245,25 +244,32 @@ Figure 3.3: Highlighted the buttons to upload files, and more options
 </h2>
 <p>Let's now create a new R script file in which we will write instructions and store comments for manipulating data, developing tables and figures. Use the File &gt; New Script menu item and select an R Script.</p>
 <p>Add the following:</p>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#___________________________----</span>
-<span class="co"># SET UP ---</span>
+<span class="co"># SET UP ----</span>
 <span class="co">## An analysis of the bill dimensions of male and female Adelie, Gentoo and Chinstrap penguins ----</span>
 
 <span class="co">### Data first published in  Gorman, KB, TD Williams, and WR Fraser. 2014. “Ecological Sexual Dimorphism and Environmental Variability Within a Community of Antarctic Penguins (Genus Pygoscelis).” PLos One 9 (3): e90081. https://doi.org/10.1371/journal.pone.0090081. ----</span>--
 <span class="co">#__________________________----</span></code></pre></div>
 <p>Then load the following add-on package to the R script, just underneath these comments. Tidyverse isn't actually one package, but a bundle of many different packages that play well together - for example it <em>includes</em> <code>ggplot2</code> which we used in the last session, so we don't have to call that separately</p>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<p>Add the following to your script:</p>
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># PACKAGES ----</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span> <span class="co"># tidy data packages</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sfirke/janitor">janitor</a></span><span class="op">)</span> <span class="co"># cleans variable names</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span> <span class="co"># make sure dates are processed properly</span>
 <span class="co">#__________________________----</span></code></pre></div>
 <p>Save this file inside the scripts folder and call it <code>01_import_penguins_data.R</code></p>
-<div id="document-outline" class="section level3" number="3.5.1">
-<h3>
-<span class="header-section-number">3.5.1</span> Document outline<a class="anchor" aria-label="anchor" href="#document-outline"><i class="fas fa-link"></i></a>
-</h3>
+<div class="try">
+<p>
+Click on the document outline button (top right of script pane). This will show you how the use of
+</p>
+<p>
+#TITLES----
+</p>
+<p>
+Allows us to build a series of headers and subheaders, this is very useful when using longer scripts.
+</p>
 </div>
 </div>
 <div id="activity-5-read-in-data" class="section level2" number="3.6">
@@ -272,9 +278,10 @@ Figure 3.3: Highlighted the buttons to upload files, and more options
 </h2>
 <p>Now we can read in the data. To do this we will use the function <code>read_csv()</code> that allows us to read in .csv files. There are also functions that allow you to read in .xlsx files and other formats, however in this course we will only use .csv files.</p>
 <ul>
-<li>First, we will create an object called <code>penguins_data</code> that contains the data in the <code>penguins_raw.csv</code> file.</li>
+<li><p>First, we will create an object called <code>penguins_data</code> that contains the data in the <code>penguins_raw.csv</code> file.</p></li>
+<li><p>Add the following to your script, and check the document outline:</p></li>
 </ul>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># IMPORT DATA ----</span>
 <span class="va">penguins</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span> <span class="op">(</span><span class="st">"data/penguins_raw.csv"</span><span class="op">)</span>
 
@@ -349,14 +356,39 @@ For those of you using RStudio Cloud, remember you are working on a Linux OS clo
 </div>
 </div>
 </div>
-<div id="activity-6-test-yourself" class="section level2" number="3.8">
+<div id="activity-5-check-your-script" class="section level2" number="3.8">
 <h2>
-<span class="header-section-number">3.8</span> Activity 6: Test yourself<a class="anchor" aria-label="anchor" href="#activity-6-test-yourself"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.8</span> Activity 5: Check your script<a class="anchor" aria-label="anchor" href="#activity-5-check-your-script"><i class="fas fa-link"></i></a>
 </h2>
-<div id="head-to-blackboard-when-complete-and-submit-your-answers-to-the-quiz.-1" class="section level3" number="3.8.1">
-<h3>
-<span class="header-section-number">3.8.1</span> Head to Blackboard when complete and submit your answers to the quiz.<a class="anchor" aria-label="anchor" href="#head-to-blackboard-when-complete-and-submit-your-answers-to-the-quiz.-1"><i class="fas fa-link"></i></a>
-</h3>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#___________________________----</span>
+<span class="co"># SET UP ----</span>
+<span class="co">## An analysis of the bill dimensions of male and female Adelie, Gentoo and Chinstrap penguins ----</span>
+
+<span class="co">### Data first published in  Gorman, KB, TD Williams, and WR Fraser. 2014. “Ecological Sexual Dimorphism and Environmental Variability Within a Community of Antarctic Penguins (Genus Pygoscelis).” PLos One 9 (3): e90081. https://doi.org/10.1371/journal.pone.0090081. ----</span>--
+<span class="co">#__________________________----</span>
+
+<span class="co"># PACKAGES ----</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span> <span class="co"># tidy data packages</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sfirke/janitor">janitor</a></span><span class="op">)</span> <span class="co"># cleans variable names</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span> <span class="co"># make sure dates are processed properly</span>
+<span class="co">#__________________________----</span>
+
+<span class="co"># IMPORT DATA ----</span>
+<span class="va">penguins</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span> <span class="op">(</span><span class="st">"data/penguins_raw.csv"</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span> <span class="co"># check the data has loaded, prints first 10 rows of dataframe</span>
+<span class="co">#__________________________----</span></code></pre></div>
+</div>
+</div>
+<div id="activity-7-test-yourself-1" class="section level2" number="3.9">
+<h2>
+<span class="header-section-number">3.9</span> Activity 7: Test yourself<a class="anchor" aria-label="anchor" href="#activity-7-test-yourself-1"><i class="fas fa-link"></i></a>
+</h2>
 <p><strong>Question 1.</strong> In order to make your R project reproducible what filepath should you use?</p>
 <p><select class="webex-select"><option value="blank"></option>
 <option value="">Absolute filepath</option>
@@ -395,7 +427,6 @@ Explain This Answer
 <p><strong>Question 8.</strong> What operator do I need to use if I wish to assign the output of the <code>read_csv</code> function to an R object (rather than just print the dataframe into the console)?</p>
 <p><input class="webex-solveme nospaces" size="2" data-answer='["&lt;-"]'></p>
 
-</div>
 </div>
 </div>
 
@@ -589,9 +620,7 @@ $( document ).ready(function() {
 <li><a class="nav-link" href="#activity-1-organising-our-workspace"><span class="header-section-number">3.2</span> Activity 1: Organising our workspace</a></li>
 <li><a class="nav-link" href="#activity-2-access-our-data"><span class="header-section-number">3.3</span> Activity 2: Access our data</a></li>
 <li><a class="nav-link" href="#activity-3-upload-our-data"><span class="header-section-number">3.4</span> Activity 3: Upload our data</a></li>
-<li>
-<a class="nav-link" href="#activity-4-make-a-script"><span class="header-section-number">3.5</span> Activity 4: Make a script</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#document-outline"><span class="header-section-number">3.5.1</span> Document outline</a></li></ul>
-</li>
+<li><a class="nav-link" href="#activity-4-make-a-script"><span class="header-section-number">3.5</span> Activity 4: Make a script</a></li>
 <li><a class="nav-link" href="#activity-5-read-in-data"><span class="header-section-number">3.6</span> Activity 5: Read in data</a></li>
 <li>
 <a class="nav-link" href="#filepaths"><span class="header-section-number">3.7</span> Filepaths</a><ul class="nav navbar-nav">
@@ -601,9 +630,8 @@ $( document ).ready(function() {
 <li><a class="nav-link" href="#absolute-vs-relative-filepaths"><span class="header-section-number">3.7.4</span> Absolute vs Relative filepaths</a></li>
 </ul>
 </li>
-<li>
-<a class="nav-link" href="#activity-6-test-yourself"><span class="header-section-number">3.8</span> Activity 6: Test yourself</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#head-to-blackboard-when-complete-and-submit-your-answers-to-the-quiz.-1"><span class="header-section-number">3.8.1</span> Head to Blackboard when complete and submit your answers to the quiz.</a></li></ul>
-</li>
+<li><a class="nav-link" href="#activity-5-check-your-script"><span class="header-section-number">3.8</span> Activity 5: Check your script</a></li>
+<li><a class="nav-link" href="#activity-7-test-yourself-1"><span class="header-section-number">3.9</span> Activity 7: Test yourself</a></li>
 </ul>
 
       <div class="book-extra">
@@ -621,7 +649,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-08-31.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-09-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

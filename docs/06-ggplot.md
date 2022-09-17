@@ -8,18 +8,17 @@
 
 ## Intro to grammar
 
-<div class="figure" style="text-align: center">
-<img src="images/ambitious.png" alt="An example of what we can produce in ggplot" width="100%" />
-<p class="caption">(\#fig:ambitious-figure)An example of what we can produce in ggplot</p>
-</div>
-
-
 
 The ggplot2 package is widely used and valued for its simple, consistent approach to making data visuals.
 
 The 'grammar of graphics' relates to the different components of a plot that function like different parts of linguistic grammar. For example, all plots require axes, so the x and y axes form one part of the ‘language’ of a plot. Similarly, all plots have data represented between the axes, often as points, lines or bars. The visual way that the data is represented forms another component of the grammar of graphics. Furthermore, the colour, shape or size of points and lines can be used to encode additional information in the plot. This information is usually clarified in a key, or legend, which can also be considered part of this ‘grammar’.
 
 The philosophy of ggplot is much better explained by the package author, Hadley Wickham (@R-ggplot2). For now, we just need to be aware that ggplots are constructed by specifying the different components that we want to display, based on underlying information in a data frame.
+
+<div class="figure" style="text-align: center">
+<img src="images/ambitious.png" alt="An example of what we can produce in ggplot" width="100%" />
+<p class="caption">(\#fig:ambitious-figure)An example of what we can produce in ggplot</p>
+</div>
 
 ## Before we start
 
@@ -95,7 +94,7 @@ Because we want a scatter plot, each point will have an x and a y coordinate. We
 We give these specifications separated by a comma. Quotes are not required when giving variables within `aes()`.
 
 <div class="info">
-<p>Those interested in why quotes aren’t required can read about [non-standard evaluation] (<a href="https://edwinth.github.io/blog/nse/" class="uri">https://edwinth.github.io/blog/nse/</a>).</p>
+<p>Those interested in why quotes aren’t required can read about <a href="https://edwinth.github.io/blog/nse/">non-standard evaluation</a>.</p>
 </div>
 
 
@@ -182,6 +181,13 @@ In order to achieve this we need to use `aes()` again, and make the colour condi
 
 Here, the `aes()` function containing the relevant column name, is given within the `geom_point()` function.
 
+<div class="warning">
+<p>A common mistake is to get confused about when to use (or not use) <code>aes()</code></p>
+<p>If specifying a fixed aesthetic e.g. red for everything it DOES NOT go inside <code>aes()</code> instead specify e.g. colour = "red" or shape =21.</p>
+<p>If you wish to modify an aethetic according to a variable in your data THEN it DOES go inside <code>aes()</code> e.g. <code>aes(colour = species)</code></p>
+</div>
+
+
 
 ```r
 penguins %>% 
@@ -190,7 +196,7 @@ penguins %>%
   geom_point(aes(colour=species))
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-14-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-15-1.png" width="100%" style="display: block; margin: auto;" />
 
 <div class="info">
 <p>You may (or may not) have noticed that the grammar of ggplot (and tidyverse in general) accepts British/Americanization for spelling!!!</p>
@@ -223,7 +229,7 @@ penguins %>%
               aes(colour=species)) # note layers inherit information from the top ggplot() function but not previous layers - if we want separate lines per species we need to either specify this again *or* move the color aesthetic to the top layer. 
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-17-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-18-1.png" width="100%" style="display: block; margin: auto;" />
 
 In the example above we may notice that we are assigning colour to the same variable (species) in both geometric layers. This means we have the option to simplify our code. Aesthetics set in the "top layer" of `ggplot()` are inherited by all subsequent layers.
 
@@ -238,7 +244,7 @@ penguins %>%
               se=FALSE)
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-18-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-19-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 <div class="try">
@@ -266,7 +272,7 @@ penguins %>%
   xlim(0,240) + ylim(0,7000)
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-20-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-21-1.png" width="100%" style="display: block; margin: auto;" />
 
 Further, we can control the coordinate space using `coord()` functions. Say we want to flip the x and y axes, we add `coord_flip()`:
 
@@ -283,7 +289,7 @@ penguins %>%
   coord_flip()
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-21-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-22-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Labels
 
@@ -303,7 +309,7 @@ penguins %>%
        y = "Body mass (g)")
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-22-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-23-1.png" width="100%" style="display: block; margin: auto;" />
 
 ### Titles and subtitles
 
@@ -323,7 +329,7 @@ penguins %>%
        subtitle= "Flipper length and body mass for three penguin species")
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-23-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-24-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Themes
 
@@ -347,7 +353,7 @@ penguins %>%
   theme_void()
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-24-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-25-1.png" width="100%" style="display: block; margin: auto;" />
 
 <div class="info">
 <p>There is a lot more customisation available through the theme() function. We will look at making our own custom themes in later lessons</p>
@@ -372,7 +378,7 @@ ggplot(data = penguins, aes(x = species, y = culmen_length_mm)) +
               show.legend = FALSE) # don't leave a legend in a plot, if it doesn't add value
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-26-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-27-1.png" width="100%" style="display: block; margin: auto;" />
 
 ### Boxplots
 
@@ -392,7 +398,7 @@ ggplot(data = penguins, aes(x = species, y = culmen_length_mm)) +
               show.legend = FALSE)
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-28-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-29-1.png" width="100%" style="display: block; margin: auto;" />
 
 <div class="try">
 <p>Note that when specifying colour variables using <code>aes()</code> some geometric shapes support an internal colour "fill" and an external colour "colour". Try changing the aes fill for colour in the code above, and note what happens.</p>
@@ -415,7 +421,7 @@ ggplot(data = penguins, aes(x = species, y = culmen_length_mm)) +
   theme(legend.position = "none")
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-30-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-31-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 <div class="warning">
@@ -435,7 +441,7 @@ penguins %>%
     geom_histogram(bins=50)
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-32-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-33-1.png" width="100%" style="display: block; margin: auto;" />
 
 At first you might struggle to see/understand the difference between these two charts. The shapes should be roughly the same. 
 
@@ -448,7 +454,7 @@ penguins %>%
                    position = "identity")
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-33-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-34-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 <div class='webex-solution'><button>Explain this</button>
@@ -480,13 +486,17 @@ penguins %>%
                    colour="black")
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-35-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-36-1.png" width="100%" style="display: block; margin: auto;" />
 
-### Assign specific colours to variables
+### Choosing and using colour palettes
 
 You can specify what colours you want to assign to variables in a number of different ways. 
 
-In ggplot2, colors that are assigned to variables are modified via the scale_color_* and the scale_fill_* functions. In order to use color with your data, most importantly you need to know if you are dealing with a categorical or continuous variable. The color palette should be chosen depending on type of the variable, with sequential or diverging color palettes being used for continuous variables and qualitative color palettes for categorical variables:
+In ggplot2, colors that are assigned to variables are modified via the scale_color_* and the scale_fill_* functions. In order to use color with your data, most importantly you need to know if you are dealing with a categorical or continuous variable. The color palette should be chosen depending on type of the variable:
+
+* **sequential or diverging** color palettes being used for continuous variables 
+
+* **qualitative** color palettes for (unordered) categorical variables:
 
 <img src="images/palette.png" width="80%" style="display: block; margin: auto;" />
 
@@ -507,7 +517,7 @@ penguins %>%
   theme_minimal()
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-37-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-38-1.png" width="100%" style="display: block; margin: auto;" />
 
 You can also use a range of inbuilt colour palettes: 
 
@@ -521,7 +531,7 @@ penguins %>%
   theme_minimal()
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-38-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-39-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 <div class="info">
@@ -546,7 +556,7 @@ library(colorBlindness)
 colorBlindness::cvdPlot() # will automatically run on the last plot you made
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-41-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-42-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 ### Guides to visual accessibility 
@@ -578,7 +588,7 @@ penguins %>%
   facet_wrap(~sex)
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-44-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-45-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Patchwork
 
@@ -619,16 +629,48 @@ p3 <- penguins %>%
   plot_layout(guides = "collect") 
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-45-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-46-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Activity: Replicate this figure
 
 <div class="try">
 <p>How close can you get to replicating the figure below?</p>
-<p>Make sure to use the tips and links at the end of this chapter, when you are done save the file using the commands below and submit to Blackboard</p>
+<p>Make sure to use the tips and links at the end of this chapter, when you are done save the file and submit!</p>
 </div>
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-47-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-48-1.png" width="100%" style="display: block; margin: auto;" />
+
+
+
+<div class='webex-solution'><button>Solution</button>
+
+
+
+```r
+pal <- c("#FF8C00", "#A034F0", "#159090")
+
+penguins %>% 
+  ggplot(aes(x = species,
+             y = body_mass_g,
+             fill = species,
+             colour = species))+
+  geom_violin(alpha = 0.2)+
+  geom_boxplot(width = 0.2,
+               alpha = 0.6)+
+  scale_fill_manual(values = pal)+
+  scale_colour_manual(values = pal)+
+  theme_classic()+
+  theme(legend.position = "none")+
+    labs(
+    x = "",
+    y = "Body mass (g)",
+    title = "Body mass of brush-tailed penguins",
+    subtitle = "Box and violin plot of body mass by species")
+```
+
+
+</div>
+
 
 
 ## Saving
@@ -644,12 +686,21 @@ You should specify the output path to your **figures** folder, then provide a fi
 ggsave("figures/YYYYMMDD_ggplot_workshop_final_plot.png", dpi=300)
 ```
 
+<div class="try">
+<p>If you got this far and still have time why not try one of the following:</p>
+<ol style="list-style-type: decimal">
+<li><p>Making another type of figure using the penguins dataset, use the further reading below to use for inspiration.</p></li>
+<li><p>Use any of your own data</p></li>
+</ol>
+</div>
+
 
 ## Quitting
 
 <div class="warning">
-<p>Make sure you have saved your script! Remember to Download your image file from RStudio Cloud onto YOUR computer so that it is available for upload to Blackboard.</p>
+<p>Make sure you have saved your script! Remember to Download your image file from RStudio Cloud onto YOUR computer.</p>
 </div>
+
 
 <div class="info">
 <p>run <code>SessionInfo()</code> at the end of your script to gather the packages and versions you have been using. This is very useful for when you <a href="#how-to-cite-r-and-rstudio">cite R versions and packages</a> when writing reports later.</p>

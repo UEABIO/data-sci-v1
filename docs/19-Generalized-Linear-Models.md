@@ -1633,29 +1633,12 @@ First - we make a new dataset with the temperature on the day of the Challenger 
 
 ```r
 new_data <- tibble(temp=36, oring_binary=1)
-new_data
+
 
 augment_glm(binary_model, new_data)
 ```
 
 <div class="kable-table">
-
-<table>
- <thead>
-  <tr>
-   <th style="text-align:right;"> temp </th>
-   <th style="text-align:right;"> oring_binary </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 36 </td>
-   <td style="text-align:right;"> 1 </td>
-  </tr>
-</tbody>
-</table>
-
-</div><div class="kable-table">
 
 <table>
  <thead>

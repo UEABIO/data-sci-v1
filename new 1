@@ -1,0 +1,118 @@
+OPTIONAL - add question tallies to bottom of pages?
+SLIDOS
+CHECK PACKAGES
+RCloud ASSIGNMENTS
+
+# Intro to R and RStudio
+
+R and RStudio can be downloaded for free onto your personal computers 
+ACTION: Link this section to appendices
+
+Add the short explainer videos for RStudio Cloud!
+
+Add the Consoles vs scripts blurb
+
+Add the Environment blurb
+
+Add the navigate plots, files, packages, help tabs
+
+Customise RStudio tab
+
+Add blurb on Operators
+
+Got a Maths processing error in 1.5.4 check this
+
+1.7. What is the value of c - change box to solution
+
+1.12.6 - put an example of finished R script on Github?
+
+# 2. Basic programming
+
+2.2 - Warning box for never include install.packages in R scripts
+
+2.3 Run the warning output?
+
+2.3 This allows R to use the specific function from the package you intended
+Put in a line about how this happens because R is open source software
+
+2.4.1 - Remove bullet point
+
+2.8 call country_data object
+
+2.12 Activity 2 - put more blurb
+
+# 3 Loading Data
+
+3.1 Remove the reference to previously using penguins package
+3.2 Note reference to coursework and modules
+3.5. # SET UP ---- missing a dash
+3.5.1 Blurb about document outlines
+3.6. Make it clear they are adding lines to their script! 
+HAVE A finished script as an example?
+4.2. Keep adding to script from last time? 
+4.2.4 change box text to case_when()
+4.3 Include allison horst images???
+
+4.4 Fix pipe image
+4.4. more text about the three different R codes
+4.4 Solution text typo for 'length'
+4.5.5 Include drop_na function? Show how choosing columsn changes obs lost?
+4.7 show finished R script.
+
+# 5
+
+5.2 Make it clear that R code should be added to scripts
+include # comments or ask them to add their own?
+
+5.3.1. Include stringr outputs
+
+# 6 Data viz
+
+Shift first image to after into?
+6.3.1 fix box hyperlink
+6.4 warning box about when to use aes for colour
+6.8.1 change title to colour palettes?
+bullet points on when to use different types of palettes? 
+6.12 refers to Blackboard - and should have a solution
+
+Provide a finished script?
+
+7. Markdown - 
+DO i introduce here from chapter 3 (and for when loading .Rdata?) Would make markdown simpler- maybe not???
+
+- Common issues when knitting
+- chunk names
+- rmarkdown hygiene https://rmd4sci.njtierney.com/using-rmarkdown.html#the-anatomy-of-an-rmarkdown-document
+- Very simple tables with Markdown formatting
+- Using RStudio
+- Using the visual editor - citations etc. 
+
+
+
+NEEDS MOST IMMEDIATE ATTENTION
+9. Functions - Jumping rivers custome colours? More map exercises??? Move for loop to appendices???
+Use nested groups with purrr
+
+10
+10.4.5 - Wrong figure legend for gif?
+10.4.6 move drop_na to earlier chapter?
+
+10 - exercises with sum of squares, variance and standard deviation. 
+
+Use the normal distribution, sd and z scores? 
+
+11.1 is missing! 
+11.2 complex interactions
+11.3.1 reduce cor() outputs and correct .22 and .24
+11.3.2 reduce output using head()
+11.6.2 multiple ways to organise three or more layers?
+
+
+
+16 ANOVA - emmeans posthoc???
+
+17 - could do iteration based model approach? - use purr example
+
+17.7 add confidence intervals to emmeans package
+
+18 - better phylopic explanation

@@ -212,6 +212,14 @@ After the language name and optional chunk name put a comma, then you can includ
 
 * A chunk header must be written in **one line**
 
+````md
+
+```{r optional-name , eval = TRUE, echo = FALSE}`r ''`
+
+```
+
+````
+
 * Try to avoid periods, underscores, and spaces. Use hyphens ( - ) instead if you need a separator.
 
 Read more extensively about the knitr options here^[(https://yihui.org/knitr/options/)].
@@ -338,7 +346,7 @@ This is how `here()` works within an R project:
 
 So when you use `here()` wrapped inside other functions for importing/exporting (like `read_csv()` or `ggsave()`) if you include `here()` you can still use the RProject location as the root directory when 'knitting' Rmarkdown files, even if your markdown is tidied away into a **separate sub-folder**.
 
-This means your previous relative filepaths could be replaced with
+This means your previous relative filepaths should be replaced with:
 
 ````md
 ```{r, include=FALSE}`r ''`
@@ -502,7 +510,27 @@ https://benjaminlouis-stat.fr/en/blog/2020-05-21-astuces-ggplot-rmarkdown/
 
 ## Tables
 
-To create and manage able objects, we first pass the data frame through the `kable()` function. The package `kableExtra` @R-kableExtra gives us lots of extra styling options.^[(https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html)]
+### Markdown tables
+
+```
+| Syntax      | Description |
+| ----------- | ----------- |
+| Header      | Title       |
+| Paragraph   | Text        |
+
+```
+
+Which will render as this
+
+| Syntax      | Description |
+| ----------- | ----------- |
+| Header      | Title       |
+| Paragraph   | Text        |
+
+
+### knitr::kable()
+
+To create and manage able objects, we first pass the data frame through the `kable()` function from the `knitr` package. The package `kableExtra` @R-kableExtra gives us lots of extra styling options.^[(https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html)]
 
 ```{block, type="try"}
 Can you get this working?
@@ -523,6 +551,18 @@ penguins %>%
 
 ```
 
+### gt()
+
+The `gt` @R-gt package is all about making it simple to produce nice-looking display tables in HTML (so won't work for LaTex). [It has a lot of customisation options.](https://gt.rstudio.com/index.html) 
+
+```{r, eval = T}
+penguins %>% 
+    group_by(Species) %>% 
+    summarise(`Body Mass (g)`= mean(`Body Mass (g)`, na.rm = T),
+              `Flipper Length (mm)`= mean(`Flipper Length (mm)`, na.rm = T)) %>% gt::gt()
+
+```
+
 ## Source files
 
 One variation of the “self-contained” approach is to have R Markdown code chunks “source” (run) other R scripts. 
@@ -539,7 +579,7 @@ source("scripts/your-script.R")
 
 ## Activity 5: Connecting scripts and reports
 
-* Create a new Rmarkdown file (in the reports folder).
+* Create a **new** Rmarkdown file.
 
 * Save this (without changes) to the same folder as your `.Rproj` file and call it `03_linked_report_penguins.Rmd`.
 
@@ -550,7 +590,7 @@ We will now source the pre-written scripts for data loading and wrangling in you
 ```
 
 ````md
-```{r, include=FALSE}`r ''`
+```{r setup, include=FALSE}`r ''`
 # GLOBAL KNITR OPTIONS ----
 knitr::opts_chunk$set(echo = TRUE)
 # ____________________----
@@ -563,14 +603,14 @@ library(tidyverse)
 ````
 
 ````md
-```{r, include=FALSE}`r ''`
+```{r read-data, include=FALSE}`r ''`
 # READ DATA ----
 
 source("scripts/02_visualisation_penguins.R")
 
-#___________________________----
+```
 
-# PLOT ----
+```{r figure, include=FALSE}`r ''`
 
  (p1+p2)/p3+
   plot_layout(guides = "collect") 
@@ -583,7 +623,7 @@ source("scripts/02_visualisation_penguins.R")
 
 Let's make another reproducible report. 
 
-* Make a new .rmd file `YYYYMMDD_surname_5023Y_rmd_workshop.Rmd`
+* Make a new Rmarkdown or RNotebook file `YYYYMMDD_surname_5023Y_rmd_workshop.Rmd`
 
 * Make any summary figure you want from the penguins data with `ggplot`
 
@@ -593,10 +633,90 @@ Let's make another reproducible report.
 
 * Knit the report to **pdf**
 
-* Use chunk options to optimise your figure layout and text and make it so that raw code and rendered outputs are visible.
+* Use chunk options to optimise your figure layout and text and make it so that raw code and rendered outputs are visible. An example of literate programming
 
-### Head to Blackboard when complete and submit your document.
+### Hygiene tips
 
+I recommend having three chunks at the top of any document
+
+* Global chunk options
+
+* All packages
+
+* Reading data
+
+````md
+
+```{r setup , include=FALSE}`r ''`
+knitr::opts_chunk$set(echo = TRUE, 
+                      fig.align = "center",
+                      fig.width = 6,
+                      fig.asp = 0.8,
+                      out.width = "80%
+                      )
+                      
+```
+
+```{r library}`r ''`
+library(tidyverse)
+```
+
+```{r read-data}`r ''`
+source("scripts/02_visualisation_penguins.R")
+```
+
+````
+
+## Common knit issues
+
+Any of these issues will cause the Rmd document to fail to knit in its entirety. A failed knit is usually an easy fix, but needs you to READ the error message, and do a little detective work. 
+
+### Duplication
+
+````md
+
+```{r title-one}`r ''`
+```
+
+```{r title-one}`r ''`
+```
+
+````
+
+### Not the right order
+
+```
+plot(my_table)
+
+my_table <- table(mtcars$cyl)
+```
+
+### Forgotten trails
+
+: Missing “,”, or “(”, “}”, or “’”
+
+
+### Path not taken
+
+The Rmd document is in a different location the .Rproj file causing issues with relative filepaths
+
+### Spolling
+
+* Incorrectly labelled chunk options
+
+* Incorrectly evaluated R code
+
+## Visual editor
+
+RStudio comes with a pretty nifty [Visual Markdown Editor](https://www.rstudio.com/blog/exploring-rstudio-visual-markdown-editor/) which includes:
+
+* Spellcheck
+
+* Easy table & equation insertion
+
+* Easy citations and reference list building
+
+You can switch between modes with a button push, try it out! 
 
 ## Summing up Rmarkdown
 

@@ -14,17 +14,16 @@ library(lubridate)
 
 ## Intro to grammar
 
-```{r ambitious-figure, eval=TRUE, echo=FALSE, out.width="100%",  fig.cap="An example of what we can produce in ggplot"}
-knitr::include_graphics("images/ambitious.png")
-```
-
-
 
 The ggplot2 package is widely used and valued for its simple, consistent approach to making data visuals.
 
 The 'grammar of graphics' relates to the different components of a plot that function like different parts of linguistic grammar. For example, all plots require axes, so the x and y axes form one part of the ‘language’ of a plot. Similarly, all plots have data represented between the axes, often as points, lines or bars. The visual way that the data is represented forms another component of the grammar of graphics. Furthermore, the colour, shape or size of points and lines can be used to encode additional information in the plot. This information is usually clarified in a key, or legend, which can also be considered part of this ‘grammar’.
 
 The philosophy of ggplot is much better explained by the package author, Hadley Wickham (@R-ggplot2). For now, we just need to be aware that ggplots are constructed by specifying the different components that we want to display, based on underlying information in a data frame.
+
+```{r ambitious-figure, eval=TRUE, echo=FALSE, out.width="100%",  fig.cap="An example of what we can produce in ggplot"}
+knitr::include_graphics("images/ambitious.png")
+```
 
 ## Before we start
 
@@ -95,7 +94,7 @@ Because we want a scatter plot, each point will have an x and a y coordinate. We
 We give these specifications separated by a comma. Quotes are not required when giving variables within `aes()`.
 
 ```{block, type = "info"}
-Those interested in why quotes aren’t required can read about [non-standard evaluation] (https://edwinth.github.io/blog/nse/).
+Those interested in why quotes aren’t required can read about [non-standard evaluation](https://edwinth.github.io/blog/nse/).
 ```
 
 
@@ -176,6 +175,17 @@ However the current plot could be more informative if colour was used to convey 
 In order to achieve this we need to use `aes()` again, and make the colour conditional upon a variable.
 
 Here, the `aes()` function containing the relevant column name, is given within the `geom_point()` function.
+
+```{block, type = "warning"}
+
+A common mistake is to get confused about when to use (or not use) `aes()`
+
+If specifying a fixed aesthetic e.g. red for everything it DOES NOT go inside `aes()` instead specify e.g. colour = "red" or shape =21.
+
+If you wish to modify an aethetic according to a variable in your data THEN it DOES go inside `aes()` e.g. `aes(colour = species)`
+
+```
+
 
 ```{r}
 
@@ -456,11 +466,15 @@ penguins %>%
 
 ```
 
-### Assign specific colours to variables
+### Choosing and using colour palettes
 
 You can specify what colours you want to assign to variables in a number of different ways. 
 
-In ggplot2, colors that are assigned to variables are modified via the scale_color_* and the scale_fill_* functions. In order to use color with your data, most importantly you need to know if you are dealing with a categorical or continuous variable. The color palette should be chosen depending on type of the variable, with sequential or diverging color palettes being used for continuous variables and qualitative color palettes for categorical variables:
+In ggplot2, colors that are assigned to variables are modified via the scale_color_* and the scale_fill_* functions. In order to use color with your data, most importantly you need to know if you are dealing with a categorical or continuous variable. The color palette should be chosen depending on type of the variable:
+
+* **sequential or diverging** color palettes being used for continuous variables 
+
+* **qualitative** color palettes for (unordered) categorical variables:
 
 ```{r, eval=TRUE, echo=FALSE, out.width="80%"}
 knitr::include_graphics("images/palette.png")
@@ -599,7 +613,7 @@ p3 <- penguins %>%
 ```{block, type = "try"}
 How close can you get to replicating the figure below?
 
-Make sure to use the tips and links at the end of this chapter, when you are done save the file using the commands below and submit to Blackboard
+Make sure to use the tips and links at the end of this chapter, when you are done save the file and submit!
 
 ```
 
@@ -626,6 +640,33 @@ penguins %>%
 ```
 
 
+`r hide("Solution")`
+
+```{r, eval = FALSE}
+pal <- c("#FF8C00", "#A034F0", "#159090")
+
+penguins %>% 
+  ggplot(aes(x = species,
+             y = body_mass_g,
+             fill = species,
+             colour = species))+
+  geom_violin(alpha = 0.2)+
+  geom_boxplot(width = 0.2,
+               alpha = 0.6)+
+  scale_fill_manual(values = pal)+
+  scale_colour_manual(values = pal)+
+  theme_classic()+
+  theme(legend.position = "none")+
+    labs(
+    x = "",
+    y = "Body mass (g)",
+    title = "Body mass of brush-tailed penguins",
+    subtitle = "Box and violin plot of body mass by species")
+```
+
+`r unhide()`
+
+
 ## Saving
 
 One of the easiest ways to save a figure you have made is with the `ggsave()` function. By default it will save the last plot you made on the screen. 
@@ -639,13 +680,23 @@ ggsave("figures/YYYYMMDD_ggplot_workshop_final_plot.png", dpi=300)
 
 ```
 
+```{block, type = "try"}
+If you got this far and still have time why not try one of the following: 
+
+1. Making another type of figure using the penguins dataset, use the further reading below to use for inspiration.
+
+2. Use any of your own data
+
+```
+
 
 ## Quitting
 
 ```{block, type="warning"}
 Make sure you have saved your script!
-Remember to Download your image file from RStudio Cloud onto YOUR computer so that it is available for upload to Blackboard.
+Remember to Download your image file from RStudio Cloud onto YOUR computer.
 ```
+
 
 ```{block, type = "info"}
 run `SessionInfo()` at the end of your script to gather the packages and versions you have been using. This is very useful for when you [cite R versions and packages](#how-to-cite-r-and-rstudio) when writing reports later.

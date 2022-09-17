@@ -183,6 +183,14 @@ You can create a new chunk by typing it out yourself, by using the keyboard shor
 
 * A chunk header must be written in **one line**
 
+````md
+
+```{r optional-name , eval = TRUE, echo = FALSE}
+
+```
+
+````
+
 * Try to avoid periods, underscores, and spaces. Use hyphens ( - ) instead if you need a separator.
 
 Read more extensively about the knitr options here^[(https://yihui.org/knitr/options/)].
@@ -197,7 +205,7 @@ There are also two arrows at the top right of each chunk, which are useful to ru
 
 Knit the template document provided when you opened the new Rmd file. Make a note of the different R chunks, how they are processed and what the outputs look like.
 
-**Question 1.** The global option for this document is set to show the R code used to render chunks <select class='webex-select'><option value='blank'></option><option value=''>FALSE</option><option value='answer'>TRUE</option></select>
+**Question 1.** The global option for this document is set to show the R code used to render chunks <select class='webex-select'><option value='blank'></option><option value='answer'>TRUE</option><option value=''>FALSE</option></select>
 
 
 <div class='webex-solution'><button>Explain This Answer</button>
@@ -237,7 +245,7 @@ You can also include minimal R code within back-ticks. Within the back-ticks, be
 
 \` r Sys.Date()\`
 
-When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead: 2022-08-31
+When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead: 2022-09-17
 
 <div class="try">
 <p>Having added some in-line code, try re-knitting your .Rmd file, what is the output?</p>
@@ -309,7 +317,7 @@ This is how `here()` works within an R project:
 
 So when you use `here()` wrapped inside other functions for importing/exporting (like `read_csv()` or `ggsave()`) if you include `here()` you can still use the RProject location as the root directory when 'knitting' Rmarkdown files, even if your markdown is tidied away into a **separate sub-folder**.
 
-This means your previous relative filepaths could be replaced with
+This means your previous relative filepaths should be replaced with:
 
 ````md
 ```{r, include=FALSE}
@@ -456,7 +464,27 @@ https://benjaminlouis-stat.fr/en/blog/2020-05-21-astuces-ggplot-rmarkdown/
 
 ## Tables
 
-To create and manage able objects, we first pass the data frame through the `kable()` function. The package `kableExtra` @R-kableExtra gives us lots of extra styling options.^[(https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html)]
+### Markdown tables
+
+```
+| Syntax      | Description |
+| ----------- | ----------- |
+| Header      | Title       |
+| Paragraph   | Text        |
+
+```
+
+Which will render as this
+
+| Syntax      | Description |
+| ----------- | ----------- |
+| Header      | Title       |
+| Paragraph   | Text        |
+
+
+### knitr::kable()
+
+To create and manage able objects, we first pass the data frame through the `kable()` function from the `knitr` package. The package `kableExtra` @R-kableExtra gives us lots of extra styling options.^[(https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html)]
 
 <div class="try">
 <p>Can you get this working? Add the library call for <code>kableExtra</code> to the first chunk of your Rmd file, then make a chunk for the below at the bottom of your file and hit knit to test.</p>
@@ -502,6 +530,383 @@ penguins %>%
 </tbody>
 </table>
 
+### gt()
+
+The `gt` @R-gt package is all about making it simple to produce nice-looking display tables in HTML (so won't work for LaTex). [It has a lot of customisation options.](https://gt.rstudio.com/index.html) 
+
+
+```r
+penguins %>% 
+    group_by(Species) %>% 
+    summarise(`Body Mass (g)`= mean(`Body Mass (g)`, na.rm = T),
+              `Flipper Length (mm)`= mean(`Flipper Length (mm)`, na.rm = T)) %>% gt::gt()
+```
+
+```{=html}
+<div id="aqdpglteuq" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#aqdpglteuq .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#aqdpglteuq .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#aqdpglteuq .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#aqdpglteuq .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#aqdpglteuq .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#aqdpglteuq .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#aqdpglteuq .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#aqdpglteuq .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#aqdpglteuq .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#aqdpglteuq .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#aqdpglteuq .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#aqdpglteuq .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#aqdpglteuq .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#aqdpglteuq .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#aqdpglteuq .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#aqdpglteuq .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#aqdpglteuq .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#aqdpglteuq .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#aqdpglteuq .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#aqdpglteuq .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#aqdpglteuq .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#aqdpglteuq .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#aqdpglteuq .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#aqdpglteuq .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#aqdpglteuq .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#aqdpglteuq .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#aqdpglteuq .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#aqdpglteuq .gt_left {
+  text-align: left;
+}
+
+#aqdpglteuq .gt_center {
+  text-align: center;
+}
+
+#aqdpglteuq .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#aqdpglteuq .gt_font_normal {
+  font-weight: normal;
+}
+
+#aqdpglteuq .gt_font_bold {
+  font-weight: bold;
+}
+
+#aqdpglteuq .gt_font_italic {
+  font-style: italic;
+}
+
+#aqdpglteuq .gt_super {
+  font-size: 65%;
+}
+
+#aqdpglteuq .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 65%;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Species</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Body Mass (g)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Flipper Length (mm)</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">Adelie Penguin (Pygoscelis adeliae)</td>
+<td class="gt_row gt_right">3700.662</td>
+<td class="gt_row gt_right">189.9536</td></tr>
+    <tr><td class="gt_row gt_left">Chinstrap penguin (Pygoscelis antarctica)</td>
+<td class="gt_row gt_right">3733.088</td>
+<td class="gt_row gt_right">195.8235</td></tr>
+    <tr><td class="gt_row gt_left">Gentoo penguin (Pygoscelis papua)</td>
+<td class="gt_row gt_right">5076.016</td>
+<td class="gt_row gt_right">217.1870</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+```
+
 ## Source files
 
 One variation of the “self-contained” approach is to have R Markdown code chunks “source” (run) other R scripts. 
@@ -518,7 +923,7 @@ source("scripts/your-script.R")
 
 ## Activity 5: Connecting scripts and reports
 
-* Create a new Rmarkdown file (in the reports folder).
+* Create a **new** Rmarkdown file.
 
 * Save this (without changes) to the same folder as your `.Rproj` file and call it `03_linked_report_penguins.Rmd`.
 
@@ -527,7 +932,7 @@ source("scripts/your-script.R")
 </div>
 
 ````md
-```{r, include=FALSE}
+```{r setup, include=FALSE}
 # GLOBAL KNITR OPTIONS ----
 knitr::opts_chunk$set(echo = TRUE)
 # ____________________----
@@ -540,14 +945,14 @@ library(tidyverse)
 ````
 
 ````md
-```{r, include=FALSE}
+```{r read-data, include=FALSE}
 # READ DATA ----
 
 source("scripts/02_visualisation_penguins.R")
 
-#___________________________----
+```
 
-# PLOT ----
+```{r figure, include=FALSE}
 
  (p1+p2)/p3+
   plot_layout(guides = "collect") 
@@ -560,7 +965,7 @@ source("scripts/02_visualisation_penguins.R")
 
 Let's make another reproducible report. 
 
-* Make a new .rmd file `YYYYMMDD_surname_5023Y_rmd_workshop.Rmd`
+* Make a new Rmarkdown or RNotebook file `YYYYMMDD_surname_5023Y_rmd_workshop.Rmd`
 
 * Make any summary figure you want from the penguins data with `ggplot`
 
@@ -570,10 +975,90 @@ Let's make another reproducible report.
 
 * Knit the report to **pdf**
 
-* Use chunk options to optimise your figure layout and text and make it so that raw code and rendered outputs are visible.
+* Use chunk options to optimise your figure layout and text and make it so that raw code and rendered outputs are visible. An example of literate programming
 
-### Head to Blackboard when complete and submit your document.
+### Hygiene tips
 
+I recommend having three chunks at the top of any document
+
+* Global chunk options
+
+* All packages
+
+* Reading data
+
+````md
+
+```{r setup , include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      fig.align = "center",
+                      fig.width = 6,
+                      fig.asp = 0.8,
+                      out.width = "80%
+                      )
+                      
+```
+
+```{r library}
+library(tidyverse)
+```
+
+```{r read-data}
+source("scripts/02_visualisation_penguins.R")
+```
+
+````
+
+## Common knit issues
+
+Any of these issues will cause the Rmd document to fail to knit in its entirety. A failed knit is usually an easy fix, but needs you to READ the error message, and do a little detective work. 
+
+### Duplication
+
+````md
+
+```{r title-one}
+```
+
+```{r title-one}
+```
+
+````
+
+### Not the right order
+
+```
+plot(my_table)
+
+my_table <- table(mtcars$cyl)
+```
+
+### Forgotten trails
+
+: Missing “,”, or “(”, “}”, or “’”
+
+
+### Path not taken
+
+The Rmd document is in a different location the .Rproj file causing issues with relative filepaths
+
+### Spolling
+
+* Incorrectly labelled chunk options
+
+* Incorrectly evaluated R code
+
+## Visual editor
+
+RStudio comes with a pretty nifty [Visual Markdown Editor](https://www.rstudio.com/blog/exploring-rstudio-visual-markdown-editor/) which includes:
+
+* Spellcheck
+
+* Easy table & equation insertion
+
+* Easy citations and reference list building
+
+You can switch between modes with a button push, try it out! 
 
 ## Summing up Rmarkdown
 

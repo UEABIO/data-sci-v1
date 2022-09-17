@@ -16,7 +16,9 @@ In this chapter you will see how data science skills will allow you to efficient
 
 ## Load your workspace
 
-You should have a workspace ready to work with the Palmer penguins data. Load this workspace now. 
+You should have a workspace ready to work with the Palmer penguins data. 
+
+Load this workspace now. 
 
 Think about some basic checks before you start your work today.
 
@@ -28,7 +30,7 @@ Think about some basic checks before you start your work today.
 
 * Check for any warning or error messages
 
-* Add the code from today's session as we go
+* Add the code from today's session to your script as we go
 
 ## Activity 1: Change column names
 
@@ -40,10 +42,11 @@ Here 'tidy' refers to a specific structure that lets us manipulate and visualise
 
 So we know our data is in R, and we know the columns and names have been imported. But we still don't know whether all of our values imported correctly, or whether it captured all the rows. 
 
+### Open your script from last time and add these new lines at the bottom. 
 
 
 ```r
-# CHECK DATA ----
+# CHECK DATA----
 # check the data
 colnames(penguins)
 #__________________________----
@@ -149,7 +152,7 @@ Sometimes we may want to rename the values in our variables in order to make a s
 
 
 ```r
-# use mutate and case_when for an if-else statement that changes the names of the values in a variable
+# use mutate and case_when for a statement that conditionally changes the names of the values in a variable
 penguins <- penguins %>% 
   mutate(species = case_when(species == "Adelie Penguin (Pygoscelis adeliae)" ~ "Adelie",
                              species == "Gentoo penguin (Pygoscelis papua)" ~ "Gentoo",
@@ -354,17 +357,19 @@ new_penguins <- mutate(.data = new_penguins,
 
 ## Pipes
 
-<blockquote class="twitter-tweet" data-width="550" data-lang="en" data-dnt="true" data-theme="light"><p lang="en" dir="ltr">I %&gt;% <br>  tumble(out_of = &quot;bed&quot;) %&gt;% <br>  stumble(to = &quot;the kitchen&quot;) %&gt;% <br>  pour(who = &quot;myself&quot;, unit = &quot;cup&quot;, what = &quot;ambition&quot;) %&gt;% <br>  yawn() %&gt;% <br>  stretch() %&gt;% <br>  try(come_to_live()) <a href="https://t.co/plnA2dZdJ4">https://t.co/plnA2dZdJ4</a></p>&mdash; Hadley Wickham (@hadleywickham) <a href="https://twitter.com/hadleywickham/status/1359852563726819332?ref_src=twsrc%5Etfw">February 11, 2021</a></blockquote>
+<img src="images/pipe_order.jpg" title="Pipes make code more human readable" alt="Pipes make code more human readable" width="80%" style="display: block; margin: auto;" />
 
 Pipes look like this: `%>%` Pipes allow you to send the output from one function straight into another function. Specifically, they send the result of the function before `%>%` to be the **first** argument of the function after `%>%`. As usual, it's easier to show, rather than tell so let's look at an example.
 
 
 ```r
+# this example uses brackets to nest and order functions
 arrange(.data = filter(.data = select(.data = penguins, species, sex, flipper_length_mm), sex == "MALE"), desc(flipper_length_mm))
 ```
 
 
 ```r
+# this example uses sequential R objects to make the code more readable
 object_1 <- select(.data = penguins, species, sex, flipper_length_mm)
 object_2 <- filter(.data = object_1, sex == "MALE")
 arrange(object_2, desc(flipper_length_mm))
@@ -372,6 +377,7 @@ arrange(object_2, desc(flipper_length_mm))
 
 
 ```r
+# this example is human readable without intermediate objects
 penguins %>% 
   select(species, sex, flipper_length_mm) %>% 
   filter(sex == "MALE") %>% 
@@ -388,7 +394,7 @@ Try and write out as plain English what the %>% above is doing? You can read the
 
 
 Take the penguins data AND THEN
-Select only the species, sex and flipper lenght columns AND THEN
+Select only the species, sex and flipper length columns AND THEN
 Filter to keep only those observations labelled as sex equals male AND THEN
 Arrange the data from HIGHEST to LOWEST flipper lengths.
 
@@ -437,7 +443,7 @@ penguins %>%
 
 The minimum weight for our penguins is 2.7kg, and the max is 6.3kg - not outrageous. If the min had come out at 27g we might have been suspicious. We will use `summarise` again to calculate other metrics in the future. 
 
-<div class="information">
+<div class="info">
 <p>our first data insight, the difference the smallest adult penguin in our dataset is nearly half the size of the largest penguin.</p>
 </div>
 

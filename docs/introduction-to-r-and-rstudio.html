@@ -94,7 +94,7 @@
 <li><a class="" href="data-visualisation-with-ggplot2.html"><span class="header-section-number">6</span> Data visualisation with ggplot2</a></li>
 <li><a class="" href="markdown.html"><span class="header-section-number">7</span> Markdown</a></li>
 <li><a class="" href="github.html"><span class="header-section-number">8</span> Github</a></li>
-<li><a class="" href="functions-1.html"><span class="header-section-number">9</span> Functions</a></li>
+<li><a class="" href="functions-and-iteration.html"><span class="header-section-number">9</span> Functions and Iteration</a></li>
 <li><a class="" href="data-insights-part-one.html"><span class="header-section-number">10</span> Data Insights part one</a></li>
 <li><a class="" href="data-insights-part-two.html"><span class="header-section-number">11</span> Data insights part two</a></li>
 <li class="book-part">Statistics</li>
@@ -136,24 +136,24 @@
 <li><p>RStudio is a convenient interface which we will be using throughout the course in order to learn how to organise data, produce accurate data analyses &amp; data visualisations.</p></li>
 </ul>
 <p>R is a programming language that you will write code in, and RStudio is an Integrated Development Environment (IDE) which makes working with R easier. Think of it as knowing English and using a plain text editor like NotePad to write a book versus using a word processor like Microsoft Word. You could do it, but it wouldn't look as good and it would be much harder without things like spell-checking and formatting. In a similar way, you can use R without R Studio but we wouldn't recommend it. The key thing to remember is that although you will do all of your work using RStudio for this course, you are actually using <strong>two</strong> pieces of software which means that from time-to-time, both of them may have separate updates.</p>
-<p>R and RStudio can be downloaded for free onto your <a href="https://www.rstudio.com/products/rstudio/">personal computers</a>, but for convenience we will use a classroom space on <strong>RStudio Cloud</strong>.</p>
+<p>R and RStudio can be downloaded for free onto your <a href="https://www.rstudio.com/products/rstudio/">personal computers</a>(see Appendices), but for convenience we will use a classroom space on <strong>RStudio Cloud</strong>.</p>
 <p><a href="https://rstudio.cloud/">RStudio Cloud</a> is a cloud-based service where we can log into remotely hosted servers that host our data analysis projects.</p>
 <p>The advantage of using RStudio Cloud is that all the extra packages and functions you need for this course will already be installed. You can log-in to your workspace from any computer as long as you have an internet connection and remember you username and password. I can also "visit" your projects and help out when you get stuck, if they are hosted on RStudio Cloud.</p>
-<p>Eventually we will also add extra tools like GitHub and RMarkdown for data reproducibility and collaborative programming, which are collaboration and version control systems that we will be using throughout the course. More on this in future weeks.</p>
-<p>By the end of this module I hope you will have the tools to confidently analyze real data, make informative and beautiful data visuals, and be able to analyse lots of different types of data.</p>
+<p>Eventually we will may also add extra tools like GitHub and RMarkdown for data reproducibility, literate and collaborative programming.</p>
+<p>By the end of this course I hope you will have the tools to confidently analyze real data, make informative and beautiful data visuals, and be able to analyze lots of different types of data.</p>
 <div id="using-rstudio-cloud" class="section level2" number="1.1">
 <h2>
 <span class="header-section-number">1.1</span> Using RStudio Cloud<a class="anchor" aria-label="anchor" href="#using-rstudio-cloud"><i class="fas fa-link"></i></a>
 </h2>
-<p>All of our sessions will run on cloud-based software. All you have to do is make a free account, and join our Workspace BIO-5023Y the sharing link is here.</p>
+<p>All of our sessions will run on cloud-based software. All you have to do is make a free account, and join our Workspace.</p>
 <p>Once you are signed up - you will see that there are two spaces:</p>
 <ul>
-<li><p>Your workspace - for personal use</p></li>
-<li><p>BIO-5023Y - for our module work only</p></li>
+<li><p>Your workspace - for personal use (20hrs/month)</p></li>
+<li><p>Our shared classroom - educational licence (no limit)</p></li>
 </ul>
-<p>Make sure you are working in the class workspace - there is a limit to the hours/month on your workspace, so ALL assignments and project work should take place in the BIO-5023Y workspace.</p>
+<p>Make sure you are working in the classroom workspace - so that I can distribute project work and 'visit' your projects if needed.</p>
 <p>RStudio Cloud works in exactly the same way as RStudio, but means you don't have to download any software. You can access the hosted cloud server and your projects through any browser connection (Chrome works best), from any computer.</p>
-<p>Watch these short explainer videos to get used to navigating the environment.</p>
+<p>Here is a good reference guide to <a href="https://rstudio.cloud/learn/guide#projects">RStudio Cloud</a></p>
 </div>
 <div id="getting-to-know-rstudio" class="section level2" number="1.2">
 <h2>
@@ -166,27 +166,47 @@
 Figure 1.1: RStudio interface
 </p>
 </div>
-<p>You will learn more about how to use the features included in R Studio throughout this course, however, we highly recommend watching <a href="https://rstudio.com/resources/webinars/programming-part-1-writing-code-in-rstudio/">RStudio Essentials 1</a> from the R Studio team. The video lasts ~30 minutes and gives a tour of the main parts of R Studio.</p>
+<p>You will learn more about how to use the features included in R Studio throughout this course, however, I highly recommend watching <a href="https://rstudio.com/resources/webinars/programming-part-1-writing-code-in-rstudio/">RStudio Essentials 1</a> at some point.</p>
+<p>The video lasts ~30 minutes and gives a tour of the main parts of R Studio.</p>
 <div id="consoles-vs.-scripts" class="section level3" number="1.2.1">
 <h3>
 <span class="header-section-number">1.2.1</span> Consoles vs. scripts<a class="anchor" aria-label="anchor" href="#consoles-vs.-scripts"><i class="fas fa-link"></i></a>
 </h3>
+<ul>
+<li><p>The <em>script</em> window is the place to enter and run code so that it is easily edited and saved for future use. Usually the Script Window is shown at the top left in RStudio. If this window is not shown, it will be visible <em>if</em> you open a previously saved R script, <em>or</em> if you create a new R Script. You create new R Script by clicking on File &gt; New File &gt; R Script in the RStudio menu bar.</p></li>
+<li><p>To execute your code in the R script, you can either highlight the code and click on Run, or you can highlight the code and press CTRL + Enter on your keyboard.</p></li>
+<li><p>The <em>console</em>: you can enter code directly in the Console Window and click Enter. The commands that you run will be shown in the History Window on the top right of RStudio. Though it is much more difficult to keep track of your work this way.</p></li>
+</ul>
 </div>
 <div id="environment" class="section level3" number="1.2.2">
 <h3>
 <span class="header-section-number">1.2.2</span> Environment<a class="anchor" aria-label="anchor" href="#environment"><i class="fas fa-link"></i></a>
 </h3>
+<p>The Environment tab (top right) allows you to see what objects are in the workspace. If you create variables or data frames, you have a visual listing of everything in the current workspace. When you start a new project this should be completely empty.</p>
 </div>
 <div id="plots-files-packages-help" class="section level3" number="1.2.3">
 <h3>
 <span class="header-section-number">1.2.3</span> Plots, files, packages, help<a class="anchor" aria-label="anchor" href="#plots-files-packages-help"><i class="fas fa-link"></i></a>
 </h3>
+<ol style="list-style-type: decimal">
+<li><p>Plots - The Plots panel, shows all your plots. There are buttons for opening the plot in a separate window and exporting the plot as a pdf or jpeg (though you can also do this with code.)</p></li>
+<li><p>Files - The files panel gives you access to the file directory on your hard drive.</p></li>
+<li><p>Packages - Shows a list of all the R packages installed on your harddrive and indicates whether or not they are currently loaded. Packages that are loaded in the current session are checked while those that are installed but not yet loaded are unchecked. We will discuss packages more later.</p></li>
+<li><p>Help - Help menu for R functions. You can either type the name of a function in the search window, or use the code to search for a function with the name</p></li>
+</ol>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:labelled"></span>
+<img src="images/RStudio_Screenshot_Labels.png" alt="RStudio interface labelled" width="100%"><p class="caption">
+Figure 1.2: RStudio interface labelled
+</p>
+</div>
 </div>
 <div id="make-rstudio-your-own" class="section level3" number="1.2.4">
 <h3>
 <span class="header-section-number">1.2.4</span> Make RStudio your own<a class="anchor" aria-label="anchor" href="#make-rstudio-your-own"><i class="fas fa-link"></i></a>
 </h3>
-<p><strong>PERSONALISE AND CUSTOMISE</strong></p>
+<p>You can <a href="https://support.rstudio.com/hc/en-us/articles/115011846747-Using-Themes-in-the-RStudio-IDE">personalise the RStudio GUI</a> as much as you like.</p>
+<p><img src="images/dark_mode.png" width="50%" style="display: block; margin: auto;"><img src="images/classic_mode.png" width="50%" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div id="get-help" class="section level2" number="1.3">
@@ -214,7 +234,7 @@ It is natural and common to feel apprehensive, or to think that your code is rea
 <h2>
 <span class="header-section-number">1.4</span> Get Started<a class="anchor" aria-label="anchor" href="#get-started"><i class="fas fa-link"></i></a>
 </h2>
-<p>Go to RStudio Cloud and enter the Project labelled <code>Week One</code> - this will clone the project and provide you with your own workspace.</p>
+<p>Go to RStudio Cloud and enter the Project labelled <code>Day One</code> - this will clone the project and provide you with your own project workspace.</p>
 <p>Follow the instructions below to get used to the R command line, and how R works as a language.</p>
 </div>
 <div id="your-first-r-command" class="section level2" number="1.5">
@@ -242,6 +262,77 @@ Solution
 <h3>
 <span class="header-section-number">1.5.1</span> Operators<a class="anchor" aria-label="anchor" href="#operators"><i class="fas fa-link"></i></a>
 </h3>
+<p>There are two types of operators to consider</p>
+<div id="arithmetic-operators" class="section level4" number="1.5.1.1">
+<h4>
+<span class="header-section-number">1.5.1.1</span> Arithmetic Operators<a class="anchor" aria-label="anchor" href="#arithmetic-operators"><i class="fas fa-link"></i></a>
+</h4>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr class="header">
+<th>Operator</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>+</td>
+<td>addition</td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>subtraction</td>
+</tr>
+<tr class="odd">
+<td>*</td>
+<td>multiplication</td>
+</tr>
+<tr class="even">
+<td>/</td>
+<td>division</td>
+</tr>
+<tr class="odd">
+<td>^</td>
+<td>exponentiation</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div id="logical-operators" class="section level4" number="1.5.1.2">
+<h4>
+<span class="header-section-number">1.5.1.2</span> Logical Operators<a class="anchor" aria-label="anchor" href="#logical-operators"><i class="fas fa-link"></i></a>
+</h4>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr class="header">
+<th>Operator</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>&lt;</td>
+<td>less than</td>
+</tr>
+<tr class="even">
+<td>&lt;=</td>
+<td>less than or equal to</td>
+</tr>
+<tr class="odd">
+<td>&gt;</td>
+<td>greater than</td>
+</tr>
+<tr class="even">
+<td>&gt;=</td>
+<td>greater than or equal to</td>
+</tr>
+<tr class="odd">
+<td>==</td>
+<td>exactly equal to</td>
+</tr>
+<tr class="even">
+<td>!=</td>
+<td>not equal to</td>
+</tr>
+</tbody>
+</table></div>
+</div>
 </div>
 <div id="typos" class="section level3" number="1.5.2">
 <h3>
@@ -393,7 +484,7 @@ Note the shortcut key for &lt;- is Alt + - (Windows) or Option + - (Mac)
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:img-environment"></span>
 <img src="images/environment.png" alt="object a is now visible withe a value of 3 in the Environment Pane" width="100%"><p class="caption">
-Figure 1.2: object a is now visible withe a value of 3 in the Environment Pane
+Figure 1.3: object a is now visible withe a value of 3 in the Environment Pane
 </p>
 </div>
 <ul>
@@ -452,6 +543,8 @@ Overwriting objects with new values means the old value is lost.
 What is the value of c ?
 </button>
 <p>[1] 15</p>
+<p>When <code>c</code> was created it was a product of <code>a</code> and <code>b</code> having values of 10 and 15 respectively.
+If we re-ran the command <code>c &lt;- a + b</code> <em>after</em> changing the value of <code>b</code> <strong>then</strong> we would get a value of 17.</p>
 </div>
 <p>Look at the environment tab again - you should see it's starting to fill up now!</p>
 <div class="info">
@@ -481,7 +574,7 @@ Instead we are going to learn how to use scripts to quickly re-run analyses we h
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-37"></span>
 <img src="images/snake_case.png" alt="snake_case" width="80%"><p class="caption">
-Figure 1.3: courtesy of Allison Horst
+Figure 1.4: courtesy of Allison Horst
 </p>
 </div>
 </div>
@@ -510,7 +603,7 @@ Put a function or package into the brackets to get help with a specific topic
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-39"></span>
 <img src="images/Error.jpg" alt="R Error" width="80%"><p class="caption">
-Figure 1.4: courtesy of Allison Horst
+Figure 1.5: courtesy of Allison Horst
 </p>
 </div>
 </div>
@@ -677,7 +770,7 @@ It is a good thing to take note of all warnings and errors - they provide useful
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:script"></span>
 <img src="images/RStudio.png" alt="RStudio interface - top left script, botto  left console" width="100%"><p class="caption">
-Figure 1.5: RStudio interface - top left script, botto left console
+Figure 1.6: RStudio interface - top left script, botto left console
 </p>
 </div>
 <p>This will open a pane in the top-left of RStudio with a tab name of <code>Untitled1</code>.</p>
@@ -764,8 +857,7 @@ Add the below code into your script, underneath the sections you already have
 </div>
 <p>It is very similar to the code you ran earlier, but is preceded by <code>plot_1 &lt;-</code></p>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># ________________----</span>
-<span class="co"># DATA VISUAL ----</span>
+<code class="sourceCode R"><span class="co"># DATA VISUAL ----</span>
 
 <span class="va">plot_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">penguins</span>, <span class="co"># calls ggplot function, data is penguins</span>
            <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">bill_length_mm</span>, <span class="co"># sets x axis as bill length</span>
@@ -796,8 +888,7 @@ Add the below code into your script, underneath the sections you already have
 </h3>
 <p>For our next trick we will make a script that outputs a file. Underneath the lines of code to generate the figure we will add a new function <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave()</a></code>. Then <strong>re-run your script</strong>. To find out more about this function (and the arguments it contains), type <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">help(ggsave)</a></code> into the console.</p>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># ________________----</span>
-<span class="co"># OUTPUT TO FILE ----</span>
+<code class="sourceCode R"><span class="co"># OUTPUT TO FILE ----</span>
 
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"2022_10_01_5023Y_workshop_1_penguin_scatterplot.png"</span>, 
        plot <span class="op">=</span> <span class="va">plot_1</span>, 
@@ -837,6 +928,37 @@ e.g. YYYYMMDD_short_image_description.fileextension
 <p>Our script now contains code and comments from our first workshop. We need to save it.</p>
 <p>Alongside our data, our script is the most precious part of our analysis. We don't need to save anything else, any outputs etc. because our script can always be used to generate everything again. Note the colour of the script - the name changes colour when we have unsaved changes. Press the Save button or go to File &gt; Save as. Give the File a sensible name like "YYYYMMDD_5023Y_workshop_1_simple_commands" and in the bottom right pane under <code>Files</code> you should now be able to see your saved script, it should be saved with a <code>.R</code> file extension indicating this is an R Script.</p>
 <p>You could now safely quit R, and when you log on next time to this project, your script will be waiting for you.</p>
+<div class="webex-solution">
+<button>
+Check your script
+</button>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="introduction-to-r-and-rstudio.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I really love R</span></span>
+<span id="cb50-2"><a href="introduction-to-r-and-rstudio.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="co"># _______________----</span></span>
+<span id="cb50-3"><a href="introduction-to-r-and-rstudio.html#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="introduction-to-r-and-rstudio.html#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 📦 PACKAGES ----</span></span>
+<span id="cb50-5"><a href="introduction-to-r-and-rstudio.html#cb50-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-6"><a href="introduction-to-r-and-rstudio.html#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># create elegant data visualisations</span></span>
+<span id="cb50-7"><a href="introduction-to-r-and-rstudio.html#cb50-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmer penguins) <span class="co"># Palmer Archipelago Penguin Data</span></span>
+<span id="cb50-8"><a href="introduction-to-r-and-rstudio.html#cb50-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-9"><a href="introduction-to-r-and-rstudio.html#cb50-9" aria-hidden="true" tabindex="-1"></a><span class="co"># ________________----</span></span>
+<span id="cb50-10"><a href="introduction-to-r-and-rstudio.html#cb50-10" aria-hidden="true" tabindex="-1"></a><span class="co"># DATA VISUAL ----</span></span>
+<span id="cb50-11"><a href="introduction-to-r-and-rstudio.html#cb50-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-12"><a href="introduction-to-r-and-rstudio.html#cb50-12" aria-hidden="true" tabindex="-1"></a>plot_1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="co"># calls ggplot function, data is penguins</span></span>
+<span id="cb50-13"><a href="introduction-to-r-and-rstudio.html#cb50-13" aria-hidden="true" tabindex="-1"></a>           <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="co"># sets x axis as bill length</span></span>
+<span id="cb50-14"><a href="introduction-to-r-and-rstudio.html#cb50-14" aria-hidden="true" tabindex="-1"></a>               <span class="at">y =</span> bill_depth_mm)) <span class="sc">+</span> <span class="co"># sets y axis value as bill depth</span></span>
+<span id="cb50-15"><a href="introduction-to-r-and-rstudio.html#cb50-15" aria-hidden="true" tabindex="-1"></a>          <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour=</span>species)) <span class="co"># geometric to plot</span></span>
+<span id="cb50-16"><a href="introduction-to-r-and-rstudio.html#cb50-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-17"><a href="introduction-to-r-and-rstudio.html#cb50-17" aria-hidden="true" tabindex="-1"></a><span class="co"># ______________----</span></span>
+<span id="cb50-18"><a href="introduction-to-r-and-rstudio.html#cb50-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-19"><a href="introduction-to-r-and-rstudio.html#cb50-19" aria-hidden="true" tabindex="-1"></a><span class="co"># OUTPUT TO FILE ----</span></span>
+<span id="cb50-20"><a href="introduction-to-r-and-rstudio.html#cb50-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-21"><a href="introduction-to-r-and-rstudio.html#cb50-21" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="at">filename =</span> <span class="st">"2022_10_01_5023Y_workshop_1_penguin_scatterplot.png"</span>, </span>
+<span id="cb50-22"><a href="introduction-to-r-and-rstudio.html#cb50-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">plot =</span> plot_1, </span>
+<span id="cb50-23"><a href="introduction-to-r-and-rstudio.html#cb50-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">dpi =</span> <span class="dv">300</span>, </span>
+<span id="cb50-24"><a href="introduction-to-r-and-rstudio.html#cb50-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">6</span>, </span>
+<span id="cb50-25"><a href="introduction-to-r-and-rstudio.html#cb50-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">height =</span> <span class="dv">6</span>)</span>
+<span id="cb50-26"><a href="introduction-to-r-and-rstudio.html#cb50-26" aria-hidden="true" tabindex="-1"></a><span class="co"># _________________----</span></span></code></pre></div>
+</div>
 </div>
 </div>
 <div id="quitting" class="section level2" number="1.13">
@@ -855,9 +977,9 @@ e.g. YYYYMMDD_short_image_description.fileextension
 <h2>
 <span class="header-section-number">1.14</span> Activity 1<a class="anchor" aria-label="anchor" href="#activity-1"><i class="fas fa-link"></i></a>
 </h2>
-<div id="head-to-blackboard-when-complete-and-submit-your-answers-to-the-quiz-to-get-your-first-data-science-learning-badge." class="section level3" number="1.14.1">
+<div id="complete-this-quiz" class="section level3" number="1.14.1">
 <h3>
-<span class="header-section-number">1.14.1</span> Head to Blackboard when complete and submit your answers to the quiz to get your first Data Science Learning Badge.<a class="anchor" aria-label="anchor" href="#head-to-blackboard-when-complete-and-submit-your-answers-to-the-quiz-to-get-your-first-data-science-learning-badge."><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.14.1</span> Complete this Quiz<a class="anchor" aria-label="anchor" href="#complete-this-quiz"><i class="fas fa-link"></i></a>
 </h3>
 <p>When you get the correct answer, the answer box will turn green. Sometimes this doesn't work on Internet Explorer or Edge so be sure to use Chrome or Firefox.</p>
 <p><strong>Question 1.</strong> What is the output from 5^4</p>
@@ -878,7 +1000,7 @@ Solution
 <p><strong>Question 4.</strong> What symbol do I use if I want to <strong>assign</strong> a value or output of a function to an R object</p>
 <p><input class="webex-solveme nospaces" size="2" data-answer='["&lt;-"]'></p>
 <p><strong>Question 5.</strong> What is the value of <code>a</code> if I ran the following commands?</p>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">a</span> <span class="op">&lt;-</span>  <span class="fl">12</span><span class="op">*</span><span class="fl">2</span>
 
 <span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">5</span></code></pre></div>
@@ -1138,7 +1260,7 @@ $( document ).ready(function() {
 </li>
 <li><a class="nav-link" href="#quitting"><span class="header-section-number">1.13</span> Quitting</a></li>
 <li>
-<a class="nav-link" href="#activity-1"><span class="header-section-number">1.14</span> Activity 1</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#head-to-blackboard-when-complete-and-submit-your-answers-to-the-quiz-to-get-your-first-data-science-learning-badge."><span class="header-section-number">1.14.1</span> Head to Blackboard when complete and submit your answers to the quiz to get your first Data Science Learning Badge.</a></li></ul>
+<a class="nav-link" href="#activity-1"><span class="header-section-number">1.14</span> Activity 1</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#complete-this-quiz"><span class="header-section-number">1.14.1</span> Complete this Quiz</a></li></ul>
 </li>
 </ul>
 
@@ -1157,7 +1279,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-08-31.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-09-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -374,7 +374,7 @@ standard deviation (or σ) is a measure of how dispersed the data is in relation
 
 ### Visualising dispersion
 
-```{r, eval=TRUE, echo=FALSE, out.width="80%", fig.cap = "Examples of qqplots with different deviations from a normal distribution"}
+```{r, eval=TRUE, echo=FALSE, out.width="80%", fig.cap = "Visualising dispersion with different figures"}
 knitr::include_graphics("images/distribution_gif.gif")
 ```
 
@@ -691,7 +691,8 @@ penguins %>% select(culmen_length_mm,
                     culmen_depth_mm) %>% 
   drop_na() %>% 
   mutate(rank_length=dense_rank((culmen_length_mm)), 
-         rank_depth=dense_rank((culmen_depth_mm)))
+         rank_depth=dense_rank((culmen_depth_mm))) %>% 
+  head()
 ```
 
 Measures of rank correlation then are just a comparison of the rank orders between two variables, with a value between -1 and 1 just like Pearsons's. We already know from our Pearson's correlation coefficient, that we expect this relationship to be negative. So it should come as no surprise that the highest rank order values for bill_length_mm appear to be associated with lower rank order values for bill_depth_mm. 

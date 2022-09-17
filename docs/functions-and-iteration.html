@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 9 Functions and Iteration | 5023Y</title>
+<meta name="author" content="Philip T. Leftwich">
+<meta name="description" content="In this chapter we are going to look at two processes that streamline our code and make it more efficient. The principle behind this is to try and make DRY code. So what the flip is DRY code...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 9 Functions and Iteration | 5023Y">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://ueabio.github.io/data-sci/functions-and-iteration.html">
+<meta property="og:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
+<meta property="og:description" content="In this chapter we are going to look at two processes that streamline our code and make it more efficient. The principle behind this is to try and make DRY code. So what the flip is DRY code...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 9 Functions and Iteration | 5023Y">
+<meta name="twitter:description" content="In this chapter we are going to look at two processes that streamline our code and make it more efficient. The principle behind this is to try and make DRY code. So what the flip is DRY code...">
+<meta name="twitter:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.13/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1.9000/transition.js"></script><script src="libs/bs3compat-0.3.1.9000/tabs.js"></script><script src="libs/bs3compat-0.3.1.9000/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/font-awesome-5.13.0/js/script.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NP3MF25W3"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6NP3MF25W3');
+    </script><script language="javascript"> 
+        function toggle(id) {
+            var ele = document.getElementById("toggleText" + id);
+            var text = document.getElementById("displayText" + id);
+            var buttonText = text.innerHTML.replace("Show ", "");
+            buttonText = buttonText.replace("Hide ", "");
+            if(ele.style.display == "block") {
+                ele.style.display = "none";
+                text.innerHTML = "Show " + buttonText;
+            } else {
+                ele.style.display = "block";
+                text.innerHTML = "Hide " + buttonText;
+            }
+        } 
+    </script><script language="javascript">
+        function openCode(evt, codeName, id) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent" + id);
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks" + id);
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(codeName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script><script language="javascript">
+        function hide(id){
+            document.getElementById(id).style.display = "none";
+        }
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="include/psyteachr.css">
+<link rel="stylesheet" href="include/webex.css">
+<link rel="stylesheet" href="include/style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Data Science for Biologists">5023Y</a>:
+        <small class="text-muted">Data Science for Biologists</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Overview</a></li>
+<li class="book-part">R Programming</li>
+<li><a class="" href="introduction-to-r-and-rstudio.html"><span class="header-section-number">1</span> Introduction to R and RStudio</a></li>
+<li><a class="" href="basic-programming.html"><span class="header-section-number">2</span> Basic programming</a></li>
+<li><a class="" href="loading-data.html"><span class="header-section-number">3</span> Loading data</a></li>
+<li><a class="" href="data-wrangling-part-one.html"><span class="header-section-number">4</span> Data wrangling part one</a></li>
+<li><a class="" href="data-wrangling-part-two.html"><span class="header-section-number">5</span> Data wrangling part two</a></li>
+<li><a class="" href="data-visualisation-with-ggplot2.html"><span class="header-section-number">6</span> Data visualisation with ggplot2</a></li>
+<li><a class="" href="markdown.html"><span class="header-section-number">7</span> Markdown</a></li>
+<li><a class="" href="github.html"><span class="header-section-number">8</span> Github</a></li>
+<li><a class="active" href="functions-and-iteration.html"><span class="header-section-number">9</span> Functions and Iteration</a></li>
+<li><a class="" href="data-insights-part-one.html"><span class="header-section-number">10</span> Data Insights part one</a></li>
+<li><a class="" href="data-insights-part-two.html"><span class="header-section-number">11</span> Data insights part two</a></li>
+<li class="book-part">Statistics</li>
+<li><a class="" href="introduction-to-statistics.html"><span class="header-section-number">12</span> Introduction to statistics</a></li>
+<li><a class="" href="introduction-to-linear-models.html"><span class="header-section-number">13</span> Introduction to Linear Models</a></li>
+<li><a class="" href="testing.html"><span class="header-section-number">14</span> Testing</a></li>
+<li><a class="" href="regression.html"><span class="header-section-number">15</span> Regression</a></li>
+<li><a class="" href="anova.html"><span class="header-section-number">16</span> ANOVA</a></li>
+<li><a class="" href="multivariate-linear-models.html"><span class="header-section-number">17</span> Multivariate linear models</a></li>
+<li><a class="" href="complex-models.html"><span class="header-section-number">18</span> Complex models</a></li>
+<li><a class="" href="generalized-linear-models.html"><span class="header-section-number">19</span> Generalized Linear Models</a></li>
+<li class="book-part">Advanced topics</li>
+<li><a class="" href="mixed-models.html"><span class="header-section-number">20</span> Mixed models</a></li>
+<li><a class="" href="generalised-additive-models.html"><span class="header-section-number">21</span> Generalised Additive Models</a></li>
+<li><a class="" href="survival-models.html"><span class="header-section-number">22</span> Survival models</a></li>
+<li><a class="" href="unsupervised-machine-learning.html"><span class="header-section-number">23</span> Unsupervised Machine Learning</a></li>
+<li><a class="" href="power-analysis.html"><span class="header-section-number">24</span> Power analysis</a></li>
+<li class="book-part">Appendices</li>
+<li><a class="" href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></li>
+<li><a class="" href="updating-r-rstudio-and-packages.html"><span class="header-section-number">B</span> Updating R, RStudio, and packages</a></li>
+<li><a class="" href="exporting-files-from-the-server.html"><span class="header-section-number">C</span> Exporting files from the server</a></li>
+<li><a class="" href="symbols.html"><span class="header-section-number">D</span> Symbols</a></li>
+<li><a class="" href="baser.html"><span class="header-section-number">E</span> Base R vs. Tidyverse</a></li>
+<li><a class="" href="license.html">License</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/UEABIO/data-sci-v1">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="functions-and-iteration" class="section level1" number="9">
+<h1>
+<span class="header-section-number">9</span> Functions and Iteration<a class="anchor" aria-label="anchor" href="#functions-and-iteration"><i class="fas fa-link"></i></a>
+</h1>
+<p>In this chapter we are going to look at two processes that streamline our code and make it more efficient. The principle behind this is to try and make <strong>DRY</strong> code.</p>
+<p>So what the flip is <strong>DRY</strong> code anyway? It stands for <strong>D</strong>on't <strong>R</strong>epeat <strong>Y</strong>ourself. It's aimed at reducing the repetition and number of lines of code in your scripts.</p>
+<p>Why is this useful?</p>
+<ul>
+<li><p>If you keep repeating the same/similar lines of code over and over then your script will become very large</p></li>
+<li><p>Changes or updates have to be manually applied to each and every time you have used a line of code in your script</p></li>
+<li><p>Mistakes can easily start to creep in</p></li>
+</ul>
+<p>There are two broad ways we can DRY out our code:</p>
+<ol style="list-style-type: decimal">
+<li><p>Use <strong>Functions</strong> - functions contain code instructions, and we can re-use them for similar processes simply by changing the arguments. In R you can use pre-built functions and start building your own!</p></li>
+<li><p>Use <strong>Iteration</strong> - Apply functions to loop or repeat over different groups or lists.</p></li>
+</ol>
+<div id="functions-1" class="section level2" number="9.1">
+<h2>
+<span class="header-section-number">9.1</span> Functions<a class="anchor" aria-label="anchor" href="#functions-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Most of the time when we work in R, we will use functions; either pre-written functions or ones we write ourselves. <strong>Functions</strong> make it easy to use sets of code instructions repeatedly (without filling our scripts with the code underlying the function) and help us carry out multiple tasks in a single step without having to go through the details of how the steps are executed.</p>
+<div id="common-functions" class="section level3" number="9.1.1">
+<h3>
+<span class="header-section-number">9.1.1</span> Common functions<a class="anchor" aria-label="anchor" href="#common-functions"><i class="fas fa-link"></i></a>
+</h3>
+<p>You have been using functions in R from week one, we type the name of the function followed by parentheses e.g. <code>read_csv()</code>. Within the parentheses is where we will specify the function input and options, separated by commas <code>,</code>. One function you will use a lot is the <strong>combine function</strong> <code><a href="https://rdrr.io/r/base/c.html">c()</a></code>, which as the name suggests lets you concatenate different types of values into a <strong>vector</strong>.</p>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+<p>Complete the script below to combine any set of numerical values using <code><a href="https://rdrr.io/r/base/c.html">c()</a></code>.</p>
+Then use the <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> function to add them together
+</div>
+</div>
+<button id="displayTextunnamed-chunk-4" onclick="javascript:toggle('unnamed-chunk-4');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-4" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="functions-and-iteration.html#cb207-1" aria-hidden="true" tabindex="-1"></a>my_combined_values <span class="ot">&lt;-</span> <span class="fu">c</span>(__,__) </span>
+<span id="cb207-2"><a href="functions-and-iteration.html#cb207-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(my_combined_values)</span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+<div id="write-your-own-function" class="section level3" number="9.1.2">
+<h3>
+<span class="header-section-number">9.1.2</span> Write your own function<a class="anchor" aria-label="anchor" href="#write-your-own-function"><i class="fas fa-link"></i></a>
+</h3>
+<p>R makes it easy to create user defined functions by using <code>function()</code>. Here is how it works:</p>
+<ul>
+<li><p>Give your function an object name and assign the function to it, e.g. <code>my_function_name &lt;- function()</code>.</p></li>
+<li><p>Within the parentheses you specify inputs and arguments just like how pre-written functions work, e.g. <code>function(input_data)</code>.</p></li>
+<li><p>Next, put all the code you want your function to execute inside curly brackets like this: <code>function(input_data) {code to run}</code></p></li>
+<li><p>Use <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> to specify what you want to your function to output once it is done running the code.</p></li>
+</ul>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+Use the custom function below to add ten to each element of this vector
+</div>
+</div>
+<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">vector</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">5</span>,<span class="fl">10</span><span class="op">)</span></code></pre></div>
+<p>Here we are making a function, remember <code>input_data</code> is a placeholder for real values that will be supplied <em>later</em>.</p>
+<p>In this example we are telling R that <em>when</em> we provide data (a value) in the position of the argument <code>input_data</code> it should add 1 to this, and return the result:</p>
+<div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">add_one</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_data</span><span class="op">)</span> <span class="op">{</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">input_data</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
+<div class="info">
+<p>
+Remember, when you make a function like the one above, nothing will happen until you use the function on same data!
+</p>
+</div>
+<p>Let's try our new function out on the vector we made.</p>
+<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">add_one</span><span class="op">(</span><span class="va">vector</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1]  2  6 11</code></pre>
+</div>
+<div id="activity-1-use-the-following-instructions-to-complete-the-function-in-the-window-below" class="section level3" number="9.1.3">
+<h3>
+<span class="header-section-number">9.1.3</span> Activity 1: Use the following instructions to complete the function in the window below:<a class="anchor" aria-label="anchor" href="#activity-1-use-the-following-instructions-to-complete-the-function-in-the-window-below"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li><p>I’ve started writing a function for you that will sum up values and take the square root of the sum. To take the square root, we use the <code><a href="https://rdrr.io/r/base/MathFun.html">sqrt()</a></code> function.</p></li>
+<li><p>Complete this function by filling in input_data for the <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code>, and then filling in the remaining empty parentheses with the appropriate object names.</p></li>
+<li><p>Now create an object containing a set of numerical values and call it <code>my_combined_values</code>. Then try out your new function on this object, which will compute the square root of the objects sum.</p></li>
+</ul>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+Finish writing the function below
+</div>
+</div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="functions-and-iteration.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the instructions above to complete the function below</span></span>
+<span id="cb212-2"><a href="functions-and-iteration.html#cb212-2" aria-hidden="true" tabindex="-1"></a>my_function_name <span class="ot">&lt;-</span> <span class="cf">function</span>(input_data){</span>
+<span id="cb212-3"><a href="functions-and-iteration.html#cb212-3" aria-hidden="true" tabindex="-1"></a>  s <span class="ot">&lt;-</span> <span class="fu">sum</span>(__)</span>
+<span id="cb212-4"><a href="functions-and-iteration.html#cb212-4" aria-hidden="true" tabindex="-1"></a>  ss <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(__)</span>
+<span id="cb212-5"><a href="functions-and-iteration.html#cb212-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(__)</span>
+<span id="cb212-6"><a href="functions-and-iteration.html#cb212-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb212-7"><a href="functions-and-iteration.html#cb212-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb212-8"><a href="functions-and-iteration.html#cb212-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new object and try out your new function</span></span>
+<span id="cb212-9"><a href="functions-and-iteration.html#cb212-9" aria-hidden="true" tabindex="-1"></a>my_combined_values <span class="ot">&lt;-</span> <span class="fu">c</span>(__,__) </span>
+<span id="cb212-10"><a href="functions-and-iteration.html#cb212-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb212-11"><a href="functions-and-iteration.html#cb212-11" aria-hidden="true" tabindex="-1"></a><span class="fu">my_function_name</span>(my_combined_values)</span></code></pre></div>
+<button id="displayTextunnamed-chunk-12" onclick="javascript:toggle('unnamed-chunk-12');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-12" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb213"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Use the instructions above to complete the function below</span>
+<span class="va">my_function_name</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_data</span><span class="op">)</span><span class="op">{</span>
+  <span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">input_data</span><span class="op">)</span>
+  <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
+<span class="op">}</span>
+
+<span class="co"># Create a new object and try out your new function</span>
+<span class="va">my_combined_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span> <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span> 
+
+<span class="fu">my_function_name</span><span class="op">(</span><span class="va">my_combined_values</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 3.872983</code></pre>
+</div>
+</div>
+</div>
+<div class="info">
+<p>
+A general rule of thumb. If you end up repeating a line of code more than three times in a script - you should write a function to do the work instead. And write clear comments on its use!
+</p>
+<p>
+Why?
+</p>
+<p>
+It reduces the numbers of lines of code in your script, it reduces the amount of repetition in the code, if you need to make changes you can change the function without having to hunt through all of your code.
+</p>
+<p>
+A really good way to organise your functions is to organise them into a separate script to the rest of your analysis. Write functions in a separate script and use source("scripts/functions.R")
+</p>
+</div>
+</div>
+<div id="activity-2-more-functions" class="section level3" number="9.1.4">
+<h3>
+<span class="header-section-number">9.1.4</span> Activity 2: More functions<a class="anchor" aria-label="anchor" href="#activity-2-more-functions"><i class="fas fa-link"></i></a>
+</h3>
+<p>It might surprise you to know that there is no pre-built function for standard error in base R, but we can build our own!</p>
+<div class="info">
+<p>
+Here you can see we replaced <code>input_data</code> with <code>.x</code> as the name of our argument. These placeholders can have whatever name we like to choose, but we should avoid using names that match any R objects we make in our project
+</p>
+</div>
+<div class="sourceCode" id="cb215"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">se</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">.x</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">se</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span>
+  <span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># The seq R function generates a sequence of numeric values</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">20</span>, length<span class="op">=</span><span class="fl">100</span><span class="op">)</span>
+
+<span class="co"># use the mean function to calculate average for x</span>
+<span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+
+<span class="co"># use our custom function to calculate se for x</span>
+<span class="fu">se</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 14
+## [1] 0.3516544</code></pre>
+<div class="warning">
+<p>
+Functions can basically be given any name you want. However, you may accidentally overwrite existing functions if you give them the same name, so try and make them unique.
+</p>
+</div>
+</div>
+<div id="even-more-functions" class="section level3" number="9.1.5">
+<h3>
+<span class="header-section-number">9.1.5</span> Even more functions<a class="anchor" aria-label="anchor" href="#even-more-functions"><i class="fas fa-link"></i></a>
+</h3>
+<p>This is an example of a very simple function that just prints the string "Hello World" whenever you type the function <code>say_hello()</code></p>
+<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">say_hello</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span><span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Hello World"</span><span class="op">)</span> 
+<span class="op">}</span>
+
+<span class="fu">say_hello</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] "Hello World"</code></pre>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+What happens when you try to put something in the brackets when using this function?
+</div>
+</div>
+<button id="displayTextunnamed-chunk-20" onclick="javascript:toggle('unnamed-chunk-20');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-20" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+Error in say_hello( or something similar, this function has not been set with any arguments, therefore it doesn't know what to do with any values provided to it.
+</div>
+</div>
+</div>
+<p>Now lets try a similar function, but we include an argument:</p>
+<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">say_morning</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Good morning"</span>, <span class="va">x</span><span class="op">)</span>
+<span class="op">}</span>
+
+<span class="co">#  what about this one?</span>
+<span class="fu">say_morning</span><span class="op">(</span><span class="st">"Phil"</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] "Good morning Phil"</code></pre>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+What happens when you DO NOT put something in the brackets when using this function?
+</div>
+</div>
+<button id="displayTextunnamed-chunk-23" onclick="javascript:toggle('unnamed-chunk-23');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-23" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="functions-and-iteration.html#cb222-1" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">paste</span>(<span class="st">"Good morning"</span>, x) <span class="sc">:</span> </span>
+<span id="cb222-2"><a href="functions-and-iteration.html#cb222-2" aria-hidden="true" tabindex="-1"></a>  argument <span class="st">"x"</span> is missing, with no default</span></code></pre></div>
+</div>
+</div>
+</div>
+<p>So that was an example where we included an argument for our function. But now it requires a value be provided in order to work.</p>
+<p>However, you are probably used to the idea that many functions have "default" values for arguments, and we can easily set these.</p>
+<div class="sourceCode" id="cb223"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">say_morning_default</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">name</span> <span class="op">=</span> <span class="st">"you"</span><span class="op">)</span><span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Good morning"</span>, <span class="va">name</span><span class="op">)</span>
+<span class="op">}</span>
+
+<span class="fu">say_morning_default</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] "Good morning you"</code></pre>
+<div class="try">
+<p>
+There is now a default value supplied to the argument, but this should still be able to changed when running the function. Try it!
+</p>
+</div>
+</div>
+<div id="activity-3" class="section level3" number="9.1.6">
+<h3>
+<span class="header-section-number">9.1.6</span> Activity 3<a class="anchor" aria-label="anchor" href="#activity-3"><i class="fas fa-link"></i></a>
+</h3>
+<p>We are going to try and write a custom function called <code>find_largest_male()</code>, it will be used to identify the largest male <em>Drosophila</em> from a small dataset.</p>
+<div class="sourceCode" id="cb225"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Make some fake data into a tibble</span>
+
+<span class="va">vial</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>,<span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="va">sex</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"male"</span>,<span class="fl">10</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"female"</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="va">weight_mg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, mean<span class="op">=</span><span class="fl">0.2</span>, sd<span class="op">=</span><span class="fl">0.02</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, mean<span class="op">=</span><span class="fl">0.25</span>, sd<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">dros_weight</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span><span class="va">vial</span>, <span class="va">sex</span>, <span class="va">weight_mg</span><span class="op">)</span></code></pre></div>
+<div id="step-1." class="section level4" number="9.1.6.1">
+<h4>
+<span class="header-section-number">9.1.6.1</span> Step 1.<a class="anchor" aria-label="anchor" href="#step-1."><i class="fas fa-link"></i></a>
+</h4>
+<p>What functions would you use to extract the heaviest male from this dataset? Try and think that through first.</p>
+<button id="displayTextunnamed-chunk-27" onclick="javascript:toggle('unnamed-chunk-27');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-27" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="va">dros_weight</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">sex</span> <span class="op">==</span> <span class="st">"male"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">.</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">weight_mg</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.</span>, n<span class="op">=</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:right;">
+vial
+</th>
+<th style="text-align:left;">
+sex
+</th>
+<th style="text-align:right;">
+weight_mg
+</th>
+</tr></thead>
+<tbody><tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+0.2358928
+</td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="step-2." class="section level4" number="9.1.6.2">
+<h4>
+<span class="header-section-number">9.1.6.2</span> Step 2.<a class="anchor" aria-label="anchor" href="#step-2."><i class="fas fa-link"></i></a>
+</h4>
+<p>Abstract your lines of code to make a function. How could you remove the data and introduce a placeholder instead?</p>
+<button id="displayTextunnamed-chunk-28" onclick="javascript:toggle('unnamed-chunk-28');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-28" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb227"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">find_largest_male</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">{</span> 
+  <span class="va">df</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">sex</span> <span class="op">==</span> <span class="st">"male"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">.</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">weight_mg</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.</span>, n<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+<div id="step-3." class="section level4" number="9.1.6.3">
+<h4>
+<span class="header-section-number">9.1.6.3</span> Step 3.<a class="anchor" aria-label="anchor" href="#step-3."><i class="fas fa-link"></i></a>
+</h4>
+<p>Now we have a basic function we can work to refine and extend it.</p>
+<p>What if we made a function that could pick the largest Drosophila overall, or male or female depending on what we need?</p>
+<button id="displayTextunnamed-chunk-29" onclick="javascript:toggle('unnamed-chunk-29');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-29" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">find_largest_fly</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span>,  <span class="va">n</span><span class="op">=</span><span class="fl">1</span>, <span class="va">s</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"male"</span>, <span class="st">"female"</span><span class="op">)</span> <span class="op">)</span><span class="op">{</span> 
+  <span class="va">df</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">sex</span> <span class="op">==</span> <span class="va">s</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">.</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">weight_mg</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.</span>, n<span class="op">=</span><span class="va">n</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="examples" class="section level2" number="9.2">
+<h2>
+<span class="header-section-number">9.2</span> Examples<a class="anchor" aria-label="anchor" href="#examples"><i class="fas fa-link"></i></a>
+</h2>
+<div id="custom-ggplot-themes" class="section level3" number="9.2.1">
+<h3>
+<span class="header-section-number">9.2.1</span> Custom ggplot themes<a class="anchor" aria-label="anchor" href="#custom-ggplot-themes"><i class="fas fa-link"></i></a>
+</h3>
+<p>It is often the case that we start to default to a particular 'style' for our figures, or you may be making several similar figures within a research paper. Creating custom functions can extend to making our own custom ggplot themes. You have probably already used theme variants such as <code><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw()</a></code>, <code><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void()</a></code>, <code><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal()</a></code> - these are incredibly useful, but you might find you still wish to make consistent changes.</p>
+<p>Here is a plot we made in the previous chapter</p>
+<div class="sourceCode" id="cb229"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">plot</span> <span class="op">&lt;-</span> <span class="va">dros_weight</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">sex</span>,
+         y<span class="op">=</span><span class="va">weight_mg</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>
+
+<span class="va">plot</span></code></pre></div>
+<div class="inline-figure"><img src="09-writing-functions_files/figure-html/unnamed-chunk-30-1.png" width="100%" style="display: block; margin: auto;"></div>
+<p>With the addition of a title and <code><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic()</a></code> we can improve the style quickly</p>
+<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">plot</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Comparison of weights (mg) between \nmale and female Drosophila"</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="09-writing-functions_files/figure-html/unnamed-chunk-31-1.png" width="100%" style="display: block; margin: auto;"></div>
+<p>But I <strong>still</strong> want to make some more changes, rather than do this work for one figure, and potentially have to repeat this several times for subsequent figures, I can decide to make a new function instead.</p>
+<div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># custom theme sets defaults for font and size, but these can be changed without changing the function</span>
+<span class="va">theme_custom</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">base_size</span><span class="op">=</span><span class="fl">12</span>, <span class="va">base_family</span><span class="op">=</span><span class="st">"serif"</span><span class="op">)</span><span class="op">{</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="va">base_size</span>, 
+                base_family <span class="op">=</span> <span class="va">base_family</span>,
+                <span class="op">)</span> <span class="op">+</span>
+<span class="co"># update theme minimal </span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>
+  <span class="co"># specify default settings for plot titles - use rel to set titles relative to base size</span>
+  plot.title<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">rel</a></span><span class="op">(</span><span class="fl">1.5</span><span class="op">)</span>,
+      face<span class="op">=</span><span class="st">"bold"</span>,
+      family<span class="op">=</span><span class="va">base_family</span><span class="op">)</span>,
+  <span class="co">#specify defaults for axis titles</span>
+  axis.title<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>
+    size<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">rel</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,
+    family<span class="op">=</span><span class="va">base_family</span><span class="op">)</span>,
+  <span class="co"># specify position for y axis title</span>
+  axis.title.y<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>margin <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span>r <span class="op">=</span> <span class="fl">10</span>, l<span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span>,
+  <span class="co"># specify position for x axis title</span>
+  axis.title.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>margin <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span> t <span class="op">=</span> <span class="fl">10</span>, b <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span>,
+  <span class="co"># set major y grid lines</span>
+  panel.grid.major.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span><span class="op">(</span>colour<span class="op">=</span><span class="st">"gray"</span>, size<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span>,
+  <span class="co"># add axis lines</span>
+  axis.line<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span><span class="op">(</span><span class="op">)</span>,
+   <span class="co"># Adding a 0.5cm margin around the plot</span>
+  plot.margin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span><span class="op">)</span>, units <span class="op">=</span> , <span class="st">"cm"</span><span class="op">)</span>,    
+   <span class="co"># Setting the font for the legend text</span>
+  legend.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>face <span class="op">=</span> <span class="st">"italic"</span><span class="op">)</span>,   
+    <span class="co"># Removing the legend title</span>
+          legend.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,    
+   <span class="co"># Setting the position for the legend - 0 is left/bottom, 1 is top/right</span>
+          legend.position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.9</span>, <span class="fl">0.8</span><span class="op">)</span>             
+<span class="op">)</span>
+  
+<span class="op">}</span></code></pre></div>
+<p>With this function set, I can now use it for as many figures as I wish. To use it in the future I should probably save it in a unique script, with a clear title and comments for future use.</p>
+<p>I could then easily use <code><a href="https://rdrr.io/r/base/source.html">source("custom_theme_function.R")</a></code> to make this available to any scripts I was using.</p>
+<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">plot</span><span class="op">+</span>
+<span class="fu">theme_custom</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="09-writing-functions_files/figure-html/unnamed-chunk-33-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="info">
+<p>
+Functions are about 'abstracting' a command, so it can be used more than once. If you are having trouble writing a function, start by writing a standard set of commands as you would to solve a specific problem. Then work backwards to turn this into a function.
+</p>
+</div>
+</div>
+<div id="writing-packages" class="section level3" number="9.2.2">
+<h3>
+<span class="header-section-number">9.2.2</span> Writing Packages<a class="anchor" aria-label="anchor" href="#writing-packages"><i class="fas fa-link"></i></a>
+</h3>
+<p>You should be familiar by now with the idea that R packages add data and functions to your workspace. They are bundles of code that anyone can write, most commonly you will be downloading packages from CRAN. However development stage packages can also be downloaded directly from GitHub.</p>
+<p>In the previous section we walked through some very basic writing of new functions. We can save these as R scripts and move them from project to project. Or we could choose to write them into a documented R package.
+<a href="https://ourcodingclub.github.io/tutorials/writing-r-package/">This tutorial</a> shows you just how to do that. Writing packages is a useful thing to do, even if you think the only person that will ever use them is yourself, as you then more easily access these functions across different workspaces and projects.</p>
+</div>
+</div>
+<div id="iteration" class="section level2" number="9.3">
+<h2>
+<span class="header-section-number">9.3</span> Iteration<a class="anchor" aria-label="anchor" href="#iteration"><i class="fas fa-link"></i></a>
+</h2>
+<p>We’ve seen how to write a function and how they can be used to create concise re-usable operations that can be applied multiple times in a script without having to copy and paste, but where functions really come into their own is when combined with iteration. Iteration is the process of running the same operation on a group of objects, further minimising code replication.</p>
+<p>Here we will introduce two approaches to iterative operations - using for loops and using the package <code>purrr</code>.</p>
+<ol style="list-style-type: decimal">
+<li><p>for loops iterate code across a series of inputs, but are less common in R than in other programming languages. Nevertheless, we introduce them here as a learning tool and reference</p></li>
+<li><p>The <code>purrr</code> package is the tidyverse approach to iterative operations - it works by “mapping” a function across many inputs (values, columns, datasets, etc.)</p></li>
+</ol>
+<div id="for-loops" class="section level3" number="9.3.1">
+<h3>
+<span class="header-section-number">9.3.1</span> For Loops<a class="anchor" aria-label="anchor" href="#for-loops"><i class="fas fa-link"></i></a>
+</h3>
+<p>A for loop has three core parts:</p>
+<ol style="list-style-type: decimal">
+<li><p>The sequence of items to iterate through</p></li>
+<li><p>The operations to conduct per item in the sequence</p></li>
+<li><p>The container for the results (optional)</p></li>
+</ol>
+<p>The basic syntax is: for (item in sequence) {do operations using item}. Note the parentheses and the curly brackets. The results could be printed to console, or stored in a container R object.</p>
+<pre><code>for(i in list){
+    # PERFORM SOME ACTION
+}</code></pre>
+<p>A simple for loop <strong>example</strong> is below. For every number in the vector add 2. There is no <em>container object</em> here, the results of the function are printed directly into the console.</p>
+<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">for</span> <span class="op">(</span><span class="va">num</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>  <span class="co"># the SEQUENCE is defined (numbers 1 to 5) and loop is opened with "{"</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">num</span> <span class="op">+</span> <span class="fl">2</span><span class="op">)</span>             <span class="co"># The OPERATIONS (add two to each sequence number and print)</span>
+<span class="op">}</span>                            <span class="co"># The loop is closed with "}"                            </span></code></pre></div>
+<pre><code>## [1] 3
+## [1] 4
+## [1] 5
+## [1] 6
+## [1] 7</code></pre>
+<pre><code>[1] 3
+[1] 4
+[1] 5
+[1] 6
+[1] 7</code></pre>
+<p>So let's make a slightly more complicated function - first we are making a new tibble, first we have four vectors - made of 10 numbers each randomly generated to be roughly close to a 0 mean with a s.d. of 1. Then we combine them to make a tibble</p>
+<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># a simple tibble</span>
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
+  a <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>,
+  b <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>,
+  c <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>,
+  d <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
+<span class="op">)</span></code></pre></div>
+<p>Each vector is randomly generated so the actual averages will be slightly different</p>
+<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">a</span><span class="op">)</span>
+<span class="co"># [1] 0.3085154</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">b</span><span class="op">)</span>
+<span class="co"># [1] 0.5429483</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">c</span><span class="op">)</span>
+<span class="co"># [1] -0.5137691</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">d</span><span class="op">)</span>
+<span class="co"># [1] 0.04415608</span></code></pre></div>
+<p>So the above code works, but it is repetitive, applying the same function again and again. Below we have a simple for loop</p>
+<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span><span class="st">"double"</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span>  <span class="co"># 1. output having a predefined empty list of the right size works best, we choose to make the vector "double" specifying that it is empty and ready to receive number values. </span>
+
+<span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>            <span class="co"># 2. sequence - determines what to loop over - here we are looping along df, rather than down the length of each vector</span>
+  
+  <span class="va">output</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">df</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>      <span class="co"># 3. body - each time the loop runs it allocates a value to output, </span>
+<span class="op">}</span>
+<span class="va">output</span>
+<span class="co"># [1]  0.30851540  0.54294832 -0.51376911  0.0441560</span></code></pre></div>
+<pre><code>## [1] -0.2188119 -0.2428444  0.2594478 -0.5014775</code></pre>
+</div>
+<div id="exercise-for-for-loops" class="section level3" number="9.3.2">
+<h3>
+<span class="header-section-number">9.3.2</span> Exercise for For Loops<a class="anchor" aria-label="anchor" href="#exercise-for-for-loops"><i class="fas fa-link"></i></a>
+</h3>
+<p>This part of the exercise is a real world example of using simple <code>for()</code> loops to create graphs. This data comes from the <a href="https://livingplanetindex.org/home/index">Living Planet Index</a>, which holds data on various vertebrate species collected from 1974 to 2014.</p>
+<a href="https://raw.githubusercontent.com/UEABIO/data-sci-v1/main/book/files/LPI_data_loops.csv">
+<button class="btn btn-success"><i class="fa fa-save"></i> Download LPI data as csv</button>
+</a>
+<p>First we should import the data:</p>
+<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">LPI</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/LPI_data_loops.csv"</span><span class="op">)</span></code></pre></div>
+<p>Here is an example of a graph we can make from the data looking at Griffon Vulture changes in numbers over time.</p>
+<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">vultureITCR</span> <span class="op">&lt;-</span> <span class="va">LPI</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Common.Name</span> <span class="op">==</span> <span class="st">"Griffon vulture / Eurasian griffon"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Country.list</span><span class="op">==</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Croatia"</span>, <span class="st">"Italy"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">vulture_scatter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">vultureITCR</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">abundance</span>, colour <span class="op">=</span> <span class="va">Country.list</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span>  
+  <span class="co"># Changing point size</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="va">lm</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">Country.list</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="co"># Adding a linear model fit and colour-coding by country</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#EE7600"</span>, <span class="st">"#00868B"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>               
+  <span class="co"># Adding custom colours</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_colour_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#EE7600"</span>, <span class="st">"#00868B"</span><span class="op">)</span>,               
+                        <span class="co"># Adding custom colours</span>
+                        labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Croatia"</span>, <span class="st">"Italy"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>               
+  <span class="co"># Adding labels for the legend</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Griffon vulture abundance\n"</span><span class="op">)</span> <span class="op">+</span>                             
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"\nYear"</span><span class="op">)</span>  <span class="op">+</span>
+        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> 
+
+<span class="va">vulture_scatter</span></code></pre></div>
+<div class="inline-figure"><img src="09-writing-functions_files/figure-html/unnamed-chunk-42-1.png" width="100%" style="display: block; margin: auto;"></div>
+<p>We can use custom themes (like the one you made earlier) to quickly update figures</p>
+<div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">vulture_scatter</span><span class="op">+</span><span class="fu">theme_custom</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="09-writing-functions_files/figure-html/unnamed-chunk-43-1.png" width="100%" style="display: block; margin: auto;"></div>
+<p>Now let's take a look at using functions and loops to help us build figures.</p>
+<div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">LPI_UK</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">LPI</span>, <span class="va">Country.list</span> <span class="op">==</span> <span class="st">"United Kingdom"</span><span class="op">)</span>
+
+<span class="co"># Pick 4 species and make scatterplots with a simple regression model fits that show how the population has varied through time</span>
+
+<span class="co"># Careful with the spelling of the names, it needs to match the names of the species in the LPI.UK dataframe</span>
+
+<span class="va">house_sparrow</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">LPI_UK</span>, <span class="va">Common.Name</span> <span class="op">==</span> <span class="st">"House sparrow"</span><span class="op">)</span>
+<span class="va">great_tit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">LPI_UK</span>, <span class="va">Common.Name</span> <span class="op">==</span> <span class="st">"Great tit"</span><span class="op">)</span>
+<span class="va">corn_bunting</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">LPI_UK</span>, <span class="va">Common.Name</span> <span class="op">==</span> <span class="st">"Corn bunting"</span><span class="op">)</span>
+<span class="va">meadow_pipit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">LPI_UK</span>, <span class="va">Common.Name</span> <span class="op">==</span> <span class="st">"Meadow pipit"</span><span class="op">)</span></code></pre></div>
+<p>So now we have four separate R objects holding data from four bird species, our standard approach might then be to make four figures looking at abundance over time.</p>
+<div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">house_sparrow_scatter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">house_sparrow</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span> <span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">abundance</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span>, colour <span class="op">=</span> <span class="st">"#00868B"</span><span class="op">)</span> <span class="op">+</span>                                                
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="va">lm</span>, colour <span class="op">=</span> <span class="st">"#00868B"</span>, fill <span class="op">=</span> <span class="st">"#00868B"</span><span class="op">)</span> <span class="op">+</span>          
+    <span class="fu">theme_custom</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Abundance\n"</span>, x <span class="op">=</span> <span class="st">""</span>, title <span class="op">=</span> <span class="st">"House sparrow"</span><span class="op">)</span>
+
+<span class="va">great_tit_scatter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">great_tit</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span> <span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">abundance</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span>, colour <span class="op">=</span> <span class="st">"#00868B"</span><span class="op">)</span> <span class="op">+</span>                                                
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="va">lm</span>, colour <span class="op">=</span> <span class="st">"#00868B"</span>, fill <span class="op">=</span> <span class="st">"#00868B"</span><span class="op">)</span> <span class="op">+</span>          
+    <span class="fu">theme_custom</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Abundance\n"</span>, x <span class="op">=</span> <span class="st">""</span>, title <span class="op">=</span> <span class="st">"Great tit"</span><span class="op">)</span>
+
+<span class="va">corn_bunting_scatter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">corn_bunting</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span> <span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">abundance</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span>, colour <span class="op">=</span> <span class="st">"#00868B"</span><span class="op">)</span> <span class="op">+</span>                                                
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="va">lm</span>, colour <span class="op">=</span> <span class="st">"#00868B"</span>, fill <span class="op">=</span> <span class="st">"#00868B"</span><span class="op">)</span> <span class="op">+</span>          
+    <span class="fu">theme_custom</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Abundance\n"</span>, x <span class="op">=</span> <span class="st">""</span>, title <span class="op">=</span> <span class="st">"Corn bunting"</span><span class="op">)</span>
+
+<span class="va">meadow_pipit_scatter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">meadow_pipit</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span> <span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">abundance</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span>, colour <span class="op">=</span> <span class="st">"#00868B"</span><span class="op">)</span> <span class="op">+</span>                                                
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="va">lm</span>, colour <span class="op">=</span> <span class="st">"#00868B"</span>, fill <span class="op">=</span> <span class="st">"#00868B"</span><span class="op">)</span> <span class="op">+</span>          
+    <span class="fu">theme_custom</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Abundance\n"</span>, x <span class="op">=</span> <span class="st">""</span>, title <span class="op">=</span> <span class="st">"Meadow pipit"</span><span class="op">)</span></code></pre></div>
+<p>If we want to look at all four plots at once we can use the layout functions from the package <code>patchwork</code>.</p>
+<div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># put at the top of your script</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span>
+
+<span class="va">layout</span> <span class="op">&lt;-</span> <span class="st">"AABB
+           CCDD"</span>
+
+<span class="va">house_sparrow_scatter</span><span class="op">+</span>
+  <span class="va">great_tit_scatter</span><span class="op">+</span>
+  <span class="va">corn_bunting_scatter</span><span class="op">+</span>
+  <span class="va">meadow_pipit_scatter</span><span class="op">+</span>
+  <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html">plot_layout</a></span><span class="op">(</span>design<span class="op">=</span><span class="va">layout</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="09-writing-functions_files/figure-html/unnamed-chunk-46-1.png" width="100%" style="display: block; margin: auto;"></div>
+<p>This is ok, but arguably still requires a lot of code repetition. We have used the same lines of code four times to recreate four plots that are functionally the same. If we want to make any changes to the look of our plots we have to make four separate edits &amp; mistakes can easily creep in.</p>
+<p>If we want to apply a loop, then the easiest thing is to first make our objects into an R list:</p>
+<div class="sourceCode" id="cb247"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">Sp_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">house_sparrow</span>, <span class="va">great_tit</span>, <span class="va">corn_bunting</span>, <span class="va">meadow_pipit</span><span class="op">)</span></code></pre></div>
+<p>Then loop down the length of our list:</p>
+<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">my_plots</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">Sp_list</span><span class="op">)</span><span class="op">)</span>
+
+<span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">Sp_list</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>                                    
+  <span class="co"># For every item along the length of Sp_list we want R to perform the following functions</span>
+  <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">Sp_list</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span>                               
+  <span class="co"># Create a dataframe for each species</span>
+  <span class="va">sp.name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">Common.Name</span><span class="op">)</span>                             
+  <span class="co"># Create an object that holds the species name, so that we can title each graph</span>
+  <span class="va">plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span> <span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">abundance</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>               
+    <span class="co"># Make the plots and add our customised theme</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span>, colour <span class="op">=</span> <span class="st">"#00868B"</span><span class="op">)</span> <span class="op">+</span>                              
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="va">lm</span>, colour <span class="op">=</span> <span class="st">"#00868B"</span>, fill <span class="op">=</span> <span class="st">"#00868B"</span><span class="op">)</span> <span class="op">+</span>        
+    <span class="fu">theme_custom</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Abundance\n"</span>, x <span class="op">=</span> <span class="st">""</span>, title <span class="op">=</span> <span class="va">sp.name</span><span class="op">)</span>
+ 
+   <span class="co"># makes a list of all the plots generates</span>
+  <span class="va">my_plots</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">plot</span> 
+  
+  <span class="co"># prints each plot out as it is made</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">plot</span><span class="op">)</span> 
+<span class="op">}</span></code></pre></div>
+<p><img src="09-writing-functions_files/figure-html/unnamed-chunk-48-1.png" width="100%" style="display: block; margin: auto;"><img src="09-writing-functions_files/figure-html/unnamed-chunk-48-2.png" width="100%" style="display: block; margin: auto;"><img src="09-writing-functions_files/figure-html/unnamed-chunk-48-3.png" width="100%" style="display: block; margin: auto;"><img src="09-writing-functions_files/figure-html/unnamed-chunk-48-4.png" width="100%" style="display: block; margin: auto;"></p>
+<p>So now we have a new object <code>my_plots</code> which is a list containing the four plots. This loop allowed us to code the details of our figures once, then iterate across four different groups.</p>
+<div class="sourceCode" id="cb249"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/wrap_plots.html">wrap_plots</a></span><span class="op">(</span><span class="va">my_plots</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html">plot_layout</a></span><span class="op">(</span>design<span class="op">=</span><span class="va">layout</span><span class="op">)</span> </code></pre></div>
+<div class="inline-figure"><img src="09-writing-functions_files/figure-html/unnamed-chunk-49-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#wrap_plots function from patchwork can take a list of ggplots</span></code></pre></div>
+<p>What if you want to write a loop to save all four plots at once - can you modify the script to do this?</p>
+<div class="sourceCode" id="cb251"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">Sp_list</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>                                    
+  <span class="co"># For every item along the length of Sp_list we want R to perform the following functions</span>
+  <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">Sp_list</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span>                               
+  <span class="co"># Create a dataframe for each species</span>
+  <span class="va">sp.name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">Common.Name</span><span class="op">)</span>                             
+  <span class="co"># Create an object that holds the species name, so that we can title each graph</span>
+  <span class="va">plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span> <span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">abundance</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>               
+    <span class="co"># Make the plots and add our customised theme</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span>, colour <span class="op">=</span> <span class="st">"#00868B"</span><span class="op">)</span> <span class="op">+</span>                                                
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="va">lm</span>, colour <span class="op">=</span> <span class="st">"#00868B"</span>, fill <span class="op">=</span> <span class="st">"#00868B"</span><span class="op">)</span> <span class="op">+</span>          
+    <span class="fu">theme_custom</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Abundance\n"</span>, x <span class="op">=</span> <span class="st">""</span>, title <span class="op">=</span> <span class="va">sp.name</span><span class="op">)</span>
+  
+    <span class="kw">if</span><span class="op">(</span><span class="va">i</span> <span class="op">%%</span> <span class="fl">1</span><span class="op">==</span><span class="fl">0</span><span class="op">)</span><span class="op">{</span>    <span class="co"># The %% operator is the remainder, this handy if line prints a number every time it completes a loop</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">i</span><span class="op">)</span>
+    <span class="op">}</span>
+<span class="co"># use paste to automatically add filename</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a></span><span class="op">(</span><span class="va">plot</span>, file<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"figure/"</span>, <span class="va">sp.name</span>, <span class="st">".png"</span>, sep<span class="op">=</span><span class="st">''</span><span class="op">)</span>, dpi<span class="op">=</span><span class="fl">900</span><span class="op">)</span> 
+<span class="op">}</span></code></pre></div>
+</div>
+<div id="iteration-in-r" class="section level3" number="9.3.3">
+<h3>
+<span class="header-section-number">9.3.3</span> Iteration in R<a class="anchor" aria-label="anchor" href="#iteration-in-r"><i class="fas fa-link"></i></a>
+</h3>
+<p>Loops are a fundamental part of programming in many languages - that's why they have been introduced as a concept with examples here. However in R, Loops are used much less often than in other languages. That is because R is a 'vector based language', something we often take for granted. But what does that mean?</p>
+<p>Here's an example - in the below written for R if we make a vector then apply a function to it, then it is applied to each element of the function, this is something we take for granted in R, but simply doesn't exist in languages like C++</p>
+<pre><code>x &lt;- c(2,4,6,8,10)
+
+x/2
+
+# [1] 1 2 3 4 5
+</code></pre>
+<p>Instead for C++ we would be required to write a loop, in order to explicitly request that the division is applied to each element of the vector</p>
+<pre><code>for(i in seq_along(x)){
+x[i] = x[i]/2
+}
+x
+
+# [1] 1 2 3 4 5
+</code></pre>
+<p>A lot of functions in R are already vectorised and you don't even have to think about this concept. When we want more control over how this vectorization is applied, we have used the function <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> It allows us to subset our data into hidden vectors, then command R to perform subsequent <code>dplyr</code> functions on each group separately. Because of the combined functionality of R's vectorization and dplyr's data tools you might find there is little need for loops. When we <em>do</em> wish to apply a function that isn't vectorize in the way we want - then tidyverse has an answer to this as well - purrr <span class="citation"><a href="references.html#ref-R-purrr" role="doc-biblioref">Henry &amp; Wickham</a> (<a href="references.html#ref-R-purrr" role="doc-biblioref">2020</a>)</span> and the <code>map()</code> function</p>
+</div>
+<div id="learn-to-purrr" class="section level3" number="9.3.4">
+<h3>
+<span class="header-section-number">9.3.4</span> Learn to purrr<a class="anchor" aria-label="anchor" href="#learn-to-purrr"><i class="fas fa-link"></i></a>
+</h3>
+<p>There are also a few other advantages to using <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map()</a></code> - you can use it with pipes %&gt;%, it handles errors better than normal for loops, and the syntax is quite clean and simple!</p>
+<p><strong>Remember</strong> purrr is a very tidyverse focused method of iteration, so understanding for loops can be useful if you end up learning other programming languages in the future.</p>
+<p><strong>purrr</strong> is more focused on the function, and less obviously focused on the looping aspect, as you might be able to see below.</p>
+<p>The basic syntax is map(<code>.x</code> = SEQUENCE, <code>.f</code> = FUNCTION, OTHER ARGUMENTS). In a bit more detail:</p>
+<ul>
+<li><p><code>.x</code> = are the inputs upon which the .f function will be iteratively applied - e.g. a vector of jurisdiction names, columns in a data frame, or a list of data frames</p></li>
+<li><p><code>.f</code> = is the function to apply to each element of the .x input - it could be a function like print() that already exists, or a custom function that you define. The function is often written after a tilde ~ (details below).
+A few more notes on syntax:</p></li>
+<li><p>If the function needs no further arguments specified, it can be written with no parentheses and no tilde (e.g. <code>.f = mean</code>). To provide arguments that will be the same value for each iteration, provide them within <code>map()</code> but outside the <code>.f = argument</code>, such as the <code>na.rm = T</code> in <code>map(.x = my_list, .f = mean, na.rm=T)</code>.</p></li>
+<li><p>You can use <code>.x</code> (or simply <code>.</code>) within the <code>.f = function</code> as a placeholder for the <code>.x</code> value of that iteration</p></li>
+<li><p>Use tilde syntax (<code><a href="https://rdrr.io/r/base/tilde.html">~</a></code>) to have greater control over the function - write the function as normal with parentheses, such as: <code>map(.x = my_list, .f = ~mean(., na.rm = T))</code>. Use this syntax particularly if the value of an argument will change each iteration, or if it is the value <code>.x</code> itself.</p></li>
+</ul>
+<p><strong>The output of using<code>map()</code> is a list</strong> - a list is an object class like a vector but whose elements can be of different classes. So, a list produced by <code>map()</code> could contain many data frames, or many vectors, many single values, or even many lists! There are alternative versions of <code>map()</code> explained below that produce other types of outputs (e.g. <code>map_dfr()</code> to produce a data frame, <code>map_chr()</code> to produce character vectors, and <code>map_dbl()</code> to produce numeric vectors).</p>
+<p>Basic <code>map()</code> will <em>always</em> return a list of values</p>
+<ul>
+<li>
+<code>map_lgl()</code> returns a logical</li>
+<li>
+<code>map_int()</code> returns an integer vector</li>
+<li>
+<code>map_dbl()</code> returns a double vector</li>
+<li>
+<code>map_chr()</code> returns a character vector</li>
+<li>
+<code>map_df()</code> returns a data frame</li>
+</ul>
+<div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Apply n_distinct to all variables, returning a double (numeric) for each</span>
+<span class="va">map_dbl_result</span> <span class="op">&lt;-</span> <span class="va">LPI</span> <span class="op">%&gt;%</span> 
+  <span class="fu">map_dbl</span><span class="op">(</span><span class="va">n_distinct</span><span class="op">)</span>
+
+<span class="co"># Print out result</span>
+<span class="va">map_dbl_result</span>
+
+<span class="co"># Print out type of result</span>
+<span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="va">map_dbl_result</span><span class="op">)</span></code></pre></div>
+<pre><code>##         ...1        Class        Order  Common.Name Country.list       Region 
+##       182086           14          100         2947          357            9 
+##       system        biome        realm         year    abundance 
+##            4           33           16           45        30872 
+## [1] "double"</code></pre>
+<div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Apply n_distinct to all variables, returning a dataframe</span>
+<span class="va">map_df_result</span> <span class="op">&lt;-</span> <span class="va">LPI</span> <span class="op">%&gt;%</span> 
+  <span class="fu">map_df</span><span class="op">(</span><span class="va">n_distinct</span><span class="op">)</span>
+
+<span class="co"># Print out result</span>
+<span class="va">map_df_result</span>
+
+<span class="co"># Check if output is a data frame (tibble in this case)</span>
+<span class="fu">is_tibble</span><span class="op">(</span><span class="va">map_df_result</span><span class="op">)</span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:right;">
+...1
+</th>
+<th style="text-align:right;">
+Class
+</th>
+<th style="text-align:right;">
+Order
+</th>
+<th style="text-align:right;">
+Common.Name
+</th>
+<th style="text-align:right;">
+Country.list
+</th>
+<th style="text-align:right;">
+Region
+</th>
+<th style="text-align:right;">
+system
+</th>
+<th style="text-align:right;">
+biome
+</th>
+<th style="text-align:right;">
+realm
+</th>
+<th style="text-align:right;">
+year
+</th>
+<th style="text-align:right;">
+abundance
+</th>
+</tr></thead>
+<tbody><tr>
+<td style="text-align:right;">
+182086
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+2947
+</td>
+<td style="text-align:right;">
+357
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+45
+</td>
+<td style="text-align:right;">
+30872
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<pre><code>## [1] TRUE</code></pre>
+</div>
+</div>
+<div id="reading-and-writing-lots-of-files" class="section level2" number="9.4">
+<h2>
+<span class="header-section-number">9.4</span> Reading and writing lots of files<a class="anchor" aria-label="anchor" href="#reading-and-writing-lots-of-files"><i class="fas fa-link"></i></a>
+</h2>
+<div id="writing" class="section level3" number="9.4.1">
+<h3>
+<span class="header-section-number">9.4.1</span> Writing<a class="anchor" aria-label="anchor" href="#writing"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb258"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">LPI_list</span> <span class="op">&lt;-</span> <span class="va">LPI</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html">group_split</a></span><span class="op">(</span><span class="va">Class</span><span class="op">)</span></code></pre></div>
+<p>I’ll also use <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map()</a></code> to take the character values from the Class column itself for assigning names to the list. <code>map()</code> transforms an input by applying a function to each element of the input, and then returns a vector the same length as the input. In this immediate example, the input is the list_of_dfs and we apply the function <code><a href="https://dplyr.tidyverse.org/reference/pull.html">dplyr::pull()</a></code> to extract the Class variable from each data frame. We then repeat this approach to convert Class into character type with <code><a href="https://rdrr.io/r/base/character.html">as.character()</a></code> and take out a single value with <code><a href="https://rdrr.io/r/base/unique.html">unique()</a></code>:</p>
+<div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">LPI_list</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">LPI_list</span> <span class="op">%&gt;%</span>
+  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">.</span>,<span class="va">Class</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># Pull out Species variable</span>
+  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># Convert factor to character</span>
+  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="co"># Set this as names for list members</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">LPI_list</span><span class="op">)</span></code></pre></div>
+<pre><code> [1] "Actinopterygii"            "Amphibia"                  "Aves"                      "Cephalaspidomorphi"       
+ [5] "Cetacea"                   "Chondrichthyes"            "Elasmobranchii"            "Holocephali"              
+ [9] "Mammalia"                  "Myxini"                    "Perciformes"               "Reptilia"                 
+[13] "Sarcopterygii"             "Testudinidae"              "updated by Nancy - Feb/02"
+</code></pre>
+<p>Exporting the list of data frames into multiple CSV files will take a few more lines of code, but is relatively straightforward. There are three main steps:</p>
+<ol style="list-style-type: decimal">
+<li><p>Define a function that tells R what the names for each CSV file should be, which I’ve called output_csv() below. The data argument will take in a data frame whilst the names argument will take in a character string that will form part of the file name for the individual CSV file.</p></li>
+<li><p>Create a named list where the names match the arguments of the function you’ve just defined (data and names), and should contain the objects that you would like to pass through to the function for the respective arguments. In this case, list_of_dfs will provide the three data frames, and names(list_of_dfs) will provide the names of those three data frames. This is necessary for running pmap(), which in my view is basically a super-powered version of map() that lets you iterate over multiple inputs simultaneously.</p></li>
+<li><p><code>pmap()</code> will then iterate through the two sets of inputs through output_csv() (the inputs are used as arguments), which then writes the three CSV files with the file names you want. For the “writing” function, you could either use write_csv() from readr (part of tidyverse) or fwrite() from data.table, depending on your workflow / style.</p></li>
+</ol>
+<div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Step 1</span>
+<span class="co"># Define a function for exporting csv with the desired file names and into the right path</span>
+<span class="va">output_csv</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">names</span><span class="op">)</span><span class="op">{</span> 
+    <span class="va">folder_path</span> <span class="op">&lt;-</span> <span class="st">"../data/"</span>
+    
+    <span class="fu">write_csv</span><span class="op">(</span><span class="va">data</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">folder_path</span>, <span class="st">"class-"</span>, <span class="va">names</span>, <span class="st">".csv"</span><span class="op">)</span><span class="op">)</span>
+  <span class="op">}</span>
+
+<span class="co"># Step 2</span>
+<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">LPI_list</span>,
+     names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">LPI_list</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  
+<span class="co"># Step 3</span>
+  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html">pmap</a></span><span class="op">(</span><span class="va">output_csv</span><span class="op">)</span> </code></pre></div>
+</div>
+<div id="reading" class="section level3" number="9.4.2">
+<h3>
+<span class="header-section-number">9.4.2</span> Reading<a class="anchor" aria-label="anchor" href="#reading"><i class="fas fa-link"></i></a>
+</h3>
+<p>The method for reading CSV files into a directory is slightly different, as you’ll need to find a way to identify or create a character vector of names of all the files that you want to load into R. To do this, we’ll use <code><a href="https://rdrr.io/r/base/list.files.html">list.files()</a></code>, which produces a character vector of the names of files or directories in the named directory:</p>
+<div class="sourceCode" id="cb262"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span>path<span class="op">=</span><span class="st">"../data/"</span>, pattern <span class="op">=</span> <span class="st">"*.csv"</span>, full.names <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
+<pre><code> [1] "class-Actinopterygii.csv"     "class-Amphibia.csv"           "class-Aves.csv"               "class-Cephalaspidomorphi.csv"
+ [5] "class-Cetacea.csv"            "class-Chondrichthyes.csv"     "class-Elasmobranchii.csv"     "class-Holocephali.csv"       
+ [9] "class-Mammalia.csv"           "class-Myxini.csv"             "class-Perciformes.csv"        "class-Reptilia.csv"          
+[13] "class-Sarcopterygii.csv"      "class-Testudinidae.csv"
+</code></pre>
+<p>The code below takes that list of files, pipes it to a <code>map_df()</code> function that runs read_csv on each file, then outputs everything toa dataframe</p>
+<div class="sourceCode" id="cb264"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">LPI</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span>path<span class="op">=</span><span class="st">"../data/"</span>, pattern <span class="op">=</span> <span class="st">"*.csv"</span>, full.names <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+     <span class="fu">map_df</span><span class="op">(</span><span class="op">~</span><span class="fu">read_csv</span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>I think <code>map_df</code> is extremely useful because you can feed it’s output directly into a ggplot2 call:</p>
+<div class="sourceCode" id="cb265"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">LPI</span> <span class="op">%&gt;%</span> 
+  <span class="fu">map_df</span><span class="op">(</span><span class="va">n_distinct</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="co"># Convert to longer format</span>
+  <span class="fu">pivot_longer</span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>, names_to <span class="op">=</span> <span class="st">"variable"</span>, values_to <span class="op">=</span> <span class="st">"count"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="co"># Start plotting</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">variable</span>, y <span class="op">=</span> <span class="va">count</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="09-writing-functions_files/figure-html/unnamed-chunk-58-1.png" width="100%" style="display: block; margin: auto;"></div>
+<p>Now you have a simple grasp of <code>purrr</code> you should see that we have a list containing species objects, and an anonymous function ~ggplot on the right. We can use this to quickly make four plots, just like we did with our for loops.</p>
+<p>the <code>map()</code> function takes a list or vector as the first argument, and a function (prefixed by ~) as the second argument, it will then apply the function to each element of the list or vector. It will then return the output as new list. Simple!</p>
+<div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">my_plots_2</span> <span class="op">&lt;-</span> 
+  <span class="fu">map</span><span class="op">(</span><span class="va">Sp_list</span>, <span class="op">~</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">.</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span> <span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">abundance</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>              
+                      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span>, colour <span class="op">=</span> <span class="st">"#00868B"</span><span class="op">)</span> <span class="op">+</span>                                                
+                      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="va">lm</span>, colour <span class="op">=</span> <span class="st">"#00868B"</span>, fill <span class="op">=</span> <span class="st">"#00868B"</span><span class="op">)</span> <span class="op">+</span>          
+                      <span class="fu">theme_custom</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+                      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Abundance\n"</span>, x <span class="op">=</span> <span class="st">""</span><span class="op">)</span><span class="op">)</span> 
+
+
+<span class="fu"><a href="https://patchwork.data-imaginist.com/reference/wrap_plots.html">wrap_plots</a></span><span class="op">(</span><span class="va">my_plots_2</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html">plot_layout</a></span><span class="op">(</span>design<span class="op">=</span><span class="va">layout</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="09-writing-functions_files/figure-html/unnamed-chunk-59-1.png" width="100%" style="display: block; margin: auto;"></div>
+</div>
+</div>
+<div id="activity-4-test-yourself" class="section level2" number="9.5">
+<h2>
+<span class="header-section-number">9.5</span> Activity 4: Test yourself<a class="anchor" aria-label="anchor" href="#activity-4-test-yourself"><i class="fas fa-link"></i></a>
+</h2>
+<p><strong>Question 1.</strong> Predict the output of the following when executed in R:</p>
+<div class="sourceCode" id="cb267"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">foo</span><span class="op">=</span><span class="kw">function</span><span class="op">(</span><span class="va">d</span>,<span class="va">n</span>,<span class="va">max</span><span class="op">)</span><span class="op">{</span>
+   <span class="va">nums</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from<span class="op">=</span><span class="fl">1</span>, by<span class="op">=</span><span class="va">d</span>, length.out<span class="op">=</span><span class="va">n</span><span class="op">)</span>
+   <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">nums</span><span class="op">[</span><span class="va">nums</span> <span class="op">&lt;=</span> <span class="va">max</span><span class="op">]</span><span class="op">)</span>
+<span class="op">}</span>
+<span class="fu">foo</span><span class="op">(</span><span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">10</span><span class="op">)</span></code></pre></div>
+<p><select class="webex-select"><option value="blank"></option>
+<option value="">4, 5, 10</option>
+<option value="answer">1, 5, 9</option>
+<option value="">4, 8, 12</option></select></p>
+<p><strong>Question 2.</strong> Predict the output of the following when executed in R:</p>
+<div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">fum</span><span class="op">=</span><span class="kw">function</span><span class="op">(</span><span class="va">a</span>,<span class="va">b</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">a</span> <span class="op">=</span> <span class="va">a</span><span class="op">[</span><span class="va">a</span><span class="op">&lt;</span><span class="va">b</span><span class="op">]</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span>
+<span class="op">}</span>
+
+<span class="fu">fum</span><span class="op">(</span><span class="fl">3</span><span class="op">:</span><span class="fl">7</span>,<span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
+<p><select class="webex-select"><option value="blank"></option>
+<option value="answer">5, 6, 7</option>
+<option value="">3, 4, 5, 6, 7</option>
+<option value="">3, 4</option></select></p>
+<p><strong>Question 3.</strong> Write a function that adds two numbers and divides the results by 2.</p>
+<button id="displayTextunnamed-chunk-62" onclick="javascript:toggle('unnamed-chunk-62');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-62" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb269"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">addtwo</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">num1</span>, <span class="va">num2</span><span class="op">)</span><span class="op">{</span>
+<span class="op">(</span><span class="va">num1</span> <span class="op">+</span> <span class="va">num2</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span>
+<span class="op">}</span></code></pre></div>
+</div>
+</div>
+</div>
+<p><strong>Question 4.</strong> Recode values of a datase. tFor example, if you have a survey of age data, you may want to convert any crazy values (like anything below 0 or above 100) to NA. Write a function called recode.integer() with 3 arguments: x, lb, and ub. We’ll assume that x is a numeric vector. The function should look at the values of x, convert any values below lb and above ub to NA, and then return the resulting vector. Here is the function in action:</p>
+<p>Some hints: there are multiple ways to solve this.</p>
+<div class="sourceCode" id="cb270"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">vector</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span><span class="op">:</span><span class="fl">30</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb271"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">recode.integer</span><span class="op">(</span>x <span class="op">=</span> <span class="va">vector</span>,
+               lb <span class="op">=</span> <span class="fl">0</span>,
+               ub <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
+<button id="displayTextunnamed-chunk-65" onclick="javascript:toggle('unnamed-chunk-65');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-65" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb272"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">recode.integer</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">lb</span>, <span class="va">ub</span><span class="op">)</span><span class="op">{</span>
+  <span class="va">x</span><span class="op">[</span><span class="va">x</span><span class="op">&lt;</span><span class="va">lb</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span>
+  <span class="va">x</span><span class="op">[</span><span class="va">x</span><span class="op">&gt;</span><span class="va">ub</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb273"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">recode.integer</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">lb</span>, <span class="va">ub</span><span class="op">)</span><span class="op">{</span>
+    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/replace.html">replace</a></span><span class="op">(</span><span class="va">value</span>, <span class="va">value</span><span class="op">&lt;</span><span class="va">lb</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/replace.html">replace</a></span><span class="op">(</span><span class="va">value</span>, <span class="va">value</span><span class="op">&gt;</span><span class="va">ub</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">}</span>
+
+<span class="va">recode.numeric</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">lb</span>, <span class="va">ub</span><span class="op">)</span><span class="op">{</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="va">lb</span>, <span class="cn">NA_integer_</span>, <span class="va">x</span><span class="op">)</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="va">ub</span>, <span class="cn">NA_integer_</span>, <span class="va">x</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+<div id="activity-5" class="section level2" number="9.6">
+<h2>
+<span class="header-section-number">9.6</span> Activity 5<a class="anchor" aria-label="anchor" href="#activity-5"><i class="fas fa-link"></i></a>
+</h2>
+<p>If you are hungry for more <code>map()</code> then check out <a href="https://www.rebeccabarter.com/blog/2019-08-19_purrr/#simplest-usage-repeated-looping-with-map">this blogpost</a></p>
+</div>
+<div id="summary-1" class="section level2" number="9.7">
+<h2>
+<span class="header-section-number">9.7</span> Summary<a class="anchor" aria-label="anchor" href="#summary-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Making functions and iterations are advanced R skills, and can often seem daunting. I do not expect you to HAVE to implement these for this course, but I do want to give you an insight into some core programming skills that you might be interested in and want to develop.</p>
+<p>Below are some links you may find useful</p>
+<ul>
+<li><p><a href="https://www.rstudio.com/resources/cheatsheets/">RStudio education cheat sheet for purr</a></p></li>
+<li><p><a href="https://r4ds.had.co.nz/program-intro.html">R4DS - intro to programming</a></p></li>
+<li><p><a href="https://ourcodingclub.github.io/tutorials/funandloops/#function">Coding club</a></p></li>
+<li><p><a href="https://epirhandbook.com/en/iteration-loops-and-lists.html">EpiR handbook</a></p></li>
+</ul>
+</div>
+</div>
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  if (t = document.getElementById("webex-total_correct")) {
+    var correct = document.getElementsByClassName("webex-correct").length;
+    var solvemes = document.getElementsByClassName("webex-solveme").length;
+    var radiogroups = document.getElementsByClassName("webex-radiogroup").length;
+    var selects = document.getElementsByClassName("webex-select").length;
+    
+    t.innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+  
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+  
+  var cl = this.classList
+  
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+  
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+  
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+  
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+  
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+  }
+  
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+  
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+  }
+
+  update_total_correct();
+}
+
+</script><script>
+$( document ).ready(function() {
+  var cite = ' ';
+  var license = ' <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>';
+
+  $("footer div.row div:eq(1) p").html(
+    license
+  );
+});
+</script><div class="chapter-nav">
+<div class="prev"><a href="github.html"><span class="header-section-number">8</span> Github</a></div>
+<div class="next"><a href="data-insights-part-one.html"><span class="header-section-number">10</span> Data Insights part one</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#functions-and-iteration"><span class="header-section-number">9</span> Functions and Iteration</a></li>
+<li>
+<a class="nav-link" href="#functions-1"><span class="header-section-number">9.1</span> Functions</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#common-functions"><span class="header-section-number">9.1.1</span> Common functions</a></li>
+<li><a class="nav-link" href="#write-your-own-function"><span class="header-section-number">9.1.2</span> Write your own function</a></li>
+<li><a class="nav-link" href="#activity-1-use-the-following-instructions-to-complete-the-function-in-the-window-below"><span class="header-section-number">9.1.3</span> Activity 1: Use the following instructions to complete the function in the window below:</a></li>
+<li><a class="nav-link" href="#activity-2-more-functions"><span class="header-section-number">9.1.4</span> Activity 2: More functions</a></li>
+<li><a class="nav-link" href="#even-more-functions"><span class="header-section-number">9.1.5</span> Even more functions</a></li>
+<li><a class="nav-link" href="#activity-3"><span class="header-section-number">9.1.6</span> Activity 3</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#examples"><span class="header-section-number">9.2</span> Examples</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#custom-ggplot-themes"><span class="header-section-number">9.2.1</span> Custom ggplot themes</a></li>
+<li><a class="nav-link" href="#writing-packages"><span class="header-section-number">9.2.2</span> Writing Packages</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#iteration"><span class="header-section-number">9.3</span> Iteration</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#for-loops"><span class="header-section-number">9.3.1</span> For Loops</a></li>
+<li><a class="nav-link" href="#exercise-for-for-loops"><span class="header-section-number">9.3.2</span> Exercise for For Loops</a></li>
+<li><a class="nav-link" href="#iteration-in-r"><span class="header-section-number">9.3.3</span> Iteration in R</a></li>
+<li><a class="nav-link" href="#learn-to-purrr"><span class="header-section-number">9.3.4</span> Learn to purrr</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#reading-and-writing-lots-of-files"><span class="header-section-number">9.4</span> Reading and writing lots of files</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#writing"><span class="header-section-number">9.4.1</span> Writing</a></li>
+<li><a class="nav-link" href="#reading"><span class="header-section-number">9.4.2</span> Reading</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#activity-4-test-yourself"><span class="header-section-number">9.5</span> Activity 4: Test yourself</a></li>
+<li><a class="nav-link" href="#activity-5"><span class="header-section-number">9.6</span> Activity 5</a></li>
+<li><a class="nav-link" href="#summary-1"><span class="header-section-number">9.7</span> Summary</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/UEABIO/data-sci-v1/blob/main/book/09-writing-functions.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/UEABIO/data-sci-v1/edit/main/book/09-writing-functions.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-09-17.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

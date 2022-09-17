@@ -67,6 +67,25 @@ There are thousands of different R packages with even more functions. Unfortunat
 library(dplyr)
 library(MASS)
 ```
+```
+package �dplyr� was built under R version 3.6.3
+Attaching package: �dplyr�
+
+The following objects are masked from �package:stats�:
+
+    filter, lag
+
+The following objects are masked from �package:base�:
+
+    intersect, setdiff, setequal, union
+
+
+Attaching package: �MASS�
+
+The following object is masked from �package:dplyr�:
+
+    select
+```
 
 In this case, R is telling you that the function `select()` in the `dplyr` package is being hidden (or 'masked') by another function with the same name. If you were to try and use `select()`, R would use the function from the package that was loaded most recently - in this case it would use the function from `MASS`.
 
@@ -77,13 +96,20 @@ dplyr::select()
 MASS::select()
 ```
 
+```{block, type = "info"}
+Why do we get naming conflicts? 
+
+This is because R is open source software. Anyone can write and submit useful R packages. As a result it is impossible to make sure that there are NEVER any functions with identical names.
+
+```
+
 ## Objects
 
 A large part of your coding will involve creating and manipulating objects. Objects contain stuff, and we made our first R objects in the previous chapter. The values contained in an object can be numbers, words, or the result of operations and analyses.You assign content to an object using `<-`.
 
 ### Activity 1: Create some objects
 
-* Copy and paste the following code into the console, change the code so that it uses your own name and age and run it. You should see that `name`, `age`, `today`, `new_year`, and `data` appear in the environment pane.  
+Copy and paste the following code into the console, change the code so that it uses your own name and age and run it. You should see that `name`, `age`, `today`, `new_year`, and `data` appear in the environment pane.  
 
 ```{r objects}
 
@@ -247,14 +273,14 @@ There are functions found as part of the `tidyverse` that can help us to reshape
 
 * `tidyr::pivot_longer()` - from *wide* to *long* format
 
-```{r, eval = F}
+```{r, eval = T}
  country <- c("x", "y", "z")
  yr1960 <-  c(10, 20, 30)
  yr1970 <-  c(13, 23, 33)
  yr2010 <-  c(15, 25, 35)
 
 country_data <- tibble(country, yr1960, yr1970, yr2010)
-
+country_data
 ```
 
 
@@ -348,9 +374,18 @@ When you open up R and start writing code, loading packages, and creating object
 
 Click 'Session - Restart R'. 
 
+Have you tried turning it off and on again? It is vital to restart R regularly. Restarting R helps to avoid accidentally using the wrong data or functions stored in the environment. Restarting R only takes a second and we do it several times per day! Once you get used to saving everything in a script, you’ll always be happy to restart R. This will help you develop robust and reproducible data analysis skills.
+
 ```{r img-session, echo=FALSE, fig.cap="The truth about programming"}
 
 knitr::include_graphics("images/new_session.png")
+
+```
+
+```{block, type = "info"}
+This does not mean you can’t or shouldn’t ever save your work in .RData/.rda files. 
+
+But it is best to do it consciously and load exactly what you want to load. Letting R silently save and load everything for you may also include broken data or objects.
 
 ```
 
@@ -412,7 +447,6 @@ A large part of coding is trying to figure why your code doesn't work and this i
 * Is it definitely an error? Not all red text in R means an error - sometimes it is just giving you a message with information. 
 
 ## Activity 7: Test yourself
-### Head to Blackboard when complete and submit your answers to the quiz.
 
 **Question 1.** Why should you never include the code `install.packages()` in your analysis scripts? `r mcq(c("You should use library() instead", "Packages are already part of Base R", answer = "You (or someone else) may accidentally install a package update that stops your code working", "You already have the latest version of the package"))` 
 

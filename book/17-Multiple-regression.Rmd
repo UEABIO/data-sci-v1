@@ -384,7 +384,8 @@ Because the drop1 function drops one term from the model, then adds it back in a
 In this example it is unnecessary to spend time looking at pairwise comparisons between the four possible levels, the interesting finding is to report the strength of the interaction effect. **But** it is possible to generate estimated means, and produce pairwise comparisons with the `emmeans()` package
 
 ```{r}
-emmeans::emmeans(ls_2, specs = pairwise ~ Light + Fert + Light:Fert)
+emmeans::emmeans(ls_2, specs = pairwise ~ Light + Fert + Light:Fert) %>% 
+  confint()
 # including the argument pairwise in front of the ~ prompts the post-hoc pairwise comparisons.
  # $emmeans contains the estimate mean values for each possible combination (with confidence intervals)
  # $ contrasts contains tukey test post hoc comparisons between levels

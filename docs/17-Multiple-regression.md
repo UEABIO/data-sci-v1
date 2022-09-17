@@ -886,7 +886,8 @@ In this example it is unnecessary to spend time looking at pairwise comparisons 
 
 
 ```r
-emmeans::emmeans(ls_2, specs = pairwise ~ Light + Fert + Light:Fert)
+emmeans::emmeans(ls_2, specs = pairwise ~ Light + Fert + Light:Fert) %>% 
+  confint()
 # including the argument pairwise in front of the ~ prompts the post-hoc pairwise comparisons.
  # $emmeans contains the estimate mean values for each possible combination (with confidence intervals)
  # $ contrasts contains tukey test post hoc comparisons between levels
@@ -903,15 +904,16 @@ emmeans::emmeans(ls_2, specs = pairwise ~ Light + Fert + Light:Fert)
 ## Confidence level used: 0.95 
 ## 
 ## $contrasts
-##  contrast          estimate   SE df t.ratio p.value
-##  (L- F-) - (L+ F-)    -30.1 32.7 60 -0.921  0.7940 
-##  (L- F-) - (L- F+)    -93.7 32.7 60 -2.863  0.0287 
-##  (L- F-) - (L+ F+)   -219.2 32.7 60 -6.699  <.0001 
-##  (L+ F-) - (L- F+)    -63.6 32.7 60 -1.943  0.2215 
-##  (L+ F-) - (L+ F+)   -189.1 32.7 60 -5.779  <.0001 
-##  (L- F+) - (L+ F+)   -125.5 32.7 60 -3.836  0.0017 
+##  contrast          estimate   SE df lower.CL upper.CL
+##  (L- F-) - (L+ F-)    -30.1 32.7 60     -117    56.35
+##  (L- F-) - (L- F+)    -93.7 32.7 60     -180    -7.22
+##  (L- F-) - (L+ F+)   -219.2 32.7 60     -306  -132.75
+##  (L+ F-) - (L- F+)    -63.6 32.7 60     -150    22.90
+##  (L+ F-) - (L+ F+)   -189.1 32.7 60     -276  -102.63
+##  (L- F+) - (L+ F+)   -125.5 32.7 60     -212   -39.06
 ## 
-## P value adjustment: tukey method for comparing a family of 4 estimates
+## Confidence level used: 0.95 
+## Conf-level adjustment: tukey method for comparing a family of 4 estimates
 ```
 
 ## Continuous Linear Models

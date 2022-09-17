@@ -94,7 +94,7 @@
 <li><a class="" href="data-visualisation-with-ggplot2.html"><span class="header-section-number">6</span> Data visualisation with ggplot2</a></li>
 <li><a class="" href="markdown.html"><span class="header-section-number">7</span> Markdown</a></li>
 <li><a class="" href="github.html"><span class="header-section-number">8</span> Github</a></li>
-<li><a class="" href="functions-1.html"><span class="header-section-number">9</span> Functions</a></li>
+<li><a class="" href="functions-and-iteration.html"><span class="header-section-number">9</span> Functions and Iteration</a></li>
 <li><a class="" href="data-insights-part-one.html"><span class="header-section-number">10</span> Data Insights part one</a></li>
 <li><a class="" href="data-insights-part-two.html"><span class="header-section-number">11</span> Data insights part two</a></li>
 <li class="book-part">Statistics</li>
@@ -204,7 +204,7 @@ huge
 </summary><p>unpaired <em>t</em>-test: 0.92</p>
 <p>paired <em>t</em>-test: 0.45</p>
 <p>There is also a package with functions to help you calculate a range of common standardised effect size measures - it also provides confidence intervals on a standardised scale (where 0 would be no effect):</p>
-<div class="sourceCode" id="cb497"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb522"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/effectsize/">effectsize</a></span><span class="op">)</span>
 
 
@@ -279,7 +279,7 @@ CI_high
 <h3>
 <span class="header-section-number">24.0.1</span> Power<a class="anchor" aria-label="anchor" href="#power"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb498"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb523"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/heliosdrm/pwr">pwr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/pitakakariki/simr">simr</a></span><span class="op">)</span></code></pre></div>
 <p>You don't necessarily need to report effect sizes in a write-up, it is fairly rare to see them included in a paper. It will be more useful for you to report confidence intervals on the original measurement scale. But it does provide two important pieces of information.</p>
@@ -293,13 +293,13 @@ CI_high
 <li><p>Working out what the statistical power of you analysis was <em>post hoc</em> to determine how likely it was you missed an effect ( but see<a href="https://gpsych.bmj.com/content/32/4/e100069">This useful paper</a>.</p></li>
 <li><p>Working out what sample size you <em>need</em> before an experiment to make sure you reach the desired power. Often a common <span class="math inline">\(\beta\)</span> value is 0.8, in much the same way that a common <span class="math inline">\(\alpha\)</span> is 0.05, it is an arbitrary target, but here means we can tolerate a risk of failing to reject the null when we should have in 20% of our experiments that do not produce a significant result.</p></li>
 </ol>
-<div class="sourceCode" id="cb499"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb524"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># for n, d, sig.level and power - put values for three of the arguments and it will return the value of the fourth e.g. can you work out the power of our two sample t-test above? </span>
 <span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>n <span class="op">=</span> <span class="cn">NULL</span>, d <span class="op">=</span> <span class="cn">NULL</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="cn">NULL</span>,
 type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"two.sample"</span><span class="op">)</span>,
 alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"two.sided"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><strong>Now you know how the pwr.t.test() function works - Can you make a simple iteration to check the power for a lower effect size (d) of 0.2 for a two-sided t-test at sample sizes from 0-1000 increasing by 10 each time?</strong></p>
-<div class="sourceCode" id="cb500"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb525"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sample_size</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1000</span>, by<span class="op">=</span><span class="fl">10</span><span class="op">)</span>
 
 <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sample_size</span><span class="op">)</span><span class="op">)</span>
@@ -635,7 +635,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-08-31.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-09-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

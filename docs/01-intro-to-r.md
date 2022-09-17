@@ -11,31 +11,31 @@
 
 R is a programming language that you will write code in, and RStudio is an Integrated Development Environment (IDE) which makes working with R easier. Think of it as knowing English and using a plain text editor like NotePad to write a book versus using a word processor like Microsoft Word. You could do it, but it wouldn't look as good and it would be much harder without things like spell-checking and formatting. In a similar way, you can use R without R Studio but we wouldn't recommend it. The key thing to remember is that although you will do all of your work using RStudio for this course, you are actually using **two** pieces of software which means that from time-to-time, both of them may have separate updates.
 
-R and RStudio can be downloaded for free onto your [personal computers](https://www.rstudio.com/products/rstudio/), but for convenience we will use a classroom space on **RStudio Cloud**.
+R and RStudio can be downloaded for free onto your [personal computers](https://www.rstudio.com/products/rstudio/)(see Appendices), but for convenience we will use a classroom space on **RStudio Cloud**.
 
 [RStudio Cloud](https://rstudio.cloud/) is a cloud-based service where we can log into remotely hosted servers that host our data analysis projects.
 
 The advantage of using RStudio Cloud is that all the extra packages and functions you need for this course will already be installed. You can log-in to your workspace from any computer as long as you have an internet connection and remember you username and password. I can also "visit" your projects and help out when you get stuck, if they are hosted on RStudio Cloud.
 
-Eventually we will also add extra tools like GitHub and RMarkdown for data reproducibility and collaborative programming, which are collaboration and version control systems that we will be using throughout the course. More on this in future weeks.
+Eventually we will may also add extra tools like GitHub and RMarkdown for data reproducibility, literate and collaborative programming.
 
-By the end of this module I hope you will have the tools to confidently analyze real data, make informative and beautiful data visuals, and be able to analyse lots of different types of data.
+By the end of this course I hope you will have the tools to confidently analyze real data, make informative and beautiful data visuals, and be able to analyze lots of different types of data.
 
 ## Using RStudio Cloud
 
-All of our sessions will run on cloud-based software. All you have to do is make a free account, and join our Workspace BIO-5023Y the sharing link is here.
+All of our sessions will run on cloud-based software. All you have to do is make a free account, and join our Workspace.
 
 Once you are signed up - you will see that there are two spaces:
 
--   Your workspace - for personal use
+-   Your workspace - for personal use (20hrs/month)
 
--   BIO-5023Y - for our module work only
+-   Our shared classroom - educational licence (no limit)
 
-Make sure you are working in the class workspace - there is a limit to the hours/month on your workspace, so ALL assignments and project work should take place in the BIO-5023Y workspace.
+Make sure you are working in the classroom workspace - so that I can distribute project work and 'visit' your projects if needed.
 
 RStudio Cloud works in exactly the same way as RStudio, but means you don't have to download any software. You can access the hosted cloud server and your projects through any browser connection (Chrome works best), from any computer.
 
-Watch these short explainer videos to get used to navigating the environment.
+Here is a good reference guide to [RStudio Cloud](https://rstudio.cloud/learn/guide#projects)
 
 ## Getting to know RStudio
 
@@ -46,17 +46,44 @@ R Studio has a console that you can try out code in (appearing as the bottom lef
 <p class="caption">(\#fig:img-rstudio)RStudio interface</p>
 </div>
 
-You will learn more about how to use the features included in R Studio throughout this course, however, we highly recommend watching [RStudio Essentials 1](https://rstudio.com/resources/webinars/programming-part-1-writing-code-in-rstudio/) from the R Studio team. The video lasts \~30 minutes and gives a tour of the main parts of R Studio.
+You will learn more about how to use the features included in R Studio throughout this course, however, I highly recommend watching [RStudio Essentials 1](https://rstudio.com/resources/webinars/programming-part-1-writing-code-in-rstudio/) at some point. 
+
+The video lasts \~30 minutes and gives a tour of the main parts of R Studio.
 
 ### Consoles vs. scripts
 
+* The *script* window is the place to enter and run code so that it is easily edited and saved for future use. Usually the Script Window is shown at the top left in RStudio. If this window is not shown, it will be visible *if* you open a previously saved R script, *or* if you create a new R Script. You create new R Script by clicking on File > New File > R Script in the RStudio menu bar.
+
+* To execute your code in the R script, you can either highlight the code and click on Run, or you can highlight the code and press CTRL + Enter on your keyboard.
+
+* The *console*: you can enter code directly in the Console Window and click Enter. The commands that you run will be shown in the History Window on the top right of RStudio. Though it is much more difficult to keep track of your work this way.
+
 ### Environment
+
+The Environment tab (top right) allows you to see what objects are in the workspace. If you create variables or data frames, you have a visual listing of everything in the current workspace. When you start a new project this should be completely empty.
 
 ### Plots, files, packages, help
 
+1. Plots - The Plots panel, shows all your plots. There are buttons for opening the plot in a separate window and exporting the plot as a pdf or jpeg (though you can also do this with code.)
+
+2. Files - The files panel gives you access to the file directory on your hard drive. 
+
+3. Packages - Shows a list of all the R packages installed on your harddrive and indicates whether or not they are currently loaded. Packages that are loaded in the current session are checked while those that are installed but not yet loaded are unchecked. We will discuss packages more later.
+
+4. Help - Help menu for R functions. You can either type the name of a function in the search window, or use the code to search for a function with the name
+
+
+<div class="figure" style="text-align: center">
+<img src="images/RStudio_Screenshot_Labels.png" alt="RStudio interface labelled" width="100%" />
+<p class="caption">(\#fig:labelled)RStudio interface labelled</p>
+</div>
+
 ### Make RStudio your own
 
-**PERSONALISE AND CUSTOMISE**
+You can [personalise the RStudio GUI](https://support.rstudio.com/hc/en-us/articles/115011846747-Using-Themes-in-the-RStudio-IDE) as much as you like. 
+
+<img src="images/dark_mode.png" width="50%" style="display: block; margin: auto;" /><img src="images/classic_mode.png" width="50%" style="display: block; margin: auto;" />
+
 
 ## Get Help!
 
@@ -79,7 +106,7 @@ There are a lot of sources of information about using R out there. Here are a fe
 
 ## Get Started
 
-Go to RStudio Cloud and enter the Project labelled `Week One` - this will clone the project and provide you with your own workspace.
+Go to RStudio Cloud and enter the Project labelled `Day One` - this will clone the project and provide you with your own project workspace.
 
 Follow the instructions below to get used to the R command line, and how R works as a language.
 
@@ -116,6 +143,29 @@ You didn't type the `>` symbol: that's just the R command prompt and isn't part 
 It's important to understand how the output is formatted. Obviously, the correct answer to the sum `10 + 20` is `30`, and not surprisingly R has printed that out as part of its response. But it's also printed out this `[1]` part, which probably doesn't make a lot of sense to you right now. You're going to see that a lot. You can think of `[1] 30` as if R were saying "the answer to the 1st question you asked is 30".
 
 ### Operators
+
+There are two types of operators to consider
+
+#### Arithmetic Operators
+
+|Operator|Description
+|-----|-----|
+|+|	addition|
+|-|	subtraction|
+|*|	multiplication|
+|/|	division|
+|^|	exponentiation|
+
+#### Logical Operators
+
+|Operator|Description
+|-----|-----|
+|<|less than|
+|<=|less than or equal to|
+|>|	greater than|
+|>=|greater than or equal to|
+|==|exactly equal to|
+|!=|not equal to|
 
 ### Typos
 
@@ -415,6 +465,9 @@ c
 <div class='webex-solution'><button>What is the value of c ?</button>
 
 [1] 15
+
+When `c` was created it was a product of `a` and `b` having values of 10 and 15 respectively. 
+If we re-ran the command `c <- a + b` *after* changing the value of `b` **then** we would get a value of 17. 
 
 
 </div>
@@ -764,7 +817,6 @@ It is very similar to the code you ran earlier, but is preceded by `plot_1 <-`
 
 
 ```r
-# ________________----
 # DATA VISUAL ----
 
 plot_1 <- ggplot(data = penguins, # calls ggplot function, data is penguins
@@ -799,7 +851,6 @@ For our next trick we will make a script that outputs a file. Underneath the lin
 
 
 ```r
-# ________________----
 # OUTPUT TO FILE ----
 
 ggsave(filename = "2022_10_01_5023Y_workshop_1_penguin_scatterplot.png", 
@@ -837,6 +888,46 @@ Alongside our data, our script is the most precious part of our analysis. We don
 
 You could now safely quit R, and when you log on next time to this project, your script will be waiting for you.
 
+
+
+<div class='webex-solution'><button>Check your script</button>
+
+
+
+```r
+# I really love R
+# _______________----
+
+# 📦 PACKAGES ----
+
+library(ggplot2) # create elegant data visualisations
+library(palmer penguins) # Palmer Archipelago Penguin Data
+
+# ________________----
+# DATA VISUAL ----
+
+plot_1 <- ggplot(data = penguins, # calls ggplot function, data is penguins
+           aes(x = bill_length_mm, # sets x axis as bill length
+               y = bill_depth_mm)) + # sets y axis value as bill depth
+          geom_point(aes(colour=species)) # geometric to plot
+
+# ______________----
+
+# OUTPUT TO FILE ----
+
+ggsave(filename = "2022_10_01_5023Y_workshop_1_penguin_scatterplot.png", 
+       plot = plot_1, 
+       dpi = 300, 
+       width = 6, 
+       height = 6)
+# _________________----
+```
+
+
+</div>
+
+
+
 ## Quitting
 
 -   Make sure you have saved any changes to your R script - that's all you need to make sure you've done!
@@ -851,7 +942,7 @@ You could now safely quit R, and when you log on next time to this project, your
 
 ## Activity 1
 
-### Head to Blackboard when complete and submit your answers to the quiz to get your first Data Science Learning Badge.
+### Complete this Quiz
 
 When you get the correct answer, the answer box will turn green. Sometimes this doesn't work on Internet Explorer or Edge so be sure to use Chrome or Firefox.
 

@@ -94,7 +94,7 @@
 <li><a class="" href="data-visualisation-with-ggplot2.html"><span class="header-section-number">6</span> Data visualisation with ggplot2</a></li>
 <li><a class="" href="markdown.html"><span class="header-section-number">7</span> Markdown</a></li>
 <li><a class="active" href="github.html"><span class="header-section-number">8</span> Github</a></li>
-<li><a class="" href="functions-1.html"><span class="header-section-number">9</span> Functions</a></li>
+<li><a class="" href="functions-and-iteration.html"><span class="header-section-number">9</span> Functions and Iteration</a></li>
 <li><a class="" href="data-insights-part-one.html"><span class="header-section-number">10</span> Data Insights part one</a></li>
 <li><a class="" href="data-insights-part-two.html"><span class="header-section-number">11</span> Data insights part two</a></li>
 <li class="book-part">Statistics</li>
@@ -278,13 +278,13 @@ Note your password carefully!
 Make sure you go to your RStudio Cloud profile &gt; Authentication and select Github Enabled &amp; Private repo access also enabled
 </p>
 </div>
-<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_git_config.html">use_git_config</a></span><span class="op">(</span>user.name <span class="op">=</span> <span class="st">"Jane Doe"</span>, user.email <span class="op">=</span> <span class="st">"jane@example.org"</span><span class="op">)</span></code></pre></div>
 <p>Then you need to give RStudio Cloud your GitHub Personal Access Token, which you can retrieve by going to Settings &gt; Developer Settings &gt; Generate Token</p>
 <p>Select all the "scopes" and name your token.</p>
 <div class="inline-figure"><img src="images/git-PAT.png" width="100%" style="display: block; margin: auto;"></div>
 <p>Make a note of this because you will need it whenever you set up a new project you want to talk to GitHub. GitHub recently removed password authentication in favour of PATs, but RStudio Cloud doesn't seem to have updated this yet - that's ok though - just enter this line of code - then copy+paste your PAT when prompted. - Option set/replace these credentials.</p>
-<div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">gitcreds</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gitcreds/man/gitcreds_get.html">gitcreds_set</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>If you forget your PAT - that's ok - you can't retrieve it - but you can just generate a new one.</p>
 <div id="see-changes" class="section level3" number="8.4.1">
@@ -423,7 +423,7 @@ When you accept an assignment on GitHub classrooms - the repo won't appear on yo
 <p><strong>j.</strong> Back in the script, write a short script to read and clean the data.</p>
 <p>This script is pre-written, it puts the data in tidy format, cleans names, makes sure year is treated as date data and filters four countries of interest.</p>
 <p>Assign this to a new object</p>
-<div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sfirke/janitor">janitor</a></span><span class="op">)</span>
@@ -449,18 +449,18 @@ When you accept an assignment on GitHub classrooms - the repo won't appear on yo
 <span class="co"># subset the date according to (US,UK, Japan = lowest infant death rates, Afghanistan = highest infant death rates)</span></code></pre></div>
 <p><strong>k.</strong> Make a ggplot plotting the infant mortality rate by country</p>
 <p>HINT - use <code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line()</a></code> and remember to separate countries by colour</p>
-<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">subset_infant_mortality</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>,
                  y <span class="op">=</span> <span class="va">infant_mortality_rate</span>,
                  color <span class="op">=</span> <span class="va">country_name</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><strong>l.</strong> Update your graph with direct labels (using <code>annotate</code>) and vertical or horizontal lines with <code>geom_vline</code> or <code>geom_hline</code>.</p>
 <p><strong>m.</strong> Use ggsave() to write your graph to a .png in the ‘final_graphs’ subfolder</p>
-<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a></span><span class="op">(</span><span class="st">"figures/infant mortality graph.png"</span>, plot<span class="op">=</span><span class="va">mortality_figure</span>, dpi<span class="op">=</span><span class="fl">900</span>, width <span class="op">=</span> <span class="fl">7</span>, height <span class="op">=</span> <span class="fl">7</span><span class="op">)</span></code></pre></div>
 <p><strong>n.</strong> Save, stage, commit</p>
 <p><strong>o</strong> Let's do one more cool and fun thing! And make an interactive version of our plot using plotly <span class="citation"><a href="references.html#ref-R-plotly" role="doc-biblioref">Sievert et al.</a> (<a href="references.html#ref-R-plotly" role="doc-biblioref">2021</a>)</span> just for fun!</p>
-<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/plotly/man/ggplotly.html">ggplotly</a></span><span class="op">(</span><span class="va">mortality_figure</span>, tooltip <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"infant_mortality_rate"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">## uses plotly package</span></code></pre></div>
 <p><strong>p</strong> Now save, stage, commit &amp; <strong>push</strong></p>
@@ -900,7 +900,7 @@ $( document ).ready(function() {
 });
 </script><div class="chapter-nav">
 <div class="prev"><a href="markdown.html"><span class="header-section-number">7</span> Markdown</a></div>
-<div class="next"><a href="functions-1.html"><span class="header-section-number">9</span> Functions</a></div>
+<div class="next"><a href="functions-and-iteration.html"><span class="header-section-number">9</span> Functions and Iteration</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -959,7 +959,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-08-31.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-09-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
