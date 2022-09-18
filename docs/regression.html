@@ -173,6 +173,11 @@ You may also note this is basically identical to the equation for a straight fit
 Check the data is imported correctly and make sure it is 'tidy' with no obvious errors or missing data
 </p>
 </div>
+</div>
+<div id="activity-1-exploratory-analysis" class="section level2" number="15.4">
+<h2>
+<span class="header-section-number">15.4</span> Activity 1: Exploratory Analysis<a class="anchor" aria-label="anchor" href="#activity-1-exploratory-analysis"><i class="fas fa-link"></i></a>
+</h2>
 <div class="panel panel-default">
 <div class="panel-heading">
 Task
@@ -190,7 +195,7 @@ Show Solution
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb376"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb378"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">janka</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">dens</span>, y<span class="op">=</span><span class="va">hardness</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -199,11 +204,16 @@ Solution
 </div>
 </div>
 </div>
-<div id="correlation" class="section level2" number="15.4">
+<div id="correlation" class="section level2" number="15.5">
 <h2>
-<span class="header-section-number">15.4</span> Correlation<a class="anchor" aria-label="anchor" href="#correlation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.5</span> Correlation<a class="anchor" aria-label="anchor" href="#correlation"><i class="fas fa-link"></i></a>
 </h2>
 <p>Wood density and timber hardness appear to be positively related, and the linear appears to be fairly linear. We can look at a simple strength of this association between dens and hardness using correlation</p>
+</div>
+<div id="activty-2-generate-pearsons-r" class="section level2" number="15.6">
+<h2>
+<span class="header-section-number">15.6</span> Activty 2: Generate Pearson's R<a class="anchor" aria-label="anchor" href="#activty-2-generate-pearsons-r"><i class="fas fa-link"></i></a>
+</h2>
 <button id="displayTextunnamed-chunk-8" onclick="javascript:toggle('unnamed-chunk-8');">
 Show Solution
 </button>
@@ -222,13 +232,13 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-8" class="tabcontentunnamed-chunk-8">
-<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># cor() does not have a data option so need to use the with() function</span>
 <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">janka</span>, <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">dens</span>, <span class="va">hardness</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 0.9743345</code></pre>
 </div>
 <div id="option2unnamed-chunk-8" class="tabcontentunnamed-chunk-8">
-<div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/rstatix/">rstatix</a></span><span class="op">)</span>
 
 <span class="va">janka</span> <span class="op">%&gt;%</span> 
@@ -296,9 +306,9 @@ Pearson
 </div>
 <p>Correlation coefficients range from -1 to 1 for perfectly negative to perfectly positive linear relationships. The relationship here appears to be strongly positive. Correlation looks at the <strong>association</strong> between two variables, but we want to go further - we are arguing that wood density <em>causes</em> higher values of timber hardness. In order to test that hypothesis we need to go further than correlation and use regression.</p>
 </div>
-<div id="regression-in-r" class="section level2" number="15.5">
+<div id="regression-in-r" class="section level2" number="15.7">
 <h2>
-<span class="header-section-number">15.5</span> Regression in R<a class="anchor" aria-label="anchor" href="#regression-in-r"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.7</span> Regression in R<a class="anchor" aria-label="anchor" href="#regression-in-r"><i class="fas fa-link"></i></a>
 </h2>
 <p>We can fit the regression model in exactly the same way as we fit the linear model for Darwin's maize data. The <em>only</em> difference is that here our predictor variable is continuous rather than categorical.</p>
 <div class="warning">
@@ -321,17 +331,17 @@ on the right is the predictor.
 Get them the wrong way round and it will reverse your hypothesis.
 </p>
 </div>
-<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">janka_ls1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">hardness</span> <span class="op">~</span> <span class="va">dens</span>, data <span class="op">=</span> <span class="va">janka</span><span class="op">)</span> </code></pre></div>
 <p>This linear model will estimate a 'line of best fit' using the method of 'least squares' to minimise the error sums of squares (the average distance between the data points and the regression line).</p>
 <p>We can add a regression line to our ggplots very easily with the function <code><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth()</a></code>.</p>
-<div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb383"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">janka</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">dens</span>, y<span class="op">=</span><span class="va">hardness</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method<span class="op">=</span><span class="st">"lm"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="15-Regression_files/figure-html/unnamed-chunk-11-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="co"># specify linear model method for line fitting</span></code></pre></div>
 <p><strong>Q. The blue line represents the regression line, and the shaded interval is the 95% confidence interval band. What do you notice about the width of the interval band as you move along the regression line?</strong></p>
 <div class="webex-solution">
@@ -343,11 +353,11 @@ Explain this
 <p>First is the prediction of the overall mean of the estimate (ie the center of the fit). The second is the uncertainly in the estimate calculating the slope.</p>
 <p>So when you combine both uncertainties of the prediction there is a spread between the high and low estimates. The further away from the center of the data you get (in either direction), the uncertainty of the slope becomes a large and more noticeable factor, thus the limits widen.</p>
 </div>
-<div id="summary-5" class="section level3" number="15.5.1">
+<div id="summary-5" class="section level3" number="15.7.1">
 <h3>
-<span class="header-section-number">15.5.1</span> Summary<a class="anchor" aria-label="anchor" href="#summary-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.7.1</span> Summary<a class="anchor" aria-label="anchor" href="#summary-5"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb383"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb385"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">janka_ls1</span> <span class="op">%&gt;%</span> 
   <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="op">)</span>
 
@@ -412,6 +422,12 @@ dens
 <p>This output should look very familiar to you, because it's the same output produced for the analysis of the maize data. Including a column for the coefficient estimates, standard error, <em>t</em>-statistic and <em>P</em>-value. The first row is the intercept, and the second row is the difference in the mean from the intercept caused by our explanantory variable.</p>
 <p>In many ways the intercept makes more intuitive sense in a regression model than a difference model. Here the intercept describes the value of <em>y</em> (timber hardness) when <em>x</em> (wood density) = 0. The standard error is standard error of this calculated mean value. The only wrinkle here is that that value of <em>y</em> is an impossible value - timber hardness obviously cannot be a negative value (anti-hardness???). This does not affect the fit of our line, it just means a regression line (being an infinite straight line) can move into impossible value ranges.</p>
 <p>One way in which the intercept can be made more valuable is to use a technique known as 'centering'. By subtracting the average (mean) value of <em>x</em> from every data point, the intercept (when <em>x</em> is 0) can effectively be right-shifted into the centre of the data.</p>
+</div>
+</div>
+<div id="activity-3-mean-centered-regression" class="section level2" number="15.8">
+<h2>
+<span class="header-section-number">15.8</span> Activity 3: Mean centered regression<a class="anchor" aria-label="anchor" href="#activity-3-mean-centered-regression"><i class="fas fa-link"></i></a>
+</h2>
 <div class="panel panel-default">
 <div class="panel-heading">
 Task
@@ -429,13 +445,13 @@ Show Solution
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb386"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dens_mean</span> <span class="op">&lt;-</span> <span class="va">janka</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_dens<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">dens</span><span class="op">)</span><span class="op">)</span>
 <span class="co"># 45.73333</span>
 
 <span class="va">janka</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>centered_dens <span class="op">=</span> <span class="va">dens</span><span class="op">-</span><span class="va">dens_mean</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>centered_dens <span class="op">=</span> <span class="va">dens</span><span class="op">-</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">dens_mean</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">hardness</span> <span class="op">~</span> <span class="va">centered_dens</span>, data <span class="op">=</span> <span class="va">.</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
@@ -503,20 +519,19 @@ centered_dens
 Note how the estimate for row 2 - the effect of density on timber hardness <strong>has not</strong> changed, but the intercept now represents the estimated mean timber hardness for the mean wood density e.g. at a density of <span class="math inline"><span class="math inline">\(\rho\)</span></span> = 45.73 the average timber hardness on the janka scale is 1469.
 </p>
 </div>
-</div>
-<div id="the-second-row" class="section level3" number="15.5.2">
+<div id="the-second-row" class="section level3" number="15.8.1">
 <h3>
-<span class="header-section-number">15.5.2</span> the second row<a class="anchor" aria-label="anchor" href="#the-second-row"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.8.1</span> the second row<a class="anchor" aria-label="anchor" href="#the-second-row"><i class="fas fa-link"></i></a>
 </h3>
 <p>The second row is labelled 'dens'. Density is our explanatory variable, and the slope is estimated against it. So if 57.5 is the value of the regression slope (with its standard error) - then the timber hardness is predicted to <strong>increase</strong> by 57.5 on the janka scale for every unit change of density.</p>
 <p>According to our model summary, this estimated change in the mean is statistically significant - so for this effect size and sample size it is unlikely that we would observe this relationship if the null hypothesis (that we cannot predict timber hardness from wood density) were true.</p>
 </div>
-<div id="confidence-intervals-2" class="section level3" number="15.5.3">
+<div id="confidence-intervals-2" class="section level3" number="15.8.2">
 <h3>
-<span class="header-section-number">15.5.3</span> Confidence intervals<a class="anchor" aria-label="anchor" href="#confidence-intervals-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.8.2</span> Confidence intervals<a class="anchor" aria-label="anchor" href="#confidence-intervals-2"><i class="fas fa-link"></i></a>
 </h3>
 <p>Just like with the maize data, we can produce upper and lower bounds of confidence intervals:</p>
-<div class="sourceCode" id="cb385"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb387"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">janka_ls1</span>, conf.int<span class="op">=</span><span class="cn">T</span>, conf.level<span class="op">=</span><span class="fl">0.95</span><span class="op">)</span>
 
 <span class="co"># base r</span>
@@ -598,13 +613,13 @@ dens
 </div>
 <p>Here we can say that at <span class="math inline">\(\alpha\)</span> = 0.05 we think there is at least a 52.9 unit increase on the janka scale for every unit increase in density (<span class="math inline">\(\rho\)</span>). Because our 95% confidence intervals do not span 0, we know that there is a significant relationship at <span class="math inline">\(\alpha\)</span> = 0.05.</p>
 </div>
-<div id="effect-size" class="section level3" number="15.5.4">
+<div id="effect-size" class="section level3" number="15.8.3">
 <h3>
-<span class="header-section-number">15.5.4</span> Effect size<a class="anchor" aria-label="anchor" href="#effect-size"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.8.3</span> Effect size<a class="anchor" aria-label="anchor" href="#effect-size"><i class="fas fa-link"></i></a>
 </h3>
 <p>With a regression model, we can also produce a standardised effect size. The estimate and 95% confidence intervals are the amount of change being observed, but just like with the maize data we can produce a standardised measure of how strong the relationship is. This value is represented by <span class="math inline">\(R^2\)</span> : the proportion of the variation in the data explained by the linear regression analysis.</p>
 <p>The value of <span class="math inline">\(R^2\)</span> can be found in the model summaries as follows</p>
-<div class="sourceCode" id="cb386"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb388"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">janka_ls1</span> <span class="op">%&gt;%</span> 
   <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html">glance</a></span><span class="op">(</span><span class="op">)</span>
 
@@ -731,9 +746,9 @@ large
 </table></div>
 </div>
 </div>
-<div id="assumptions" class="section level2" number="15.6">
+<div id="assumptions" class="section level2" number="15.9">
 <h2>
-<span class="header-section-number">15.6</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.9</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions"><i class="fas fa-link"></i></a>
 </h2>
 <p>Regression models make ALL the same assumptions as all linear models - that the unexplained variation around the regression line (the residuals) is approximately normally distributed, and has constant variance. And we can check this in the same way.</p>
 <p>Remember, the residuals are the <em>difference</em> between the observed values and the fitted values predicted by the model. Or in other words it is the <em>vertical</em> distance between a data point and the fitted value on the regression line. We can take a look at this with another function in the <code>broom</code> package <code><a href="https://generics.r-lib.org/reference/augment.html">augment()</a></code>. This generates the predicted value for each data point according to the regression, and calculates the residuals for each data point.</p>
@@ -755,7 +770,7 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-19" class="tabcontentunnamed-chunk-19">
-<div class="sourceCode" id="cb387"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb389"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">janka_ls1</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">resid</a></span><span class="op">(</span><span class="va">janka_ls1</span><span class="op">)</span></code></pre></div>
@@ -783,9 +798,10 @@ Base R
 ## -338.3994472  625.0591692  -15.4501754   94.0404799  -73.2115225  326.7884775</code></pre>
 </div>
 <div id="option2unnamed-chunk-19" class="tabcontentunnamed-chunk-19">
-<div class="sourceCode" id="cb389"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb391"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">janka_ls1</span> <span class="op">%&gt;%</span> 
-  <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+  <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
 <thead><tr>
@@ -826,7 +842,7 @@ dens
 259.9152
 </td>
 <td style="text-align:right;">
-224.0848370
+224.084837
 </td>
 <td style="text-align:right;">
 0.0963176
@@ -852,7 +868,7 @@ dens
 265.6658
 </td>
 <td style="text-align:right;">
-161.3341695
+161.334170
 </td>
 <td style="text-align:right;">
 0.0956674
@@ -878,7 +894,7 @@ dens
 409.4325
 </td>
 <td style="text-align:right;">
-3.5674826
+3.567483
 </td>
 <td style="text-align:right;">
 0.0804200
@@ -904,7 +920,7 @@ dens
 472.6899
 </td>
 <td style="text-align:right;">
-44.3101404
+44.310140
 </td>
 <td style="text-align:right;">
 0.0743247
@@ -930,7 +946,7 @@ dens
 472.6899
 </td>
 <td style="text-align:right;">
-76.3101404
+76.310140
 </td>
 <td style="text-align:right;">
 0.0743247
@@ -956,7 +972,7 @@ dens
 507.1939
 </td>
 <td style="text-align:right;">
-140.8061355
+140.806136
 </td>
 <td style="text-align:right;">
 0.0711580
@@ -971,786 +987,6 @@ dens
 0.7981020
 </td>
 </tr>
-<tr>
-<td style="text-align:right;">
-587
-</td>
-<td style="text-align:right;">
-30.3
-</td>
-<td style="text-align:right;">
-581.9525
-</td>
-<td style="text-align:right;">
-5.0474583
-</td>
-<td style="text-align:right;">
-0.0646795
-</td>
-<td style="text-align:right;">
-185.8102
-</td>
-<td style="text-align:right;">
-0.0000281
-</td>
-<td style="text-align:right;">
-0.0285102
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-704
-</td>
-<td style="text-align:right;">
-32.7
-</td>
-<td style="text-align:right;">
-719.9686
-</td>
-<td style="text-align:right;">
--15.9685611
-</td>
-<td style="text-align:right;">
-0.0540949
-</td>
-<td style="text-align:right;">
-185.7904
-</td>
-<td style="text-align:right;">
-0.0002300
-</td>
-<td style="text-align:right;">
--0.0896912
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-979
-</td>
-<td style="text-align:right;">
-35.6
-</td>
-<td style="text-align:right;">
-886.7379
-</td>
-<td style="text-align:right;">
-92.2620821
-</td>
-<td style="text-align:right;">
-0.0436864
-</td>
-<td style="text-align:right;">
-185.0852
-</td>
-<td style="text-align:right;">
-0.0060670
-</td>
-<td style="text-align:right;">
-0.5153839
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-914
-</td>
-<td style="text-align:right;">
-38.5
-</td>
-<td style="text-align:right;">
-1053.5073
-</td>
-<td style="text-align:right;">
--139.5072748
-</td>
-<td style="text-align:right;">
-0.0358837
-</td>
-<td style="text-align:right;">
-184.1590
-</td>
-<td style="text-align:right;">
-0.0112103
-</td>
-<td style="text-align:right;">
--0.7761397
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1070
-</td>
-<td style="text-align:right;">
-38.8
-</td>
-<td style="text-align:right;">
-1070.7593
-</td>
-<td style="text-align:right;">
--0.7592772
-</td>
-<td style="text-align:right;">
-0.0352253
-</td>
-<td style="text-align:right;">
-185.8124
-</td>
-<td style="text-align:right;">
-0.0000003
-</td>
-<td style="text-align:right;">
--0.0042227
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1020
-</td>
-<td style="text-align:right;">
-39.3
-</td>
-<td style="text-align:right;">
-1099.5126
-</td>
-<td style="text-align:right;">
--79.5126146
-</td>
-<td style="text-align:right;">
-0.0341899
-</td>
-<td style="text-align:right;">
-185.2779
-</td>
-<td style="text-align:right;">
-0.0034576
-</td>
-<td style="text-align:right;">
--0.4419752
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1210
-</td>
-<td style="text-align:right;">
-39.4
-</td>
-<td style="text-align:right;">
-1105.2633
-</td>
-<td style="text-align:right;">
-104.7367180
-</td>
-<td style="text-align:right;">
-0.0339921
-</td>
-<td style="text-align:right;">
-184.8841
-</td>
-<td style="text-align:right;">
-0.0059621
-</td>
-<td style="text-align:right;">
-0.5821251
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-989
-</td>
-<td style="text-align:right;">
-39.9
-</td>
-<td style="text-align:right;">
-1134.0166
-</td>
-<td style="text-align:right;">
--145.0166194
-</td>
-<td style="text-align:right;">
-0.0330496
-</td>
-<td style="text-align:right;">
-184.0305
-</td>
-<td style="text-align:right;">
-0.0110912
-</td>
-<td style="text-align:right;">
--0.8056073
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1160
-</td>
-<td style="text-align:right;">
-40.3
-</td>
-<td style="text-align:right;">
-1157.0193
-</td>
-<td style="text-align:right;">
-2.9807107
-</td>
-<td style="text-align:right;">
-0.0323514
-</td>
-<td style="text-align:right;">
-185.8117
-</td>
-<td style="text-align:right;">
-0.0000046
-</td>
-<td style="text-align:right;">
-0.0165527
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1010
-</td>
-<td style="text-align:right;">
-40.6
-</td>
-<td style="text-align:right;">
-1174.2713
-</td>
-<td style="text-align:right;">
--164.2712918
-</td>
-<td style="text-align:right;">
-0.0318603
-</td>
-<td style="text-align:right;">
-183.5255
-</td>
-<td style="text-align:right;">
-0.0136862
-</td>
-<td style="text-align:right;">
--0.9120117
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1100
-</td>
-<td style="text-align:right;">
-40.7
-</td>
-<td style="text-align:right;">
-1180.0220
-</td>
-<td style="text-align:right;">
--80.0219592
-</td>
-<td style="text-align:right;">
-0.0317028
-</td>
-<td style="text-align:right;">
-185.2724
-</td>
-<td style="text-align:right;">
-0.0032306
-</td>
-<td style="text-align:right;">
--0.4442348
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1130
-</td>
-<td style="text-align:right;">
-40.7
-</td>
-<td style="text-align:right;">
-1180.0220
-</td>
-<td style="text-align:right;">
--50.0219592
-</td>
-<td style="text-align:right;">
-0.0317028
-</td>
-<td style="text-align:right;">
-185.6016
-</td>
-<td style="text-align:right;">
-0.0012624
-</td>
-<td style="text-align:right;">
--0.2776925
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1270
-</td>
-<td style="text-align:right;">
-42.9
-</td>
-<td style="text-align:right;">
-1306.5366
-</td>
-<td style="text-align:right;">
--36.5366437
-</td>
-<td style="text-align:right;">
-0.0290215
-</td>
-<td style="text-align:right;">
-185.7003
-</td>
-<td style="text-align:right;">
-0.0006131
-</td>
-<td style="text-align:right;">
--0.2025497
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1180
-</td>
-<td style="text-align:right;">
-45.8
-</td>
-<td style="text-align:right;">
-1473.3060
-</td>
-<td style="text-align:right;">
--293.3060005
-</td>
-<td style="text-align:right;">
-0.0277785
-</td>
-<td style="text-align:right;">
-178.4513
-</td>
-<td style="text-align:right;">
-0.0377229
-</td>
-<td style="text-align:right;">
--1.6249727
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1400
-</td>
-<td style="text-align:right;">
-46.9
-</td>
-<td style="text-align:right;">
-1536.5633
-</td>
-<td style="text-align:right;">
--136.5633428
-</td>
-<td style="text-align:right;">
-0.0279887
-</td>
-<td style="text-align:right;">
-184.2413
-</td>
-<td style="text-align:right;">
-0.0082431
-</td>
-<td style="text-align:right;">
--0.7566695
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1760
-</td>
-<td style="text-align:right;">
-48.2
-</td>
-<td style="text-align:right;">
-1611.3220
-</td>
-<td style="text-align:right;">
-148.6779800
-</td>
-<td style="text-align:right;">
-0.0287204
-</td>
-<td style="text-align:right;">
-183.9473
-</td>
-<td style="text-align:right;">
-0.0100411
-</td>
-<td style="text-align:right;">
-0.8241045
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1710
-</td>
-<td style="text-align:right;">
-51.5
-</td>
-<td style="text-align:right;">
-1801.0940
-</td>
-<td style="text-align:right;">
--91.0940467
-</td>
-<td style="text-align:right;">
-0.0329298
-</td>
-<td style="text-align:right;">
-185.1114
-</td>
-<td style="text-align:right;">
-0.0043595
-</td>
-<td style="text-align:right;">
--0.5060212
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2010
-</td>
-<td style="text-align:right;">
-51.5
-</td>
-<td style="text-align:right;">
-1801.0940
-</td>
-<td style="text-align:right;">
-208.9059533
-</td>
-<td style="text-align:right;">
-0.0329298
-</td>
-<td style="text-align:right;">
-182.0954
-</td>
-<td style="text-align:right;">
-0.0229277
-</td>
-<td style="text-align:right;">
-1.1604583
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1880
-</td>
-<td style="text-align:right;">
-53.4
-</td>
-<td style="text-align:right;">
-1910.3567
-</td>
-<td style="text-align:right;">
--30.3567287
-</td>
-<td style="text-align:right;">
-0.0368840
-</td>
-<td style="text-align:right;">
-185.7344
-</td>
-<td style="text-align:right;">
-0.0005467
-</td>
-<td style="text-align:right;">
--0.1689754
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1980
-</td>
-<td style="text-align:right;">
-56.0
-</td>
-<td style="text-align:right;">
-2059.8741
-</td>
-<td style="text-align:right;">
--79.8740831
-</td>
-<td style="text-align:right;">
-0.0441078
-</td>
-<td style="text-align:right;">
-185.2674
-</td>
-<td style="text-align:right;">
-0.0045951
-</td>
-<td style="text-align:right;">
--0.4462818
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1820
-</td>
-<td style="text-align:right;">
-56.5
-</td>
-<td style="text-align:right;">
-2088.6274
-</td>
-<td style="text-align:right;">
--268.6274205
-</td>
-<td style="text-align:right;">
-0.0457371
-</td>
-<td style="text-align:right;">
-179.5404
-</td>
-<td style="text-align:right;">
-0.0540777
-</td>
-<td style="text-align:right;">
--1.5021872
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2020
-</td>
-<td style="text-align:right;">
-57.3
-</td>
-<td style="text-align:right;">
-2134.6328
-</td>
-<td style="text-align:right;">
--114.6327603
-</td>
-<td style="text-align:right;">
-0.0485051
-</td>
-<td style="text-align:right;">
-184.6829
-</td>
-<td style="text-align:right;">
-0.0105045
-</td>
-<td style="text-align:right;">
--0.6419678
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1980
-</td>
-<td style="text-align:right;">
-57.6
-</td>
-<td style="text-align:right;">
-2151.8848
-</td>
-<td style="text-align:right;">
--171.8847628
-</td>
-<td style="text-align:right;">
-0.0495942
-</td>
-<td style="text-align:right;">
-183.2601
-</td>
-<td style="text-align:right;">
-0.0242032
-</td>
-<td style="text-align:right;">
--0.9631426
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2310
-</td>
-<td style="text-align:right;">
-59.2
-</td>
-<td style="text-align:right;">
-2243.8954
-</td>
-<td style="text-align:right;">
-66.1045576
-</td>
-<td style="text-align:right;">
-0.0558739
-</td>
-<td style="text-align:right;">
-185.4346
-</td>
-<td style="text-align:right;">
-0.0040869
-</td>
-<td style="text-align:right;">
-0.3716415
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1940
-</td>
-<td style="text-align:right;">
-59.8
-</td>
-<td style="text-align:right;">
-2278.3994
-</td>
-<td style="text-align:right;">
--338.3994472
-</td>
-<td style="text-align:right;">
-0.0584333
-</td>
-<td style="text-align:right;">
-175.6154
-</td>
-<td style="text-align:right;">
-0.1126168
-</td>
-<td style="text-align:right;">
--1.9050740
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-3260
-</td>
-<td style="text-align:right;">
-66.0
-</td>
-<td style="text-align:right;">
-2634.9408
-</td>
-<td style="text-align:right;">
-625.0591692
-</td>
-<td style="text-align:right;">
-0.0914121
-</td>
-<td style="text-align:right;">
-146.6143
-</td>
-<td style="text-align:right;">
-0.6455017
-</td>
-<td style="text-align:right;">
-3.5821634
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2700
-</td>
-<td style="text-align:right;">
-67.4
-</td>
-<td style="text-align:right;">
-2715.4502
-</td>
-<td style="text-align:right;">
--15.4501754
-</td>
-<td style="text-align:right;">
-0.1005073
-</td>
-<td style="text-align:right;">
-185.7908
-</td>
-<td style="text-align:right;">
-0.0004424
-</td>
-<td style="text-align:right;">
--0.0889902
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2890
-</td>
-<td style="text-align:right;">
-68.8
-</td>
-<td style="text-align:right;">
-2795.9595
-</td>
-<td style="text-align:right;">
-94.0404799
-</td>
-<td style="text-align:right;">
-0.1102099
-</td>
-<td style="text-align:right;">
-185.0002
-</td>
-<td style="text-align:right;">
-0.0183679
-</td>
-<td style="text-align:right;">
-0.5446014
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2740
-</td>
-<td style="text-align:right;">
-69.1
-</td>
-<td style="text-align:right;">
-2813.2115
-</td>
-<td style="text-align:right;">
--73.2115225
-</td>
-<td style="text-align:right;">
-0.1123680
-</td>
-<td style="text-align:right;">
-185.3194
-</td>
-<td style="text-align:right;">
-0.0114057
-</td>
-<td style="text-align:right;">
--0.4244932
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-3140
-</td>
-<td style="text-align:right;">
-69.1
-</td>
-<td style="text-align:right;">
-2813.2115
-</td>
-<td style="text-align:right;">
-326.7884775
-</td>
-<td style="text-align:right;">
-0.1123680
-</td>
-<td style="text-align:right;">
-175.7285
-</td>
-<td style="text-align:right;">
-0.2272457
-</td>
-<td style="text-align:right;">
-1.8947765
-</td>
-</tr>
 </tbody>
 </table></div>
 </div>
@@ -1760,7 +996,7 @@ dens
 </div>
 </div>
 <p>If we plot this, with a black fitted regression line and red dashed lines representing the residuals:</p>
-<div class="sourceCode" id="cb390"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb392"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">augmented_ls1</span> <span class="op">&lt;-</span> <span class="va">janka_ls1</span> <span class="op">%&gt;%</span> 
   <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="op">)</span>
 
@@ -1781,7 +1017,7 @@ dens
 <li><p>that there is a 'normal distribution' to the residuals e.g. more residuals close to the mean, and fewer further away in a rough z-distribution.</p></li>
 <li><p>We also want to see homogeneity of the residuals e.g. it would be a bad model if the average error was greater at one end of the model than the other. This might mean we have more uncertainty in the slope of the line for large values over small values or vice versa.</p></li>
 </ol>
-<div class="sourceCode" id="cb391"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb393"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># A line connecting all the data points in order </span>
 <span class="va">p1</span> <span class="op">&lt;-</span> <span class="va">augmented_ls1</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">dens</span>, y<span class="op">=</span><span class="va">hardness</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
@@ -1823,7 +1059,7 @@ Show Solution
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb392"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb394"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model_plot</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">=</span><span class="va">augmented_ls1</span>, 
                        <span class="va">x</span><span class="op">=</span><span class="st">"dens"</span>, 
                        <span class="va">y</span><span class="op">=</span><span class="st">"hardness"</span>, 
@@ -1842,9 +1078,9 @@ Solution
 </div>
 </div>
 </div>
-<div id="normal-distribution-3" class="section level3" number="15.6.1">
+<div id="normal-distribution-3" class="section level3" number="15.9.1">
 <h3>
-<span class="header-section-number">15.6.1</span> Normal distribution<a class="anchor" aria-label="anchor" href="#normal-distribution-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.9.1</span> Normal distribution<a class="anchor" aria-label="anchor" href="#normal-distribution-3"><i class="fas fa-link"></i></a>
 </h3>
 <p>We can use the same model diagnostic plots as we used for the maize data.
 Here you can see it is mostly pretty good, with just one or two data points outside of the confidence intervals</p>
@@ -1866,12 +1102,12 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-24" class="tabcontentunnamed-chunk-24">
-<div class="sourceCode" id="cb393"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">janka_ls1</span>, which<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb395"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">janka_ls1</span>, which<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="15-Regression_files/figure-html/unnamed-chunk-39-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <div id="option2unnamed-chunk-24" class="tabcontentunnamed-chunk-24">
-<div class="sourceCode" id="cb394"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb396"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">performance</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html">check_model</a></span><span class="op">(</span><span class="va">janka_ls1</span>, check<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"normality"</span>,<span class="st">"qq"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="15-Regression_files/figure-html/unnamed-chunk-40-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
@@ -1880,9 +1116,9 @@ Base R
 </div>
 </div>
 </div>
-<div id="equal-variance-1" class="section level3" number="15.6.2">
+<div id="equal-variance-1" class="section level3" number="15.9.2">
 <h3>
-<span class="header-section-number">15.6.2</span> Equal variance<a class="anchor" aria-label="anchor" href="#equal-variance-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.9.2</span> Equal variance<a class="anchor" aria-label="anchor" href="#equal-variance-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>We can use the same model diagnostic plots as we used for the maize data.
 You should see that this is similar to the <code>p3</code> plot we constructed manually. With the plot we constructed earlier we had the 'raw' residuals as a function of the fitted values. The plot we have produced now is the 'standardized residuals' - this is the raw residual divided by the standard deviation.</p>
@@ -1905,12 +1141,12 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-25" class="tabcontentunnamed-chunk-25">
-<div class="sourceCode" id="cb395"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">janka_ls1</span>, which<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb397"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">janka_ls1</span>, which<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="15-Regression_files/figure-html/unnamed-chunk-41-1.png" width="100%" style="display: block; margin: auto;"><img src="15-Regression_files/figure-html/unnamed-chunk-41-2.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
 <div id="option2unnamed-chunk-25" class="tabcontentunnamed-chunk-25">
-<div class="sourceCode" id="cb396"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb398"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">performance</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html">check_model</a></span><span class="op">(</span><span class="va">janka_ls1</span>, check<span class="op">=</span><span class="st">"homogeneity"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="15-Regression_files/figure-html/unnamed-chunk-42-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
@@ -1919,11 +1155,12 @@ Base R
 </div>
 </div>
 </div>
-<div id="outliers-1" class="section level3" number="15.6.3">
+<div id="outliers-1" class="section level3" number="15.9.3">
 <h3>
-<span class="header-section-number">15.6.3</span> Outliers<a class="anchor" aria-label="anchor" href="#outliers-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.9.3</span> Outliers<a class="anchor" aria-label="anchor" href="#outliers-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>Here we can see there is just one potential outlier.</p>
+<p>What is it's positional order in the dataframe? <input class="webex-solveme nospaces" size="2" data-answer='["32"]'></p>
 <button id="displayTextunnamed-chunk-26" onclick="javascript:toggle('unnamed-chunk-26');">
 Show Solution
 </button>
@@ -1942,12 +1179,12 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-26" class="tabcontentunnamed-chunk-26">
-<div class="sourceCode" id="cb397"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">janka_ls1</span>, which<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb399"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">janka_ls1</span>, which<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="15-Regression_files/figure-html/unnamed-chunk-43-1.png" width="100%" style="display: block; margin: auto;"><img src="15-Regression_files/figure-html/unnamed-chunk-43-2.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
 <div id="option2unnamed-chunk-26" class="tabcontentunnamed-chunk-26">
-<div class="sourceCode" id="cb398"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb400"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">performance</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html">check_model</a></span><span class="op">(</span><span class="va">janka_ls1</span>, check<span class="op">=</span><span class="st">"outliers"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="15-Regression_files/figure-html/unnamed-chunk-44-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
@@ -1955,15 +1192,16 @@ Base R
 </div>
 </div>
 </div>
+<p>Check the data, does this make sense?</p>
 </div>
 </div>
-<div id="prediction" class="section level2" number="15.7">
+<div id="prediction" class="section level2" number="15.10">
 <h2>
-<span class="header-section-number">15.7</span> Prediction<a class="anchor" aria-label="anchor" href="#prediction"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.10</span> Prediction<a class="anchor" aria-label="anchor" href="#prediction"><i class="fas fa-link"></i></a>
 </h2>
 <p>Using the coefficients of the intercept and the slope we can make predictions on new data.
 The estimates of the intercept and the slope are:</p>
-<div class="sourceCode" id="cb399"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb401"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">janka_ls1</span><span class="op">)</span></code></pre></div>
 <pre><code>## (Intercept)        dens 
 ## -1160.49970    57.50667</code></pre>
@@ -1978,7 +1216,7 @@ Show Solution
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb401"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb403"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># a + bx</span>
 
 <span class="op">-</span><span class="fl">1160.49970</span> <span class="op">+</span> <span class="fl">57.50667</span> <span class="op">*</span> <span class="fl">65</span></code></pre></div>
@@ -1987,11 +1225,11 @@ Solution
 </div>
 </div>
 <p>Rather than work out the values manually, we can also use the coefficients of the model directly</p>
-<div class="sourceCode" id="cb403"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb405"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">janka_ls1</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">janka_ls1</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">*</span> <span class="fl">65</span></code></pre></div>
 <pre><code>## (Intercept) 
 ##    2577.434</code></pre>
-<p>But most of the time we are unlikely to want to work out predicted values by hand, instead we can use functions like <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> and <code><a href="https://generics.r-lib.org/reference/augment.html">augment()</a></code></p>
+<p>But most of the time we are unlikely to want to work out predicted values by hand, instead we can use functions like <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> and <code><a href="https://generics.r-lib.org/reference/augment.html">broom::augment()</a></code></p>
 <button id="displayTextunnamed-chunk-30" onclick="javascript:toggle('unnamed-chunk-30');">
 Show Solution
 </button>
@@ -2010,13 +1248,13 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-30" class="tabcontentunnamed-chunk-30">
-<div class="sourceCode" id="cb405"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb407"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">janka_ls1</span>, newdata<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>dens<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">22</span>,<span class="fl">35</span>,<span class="fl">65</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>##         1         2         3 
 ##  104.6471  852.2339 2577.4342</code></pre>
 </div>
 <div id="option2unnamed-chunk-30" class="tabcontentunnamed-chunk-30">
-<div class="sourceCode" id="cb407"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb409"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="va">janka_ls1</span>, 
                newdata<span class="op">=</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>dens<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">22</span>,<span class="fl">35</span>,<span class="fl">65</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
@@ -2062,11 +1300,11 @@ dens
 </div>
 </div>
 </div>
-<div id="adding-confidence-intervals" class="section level3" number="15.7.1">
+<div id="adding-confidence-intervals" class="section level3" number="15.10.1">
 <h3>
-<span class="header-section-number">15.7.1</span> Adding confidence intervals<a class="anchor" aria-label="anchor" href="#adding-confidence-intervals"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.10.1</span> Adding confidence intervals<a class="anchor" aria-label="anchor" href="#adding-confidence-intervals"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb408"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb410"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="va">janka_ls1</span>, newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>dens<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">22</span>,<span class="fl">35</span>,<span class="fl">65</span><span class="op">)</span>, se<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
@@ -2118,7 +1356,7 @@ TRUE
 </tbody>
 </table></div>
 </div>
-<div class="sourceCode" id="cb409"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb411"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="va">janka_ls1</span>, newdata<span class="op">=</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>dens<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">22</span>,<span class="fl">35</span>,<span class="fl">65</span><span class="op">)</span>, interval<span class="op">=</span><span class="st">"confidence"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
@@ -2170,6 +1408,28 @@ confidence
 </tbody>
 </table></div>
 </div>
+<p>I really like the <code>emmeans</code> package - it is very good for producing quick predictions for categorical data - it can also do this for continuous variables. By default it will produce a single mean-centered prediction. But a list can be provided - it will produce confidence intervals as standard.</p>
+<div class="webex-solution">
+<button>
+emmeans
+</button>
+<div class="sourceCode" id="cb412"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">emmeans</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html">emmeans</a></span><span class="op">(</span><span class="va">janka_ls1</span>, 
+                 specs <span class="op">=</span> <span class="st">"dens"</span>, 
+                 at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>dens <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">22</span>, <span class="fl">35</span>, <span class="fl">65</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code>##  dens emmean   SE df lower.CL upper.CL
+##    22    105 62.1 34    -21.5      231
+##    35    852 39.1 34    772.8      932
+##    65   2577 53.5 34   2468.8     2686
+## 
+## Confidence level used: 0.95</code></pre>
+</div>
+</div>
+</div>
+<div id="activity-4-prediction" class="section level2" number="15.11">
+<h2>
+<span class="header-section-number">15.11</span> Activity 4: Prediction<a class="anchor" aria-label="anchor" href="#activity-4-prediction"><i class="fas fa-link"></i></a>
+</h2>
 <div class="panel panel-default">
 <div class="panel-heading">
 Task
@@ -2178,16 +1438,16 @@ Task
 can you plot the three new predicted values onto an existing figure to recreate the below?
 </div>
 </div>
-<button id="displayTextunnamed-chunk-34" onclick="javascript:toggle('unnamed-chunk-34');">
+<button id="displayTextunnamed-chunk-35" onclick="javascript:toggle('unnamed-chunk-35');">
 Show Solution
 </button>
-<div id="toggleTextunnamed-chunk-34" style="display: none">
+<div id="toggleTextunnamed-chunk-35" style="display: none">
 <div class="panel panel-default">
 <div class="panel-heading panel-heading1">
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb410"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb414"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pred_newdata</span> <span class="op">&lt;-</span> <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="va">janka_ls1</span>, 
                newdata<span class="op">=</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>dens<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">22</span>,<span class="fl">35</span>,<span class="fl">65</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 
@@ -2200,15 +1460,14 @@ Solution
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Density"</span>, y<span class="op">=</span><span class="st">"Timber Hardness"</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>limits<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">20</span>,<span class="fl">80</span><span class="op">)</span>, expand<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html">expansion</a></span><span class="op">(</span>add<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="15-Regression_files/figure-html/unnamed-chunk-36-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="15-Regression_files/figure-html/unnamed-chunk-40-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 </div>
 </div>
 </div>
-</div>
-<div id="summary-6" class="section level2" number="15.8">
+<div id="summary-6" class="section level2" number="15.12">
 <h2>
-<span class="header-section-number">15.8</span> Summary<a class="anchor" aria-label="anchor" href="#summary-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.12</span> Summary<a class="anchor" aria-label="anchor" href="#summary-6"><i class="fas fa-link"></i></a>
 </h2>
 <p>Linear model analyses can extend beyond testing differences of means in categorical groupings to test relationships with continuous variables. This is known as linear regression, where the relationship between the explanatory variable and response variable are modelled with the equation for a straight line. The intercept is the value of <em>y</em> when <em>x</em> = 0, often this isn't that useful, and we can use 'mean-centered' values if we wish to make the intercept more intuitive.
 As with all linear models, regression assumes that the unexplained variability around the regression line, is normally distributed and has constant variance.</p>
@@ -2405,26 +1664,31 @@ $( document ).ready(function() {
 <li><a class="nav-link" href="#introduction-to-regression"><span class="header-section-number">15.1</span> Introduction to Regression</a></li>
 <li><a class="nav-link" href="#linear-regression"><span class="header-section-number">15.2</span> Linear regression</a></li>
 <li><a class="nav-link" href="#data"><span class="header-section-number">15.3</span> Data</a></li>
-<li><a class="nav-link" href="#correlation"><span class="header-section-number">15.4</span> Correlation</a></li>
+<li><a class="nav-link" href="#activity-1-exploratory-analysis"><span class="header-section-number">15.4</span> Activity 1: Exploratory Analysis</a></li>
+<li><a class="nav-link" href="#correlation"><span class="header-section-number">15.5</span> Correlation</a></li>
+<li><a class="nav-link" href="#activty-2-generate-pearsons-r"><span class="header-section-number">15.6</span> Activty 2: Generate Pearson's R</a></li>
 <li>
-<a class="nav-link" href="#regression-in-r"><span class="header-section-number">15.5</span> Regression in R</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#summary-5"><span class="header-section-number">15.5.1</span> Summary</a></li>
-<li><a class="nav-link" href="#the-second-row"><span class="header-section-number">15.5.2</span> the second row</a></li>
-<li><a class="nav-link" href="#confidence-intervals-2"><span class="header-section-number">15.5.3</span> Confidence intervals</a></li>
-<li><a class="nav-link" href="#effect-size"><span class="header-section-number">15.5.4</span> Effect size</a></li>
+<a class="nav-link" href="#regression-in-r"><span class="header-section-number">15.7</span> Regression in R</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#summary-5"><span class="header-section-number">15.7.1</span> Summary</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#activity-3-mean-centered-regression"><span class="header-section-number">15.8</span> Activity 3: Mean centered regression</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#the-second-row"><span class="header-section-number">15.8.1</span> the second row</a></li>
+<li><a class="nav-link" href="#confidence-intervals-2"><span class="header-section-number">15.8.2</span> Confidence intervals</a></li>
+<li><a class="nav-link" href="#effect-size"><span class="header-section-number">15.8.3</span> Effect size</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#assumptions"><span class="header-section-number">15.6</span> Assumptions</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#normal-distribution-3"><span class="header-section-number">15.6.1</span> Normal distribution</a></li>
-<li><a class="nav-link" href="#equal-variance-1"><span class="header-section-number">15.6.2</span> Equal variance</a></li>
-<li><a class="nav-link" href="#outliers-1"><span class="header-section-number">15.6.3</span> Outliers</a></li>
+<a class="nav-link" href="#assumptions"><span class="header-section-number">15.9</span> Assumptions</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#normal-distribution-3"><span class="header-section-number">15.9.1</span> Normal distribution</a></li>
+<li><a class="nav-link" href="#equal-variance-1"><span class="header-section-number">15.9.2</span> Equal variance</a></li>
+<li><a class="nav-link" href="#outliers-1"><span class="header-section-number">15.9.3</span> Outliers</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#prediction"><span class="header-section-number">15.7</span> Prediction</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#adding-confidence-intervals"><span class="header-section-number">15.7.1</span> Adding confidence intervals</a></li></ul>
+<a class="nav-link" href="#prediction"><span class="header-section-number">15.10</span> Prediction</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#adding-confidence-intervals"><span class="header-section-number">15.10.1</span> Adding confidence intervals</a></li></ul>
 </li>
-<li><a class="nav-link" href="#summary-6"><span class="header-section-number">15.8</span> Summary</a></li>
+<li><a class="nav-link" href="#activity-4-prediction"><span class="header-section-number">15.11</span> Activity 4: Prediction</a></li>
+<li><a class="nav-link" href="#summary-6"><span class="header-section-number">15.12</span> Summary</a></li>
 </ul>
 
       <div class="book-extra">
@@ -2442,7 +1706,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-09-17.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-09-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

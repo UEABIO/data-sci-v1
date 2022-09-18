@@ -59,14 +59,13 @@ You should set up a script to put your work into - use this to write instruction
 
 ```
 
-### Description
+
+
+
+
+## Activity 1: Carry out some basic exploratory data analysis
 
 The first thing we should know by now is to always start by exploring our data. If you want to stretch yourself, see if you can perform a basic data check **without** prompts. 
-
-```{task}
-Carry out some basic exploratory data analysis
-```
-
 
 ```{solution}
 
@@ -208,9 +207,10 @@ Darwin's data used match pairs - each pair shared one parent. So that in pair 1 
 
 In order to calculate the differences in height between each pair we need to do some data wrangling with `tidyr::pivot_wider()` [Chapter 2](#using-`pivot`-functions) and calculations with `mutate`.
 
-```{task}
+## Activity 2: Differences
+
 Create a new column called difference with the height of the selfed plant in each pair subtracted from the crossed plant. 
-```
+
 
 ```{solution}
 
@@ -274,14 +274,17 @@ difference_summary %>%
 
 Our estimate of the mean is not really very useful without an accompanying measuring of *uncertainty* like the standard error, in fact estimates of averages or differences should **always** be accompanied by their measure of uncertainty. 
 
-```{task}
+
+### Activity 3: Communicate
+
 With the information above, how would you present a short sentence describing the average different in height?
-```
+
 
 ```{solution}
 *... the average difference in height was 2.62 ± 1.22 inches (mean ± SE).*
 ```
 
+## Uncertainty
 
 With a mean and standard error of the difference in heights between inbred and crossed plants - how do we work out how much confidence we have in their being a difference between our **population means**? 
 

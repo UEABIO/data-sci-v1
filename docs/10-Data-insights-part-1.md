@@ -403,12 +403,7 @@ ggplot()+
 <p class="caption">(\#fig:unnamed-chunk-16)Red dashed line represents the mean, Black dashed line is the median value</p>
 </div>
 
-With the information about the distribution, and positions of the mean and median, which of these two measures of central tendency is most appropriate for this data? <select class='webex-select'><option value='blank'></option><option value='answer'>mean</option><option value=''>median</option></select>
 
-<button id="displayTextunnamed-chunk-17" onclick="javascript:toggle('unnamed-chunk-17');">Show Solution</button>
-
-<div id="toggleTextunnamed-chunk-17" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
-we can clearly see that the mean value has been significantly "right-shifted" by the long tail of the data distribution. However,this is much less apparent for the median. In this way we can say that the median is less sensitive to the distribution of the data than the mean is.</div></div></div>
 
 ### Normal distribution
 
@@ -436,7 +431,7 @@ norm_mass %>%
                  bins = 10)
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-19-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-18-1.png" width="100%" style="display: block; margin: auto;" />
 
 #### QQ-plot
 
@@ -446,7 +441,7 @@ Watch this video to see [QQ plots explained](https://www.youtube.com/watch?v=okj
 
 <div class="figure" style="text-align: center">
 <img src="images/qq_example.png" alt="Examples of qqplots with different deviations from a normal distribution" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-20)Examples of qqplots with different deviations from a normal distribution</p>
+<p class="caption">(\#fig:unnamed-chunk-19)Examples of qqplots with different deviations from a normal distribution</p>
 </div>
 
 In our example we can see that *most* of our residuals can be explained by a normal distribution, except at the low end of our data. 
@@ -460,9 +455,9 @@ ggplot(penguins, aes(sample = body_mass_g))+
   stat_qq_line()
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-21-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-20-1.png" width="100%" style="display: block; margin: auto;" />
 
-**Q. How do we know how much deviation from an idealised distribution is ok?**
+**How do we know how much deviation from an idealised distribution is ok?**
 
 
 ```r
@@ -471,7 +466,7 @@ penguins %>%
   car::qqPlot()
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-22-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-21-1.png" width="100%" style="display: block; margin: auto;" />
 
 ```
 ## [1] 170 186
@@ -479,6 +474,13 @@ penguins %>%
 
 The qqPlot() function from the R package car provides 95% confidence interval margins to help you determine how severely your quantiles deviate from your idealised distribution.
 
+
+With the information from the qqPlot which section of the distribution deviates most clearly from a normal distribution <select class='webex-select'><option value='blank'></option><option value='answer'><3500g</option><option value=''>3500-4000g</option><option value=''>4000-4500g</option><option value=''>5000-5500g</option><option value=''>>5500g</option></select>
+
+<button id="displayTextunnamed-chunk-22" onclick="javascript:toggle('unnamed-chunk-22');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-22" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+There are is a 'truncated' left tail of our normal distribution. We would predict more penguins with body masses lower than 3000g under the normal distribution.</div></div></div>
 
 
 ### Variation
@@ -540,13 +542,36 @@ We can see for ourselves the IQR is obtained by subtracting the body mass at tht
 
 #### Standard deviation
 
-standard deviation (or σ) is a measure of how dispersed the data is in relation to the mean. Low standard deviation means data are clustered around the mean, and high standard deviation indicates data are more spread out. As such it makes sense only to use this when the mean is a good measure of our central tendency. 
+standard deviation (or $s$) is a measure of how dispersed the data is in relation to the mean. Low standard deviation means data are clustered around the mean, and high standard deviation indicates data are more spread out. As such it makes sense only to use this when the mean is a good measure of our central tendency. 
+
+<div class="info">
+<p><span class="math inline">\(\sigma\)</span> = a known population standard deviation</p>
+<p><span class="math inline">\(s\)</span> = a sample standard deviation</p>
+</div>
+
+<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
+If we know we have a normal distribution, then we can use `summarise()` to quickly produce a mean and standard deviation. </div></div>
+
+<button id="displayTextunnamed-chunk-26" onclick="javascript:toggle('unnamed-chunk-26');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-26" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+
+```
+penguins %>% 
+  summarise(mean = mean(body_mass_g),
+            sd = sd(body_mass_g),
+            n = n())
+```
+</div></div></div>
+
+
+
 
 ### Visualising dispersion
 
 <div class="figure" style="text-align: center">
 <img src="images/distribution_gif.gif" alt="Visualising dispersion with different figures" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-24)Visualising dispersion with different figures</p>
+<p class="caption">(\#fig:unnamed-chunk-27)Visualising dispersion with different figures</p>
 </div>
 
 
@@ -598,7 +623,7 @@ plot_3 <- penguin_body_mass_summary %>%
 plot_1 + plot_2 + plot_3 
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-25-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-28-1.png" width="80%" style="display: block; margin: auto;" />
 
 We now have several compact representations of the body_mass_g including a histogram, boxplot and summary calculations. You can *and should* generate the same summaries for your other numeric variables. These tables and graphs provide the detail you need to understand the central tendency and dispersion of numeric variables. 
 
@@ -617,31 +642,35 @@ We first met `NA` back in [Chapter 4](#missing-values-na) and you will hopefully
 
 It’s common to want to explore the distribution of a continuous variable broken down by a categorical variable. 
 
-<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
-Think about which other variables might affect body mass? </div></div>
 
-<button id="displayTextunnamed-chunk-27" onclick="javascript:toggle('unnamed-chunk-27');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-27" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div class='webex-solution'><button>Think about which other variables might affect body mass?</button>
 
-```{=html}
-<div id="htmlwidget-7517e8974eb30ac91559" style="width:100%;height:480px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7517e8974eb30ac91559">{"x":{"diagram":"digraph {\n  \ngraph[layout = dot, rankdir = LR]\n\na[label = \"Body mass\"]\nb[label = \"Beak length\"]\nc[label = \"Species\"]\nd[label = \"Sex\"]\n\nc -> a\nd -> a\n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
-```
+
+<div class="figure" style="text-align: center">
+<img src="images/body-mass-interaction.png" alt="Species and sex are both likely to affect body mass" width="80%" />
+<p class="caption">(\#fig:unnamed-chunk-29)Species and sex are both likely to affect body mass</p>
+</div>
+
+
 
 So it is reasonable to think that perhaps either species or sex might affect the morphology of beaks directly - or that these might affect body mass (so that if there is a direct relationship between mass and beak length, there will also be an indirect relationship with sex or species).
-</div></div></div>
+
+
+</div>
+
 
 The best and simplest place to start exploring these possible relationships is by producing simple figures. 
 
 Let's start by looking at the distribution of body mass by species. 
 
-<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
-Produce a plot which allows you to look at the distribution of penguin body mass observations by species </div></div>
 
-<button id="displayTextunnamed-chunk-29" onclick="javascript:toggle('unnamed-chunk-29');">Show Solution</button>
+## Activity 1: Produce a plot which allows you to look at the distribution of penguin body mass observations by species
 
-<div id="toggleTextunnamed-chunk-29" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+
+<button id="displayTextunnamed-chunk-30" onclick="javascript:toggle('unnamed-chunk-30');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-30" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 jitter_plot <- penguins %>% 
@@ -672,19 +701,20 @@ histogram_plot <- penguins %>%
 jitter_plot/box_plot/histogram_plot
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-53-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-55-1.png" width="100%" style="display: block; margin: auto;" />
 
 So it is reasonable to think that perhaps either species or sex might affect body mass, and we can visualise this in a number of different ways. The last method, a density histogram, looks a little crowded now, so I will use the excellent `ggridges` package to help out
 </div></div></div>
 
 
 
-GGridges
+## GGridges
 
+The package `ggridges` (@R-ggridges) provides some excellent extra geoms to supplement `ggplot`. One if its most useful features is to to allow different groups to be mapped to the y axis, so that histograms are more easily viewed. 
 
-<button id="displayTextunnamed-chunk-30" onclick="javascript:toggle('unnamed-chunk-30');">Show Solution</button>
+<button id="displayTextunnamed-chunk-31" onclick="javascript:toggle('unnamed-chunk-31');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-30" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-31" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 library(ggridges)
@@ -694,7 +724,7 @@ ggplot(penguins, aes(x = body_mass_g, y = species)) +
                 alpha = 0.8)
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-53-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-56-1.png" width="100%" style="display: block; margin: auto;" />
 
 </div></div></div>
 
@@ -706,9 +736,9 @@ ggplot(penguins, aes(x = body_mass_g, y = species)) +
 
 * Adelie <select class='webex-select'><option value='blank'></option><option value='answer'>Yes</option><option value=''>No</option></select>
 
-<button id="displayTextunnamed-chunk-31" onclick="javascript:toggle('unnamed-chunk-31');">Show Solution</button>
+<button id="displayTextunnamed-chunk-32" onclick="javascript:toggle('unnamed-chunk-32');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-31" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-32" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 penguins %>% 
@@ -717,7 +747,7 @@ penguins %>%
       %>% car::qqPlot())
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-54-1.png" width="100%" style="display: block; margin: auto;" /><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-54-2.png" width="100%" style="display: block; margin: auto;" /><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-54-3.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-57-1.png" width="100%" style="display: block; margin: auto;" /><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-57-2.png" width="100%" style="display: block; margin: auto;" /><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-57-3.png" width="100%" style="display: block; margin: auto;" />
 
 ```
 ## [[1]]
@@ -735,7 +765,6 @@ While the Gentoo density plot appears to show two peaks, our qqplot indicates th
 
 
 
-
 ```r
 penguins %>% drop_na %>% ggplot(aes(x = body_mass_g, y = species)) + 
     geom_density_ridges(aes(fill = sex),
@@ -744,11 +773,21 @@ penguins %>% drop_na %>% ggplot(aes(x = body_mass_g, y = species)) +
                         bandwidth = 175)
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-32-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-33-1.png" width="100%" style="display: block; margin: auto;" />
 
 ```r
 # try playing with the bandwidth argument - this behaves similar to binning which you should be familiar with from using geom_histogram
 ```
+
+
+
+## Activity 2: Test yourself
+
+**Question 1.** Write down some insights you have made about the data and relationships you have observed. Compare these to the ones below. Do you agree with these? Did you miss any? What observations did you make that are **not** in the list below.
+
+
+<div class='webex-solution'><button>What data insights have you made?</button>
+
 
 This is revealing some really interesting insights into the shape and distribution of body sizes in our penguin populations now. 
 
@@ -766,26 +805,67 @@ For example:
 
 Note how we are able to understand our data better, by spending time making data visuals. While descriptive data statistics (mean, median) and measures of variance (range, IQR, sd) are important. They are not substitutes for spending time thinking about data and making exploratory analyses. 
 
-# Data insights part two
+
+</div>
 
 
 
+**Question 2.** Using `summarise` we can quickly calculate $s$ but can you replicate this by hand with `dplyr` functions?  -  do this for total $s$ (not by category). 
 
-## Two continuous variables
+* Residuals
 
-## Complex interactions
+* Squared residuals
+
+* Sum of squares
+
+* Variance = SS/df
+
+* $s=\sqrt{Variance}$
 
 <button id="displayTextunnamed-chunk-34" onclick="javascript:toggle('unnamed-chunk-34');">Show Solution</button>
 
 <div id="toggleTextunnamed-chunk-34" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
-```{=html}
-<div id="htmlwidget-e8974eb30ac915595fb4" style="width:100%;height:480px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e8974eb30ac915595fb4">{"x":{"diagram":"digraph {\n  \ngraph[layout = dot, rankdir = LR]\n\na[label = \"Body mass\"]\nb[label = \"Beak length\"]\nc[label = \"Species\"]\nd[label = \"Sex\"]\n\na -> b \nc -> b\nc -> a\nd -> b\nd -> a\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+```r
+mean <- penguins %>% 
+    summarise(mean = mean(body_mass_g, na.rm = T))
+
+penguins %>% 
+    mutate(residuals = (body_mass_g - pull(mean)),
+           sqrd_resid = residuals^2) %>% 
+    drop_na(sqrd_resid) %>% 
+    summarise(sum_squares = sum(sqrd_resid),
+              variance = sum_squares/(n=n())-1,
+              sd = sqrt(variance))
 ```
 
-So it is reasonable to think that perhaps either species or sex might affect the morphology of beaks directly - or that these might affect body mass (so that if there is a direct relationship between mass and beak length, there will also be an indirect relationship with sex or species).
+<div class="kable-table">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> sum_squares </th>
+   <th style="text-align:right;"> variance </th>
+   <th style="text-align:right;"> sd </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 219307697 </td>
+   <td style="text-align:right;"> 641249.6 </td>
+   <td style="text-align:right;"> 800.7806 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
 </div></div></div>
+
+
+# Data insights part two
+
+
+
 
 
 
@@ -862,7 +942,7 @@ This tells us two features of the association. It's *sign* and *magnitude*. The 
 
 <div class="figure" style="text-align: center">
 <img src="images/correlation_examples.png" alt="Different relationships between two numeric variables. Each number represents the Pearson's correlation coefficient of each association" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-36)Different relationships between two numeric variables. Each number represents the Pearson's correlation coefficient of each association</p>
+<p class="caption">(\#fig:unnamed-chunk-37)Different relationships between two numeric variables. Each number represents the Pearson's correlation coefficient of each association</p>
 </div>
 
 * Because Pearson's coefficient is designed to summarise the strength of a linear relationship, this can be misleading if the relationship is *not linear* e.g. curved or humped. This is why it's always a good idea to plot the relationship *first* (see above).
@@ -1002,8 +1082,8 @@ length_depth_scatterplot
 ```
 
 <div class="figure" style="text-align: center">
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-39-1.png" alt="A scatter plot of bill depth against bill length in mm" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-39)A scatter plot of bill depth against bill length in mm</p>
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-40-1.png" alt="A scatter plot of bill depth against bill length in mm" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-40)A scatter plot of bill depth against bill length in mm</p>
 </div>
 
 > **Note - Remember there are a number of different options available when constructing a plot including changing alpha to produce transparency if plots are lying on top of each other, colours (and shapes) to separate subgroups and ways to present third numerical variables such as setting aes(size=body_mass_g). 
@@ -1040,8 +1120,8 @@ bill_length_marginal+length_depth_scatterplot+bill_depth_marginal+ # order of pl
 ```
 
 <div class="figure" style="text-align: center">
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-40-1.png" alt="Using patchwork we can easily arrange extra plots to fit as marginals - these could be boxplots, histograms or density plots" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-40)Using patchwork we can easily arrange extra plots to fit as marginals - these could be boxplots, histograms or density plots</p>
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-41-1.png" alt="Using patchwork we can easily arrange extra plots to fit as marginals - these could be boxplots, histograms or density plots" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-41)Using patchwork we can easily arrange extra plots to fit as marginals - these could be boxplots, histograms or density plots</p>
 </div>
 
 These efforts allow us to capture details about the spread and distribution of both variables **and** how they relate to each other. This figure provides us with insights into
@@ -1136,7 +1216,7 @@ penguins%>%
   coord_flip()
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-42-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-43-1.png" width="100%" style="display: block; margin: auto;" />
 
 This is fine, but it looks a bit odd, because the bars expand to fill the available space on the category axis. Luckily there is an advanced version of the postion_dodge argument. 
 
@@ -1150,7 +1230,7 @@ penguins%>%
   coord_flip()
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-43-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-44-1.png" width="100%" style="display: block; margin: auto;" />
 > **Note the default for bar charts would have been a stacked option, but we have already seen how that can produce graphs that are difficult to read. 
 
 An alternative approach would be to look at the 'relative proportions' of each population in our overall dataset. Using the same methods as we used previously when looking at single variables. Let's add in a few aesthetic tweaks to improve the look. 
@@ -1180,8 +1260,8 @@ penguins %>%
 ```
 
 <div class="figure" style="text-align: center">
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-44-1.png" alt="A dodged barplot showing the numbers and relative proportions of data observations recorded by penguin species and location" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-44)A dodged barplot showing the numbers and relative proportions of data observations recorded by penguin species and location</p>
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-45-1.png" alt="A dodged barplot showing the numbers and relative proportions of data observations recorded by penguin species and location" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-45)A dodged barplot showing the numbers and relative proportions of data observations recorded by penguin species and location</p>
 </div>
 
 ## Associations between Categorical-numerical variables
@@ -1196,7 +1276,7 @@ penguins %>%
          x= "Species")
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-45-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-46-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 ```r
@@ -1210,16 +1290,23 @@ penguins %>%
              ncol=1)
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-46-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-47-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Complexity
+
+<img src="images/complexity.png" title="Variables such as species or sex may directly or indirectly affect the relationship between body mass and beak length" alt="Variables such as species or sex may directly or indirectly affect the relationship between body mass and beak length" width="80%" style="display: block; margin: auto;" />
+
+It is reasonable to think that perhaps either species or sex might affect the morphology of beaks directly - or that these might affect body mass (so that if there is a direct relationship between mass and beak length, there will also be an indirect relationship with sex or species).
+
+Failure to account for complex interactions can lead to misleading insights about your data. 
+
 
 ### Simpson's Paradox
 
 Remember when we first correlated bill length and bill depth against each other we found an overall negative correlation of -0.22. However, this is because of a confounding variable we had not accounted for - species. 
 
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-47-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-49-1.png" width="100%" style="display: block; margin: auto;" />
 
 This is another example of why carefully studying your data - and carefully considering those variables which are likely to affect each other are studied or controlled for. It is an entirely reasonable hypothesis that different penguin species might have different bill shapes that might make an overall trend misleading. We can easily check the effect of a categoricial variable on our two numeric variables by assigning the aesthetic colour. 
 
@@ -1244,7 +1331,7 @@ length_depth_scatterplot_2 <- ggplot(penguins, aes(x= culmen_length_mm,
 length_depth_scatterplot
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-48-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-50-1.png" width="100%" style="display: block; margin: auto;" />
 
 ```r
 bill_depth_marginal_2 <- penguins %>% 
@@ -1275,7 +1362,7 @@ bill_length_marginal_2+length_depth_scatterplot_2+bill_depth_marginal_2+ # order
   plot_layout(design=layout2) # uses the layout argument defined above to arrange the size and position of plots
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-48-2.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-50-2.png" width="100%" style="display: block; margin: auto;" />
 
 We now clearly see a striking reversal of our previous trend, that in fact *within* each species of penguin there is an overall positive association between bill length and depth. 
 
@@ -1352,6 +1439,26 @@ In the above example therefore, we saw the importance of exploring relationships
 
 1. Layer an extra aesthetic mapping onto ggplot - such as size, colour, or shape
 
+
+```r
+penguins %>% 
+  drop_na(sex) %>% 
+ggplot(aes(x= culmen_length_mm, 
+                     y= culmen_depth_mm,
+                     colour=sex)) + # colour aesthetic set to sex
+    geom_point(aes(shape = species))+
+  geom_smooth(aes(group = species),
+              method="lm",
+              se=FALSE)+
+  scale_colour_manual(values=c("#1B9E77", "#D95F02"))+ # pick two colour scheme
+  theme_classic()+
+  theme(legend.position="none")+
+    labs(x="Bill length (mm)",
+         y="Bill depth (mm)")
+```
+
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-52-1.png" width="100%" style="display: block; margin: auto;" />
+
 2. Use facets to construct multipanel plots according to the values of a categorical variable
 
 If we want we can also adopt both of these approaches at the same time:
@@ -1374,7 +1481,7 @@ ggplot(aes(x= culmen_length_mm,
   facet_wrap(~species, ncol=1) # specify plots are stacked split by species
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-50-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-53-1.png" width="100%" style="display: block; margin: auto;" />
 
 Here we can see that the trends are the same across the different penguin sexes. Although by comparing the slopes of the lines, lengths of the lines and amounts of overlap we can make insights into how "sexually dimorphic" these different species are e.g. in terms of beak morphology do some species show greater differences between males and females than others?
 
@@ -1390,7 +1497,7 @@ Sometimes we may see a pattern in our data, but it has likely occurred due to ra
 
 That's it! Thank you for taking the time to get this far. Be kind to yourself if you found it difficult. You have done incredibly well.
 
-Have some more praise!!!!
+Have some praise!!!!
 
 
 ```r

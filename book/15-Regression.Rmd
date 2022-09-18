@@ -78,6 +78,9 @@ Check the data is imported correctly and make sure it is 'tidy' with no obvious 
 
 ```
 
+
+## Activity 1: Exploratory Analysis
+
 ```{task}
 Is there any visual evidence for a linear association between wood density and timber hardness?
 ```
@@ -97,6 +100,8 @@ janka %>%
 ## Correlation
 
 Wood density and timber hardness appear to be positively related, and the linear appears to be fairly linear. We can look at a simple strength of this association between dens and hardness using correlation
+
+## Activty 2: Generate Pearson's R
 
 ```{solution, multCode = T}
 
@@ -185,6 +190,8 @@ In many ways the intercept makes more intuitive sense in a regression model than
 
 One way in which the intercept can be made more valuable is to use a technique known as 'centering'. By subtracting the average (mean) value of *x* from every data point, the intercept (when *x* is 0) can effectively be right-shifted into the centre of the data. 
 
+## Activity 3: Mean centered regression
+
 ```{task}
 Try it for yourself, use your data manipulation skills to 'center' the values of x then fit a new linear model.
 ```
@@ -198,7 +205,7 @@ dens_mean <- janka %>%
 # 45.73333
 
 janka %>% 
-  mutate(centered_dens = dens-dens_mean[,1]) %>% 
+  mutate(centered_dens = dens-pull(dens_mean)) %>% 
   lm(hardness ~ centered_dens, data = .) %>% 
   broom::tidy()
 
@@ -281,7 +288,8 @@ resid(janka_ls1)
 ``{r}
 
 janka_ls1 %>% 
-  broom::augment()
+  broom::augment() %>% 
+  head()
 
 
 ``
@@ -421,6 +429,8 @@ performance::check_model(janka_ls1, check="homogeneity")
 
 Here we can see there is just one potential outlier. 
 
+What is it's positional order in the dataframe? `r fitb("32")`
+
 ```{solution, multCode = T}
 
 ``{r}
@@ -436,6 +446,7 @@ performance::check_model(janka_ls1, check="outliers")
 
 ```
 
+Check the data, does this make sense?
 
 ## Prediction
 
@@ -474,7 +485,7 @@ coef(janka_ls1)[1] + coef(janka_ls1)[2] * 65
 ```
 
 
-But most of the time we are unlikely to want to work out predicted values by hand, instead we can use functions like `predict()` and `augment()`
+But most of the time we are unlikely to want to work out predicted values by hand, instead we can use functions like `predict()` and `broom::augment()`
 
 ```{solution, multCode = T}
 
@@ -494,6 +505,8 @@ broom::augment(janka_ls1,
 
 ```
 
+
+
 ### Adding confidence intervals
 
 ```{r}
@@ -509,6 +522,21 @@ broom::augment(janka_ls1, newdata=tibble(dens=c(22,35,65), interval="confidence"
 ```
 
 
+I really like the `emmeans` package - it is very good for producing quick predictions for categorical data - it can also do this for continuous variables. By default it will produce a single mean-centered prediction. But a list can be provided - it will produce confidence intervals as standard.
+
+`r hide("emmeans")`
+
+```{r}
+emmeans::emmeans(janka_ls1, 
+                 specs = "dens", 
+                 at = list(dens = c(22, 35, 65)))
+
+```
+
+`r unhide()`
+
+
+## Activity 4: Prediction
 
 ```{task}
 can you plot the three new predicted values onto an existing figure to recreate the below? 

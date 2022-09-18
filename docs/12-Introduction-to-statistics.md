@@ -43,17 +43,17 @@ darwin <- read_csv(here("data", "darwin.csv"))
 <p>You should set up a script to put your work into - use this to write instructions and store comments. Use the File &gt; New Script menu item and select an R Script.</p>
 </div>
 
-### Description
+
+
+
+
+## Activity 1: Carry out some basic exploratory data analysis
 
 The first thing we should know by now is to always start by exploring our data. If you want to stretch yourself, see if you can perform a basic data check **without** prompts. 
 
-<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
-Carry out some basic exploratory data analysis </div></div>
+<button id="displayTextunnamed-chunk-6" onclick="javascript:toggle('unnamed-chunk-6');">Show Solution</button>
 
-
-<button id="displayTextunnamed-chunk-7" onclick="javascript:toggle('unnamed-chunk-7');">Show Solution</button>
-
-<div id="toggleTextunnamed-chunk-7" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-6" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 # check the structure of the data
@@ -115,7 +115,7 @@ darwin %>%
   geom_point()
 ```
 
-<img src="12-Introduction-to-statistics_files/figure-html/unnamed-chunk-8-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="12-Introduction-to-statistics_files/figure-html/unnamed-chunk-7-1.png" width="100%" style="display: block; margin: auto;" />
 
 ```r
 # you could also substitute (or combine) other geoms including
@@ -192,7 +192,7 @@ darwin_summary %>%
   theme_bw()
 ```
 
-<img src="12-Introduction-to-statistics_files/figure-html/unnamed-chunk-11-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="12-Introduction-to-statistics_files/figure-html/unnamed-chunk-10-1.png" width="100%" style="display: block; margin: auto;" />
 
 ```r
 # put this at top of script
@@ -205,7 +205,7 @@ darwin_summary %>%
 ```
 
 <table class="table table-striped" style="">
-<caption>(\#tab:unnamed-chunk-11)Summary statistics of crossed and selfed maize plants</caption>
+<caption>(\#tab:unnamed-chunk-10)Summary statistics of crossed and selfed maize plants</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> type </th>
@@ -247,12 +247,14 @@ Darwin's data used match pairs - each pair shared one parent. So that in pair 1 
 
 In order to calculate the differences in height between each pair we need to do some data wrangling with `tidyr::pivot_wider()` [Chapter 2](#using-`pivot`-functions) and calculations with `mutate`.
 
-<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
-Create a new column called difference with the height of the selfed plant in each pair subtracted from the crossed plant.  </div></div>
+## Activity 2: Differences
 
-<button id="displayTextunnamed-chunk-13" onclick="javascript:toggle('unnamed-chunk-13');">Show Solution</button>
+Create a new column called difference with the height of the selfed plant in each pair subtracted from the crossed plant. 
 
-<div id="toggleTextunnamed-chunk-13" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+
+<button id="displayTextunnamed-chunk-11" onclick="javascript:toggle('unnamed-chunk-11');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-11" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 # pivot data to wide format then subtract Selfed plant heights from Crossed plant heights
@@ -317,9 +319,9 @@ As sample size increases the standard error should reduce - reflecting an increa
 
 We can calculate the standard error for our sample by applying this equation to our `difference_summary` object, can you complete this?
 
-<button id="displayTextunnamed-chunk-16" onclick="javascript:toggle('unnamed-chunk-16');">Show Solution</button>
+<button id="displayTextunnamed-chunk-14" onclick="javascript:toggle('unnamed-chunk-14');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-16" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-14" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 difference_summary %>% 
@@ -353,14 +355,18 @@ difference_summary %>%
 
 Our estimate of the mean is not really very useful without an accompanying measuring of *uncertainty* like the standard error, in fact estimates of averages or differences should **always** be accompanied by their measure of uncertainty. 
 
-<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
-With the information above, how would you present a short sentence describing the average different in height? </div></div>
 
-<button id="displayTextunnamed-chunk-18" onclick="javascript:toggle('unnamed-chunk-18');">Show Solution</button>
+### Activity 3: Communicate
 
-<div id="toggleTextunnamed-chunk-18" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+With the information above, how would you present a short sentence describing the average different in height?
+
+
+<button id="displayTextunnamed-chunk-15" onclick="javascript:toggle('unnamed-chunk-15');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-15" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 *... the average difference in height was 2.62 ± 1.22 inches (mean ± SE).*</div></div></div>
 
+## Uncertainty
 
 With a mean and standard error of the difference in heights between inbred and crossed plants - how do we work out how much confidence we have in their being a difference between our **population means**? 
 
@@ -407,7 +413,7 @@ plot(x,y, type = "l", lwd = 2, axes = FALSE, xlab = "", ylab = "")
 axis(1, at = -3:3, labels = c("-3s", "-2s", "-1s", "mean", "1s", "2s", "3s"))
 ```
 
-<img src="12-Introduction-to-statistics_files/figure-html/unnamed-chunk-20-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="12-Introduction-to-statistics_files/figure-html/unnamed-chunk-17-1.png" width="100%" style="display: block; margin: auto;" />
 
 How do we convert this information into how likely we are to observe a difference of 2.62 inches in plant heights if the 'true' difference between crosses and selfed plants is *zero*? 
 
@@ -415,7 +421,7 @@ The **central limit theorem** states that if you have a population with mean and
 
 So if we now center our bell curve on the estimate of the mean (2.62), then just over two thirds of the area under the curve is ± 1.22 inches. 95% of it will be within ± 2 standard errors, and 99.8% will be within ± 3 standard errors.
 
-<img src="12-Introduction-to-statistics_files/figure-html/unnamed-chunk-21-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="12-Introduction-to-statistics_files/figure-html/unnamed-chunk-18-1.png" width="100%" style="display: block; margin: auto;" />
 
 Taking a look at this figure we can ask ourselves where is zero on our normal distribution? One way to think about this is, if the true difference between our plant groups is zero, how surprising is it that we estimated a difference between the groups of 2.62 inches? 
 

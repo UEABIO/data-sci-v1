@@ -39,7 +39,24 @@ lsmodel0 <- lm(formula = height ~ 1, data = darwin)
 
 The first argument of the `lm()` function is formula (we won't write this out in full in the future) - and this specifies we want to analyse a **response** variable (height) as a function of an **explanatory** variable using the *tilde* symbol (~).
 
-The simplest possible model ignores any explanatory variables, instead the `1` indicates we just want to estimate an intercept. Without explanatory variables this means the formula will just estimate the overall mean height of **all** the plants in the dataset. 
+The simplest possible model ignores any explanatory variables, instead the `1` indicates we just want to estimate an intercept. Without explanatory variables this means the formula will just estimate the overall mean height of **all** the plants in the dataset.
+
+
+## Summaries for models
+
+When you have made a linear model, we can investigate a summary of the model using the base R function `summary()`. There is also a tidyverse option provided by the package `broom`(@R-broom).
+
+### Broom
+
+broom summarizes key information about models in tidy `tibble()s`. broom provides three verbs to make it convenient to interact with model objects:
+
+* `broom::tidy()` summarizes information about model components
+
+* `broom::glance()` reports information about the entire model
+
+* `broom::augment()` adds informations about individual observations to a dataset and it can be used to model predictions onto a new dataset.
+
+### Model summary
 
 <button id="displayTextunnamed-chunk-6" onclick="javascript:toggle('unnamed-chunk-6');">Show Solution</button>
 
@@ -467,6 +484,8 @@ darwin %>%
 
 After relevelling, the self treatment is now taken as the intercept, and we get the estimate for it's mean and standard error
 
+### Emmeans
+
 We could also use the package [`emmeans`](https://aosmith.rbind.io/2019/03/25/getting-started-with-emmeans/) and its function `emmeans()` to do a similar thing
 
 
@@ -501,7 +520,6 @@ means %>%
 ```
 
 <img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-21-1.png" width="100%" style="display: block; margin: auto;" />
-
 
 Notice that no matter how we calculate the estimated SE (and therefore the 95% CI) of both treatments is the same. This is because as mentioned earlier the variance is a pooled estimate, e.g. variance is not being calculate separately for each group. The only difference you should see in SE across treatments will be if there is a difference in *sample size* between groups. 
 

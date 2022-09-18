@@ -144,7 +144,7 @@
 <a href="https://raw.githubusercontent.com/UEABIO/data-sci-v1/main/book/files/darwin.csv">
 <button class="btn btn-success"><i class="fa fa-save"></i> Download Maize data as csv</button>
 </a>
-<div class="sourceCode" id="cb313"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb316"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/">here</a></span><span class="op">)</span>
 
@@ -157,29 +157,22 @@ Before you go any further - make sure your basic R project set up is up to scrat
 You should set up a script to put your work into - use this to write instructions and store comments. Use the File &gt; New Script menu item and select an R Script.
 </p>
 </div>
-<div id="description" class="section level3" number="12.1.1">
-<h3>
-<span class="header-section-number">12.1.1</span> Description<a class="anchor" aria-label="anchor" href="#description"><i class="fas fa-link"></i></a>
-</h3>
+</div>
+<div id="activity-1-carry-out-some-basic-exploratory-data-analysis" class="section level2" number="12.2">
+<h2>
+<span class="header-section-number">12.2</span> Activity 1: Carry out some basic exploratory data analysis<a class="anchor" aria-label="anchor" href="#activity-1-carry-out-some-basic-exploratory-data-analysis"><i class="fas fa-link"></i></a>
+</h2>
 <p>The first thing we should know by now is to always start by exploring our data. If you want to stretch yourself, see if you can perform a basic data check <strong>without</strong> prompts.</p>
-<div class="panel panel-default">
-<div class="panel-heading">
-Task
-</div>
-<div class="panel-body">
-Carry out some basic exploratory data analysis
-</div>
-</div>
-<button id="displayTextunnamed-chunk-7" onclick="javascript:toggle('unnamed-chunk-7');">
+<button id="displayTextunnamed-chunk-6" onclick="javascript:toggle('unnamed-chunk-6');">
 Show Solution
 </button>
-<div id="toggleTextunnamed-chunk-7" style="display: none">
+<div id="toggleTextunnamed-chunk-6" style="display: none">
 <div class="panel panel-default">
 <div class="panel-heading panel-heading1">
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb314"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb317"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># check the structure of the data</span>
 <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">darwin</span><span class="op">)</span>
 
@@ -226,19 +219,18 @@ Solution
 </div>
 </div>
 
-</div>
-<div id="visualisation" class="section level3" number="12.1.2">
+<div id="visualisation" class="section level3" number="12.2.1">
 <h3>
-<span class="header-section-number">12.1.2</span> Visualisation<a class="anchor" aria-label="anchor" href="#visualisation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.2.1</span> Visualisation<a class="anchor" aria-label="anchor" href="#visualisation"><i class="fas fa-link"></i></a>
 </h3>
 <p>Now seems like a good time for our first data visualisation.</p>
-<div class="sourceCode" id="cb315"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb318"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">darwin</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">type</span>,
          y<span class="op">=</span><span class="va">height</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="12-Introduction-to-statistics_files/figure-html/unnamed-chunk-8-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb316"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="12-Introduction-to-statistics_files/figure-html/unnamed-chunk-7-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb319"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># you could also substitute (or combine) other geoms including</span>
 <span class="co"># geom_boxplot()</span>
 <span class="co"># geom_violin()</span>
@@ -247,12 +239,12 @@ Solution
 <p>The graph clearly shows that the average height of the 'crossed' plants is greater than that of the 'selfed' plants. But we need to investigate further in order to determine whether the signal (any apparent differences in mean values) is greater than the level of noise (variance within the different groups).</p>
 <p>The variance appears to be roughly similar between the two groups - though by making a graph we can now clearly see that in the crossed group, there is a <em>potential</em> outlier with a value of 12.</p>
 </div>
-<div id="comparing-groups" class="section level3" number="12.1.3">
+<div id="comparing-groups" class="section level3" number="12.2.2">
 <h3>
-<span class="header-section-number">12.1.3</span> Comparing groups<a class="anchor" aria-label="anchor" href="#comparing-groups"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.2.2</span> Comparing groups<a class="anchor" aria-label="anchor" href="#comparing-groups"><i class="fas fa-link"></i></a>
 </h3>
 <p>As we have seen previously we can use various tidy functions to determine the mean and standard deviations of our groups.</p>
-<div class="sourceCode" id="cb317"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb320"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">darwin</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span>,
@@ -302,7 +294,7 @@ You should (re)familiarise yourself with how (and why) we calculate standard dev
 </p>
 </div>
 <p>Summary statistics like these could be presented as figures or tables. We normally reserve tables for <strong>very</strong> simple sets of numbers, and this instance we could present both.</p>
-<div class="sourceCode" id="cb318"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb321"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># make a new object</span>
 <span class="va">darwin_summary</span> <span class="op">&lt;-</span><span class="va">darwin</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -315,8 +307,8 @@ You should (re)familiarise yourself with how (and why) we calculate standard dev
              y<span class="op">=</span><span class="va">mean</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_pointrange</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>ymin<span class="op">=</span><span class="va">mean</span><span class="op">-</span><span class="va">sd</span>, ymax<span class="op">=</span><span class="va">mean</span><span class="op">+</span><span class="va">sd</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="12-Introduction-to-statistics_files/figure-html/unnamed-chunk-11-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb319"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="12-Introduction-to-statistics_files/figure-html/unnamed-chunk-10-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb322"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># put this at top of script</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://haozhu233.github.io/kableExtra/">kableExtra</a></span><span class="op">)</span>
 
@@ -326,7 +318,7 @@ You should (re)familiarise yourself with how (and why) we calculate standard dev
   <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span>bootstrap_options <span class="op">=</span> <span class="st">"striped"</span>, full_width <span class="op">=</span> <span class="cn">T</span>, position <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped" style>
 <caption>
-<span id="tab:unnamed-chunk-11">Table 12.1: </span>Summary statistics of crossed and selfed maize plants
+<span id="tab:unnamed-chunk-10">Table 12.1: </span>Summary statistics of crossed and selfed maize plants
 </caption>
 <thead><tr>
 <th style="text-align:left;">
@@ -367,9 +359,9 @@ Self
 <p>Descriptive statistics and careful data checking are often skipped steps in the rush to answer the <strong>big</strong> questions. However, description is an essential part of early phase analysis.</p>
 </div>
 </div>
-<div id="estimation" class="section level2" number="12.2">
+<div id="estimation" class="section level2" number="12.3">
 <h2>
-<span class="header-section-number">12.2</span> Estimation<a class="anchor" aria-label="anchor" href="#estimation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.3</span> Estimation<a class="anchor" aria-label="anchor" href="#estimation"><i class="fas fa-link"></i></a>
 </h2>
 <p>In the section above we concentrated on description. But the hypothesis Darwin aimed to test was whether 'inbreeding reduced the fitness of the selfed plants'. To do this we will use the height of the plants as a proxy for fitness and explicitly address whether there is a <strong>difference</strong> in the mean heights of the plants between these two groups.</p>
 <p>Our goal is to:</p>
@@ -378,30 +370,29 @@ Self
 <li><p>Estimate the mean <em>difference</em> in heights between these two groups</p></li>
 <li><p>Quantify our <em>confidence</em> in these differences</p></li>
 </ul>
-<div id="differences-between-groups" class="section level3" number="12.2.1">
+<div id="differences-between-groups" class="section level3" number="12.3.1">
 <h3>
-<span class="header-section-number">12.2.1</span> Differences between groups<a class="anchor" aria-label="anchor" href="#differences-between-groups"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.3.1</span> Differences between groups<a class="anchor" aria-label="anchor" href="#differences-between-groups"><i class="fas fa-link"></i></a>
 </h3>
 <p>Darwin's data used match pairs - each pair shared one parent. So that in pair 1 the same parent plant was either 'selfed' or 'crossed' to produce offspring. This is a powerful approach to experimental design, as it means that we can look at the differences in heights across each of the 15 pairs of plants - rather than having to infer differences from two randomly derived groups.</p>
 <p>In order to calculate the differences in height between each pair we need to do some data wrangling with <code><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">tidyr::pivot_wider()</a></code> <a href="#using-%60pivot%60-functions">Chapter 2</a> and calculations with <code>mutate</code>.</p>
-<div class="panel panel-default">
-<div class="panel-heading">
-Task
-</div>
-<div class="panel-body">
-Create a new column called difference with the height of the selfed plant in each pair subtracted from the crossed plant.
 </div>
 </div>
-<button id="displayTextunnamed-chunk-13" onclick="javascript:toggle('unnamed-chunk-13');">
+<div id="activity-2-differences" class="section level2" number="12.4">
+<h2>
+<span class="header-section-number">12.4</span> Activity 2: Differences<a class="anchor" aria-label="anchor" href="#activity-2-differences"><i class="fas fa-link"></i></a>
+</h2>
+<p>Create a new column called difference with the height of the selfed plant in each pair subtracted from the crossed plant.</p>
+<button id="displayTextunnamed-chunk-11" onclick="javascript:toggle('unnamed-chunk-11');">
 Show Solution
 </button>
-<div id="toggleTextunnamed-chunk-13" style="display: none">
+<div id="toggleTextunnamed-chunk-11" style="display: none">
 <div class="panel panel-default">
 <div class="panel-heading panel-heading1">
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb320"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb323"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># pivot data to wide format then subtract Selfed plant heights from Crossed plant heights</span>
 
 <span class="va">darwin_wide</span> <span class="op">&lt;-</span> <span class="va">darwin</span> <span class="op">%&gt;%</span> 
@@ -411,7 +402,7 @@ Solution
 </div>
 </div>
 <p>We now have the difference in height for each pair, we can use this to calculate the <strong>mean difference</strong> in heights between paired plants, and the amount of variance (as standard deviation)</p>
-<div class="sourceCode" id="cb321"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb324"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">difference_summary</span> <span class="op">&lt;-</span> <span class="va">darwin_wide</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">difference</span><span class="op">)</span>,
             sd<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">difference</span><span class="op">)</span>,
@@ -449,10 +440,9 @@ n
 What we have just calculated is the average difference in height between these groups of plants and the standard deviation of the difference Moving forward we will be working a lot with estimating our confidence in differences between groups
 </p>
 </div>
-</div>
-<div id="standard-error-of-the-difference" class="section level3" number="12.2.2">
+<div id="standard-error-of-the-difference" class="section level3" number="12.4.1">
 <h3>
-<span class="header-section-number">12.2.2</span> Standard error of the difference<a class="anchor" aria-label="anchor" href="#standard-error-of-the-difference"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.4.1</span> Standard error of the difference<a class="anchor" aria-label="anchor" href="#standard-error-of-the-difference"><i class="fas fa-link"></i></a>
 </h3>
 <p>Remember standard deviation is a <em>descriptive</em> statistic - it measures the variance within our dataset - e.g. how closely do datapoints fit to the mean. However for <em>inferential</em> statistics we are more interested in our confidence in our estimation of the mean. This is where standard error comes in.</p>
 <p>We can think of error as a standard deviation of the mean. The mean we have calculated is an estimate based on one sample of data. We would expect that if we sampled another 30 plants these would have a different sample mean. Standard error describes the variability we would expect among sample means if we repeated this experiment many times. So we can think of it as a measure of the confidence we have in our estimate of a <strong>true population mean</strong>.</p>
@@ -461,16 +451,16 @@ SE = \frac{s}{\sqrt(n)}
 \]</span></p>
 <p>As sample size increases the standard error should reduce - reflecting an increasing confidence in our estimate.</p>
 <p>We can calculate the standard error for our sample by applying this equation to our <code>difference_summary</code> object, can you complete this?</p>
-<button id="displayTextunnamed-chunk-16" onclick="javascript:toggle('unnamed-chunk-16');">
+<button id="displayTextunnamed-chunk-14" onclick="javascript:toggle('unnamed-chunk-14');">
 Show Solution
 </button>
-<div id="toggleTextunnamed-chunk-16" style="display: none">
+<div id="toggleTextunnamed-chunk-14" style="display: none">
 <div class="panel panel-default">
 <div class="panel-heading panel-heading1">
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb322"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb325"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">difference_summary</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>se<span class="op">=</span> <span class="va">sd</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
@@ -509,18 +499,16 @@ se
 </div>
 </div>
 <p>Our estimate of the mean is not really very useful without an accompanying measuring of <em>uncertainty</em> like the standard error, in fact estimates of averages or differences should <strong>always</strong> be accompanied by their measure of uncertainty.</p>
-<div class="panel panel-default">
-<div class="panel-heading">
-Task
 </div>
-<div class="panel-body">
-With the information above, how would you present a short sentence describing the average different in height?
-</div>
-</div>
-<button id="displayTextunnamed-chunk-18" onclick="javascript:toggle('unnamed-chunk-18');">
+<div id="activity-3-communicate" class="section level3" number="12.4.2">
+<h3>
+<span class="header-section-number">12.4.2</span> Activity 3: Communicate<a class="anchor" aria-label="anchor" href="#activity-3-communicate"><i class="fas fa-link"></i></a>
+</h3>
+<p>With the information above, how would you present a short sentence describing the average different in height?</p>
+<button id="displayTextunnamed-chunk-15" onclick="javascript:toggle('unnamed-chunk-15');">
 Show Solution
 </button>
-<div id="toggleTextunnamed-chunk-18" style="display: none">
+<div id="toggleTextunnamed-chunk-15" style="display: none">
 <div class="panel panel-default">
 <div class="panel-heading panel-heading1">
 Solution
@@ -530,6 +518,12 @@ Solution
 </div>
 </div>
 </div>
+</div>
+</div>
+<div id="uncertainty" class="section level2" number="12.5">
+<h2>
+<span class="header-section-number">12.5</span> Uncertainty<a class="anchor" aria-label="anchor" href="#uncertainty"><i class="fas fa-link"></i></a>
+</h2>
 <p>With a mean and standard error of the difference in heights between inbred and crossed plants - how do we work out how much confidence we have in their being a difference between our <strong>population means</strong>?</p>
 <p>Standard error is a measure of uncertainty, the larger the standard error the more <em>noise</em> around our data and the more uncertainty we have. The smaller the standard error the more confidence we can have that our difference in means is <em>real</em>.</p>
 <ul>
@@ -544,10 +538,9 @@ A statistical way of thinking about our inferences is in terms of confidence aro
 When we decide whether we have enough confidence that a difference is real (e.g. we could reject the null hypothesis), we cannot ever be 100% certain that this isn't a false positive (also known as a Type I error). More on this later
 </p>
 </div>
-</div>
-<div id="normal-distribution-1" class="section level3" number="12.2.3">
+<div id="normal-distribution-1" class="section level3" number="12.5.1">
 <h3>
-<span class="header-section-number">12.2.3</span> Normal distribution<a class="anchor" aria-label="anchor" href="#normal-distribution-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.5.1</span> Normal distribution<a class="anchor" aria-label="anchor" href="#normal-distribution-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>As we should remember, the normal distribution is the bell-shaped curve. It is defined by two parameters:</p>
 <ul>
@@ -558,7 +551,7 @@ When we decide whether we have enough confidence that a difference is real (e.g.
 <p>Large standard deviations produce wide bell curves, with short peaks. Small standard deviations produce narrow bell curves with tall peaks.</p>
 <p>The bell curve occurs frequently in nature, most circumstances where we can think of a continuous measure coming from a population e.g. human mass, penguin flipper lengths or plant heights.</p>
 <p>As a <em>probability</em> distribution, the area within the curve sums to the whole population (e.g. the probability that the curve contains every possible measurement is 1). Known proportions of the curve lie within certain distances from the centre e.g. 67.8% of observations should have values within one standard deviation of the mean. 95% of observations should have values within two standard deviations of the mean. This <em>idealized</em> normal distribution is presented below:</p>
-<div class="sourceCode" id="cb323"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb326"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#Create a sequence of 100 equally spaced numbers between -4 and 4</span>
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">4</span>, <span class="fl">4</span>, length<span class="op">=</span><span class="fl">100</span><span class="op">)</span>
 
@@ -568,13 +561,13 @@ When we decide whether we have enough confidence that a difference is real (e.g.
 
 <span class="co">#plot x and y as a scatterplot with connected lines (type = "l") and add</span>
 <span class="co">#an x-axis with custom labels</span>
-<span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span>, type <span class="op">=</span> <span class="st">"l"</span>, lwd <span class="op">=</span> <span class="fl">2</span>, axes <span class="op">=</span> <span class="cn">FALSE</span>, xlab <span class="op">=</span> <span class="st">""</span>, ylab <span class="op">=</span> <span class="st">""</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span>, type <span class="op">=</span> <span class="st">"l"</span>, lwd <span class="op">=</span> <span class="fl">2</span>, axes <span class="op">=</span> <span class="cn">FALSE</span>, xlab <span class="op">=</span> <span class="st">""</span>, ylab <span class="op">=</span> <span class="st">""</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/axis.html">axis</a></span><span class="op">(</span><span class="fl">1</span>, at <span class="op">=</span> <span class="op">-</span><span class="fl">3</span><span class="op">:</span><span class="fl">3</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"-3s"</span>, <span class="st">"-2s"</span>, <span class="st">"-1s"</span>, <span class="st">"mean"</span>, <span class="st">"1s"</span>, <span class="st">"2s"</span>, <span class="st">"3s"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="12-Introduction-to-statistics_files/figure-html/unnamed-chunk-20-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="12-Introduction-to-statistics_files/figure-html/unnamed-chunk-17-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>How do we convert this information into how likely we are to observe a difference of 2.62 inches in plant heights if the 'true' difference between crosses and selfed plants is <em>zero</em>?</p>
 <p>The <strong>central limit theorem</strong> states that if you have a population with mean and standard deviation, and take sufficiently large random samples from the population, then the distribution of the sample means will be approximately normally distributed. Standard error then is our measure of variability around our sample mean, and we will assume that we can apply a normal distribution to our ability to estimate the mean (<em>we will revisit this assumption later</em>).</p>
 <p>So if we now center our bell curve on the estimate of the mean (2.62), then just over two thirds of the area under the curve is ± 1.22 inches. 95% of it will be within ± 2 standard errors, and 99.8% will be within ± 3 standard errors.</p>
-<div class="inline-figure"><img src="12-Introduction-to-statistics_files/figure-html/unnamed-chunk-21-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="12-Introduction-to-statistics_files/figure-html/unnamed-chunk-18-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>Taking a look at this figure we can ask ourselves where is zero on our normal distribution? One way to think about this is, if the true difference between our plant groups is zero, how surprising is it that we estimated a difference between the groups of 2.62 inches?</p>
 <p>If zero was close to the center of the bell curve, then our observed mean would not be surprising at all (<strong>if the null hypothesis is true</strong>). However in this case it is not in the middle of the bell. It falls in the left-hand tail, and it is &gt; than two standard deviations from our estimated mean.</p>
 <p>We can describe this in two ways:</p>
@@ -584,13 +577,13 @@ When we decide whether we have enough confidence that a difference is real (e.g.
 </ul>
 <p>You will probably be very used to a threshold for null hypothesis rejection of <span class="math inline">\(\alpha\)</span> = 0.05, but this only the very lowest level of confidence at which we can pass a statistical test. If we increase the severity of our test so that the minimum we require is <span class="math inline">\(\alpha\)</span> = 0.001 or 99% confidence, we can see that we no longer believe we have enough confidence to reject the null hypothesis (0 is within 3 s.d. of our estimated mean).</p>
 </div>
-<div id="confidence-intervals" class="section level3" number="12.2.4">
+<div id="confidence-intervals" class="section level3" number="12.5.2">
 <h3>
-<span class="header-section-number">12.2.4</span> Confidence Intervals<a class="anchor" aria-label="anchor" href="#confidence-intervals"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.5.2</span> Confidence Intervals<a class="anchor" aria-label="anchor" href="#confidence-intervals"><i class="fas fa-link"></i></a>
 </h3>
 <p>Because ± 2 standard errors covers the central 95% of the area under the normal curve, we refer to this as our 95% confidence interval. We can calculate confidence intervals for any level, but commonly we refer to standard error (68% CI), 95% and 99%.</p>
 <p>We can work out the 95% confidence interval range of our estimated mean as follows:</p>
-<div class="sourceCode" id="cb324"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb327"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lowerCI</span> <span class="op">&lt;-</span> <span class="fl">2.62</span><span class="op">-</span><span class="op">(</span><span class="fl">2</span><span class="op">*</span><span class="fl">1.22</span><span class="op">)</span>
 
 <span class="va">upperCI</span> <span class="op">&lt;-</span> <span class="fl">2.62</span><span class="op">+</span><span class="op">(</span><span class="fl">2</span><span class="op">*</span><span class="fl">1.22</span><span class="op">)</span>
@@ -612,9 +605,9 @@ The maize plants that have been cross pollinated were taller on average than the
 <p>The above is a good example of a simple but clear write-up because it clearly describes the <em>direction</em> of the difference, the <em>amount</em> and the <em>error</em> in our estimate.</p>
 </div>
 </div>
-<div id="summary-2" class="section level2" number="12.3">
+<div id="summary-2" class="section level2" number="12.6">
 <h2>
-<span class="header-section-number">12.3</span> Summary<a class="anchor" aria-label="anchor" href="#summary-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.6</span> Summary<a class="anchor" aria-label="anchor" href="#summary-2"><i class="fas fa-link"></i></a>
 </h2>
 <p>Statistics is all about trying to interpret whether the signal (of a difference or trend) is stronger than the amount of noise (variability). In a sample the standard deviation is a strong choice for estimating this <em>within</em> a dataset. The standard deviation of the sampling distribution of the mean is known as the standard error. The standard error (of the mean) is a measure of the precision we have in our estimate of the mean. Thanks to the central limit theorem and normal distribution we can use the variability in our estimate to calculate confidence intervals, and decide whether our signal of an effect is strong enough to reject a null hypothesis (of no effect or no difference).</p>
 <p>Next time we will start working with linear models - this approach allows us to estimate means and intervals in a more sophisticated (and automated) way.</p>
@@ -807,22 +800,29 @@ $( document ).ready(function() {
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#introduction-to-statistics"><span class="header-section-number">12</span> Introduction to statistics</a></li>
+<li><a class="nav-link" href="#darwins-maize-data"><span class="header-section-number">12.1</span> Darwin's maize data</a></li>
 <li>
-<a class="nav-link" href="#darwins-maize-data"><span class="header-section-number">12.1</span> Darwin's maize data</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#description"><span class="header-section-number">12.1.1</span> Description</a></li>
-<li><a class="nav-link" href="#visualisation"><span class="header-section-number">12.1.2</span> Visualisation</a></li>
-<li><a class="nav-link" href="#comparing-groups"><span class="header-section-number">12.1.3</span> Comparing groups</a></li>
+<a class="nav-link" href="#activity-1-carry-out-some-basic-exploratory-data-analysis"><span class="header-section-number">12.2</span> Activity 1: Carry out some basic exploratory data analysis</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#visualisation"><span class="header-section-number">12.2.1</span> Visualisation</a></li>
+<li><a class="nav-link" href="#comparing-groups"><span class="header-section-number">12.2.2</span> Comparing groups</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#estimation"><span class="header-section-number">12.2</span> Estimation</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#differences-between-groups"><span class="header-section-number">12.2.1</span> Differences between groups</a></li>
-<li><a class="nav-link" href="#standard-error-of-the-difference"><span class="header-section-number">12.2.2</span> Standard error of the difference</a></li>
-<li><a class="nav-link" href="#normal-distribution-1"><span class="header-section-number">12.2.3</span> Normal distribution</a></li>
-<li><a class="nav-link" href="#confidence-intervals"><span class="header-section-number">12.2.4</span> Confidence Intervals</a></li>
+<a class="nav-link" href="#estimation"><span class="header-section-number">12.3</span> Estimation</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#differences-between-groups"><span class="header-section-number">12.3.1</span> Differences between groups</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#activity-2-differences"><span class="header-section-number">12.4</span> Activity 2: Differences</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#standard-error-of-the-difference"><span class="header-section-number">12.4.1</span> Standard error of the difference</a></li>
+<li><a class="nav-link" href="#activity-3-communicate"><span class="header-section-number">12.4.2</span> Activity 3: Communicate</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#summary-2"><span class="header-section-number">12.3</span> Summary</a></li>
+<li>
+<a class="nav-link" href="#uncertainty"><span class="header-section-number">12.5</span> Uncertainty</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#normal-distribution-1"><span class="header-section-number">12.5.1</span> Normal distribution</a></li>
+<li><a class="nav-link" href="#confidence-intervals"><span class="header-section-number">12.5.2</span> Confidence Intervals</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#summary-2"><span class="header-section-number">12.6</span> Summary</a></li>
 </ul>
 
       <div class="book-extra">
@@ -840,7 +840,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-09-17.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-09-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

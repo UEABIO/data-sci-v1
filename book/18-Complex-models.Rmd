@@ -63,13 +63,15 @@ You should now import, clean and tidy your data. Making sure it is in tidy forma
 
 Based on the variables you have decided to test you should start with some simple visualisations, to understand the distribution of your data, and investigate visually the relationships you wish to test.
 
-This is full two-by-two plot of the entire dataset, but you should try and follow this up with some specific plots. 
+This is a full two-by-two plot of the entire dataset, but you should try and follow this up with some specific plots. 
 
 ```{r, eval = TRUE, warning = FALSE, message = FALSE}
 
 GGally::ggpairs(fruitfly)
 
 ```
+
+## Activity 1: Think about your data
 
 ```{task}
 Think carefully about the plots you should make to investigate the potential differences and relationships you wish to investigate - examples hidden behing this dropdown
@@ -94,7 +96,17 @@ fruitfly %>%
 
 ```
 
-With careful thought we can construct figures that help us investigate the distribution of multiple potential predictors at once. Here we can overlay body size onto the three treatments. Here it does look as though larger flies have a longer lifespan than smaller flies. Is this trend enough of a deviation to reject a null hypothesis of no effect?
+With careful thought we can construct figures that help us investigate the distribution of multiple potential predictors at once. Here we can overlay body size onto the three treatments. 
+
+**Q** Does it like size affects longevity? `r mcq(c(answer = "Yes","No"))`
+
+**Q** Does it look like size affects longevity differently between treatment groups? `r mcq(c("Yes", answer = "No"))`
+
+`r hide("Explain this")`
+
+Here it does look as though larger flies have a longer lifespan than smaller flies. But there appears to be little difference in the distribution of body sizes by treatment. This does not mean we can't test this in our model. But we should have a clear idea of which will have largest probable effect sizes
+
+`r unhide()`
 
 ```{r, message = FALSE, eval = TRUE, fig.cap = "A boxplot of longevity across three treatments of sexual activity. Individual points represent individual males, where the size of each point represents thorax length."}
 
@@ -113,7 +125,11 @@ fruitfly %>%
 
 ```
 
-We are also interested in the potential effect of sleep on activity, we can construct a scatter plot of sleep against longevity, while including body size as a covariate. In these faceted plots - do the data points appear to follow the trendline? Are the trendlines moving in the same direction? Investigating these can help us determine is there much evidence of a potential effect of sleep, is there evidence for whether this might be an additive effect or one which interacts with the the three treatments?
+We are also interested in the potential effect of sleep on activity, we can construct a scatter plot of sleep against longevity, while including body size as a covariate. 
+
+In these faceted plots - Are the trendlines moving in the same direction?  `r mcq(c("Yes", answer ="No"))`
+
+Investigating these can help us determine is there much evidence of a potential effect of sleep, is there evidence for whether this might be an additive effect or one which interacts with the the three treatments?
 
 ```{r, message = FALSE, eval = TRUE, fig.cap = "A scatter plot of proportion of time spent sleeping against longevity with a linear model trendline. Points represent individual flies, and the size of each point represents thorax length (mm)."}
 
@@ -194,7 +210,9 @@ performance::check_model(flyls1)
 
 ```
 
-**Question - IS the assumption of homogeneity of variance met?**
+## Activity 2: Model checking
+
+**Question - IS the assumption of homogeneity of variance met?** `r mcq(c( answer = "Yes", "No"))`
 
 ```{solution}
 
@@ -208,7 +226,7 @@ With a slight curvature this could indicate that you *might* get a better fit wi
 
 ```
 
-**Question - ARE the residuals normally distributed?**
+**Question - ARE the residuals normally distributed?** `r mcq(c(answer = "Yes", "No"))`
 
 ```{solution}
 Yes - the QQplot looks pretty good, a very minor indication of a right skew, but nothing to worry about. 
@@ -218,7 +236,7 @@ Yes - the QQplot looks pretty good, a very minor indication of a right skew, but
 ```
 
 
-**Question - IS their an issue with Collinearity?**
+**Question - IS their an issue with Collinearity?** `r mcq(c("Yes", answer ="No"))`
 
 ```{solution}
 
@@ -280,7 +298,7 @@ MASS::boxcox(flyls1)
 
 ```
 
-**Question - Does the fit of the model improve with a square root transformation?**
+**Question - Does the fit of the model improve with a square root transformation?** `r mcq(c("Yes", answer ="No"))`
 
 ```{solution}
 Not really, despite the suggestion that a sqrt transformation would improve the model, residual fits are not really any better - so we might as well stick with the original scale.
@@ -310,7 +328,7 @@ drop1(flyls2, test = "F")
 
 ```
 
-**Question - Should we drop sleep from this model?**
+**Question - Should we drop sleep from this model?** `r mcq(c("Yes", answer ="No"))`
 
 ```{solution}
 
@@ -338,7 +356,7 @@ emmeans::emmeans(flyls2, specs = pairwise ~ type + thorax + sleep)
 For continuous variables (sleep and thorax) - `emmeans` has set these to the mean value within the dataset, so comparisons are constant between categories at the average value of all continuous variables. 
 ```
 
-## Write-up
+## Activity 3: Write-up
 
 ```{task} 
 Can you write a Results section?

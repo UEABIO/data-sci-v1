@@ -272,11 +272,7 @@ ggplot()+
   theme_classic()
 ```
 
-With the information about the distribution, and positions of the mean and median, which of these two measures of central tendency is most appropriate for this data? `r mcq(c(answer = "mean", "median"))`
 
-```{solution}
-we can clearly see that the mean value has been significantly "right-shifted" by the long tail of the data distribution. However,this is much less apparent for the median. In this way we can say that the median is less sensitive to the distribution of the data than the mean is.
-```
 
 ### Normal distribution
 
@@ -326,7 +322,7 @@ ggplot(penguins, aes(sample = body_mass_g))+
 
 ```
 
-**Q. How do we know how much deviation from an idealised distribution is ok?**
+**How do we know how much deviation from an idealised distribution is ok?**
 
 ```{r}
 penguins %>% 
@@ -336,6 +332,12 @@ penguins %>%
 
 The qqPlot() function from the R package car provides 95% confidence interval margins to help you determine how severely your quantiles deviate from your idealised distribution.
 
+
+With the information from the qqPlot which section of the distribution deviates most clearly from a normal distribution `r mcq(c(answer = "<3500g", "3500-4000g", "4000-4500g", "5000-5500g", ">5500g"))`
+
+```{solution}
+There are is a 'truncated' left tail of our normal distribution. We would predict more penguins with body masses lower than 3000g under the normal distribution.
+```
 
 
 ### Variation
@@ -370,7 +372,34 @@ We can see for ourselves the IQR is obtained by subtracting the body mass at tht
 
 #### Standard deviation
 
-standard deviation (or σ) is a measure of how dispersed the data is in relation to the mean. Low standard deviation means data are clustered around the mean, and high standard deviation indicates data are more spread out. As such it makes sense only to use this when the mean is a good measure of our central tendency. 
+standard deviation (or $s$) is a measure of how dispersed the data is in relation to the mean. Low standard deviation means data are clustered around the mean, and high standard deviation indicates data are more spread out. As such it makes sense only to use this when the mean is a good measure of our central tendency. 
+
+```{block, type = "info"}
+
+$\sigma$ = a known population standard deviation
+
+$s$ = a sample standard deviation
+
+```
+
+```{task}
+If we know we have a normal distribution, then we can use `summarise()` to quickly produce a mean and standard deviation.
+```
+
+```{solution}
+
+
+``
+penguins %>% 
+  summarise(mean = mean(body_mass_g),
+            sd = sd(body_mass_g),
+            n = n())
+``
+
+```
+
+
+
 
 ### Visualising dispersion
 
@@ -445,45 +474,31 @@ We first met `NA` back in [Chapter 4](#missing-values-na) and you will hopefully
 
 It’s common to want to explore the distribution of a continuous variable broken down by a categorical variable. 
 
-```{task}
-Think about which other variables might affect body mass?
+
+`r hide("Think about which other variables might affect body mass?")`
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%", fig.cap = "Species and sex are both likely to affect body mass"}
+knitr::include_graphics("images/body-mass-interaction.png")
 ```
 
-```{solution}
 
-``{r, echo = F}
-library(DiagrammeR)
-
-grViz("digraph {
-  
-graph[layout = dot, rankdir = LR]
-
-a[label = 'Body mass']
-b[label = 'Beak length']
-c[label = 'Species']
-d[label = 'Sex']
-
-c -> a
-d -> a
-
-}")
-``
 
 So it is reasonable to think that perhaps either species or sex might affect the morphology of beaks directly - or that these might affect body mass (so that if there is a direct relationship between mass and beak length, there will also be an indirect relationship with sex or species).
 
-```
+`r unhide()`
 
 The best and simplest place to start exploring these possible relationships is by producing simple figures. 
 
 Let's start by looking at the distribution of body mass by species. 
 
-```{task}
-Produce a plot which allows you to look at the distribution of penguin body mass observations by species
-```
+
+## Activity 1: Produce a plot which allows you to look at the distribution of penguin body mass observations by species
+
 
 ```{solution}
 
 ``{r}
+
 jitter_plot <- penguins %>% 
     ggplot(aes(x = species,
                y = body_mass_g))+
@@ -519,8 +534,9 @@ So it is reasonable to think that perhaps either species or sex might affect bod
 
 
 
-GGridges
+## GGridges
 
+The package `ggridges` (@R-ggridges) provides some excellent extra geoms to supplement `ggplot`. One if its most useful features is to to allow different groups to be mapped to the y axis, so that histograms are more easily viewed. 
 
 ```{solution}
 
@@ -558,7 +574,6 @@ While the Gentoo density plot appears to show two peaks, our qqplot indicates th
 ```
 
 
-
 ```{r}
 penguins %>% drop_na %>% ggplot(aes(x = body_mass_g, y = species)) + 
     geom_density_ridges(aes(fill = sex),
@@ -569,6 +584,14 @@ penguins %>% drop_na %>% ggplot(aes(x = body_mass_g, y = species)) +
 # try playing with the bandwidth argument - this behaves similar to binning which you should be familiar with from using geom_histogram
 
 ```
+
+
+
+## Activity 2: Test yourself
+
+**Question 1.** Write down some insights you have made about the data and relationships you have observed. Compare these to the ones below. Do you agree with these? Did you miss any? What observations did you make that are **not** in the list below.
+
+`r hide("What data insights have you made?")`
 
 This is revealing some really interesting insights into the shape and distribution of body sizes in our penguin populations now. 
 
@@ -586,39 +609,44 @@ For example:
 
 Note how we are able to understand our data better, by spending time making data visuals. While descriptive data statistics (mean, median) and measures of variance (range, IQR, sd) are important. They are not substitutes for spending time thinking about data and making exploratory analyses. 
 
-# Data insights part two
+`r unhide()`
 
-```{r, child='_setup.Rmd'}
-```
 
-## Two continuous variables
+**Question 2.** Using `summarise` we can quickly calculate $s$ but can you replicate this by hand with `dplyr` functions?  -  do this for total $s$ (not by category). 
 
-## Complex interactions
+* Residuals
+
+* Squared residuals
+
+* Sum of squares
+
+* Variance = SS/df
+
+* $s=\sqrt{Variance}$
 
 ```{solution}
 
-``{r, echo = F}
-library(DiagrammeR)
+``{r}
 
-grViz("digraph {
-  
-graph[layout = dot, rankdir = LR]
+mean <- penguins %>% 
+    summarise(mean = mean(body_mass_g, na.rm = T))
 
-a[label = 'Body mass']
-b[label = 'Beak length']
-c[label = 'Species']
-d[label = 'Sex']
+penguins %>% 
+    mutate(residuals = (body_mass_g - pull(mean)),
+           sqrd_resid = residuals^2) %>% 
+    drop_na(sqrd_resid) %>% 
+    summarise(sum_squares = sum(sqrd_resid),
+              variance = sum_squares/(n=n())-1,
+              sd = sqrt(variance))
 
-a -> b 
-c -> b
-c -> a
-d -> b
-d -> a
-}")
 ``
 
-So it is reasonable to think that perhaps either species or sex might affect the morphology of beaks directly - or that these might affect body mass (so that if there is a direct relationship between mass and beak length, there will also be an indirect relationship with sex or species).
+```
 
+
+# Data insights part two
+
+```{r, child='_setup.Rmd'}
 ```
 
 
@@ -861,6 +889,15 @@ penguins %>%
 
 ## Complexity
 
+```{r, eval=TRUE, echo=FALSE, out.width="80%", fig.alt= "Variables such as species or sex may directly or indirectly affect the relationship between body mass and beak length"}
+knitr::include_graphics("images/complexity.png")
+```
+
+It is reasonable to think that perhaps either species or sex might affect the morphology of beaks directly - or that these might affect body mass (so that if there is a direct relationship between mass and beak length, there will also be an indirect relationship with sex or species).
+
+Failure to account for complex interactions can lead to misleading insights about your data. 
+
+
 ### Simpson's Paradox
 
 Remember when we first correlated bill length and bill depth against each other we found an overall negative correlation of -0.22. However, this is because of a confounding variable we had not accounted for - species. 
@@ -943,6 +980,24 @@ In the above example therefore, we saw the importance of exploring relationships
 
 1. Layer an extra aesthetic mapping onto ggplot - such as size, colour, or shape
 
+```{r,  eval=TRUE, message=FALSE, warning=FALSE}
+penguins %>% 
+  drop_na(sex) %>% 
+ggplot(aes(x= culmen_length_mm, 
+                     y= culmen_depth_mm,
+                     colour=sex)) + # colour aesthetic set to sex
+    geom_point(aes(shape = species))+
+  geom_smooth(aes(group = species),
+              method="lm",
+              se=FALSE)+
+  scale_colour_manual(values=c("#1B9E77", "#D95F02"))+ # pick two colour scheme
+  theme_classic()+
+  theme(legend.position="none")+
+    labs(x="Bill length (mm)",
+         y="Bill depth (mm)")
+
+```
+
 2. Use facets to construct multipanel plots according to the values of a categorical variable
 
 If we want we can also adopt both of these approaches at the same time:
@@ -979,7 +1034,7 @@ Sometimes we may see a pattern in our data, but it has likely occurred due to ra
 
 That's it! Thank you for taking the time to get this far. Be kind to yourself if you found it difficult. You have done incredibly well.
 
-Have some more praise!!!!
+Have some praise!!!!
 
 ```{r}
 praise::praise()

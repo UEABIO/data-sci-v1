@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 11 Data insights part two | 5023Y</title>
 <meta name="author" content="Philip T. Leftwich">
-<meta name="description" content='11.1 Two continuous variables   11.2 Complex interactions  Show Solution   Solution  {"x":{"diagram":"digraph {\n \ngraph[layout = dot, rankdir = LR]\n\na[label = \"Body mass\"]\nb[label = \"Beak...'>
+<meta name="description" content="In the previous chapter we looked at individual variables, and understanding the different types of data. We made numeric and graphical summaries of the distributions of features within each...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 11 Data insights part two | 5023Y">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://ueabio.github.io/data-sci/data-insights-part-two.html">
 <meta property="og:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
-<meta property="og:description" content='11.1 Two continuous variables   11.2 Complex interactions  Show Solution   Solution  {"x":{"diagram":"digraph {\n \ngraph[layout = dot, rankdir = LR]\n\na[label = \"Body mass\"]\nb[label = \"Beak...'>
+<meta property="og:description" content="In the previous chapter we looked at individual variables, and understanding the different types of data. We made numeric and graphical summaries of the distributions of features within each...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 11 Data insights part two | 5023Y">
-<meta name="twitter:description" content='11.1 Two continuous variables   11.2 Complex interactions  Show Solution   Solution  {"x":{"diagram":"digraph {\n \ngraph[layout = dot, rankdir = LR]\n\na[label = \"Body mass\"]\nb[label = \"Beak...'>
+<meta name="twitter:description" content="In the previous chapter we looked at individual variables, and understanding the different types of data. We made numeric and graphical summaries of the distributions of features within each...">
 <meta name="twitter:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.13/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -131,39 +131,15 @@
 <h1>
 <span class="header-section-number">11</span> Data insights part two<a class="anchor" aria-label="anchor" href="#data-insights-part-two"><i class="fas fa-link"></i></a>
 </h1>
-<div id="two-continuous-variables" class="section level2" number="11.1">
-<h2>
-<span class="header-section-number">11.1</span> Two continuous variables<a class="anchor" aria-label="anchor" href="#two-continuous-variables"><i class="fas fa-link"></i></a>
-</h2>
-</div>
-<div id="complex-interactions" class="section level2" number="11.2">
-<h2>
-<span class="header-section-number">11.2</span> Complex interactions<a class="anchor" aria-label="anchor" href="#complex-interactions"><i class="fas fa-link"></i></a>
-</h2>
-<button id="displayTextunnamed-chunk-34" onclick="javascript:toggle('unnamed-chunk-34');">
-Show Solution
-</button>
-<div id="toggleTextunnamed-chunk-34" style="display: none">
-<div class="panel panel-default">
-<div class="panel-heading panel-heading1">
-Solution
-</div>
-<div class="panel-body">
-<div id="htmlwidget-e8974eb30ac915595fb4" style="width:100%;height:480px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e8974eb30ac915595fb4">{"x":{"diagram":"digraph {\n  \ngraph[layout = dot, rankdir = LR]\n\na[label = \"Body mass\"]\nb[label = \"Beak length\"]\nc[label = \"Species\"]\nd[label = \"Sex\"]\n\na -> b \nc -> b\nc -> a\nd -> b\nd -> a\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><p>So it is reasonable to think that perhaps either species or sex might affect the morphology of beaks directly - or that these might affect body mass (so that if there is a direct relationship between mass and beak length, there will also be an indirect relationship with sex or species).</p>
-</div>
-</div>
-</div>
 <p>In the previous chapter we looked at individual variables, and understanding the different types of data. We made numeric and graphical summaries of the distributions of features within each variable. This week we will continue to work in the same space, and extend our understanding to include relationships between variables.</p>
 <p>Understanding the relationship between two or more variables is often the basis of most of our scientific questions. These might include comparing variables of the same type (numeric against numeric) or different types (numeric against categorical). In this chapter we will see how we can use descriptive statistics and visuals to explore associations</p>
-</div>
-<div id="associations-between-numerical-variables" class="section level2" number="11.3">
+<div id="associations-between-numerical-variables" class="section level2" number="11.1">
 <h2>
-<span class="header-section-number">11.3</span> Associations between numerical variables<a class="anchor" aria-label="anchor" href="#associations-between-numerical-variables"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.1</span> Associations between numerical variables<a class="anchor" aria-label="anchor" href="#associations-between-numerical-variables"><i class="fas fa-link"></i></a>
 </h2>
-<div id="correlations" class="section level3" number="11.3.1">
+<div id="correlations" class="section level3" number="11.1.1">
 <h3>
-<span class="header-section-number">11.3.1</span> Correlations<a class="anchor" aria-label="anchor" href="#correlations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.1.1</span> Correlations<a class="anchor" aria-label="anchor" href="#correlations"><i class="fas fa-link"></i></a>
 </h3>
 <p>A common measure of association between two numerical variables is the <strong>correlation coefficient</strong>. The correlation metric is a numerical measure of the <em>strength of an association</em></p>
 <p>There are several measures of correlation including:</p>
@@ -179,7 +155,7 @@ Solution
 </ul>
 <p>A <em>perfect</em> association is one where we can predict the value of one variable with complete accuracy, just by knowing the value of the other variable.</p>
 <p>We can use the <code>cor</code> function in R to calculate Pearson's correlation coefficient.</p>
-<div class="sourceCode" id="cb295"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb297"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/rstatix/">rstatix</a></span><span class="op">)</span>
 
 <span class="va">penguins</span> <span class="op">%&gt;%</span> 
@@ -242,9 +218,9 @@ Pearson
 </div>
 <p>This tells us two features of the association. It's <em>sign</em> and <em>magnitude</em>. The coefficient is negative, so as bill length increases, bill depth decreases. The value -0.22 indicates that only about 22% of the variation in bill length can be explained by changes in bill depth (and <em>vice-versa</em>), suggesting that the variables are not closely related.</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-36"></span>
+<span style="display:block;" id="fig:unnamed-chunk-37"></span>
 <img src="images/correlation_examples.png" alt="Different relationships between two numeric variables. Each number represents the Pearson's correlation coefficient of each association" width="80%"><p class="caption">
-Figure 11.1: Different relationships between two numeric variables. Each number represents the Pearson's correlation coefficient of each association
+Figure 1.4: Different relationships between two numeric variables. Each number represents the Pearson's correlation coefficient of each association
 </p>
 </div>
 <ul>
@@ -258,13 +234,13 @@ Figure 11.1: Different relationships between two numeric variables. Each number 
 <li><p>The third row shows a series of associations where there is <em>clearly</em> a relationship between the two variables, but it is also not linear so would be inappropriate for a Pearson's correlation.</p></li>
 </ul>
 </div>
-<div id="non-linear-correlations" class="section level3" number="11.3.2">
+<div id="non-linear-correlations" class="section level3" number="11.1.2">
 <h3>
-<span class="header-section-number">11.3.2</span> Non-linear correlations<a class="anchor" aria-label="anchor" href="#non-linear-correlations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.1.2</span> Non-linear correlations<a class="anchor" aria-label="anchor" href="#non-linear-correlations"><i class="fas fa-link"></i></a>
 </h3>
 <p>So what should we do if the relationship between our variables is non-linear? Instead of using Pearson's correlation coefficient we can calculate something called a <strong>rank correlation</strong>.</p>
 <p>Instead of working with the raw values of our two variables we can use rank ordering instead. The idea is pretty simple if we start with the lowest vaule in a variable and order it as '1', then assign labels '2', '3' etc. as we ascend in rank order. We can see a way that this could be applied manually with the function <code>dense_rank</code> from dplyr below:</p>
-<div class="sourceCode" id="cb296"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb298"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">culmen_length_mm</span>, 
                     <span class="va">culmen_depth_mm</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -377,7 +353,7 @@ rank_depth
 </div>
 <p>Measures of rank correlation then are just a comparison of the rank orders between two variables, with a value between -1 and 1 just like Pearsons's. We already know from our Pearson's correlation coefficient, that we expect this relationship to be negative. So it should come as no surprise that the highest rank order values for bill_length_mm appear to be associated with lower rank order values for bill_depth_mm.</p>
 <p>To calculate Spearman's <span class="math inline">\(\rho\)</span> 'rho' is pretty easy, you can use the cor functions again, but this time specify a hidden argument to <code>method="spearman"</code>.</p>
-<div class="sourceCode" id="cb297"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb299"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_test.html">cor_test</a></span><span class="op">(</span><span class="va">culmen_length_mm</span>, <span class="va">culmen_depth_mm</span>, method<span class="op">=</span><span class="st">"spearman"</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
@@ -426,28 +402,28 @@ Spearman
 </div>
 <p>What we can see in this example is that Pearson's <em>r</em> and Spearman's <span class="math inline">\(\rho\)</span> are basically identical.</p>
 </div>
-<div id="graphical-summaries-between-numeric-variables" class="section level3" number="11.3.3">
+<div id="graphical-summaries-between-numeric-variables" class="section level3" number="11.1.3">
 <h3>
-<span class="header-section-number">11.3.3</span> Graphical summaries between numeric variables<a class="anchor" aria-label="anchor" href="#graphical-summaries-between-numeric-variables"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.1.3</span> Graphical summaries between numeric variables<a class="anchor" aria-label="anchor" href="#graphical-summaries-between-numeric-variables"><i class="fas fa-link"></i></a>
 </h3>
 <p>Correlation coefficients are a quick and simple way to attach a metric to the level of association between two variables. They are limited however in that a single number can never capture the every aspect of their relationship. This is why we visualise our data.</p>
 <p>We have already covered scatter plots and <code><a href="https://ggplot2.tidyverse.org/reference/ggplot2-package.html">ggplot2()</a></code> extensively in previous chapters, so here we will just cover some of the different ways in which you could present the nature of a relationship</p>
-<div class="sourceCode" id="cb298"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb300"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">length_depth_scatterplot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span> <span class="va">culmen_length_mm</span>, 
                      y<span class="op">=</span> <span class="va">culmen_depth_mm</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="va">length_depth_scatterplot</span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-39"></span>
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-39-1.png" alt="A scatter plot of bill depth against bill length in mm" width="100%"><p class="caption">
-Figure 1.5: A scatter plot of bill depth against bill length in mm
+<span style="display:block;" id="fig:unnamed-chunk-40"></span>
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-40-1.png" alt="A scatter plot of bill depth against bill length in mm" width="100%"><p class="caption">
+Figure 11.1: A scatter plot of bill depth against bill length in mm
 </p>
 </div>
 <blockquote>
 <p>**Note - Remember there are a number of different options available when constructing a plot including changing alpha to produce transparency if plots are lying on top of each other, colours (and shapes) to separate subgroups and ways to present third numerical variables such as setting aes(size=body_mass_g).</p>
 </blockquote>
-<div class="sourceCode" id="cb299"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb301"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span> <span class="co"># package calls should be placed at the TOP of your script</span>
 
 <span class="va">bill_depth_marginal</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op">%&gt;%</span> 
@@ -476,8 +452,8 @@ BBC"</span>
 <span class="va">bill_length_marginal</span><span class="op">+</span><span class="va">length_depth_scatterplot</span><span class="op">+</span><span class="va">bill_depth_marginal</span><span class="op">+</span> <span class="co"># order of plots is important</span>
   <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html">plot_layout</a></span><span class="op">(</span>design<span class="op">=</span><span class="va">layout</span><span class="op">)</span> <span class="co"># uses the layout argument defined above to arrange the size and position of plots</span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-40"></span>
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-40-1.png" alt="Using patchwork we can easily arrange extra plots to fit as marginals - these could be boxplots, histograms or density plots" width="100%"><p class="caption">
+<span style="display:block;" id="fig:unnamed-chunk-41"></span>
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-41-1.png" alt="Using patchwork we can easily arrange extra plots to fit as marginals - these could be boxplots, histograms or density plots" width="100%"><p class="caption">
 Figure 11.2: Using patchwork we can easily arrange extra plots to fit as marginals - these could be boxplots, histograms or density plots
 </p>
 </div>
@@ -489,13 +465,13 @@ Figure 11.2: Using patchwork we can easily arrange extra plots to fit as margina
 </ul>
 </div>
 </div>
-<div id="associations-between-categorical-variables" class="section level2" number="11.4">
+<div id="associations-between-categorical-variables" class="section level2" number="11.2">
 <h2>
-<span class="header-section-number">11.4</span> Associations between categorical variables<a class="anchor" aria-label="anchor" href="#associations-between-categorical-variables"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.2</span> Associations between categorical variables<a class="anchor" aria-label="anchor" href="#associations-between-categorical-variables"><i class="fas fa-link"></i></a>
 </h2>
 <p>Exploring associations between different categorical variables is not quite as simple as the previous numeric-numeric examples. Generally speaking we are interested in whether different combinations of categories are uniformally distributed or show evidence of clustering leading to <em>over- or under-represented</em> combinations.
 The simplest way to investigate this is to use <code>group_by</code> and <code>summarise</code> as we have used previously.</p>
-<div class="sourceCode" id="cb300"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">island_species_summary</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">island</span>, <span class="va">species</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>n<span class="op">=</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>,
@@ -618,24 +594,24 @@ Adelie
 <p>What does the above tell us, that 168 observations were made on the Island of Biscoe, with three times as many Gentoo penguin observations made as Adelie penguins (remeber this is observations made, not individual penguins). When we account for penguin ID we see there are around twice as many Gentoo penguins recorded. We can see there are no Chinstrap penguins recorded on Biscoe. Conversely we can see that Gentoo penguins are <strong>only</strong> observed on Biscoe.
 The island of Dream has two populations of Adelie and Chinstrap penguins of roughly equal size, while the island of Torgensen appears to have a population comprised only of Adelie penguins.</p>
 <p>We could also use a bar chart in ggplot to represent this count data.</p>
-<div class="sourceCode" id="cb301"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb303"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">penguins</span><span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">island</span>, fill<span class="op">=</span><span class="va">species</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>position<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-42-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-43-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>This is fine, but it looks a bit odd, because the bars expand to fill the available space on the category axis. Luckily there is an advanced version of the postion_dodge argument.</p>
-<div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb304"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">penguins</span><span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">island</span>, fill<span class="op">=</span><span class="va">species</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>position<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge2</a></span><span class="op">(</span>preserve<span class="op">=</span><span class="st">"single"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span> 
   <span class="co">#keeps bars to appropriate widths</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure">
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-43-1.png" width="100%" style="display: block; margin: auto;">
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-44-1.png" width="100%" style="display: block; margin: auto;">
 &gt; **Note the default for bar charts would have been a stacked option, but we have already seen how that can produce graphs that are difficult to read.</div>
 <p>An alternative approach would be to look at the 'relative proportions' of each population in our overall dataset. Using the same methods as we used previously when looking at single variables. Let's add in a few aesthetic tweaks to improve the look.</p>
-<div class="sourceCode" id="cb303"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb305"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">island</span>, fill<span class="op">=</span><span class="va">species</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>position<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge2</a></span><span class="op">(</span>preserve<span class="op">=</span><span class="st">"single"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span> 
@@ -657,25 +633,25 @@ The island of Dream has two populations of Adelie and Chinstrap penguins of roug
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position<span class="op">=</span><span class="st">"bottom"</span><span class="op">)</span> <span class="co"># put legend at the bottom of the graph</span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-44"></span>
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-44-1.png" alt="A dodged barplot showing the numbers and relative proportions of data observations recorded by penguin species and location" width="100%"><p class="caption">
+<span style="display:block;" id="fig:unnamed-chunk-45"></span>
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-45-1.png" alt="A dodged barplot showing the numbers and relative proportions of data observations recorded by penguin species and location" width="100%"><p class="caption">
 Figure 11.3: A dodged barplot showing the numbers and relative proportions of data observations recorded by penguin species and location
 </p>
 </div>
 </div>
-<div id="associations-between-categorical-numerical-variables" class="section level2" number="11.5">
+<div id="associations-between-categorical-numerical-variables" class="section level2" number="11.3">
 <h2>
-<span class="header-section-number">11.5</span> Associations between Categorical-numerical variables<a class="anchor" aria-label="anchor" href="#associations-between-categorical-numerical-variables"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.3</span> Associations between Categorical-numerical variables<a class="anchor" aria-label="anchor" href="#associations-between-categorical-numerical-variables"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb304"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb306"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">species</span>,
              y<span class="op">=</span><span class="va">body_mass_g</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y<span class="op">=</span><span class="st">"Body mass (g)"</span>,
          x<span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-45-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb305"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-46-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb307"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">body_mass_g</span>,
              fill<span class="op">=</span><span class="va">species</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
@@ -684,20 +660,23 @@ Figure 11.3: A dodged barplot showing the numbers and relative proportions of da
          position<span class="op">=</span><span class="st">"identity"</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">species</span>,
              ncol<span class="op">=</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-46-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-47-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
-<div id="complexity" class="section level2" number="11.6">
+<div id="complexity" class="section level2" number="11.4">
 <h2>
-<span class="header-section-number">11.6</span> Complexity<a class="anchor" aria-label="anchor" href="#complexity"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.4</span> Complexity<a class="anchor" aria-label="anchor" href="#complexity"><i class="fas fa-link"></i></a>
 </h2>
-<div id="simpsons-paradox" class="section level3" number="11.6.1">
+<div class="inline-figure"><img src="images/complexity.png" title="Variables such as species or sex may directly or indirectly affect the relationship between body mass and beak length" alt="Variables such as species or sex may directly or indirectly affect the relationship between body mass and beak length" width="80%" style="display: block; margin: auto;"></div>
+<p>It is reasonable to think that perhaps either species or sex might affect the morphology of beaks directly - or that these might affect body mass (so that if there is a direct relationship between mass and beak length, there will also be an indirect relationship with sex or species).</p>
+<p>Failure to account for complex interactions can lead to misleading insights about your data.</p>
+<div id="simpsons-paradox" class="section level3" number="11.4.1">
 <h3>
-<span class="header-section-number">11.6.1</span> Simpson's Paradox<a class="anchor" aria-label="anchor" href="#simpsons-paradox"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.4.1</span> Simpson's Paradox<a class="anchor" aria-label="anchor" href="#simpsons-paradox"><i class="fas fa-link"></i></a>
 </h3>
 <p>Remember when we first correlated bill length and bill depth against each other we found an overall negative correlation of -0.22. However, this is because of a confounding variable we had not accounted for - species.</p>
-<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-47-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-49-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>This is another example of why carefully studying your data - and carefully considering those variables which are likely to affect each other are studied or controlled for. It is an entirely reasonable hypothesis that different penguin species might have different bill shapes that might make an overall trend misleading. We can easily check the effect of a categoricial variable on our two numeric variables by assigning the aesthetic colour.</p>
-<div class="sourceCode" id="cb306"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb308"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">colours</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"cyan"</span>,
              <span class="st">"darkorange"</span>,
              <span class="st">"purple"</span><span class="op">)</span>
@@ -715,8 +694,8 @@ Figure 11.3: A dodged barplot showing the numbers and relative proportions of da
          y<span class="op">=</span><span class="st">"Bill depth (mm)"</span><span class="op">)</span>
 
 <span class="va">length_depth_scatterplot</span></code></pre></div>
-<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-48-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb307"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-50-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb309"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">bill_depth_marginal_2</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">culmen_depth_mm</span>,
@@ -743,10 +722,10 @@ BBBC"</span>
 
 <span class="va">bill_length_marginal_2</span><span class="op">+</span><span class="va">length_depth_scatterplot_2</span><span class="op">+</span><span class="va">bill_depth_marginal_2</span><span class="op">+</span> <span class="co"># order of plots is important</span>
   <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html">plot_layout</a></span><span class="op">(</span>design<span class="op">=</span><span class="va">layout2</span><span class="op">)</span> <span class="co"># uses the layout argument defined above to arrange the size and position of plots</span></code></pre></div>
-<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-48-2.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-50-2.png" width="100%" style="display: block; margin: auto;"></div>
 <p>We now clearly see a striking reversal of our previous trend, that in fact <em>within</em> each species of penguin there is an overall positive association between bill length and depth.</p>
 <p>This should prompt us to re-evaluate our correlation metrics:</p>
-<div class="sourceCode" id="cb308"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb310"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_test.html">cor_test</a></span><span class="op">(</span><span class="va">culmen_length_mm</span>, <span class="va">culmen_depth_mm</span><span class="op">)</span></code></pre></div>
@@ -874,17 +853,35 @@ Pearson
 </div>
 <p>We now see that the correlation values for all three species is &gt;0.22 - indicating these associations are much closer than previously estimated.</p>
 </div>
-<div id="three-or-more-variables" class="section level3" number="11.6.2">
+<div id="three-or-more-variables" class="section level3" number="11.4.2">
 <h3>
-<span class="header-section-number">11.6.2</span> Three or more variables<a class="anchor" aria-label="anchor" href="#three-or-more-variables"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.4.2</span> Three or more variables<a class="anchor" aria-label="anchor" href="#three-or-more-variables"><i class="fas fa-link"></i></a>
 </h3>
 <p>In the above example therefore, we saw the importance of exploring relationships among more than two variables at once. Broadly speaking there are two ways top do this</p>
 <ol style="list-style-type: decimal">
-<li><p>Layer an extra aesthetic mapping onto ggplot - such as size, colour, or shape</p></li>
-<li><p>Use facets to construct multipanel plots according to the values of a categorical variable</p></li>
+<li>Layer an extra aesthetic mapping onto ggplot - such as size, colour, or shape</li>
+</ol>
+<div class="sourceCode" id="cb311"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">sex</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span> <span class="va">culmen_length_mm</span>, 
+                     y<span class="op">=</span> <span class="va">culmen_depth_mm</span>,
+                     colour<span class="op">=</span><span class="va">sex</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="co"># colour aesthetic set to sex</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>group <span class="op">=</span> <span class="va">species</span><span class="op">)</span>,
+              method<span class="op">=</span><span class="st">"lm"</span>,
+              se<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_colour_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#1B9E77"</span>, <span class="st">"#D95F02"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span> <span class="co"># pick two colour scheme</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position<span class="op">=</span><span class="st">"none"</span><span class="op">)</span><span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Bill length (mm)"</span>,
+         y<span class="op">=</span><span class="st">"Bill depth (mm)"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-52-1.png" width="100%" style="display: block; margin: auto;"></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Use facets to construct multipanel plots according to the values of a categorical variable</li>
 </ol>
 <p>If we want we can also adopt both of these approaches at the same time:</p>
-<div class="sourceCode" id="cb309"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb312"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">sex</span><span class="op">)</span> <span class="op">%&gt;%</span> 
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span> <span class="va">culmen_length_mm</span>, 
@@ -899,21 +896,21 @@ Pearson
     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Bill length (mm)"</span>,
          y<span class="op">=</span><span class="st">"Bill depth (mm)"</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">species</span>, ncol<span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="co"># specify plots are stacked split by species</span></code></pre></div>
-<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-50-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-53-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>Here we can see that the trends are the same across the different penguin sexes. Although by comparing the slopes of the lines, lengths of the lines and amounts of overlap we can make insights into how "sexually dimorphic" these different species are e.g. in terms of beak morphology do some species show greater differences between males and females than others?</p>
 </div>
 </div>
-<div id="summing-up" class="section level2" number="11.7">
+<div id="summing-up" class="section level2" number="11.5">
 <h2>
-<span class="header-section-number">11.7</span> Summing up<a class="anchor" aria-label="anchor" href="#summing-up"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.5</span> Summing up<a class="anchor" aria-label="anchor" href="#summing-up"><i class="fas fa-link"></i></a>
 </h2>
 <p>This is our last data handling workshop. We have built up towards being able to discover and examine relationships and differences among variables in our data. You now have the skills to handle many different types of data, tidy it, and produce visuals to generate insight and communicate this to others.</p>
 <p>A note of caution is required - it is very easy to spot and identify patterns.</p>
 <p>When you do spot a trend, difference or relationship, it is important to recognise that you may not have enough evidence to assign a reason behind this observation. As scientists it is important to develope hypotheses based on knowledge and understanding, this can help (sometimes) with avoiding spurious associations.</p>
 <p>Sometimes we may see a pattern in our data, but it has likely occurred due to random chance, rather than as a result of an underlying process. This is where formal statistical analysis, to quantitatively assess the evidence, assess probability and study effect sizes can be incredibly powerful. We will delve into these exciting topics next term.</p>
 <p>That's it! Thank you for taking the time to get this far. Be kind to yourself if you found it difficult. You have done incredibly well.</p>
-<p>Have some more praise!!!!</p>
-<div class="sourceCode" id="cb310"><pre class="downlit sourceCode r">
+<p>Have some praise!!!!</p>
+<div class="sourceCode" id="cb313"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">praise</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/praise/man/praise.html">praise</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "You are wonderful!"</code></pre>
 <pre><code>[1] "You are spectaculaR!"</code></pre>
@@ -1109,24 +1106,22 @@ $( document ).ready(function() {
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#data-insights-part-two"><span class="header-section-number">11</span> Data insights part two</a></li>
-<li><a class="nav-link" href="#two-continuous-variables"><span class="header-section-number">11.1</span> Two continuous variables</a></li>
-<li><a class="nav-link" href="#complex-interactions"><span class="header-section-number">11.2</span> Complex interactions</a></li>
 <li>
-<a class="nav-link" href="#associations-between-numerical-variables"><span class="header-section-number">11.3</span> Associations between numerical variables</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#correlations"><span class="header-section-number">11.3.1</span> Correlations</a></li>
-<li><a class="nav-link" href="#non-linear-correlations"><span class="header-section-number">11.3.2</span> Non-linear correlations</a></li>
-<li><a class="nav-link" href="#graphical-summaries-between-numeric-variables"><span class="header-section-number">11.3.3</span> Graphical summaries between numeric variables</a></li>
+<a class="nav-link" href="#associations-between-numerical-variables"><span class="header-section-number">11.1</span> Associations between numerical variables</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#correlations"><span class="header-section-number">11.1.1</span> Correlations</a></li>
+<li><a class="nav-link" href="#non-linear-correlations"><span class="header-section-number">11.1.2</span> Non-linear correlations</a></li>
+<li><a class="nav-link" href="#graphical-summaries-between-numeric-variables"><span class="header-section-number">11.1.3</span> Graphical summaries between numeric variables</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#associations-between-categorical-variables"><span class="header-section-number">11.4</span> Associations between categorical variables</a></li>
-<li><a class="nav-link" href="#associations-between-categorical-numerical-variables"><span class="header-section-number">11.5</span> Associations between Categorical-numerical variables</a></li>
+<li><a class="nav-link" href="#associations-between-categorical-variables"><span class="header-section-number">11.2</span> Associations between categorical variables</a></li>
+<li><a class="nav-link" href="#associations-between-categorical-numerical-variables"><span class="header-section-number">11.3</span> Associations between Categorical-numerical variables</a></li>
 <li>
-<a class="nav-link" href="#complexity"><span class="header-section-number">11.6</span> Complexity</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#simpsons-paradox"><span class="header-section-number">11.6.1</span> Simpson's Paradox</a></li>
-<li><a class="nav-link" href="#three-or-more-variables"><span class="header-section-number">11.6.2</span> Three or more variables</a></li>
+<a class="nav-link" href="#complexity"><span class="header-section-number">11.4</span> Complexity</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#simpsons-paradox"><span class="header-section-number">11.4.1</span> Simpson's Paradox</a></li>
+<li><a class="nav-link" href="#three-or-more-variables"><span class="header-section-number">11.4.2</span> Three or more variables</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#summing-up"><span class="header-section-number">11.7</span> Summing up</a></li>
+<li><a class="nav-link" href="#summing-up"><span class="header-section-number">11.5</span> Summing up</a></li>
 </ul>
 
       <div class="book-extra">
@@ -1144,7 +1139,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-09-17.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-09-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

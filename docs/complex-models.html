@@ -137,7 +137,7 @@
 </h2>
 <p>We are introduced to the fruitfly dataset Partridge and Farquhar (1981)<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="https://nature.com/articles/294580a0" class="uri"&gt;https://nature.com/articles/294580a0&lt;/a&gt;&lt;/p&gt;'><sup>7</sup></a>. From our understanding of sexual selection and reproductive biology in fruit flies, we know there is a well established 'cost' to reproduction in terms of reduced longevity for female fruitflies. The data from this experiment is designed to test whether increased sexual activity affects the lifespan of male fruitflies.</p>
 <p>The flies used were an outbred stock, sexual activity was manipulated by supplying males with either new virgin females each day, previously mated females ( Inseminated, so remating rates are lower), or provide no females at all (Control). All groups were otherwise treated identically.</p>
-<div class="sourceCode" id="cb455"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb459"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fruitfly</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"book"</span>, <span class="st">"files"</span>, <span class="st">"fruitfly.RDS"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <ul>
 <li><p><strong>type</strong>: type of female companion (virgin, inseminated, control(partners = 0))</p></li>
@@ -186,10 +186,15 @@ Other interactions <em>could</em> be included but you should have a strong reaso
 </h2>
 <p>You should now import, clean and tidy your data. Making sure it is in tidy format, all variables have useful names, and there are no mistakes, missing data or typos.</p>
 <p>Based on the variables you have decided to test you should start with some simple visualisations, to understand the distribution of your data, and investigate visually the relationships you wish to test.</p>
-<p>This is full two-by-two plot of the entire dataset, but you should try and follow this up with some specific plots.</p>
-<div class="sourceCode" id="cb456"><pre class="downlit sourceCode r">
+<p>This is a full two-by-two plot of the entire dataset, but you should try and follow this up with some specific plots.</p>
+<div class="sourceCode" id="cb460"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">GGally</span><span class="fu">::</span><span class="fu"><a href="https://ggobi.github.io/ggally/reference/ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">fruitfly</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="18-Complex-models_files/figure-html/unnamed-chunk-6-1.png" width="100%" style="display: block; margin: auto;"></div>
+</div>
+<div id="activity-1-think-about-your-data" class="section level2" number="18.4">
+<h2>
+<span class="header-section-number">18.4</span> Activity 1: Think about your data<a class="anchor" aria-label="anchor" href="#activity-1-think-about-your-data"><i class="fas fa-link"></i></a>
+</h2>
 <div class="panel panel-default">
 <div class="panel-heading">
 Task
@@ -208,7 +213,7 @@ Solution
 </div>
 <div class="panel-body">
 <p>In this first figure - we can investigate whether there is an obvious difference in the longevities of males across the three treatments</p>
-<div class="sourceCode" id="cb457"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb461"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">colours</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"cyan"</span>, <span class="st">"darkorange"</span>, <span class="st">"purple"</span><span class="op">)</span>
 
 <span class="va">fruitfly</span> <span class="op">%&gt;%</span> 
@@ -226,8 +231,20 @@ Figure 18.1: A density distribution of longevity across the three sexual activit
 </div>
 </div>
 </div>
-<p>With careful thought we can construct figures that help us investigate the distribution of multiple potential predictors at once. Here we can overlay body size onto the three treatments. Here it does look as though larger flies have a longer lifespan than smaller flies. Is this trend enough of a deviation to reject a null hypothesis of no effect?</p>
-<div class="sourceCode" id="cb458"><pre class="downlit sourceCode r">
+<p>With careful thought we can construct figures that help us investigate the distribution of multiple potential predictors at once. Here we can overlay body size onto the three treatments.</p>
+<p><strong>Q</strong> Does it like size affects longevity? <select class="webex-select"><option value="blank"></option>
+<option value="answer">Yes</option>
+<option value="">No</option></select></p>
+<p><strong>Q</strong> Does it look like size affects longevity differently between treatment groups? <select class="webex-select"><option value="blank"></option>
+<option value="">Yes</option>
+<option value="answer">No</option></select></p>
+<div class="webex-solution">
+<button>
+Explain this
+</button>
+<p>Here it does look as though larger flies have a longer lifespan than smaller flies. But there appears to be little difference in the distribution of body sizes by treatment. This does not mean we can't test this in our model. But we should have a clear idea of which will have largest probable effect sizes</p>
+</div>
+<div class="sourceCode" id="cb462"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fruitfly</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">type</span>, y <span class="op">=</span> <span class="va">longevity</span>, fill <span class="op">=</span> <span class="va">type</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span><span class="op">+</span>
@@ -245,8 +262,12 @@ Figure 18.1: A density distribution of longevity across the three sexual activit
 Figure 3.2: A boxplot of longevity across three treatments of sexual activity. Individual points represent individual males, where the size of each point represents thorax length.
 </p>
 </div>
-<p>We are also interested in the potential effect of sleep on activity, we can construct a scatter plot of sleep against longevity, while including body size as a covariate. In these faceted plots - do the data points appear to follow the trendline? Are the trendlines moving in the same direction? Investigating these can help us determine is there much evidence of a potential effect of sleep, is there evidence for whether this might be an additive effect or one which interacts with the the three treatments?</p>
-<div class="sourceCode" id="cb459"><pre class="downlit sourceCode r">
+<p>We are also interested in the potential effect of sleep on activity, we can construct a scatter plot of sleep against longevity, while including body size as a covariate.</p>
+<p>In these faceted plots - Are the trendlines moving in the same direction? <select class="webex-select"><option value="blank"></option>
+<option value="">Yes</option>
+<option value="answer">No</option></select></p>
+<p>Investigating these can help us determine is there much evidence of a potential effect of sleep, is there evidence for whether this might be an additive effect or one which interacts with the the three treatments?</p>
+<div class="sourceCode" id="cb463"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fruitfly</span> <span class="op">%&gt;%</span> 
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">sleep</span>, y <span class="op">=</span> <span class="va">longevity</span>, fill <span class="op">=</span> <span class="va">type</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>size <span class="op">=</span> <span class="va">thorax</span>,
@@ -267,16 +288,16 @@ Figure 18.2: A scatter plot of proportion of time spent sleeping against longevi
 </p>
 </div>
 </div>
-<div id="designing-a-model-1" class="section level2" number="18.4">
+<div id="designing-a-model-1" class="section level2" number="18.5">
 <h2>
-<span class="header-section-number">18.4</span> Designing a model<a class="anchor" aria-label="anchor" href="#designing-a-model-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.5</span> Designing a model<a class="anchor" aria-label="anchor" href="#designing-a-model-1"><i class="fas fa-link"></i></a>
 </h2>
 <div class="info">
 <p>
 When you include an interaction term, the numbers produced from this are how much <strong>more</strong> or <strong>less</strong> the mean estimate is than if you just combined the main effects.
 </p>
 </div>
-<div class="sourceCode" id="cb460"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb464"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># a full model</span>
 <span class="va">flyls1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">longevity</span> <span class="op">~</span> <span class="va">type</span> <span class="op">+</span> <span class="va">thorax</span> <span class="op">+</span> <span class="va">sleep</span> <span class="op">+</span> <span class="va">type</span><span class="op">:</span><span class="va">sleep</span>, data <span class="op">=</span> <span class="va">fruitfly</span><span class="op">)</span>
 
@@ -446,18 +467,18 @@ Show Solution
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="complex-models.html#cb461-1" aria-hidden="true" tabindex="-1"></a><span class="co"># intercept</span></span>
-<span id="cb461-2"><a href="complex-models.html#cb461-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(flyls1)[<span class="dv">1</span>] <span class="sc">+</span> </span>
-<span id="cb461-3"><a href="complex-models.html#cb461-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb461-4"><a href="complex-models.html#cb461-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1*coefficient for virgin treatment  </span></span>
-<span id="cb461-5"><a href="complex-models.html#cb461-5" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(flyls1)[<span class="dv">3</span>] <span class="sc">+</span> </span>
-<span id="cb461-6"><a href="complex-models.html#cb461-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb461-7"><a href="complex-models.html#cb461-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.79 * coefficient for thorax size  </span></span>
-<span id="cb461-8"><a href="complex-models.html#cb461-8" aria-hidden="true" tabindex="-1"></a>(<span class="fu">coef</span>(flyls1)[<span class="dv">4</span>]<span class="sc">*</span><span class="fl">0.79</span>) <span class="sc">+</span> </span>
-<span id="cb461-9"><a href="complex-models.html#cb461-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb461-10"><a href="complex-models.html#cb461-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 22 * coefficient for sleep  </span></span>
-<span id="cb461-11"><a href="complex-models.html#cb461-11" aria-hidden="true" tabindex="-1"></a>(<span class="fu">coef</span>(flyls1)[<span class="dv">5</span>]<span class="sc">*</span><span class="dv">22</span>) <span class="sc">+</span> </span></code></pre></div>
-<div class="sourceCode" id="cb462"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="complex-models.html#cb465-1" aria-hidden="true" tabindex="-1"></a><span class="co"># intercept</span></span>
+<span id="cb465-2"><a href="complex-models.html#cb465-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(flyls1)[<span class="dv">1</span>] <span class="sc">+</span> </span>
+<span id="cb465-3"><a href="complex-models.html#cb465-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb465-4"><a href="complex-models.html#cb465-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1*coefficient for virgin treatment  </span></span>
+<span id="cb465-5"><a href="complex-models.html#cb465-5" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(flyls1)[<span class="dv">3</span>] <span class="sc">+</span> </span>
+<span id="cb465-6"><a href="complex-models.html#cb465-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb465-7"><a href="complex-models.html#cb465-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.79 * coefficient for thorax size  </span></span>
+<span id="cb465-8"><a href="complex-models.html#cb465-8" aria-hidden="true" tabindex="-1"></a>(<span class="fu">coef</span>(flyls1)[<span class="dv">4</span>]<span class="sc">*</span><span class="fl">0.79</span>) <span class="sc">+</span> </span>
+<span id="cb465-9"><a href="complex-models.html#cb465-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb465-10"><a href="complex-models.html#cb465-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 22 * coefficient for sleep  </span></span>
+<span id="cb465-11"><a href="complex-models.html#cb465-11" aria-hidden="true" tabindex="-1"></a>(<span class="fu">coef</span>(flyls1)[<span class="dv">5</span>]<span class="sc">*</span><span class="dv">22</span>) <span class="sc">+</span> </span></code></pre></div>
+<div class="sourceCode" id="cb466"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># 22 * 1 * coefficient for interaction</span>
 <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">flyls1</span><span class="op">)</span><span class="op">[</span><span class="fl">7</span><span class="op">]</span><span class="op">*</span><span class="fl">22</span><span class="op">*</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
 <pre><code>## typeVirgin:sleep 
@@ -466,15 +487,22 @@ Solution
 </div>
 </div>
 </div>
-<div id="model-checking-collinearity" class="section level2" number="18.5">
+<div id="model-checking-collinearity" class="section level2" number="18.6">
 <h2>
-<span class="header-section-number">18.5</span> Model checking &amp; collinearity<a class="anchor" aria-label="anchor" href="#model-checking-collinearity"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.6</span> Model checking &amp; collinearity<a class="anchor" aria-label="anchor" href="#model-checking-collinearity"><i class="fas fa-link"></i></a>
 </h2>
 <p>Before we start playing with the terms in our model, we should check to see if this is even a good way of fitting and measuring our data. We should check the assumptions of our model are being met.</p>
-<div class="sourceCode" id="cb464"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb468"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">performance</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html">check_model</a></span><span class="op">(</span><span class="va">flyls1</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="18-Complex-models_files/figure-html/unnamed-chunk-16-1.png" width="100%" style="display: block; margin: auto;"></div>
-<p><strong>Question - IS the assumption of homogeneity of variance met?</strong></p>
+</div>
+<div id="activity-2-model-checking" class="section level2" number="18.7">
+<h2>
+<span class="header-section-number">18.7</span> Activity 2: Model checking<a class="anchor" aria-label="anchor" href="#activity-2-model-checking"><i class="fas fa-link"></i></a>
+</h2>
+<p><strong>Question - IS the assumption of homogeneity of variance met?</strong> <select class="webex-select"><option value="blank"></option>
+<option value="answer">Yes</option>
+<option value="">No</option></select></p>
 <button id="displayTextunnamed-chunk-17" onclick="javascript:toggle('unnamed-chunk-17');">
 Show Solution
 </button>
@@ -493,7 +521,9 @@ Solution
 </div>
 </div>
 </div>
-<p><strong>Question - ARE the residuals normally distributed?</strong></p>
+<p><strong>Question - ARE the residuals normally distributed?</strong> <select class="webex-select"><option value="blank"></option>
+<option value="answer">Yes</option>
+<option value="">No</option></select></p>
 <button id="displayTextunnamed-chunk-18" onclick="javascript:toggle('unnamed-chunk-18');">
 Show Solution
 </button>
@@ -508,7 +538,9 @@ Solution
 </div>
 </div>
 </div>
-<p><strong>Question - IS their an issue with Collinearity?</strong></p>
+<p><strong>Question - IS their an issue with Collinearity?</strong> <select class="webex-select"><option value="blank"></option>
+<option value="">Yes</option>
+<option value="answer">No</option></select></p>
 <button id="displayTextunnamed-chunk-19" onclick="javascript:toggle('unnamed-chunk-19');">
 Show Solution
 </button>
@@ -521,7 +553,7 @@ Solution
 <p>This graph clearly shows there <strong>is</strong> collinearity. But this is not unusual when we include an <em>interaction term</em>, if we see evidence of collinearity in terms that are not part of an interaction <strong>then</strong> we should take another look<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="https://easystats.github.io/performance/reference/check_collinearity.html" class="uri"&gt;https://easystats.github.io/performance/reference/check_collinearity.html&lt;/a&gt;&lt;/p&gt;'><sup>12</sup></a>.</p>
 <p>What can you do about collinearity in main effects? 1) Nothing 2) Transform 3) Drop one of the terms.</p>
 <p>The <code>check_performance()</code> function produces a visual summary of a Variance Inflation Factor produced from the <code>vif()</code> function. This is a measure of the standard error of each estimated coefficient. If this is very larger (greater than 5 or 10), this indicates the model has problems estimating the coefficient. This does not affect model predictions, but makes it more difficult to determine the estimate change from a predictor.</p>
-<div class="sourceCode" id="cb465"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb469"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/vif.html">vif</a></span><span class="op">(</span><span class="va">flyls1</span><span class="op">)</span></code></pre></div>
 <pre><code>##                 GVIF Df GVIF^(1/(2*Df))
 ## type       12.478906  2        1.879508
@@ -532,9 +564,9 @@ Solution
 </div>
 </div>
 </div>
-<div id="data-transformations" class="section level2" number="18.6">
+<div id="data-transformations" class="section level2" number="18.8">
 <h2>
-<span class="header-section-number">18.6</span> Data transformations<a class="anchor" aria-label="anchor" href="#data-transformations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.8</span> Data transformations<a class="anchor" aria-label="anchor" href="#data-transformations"><i class="fas fa-link"></i></a>
 </h2>
 <p>The most common issues when trying to fit simple linear regression models is that our response variable is not normal which violates our modelling assumption. There are two things we can do in this case:</p>
 <ul>
@@ -547,9 +579,9 @@ Solution
 </li>
 <li><p>Generalized Linear Models (GLMs) to change the error structure (i.e the assumption that residuals need to be normal - see next week.)</p></li>
 </ul>
-<div id="boxcox" class="section level3" number="18.6.1">
+<div id="boxcox" class="section level3" number="18.8.1">
 <h3>
-<span class="header-section-number">18.6.1</span> BoxCox<a class="anchor" aria-label="anchor" href="#boxcox"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.8.1</span> BoxCox<a class="anchor" aria-label="anchor" href="#boxcox"><i class="fas fa-link"></i></a>
 </h3>
 <div class="info">
 <p>
@@ -606,7 +638,7 @@ Y^1
 </tr>
 </tbody>
 </table></div>
-<div class="sourceCode" id="cb467"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb471"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># run this, pick a transformation and retest the model fit</span>
 <span class="fu">MASS</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/MASS/man/boxcox.html">boxcox</a></span><span class="op">(</span><span class="va">flyls1</span><span class="op">)</span></code></pre></div>
 <div class="figure" style="text-align: center">
@@ -615,7 +647,9 @@ Y^1
 Figure 18.3: standard curve fitted by maximum likelihood, dashed lines represent the 95% confidence interval range for picking the 'best' transformation for the dependent variable
 </p>
 </div>
-<p><strong>Question - Does the fit of the model improve with a square root transformation?</strong></p>
+<p><strong>Question - Does the fit of the model improve with a square root transformation?</strong> <select class="webex-select"><option value="blank"></option>
+<option value="">Yes</option>
+<option value="answer">No</option></select></p>
 <button id="displayTextunnamed-chunk-23" onclick="javascript:toggle('unnamed-chunk-23');">
 Show Solution
 </button>
@@ -631,11 +665,11 @@ Not really, despite the suggestion that a sqrt transformation would improve the 
 </div>
 </div>
 </div>
-<div id="model-selection" class="section level2" number="18.7">
+<div id="model-selection" class="section level2" number="18.9">
 <h2>
-<span class="header-section-number">18.7</span> Model selection<a class="anchor" aria-label="anchor" href="#model-selection"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.9</span> Model selection<a class="anchor" aria-label="anchor" href="#model-selection"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb468"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb472"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># use drop1 function to remove top-level terms</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/add1.html">drop1</a></span><span class="op">(</span><span class="va">flyls1</span>, test <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
@@ -736,7 +770,7 @@ type:sleep
 </table></div>
 </div>
 <p>Based on this ANOVA table, we do not appear to have a strong rationale for keeping the interaction term in the model (AIC or F-test). Therefore we can confidently remove the interaction, simplifying our model and making interpretation easier.</p>
-<div class="sourceCode" id="cb469"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb473"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">flyls2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">longevity</span> <span class="op">~</span> <span class="va">type</span> <span class="op">+</span> <span class="va">thorax</span> <span class="op">+</span> <span class="va">sleep</span>, data <span class="op">=</span> <span class="va">fruitfly</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/stats/add1.html">drop1</a></span><span class="op">(</span><span class="va">flyls2</span>, test <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span></code></pre></div>
@@ -860,7 +894,9 @@ sleep
 </tbody>
 </table></div>
 </div>
-<p><strong>Question - Should we drop sleep from this model?</strong></p>
+<p><strong>Question - Should we drop sleep from this model?</strong> <select class="webex-select"><option value="blank"></option>
+<option value="">Yes</option>
+<option value="answer">No</option></select></p>
 <button id="displayTextunnamed-chunk-27" onclick="javascript:toggle('unnamed-chunk-27');">
 Show Solution
 </button>
@@ -878,12 +914,12 @@ In this example we can also see that AIC has not really changed - so the quality
 </div>
 </div>
 </div>
-<div id="posthoc" class="section level2" number="18.8">
+<div id="posthoc" class="section level2" number="18.10">
 <h2>
-<span class="header-section-number">18.8</span> Posthoc<a class="anchor" aria-label="anchor" href="#posthoc"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.10</span> Posthoc<a class="anchor" aria-label="anchor" href="#posthoc"><i class="fas fa-link"></i></a>
 </h2>
 <p>Using the <a href="https://aosmith.rbind.io/2019/03/25/getting-started-with-emmeans/">emmeans</a> package is a very easy way to produce the estimate mean values (rather than mean differences) for different categories <code>emmeans</code>. If the term <code>pairwise</code> is included then it will also include post-hoc pairwise comparisons between all levels with a tukey test <code>contrasts</code>.</p>
-<div class="sourceCode" id="cb470"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb474"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">emmeans</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html">emmeans</a></span><span class="op">(</span><span class="va">flyls2</span>, specs <span class="op">=</span> <span class="va">pairwise</span> <span class="op">~</span> <span class="va">type</span> <span class="op">+</span> <span class="va">thorax</span> <span class="op">+</span> <span class="va">sleep</span><span class="op">)</span></code></pre></div>
 <pre><code>## $emmeans
 ##  type        thorax sleep emmean   SE  df lower.CL upper.CL
@@ -910,9 +946,9 @@ For continuous variables (sleep and thorax) - <code>emmeans</code> has set these
 </p>
 </div>
 </div>
-<div id="write-up" class="section level2" number="18.9">
+<div id="activity-3-write-up" class="section level2" number="18.11">
 <h2>
-<span class="header-section-number">18.9</span> Write-up<a class="anchor" aria-label="anchor" href="#write-up"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.11</span> Activity 3: Write-up<a class="anchor" aria-label="anchor" href="#activity-3-write-up"><i class="fas fa-link"></i></a>
 </h2>
 <div class="panel panel-default">
 <div class="panel-heading">
@@ -933,7 +969,7 @@ Solution
 <div class="panel-body">
 <p>I tested the hypothesis that sexual activity is costly for male <em>Drosophila melanogaster</em> fruitflies. Previous research indicated that sleep deprived males are less attractive to females, this would indicate that levels of sexual activity might be affected by sleep and impact the effect on longevity, as such this was included as an interaction term in the full model. Body size is also know to affect lifespan, as such this was included as a covariate in the mode.</p>
 <p>There was a small interaction effect of decreased lifespan with increasing sleep in the treatment groups compared to control in our samples, but this was not significantly different from no effect (F<sub>2,118</sub> = 0.512, P = 0.6), and was therefore dropped from the full model (Table 15.1).</p>
-<div class="sourceCode" id="cb472"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb476"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://haozhu233.github.io/kableExtra/">kableExtra</a></span><span class="op">)</span>
 <span class="va">flyls2</span> <span class="op">%&gt;%</span> <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span>conf.int <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">%&gt;%</span> 
  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">`std.error`</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -1077,7 +1113,7 @@ sleep
 <p>There was a significant overall effect of treatment on male longevity (Linear model: F<sub>2,120</sub> = 30.1, P &lt; 0.001), with males paired to virgin females having the lowest mean longevity (48 days, [95%CI: 44.9 - 51.2]) (when holding body size and sleep constant), compared to control males (61.3 days [56.8 - 65.8]) and males paired with inseminated females (64.9 days [61.8 - 68.1 days]).</p>
 <p>Post hoc analysis showed that these differences were statistically significant for males paired with control females compared to the inseminated (Tukey test: t<sub>120</sub> = 4.8, P &lt; 0.001) and virgin groups (t<sub>120</sub> = 7.5, P &lt; 0.001), but there was no overall evidence of a difference between inseminated and virgin groups (t<sub>120</sub> = -1.309 P &lt; 0.3929) (Figure 19.4).</p>
 <p>Comparing the treatment effects against other predictors of longevity such as body size and sleep, I found that sleep had a very small effect on longevity (mean change -0.05 days [-0.18 - 0.07]) which was not significantly different from no effect (Linear model: F<sub>1,120</sub> = 0.68, P = 0.41). Body size (taken from thorax length) was a significant predictor of longevity (F<sub>1,120</sub> = 121, P &lt; 0.001), with each 0.1 mm increase in body size adding 14.4 days to the individual lifespan [11.8 - 17]. It appears as though body size has a stronger effect on longevity than treatment, indicating that while there is a measurable cost of sexual activity to males, it may be less severe than in females (not compared here), and less severe than other measurable predictors.</p>
-<div class="sourceCode" id="cb473"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb477"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># optional extras for adding animal silhouette</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sckott/rphylopic">rphylopic</a></span><span class="op">)</span>
 <span class="co"># search for the right image in the database</span>
@@ -1152,14 +1188,14 @@ Figure 18.4:  A scatter plot of longevity against body size across three treatme
 </div>
 </div>
 </div>
-<div id="summary-9" class="section level2" number="18.10">
+<div id="summary-9" class="section level2" number="18.12">
 <h2>
-<span class="header-section-number">18.10</span> Summary<a class="anchor" aria-label="anchor" href="#summary-9"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.12</span> Summary<a class="anchor" aria-label="anchor" href="#summary-9"><i class="fas fa-link"></i></a>
 </h2>
 <p>In this chapter we have worked with our scientific knowledge to develop testable hypotheses and built statistical models to formally assess them. We now have a working pipeline for tackling complex datasets, developing insights and producing and explaining robust linear models.</p>
-<div id="checklist-3" class="section level3" number="18.10.1">
+<div id="checklist-3" class="section level3" number="18.12.1">
 <h3>
-<span class="header-section-number">18.10.1</span> Checklist<a class="anchor" aria-label="anchor" href="#checklist-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.12.1</span> Checklist<a class="anchor" aria-label="anchor" href="#checklist-3"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
 <li><p>Think carefully about the hypotheses to test, use your scientific knowledge and background reading to support this</p></li>
@@ -1174,12 +1210,12 @@ Figure 18.4:  A scatter plot of longevity against body size across three treatme
 </ul>
 </div>
 </div>
-<div id="supplementary-code" class="section level2" number="18.11">
+<div id="supplementary-code" class="section level2" number="18.13">
 <h2>
-<span class="header-section-number">18.11</span> Supplementary code<a class="anchor" aria-label="anchor" href="#supplementary-code"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.13</span> Supplementary code<a class="anchor" aria-label="anchor" href="#supplementary-code"><i class="fas fa-link"></i></a>
 </h2>
 <p><code>sjPlot</code> A really nice package that helps produce model summaries for you automatically</p>
-<div class="sourceCode" id="cb474"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb478"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://strengejacke.github.io/sjPlot/">sjPlot</a></span><span class="op">)</span>
 <span class="fu"><a href="https://strengejacke.github.io/sjPlot/reference/tab_model.html">tab_model</a></span><span class="op">(</span><span class="va">flyls2</span><span class="op">)</span></code></pre></div>
 <div class="inline-table"><table style="border-collapse:collapse; border:none;" class="table table-sm">
@@ -1292,7 +1328,7 @@ R<sup>2</sup> / R<sup>2</sup> adjusted
 </td>
 </tr>
 </table></div>
-<div class="sourceCode" id="cb475"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb479"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ddsjoberg/gtsummary">gtsummary</a></span><span class="op">)</span>
 <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html">tbl_regression</a></span><span class="op">(</span><span class="va">flyls2</span><span class="op">)</span></code></pre></div>
 <div id="wteveklncq" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -1885,18 +1921,20 @@ $( document ).ready(function() {
 <li><a class="nav-link" href="#designing-a-model"><span class="header-section-number">18.1</span> Designing a Model</a></li>
 <li><a class="nav-link" href="#hypothesis-1"><span class="header-section-number">18.2</span> Hypothesis</a></li>
 <li><a class="nav-link" href="#checking-the-data"><span class="header-section-number">18.3</span> Checking the data</a></li>
-<li><a class="nav-link" href="#designing-a-model-1"><span class="header-section-number">18.4</span> Designing a model</a></li>
-<li><a class="nav-link" href="#model-checking-collinearity"><span class="header-section-number">18.5</span> Model checking &amp; collinearity</a></li>
+<li><a class="nav-link" href="#activity-1-think-about-your-data"><span class="header-section-number">18.4</span> Activity 1: Think about your data</a></li>
+<li><a class="nav-link" href="#designing-a-model-1"><span class="header-section-number">18.5</span> Designing a model</a></li>
+<li><a class="nav-link" href="#model-checking-collinearity"><span class="header-section-number">18.6</span> Model checking &amp; collinearity</a></li>
+<li><a class="nav-link" href="#activity-2-model-checking"><span class="header-section-number">18.7</span> Activity 2: Model checking</a></li>
 <li>
-<a class="nav-link" href="#data-transformations"><span class="header-section-number">18.6</span> Data transformations</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#boxcox"><span class="header-section-number">18.6.1</span> BoxCox</a></li></ul>
+<a class="nav-link" href="#data-transformations"><span class="header-section-number">18.8</span> Data transformations</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#boxcox"><span class="header-section-number">18.8.1</span> BoxCox</a></li></ul>
 </li>
-<li><a class="nav-link" href="#model-selection"><span class="header-section-number">18.7</span> Model selection</a></li>
-<li><a class="nav-link" href="#posthoc"><span class="header-section-number">18.8</span> Posthoc</a></li>
-<li><a class="nav-link" href="#write-up"><span class="header-section-number">18.9</span> Write-up</a></li>
+<li><a class="nav-link" href="#model-selection"><span class="header-section-number">18.9</span> Model selection</a></li>
+<li><a class="nav-link" href="#posthoc"><span class="header-section-number">18.10</span> Posthoc</a></li>
+<li><a class="nav-link" href="#activity-3-write-up"><span class="header-section-number">18.11</span> Activity 3: Write-up</a></li>
 <li>
-<a class="nav-link" href="#summary-9"><span class="header-section-number">18.10</span> Summary</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#checklist-3"><span class="header-section-number">18.10.1</span> Checklist</a></li></ul>
+<a class="nav-link" href="#summary-9"><span class="header-section-number">18.12</span> Summary</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#checklist-3"><span class="header-section-number">18.12.1</span> Checklist</a></li></ul>
 </li>
-<li><a class="nav-link" href="#supplementary-code"><span class="header-section-number">18.11</span> Supplementary code</a></li>
+<li><a class="nav-link" href="#supplementary-code"><span class="header-section-number">18.13</span> Supplementary code</a></li>
 </ul>
 
       <div class="book-extra">
@@ -1914,7 +1952,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-09-17.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-09-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -435,8 +435,15 @@ summary(cuckoo_glm1)
 
 > Note there appears to be a negative interaction effect for Species:Mass, indicating that Begging calls do not increase with mass as much as you would expect for Warblers as compared to Cuckoos.
 
-Plot the mean regression line for each species:
+##Activity 1: Plot the mean regression line for each species:
 
+Hint: Use `broom::augment`. If we fit the model on the log scale, then we get the fitted generalized linear response (Y is on a log scale). The lines will be straight. We get an exponential curve in the scale of the original data, if we specify `type.predict = response` which is the **same** as a straight line in the log-scaled version of the data. Try both: 
+
+### Variable scale
+
+<button id="displayTextunnamed-chunk-20" onclick="javascript:toggle('unnamed-chunk-20');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-20" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 # using augment allows you to generate fitted outcomes from the regression, make sure to set the predictions onto the response scale in order to 'back transform` the data onto the original scale
@@ -449,10 +456,13 @@ ggplot(aes(x=Mass, y=.fitted, colour=Species)) +
   theme_minimal()
 ```
 
-<img src="19-Generalized-Linear-Models_files/figure-html/unnamed-chunk-20-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="19-Generalized-Linear-Models_files/figure-html/unnamed-chunk-57-1.png" width="100%" style="display: block; margin: auto;" /></div></div></div>
 
-We get an exponential curve in the scale of the original data, which is the **same** as a straight line in the log-scaled version of the data. So if we fit the same model without specifying `type.predict = "response"`  Then we get the fitted generalized linear response (Y is on a log scale).
+### Log scale
 
+<button id="displayTextunnamed-chunk-21" onclick="javascript:toggle('unnamed-chunk-21');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-21" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 broom::augment(cuckoo_glm1) %>% 
@@ -463,7 +473,8 @@ ggplot(aes(x=Mass, y=.fitted, colour=Species)) +
   theme_minimal()
 ```
 
-<img src="19-Generalized-Linear-Models_files/figure-html/unnamed-chunk-21-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="19-Generalized-Linear-Models_files/figure-html/unnamed-chunk-58-1.png" width="100%" style="display: block; margin: auto;" />
+</div></div></div>
 
 Compare the new Poisson model fits to the ordinary least squares model. We can see that although the homogeneity of variance is far from perfect, the curvature in the model has been drastically reduced (this makes sense as now we have a model fitted to exponential data), and the qqplot is within acceptable confidence intervals. 
 
@@ -689,7 +700,7 @@ Poisson (and binomial models) assume that the variance is *equal to the mean.*
 
 However, if there is **residual deviance that is bigger than the residual degrees of freedom** then there is *more* variance than we expect from the prediction of the mean by our model. 
 
-Overdispersion can be diagnosed by $\frac{residual~deviance}{residual~degrees~of~freedom}$ which from our example here 'summary()' is $\frac{436}{47} = 9.3$
+Overdispersion in Poisson models can be diagnosed by $\frac{residual~deviance}{residual~degrees~of~freedom}$ which from our example here 'summary()' is $\frac{436}{47} = 9.3$
 
 Overdispersion statistic values **> 1 = Overdispersed**
 
@@ -738,6 +749,8 @@ As you can see, while none of the estimates have changed, the standard errors (a
 <div class="warning">
 <p>Because we are now estimating the variance again, the test statistics have reverted to <em>t</em> distributions and anova and drop1 functions should specify the F-test again.</p>
 </div>
+
+## Activity 2: Write-up
 
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
 How would you write up an Analysis Methods section? </div></div>
@@ -1053,10 +1066,299 @@ We can interpret $\beta_{1}$ and $\beta_{2}$ as the increase in the log odds for
 
 If you want to find out more about [Odds and log-odds head here](https://www.youtube.com/watch?v=8nm0G-1uJzA)
 
+
+
+
+## Probability
+
+A powerful use of logisitic regression is prediction. Can we predict the probability of an event occuring using our data? 
+
+### Activity 3: Make predictions
+
+Can you use our prediction functions `predict()` or `broom::augment()` to look at the models predictions for O-ring failure in our data? Bonus points if you can convert log-odds to probability?
+
+<button id="displayTextunnamed-chunk-44" onclick="javascript:toggle('unnamed-chunk-44');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-44" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body"><div class="tab"><button class="tablinksunnamed-chunk-44 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-44', 'unnamed-chunk-44');">Base R</button><button class="tablinksunnamed-chunk-44" onclick="javascript:openCode(event, 'option2unnamed-chunk-44', 'unnamed-chunk-44');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-44" class="tabcontentunnamed-chunk-44">
+
+```r
+predict(binary_model, type = "response")
+```
+
+```
+##           1           2           3           4           5           6 
+## 0.394769696 0.130776531 0.178373050 0.238538593 0.311308842 0.067388639 
+##           7           8           9          10          11          12 
+## 0.047687994 0.130776531 0.946495574 0.662129014 0.130776531 0.007941202 
+##          13          14          15          16          17          18 
+## 0.311308842 0.987128767 0.311308842 0.023485304 0.130776531 0.002657203 
+##          19          20          21          22          23 
+## 0.016393905 0.005516836 0.023485304 0.016393905 0.924582363
+```
+</div><div id="option2unnamed-chunk-44" class="tabcontentunnamed-chunk-44">
+
+```r
+broom::augment(binary_model, 
+               type.predict = "response")
+```
+
+<div class="kable-table">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> oring_binary </th>
+   <th style="text-align:right;"> temp </th>
+   <th style="text-align:right;"> .fitted </th>
+   <th style="text-align:right;"> .resid </th>
+   <th style="text-align:right;"> .std.resid </th>
+   <th style="text-align:right;"> .hat </th>
+   <th style="text-align:right;"> .sigma </th>
+   <th style="text-align:right;"> .cooksd </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 66 </td>
+   <td style="text-align:right;"> 0.3947697 </td>
+   <td style="text-align:right;"> -1.0021439 </td>
+   <td style="text-align:right;"> -1.0690274 </td>
+   <td style="text-align:right;"> 0.1212153 </td>
+   <td style="text-align:right;"> 0.8149531 </td>
+   <td style="text-align:right;"> 0.0511900 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 70 </td>
+   <td style="text-align:right;"> 0.1307765 </td>
+   <td style="text-align:right;"> 2.0170599 </td>
+   <td style="text-align:right;"> 2.0974690 </td>
+   <td style="text-align:right;"> 0.0752029 </td>
+   <td style="text-align:right;"> 0.7080401 </td>
+   <td style="text-align:right;"> 0.2922222 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 69 </td>
+   <td style="text-align:right;"> 0.1783731 </td>
+   <td style="text-align:right;"> -0.6268474 </td>
+   <td style="text-align:right;"> -0.6527589 </td>
+   <td style="text-align:right;"> 0.0778149 </td>
+   <td style="text-align:right;"> 0.8366510 </td>
+   <td style="text-align:right;"> 0.0099323 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 68 </td>
+   <td style="text-align:right;"> 0.2385386 </td>
+   <td style="text-align:right;"> -0.7382625 </td>
+   <td style="text-align:right;"> -0.7713137 </td>
+   <td style="text-align:right;"> 0.0838649 </td>
+   <td style="text-align:right;"> 0.8315908 </td>
+   <td style="text-align:right;"> 0.0156510 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 67 </td>
+   <td style="text-align:right;"> 0.3113088 </td>
+   <td style="text-align:right;"> -0.8636693 </td>
+   <td style="text-align:right;"> -0.9090255 </td>
+   <td style="text-align:right;"> 0.0973013 </td>
+   <td style="text-align:right;"> 0.8246049 </td>
+   <td style="text-align:right;"> 0.0269880 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 72 </td>
+   <td style="text-align:right;"> 0.0673886 </td>
+   <td style="text-align:right;"> -0.3735417 </td>
+   <td style="text-align:right;"> -0.3872542 </td>
+   <td style="text-align:right;"> 0.0695651 </td>
+   <td style="text-align:right;"> 0.8448617 </td>
+   <td style="text-align:right;"> 0.0029032 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 73 </td>
+   <td style="text-align:right;"> 0.0476880 </td>
+   <td style="text-align:right;"> -0.3126102 </td>
+   <td style="text-align:right;"> -0.3232178 </td>
+   <td style="text-align:right;"> 0.0645605 </td>
+   <td style="text-align:right;"> 0.8462069 </td>
+   <td style="text-align:right;"> 0.0018473 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 70 </td>
+   <td style="text-align:right;"> 0.1307765 </td>
+   <td style="text-align:right;"> -0.5294432 </td>
+   <td style="text-align:right;"> -0.5505492 </td>
+   <td style="text-align:right;"> 0.0752029 </td>
+   <td style="text-align:right;"> 0.8403180 </td>
+   <td style="text-align:right;"> 0.0066147 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 57 </td>
+   <td style="text-align:right;"> 0.9464956 </td>
+   <td style="text-align:right;"> 0.3316293 </td>
+   <td style="text-align:right;"> 0.3684596 </td>
+   <td style="text-align:right;"> 0.1899238 </td>
+   <td style="text-align:right;"> 0.8452819 </td>
+   <td style="text-align:right;"> 0.0081803 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 63 </td>
+   <td style="text-align:right;"> 0.6621290 </td>
+   <td style="text-align:right;"> 0.9080692 </td>
+   <td style="text-align:right;"> 1.0360335 </td>
+   <td style="text-align:right;"> 0.2317717 </td>
+   <td style="text-align:right;"> 0.8170810 </td>
+   <td style="text-align:right;"> 0.1001978 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 70 </td>
+   <td style="text-align:right;"> 0.1307765 </td>
+   <td style="text-align:right;"> 2.0170599 </td>
+   <td style="text-align:right;"> 2.0974690 </td>
+   <td style="text-align:right;"> 0.0752029 </td>
+   <td style="text-align:right;"> 0.7080401 </td>
+   <td style="text-align:right;"> 0.2922222 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 78 </td>
+   <td style="text-align:right;"> 0.0079412 </td>
+   <td style="text-align:right;"> -0.1262767 </td>
+   <td style="text-align:right;"> -0.1282707 </td>
+   <td style="text-align:right;"> 0.0308485 </td>
+   <td style="text-align:right;"> 0.8488032 </td>
+   <td style="text-align:right;"> 0.0001315 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 67 </td>
+   <td style="text-align:right;"> 0.3113088 </td>
+   <td style="text-align:right;"> -0.8636693 </td>
+   <td style="text-align:right;"> -0.9090255 </td>
+   <td style="text-align:right;"> 0.0973013 </td>
+   <td style="text-align:right;"> 0.8246049 </td>
+   <td style="text-align:right;"> 0.0269880 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 53 </td>
+   <td style="text-align:right;"> 0.9871288 </td>
+   <td style="text-align:right;"> 0.1609645 </td>
+   <td style="text-align:right;"> 0.1683888 </td>
+   <td style="text-align:right;"> 0.0862364 </td>
+   <td style="text-align:right;"> 0.8484526 </td>
+   <td style="text-align:right;"> 0.0006733 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 67 </td>
+   <td style="text-align:right;"> 0.3113088 </td>
+   <td style="text-align:right;"> -0.8636693 </td>
+   <td style="text-align:right;"> -0.9090255 </td>
+   <td style="text-align:right;"> 0.0973013 </td>
+   <td style="text-align:right;"> 0.8246049 </td>
+   <td style="text-align:right;"> 0.0269880 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 75 </td>
+   <td style="text-align:right;"> 0.0234853 </td>
+   <td style="text-align:right;"> -0.2180160 </td>
+   <td style="text-align:right;"> -0.2238281 </td>
+   <td style="text-align:right;"> 0.0512601 </td>
+   <td style="text-align:right;"> 0.8478117 </td>
+   <td style="text-align:right;"> 0.0006848 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 70 </td>
+   <td style="text-align:right;"> 0.1307765 </td>
+   <td style="text-align:right;"> -0.5294432 </td>
+   <td style="text-align:right;"> -0.5505492 </td>
+   <td style="text-align:right;"> 0.0752029 </td>
+   <td style="text-align:right;"> 0.8403180 </td>
+   <td style="text-align:right;"> 0.0066147 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 81 </td>
+   <td style="text-align:right;"> 0.0026572 </td>
+   <td style="text-align:right;"> -0.0729485 </td>
+   <td style="text-align:right;"> -0.0735502 </td>
+   <td style="text-align:right;"> 0.0162947 </td>
+   <td style="text-align:right;"> 0.8491284 </td>
+   <td style="text-align:right;"> 0.0000224 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 76 </td>
+   <td style="text-align:right;"> 0.0163939 </td>
+   <td style="text-align:right;"> -0.1818228 </td>
+   <td style="text-align:right;"> -0.1859683 </td>
+   <td style="text-align:right;"> 0.0440855 </td>
+   <td style="text-align:right;"> 0.8482690 </td>
+   <td style="text-align:right;"> 0.0004021 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 79 </td>
+   <td style="text-align:right;"> 0.0055168 </td>
+   <td style="text-align:right;"> -0.1051866 </td>
+   <td style="text-align:right;"> -0.1065392 </td>
+   <td style="text-align:right;"> 0.0252300 </td>
+   <td style="text-align:right;"> 0.8489535 </td>
+   <td style="text-align:right;"> 0.0000737 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 75 </td>
+   <td style="text-align:right;"> 0.0234853 </td>
+   <td style="text-align:right;"> -0.2180160 </td>
+   <td style="text-align:right;"> -0.2238281 </td>
+   <td style="text-align:right;"> 0.0512601 </td>
+   <td style="text-align:right;"> 0.8478117 </td>
+   <td style="text-align:right;"> 0.0006848 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 76 </td>
+   <td style="text-align:right;"> 0.0163939 </td>
+   <td style="text-align:right;"> -0.1818228 </td>
+   <td style="text-align:right;"> -0.1859683 </td>
+   <td style="text-align:right;"> 0.0440855 </td>
+   <td style="text-align:right;"> 0.8482690 </td>
+   <td style="text-align:right;"> 0.0004021 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 58 </td>
+   <td style="text-align:right;"> 0.9245824 </td>
+   <td style="text-align:right;"> 0.3960130 </td>
+   <td style="text-align:right;"> 0.4481860 </td>
+   <td style="text-align:right;"> 0.2192676 </td>
+   <td style="text-align:right;"> 0.8433540 </td>
+   <td style="text-align:right;"> 0.0146713 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div><script> javascript:hide('option2unnamed-chunk-44') </script></div></div></div>
+
 ### Emmeans
 
-If we use the `emmeans()` function it will convert *log-odds* to estimate the probability of o-ring failure at the mean value of x (temperature).
-But how does it do this?
+If we use the `emmeans()` function it will convert *log-odds* to estimate the probability of o-ring failure at the mean value of x (temperature). And add confidence intervals! 
+
+But how do log-odds and probability actually relate?
 
 
 ```r
@@ -1105,11 +1407,13 @@ In our example the **maximum difference** in probability from a one degree chang
 So the **maximum difference** in probability of failure corresponding to a one degree change is 9%
 
 
-If you want to augment your data with the model, you can use the `augment()` function, remembering to specify `type.predict = "response` to get probabilities of o-ring failure (not log odds). 
+Remember if you want to augment your data with the model, you can use the `augment()` function, remembering to specify `type.predict = "response` to get probabilities of o-ring failure (not log odds). 
 
 
 ```r
-broom::augment(binary_model, type.predict="response", se_fit = T) %>% 
+broom::augment(binary_model, 
+               type.predict="response", 
+               se_fit = T) %>% 
   head()
 ```
 
@@ -1602,9 +1906,9 @@ emmeans::emmeans(binary_model,
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
 Use the augment_glm function to make a ggplot of the changing probability of O-ring failure with temperature </div></div>
 
-<button id="displayTextunnamed-chunk-50" onclick="javascript:toggle('unnamed-chunk-50');">Show Solution</button>
+<button id="displayTextunnamed-chunk-51" onclick="javascript:toggle('unnamed-chunk-51');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-50" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-51" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 augment_glm(binary_model) %>% 
@@ -1612,7 +1916,7 @@ augment_glm(binary_model) %>%
   geom_ribbon(aes(ymin=.lower, ymax=.upper), alpha=0.2)
 ```
 
-<img src="19-Generalized-Linear-Models_files/figure-html/unnamed-chunk-55-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="19-Generalized-Linear-Models_files/figure-html/unnamed-chunk-61-1.png" width="100%" style="display: block; margin: auto;" />
 </div></div></div>
 
 ## Predictions
@@ -1621,13 +1925,16 @@ On the day the Challenger launched the outside air temperature was 36&deg;F
 
 We can use augment to add our model to new data - and make predictions about the risk of o-ring failure
 
+
+### Activity 4: More predictions
+
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
 Make a new dataset with the temperature on the day of the Challenger launch - what was the probability of o-ring failure? </div></div>
 
 
-<button id="displayTextunnamed-chunk-52" onclick="javascript:toggle('unnamed-chunk-52');">Show Solution</button>
+<button id="displayTextunnamed-chunk-53" onclick="javascript:toggle('unnamed-chunk-53');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-52" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-53" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 First - we make a new dataset with the temperature on the day of the Challenger Launch **36&deg;F**
 
@@ -1668,11 +1975,25 @@ We can see from our fitted model, an O-ring failure on the day of the Challenger
 </div></div></div>
 
 
-### Assumptions
+## Assumptions
 
-The standard model checks cannot be used on binomial glms, they are usually a mess! There are alternative methods of looking at how well your binary model works, but we will not cover these here. 
+The standard model checks from `plot()` cannot be used on binomial glms, they are usually a mess! 
 
-### Write-up
+Luckily the `performance` package detects and alters the checks. Pay particular attention to the binned residuals plot - this is your best estimate of possible overdispersion (requiring a quasi-likelihood check). In this case there is likely not enough data for robust checks
+
+
+```r
+performance::check_model(binary_model)
+```
+
+<img src="19-Generalized-Linear-Models_files/figure-html/unnamed-chunk-54-1.png" width="100%" style="display: block; margin: auto;" />
+
+### Activity 5: Write-up
+
+How would you write up for findings from this analysis?
+
+
+<div class='webex-solution'><button>Write-up</button>
 
 Analysis: I used a Binomial logit-link Generalized Linear Model to analyse the effect of temperature on the likelihood of O-ring failure.
 
@@ -1722,6 +2043,10 @@ drop1(binary_model, test="Chisq")
 
 </div>
 
+
+</div>
+
+
 ## Summary
 
 **GLMs** are powerful and flexible.
@@ -1757,7 +2082,7 @@ https://bookdown.org/ronsarafian/IntrotoDS/glm.html#poisson-regression
 
 * Investigate the fit of your model, understand that parameters may never be perfect, but that classic patterns in residuals may indicate a poorly fitting model - sometimes this can be fixed with careful consideration of missing variables or through data transformation
 
-* **Check for overdispersion in Poisson models where variance is not estimated, but expected to be equal to the mean - may have to use quasi-likelihood fitting** 
+* **Check for overdispersion in models where variance is not estimated independently of the mean (Poisson and Binomial) - may have to use quasi-likelihood fitting** 
 
 * Test the removal of any interaction terms from a model, look at AIC and significance tests (Remember test = "F" for Gaussian and Quasilikelihood models, "Chisq" for Poisson and Binomial models)
 

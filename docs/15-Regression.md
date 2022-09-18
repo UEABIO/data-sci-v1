@@ -62,6 +62,9 @@ Timber hardness is quantified using the 'Janka scale', and the data we are going
 <p>Check the data is imported correctly and make sure it is 'tidy' with no obvious errors or missing data</p>
 </div>
 
+
+## Activity 1: Exploratory Analysis
+
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
 Is there any visual evidence for a linear association between wood density and timber hardness? </div></div>
 
@@ -81,6 +84,8 @@ janka %>%
 ## Correlation
 
 Wood density and timber hardness appear to be positively related, and the linear appears to be fairly linear. We can look at a simple strength of this association between dens and hardness using correlation
+
+## Activty 2: Generate Pearson's R
 
 <button id="displayTextunnamed-chunk-8" onclick="javascript:toggle('unnamed-chunk-8');">Show Solution</button>
 
@@ -240,6 +245,8 @@ In many ways the intercept makes more intuitive sense in a regression model than
 
 One way in which the intercept can be made more valuable is to use a technique known as 'centering'. By subtracting the average (mean) value of *x* from every data point, the intercept (when *x* is 0) can effectively be right-shifted into the centre of the data. 
 
+## Activity 3: Mean centered regression
+
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
 Try it for yourself, use your data manipulation skills to 'center' the values of x then fit a new linear model. </div></div>
 
@@ -253,7 +260,7 @@ dens_mean <- janka %>%
 # 45.73333
 
 janka %>% 
-  mutate(centered_dens = dens-dens_mean[,1]) %>% 
+  mutate(centered_dens = dens-pull(dens_mean)) %>% 
   lm(hardness ~ centered_dens, data = .) %>% 
   broom::tidy()
 ```
@@ -477,7 +484,8 @@ resid(janka_ls1)
 
 ```r
 janka_ls1 %>% 
-  broom::augment()
+  broom::augment() %>% 
+  head()
 ```
 
 <div class="kable-table">
@@ -500,7 +508,7 @@ janka_ls1 %>%
    <td style="text-align:right;"> 484 </td>
    <td style="text-align:right;"> 24.7 </td>
    <td style="text-align:right;"> 259.9152 </td>
-   <td style="text-align:right;"> 224.0848370 </td>
+   <td style="text-align:right;"> 224.084837 </td>
    <td style="text-align:right;"> 0.0963176 </td>
    <td style="text-align:right;"> 181.2248 </td>
    <td style="text-align:right;"> 0.0883658 </td>
@@ -510,7 +518,7 @@ janka_ls1 %>%
    <td style="text-align:right;"> 427 </td>
    <td style="text-align:right;"> 24.8 </td>
    <td style="text-align:right;"> 265.6658 </td>
-   <td style="text-align:right;"> 161.3341695 </td>
+   <td style="text-align:right;"> 161.334170 </td>
    <td style="text-align:right;"> 0.0956674 </td>
    <td style="text-align:right;"> 183.4505 </td>
    <td style="text-align:right;"> 0.0454303 </td>
@@ -520,7 +528,7 @@ janka_ls1 %>%
    <td style="text-align:right;"> 413 </td>
    <td style="text-align:right;"> 27.3 </td>
    <td style="text-align:right;"> 409.4325 </td>
-   <td style="text-align:right;"> 3.5674826 </td>
+   <td style="text-align:right;"> 3.567483 </td>
    <td style="text-align:right;"> 0.0804200 </td>
    <td style="text-align:right;"> 185.8113 </td>
    <td style="text-align:right;"> 0.0000181 </td>
@@ -530,7 +538,7 @@ janka_ls1 %>%
    <td style="text-align:right;"> 517 </td>
    <td style="text-align:right;"> 28.4 </td>
    <td style="text-align:right;"> 472.6899 </td>
-   <td style="text-align:right;"> 44.3101404 </td>
+   <td style="text-align:right;"> 44.310140 </td>
    <td style="text-align:right;"> 0.0743247 </td>
    <td style="text-align:right;"> 185.6394 </td>
    <td style="text-align:right;"> 0.0025410 </td>
@@ -540,7 +548,7 @@ janka_ls1 %>%
    <td style="text-align:right;"> 549 </td>
    <td style="text-align:right;"> 28.4 </td>
    <td style="text-align:right;"> 472.6899 </td>
-   <td style="text-align:right;"> 76.3101404 </td>
+   <td style="text-align:right;"> 76.310140 </td>
    <td style="text-align:right;"> 0.0743247 </td>
    <td style="text-align:right;"> 185.2987 </td>
    <td style="text-align:right;"> 0.0075364 </td>
@@ -550,311 +558,11 @@ janka_ls1 %>%
    <td style="text-align:right;"> 648 </td>
    <td style="text-align:right;"> 29.0 </td>
    <td style="text-align:right;"> 507.1939 </td>
-   <td style="text-align:right;"> 140.8061355 </td>
+   <td style="text-align:right;"> 140.806136 </td>
    <td style="text-align:right;"> 0.0711580 </td>
    <td style="text-align:right;"> 184.0637 </td>
    <td style="text-align:right;"> 0.0243988 </td>
    <td style="text-align:right;"> 0.7981020 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 587 </td>
-   <td style="text-align:right;"> 30.3 </td>
-   <td style="text-align:right;"> 581.9525 </td>
-   <td style="text-align:right;"> 5.0474583 </td>
-   <td style="text-align:right;"> 0.0646795 </td>
-   <td style="text-align:right;"> 185.8102 </td>
-   <td style="text-align:right;"> 0.0000281 </td>
-   <td style="text-align:right;"> 0.0285102 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 704 </td>
-   <td style="text-align:right;"> 32.7 </td>
-   <td style="text-align:right;"> 719.9686 </td>
-   <td style="text-align:right;"> -15.9685611 </td>
-   <td style="text-align:right;"> 0.0540949 </td>
-   <td style="text-align:right;"> 185.7904 </td>
-   <td style="text-align:right;"> 0.0002300 </td>
-   <td style="text-align:right;"> -0.0896912 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 979 </td>
-   <td style="text-align:right;"> 35.6 </td>
-   <td style="text-align:right;"> 886.7379 </td>
-   <td style="text-align:right;"> 92.2620821 </td>
-   <td style="text-align:right;"> 0.0436864 </td>
-   <td style="text-align:right;"> 185.0852 </td>
-   <td style="text-align:right;"> 0.0060670 </td>
-   <td style="text-align:right;"> 0.5153839 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 914 </td>
-   <td style="text-align:right;"> 38.5 </td>
-   <td style="text-align:right;"> 1053.5073 </td>
-   <td style="text-align:right;"> -139.5072748 </td>
-   <td style="text-align:right;"> 0.0358837 </td>
-   <td style="text-align:right;"> 184.1590 </td>
-   <td style="text-align:right;"> 0.0112103 </td>
-   <td style="text-align:right;"> -0.7761397 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1070 </td>
-   <td style="text-align:right;"> 38.8 </td>
-   <td style="text-align:right;"> 1070.7593 </td>
-   <td style="text-align:right;"> -0.7592772 </td>
-   <td style="text-align:right;"> 0.0352253 </td>
-   <td style="text-align:right;"> 185.8124 </td>
-   <td style="text-align:right;"> 0.0000003 </td>
-   <td style="text-align:right;"> -0.0042227 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1020 </td>
-   <td style="text-align:right;"> 39.3 </td>
-   <td style="text-align:right;"> 1099.5126 </td>
-   <td style="text-align:right;"> -79.5126146 </td>
-   <td style="text-align:right;"> 0.0341899 </td>
-   <td style="text-align:right;"> 185.2779 </td>
-   <td style="text-align:right;"> 0.0034576 </td>
-   <td style="text-align:right;"> -0.4419752 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1210 </td>
-   <td style="text-align:right;"> 39.4 </td>
-   <td style="text-align:right;"> 1105.2633 </td>
-   <td style="text-align:right;"> 104.7367180 </td>
-   <td style="text-align:right;"> 0.0339921 </td>
-   <td style="text-align:right;"> 184.8841 </td>
-   <td style="text-align:right;"> 0.0059621 </td>
-   <td style="text-align:right;"> 0.5821251 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 989 </td>
-   <td style="text-align:right;"> 39.9 </td>
-   <td style="text-align:right;"> 1134.0166 </td>
-   <td style="text-align:right;"> -145.0166194 </td>
-   <td style="text-align:right;"> 0.0330496 </td>
-   <td style="text-align:right;"> 184.0305 </td>
-   <td style="text-align:right;"> 0.0110912 </td>
-   <td style="text-align:right;"> -0.8056073 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1160 </td>
-   <td style="text-align:right;"> 40.3 </td>
-   <td style="text-align:right;"> 1157.0193 </td>
-   <td style="text-align:right;"> 2.9807107 </td>
-   <td style="text-align:right;"> 0.0323514 </td>
-   <td style="text-align:right;"> 185.8117 </td>
-   <td style="text-align:right;"> 0.0000046 </td>
-   <td style="text-align:right;"> 0.0165527 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1010 </td>
-   <td style="text-align:right;"> 40.6 </td>
-   <td style="text-align:right;"> 1174.2713 </td>
-   <td style="text-align:right;"> -164.2712918 </td>
-   <td style="text-align:right;"> 0.0318603 </td>
-   <td style="text-align:right;"> 183.5255 </td>
-   <td style="text-align:right;"> 0.0136862 </td>
-   <td style="text-align:right;"> -0.9120117 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1100 </td>
-   <td style="text-align:right;"> 40.7 </td>
-   <td style="text-align:right;"> 1180.0220 </td>
-   <td style="text-align:right;"> -80.0219592 </td>
-   <td style="text-align:right;"> 0.0317028 </td>
-   <td style="text-align:right;"> 185.2724 </td>
-   <td style="text-align:right;"> 0.0032306 </td>
-   <td style="text-align:right;"> -0.4442348 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1130 </td>
-   <td style="text-align:right;"> 40.7 </td>
-   <td style="text-align:right;"> 1180.0220 </td>
-   <td style="text-align:right;"> -50.0219592 </td>
-   <td style="text-align:right;"> 0.0317028 </td>
-   <td style="text-align:right;"> 185.6016 </td>
-   <td style="text-align:right;"> 0.0012624 </td>
-   <td style="text-align:right;"> -0.2776925 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1270 </td>
-   <td style="text-align:right;"> 42.9 </td>
-   <td style="text-align:right;"> 1306.5366 </td>
-   <td style="text-align:right;"> -36.5366437 </td>
-   <td style="text-align:right;"> 0.0290215 </td>
-   <td style="text-align:right;"> 185.7003 </td>
-   <td style="text-align:right;"> 0.0006131 </td>
-   <td style="text-align:right;"> -0.2025497 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1180 </td>
-   <td style="text-align:right;"> 45.8 </td>
-   <td style="text-align:right;"> 1473.3060 </td>
-   <td style="text-align:right;"> -293.3060005 </td>
-   <td style="text-align:right;"> 0.0277785 </td>
-   <td style="text-align:right;"> 178.4513 </td>
-   <td style="text-align:right;"> 0.0377229 </td>
-   <td style="text-align:right;"> -1.6249727 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1400 </td>
-   <td style="text-align:right;"> 46.9 </td>
-   <td style="text-align:right;"> 1536.5633 </td>
-   <td style="text-align:right;"> -136.5633428 </td>
-   <td style="text-align:right;"> 0.0279887 </td>
-   <td style="text-align:right;"> 184.2413 </td>
-   <td style="text-align:right;"> 0.0082431 </td>
-   <td style="text-align:right;"> -0.7566695 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1760 </td>
-   <td style="text-align:right;"> 48.2 </td>
-   <td style="text-align:right;"> 1611.3220 </td>
-   <td style="text-align:right;"> 148.6779800 </td>
-   <td style="text-align:right;"> 0.0287204 </td>
-   <td style="text-align:right;"> 183.9473 </td>
-   <td style="text-align:right;"> 0.0100411 </td>
-   <td style="text-align:right;"> 0.8241045 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1710 </td>
-   <td style="text-align:right;"> 51.5 </td>
-   <td style="text-align:right;"> 1801.0940 </td>
-   <td style="text-align:right;"> -91.0940467 </td>
-   <td style="text-align:right;"> 0.0329298 </td>
-   <td style="text-align:right;"> 185.1114 </td>
-   <td style="text-align:right;"> 0.0043595 </td>
-   <td style="text-align:right;"> -0.5060212 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2010 </td>
-   <td style="text-align:right;"> 51.5 </td>
-   <td style="text-align:right;"> 1801.0940 </td>
-   <td style="text-align:right;"> 208.9059533 </td>
-   <td style="text-align:right;"> 0.0329298 </td>
-   <td style="text-align:right;"> 182.0954 </td>
-   <td style="text-align:right;"> 0.0229277 </td>
-   <td style="text-align:right;"> 1.1604583 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1880 </td>
-   <td style="text-align:right;"> 53.4 </td>
-   <td style="text-align:right;"> 1910.3567 </td>
-   <td style="text-align:right;"> -30.3567287 </td>
-   <td style="text-align:right;"> 0.0368840 </td>
-   <td style="text-align:right;"> 185.7344 </td>
-   <td style="text-align:right;"> 0.0005467 </td>
-   <td style="text-align:right;"> -0.1689754 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1980 </td>
-   <td style="text-align:right;"> 56.0 </td>
-   <td style="text-align:right;"> 2059.8741 </td>
-   <td style="text-align:right;"> -79.8740831 </td>
-   <td style="text-align:right;"> 0.0441078 </td>
-   <td style="text-align:right;"> 185.2674 </td>
-   <td style="text-align:right;"> 0.0045951 </td>
-   <td style="text-align:right;"> -0.4462818 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1820 </td>
-   <td style="text-align:right;"> 56.5 </td>
-   <td style="text-align:right;"> 2088.6274 </td>
-   <td style="text-align:right;"> -268.6274205 </td>
-   <td style="text-align:right;"> 0.0457371 </td>
-   <td style="text-align:right;"> 179.5404 </td>
-   <td style="text-align:right;"> 0.0540777 </td>
-   <td style="text-align:right;"> -1.5021872 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2020 </td>
-   <td style="text-align:right;"> 57.3 </td>
-   <td style="text-align:right;"> 2134.6328 </td>
-   <td style="text-align:right;"> -114.6327603 </td>
-   <td style="text-align:right;"> 0.0485051 </td>
-   <td style="text-align:right;"> 184.6829 </td>
-   <td style="text-align:right;"> 0.0105045 </td>
-   <td style="text-align:right;"> -0.6419678 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1980 </td>
-   <td style="text-align:right;"> 57.6 </td>
-   <td style="text-align:right;"> 2151.8848 </td>
-   <td style="text-align:right;"> -171.8847628 </td>
-   <td style="text-align:right;"> 0.0495942 </td>
-   <td style="text-align:right;"> 183.2601 </td>
-   <td style="text-align:right;"> 0.0242032 </td>
-   <td style="text-align:right;"> -0.9631426 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2310 </td>
-   <td style="text-align:right;"> 59.2 </td>
-   <td style="text-align:right;"> 2243.8954 </td>
-   <td style="text-align:right;"> 66.1045576 </td>
-   <td style="text-align:right;"> 0.0558739 </td>
-   <td style="text-align:right;"> 185.4346 </td>
-   <td style="text-align:right;"> 0.0040869 </td>
-   <td style="text-align:right;"> 0.3716415 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1940 </td>
-   <td style="text-align:right;"> 59.8 </td>
-   <td style="text-align:right;"> 2278.3994 </td>
-   <td style="text-align:right;"> -338.3994472 </td>
-   <td style="text-align:right;"> 0.0584333 </td>
-   <td style="text-align:right;"> 175.6154 </td>
-   <td style="text-align:right;"> 0.1126168 </td>
-   <td style="text-align:right;"> -1.9050740 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 3260 </td>
-   <td style="text-align:right;"> 66.0 </td>
-   <td style="text-align:right;"> 2634.9408 </td>
-   <td style="text-align:right;"> 625.0591692 </td>
-   <td style="text-align:right;"> 0.0914121 </td>
-   <td style="text-align:right;"> 146.6143 </td>
-   <td style="text-align:right;"> 0.6455017 </td>
-   <td style="text-align:right;"> 3.5821634 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2700 </td>
-   <td style="text-align:right;"> 67.4 </td>
-   <td style="text-align:right;"> 2715.4502 </td>
-   <td style="text-align:right;"> -15.4501754 </td>
-   <td style="text-align:right;"> 0.1005073 </td>
-   <td style="text-align:right;"> 185.7908 </td>
-   <td style="text-align:right;"> 0.0004424 </td>
-   <td style="text-align:right;"> -0.0889902 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2890 </td>
-   <td style="text-align:right;"> 68.8 </td>
-   <td style="text-align:right;"> 2795.9595 </td>
-   <td style="text-align:right;"> 94.0404799 </td>
-   <td style="text-align:right;"> 0.1102099 </td>
-   <td style="text-align:right;"> 185.0002 </td>
-   <td style="text-align:right;"> 0.0183679 </td>
-   <td style="text-align:right;"> 0.5446014 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2740 </td>
-   <td style="text-align:right;"> 69.1 </td>
-   <td style="text-align:right;"> 2813.2115 </td>
-   <td style="text-align:right;"> -73.2115225 </td>
-   <td style="text-align:right;"> 0.1123680 </td>
-   <td style="text-align:right;"> 185.3194 </td>
-   <td style="text-align:right;"> 0.0114057 </td>
-   <td style="text-align:right;"> -0.4244932 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 3140 </td>
-   <td style="text-align:right;"> 69.1 </td>
-   <td style="text-align:right;"> 2813.2115 </td>
-   <td style="text-align:right;"> 326.7884775 </td>
-   <td style="text-align:right;"> 0.1123680 </td>
-   <td style="text-align:right;"> 175.7285 </td>
-   <td style="text-align:right;"> 0.2272457 </td>
-   <td style="text-align:right;"> 1.8947765 </td>
   </tr>
 </tbody>
 </table>
@@ -1002,6 +710,8 @@ performance::check_model(janka_ls1, check="homogeneity")
 
 Here we can see there is just one potential outlier. 
 
+What is it's positional order in the dataframe? <input class='webex-solveme nospaces' size='2' data-answer='["32"]'/>
+
 <button id="displayTextunnamed-chunk-26" onclick="javascript:toggle('unnamed-chunk-26');">Show Solution</button>
 
 <div id="toggleTextunnamed-chunk-26" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body"><div class="tab"><button class="tablinksunnamed-chunk-26 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-26', 'unnamed-chunk-26');">Base R</button><button class="tablinksunnamed-chunk-26" onclick="javascript:openCode(event, 'option2unnamed-chunk-26', 'unnamed-chunk-26');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-26" class="tabcontentunnamed-chunk-26">
@@ -1020,6 +730,7 @@ performance::check_model(janka_ls1, check="outliers")
 <img src="15-Regression_files/figure-html/unnamed-chunk-44-1.png" width="100%" style="display: block; margin: auto;" />
 </div><script> javascript:hide('option2unnamed-chunk-26') </script></div></div></div>
 
+Check the data, does this make sense?
 
 ## Prediction
 
@@ -1070,7 +781,7 @@ coef(janka_ls1)[1] + coef(janka_ls1)[2] * 65
 ```
 
 
-But most of the time we are unlikely to want to work out predicted values by hand, instead we can use functions like `predict()` and `augment()`
+But most of the time we are unlikely to want to work out predicted values by hand, instead we can use functions like `predict()` and `broom::augment()`
 
 <button id="displayTextunnamed-chunk-30" onclick="javascript:toggle('unnamed-chunk-30');">Show Solution</button>
 
@@ -1118,6 +829,8 @@ broom::augment(janka_ls1,
 
 </div>
 </div><script> javascript:hide('option2unnamed-chunk-30') </script></div></div></div>
+
+
 
 ### Adding confidence intervals
 
@@ -1194,13 +907,41 @@ broom::augment(janka_ls1, newdata=tibble(dens=c(22,35,65), interval="confidence"
 </div>
 
 
+I really like the `emmeans` package - it is very good for producing quick predictions for categorical data - it can also do this for continuous variables. By default it will produce a single mean-centered prediction. But a list can be provided - it will produce confidence intervals as standard.
+
+
+<div class='webex-solution'><button>emmeans</button>
+
+
+
+```r
+emmeans::emmeans(janka_ls1, 
+                 specs = "dens", 
+                 at = list(dens = c(22, 35, 65)))
+```
+
+```
+##  dens emmean   SE df lower.CL upper.CL
+##    22    105 62.1 34    -21.5      231
+##    35    852 39.1 34    772.8      932
+##    65   2577 53.5 34   2468.8     2686
+## 
+## Confidence level used: 0.95
+```
+
+
+</div>
+
+
+
+## Activity 4: Prediction
 
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
 can you plot the three new predicted values onto an existing figure to recreate the below?  </div></div>
 
-<button id="displayTextunnamed-chunk-34" onclick="javascript:toggle('unnamed-chunk-34');">Show Solution</button>
+<button id="displayTextunnamed-chunk-35" onclick="javascript:toggle('unnamed-chunk-35');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-34" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-35" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 pred_newdata <- broom::augment(janka_ls1, 
@@ -1217,7 +958,7 @@ janka %>%
   scale_x_continuous(limits=c(20,80), expand=expansion(add=c(0,5)))
 ```
 
-<img src="15-Regression_files/figure-html/unnamed-chunk-36-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="15-Regression_files/figure-html/unnamed-chunk-40-1.png" width="100%" style="display: block; margin: auto;" />
 </div></div></div>
 
 

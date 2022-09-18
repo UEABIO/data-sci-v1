@@ -685,6 +685,7 @@ unbalanced
 </table>
 
 </div>
+## Activity 1: Sums of Squares
 
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
 Produce a linear model testing size and treatment against height. Try making two models swapping the order for including the two predictors and compare them with anova() </div></div>
@@ -932,7 +933,11 @@ The previous section looked at an interaction between two categorical variables,
 pollution <- read_csv(here::here("book", "files", "pollution.csv"))
 ```
 
-> The data is from an experimental study of the effects of low-level atmospheric pollutants and drought on agricultural yields. The experiment aimed to see how the yields soya bean (William variety), were affected by stress and Ozone levels. Your task is to first determine whether there is any evidence of an interaction effect, and if not report the effects of the two predictors separately. 
+The data is from an experimental study of the effects of low-level atmospheric pollutants and drought on agricultural yields. The experiment aimed to see how the yields soya bean (William variety), were affected by stress and Ozone levels. Your task is to first determine whether there is any evidence of an interaction effect, and if not report the effects of the two predictors separately. 
+
+## Activity 2: Build your own analysis
+
+Try and make as much progress as you can without checking the solutions. Click on the boxes when you need help/to check your working
 
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
 Explore the data! </div></div>

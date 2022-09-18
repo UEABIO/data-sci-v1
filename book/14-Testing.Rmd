@@ -160,7 +160,7 @@ tidy_model1[[2,2]] / tidy_model1[[2,3]]
 
 Which could be the same as the value for *t* in our model summary.
 
-### Paired t
+## Paired t
 
 The structure of our linear model so far has produced the output for a standard two-sample Student's *t*-test. However, when we *first* [calculated our estimates by hand](#differences-between-groups) - we started by making an average of the paired differences in height. To generate the equivalent of a paired *t*-test, we simply have to add the factor for pairs to our linear model formula:
 
@@ -184,27 +184,6 @@ darwin %>%
 
 ```
 
-```
-# A tibble: 16 x 5
-   term           estimate std.error statistic     p.value
-   <chr>             <dbl>     <dbl>     <dbl>       <dbl>
- 1 (Intercept)     21.7         2.44    8.93   0.000000375
- 2 typeSelf        -2.62        1.22   -2.15   0.0497     
- 3 factor(pair)2   -4.25        3.34   -1.27   0.223      
- 4 factor(pair)3    0.0625      3.34    0.0187 0.985      
- 5 factor(pair)4    0.563       3.34    0.169  0.869      
- 6 factor(pair)5   -1.69        3.34   -0.506  0.621      
- 7 factor(pair)6   -0.375       3.34   -0.112  0.912      
- 8 factor(pair)7   -0.0625      3.34   -0.0187 0.985      
- 9 factor(pair)8   -2.62        3.34   -0.787  0.444      
-10 factor(pair)9   -3.06        3.34   -0.918  0.374      
-11 factor(pair)10  -0.625       3.34   -0.187  0.854      
-12 factor(pair)11  -0.687       3.34   -0.206  0.840      
-13 factor(pair)12  -0.937       3.34   -0.281  0.783      
-14 factor(pair)13  -3           3.34   -0.899  0.384      
-15 factor(pair)14  -1.19        3.34   -0.356  0.727      
-16 factor(pair)15  -5.44        3.34   -1.63   0.125  
-```
 
 The table of coefficients suddenly looks a lot more complicated! This is because **now** the intercept is the height of the crossed plant from pair 1:
 
@@ -300,6 +279,7 @@ y$`experiment number` <- rep(1:20)
 # the new dataframe y contains the results of 20 new experiments
 ```
 
+## Activity 1: Experimental Repeatability
 
 ```{task}
 Using this newly generated data how many experiments found a significant difference and how many did not? - What would you conclue from this?

@@ -644,22 +644,6 @@ iqr
 Figure 10.1: Red dashed line represents the mean, Black dashed line is the median value
 </p>
 </div>
-<p>With the information about the distribution, and positions of the mean and median, which of these two measures of central tendency is most appropriate for this data? <select class="webex-select"><option value="blank"></option>
-<option value="answer">mean</option>
-<option value="">median</option></select></p>
-<button id="displayTextunnamed-chunk-17" onclick="javascript:toggle('unnamed-chunk-17');">
-Show Solution
-</button>
-<div id="toggleTextunnamed-chunk-17" style="display: none">
-<div class="panel panel-default">
-<div class="panel-heading panel-heading1">
-Solution
-</div>
-<div class="panel-body">
-we can clearly see that the mean value has been significantly "right-shifted" by the long tail of the data distribution. However,this is much less apparent for the median. In this way we can say that the median is less sensitive to the distribution of the data than the mean is.
-</div>
-</div>
-</div>
 </div>
 <div id="normal-distribution" class="section level3" number="10.4.3">
 <h3>
@@ -684,7 +668,7 @@ Normal distribution, also known as the "Gaussian distribution", is a probability
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">value</span><span class="op">)</span>,
                  bins <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-19-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-18-1.png" width="100%" style="display: block; margin: auto;"></div>
 <div id="qq-plot" class="section level4" number="10.4.3.1">
 <h4>
 <span class="header-section-number">10.4.3.1</span> QQ-plot<a class="anchor" aria-label="anchor" href="#qq-plot"><i class="fas fa-link"></i></a>
@@ -692,7 +676,7 @@ Normal distribution, also known as the "Gaussian distribution", is a probability
 <p>A QQ plot is a classic way of checking whether a sample distribution is the same as another (or theoretical distribution). They look a bit odd at first, but they are actually fairly easy to understand, and very useful! The qqplot distributes your data on the y-axis, and a theoretical normal distribution on the x-axis. If the residuals follow a normal distribution, they should meet to produce a perfect diagonal line across the plot.</p>
 <p>Watch this video to see <a href="https://www.youtube.com/watch?v=okjYjClSjOg">QQ plots explained</a></p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-20"></span>
+<span style="display:block;" id="fig:unnamed-chunk-19"></span>
 <img src="images/qq_example.png" alt="Examples of qqplots with different deviations from a normal distribution" width="80%"><p class="caption">
 Figure 10.2: Examples of qqplots with different deviations from a normal distribution
 </p>
@@ -703,15 +687,34 @@ Figure 10.2: Examples of qqplots with different deviations from a normal distrib
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>sample <span class="op">=</span> <span class="va">body_mass_g</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_qq.html">stat_qq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_qq.html">stat_qq_line</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-21-1.png" width="100%" style="display: block; margin: auto;"></div>
-<p><strong>Q. How do we know how much deviation from an idealised distribution is ok?</strong></p>
+<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-20-1.png" width="100%" style="display: block; margin: auto;"></div>
+<p><strong>How do we know how much deviation from an idealised distribution is ok?</strong></p>
 <div class="sourceCode" id="cb285"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">body_mass_g</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqPlot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-22-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-21-1.png" width="100%" style="display: block; margin: auto;"></div>
 <pre><code>## [1] 170 186</code></pre>
 <p>The qqPlot() function from the R package car provides 95% confidence interval margins to help you determine how severely your quantiles deviate from your idealised distribution.</p>
+<p>With the information from the qqPlot which section of the distribution deviates most clearly from a normal distribution <select class="webex-select"><option value="blank"></option>
+<option value="answer">&lt;3500g</option>
+<option value="">3500-4000g</option>
+<option value="">4000-4500g</option>
+<option value="">5000-5500g</option>
+<option value="">&gt;5500g</option></select></p>
+<button id="displayTextunnamed-chunk-22" onclick="javascript:toggle('unnamed-chunk-22');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-22" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+There are is a 'truncated' left tail of our normal distribution. We would predict more penguins with body masses lower than 3000g under the normal distribution.
+</div>
+</div>
+</div>
 </div>
 </div>
 <div id="variation" class="section level3" number="10.4.4">
@@ -780,7 +783,39 @@ quantile
 <h4>
 <span class="header-section-number">10.4.4.2</span> Standard deviation<a class="anchor" aria-label="anchor" href="#standard-deviation"><i class="fas fa-link"></i></a>
 </h4>
-<p>standard deviation (or σ) is a measure of how dispersed the data is in relation to the mean. Low standard deviation means data are clustered around the mean, and high standard deviation indicates data are more spread out. As such it makes sense only to use this when the mean is a good measure of our central tendency.</p>
+<p>standard deviation (or <span class="math inline">\(s\)</span>) is a measure of how dispersed the data is in relation to the mean. Low standard deviation means data are clustered around the mean, and high standard deviation indicates data are more spread out. As such it makes sense only to use this when the mean is a good measure of our central tendency.</p>
+<div class="info">
+<p>
+<span class="math inline"><span class="math inline">\(\sigma\)</span></span> = a known population standard deviation
+</p>
+<p>
+<span class="math inline"><span class="math inline">\(s\)</span></span> = a sample standard deviation
+</p>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+If we know we have a normal distribution, then we can use <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> to quickly produce a mean and standard deviation.
+</div>
+</div>
+<button id="displayTextunnamed-chunk-26" onclick="javascript:toggle('unnamed-chunk-26');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-26" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<pre><code>penguins %&gt;% 
+  summarise(mean = mean(body_mass_g),
+            sd = sd(body_mass_g),
+            n = n())</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div id="visualising-dispersion" class="section level3" number="10.4.5">
@@ -788,12 +823,12 @@ quantile
 <span class="header-section-number">10.4.5</span> Visualising dispersion<a class="anchor" aria-label="anchor" href="#visualising-dispersion"><i class="fas fa-link"></i></a>
 </h3>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-24"></span>
+<span style="display:block;" id="fig:unnamed-chunk-27"></span>
 <img src="images/distribution_gif.gif" alt="Visualising dispersion with different figures" width="80%"><p class="caption">
 Figure 10.3: Visualising dispersion with different figures
 </p>
 </div>
-<div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb289"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">colour_fill</span> <span class="op">&lt;-</span> <span class="st">"darkorange"</span>
 <span class="va">colour_line</span> <span class="op">&lt;-</span> <span class="st">"steelblue"</span>
 <span class="va">lims</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">7000</span><span class="op">)</span>
@@ -839,7 +874,7 @@ Figure 10.3: Visualising dispersion with different figures
 
 
 <span class="va">plot_1</span> <span class="op">+</span> <span class="va">plot_2</span> <span class="op">+</span> <span class="va">plot_3</span> </code></pre></div>
-<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-25-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-28-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>We now have several compact representations of the body_mass_g including a histogram, boxplot and summary calculations. You can <em>and should</em> generate the same summaries for your other numeric variables. These tables and graphs provide the detail you need to understand the central tendency and dispersion of numeric variables.</p>
 </div>
 <div id="drop_na" class="section level3" number="10.4.6">
@@ -848,9 +883,9 @@ Figure 10.3: Visualising dispersion with different figures
 </h3>
 <p>We first met <code>NA</code> back in <a href="data-wrangling-part-one.html#missing-values-na">Chapter 4</a> and you will hopefully have noticed, either here or in those previous chapters, that missing values <code>NA</code> can really mess up our calculations. There are a few different ways we can deal with missing data:</p>
 <ul>
-<li><p><code><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na()</a></code> on everything before we start. This runs the risk that we lose <strong>a lot</strong> of data as <em>every</em> row, with an NA in <em>any column</em> will be removed</p></li>
-<li><p><code><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na()</a></code> on a particular variable. This is fine, but we should approach this cautiously - if we do this in a way where we write this data into a new object e.g. <code>penguins &lt;- penguins %&gt;% drop_na(body_mass_g)</code> then we have removed this data forever - perhaps we only want to drop those rows for a specific calculation - again they might contain useful information in other variables.</p></li>
-<li><p><code><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na()</a></code> for a specific task - this is a more cautious approach <strong>but</strong> we need to be aware of another phenomena. Is the data <strong>missing at random</strong>? You might need to investigate <em>where</em> your missing values are in a dataset. Data that is truly <strong>missing at random</strong> can be removed from a dataset without introducing bias. However, if bad weather conditions meant that researchers could not get to a particular island to measure one set of penguins that data is <strong>missing not at random</strong> this should be treated with caution. If that island contained one particular species of penguin, it might mean we have complete data for only two out of three penguin species. There is nothing you can do about incomplete data other than be aware that data not missing at random could influence your distributions.</p></li>
+<li><p><code>drop_na()</code> on everything before we start. This runs the risk that we lose <strong>a lot</strong> of data as <em>every</em> row, with an NA in <em>any column</em> will be removed</p></li>
+<li><p><code>drop_na()</code> on a particular variable. This is fine, but we should approach this cautiously - if we do this in a way where we write this data into a new object e.g. <code>penguins &lt;- penguins %&gt;% drop_na(body_mass_g)</code> then we have removed this data forever - perhaps we only want to drop those rows for a specific calculation - again they might contain useful information in other variables.</p></li>
+<li><p><code>drop_na()</code> for a specific task - this is a more cautious approach <strong>but</strong> we need to be aware of another phenomena. Is the data <strong>missing at random</strong>? You might need to investigate <em>where</em> your missing values are in a dataset. Data that is truly <strong>missing at random</strong> can be removed from a dataset without introducing bias. However, if bad weather conditions meant that researchers could not get to a particular island to measure one set of penguins that data is <strong>missing not at random</strong> this should be treated with caution. If that island contained one particular species of penguin, it might mean we have complete data for only two out of three penguin species. There is nothing you can do about incomplete data other than be aware that data not missing at random could influence your distributions.</p></li>
 </ul>
 </div>
 </div>
@@ -859,48 +894,35 @@ Figure 10.3: Visualising dispersion with different figures
 <span class="header-section-number">10.5</span> Categorical and continuous variables<a class="anchor" aria-label="anchor" href="#categorical-and-continuous-variables"><i class="fas fa-link"></i></a>
 </h2>
 <p>It’s common to want to explore the distribution of a continuous variable broken down by a categorical variable.</p>
-<div class="panel panel-default">
-<div class="panel-heading">
-Task
-</div>
-<div class="panel-body">
+<div class="webex-solution">
+<button>
 Think about which other variables might affect body mass?
-</div>
-</div>
-<button id="displayTextunnamed-chunk-27" onclick="javascript:toggle('unnamed-chunk-27');">
-Show Solution
 </button>
-<div id="toggleTextunnamed-chunk-27" style="display: none">
-<div class="panel panel-default">
-<div class="panel-heading panel-heading1">
-Solution
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-29"></span>
+<img src="images/body-mass-interaction.png" alt="Species and sex are both likely to affect body mass" width="80%"><p class="caption">
+Figure 10.4: Species and sex are both likely to affect body mass
+</p>
 </div>
-<div class="panel-body">
-<div id="htmlwidget-7517e8974eb30ac91559" style="width:100%;height:480px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7517e8974eb30ac91559">{"x":{"diagram":"digraph {\n  \ngraph[layout = dot, rankdir = LR]\n\na[label = \"Body mass\"]\nb[label = \"Beak length\"]\nc[label = \"Species\"]\nd[label = \"Sex\"]\n\nc -> a\nd -> a\n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><p>So it is reasonable to think that perhaps either species or sex might affect the morphology of beaks directly - or that these might affect body mass (so that if there is a direct relationship between mass and beak length, there will also be an indirect relationship with sex or species).</p>
-</div>
-</div>
+<p>So it is reasonable to think that perhaps either species or sex might affect the morphology of beaks directly - or that these might affect body mass (so that if there is a direct relationship between mass and beak length, there will also be an indirect relationship with sex or species).</p>
 </div>
 <p>The best and simplest place to start exploring these possible relationships is by producing simple figures.</p>
 <p>Let's start by looking at the distribution of body mass by species.</p>
-<div class="panel panel-default">
-<div class="panel-heading">
-Task
 </div>
-<div class="panel-body">
-Produce a plot which allows you to look at the distribution of penguin body mass observations by species
-</div>
-</div>
-<button id="displayTextunnamed-chunk-29" onclick="javascript:toggle('unnamed-chunk-29');">
+<div id="activity-1-produce-a-plot-which-allows-you-to-look-at-the-distribution-of-penguin-body-mass-observations-by-species" class="section level2" number="10.6">
+<h2>
+<span class="header-section-number">10.6</span> Activity 1: Produce a plot which allows you to look at the distribution of penguin body mass observations by species<a class="anchor" aria-label="anchor" href="#activity-1-produce-a-plot-which-allows-you-to-look-at-the-distribution-of-penguin-body-mass-observations-by-species"><i class="fas fa-link"></i></a>
+</h2>
+<button id="displayTextunnamed-chunk-30" onclick="javascript:toggle('unnamed-chunk-30');">
 Show Solution
 </button>
-<div id="toggleTextunnamed-chunk-29" style="display: none">
+<div id="toggleTextunnamed-chunk-30" style="display: none">
 <div class="panel panel-default">
 <div class="panel-heading panel-heading1">
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb289"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">jitter_plot</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op">%&gt;%</span> 
     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">species</span>,
                y <span class="op">=</span> <span class="va">body_mass_g</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
@@ -927,28 +949,33 @@ Solution
                 colour <span class="op">=</span> <span class="va">colour_line</span><span class="op">)</span>
 
 <span class="va">jitter_plot</span><span class="op">/</span><span class="va">box_plot</span><span class="op">/</span><span class="va">histogram_plot</span></code></pre></div>
-<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-53-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-55-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>So it is reasonable to think that perhaps either species or sex might affect body mass, and we can visualise this in a number of different ways. The last method, a density histogram, looks a little crowded now, so I will use the excellent <code>ggridges</code> package to help out</p>
 </div>
 </div>
 </div>
-<p>GGridges</p>
-<button id="displayTextunnamed-chunk-30" onclick="javascript:toggle('unnamed-chunk-30');">
+</div>
+<div id="ggridges" class="section level2" number="10.7">
+<h2>
+<span class="header-section-number">10.7</span> GGridges<a class="anchor" aria-label="anchor" href="#ggridges"><i class="fas fa-link"></i></a>
+</h2>
+<p>The package <code>ggridges</code> (<span class="citation"><a href="references.html#ref-R-ggridges" role="doc-biblioref">Wilke</a> (<a href="references.html#ref-R-ggridges" role="doc-biblioref">2021</a>)</span>) provides some excellent extra geoms to supplement <code>ggplot</code>. One if its most useful features is to to allow different groups to be mapped to the y axis, so that histograms are more easily viewed.</p>
+<button id="displayTextunnamed-chunk-31" onclick="javascript:toggle('unnamed-chunk-31');">
 Show Solution
 </button>
-<div id="toggleTextunnamed-chunk-30" style="display: none">
+<div id="toggleTextunnamed-chunk-31" style="display: none">
 <div class="panel panel-default">
 <div class="panel-heading panel-heading1">
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb291"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/ggridges/">ggridges</a></span><span class="op">)</span>
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">body_mass_g</span>, y <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu">ggridges</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">colour_fill</span>,
                 colour <span class="op">=</span> <span class="va">colour_line</span>,
                 alpha <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-53-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-56-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 </div>
 </div>
@@ -964,21 +991,21 @@ Solution
 <option value="answer">Yes</option>
 <option value="">No</option></select></p></li>
 </ul>
-<button id="displayTextunnamed-chunk-31" onclick="javascript:toggle('unnamed-chunk-31');">
+<button id="displayTextunnamed-chunk-32" onclick="javascript:toggle('unnamed-chunk-32');">
 Show Solution
 </button>
-<div id="toggleTextunnamed-chunk-31" style="display: none">
+<div id="toggleTextunnamed-chunk-32" style="display: none">
 <div class="panel panel-default">
 <div class="panel-heading panel-heading1">
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb291"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb292"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html">group_split</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">map</span><span class="op">(</span><span class="op">~</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">.x</span>, <span class="va">body_mass_g</span><span class="op">)</span> 
       <span class="op">%&gt;%</span> <span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqPlot</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-54-1.png" width="100%" style="display: block; margin: auto;"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-54-2.png" width="100%" style="display: block; margin: auto;"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-54-3.png" width="100%" style="display: block; margin: auto;"></p>
+<p><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-57-1.png" width="100%" style="display: block; margin: auto;"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-57-2.png" width="100%" style="display: block; margin: auto;"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-57-3.png" width="100%" style="display: block; margin: auto;"></p>
 <pre><code>## [[1]]
 ## [1] 110 102
 ## 
@@ -991,15 +1018,25 @@ Solution
 </div>
 </div>
 </div>
-<div class="sourceCode" id="cb293"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb294"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> <span class="va">drop_na</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">body_mass_g</span>, y <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
     <span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">sex</span><span class="op">)</span>,
                         colour <span class="op">=</span> <span class="va">colour_line</span>,
                         alpha <span class="op">=</span> <span class="fl">0.8</span>,
                         bandwidth <span class="op">=</span> <span class="fl">175</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-32-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb294"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-33-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb295"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># try playing with the bandwidth argument - this behaves similar to binning which you should be familiar with from using geom_histogram</span></code></pre></div>
+</div>
+<div id="activity-2-test-yourself" class="section level2" number="10.8">
+<h2>
+<span class="header-section-number">10.8</span> Activity 2: Test yourself<a class="anchor" aria-label="anchor" href="#activity-2-test-yourself"><i class="fas fa-link"></i></a>
+</h2>
+<p><strong>Question 1.</strong> Write down some insights you have made about the data and relationships you have observed. Compare these to the ones below. Do you agree with these? Did you miss any? What observations did you make that are <strong>not</strong> in the list below.</p>
+<div class="webex-solution">
+<button>
+What data insights have you made?
+</button>
 <p>This is revealing some really interesting insights into the shape and distribution of body sizes in our penguin populations now.</p>
 <p>For example:</p>
 <ul>
@@ -1010,6 +1047,64 @@ Solution
 <li><p>Adelie penguins have larger males than females on average, but a wide spread of male body mass, (possibly two groups?)</p></li>
 </ul>
 <p>Note how we are able to understand our data better, by spending time making data visuals. While descriptive data statistics (mean, median) and measures of variance (range, IQR, sd) are important. They are not substitutes for spending time thinking about data and making exploratory analyses.</p>
+</div>
+<p><strong>Question 2.</strong> Using <code>summarise</code> we can quickly calculate <span class="math inline">\(s\)</span> but can you replicate this by hand with <code>dplyr</code> functions? - do this for total <span class="math inline">\(s\)</span> (not by category).</p>
+<ul>
+<li><p>Residuals</p></li>
+<li><p>Squared residuals</p></li>
+<li><p>Sum of squares</p></li>
+<li><p>Variance = SS/df</p></li>
+<li><p><span class="math inline">\(s=\sqrt{Variance}\)</span></p></li>
+</ul>
+<button id="displayTextunnamed-chunk-34" onclick="javascript:toggle('unnamed-chunk-34');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-34" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb296"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mean</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">body_mass_g</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">penguins</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>residuals <span class="op">=</span> <span class="op">(</span><span class="va">body_mass_g</span> <span class="op">-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">mean</span><span class="op">)</span><span class="op">)</span>,
+           sqrd_resid <span class="op">=</span> <span class="va">residuals</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu">drop_na</span><span class="op">(</span><span class="va">sqrd_resid</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>sum_squares <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">sqrd_resid</span><span class="op">)</span>,
+              variance <span class="op">=</span> <span class="va">sum_squares</span><span class="op">/</span><span class="op">(</span><span class="va">n</span><span class="op">=</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span>,
+              sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">variance</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:right;">
+sum_squares
+</th>
+<th style="text-align:right;">
+variance
+</th>
+<th style="text-align:right;">
+sd
+</th>
+</tr></thead>
+<tbody><tr>
+<td style="text-align:right;">
+219307697
+</td>
+<td style="text-align:right;">
+641249.6
+</td>
+<td style="text-align:right;">
+800.7806
+</td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <script>
@@ -1224,6 +1319,9 @@ $( document ).ready(function() {
 </ul>
 </li>
 <li><a class="nav-link" href="#categorical-and-continuous-variables"><span class="header-section-number">10.5</span> Categorical and continuous variables</a></li>
+<li><a class="nav-link" href="#activity-1-produce-a-plot-which-allows-you-to-look-at-the-distribution-of-penguin-body-mass-observations-by-species"><span class="header-section-number">10.6</span> Activity 1: Produce a plot which allows you to look at the distribution of penguin body mass observations by species</a></li>
+<li><a class="nav-link" href="#ggridges"><span class="header-section-number">10.7</span> GGridges</a></li>
+<li><a class="nav-link" href="#activity-2-test-yourself"><span class="header-section-number">10.8</span> Activity 2: Test yourself</a></li>
 </ul>
 
       <div class="book-extra">
@@ -1241,7 +1339,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-09-17.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-09-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

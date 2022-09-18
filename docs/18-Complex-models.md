@@ -55,7 +55,7 @@ You should now import, clean and tidy your data. Making sure it is in tidy forma
 
 Based on the variables you have decided to test you should start with some simple visualisations, to understand the distribution of your data, and investigate visually the relationships you wish to test.
 
-This is full two-by-two plot of the entire dataset, but you should try and follow this up with some specific plots. 
+This is a full two-by-two plot of the entire dataset, but you should try and follow this up with some specific plots. 
 
 
 ```r
@@ -63,6 +63,8 @@ GGally::ggpairs(fruitfly)
 ```
 
 <img src="18-Complex-models_files/figure-html/unnamed-chunk-6-1.png" width="100%" style="display: block; margin: auto;" />
+
+## Activity 1: Think about your data
 
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
 Think carefully about the plots you should make to investigate the potential differences and relationships you wish to investigate - examples hidden behing this dropdown </div></div>
@@ -89,7 +91,21 @@ fruitfly %>%
 </div>
 </div></div></div>
 
-With careful thought we can construct figures that help us investigate the distribution of multiple potential predictors at once. Here we can overlay body size onto the three treatments. Here it does look as though larger flies have a longer lifespan than smaller flies. Is this trend enough of a deviation to reject a null hypothesis of no effect?
+With careful thought we can construct figures that help us investigate the distribution of multiple potential predictors at once. Here we can overlay body size onto the three treatments. 
+
+**Q** Does it like size affects longevity? <select class='webex-select'><option value='blank'></option><option value='answer'>Yes</option><option value=''>No</option></select>
+
+**Q** Does it look like size affects longevity differently between treatment groups? <select class='webex-select'><option value='blank'></option><option value=''>Yes</option><option value='answer'>No</option></select>
+
+
+<div class='webex-solution'><button>Explain this</button>
+
+
+Here it does look as though larger flies have a longer lifespan than smaller flies. But there appears to be little difference in the distribution of body sizes by treatment. This does not mean we can't test this in our model. But we should have a clear idea of which will have largest probable effect sizes
+
+
+</div>
+
 
 
 ```r
@@ -111,7 +127,11 @@ fruitfly %>%
 <p class="caption">(\#fig:unnamed-chunk-9)A boxplot of longevity across three treatments of sexual activity. Individual points represent individual males, where the size of each point represents thorax length.</p>
 </div>
 
-We are also interested in the potential effect of sleep on activity, we can construct a scatter plot of sleep against longevity, while including body size as a covariate. In these faceted plots - do the data points appear to follow the trendline? Are the trendlines moving in the same direction? Investigating these can help us determine is there much evidence of a potential effect of sleep, is there evidence for whether this might be an additive effect or one which interacts with the the three treatments?
+We are also interested in the potential effect of sleep on activity, we can construct a scatter plot of sleep against longevity, while including body size as a covariate. 
+
+In these faceted plots - Are the trendlines moving in the same direction?  <select class='webex-select'><option value='blank'></option><option value=''>Yes</option><option value='answer'>No</option></select>
+
+Investigating these can help us determine is there much evidence of a potential effect of sleep, is there evidence for whether this might be an additive effect or one which interacts with the the three treatments?
 
 
 ```r
@@ -269,7 +289,9 @@ performance::check_model(flyls1)
 
 <img src="18-Complex-models_files/figure-html/unnamed-chunk-16-1.png" width="100%" style="display: block; margin: auto;" />
 
-**Question - IS the assumption of homogeneity of variance met?**
+## Activity 2: Model checking
+
+**Question - IS the assumption of homogeneity of variance met?** <select class='webex-select'><option value='blank'></option><option value='answer'>Yes</option><option value=''>No</option></select>
 
 <button id="displayTextunnamed-chunk-17" onclick="javascript:toggle('unnamed-chunk-17');">Show Solution</button>
 
@@ -284,7 +306,7 @@ VERDICT, pretty much ok, should be fine for making inferences.
 With a slight curvature this could indicate that you *might* get a better fit with a transformation, or perhaps that there is a missing variable that if included in the model would improve the residuals. In this instance I wouldn't be overly concerned. See here for a great explainer on intepreting residuals^[https://www.qualtrics.com/support/stats-iq/analyses/regression-guides/interpreting-residual-plots-improve-regression/].
 </div></div></div>
 
-**Question - ARE the residuals normally distributed?**
+**Question - ARE the residuals normally distributed?** <select class='webex-select'><option value='blank'></option><option value='answer'>Yes</option><option value=''>No</option></select>
 
 <button id="displayTextunnamed-chunk-18" onclick="javascript:toggle('unnamed-chunk-18');">Show Solution</button>
 
@@ -295,7 +317,7 @@ Yes - the QQplot looks pretty good, a very minor indication of a right skew, but
 </div></div></div>
 
 
-**Question - IS their an issue with Collinearity?**
+**Question - IS their an issue with Collinearity?** <select class='webex-select'><option value='blank'></option><option value=''>Yes</option><option value='answer'>No</option></select>
 
 <button id="displayTextunnamed-chunk-19" onclick="javascript:toggle('unnamed-chunk-19');">Show Solution</button>
 
@@ -379,7 +401,7 @@ MASS::boxcox(flyls1)
 <p class="caption">(\#fig:unnamed-chunk-22)standard curve fitted by maximum likelihood, dashed lines represent the 95% confidence interval range for picking the 'best' transformation for the dependent variable</p>
 </div>
 
-**Question - Does the fit of the model improve with a square root transformation?**
+**Question - Does the fit of the model improve with a square root transformation?** <select class='webex-select'><option value='blank'></option><option value=''>Yes</option><option value='answer'>No</option></select>
 
 <button id="displayTextunnamed-chunk-23" onclick="javascript:toggle('unnamed-chunk-23');">Show Solution</button>
 
@@ -509,7 +531,7 @@ drop1(flyls2, test = "F")
 
 </div>
 
-**Question - Should we drop sleep from this model?**
+**Question - Should we drop sleep from this model?** <select class='webex-select'><option value='blank'></option><option value=''>Yes</option><option value='answer'>No</option></select>
 
 <button id="displayTextunnamed-chunk-27" onclick="javascript:toggle('unnamed-chunk-27');">Show Solution</button>
 
@@ -559,7 +581,7 @@ emmeans::emmeans(flyls2, specs = pairwise ~ type + thorax + sleep)
 <p>For continuous variables (sleep and thorax) - <code>emmeans</code> has set these to the mean value within the dataset, so comparisons are constant between categories at the average value of all continuous variables.</p>
 </div>
 
-## Write-up
+## Activity 3: Write-up
 
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
 Can you write a Results section? </div></div>

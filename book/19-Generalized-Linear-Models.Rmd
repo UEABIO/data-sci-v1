@@ -353,9 +353,15 @@ summary(cuckoo_glm1)
 
 > Note there appears to be a negative interaction effect for Species:Mass, indicating that Begging calls do not increase with mass as much as you would expect for Warblers as compared to Cuckoos.
 
-Plot the mean regression line for each species:
+##Activity 1: Plot the mean regression line for each species:
 
-```{r, eval = TRUE}
+Hint: Use `broom::augment`. If we fit the model on the log scale, then we get the fitted generalized linear response (Y is on a log scale). The lines will be straight. We get an exponential curve in the scale of the original data, if we specify `type.predict = response` which is the **same** as a straight line in the log-scaled version of the data. Try both: 
+
+### Variable scale
+
+```{solution}
+
+``{r, eval = TRUE}
 # using augment allows you to generate fitted outcomes from the regression, make sure to set the predictions onto the response scale in order to 'back transform` the data onto the original scale
 
 broom::augment(cuckoo_glm1, type.predict = "response") %>% 
@@ -365,17 +371,22 @@ ggplot(aes(x=Mass, y=.fitted, colour=Species)) +
   scale_colour_manual(values=c("green3","turquoise3"))+
   theme_minimal()
 
+``
 ```
 
-We get an exponential curve in the scale of the original data, which is the **same** as a straight line in the log-scaled version of the data. So if we fit the same model without specifying `type.predict = "response"`  Then we get the fitted generalized linear response (Y is on a log scale).
+### Log scale
 
-```{r, eval = TRUE}
+```{solution}
+
+``{r, eval = TRUE}
 broom::augment(cuckoo_glm1) %>% 
 ggplot(aes(x=Mass, y=.fitted, colour=Species)) + 
   geom_point() +
   geom_line()+
   scale_colour_manual(values=c("green3","turquoise3"))+
   theme_minimal()
+
+``
 
 ```
 
@@ -464,7 +475,7 @@ Poisson (and binomial models) assume that the variance is *equal to the mean.*
 
 However, if there is **residual deviance that is bigger than the residual degrees of freedom** then there is *more* variance than we expect from the prediction of the mean by our model. 
 
-Overdispersion can be diagnosed by $\frac{residual~deviance}{residual~degrees~of~freedom}$ which from our example here 'summary()' is $\frac{436}{47} = 9.3$
+Overdispersion in Poisson models can be diagnosed by $\frac{residual~deviance}{residual~degrees~of~freedom}$ which from our example here 'summary()' is $\frac{436}{47} = 9.3$
 
 Overdispersion statistic values **> 1 = Overdispersed**
 
@@ -485,6 +496,8 @@ As you can see, while none of the estimates have changed, the standard errors (a
 ```{block, type = "warning"}
 Because we are now estimating the variance again, the test statistics have reverted to *t* distributions and anova and drop1 functions should specify the F-test again.
 ```
+
+## Activity 2: Write-up
 
 ```{task}
 How would you write up an Analysis Methods section?
@@ -721,10 +734,40 @@ We can interpret $\beta_{1}$ and $\beta_{2}$ as the increase in the log odds for
 
 If you want to find out more about [Odds and log-odds head here](https://www.youtube.com/watch?v=8nm0G-1uJzA)
 
+
+
+
+## Probability
+
+A powerful use of logisitic regression is prediction. Can we predict the probability of an event occuring using our data? 
+
+### Activity 3: Make predictions
+
+Can you use our prediction functions `predict()` or `broom::augment()` to look at the models predictions for O-ring failure in our data? Bonus points if you can convert log-odds to probability?
+
+```{solution, multCode = T}
+
+``{r}
+
+predict(binary_model, type = "response")
+``
+
+####
+
+``{r}
+
+broom::augment(binary_model, 
+               type.predict = "response")
+
+``
+
+```
+
 ### Emmeans
 
-If we use the `emmeans()` function it will convert *log-odds* to estimate the probability of o-ring failure at the mean value of x (temperature).
-But how does it do this?
+If we use the `emmeans()` function it will convert *log-odds* to estimate the probability of o-ring failure at the mean value of x (temperature). And add confidence intervals! 
+
+But how do log-odds and probability actually relate?
 
 ```{r}
 emmeans::emmeans(binary_model, specs=~temp, type="response")
@@ -758,10 +801,12 @@ In our example the **maximum difference** in probability from a one degree chang
 So the **maximum difference** in probability of failure corresponding to a one degree change is 9%
 
 
-If you want to augment your data with the model, you can use the `augment()` function, remembering to specify `type.predict = "response` to get probabilities of o-ring failure (not log odds). 
+Remember if you want to augment your data with the model, you can use the `augment()` function, remembering to specify `type.predict = "response` to get probabilities of o-ring failure (not log odds). 
 
 ```{r}
-broom::augment(binary_model, type.predict="response", se_fit = T) %>% 
+broom::augment(binary_model, 
+               type.predict="response", 
+               se_fit = T) %>% 
   head()
 ```
 
@@ -815,6 +860,9 @@ On the day the Challenger launched the outside air temperature was 36&deg;F
 
 We can use augment to add our model to new data - and make predictions about the risk of o-ring failure
 
+
+### Activity 4: More predictions
+
 ```{task}
 Make a new dataset with the temperature on the day of the Challenger launch - what was the probability of o-ring failure?
 ```
@@ -836,12 +884,22 @@ We can see from our fitted model, an O-ring failure on the day of the Challenger
 ```
 
 
-### Assumptions
+## Assumptions
 
-The standard model checks cannot be used on binomial glms, they are usually a mess! There are alternative methods of looking at how well your binary model works, but we will not cover these here. 
+The standard model checks from `plot()` cannot be used on binomial glms, they are usually a mess! 
 
-### Write-up
+Luckily the `performance` package detects and alters the checks. Pay particular attention to the binned residuals plot - this is your best estimate of possible overdispersion (requiring a quasi-likelihood check). In this case there is likely not enough data for robust checks
 
+```{r}
+performance::check_model(binary_model)
+
+```
+
+### Activity 5: Write-up
+
+How would you write up for findings from this analysis?
+
+`r hide("Write-up")`
 Analysis: I used a Binomial logit-link Generalized Linear Model to analyse the effect of temperature on the likelihood of O-ring failure.
 
 All analyses were carried out in R (ver 4.1.3) (R Core Team 2021) with the following packages;  tidyverse (Wickham et al 2019).
@@ -853,6 +911,8 @@ Results: I found a significant negative relationship between temperature and pro
 ```{r}
 drop1(binary_model, test="Chisq")
 ```
+
+`r unhide()`
 
 ## Summary
 
@@ -889,7 +949,7 @@ https://bookdown.org/ronsarafian/IntrotoDS/glm.html#poisson-regression
 
 * Investigate the fit of your model, understand that parameters may never be perfect, but that classic patterns in residuals may indicate a poorly fitting model - sometimes this can be fixed with careful consideration of missing variables or through data transformation
 
-* **Check for overdispersion in Poisson models where variance is not estimated, but expected to be equal to the mean - may have to use quasi-likelihood fitting** 
+* **Check for overdispersion in models where variance is not estimated independently of the mean (Poisson and Binomial) - may have to use quasi-likelihood fitting** 
 
 * Test the removal of any interaction terms from a model, look at AIC and significance tests (Remember test = "F" for Gaussian and Quasilikelihood models, "Chisq" for Poisson and Binomial models)
 
