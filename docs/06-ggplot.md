@@ -36,7 +36,7 @@ Think about some basic checks before you start your work today.
 
 * Open a **new** R script - we are moving on from data wrangling to data visualisation
 
-* Save this file in the scripts folder and call it `02_visualisation_penguins.R`
+* Save this file **in the scripts folder** and call it `02_visualisation_penguins.R`
 
 * Add the following to your script and run it:
 
@@ -50,11 +50,60 @@ source("scripts/01_import_penguins_data.R")
 
 * You should find your Environment fills up with objects from script 1
 
-* Save this **new** file inside the scripts folder and call it `02_graphs_penguins.R`
 
 <div class="info">
 <p>The <code>source()</code> function is a very handy way of allowing you to have different scripts for different parts of your R project, but allow access to objects built elsewhere. In this way we are building our analysis in stages.</p>
 </div>
+
+<div class="warning">
+<p>The above command will ONLY work if you remembered to save and name your script exactly as above AND put that script inside a subfolder called scripts.</p>
+<p>Does your project look like the one below?</p>
+</div>
+
+
+<div class="figure" style="text-align: center">
+<img src="images/project_penguin.png" alt="My neat project layout" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-7)My neat project layout</p>
+</div>
+
+<div class="figure" style="text-align: center">
+<img src="images/r_script.png" alt="If you have sucessfully saved 02_visualisation_penguins.R it should be visible here too " width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-8)If you have sucessfully saved 02_visualisation_penguins.R it should be visible here too </p>
+</div>
+
+### What if source isn't working?
+
+If source isn't working, or you can't figure out your project set-up you can complete this worksheet if you put the following commands at the top of your script *instead* of `source("scripts/01_import_penguins_data.R")`
+
+
+<div class='webex-solution'><button>Script adjustment</button>
+
+
+
+```r
+#___________________________----
+# SET UP ----
+## An analysis of the bill dimensions of male and female Adelie, Gentoo and Chinstrap penguins ----
+
+### Data first published in  Gorman, KB, TD Williams, and WR Fraser. 2014. “Ecological Sexual Dimorphism and Environmental Variability Within a Community of Antarctic Penguins (Genus Pygoscelis).” PLos One 9 (3): e90081. https://doi.org/10.1371/journal.pone.0090081. ----
+#__________________________----
+
+# PACKAGES ----
+library(tidyverse) # tidy data packages
+library(janitor) # cleans variable names
+library(lubridate) # make sure dates are processed properly
+#__________________________----
+
+# IMPORT DATA ----
+penguins <- read_csv ("data/penguins_raw.csv")
+
+penguins <- janitor::clean_names(penguins) # clean variable names
+#__________________________----
+```
+
+
+</div>
+
 
 ## Building a plot
 
@@ -79,7 +128,7 @@ The output is identical
 ggplot(data = penguins)
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-7-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-11-1.png" width="100%" style="display: block; margin: auto;" />
 
 <div class="info">
 <p>Running this command will produce an empty grey panel. This is because we need to specify how different columns of the data frame should be represented in the plot.</p>
@@ -106,7 +155,7 @@ penguins %>%
              y = body_mass_g))
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-10-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-14-1.png" width="100%" style="display: block; margin: auto;" />
 
 So far we have the grid lines for our x and y axis. `ggplot()` knows the variables required for the plot, and thus the scale, but has no information about how to display the data points.
 
@@ -151,7 +200,7 @@ penguins %>%
   geom_point() # geom_point function will always draw points, and unless specified otherwise the arguments for position and stat are both "identity".
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-12-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-16-1.png" width="100%" style="display: block; margin: auto;" />
 
 Now we have the scatter plot! Each row (except for two rows of missing data) in the penguins data set now has an x coordinate, a y coordinate, and a designated geometric representation (point).
 
@@ -173,7 +222,7 @@ penguins %>%
   geom_point(colour="red")
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-13-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-17-1.png" width="100%" style="display: block; margin: auto;" />
 
 However the current plot could be more informative if colour was used to convey information about the species of each penguin.
 
@@ -196,7 +245,7 @@ penguins %>%
   geom_point(aes(colour=species))
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-15-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-19-1.png" width="100%" style="display: block; margin: auto;" />
 
 <div class="info">
 <p>You may (or may not) have noticed that the grammar of ggplot (and tidyverse in general) accepts British/Americanization for spelling!!!</p>
@@ -229,7 +278,7 @@ penguins %>%
               aes(colour=species)) # note layers inherit information from the top ggplot() function but not previous layers - if we want separate lines per species we need to either specify this again *or* move the color aesthetic to the top layer. 
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-18-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-22-1.png" width="100%" style="display: block; margin: auto;" />
 
 In the example above we may notice that we are assigning colour to the same variable (species) in both geometric layers. This means we have the option to simplify our code. Aesthetics set in the "top layer" of `ggplot()` are inherited by all subsequent layers.
 
@@ -244,7 +293,7 @@ penguins %>%
               se=FALSE)
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-19-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-23-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 <div class="try">
@@ -272,7 +321,7 @@ penguins %>%
   xlim(0,240) + ylim(0,7000)
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-21-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-25-1.png" width="100%" style="display: block; margin: auto;" />
 
 Further, we can control the coordinate space using `coord()` functions. Say we want to flip the x and y axes, we add `coord_flip()`:
 
@@ -289,7 +338,7 @@ penguins %>%
   coord_flip()
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-22-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-26-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Labels
 
@@ -309,7 +358,7 @@ penguins %>%
        y = "Body mass (g)")
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-23-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-27-1.png" width="100%" style="display: block; margin: auto;" />
 
 ### Titles and subtitles
 
@@ -329,7 +378,7 @@ penguins %>%
        subtitle= "Flipper length and body mass for three penguin species")
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-24-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-28-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Themes
 
@@ -353,7 +402,7 @@ penguins %>%
   theme_void()
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-25-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-29-1.png" width="100%" style="display: block; margin: auto;" />
 
 <div class="info">
 <p>There is a lot more customisation available through the theme() function. We will look at making our own custom themes in later lessons</p>
@@ -378,7 +427,7 @@ ggplot(data = penguins, aes(x = species, y = culmen_length_mm)) +
               show.legend = FALSE) # don't leave a legend in a plot, if it doesn't add value
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-27-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-31-1.png" width="100%" style="display: block; margin: auto;" />
 
 ### Boxplots
 
@@ -398,7 +447,7 @@ ggplot(data = penguins, aes(x = species, y = culmen_length_mm)) +
               show.legend = FALSE)
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-29-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-33-1.png" width="100%" style="display: block; margin: auto;" />
 
 <div class="try">
 <p>Note that when specifying colour variables using <code>aes()</code> some geometric shapes support an internal colour "fill" and an external colour "colour". Try changing the aes fill for colour in the code above, and note what happens.</p>
@@ -421,7 +470,7 @@ ggplot(data = penguins, aes(x = species, y = culmen_length_mm)) +
   theme(legend.position = "none")
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-31-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-35-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 <div class="warning">
@@ -441,7 +490,7 @@ penguins %>%
     geom_histogram(bins=50)
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-33-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-37-1.png" width="100%" style="display: block; margin: auto;" />
 
 At first you might struggle to see/understand the difference between these two charts. The shapes should be roughly the same. 
 
@@ -454,7 +503,7 @@ penguins %>%
                    position = "identity")
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-34-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-38-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 <div class='webex-solution'><button>Explain this</button>
@@ -486,7 +535,7 @@ penguins %>%
                    colour="black")
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-36-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-40-1.png" width="100%" style="display: block; margin: auto;" />
 
 ### Choosing and using colour palettes
 
@@ -517,7 +566,7 @@ penguins %>%
   theme_minimal()
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-38-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-42-1.png" width="100%" style="display: block; margin: auto;" />
 
 You can also use a range of inbuilt colour palettes: 
 
@@ -531,7 +580,7 @@ penguins %>%
   theme_minimal()
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-39-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-43-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 <div class="info">
@@ -556,7 +605,7 @@ library(colorBlindness)
 colorBlindness::cvdPlot() # will automatically run on the last plot you made
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-42-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-46-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 ### Guides to visual accessibility 
@@ -588,7 +637,7 @@ penguins %>%
   facet_wrap(~sex)
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-45-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-49-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Patchwork
 
@@ -629,7 +678,7 @@ p3 <- penguins %>%
   plot_layout(guides = "collect") 
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-46-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-50-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Activity: Replicate this figure
 
@@ -638,7 +687,7 @@ p3 <- penguins %>%
 <p>Make sure to use the tips and links at the end of this chapter, when you are done save the file and submit!</p>
 </div>
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-48-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-52-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 

@@ -450,7 +450,7 @@ RStudio will by default save the objects in its memory when you close a session.
 These will then be there the next time you logon. It might seem nice to be able to close things down and pick up where you left off, but its actually quite dangerous. It's messy, and can cause lots of problems when we work with scripts later, so don't do this! 
 
 
-To stop RStudio from saving objects by default go to the Preferences option and change "Save workspace to .RData on exit" to "Never".
+To stop RStudio from saving objects by default go to Tools > Project Options option and change "Save workspace to .RData on exit" to "No" or "Never".
 
 
 Instead we are going to learn how to use scripts to quickly re-run analyses we have been working on. 
@@ -698,7 +698,11 @@ ggplot(data = penguins, # calls ggplot function, data is penguins
 
 Until now we have been typing words directly into the Console. This is fine for short/simple calculations - but as soon as we have a more complex, multi-step process this becomes time consuming, error-prone and *boring*. **Scripts** are a document containing all of your commands (in the order you want them to run), they are *repeatable, shareable, annotated records of what you have done*. In short they are incredibly useful - and a big step towards **open** and **reproducible** research.
 
-To create a script go to File \> New File \> R Script.
+
+```{task}
+Create a script by going to File \> New File \> R Script.
+```
+
 
 ```{r script, echo=FALSE, fig.cap="RStudio interface - top left script, botto  left console"}
 
@@ -933,11 +937,9 @@ When you get the correct answer, the answer box will turn green. Sometimes this 
 
 `r fitb(625)`
 
-**Question 2.**  Put the brackets in the correct place to make this equation correct `4+2*8 = 48`
 
-`r fitb((4+2)*8)`
 
-**Question 3.**  What answer will you get when you type `2+2 = 4` into the R console?
+**Question 2.**  What answer will you get when you type `2+2 = 4` into the R console?
 
 `r mcq(c("TRUE", "FALSE", answer = "Error"))`
 
@@ -949,11 +951,11 @@ cat("If we wanted R to make a judgement we must use == not = otherwise we will g
 
 `r unhide()`
 
-**Question 4.**  What symbol do I use if I want to **assign** a value or output of a function to an R object
+**Question 3.**  What symbol do I use if I want to **assign** a value or output of a function to an R object
 
 `r fitb("<-")`
 
-**Question 5.**  What is the value of `a` if I ran the following commands?
+**Question 4.**  What is the value of `a` if I ran the following commands?
 
 ```{r, eval = FALSE}
 
@@ -964,18 +966,18 @@ a <- 5
 
 `r fitb(5)`
 
-**Question 6.**  Which of these variable naming conventions is **not** written correctly?
+**Question 5.**  Which of these variable naming conventions is **not** written correctly?
 
 `r mcq(c("snake_case", "camelCase", answer = "Screaming_Snake_Case", "kebab-case"))`
 
-**Question 7.**  What should I type into the R console if I want `help` with the `round()` function?
+**Question 6.**  What should I type into the R console if I want `help` with the `round()` function?
 
 `r fitb ("help(round)")`
 
-**Question 8.**  Which of these statements about function arguments **is not true**
+**Question 7.**  Which of these statements about function arguments **is not true**
 
 `r mcq(c("Arguments are the inputs we give to a function", answer = "Values for R arguments must always be defined by the user", "Naming arguments supersedes position in a function", "There is no limit to the number of arguments a function could have"))`
 
-**Question 9.**  Evaluate this statement "An R Package can contain code functions, data, or both."
+**Question 8.**  Evaluate this statement "An R Package can contain code functions, data, or both."
 
 `r mcq(c(answer = "TRUE", "FALSE"))`

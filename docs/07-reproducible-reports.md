@@ -1,3 +1,4 @@
+# (PART\*) Literate Programming and Reproducibility {.unnumbered}
 
 # Markdown
 
@@ -32,7 +33,7 @@ With Rmarkdown we can make reproducible html, word, pdf, powerpoints or websites
 
 * rmarkdown - the package: This is used by R to render the .Rmd file into the desired output. It’s focus is converting the markdown (text) syntax, so we also need…
 
-* knitr: This R package will read the code chunks, execute it, and ‘knit’ it back into the document. This is how tables and graphs are included alongside the text.
+* knitr: This R package @R-knitr will read the code chunks, execute it, and ‘knit’ it back into the document. This is how tables and graphs are included alongside the text.
 
 * Pandoc: Finally, pandoc actually convert the output into word/pdf/powerpoint etc. It is a software separate from R but is installed automatically with RStudio.
 
@@ -245,7 +246,7 @@ You can also include minimal R code within back-ticks. Within the back-ticks, be
 
 \` r Sys.Date()\`
 
-When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead: 2022-09-18
+When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead: 2022-09-26
 
 <div class="try">
 <p>Having added some in-line code, try re-knitting your .Rmd file, what is the output?</p>
@@ -345,7 +346,7 @@ head(penguins)
 
 
 <div class="warning">
-<p>You might want start using the <code>here()</code> from now on to read in and export data from scripts. Make sure you are consistent in whether you use <code>here()</code> heuristic file paths or relative file paths across all files in a project - otherwise you might encounter errors.</p>
+<p>You might want start using the <code>here()</code> from now on to read in and export data from scripts. Make sure you are consistent in whether you use <code>here()</code> heuristic file paths or relative file paths across <strong>all .R and .Rmd files in a project</strong> - otherwise you might encounter errors.</p>
 </div>
 
 ## Activity 4: Can you change the global options of your Rmd file so that it doesn't display any code, warnings or messages?
@@ -969,11 +970,11 @@ Let's make another reproducible report.
 
 * Make any summary figure you want from the penguins data with `ggplot`
 
-* Make a summary table with `summarise` and `kableExtra`
+* Make a summary table with `summarise` and make it beautiful with `kableExtra` or `gt()`
 
 * Write a few sentences explaining what you are presenting
 
-* Knit the report to **pdf**
+* Knit the report to **html**
 
 * Use chunk options to optimise your figure layout and text and make it so that raw code and rendered outputs are visible. An example of literate programming
 
@@ -1060,13 +1061,19 @@ RStudio comes with a pretty nifty [Visual Markdown Editor](https://www.rstudio.c
 
 You can switch between modes with a button push, try it out! 
 
+## Activity 7: Test yourself
+
+Find the doi for the `palmerpenguins` @R-palmerpenguins package, and use the visual editor to easily include a reference. When completed and the document is reknit. Check the output document and your original markdown file + project space.
+
+You should find a new file in your project space `.bib` and new conditions in your YAML? 
+
 ## Summing up Rmarkdown
 
 ### What we learned
 
 You have learned
 
-* How to use markdown
+* How to use markdown with `knitr`
 
 * How to embed R chunks, to produce code, figures and analyses
 
@@ -1076,13 +1083,8 @@ You have learned
 
 * How to make simple tables
 
-You have used
+* How to size figure outputs for your documents
 
-* `knitr` as part of Rmarkdown
-
-* `kableExtra` @R-kableExtra
-
-* `here` @R-here
 
 
 ### Further Reading, Guides and tips

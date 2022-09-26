@@ -4,17 +4,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 13 Introduction to Linear Models | 5023Y</title>
+<title>Chapter 14 Introduction to Linear Models | 5023Y</title>
 <meta name="author" content="Philip T. Leftwich">
 <meta name="description" content="In the last chapter we conducted a simple analysis of Darwin's maize data using R. We worked out confidence intervals 'by hand'. This simple method allowed us to learn more about analysis,...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 13 Introduction to Linear Models | 5023Y">
+<meta property="og:title" content="Chapter 14 Introduction to Linear Models | 5023Y">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://ueabio.github.io/data-sci/introduction-to-linear-models.html">
 <meta property="og:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
 <meta property="og:description" content="In the last chapter we conducted a simple analysis of Darwin's maize data using R. We worked out confidence intervals 'by hand'. This simple method allowed us to learn more about analysis,...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 13 Introduction to Linear Models | 5023Y">
+<meta name="twitter:title" content="Chapter 14 Introduction to Linear Models | 5023Y">
 <meta name="twitter:description" content="In the last chapter we conducted a simple analysis of Darwin's maize data using R. We worked out confidence intervals 'by hand'. This simple method allowed us to learn more about analysis,...">
 <meta name="twitter:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.13/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -88,30 +88,35 @@
 <li class="book-part">R Programming</li>
 <li><a class="" href="introduction-to-r-and-rstudio.html"><span class="header-section-number">1</span> Introduction to R and RStudio</a></li>
 <li><a class="" href="basic-programming.html"><span class="header-section-number">2</span> Basic programming</a></li>
+<li class="book-part">Exploring Data</li>
 <li><a class="" href="loading-data.html"><span class="header-section-number">3</span> Loading data</a></li>
 <li><a class="" href="data-wrangling-part-one.html"><span class="header-section-number">4</span> Data wrangling part one</a></li>
 <li><a class="" href="data-wrangling-part-two.html"><span class="header-section-number">5</span> Data wrangling part two</a></li>
 <li><a class="" href="data-visualisation-with-ggplot2.html"><span class="header-section-number">6</span> Data visualisation with ggplot2</a></li>
+<li class="book-part">Literate Programming and Reproducibility</li>
 <li><a class="" href="markdown.html"><span class="header-section-number">7</span> Markdown</a></li>
 <li><a class="" href="github.html"><span class="header-section-number">8</span> Github</a></li>
-<li><a class="" href="functions-and-iteration.html"><span class="header-section-number">9</span> Functions and Iteration</a></li>
-<li><a class="" href="data-insights-part-one.html"><span class="header-section-number">10</span> Data Insights part one</a></li>
-<li><a class="" href="data-insights-part-two.html"><span class="header-section-number">11</span> Data insights part two</a></li>
+<li class="book-part">DRY code</li>
+<li><a class="" href="functions-1.html"><span class="header-section-number">9</span> Functions</a></li>
+<li><a class="" href="iteration.html"><span class="header-section-number">10</span> Iteration</a></li>
+<li class="book-part">Advanced Data Insights</li>
+<li><a class="" href="data-insights-part-one.html"><span class="header-section-number">11</span> Data Insights part one</a></li>
+<li><a class="" href="data-insights-part-two.html"><span class="header-section-number">12</span> Data insights part two</a></li>
 <li class="book-part">Statistics</li>
-<li><a class="" href="introduction-to-statistics.html"><span class="header-section-number">12</span> Introduction to statistics</a></li>
-<li><a class="active" href="introduction-to-linear-models.html"><span class="header-section-number">13</span> Introduction to Linear Models</a></li>
-<li><a class="" href="testing.html"><span class="header-section-number">14</span> Testing</a></li>
-<li><a class="" href="regression.html"><span class="header-section-number">15</span> Regression</a></li>
-<li><a class="" href="anova.html"><span class="header-section-number">16</span> ANOVA</a></li>
-<li><a class="" href="multivariate-linear-models.html"><span class="header-section-number">17</span> Multivariate linear models</a></li>
-<li><a class="" href="complex-models.html"><span class="header-section-number">18</span> Complex models</a></li>
-<li><a class="" href="generalized-linear-models.html"><span class="header-section-number">19</span> Generalized Linear Models</a></li>
+<li><a class="" href="introduction-to-statistics.html"><span class="header-section-number">13</span> Introduction to statistics</a></li>
+<li><a class="active" href="introduction-to-linear-models.html"><span class="header-section-number">14</span> Introduction to Linear Models</a></li>
+<li><a class="" href="testing.html"><span class="header-section-number">15</span> Testing</a></li>
+<li><a class="" href="regression.html"><span class="header-section-number">16</span> Regression</a></li>
+<li><a class="" href="anova.html"><span class="header-section-number">17</span> ANOVA</a></li>
+<li><a class="" href="multivariate-linear-models.html"><span class="header-section-number">18</span> Multivariate linear models</a></li>
+<li><a class="" href="complex-models.html"><span class="header-section-number">19</span> Complex models</a></li>
+<li><a class="" href="generalized-linear-models.html"><span class="header-section-number">20</span> Generalized Linear Models</a></li>
 <li class="book-part">Advanced topics</li>
-<li><a class="" href="mixed-models.html"><span class="header-section-number">20</span> Mixed models</a></li>
-<li><a class="" href="generalised-additive-models.html"><span class="header-section-number">21</span> Generalised Additive Models</a></li>
-<li><a class="" href="survival-models.html"><span class="header-section-number">22</span> Survival models</a></li>
-<li><a class="" href="unsupervised-machine-learning.html"><span class="header-section-number">23</span> Unsupervised Machine Learning</a></li>
-<li><a class="" href="power-analysis.html"><span class="header-section-number">24</span> Power analysis</a></li>
+<li><a class="" href="mixed-models.html"><span class="header-section-number">21</span> Mixed models</a></li>
+<li><a class="" href="generalised-additive-models.html"><span class="header-section-number">22</span> Generalised Additive Models</a></li>
+<li><a class="" href="survival-models.html"><span class="header-section-number">23</span> Survival models</a></li>
+<li><a class="" href="unsupervised-machine-learning.html"><span class="header-section-number">24</span> Unsupervised Machine Learning</a></li>
+<li><a class="" href="power-analysis.html"><span class="header-section-number">25</span> Power analysis</a></li>
 <li class="book-part">Appendices</li>
 <li><a class="" href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></li>
 <li><a class="" href="updating-r-rstudio-and-packages.html"><span class="header-section-number">B</span> Updating R, RStudio, and packages</a></li>
@@ -127,29 +132,29 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="introduction-to-linear-models" class="section level1" number="13">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="introduction-to-linear-models" class="section level1" number="14">
 <h1>
-<span class="header-section-number">13</span> Introduction to Linear Models<a class="anchor" aria-label="anchor" href="#introduction-to-linear-models"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14</span> Introduction to Linear Models<a class="anchor" aria-label="anchor" href="#introduction-to-linear-models"><i class="fas fa-link"></i></a>
 </h1>
 <p>In the last chapter we conducted a simple analysis of Darwin's maize data using R. We worked out confidence intervals 'by hand'. This simple method allowed us to learn more about analysis, estimates, standard error and confidence. But it is also slow, and it relied on the assumptions of a <em>z-distribution</em> to assess true differences between the groups.</p>
 <p>We will now work through a much more efficient way to carry out comparisons, we will use the functions in R that let us perform a <strong>linear model</strong> analysis.</p>
-<div id="packages-1" class="section level3" number="13.0.1">
+<div id="packages-1" class="section level3" number="14.0.1">
 <h3>
-<span class="header-section-number">13.0.1</span> Packages<a class="anchor" aria-label="anchor" href="#packages-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.0.1</span> Packages<a class="anchor" aria-label="anchor" href="#packages-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb329"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb357"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rvlenth/emmeans">emmeans</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/performance/">performance</a></span><span class="op">)</span></code></pre></div>
 </div>
-<div id="a-linear-model-analysis-for-comparing-groups" class="section level2" number="13.1">
+<div id="a-linear-model-analysis-for-comparing-groups" class="section level2" number="14.1">
 <h2>
-<span class="header-section-number">13.1</span> A linear model analysis for comparing groups<a class="anchor" aria-label="anchor" href="#a-linear-model-analysis-for-comparing-groups"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.1</span> A linear model analysis for comparing groups<a class="anchor" aria-label="anchor" href="#a-linear-model-analysis-for-comparing-groups"><i class="fas fa-link"></i></a>
 </h2>
 <p>R has a general function <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> for fitting linear models, this is part of base R (does not require the tidyverse packages). We will run through a few different iterations of the linear model increasing in complexity. We will often want to fit several models to our data, so a common way to work is to fit a model and assign it to a named R object, so that we can extract data from when we need it.</p>
 <p>In the example below I have called the model <code>lsmodel0</code>, short for "least-squares model 0", this is because the linear-model uses a technique called <strong>least-squares</strong> we will explore what this means later.</p>
-<div class="sourceCode" id="cb330"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb358"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lsmodel0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">height</span> <span class="op">~</span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">darwin</span><span class="op">)</span></code></pre></div>
 <div class="try">
 <p>
@@ -162,14 +167,14 @@ lsmodel0 &lt;- darwin %&gt;% lm(height ~ 1, data= .)
 <p>The first argument of the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function is formula (we won't write this out in full in the future) - and this specifies we want to analyse a <strong>response</strong> variable (height) as a function of an <strong>explanatory</strong> variable using the <em>tilde</em> symbol (~).</p>
 <p>The simplest possible model ignores any explanatory variables, instead the <code>1</code> indicates we just want to estimate an intercept. Without explanatory variables this means the formula will just estimate the overall mean height of <strong>all</strong> the plants in the dataset.</p>
 </div>
-<div id="summaries-for-models" class="section level2" number="13.2">
+<div id="summaries-for-models" class="section level2" number="14.2">
 <h2>
-<span class="header-section-number">13.2</span> Summaries for models<a class="anchor" aria-label="anchor" href="#summaries-for-models"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.2</span> Summaries for models<a class="anchor" aria-label="anchor" href="#summaries-for-models"><i class="fas fa-link"></i></a>
 </h2>
 <p>When you have made a linear model, we can investigate a summary of the model using the base R function <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>. There is also a tidyverse option provided by the package <code>broom</code>(<span class="citation">(<a href="#ref-R-broom" role="doc-biblioref"><strong>R-broom?</strong></a>)</span>).</p>
-<div id="broom" class="section level3" number="13.2.1">
+<div id="broom" class="section level3" number="14.2.1">
 <h3>
-<span class="header-section-number">13.2.1</span> Broom<a class="anchor" aria-label="anchor" href="#broom"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.2.1</span> Broom<a class="anchor" aria-label="anchor" href="#broom"><i class="fas fa-link"></i></a>
 </h3>
 <p>broom summarizes key information about models in tidy <code>tibble()s</code>. broom provides three verbs to make it convenient to interact with model objects:</p>
 <ul>
@@ -178,9 +183,9 @@ lsmodel0 &lt;- darwin %&gt;% lm(height ~ 1, data= .)
 <li><p><code><a href="https://generics.r-lib.org/reference/augment.html">broom::augment()</a></code> adds informations about individual observations to a dataset and it can be used to model predictions onto a new dataset.</p></li>
 </ul>
 </div>
-<div id="model-summary" class="section level3" number="13.2.2">
+<div id="model-summary" class="section level3" number="14.2.2">
 <h3>
-<span class="header-section-number">13.2.2</span> Model summary<a class="anchor" aria-label="anchor" href="#model-summary"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.2.2</span> Model summary<a class="anchor" aria-label="anchor" href="#model-summary"><i class="fas fa-link"></i></a>
 </h3>
 <button id="displayTextunnamed-chunk-6" onclick="javascript:toggle('unnamed-chunk-6');">
 Show Solution
@@ -200,7 +205,7 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-6" class="tabcontentunnamed-chunk-6">
-<div class="sourceCode" id="cb331"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb359"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">lsmodel0</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -219,7 +224,7 @@ Base R
 ## Residual standard error: 3.181 on 29 degrees of freedom</code></pre>
 </div>
 <div id="option2unnamed-chunk-6" class="tabcontentunnamed-chunk-6">
-<div class="sourceCode" id="cb333"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb361"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">lsmodel0</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
@@ -265,24 +270,24 @@ p.value
 </div>
 </div>
 <p>The output above is called the <em>table of coefficients</em>. The 18.9 is the <em>estimate of the model coefficient</em> (in this case it is the overall mean), together with its standard error. The first row in any R model output is always labelled the 'Intercept' and the challenge is usually to workout what that represents. In this case we can prove that this is the same as the overall mean as follows:</p>
-<div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb362"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">darwin</span><span class="op">$</span><span class="va">height</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 18.88333</code></pre>
 <p>This simple model allows us to understand what the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function does.</p>
 </div>
-<div id="compare-means" class="section level3" number="13.2.3">
+<div id="compare-means" class="section level3" number="14.2.3">
 <h3>
-<span class="header-section-number">13.2.3</span> Compare means<a class="anchor" aria-label="anchor" href="#compare-means"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.2.3</span> Compare means<a class="anchor" aria-label="anchor" href="#compare-means"><i class="fas fa-link"></i></a>
 </h3>
 <p>What we really want is a linear model that analyses the <em>difference</em> in average plant height as a function of pollination type. We can use the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function to fit this as a linear model as follows:</p>
-<div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lsmodel1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">type</span>, data<span class="op">=</span><span class="va">darwin</span><span class="op">)</span>
 
 <span class="co"># note that the following is identical</span>
 
 <span class="co"># lsmodel1 &lt;- lm(height ~ 1 + type, data=darwin)</span></code></pre></div>
 <p>Now the model formula contains the pollination type in addition to an intercept.</p>
-<div class="sourceCode" id="cb337"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb365"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">lsmodel1</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
@@ -360,7 +365,7 @@ Solution
 <p>So what about the second row? A common mistake is to think that this must refer to the height of the Self plants. However, this cannot be true as the value is <em>negative</em>. Instead what it actually refers to is the <strong>difference in the mean height of the two groups</strong>. This focuses then on the question which we are asking: is their a difference in the height of plants that result from cross pollination when compared to plants that have been self pollinated?</p>
 <p>This linear model indicates the average height of Crossed plants is 20.2 inches, and Selfed plants are an average of 2.6 inches <em>shorter</em>.</p>
 <p>You can confirm this for yourself:</p>
-<div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb366"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">darwin</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -398,7 +403,7 @@ Self
 </div>
 </div>
 <p>Let's take a look at a fuller summary of our model, to see what else we can determine</p>
-<div class="sourceCode" id="cb339"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb367"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">lsmodel1</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -421,11 +426,11 @@ Self
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-12"></span>
 <img src="images/model%20summary.png" alt="Annotation of the summary function output" width="80%"><p class="caption">
-Figure 13.1: Annotation of the summary function output
+Figure 14.1: Annotation of the summary function output
 </p>
 </div>
 <p>We could use the information from this model to superimpose the calculated means onto a plot.</p>
-<div class="sourceCode" id="cb341"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb369"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">darwin</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">type</span>, 
              y<span class="op">=</span><span class="va">height</span>,
@@ -437,9 +442,9 @@ Figure 13.1: Annotation of the summary function output
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-13-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
-<div id="standard-error-of-the-difference-1" class="section level3" number="13.2.4">
+<div id="standard-error-of-the-difference-1" class="section level3" number="14.2.4">
 <h3>
-<span class="header-section-number">13.2.4</span> Standard error of the difference<a class="anchor" aria-label="anchor" href="#standard-error-of-the-difference-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.2.4</span> Standard error of the difference<a class="anchor" aria-label="anchor" href="#standard-error-of-the-difference-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>The output of the model also gives the standard errors of the values (estimates). In the first row the intercept calculates a mean and the standard error of the mean (SEM). As the second row gives the mean <em>difference</em> in this column it gives the <em>standard error of the difference</em> between the two means (SED). We have already seen how to calculate SEM, but what about SED?</p>
 <p><span class="math display">\[
@@ -455,9 +460,9 @@ Our linear model analysis doesn't actually calculate the individual variances fo
 </div>
 </div>
 </div>
-<div id="confidence-intervals-1" class="section level2" number="13.3">
+<div id="confidence-intervals-1" class="section level2" number="14.3">
 <h2>
-<span class="header-section-number">13.3</span> Confidence intervals<a class="anchor" aria-label="anchor" href="#confidence-intervals-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.3</span> Confidence intervals<a class="anchor" aria-label="anchor" href="#confidence-intervals-1"><i class="fas fa-link"></i></a>
 </h2>
 <button id="displayTextunnamed-chunk-15" onclick="javascript:toggle('unnamed-chunk-15');">
 Show Solution
@@ -477,14 +482,14 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-15" class="tabcontentunnamed-chunk-15">
-<div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb370"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/confint.html">confint</a></span><span class="op">(</span><span class="va">lsmodel1</span><span class="op">)</span></code></pre></div>
 <pre><code>##                2.5 %     97.5 %
 ## (Intercept) 18.63651 21.7468231
 ## typeSelf    -4.81599 -0.4173433</code></pre>
 </div>
 <div id="option2unnamed-chunk-15" class="tabcontentunnamed-chunk-15">
-<div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">lsmodel1</span>, conf.int<span class="op">=</span><span class="cn">T</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
@@ -569,9 +574,9 @@ typeSelf
 <p>Because this follows the same layout as the table of coefficients, the output intercept row gives a 95% CI for the height of the crossed plants and the second row gives a 95% interval for the <em>difference in height between crossed and selfed plants</em>. The lower and upper bounds are the 2.5% and 97.5% of a <em>t</em>-distribution (more on this later).</p>
 <p>It is this difference in height in which we are specifically interested. Our summary models have generated <em>p</em>-values but we have conspicuously ignored these for now. Instead we are going to continue to focus on using confidence intervals to answer our question.</p>
 </div>
-<div id="answering-the-question" class="section level2" number="13.4">
+<div id="answering-the-question" class="section level2" number="14.4">
 <h2>
-<span class="header-section-number">13.4</span> Answering the question<a class="anchor" aria-label="anchor" href="#answering-the-question"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.4</span> Answering the question<a class="anchor" aria-label="anchor" href="#answering-the-question"><i class="fas fa-link"></i></a>
 </h2>
 <p>Darwin's original hypothesis was that self-pollination would reduce fitness (using height as a proxy for this). The null hypothesis is that there is no effect of pollination type, and therefore no difference in the average heights.
 We must ask ourselves if our experiment is consistent with this null hypothesis or can we reject it? If we choose to reject the null hypothesis, with what level of confidence can we do so?</p>
@@ -579,7 +584,7 @@ We must ask ourselves if our experiment is consistent with this null hypothesis 
 <p>If our confidence intervals contain zero (or no difference), then we cannot establish a difference between our sample difference in height (-2.62 inches) from the null prediction of zero difference, given the level of variability (noise) in our data.</p>
 <p>In this case we can see that the upper and lower bounds of the confidence intervals do not cross zero. The difference in height is consistent with Darwin's alternate hypothesis of inbreeding depression.</p>
 <p>The <code>GGally</code> package has a handy <code><a href="https://ggobi.github.io/ggally/reference/ggcoef_model.html">ggcoef_model()</a></code> function, that produces a graph of the estimated mean difference with an approx 95% CI. As we can see we are able to reject the null hypothesis at a 95% confidence level.</p>
-<div class="sourceCode" id="cb345"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb373"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">GGally</span><span class="fu">::</span><span class="fu"><a href="https://ggobi.github.io/ggally/reference/ggcoef_model.html">ggcoef_model</a></span><span class="op">(</span><span class="va">lsmodel1</span>,
                      show_p_values<span class="op">=</span><span class="cn">FALSE</span>, 
                      conf.level<span class="op">=</span><span class="fl">0.95</span><span class="op">)</span></code></pre></div>
@@ -591,7 +596,7 @@ Set the confidence levels to 99%, do you think the difference between treatments
 </div>
 <p>If we increase the level of confidence (from 95% to 99%, roughly 2 SE to 3 SE), then we may find that we cannot reject the null hypothesis at a higher threshold of confidence. Try altering the conf.level argument above for yourself to see this in action.</p>
 <p>We can also include this argument in the <code><a href="https://generics.r-lib.org/reference/tidy.html">tidy()</a></code> function if we wish to:</p>
-<div class="sourceCode" id="cb346"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">lsmodel1</span>, conf.int<span class="op">=</span><span class="cn">T</span>, conf.level<span class="op">=</span><span class="fl">0.99</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
@@ -668,12 +673,12 @@ typeSelf
 </tbody>
 </table></div>
 </div>
-<div id="getting-the-other-treatment-mean-and-standard-error" class="section level3" number="13.4.1">
+<div id="getting-the-other-treatment-mean-and-standard-error" class="section level3" number="14.4.1">
 <h3>
-<span class="header-section-number">13.4.1</span> Getting the other treatment mean and standard error<a class="anchor" aria-label="anchor" href="#getting-the-other-treatment-mean-and-standard-error"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.4.1</span> Getting the other treatment mean and standard error<a class="anchor" aria-label="anchor" href="#getting-the-other-treatment-mean-and-standard-error"><i class="fas fa-link"></i></a>
 </h3>
 <p>One limitation of the table of coefficients output is that it doesn't provide the mean and standard error of the <em>other</em> treatment level (only the difference between them). If we wish to calculate the "other" mean and SE then we can get R to do this.</p>
-<div class="sourceCode" id="cb347"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb375"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">darwin</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>type<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>type<span class="op">=</span><span class="fu">fct_relevel</span><span class="op">(</span><span class="va">type</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Self"</span>, <span class="st">"Cross"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -738,12 +743,12 @@ typeCross
 </div>
 <p>After relevelling, the self treatment is now taken as the intercept, and we get the estimate for it's mean and standard error</p>
 </div>
-<div id="emmeans" class="section level3" number="13.4.2">
+<div id="emmeans" class="section level3" number="14.4.2">
 <h3>
-<span class="header-section-number">13.4.2</span> Emmeans<a class="anchor" aria-label="anchor" href="#emmeans"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.4.2</span> Emmeans<a class="anchor" aria-label="anchor" href="#emmeans"><i class="fas fa-link"></i></a>
 </h3>
 <p>We could also use the package <a href="https://aosmith.rbind.io/2019/03/25/getting-started-with-emmeans/"><code>emmeans</code></a> and its function <code><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html">emmeans()</a></code> to do a similar thing</p>
-<div class="sourceCode" id="cb348"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb376"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">means</span> <span class="op">&lt;-</span> <span class="fu">emmeans</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html">emmeans</a></span><span class="op">(</span><span class="va">lsmodel1</span>, specs <span class="op">=</span> <span class="op">~</span> <span class="va">type</span><span class="op">)</span>
 
 <span class="va">means</span></code></pre></div>
@@ -754,7 +759,7 @@ typeCross
 ## Confidence level used: 0.95</code></pre>
 <p>The advantage of emmeans is that it provides the mean, standard error and 95% confidence interval estimates of all levels from the model at once (e.g. it relevels the model multiple times behind the scenes).</p>
 <p><code>emmeans</code> also gives us a handy summary to include in data visuals that combine raw data and statistical inferences. These are standard <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> outputs so can be <a href="data-visualisation-with-ggplot2.html#intro-to-grammar">customised as much as you want</a>.</p>
-<div class="sourceCode" id="cb350"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb378"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">means</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">type</span>, 
@@ -772,9 +777,9 @@ Notice how the Confidence intervals of the estimated means strongly overlap, the
 <p>Because of this pooled variance, there is an assumption that variance is equal across the groups, this and other assumptions of the linear model should be checked. We cannot trust our results if the assumptions of the model are not adequately met.</p>
 </div>
 </div>
-<div id="assumption-checking" class="section level2" number="13.5">
+<div id="assumption-checking" class="section level2" number="14.5">
 <h2>
-<span class="header-section-number">13.5</span> Assumption checking<a class="anchor" aria-label="anchor" href="#assumption-checking"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.5</span> Assumption checking<a class="anchor" aria-label="anchor" href="#assumption-checking"><i class="fas fa-link"></i></a>
 </h2>
 <p>So now we have been through the main parts of a linear model analysis, we have results and inferences. But we need to check whether the assumptions of the model are adequately met so that we know whether our analysis can be trusted.</p>
 <p>In this first part we are going to check two of our assumptions:</p>
@@ -802,12 +807,12 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-23" class="tabcontentunnamed-chunk-23">
-<div class="sourceCode" id="cb351"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">performance</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html">check_model</a></span><span class="op">(</span><span class="va">lsmodel1</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-38-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <div id="option2unnamed-chunk-23" class="tabcontentunnamed-chunk-23">
-<div class="sourceCode" id="cb352"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">lsmodel1</span><span class="op">)</span></code></pre></div>
 <p><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-39-1.png" width="100%" style="display: block; margin: auto;"><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-39-2.png" width="100%" style="display: block; margin: auto;"><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-39-3.png" width="100%" style="display: block; margin: auto;"><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-39-4.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
@@ -815,69 +820,69 @@ Base R
 </div>
 </div>
 </div>
-<div id="normal-distribution-2" class="section level3" number="13.5.1">
+<div id="normal-distribution-2" class="section level3" number="14.5.1">
 <h3>
-<span class="header-section-number">13.5.1</span> Normal distribution<a class="anchor" aria-label="anchor" href="#normal-distribution-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.5.1</span> Normal distribution<a class="anchor" aria-label="anchor" href="#normal-distribution-2"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb353"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">performance</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html">check_model</a></span><span class="op">(</span><span class="va">lsmodel1</span>, check<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"normality"</span>,<span class="st">"qq"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-24-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb354"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">lsmodel1</span>, which<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-25-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div id="what-is-a-quantile-quantile-qq-plot" class="section level4" number="13.5.1.1">
+<div id="what-is-a-quantile-quantile-qq-plot" class="section level4" number="14.5.1.1">
 <h4>
-<span class="header-section-number">13.5.1.1</span> What is a Quantile-Quantile (QQ) plot?<a class="anchor" aria-label="anchor" href="#what-is-a-quantile-quantile-qq-plot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.5.1.1</span> What is a Quantile-Quantile (QQ) plot?<a class="anchor" aria-label="anchor" href="#what-is-a-quantile-quantile-qq-plot"><i class="fas fa-link"></i></a>
 </h4>
 <p>A QQ plot is a classic way of checking whether a sample distribution is the same as another (or theoretical distribution). They look a bit odd at first, but they are actually fairly easy to understand, and very useful! The qqplot distributes your data on the y-axis, and a theoretical normal distribution on the x-axis. If the residuals follow a normal distribution, they should meet to produce a perfect diagonal line across the plot.</p>
 <p>Watch this video to see <a href="https://www.youtube.com/watch?v=okjYjClSjOg">QQ plots explained</a></p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-26"></span>
 <img src="images/qq_example.png" alt="Examples of qqplots with different deviations from a normal distribution" width="80%"><p class="caption">
-Figure 13.2: Examples of qqplots with different deviations from a normal distribution
+Figure 14.2: Examples of qqplots with different deviations from a normal distribution
 </p>
 </div>
 <p>In our example we can see that <em>most</em> of our residuals can be explained by a normal distribution, except at the extreme low end of our data. This is not surprising, as we already identified some potential outliers.</p>
 <p>So the fit is not perfect, but it is also not terrible!</p>
 </div>
 </div>
-<div id="equal-variance" class="section level3" number="13.5.2">
+<div id="equal-variance" class="section level3" number="14.5.2">
 <h3>
-<span class="header-section-number">13.5.2</span> Equal variance<a class="anchor" aria-label="anchor" href="#equal-variance"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.5.2</span> Equal variance<a class="anchor" aria-label="anchor" href="#equal-variance"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb355"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb383"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">performance</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html">check_model</a></span><span class="op">(</span><span class="va">lsmodel1</span>, check<span class="op">=</span><span class="st">"homogeneity"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-27-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb356"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">lsmodel1</span>, which<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-28-1.png" width="100%" style="display: block; margin: auto;"><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-28-2.png" width="100%" style="display: block; margin: auto;"></p>
 <p>In order to assess if variances are equal we can plot the residuals (variance) of our data against the fitted (predicted) values. If the residuals were zero, this would mean there is no error, and our data exactly matches our estimates. In reality, there will always be residual error, but as long as it is evenly distributed between treatments this is ok.</p>
 <p>The <code>check_models</code> plot provides what we call 'standardized residuals' where we divide the residual error by the standard deviation.</p>
 <p>In this instance we can see that the higher fitted values (Cross treatment) appears to be more variable than the lower fitted values. Again, this is not too bad, but not perfect. This is probably being influence at least partially by the potential outliers.</p>
 </div>
-<div id="outliers" class="section level3" number="13.5.3">
+<div id="outliers" class="section level3" number="14.5.3">
 <h3>
-<span class="header-section-number">13.5.3</span> Outliers<a class="anchor" aria-label="anchor" href="#outliers"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.5.3</span> Outliers<a class="anchor" aria-label="anchor" href="#outliers"><i class="fas fa-link"></i></a>
 </h3>
 <p>We have talked a lot about the potential effect of outliers, we can see that they are potentially affecting our estimates of error/variance. However, we should also check how much of an effect they might be having on the model estimates (means). This is where formal outlier tests are useful.</p>
-<div class="sourceCode" id="cb357"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb385"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">performance</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html">check_model</a></span><span class="op">(</span><span class="va">lsmodel1</span>, check<span class="op">=</span><span class="st">"outliers"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-29-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb358"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb386"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span><span class="op">(</span><span class="va">lsmodel1</span>, which<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-30-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>The value which the data points are being measured against is called Cook's distance. This is a measure of how much 'leverage' a single data point is exerting on the model, if it is too high, it may be having an outsized effect on the estimates. The <code><a href="https://easystats.github.io/performance/reference/check_model.html">check_model()</a></code> function gives contours to indicate whether data points fall inside or outside the margins for affecting fit, but a rough estimate for an acceptable Cook's Distance is either <span class="math inline">\(\frac{4}{N}\)</span> or <span class="math inline">\(\frac{4}{df}\)</span>, but you are unlikely to have to calculate this by hand.</p>
 </div>
 </div>
-<div id="summary-3" class="section level2" number="13.6">
+<div id="summary-3" class="section level2" number="14.6">
 <h2>
-<span class="header-section-number">13.6</span> Summary<a class="anchor" aria-label="anchor" href="#summary-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.6</span> Summary<a class="anchor" aria-label="anchor" href="#summary-3"><i class="fas fa-link"></i></a>
 </h2>
 <p>So what can we determine from this analysis? Our model is not perfect, however it is reasonably good. However, we have not addressed an important part of our experimental design yet. The fact that the plants are paired, so in this example we have basically carried out a Student's t-test, not a paired t-test. Later we will add pair as another explanatory variable and see how this affects our model.</p>
 <p>So remember a linear model sets one factor level as the 'intercept' estimates its mean, then draws a line from the first treatment to the second treatment, the slope of the line is the difference in means between the two treatments.</p>
 <p>The difference in means is always accompanied by a standard error of the difference (SED), and this can be used to calculate a 95% confidence interval. If this confidence interval does not contain the intercept value, we can reject the null hypothesis that there is 'no effect'.</p>
 <p>Linear models make a variety of assumptions, including that the noise (residual differences) are approximately normally distributed, with roughly equal (homogenous) variance.</p>
-<div class="sourceCode" id="cb359"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb387"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">darwin</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">type</span>, 
              y<span class="op">=</span><span class="va">height</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
@@ -1071,38 +1076,38 @@ $( document ).ready(function() {
   );
 });
 </script><div class="chapter-nav">
-<div class="prev"><a href="introduction-to-statistics.html"><span class="header-section-number">12</span> Introduction to statistics</a></div>
-<div class="next"><a href="testing.html"><span class="header-section-number">14</span> Testing</a></div>
+<div class="prev"><a href="introduction-to-statistics.html"><span class="header-section-number">13</span> Introduction to statistics</a></div>
+<div class="next"><a href="testing.html"><span class="header-section-number">15</span> Testing</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li>
-<a class="nav-link" href="#introduction-to-linear-models"><span class="header-section-number">13</span> Introduction to Linear Models</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#packages-1"><span class="header-section-number">13.0.1</span> Packages</a></li></ul>
+<a class="nav-link" href="#introduction-to-linear-models"><span class="header-section-number">14</span> Introduction to Linear Models</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#packages-1"><span class="header-section-number">14.0.1</span> Packages</a></li></ul>
 </li>
-<li><a class="nav-link" href="#a-linear-model-analysis-for-comparing-groups"><span class="header-section-number">13.1</span> A linear model analysis for comparing groups</a></li>
+<li><a class="nav-link" href="#a-linear-model-analysis-for-comparing-groups"><span class="header-section-number">14.1</span> A linear model analysis for comparing groups</a></li>
 <li>
-<a class="nav-link" href="#summaries-for-models"><span class="header-section-number">13.2</span> Summaries for models</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#broom"><span class="header-section-number">13.2.1</span> Broom</a></li>
-<li><a class="nav-link" href="#model-summary"><span class="header-section-number">13.2.2</span> Model summary</a></li>
-<li><a class="nav-link" href="#compare-means"><span class="header-section-number">13.2.3</span> Compare means</a></li>
-<li><a class="nav-link" href="#standard-error-of-the-difference-1"><span class="header-section-number">13.2.4</span> Standard error of the difference</a></li>
+<a class="nav-link" href="#summaries-for-models"><span class="header-section-number">14.2</span> Summaries for models</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#broom"><span class="header-section-number">14.2.1</span> Broom</a></li>
+<li><a class="nav-link" href="#model-summary"><span class="header-section-number">14.2.2</span> Model summary</a></li>
+<li><a class="nav-link" href="#compare-means"><span class="header-section-number">14.2.3</span> Compare means</a></li>
+<li><a class="nav-link" href="#standard-error-of-the-difference-1"><span class="header-section-number">14.2.4</span> Standard error of the difference</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#confidence-intervals-1"><span class="header-section-number">13.3</span> Confidence intervals</a></li>
+<li><a class="nav-link" href="#confidence-intervals-1"><span class="header-section-number">14.3</span> Confidence intervals</a></li>
 <li>
-<a class="nav-link" href="#answering-the-question"><span class="header-section-number">13.4</span> Answering the question</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#getting-the-other-treatment-mean-and-standard-error"><span class="header-section-number">13.4.1</span> Getting the other treatment mean and standard error</a></li>
-<li><a class="nav-link" href="#emmeans"><span class="header-section-number">13.4.2</span> Emmeans</a></li>
+<a class="nav-link" href="#answering-the-question"><span class="header-section-number">14.4</span> Answering the question</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#getting-the-other-treatment-mean-and-standard-error"><span class="header-section-number">14.4.1</span> Getting the other treatment mean and standard error</a></li>
+<li><a class="nav-link" href="#emmeans"><span class="header-section-number">14.4.2</span> Emmeans</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#assumption-checking"><span class="header-section-number">13.5</span> Assumption checking</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#normal-distribution-2"><span class="header-section-number">13.5.1</span> Normal distribution</a></li>
-<li><a class="nav-link" href="#equal-variance"><span class="header-section-number">13.5.2</span> Equal variance</a></li>
-<li><a class="nav-link" href="#outliers"><span class="header-section-number">13.5.3</span> Outliers</a></li>
+<a class="nav-link" href="#assumption-checking"><span class="header-section-number">14.5</span> Assumption checking</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#normal-distribution-2"><span class="header-section-number">14.5.1</span> Normal distribution</a></li>
+<li><a class="nav-link" href="#equal-variance"><span class="header-section-number">14.5.2</span> Equal variance</a></li>
+<li><a class="nav-link" href="#outliers"><span class="header-section-number">14.5.3</span> Outliers</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#summary-3"><span class="header-section-number">13.6</span> Summary</a></li>
+<li><a class="nav-link" href="#summary-3"><span class="header-section-number">14.6</span> Summary</a></li>
 </ul>
 
       <div class="book-extra">
@@ -1120,7 +1125,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-09-18.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-09-26.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

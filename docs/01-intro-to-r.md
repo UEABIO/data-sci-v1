@@ -478,7 +478,7 @@ Look at the environment tab again - you should see it's starting to fill up now!
 <div class="info">
 <p>RStudio will by default save the objects in its memory when you close a session.</p>
 <p>These will then be there the next time you logon. It might seem nice to be able to close things down and pick up where you left off, but its actually quite dangerous. It's messy, and can cause lots of problems when we work with scripts later, so don't do this!</p>
-<p>To stop RStudio from saving objects by default go to the Preferences option and change "Save workspace to .RData on exit" to "Never".</p>
+<p>To stop RStudio from saving objects by default go to Tools &gt; Project Options option and change "Save workspace to .RData on exit" to "No" or "Never".</p>
 <p>Instead we are going to learn how to use scripts to quickly re-run analyses we have been working on.</p>
 </div>
 
@@ -730,7 +730,10 @@ ggplot(data = penguins, # calls ggplot function, data is penguins
 
 Until now we have been typing words directly into the Console. This is fine for short/simple calculations - but as soon as we have a more complex, multi-step process this becomes time consuming, error-prone and *boring*. **Scripts** are a document containing all of your commands (in the order you want them to run), they are *repeatable, shareable, annotated records of what you have done*. In short they are incredibly useful - and a big step towards **open** and **reproducible** research.
 
-To create a script go to File \> New File \> R Script.
+
+<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
+Create a script by going to File \> New File \> R Script. </div></div>
+
 
 <div class="figure" style="text-align: center">
 <img src="images/rstudio.png" alt="RStudio interface - top left script, botto  left console" width="100%" />
@@ -950,11 +953,9 @@ When you get the correct answer, the answer box will turn green. Sometimes this 
 
 <input class='webex-solveme nospaces' size='3' data-answer='["625"]'/>
 
-**Question 2.**  Put the brackets in the correct place to make this equation correct `4+2*8 = 48`
 
-<input class='webex-solveme nospaces' size='2' data-answer='["48"]'/>
 
-**Question 3.**  What answer will you get when you type `2+2 = 4` into the R console?
+**Question 2.**  What answer will you get when you type `2+2 = 4` into the R console?
 
 <select class='webex-select'><option value='blank'></option><option value=''>TRUE</option><option value=''>FALSE</option><option value='answer'>Error</option></select>
 
@@ -968,11 +969,11 @@ If we wanted R to make a judgement we must use == not = otherwise we will get an
 </div>
 
 
-**Question 4.**  What symbol do I use if I want to **assign** a value or output of a function to an R object
+**Question 3.**  What symbol do I use if I want to **assign** a value or output of a function to an R object
 
 <input class='webex-solveme nospaces' size='2' data-answer='["<-"]'/>
 
-**Question 5.**  What is the value of `a` if I ran the following commands?
+**Question 4.**  What is the value of `a` if I ran the following commands?
 
 
 ```r
@@ -983,18 +984,18 @@ a <- 5
 
 <input class='webex-solveme nospaces' size='1' data-answer='["5"]'/>
 
-**Question 6.**  Which of these variable naming conventions is **not** written correctly?
+**Question 5.**  Which of these variable naming conventions is **not** written correctly?
 
 <select class='webex-select'><option value='blank'></option><option value=''>snake_case</option><option value=''>camelCase</option><option value='answer'>Screaming_Snake_Case</option><option value=''>kebab-case</option></select>
 
-**Question 7.**  What should I type into the R console if I want `help` with the `round()` function?
+**Question 6.**  What should I type into the R console if I want `help` with the `round()` function?
 
 <input class='webex-solveme nospaces' size='11' data-answer='["help(round)"]'/>
 
-**Question 8.**  Which of these statements about function arguments **is not true**
+**Question 7.**  Which of these statements about function arguments **is not true**
 
 <select class='webex-select'><option value='blank'></option><option value=''>Arguments are the inputs we give to a function</option><option value='answer'>Values for R arguments must always be defined by the user</option><option value=''>Naming arguments supersedes position in a function</option><option value=''>There is no limit to the number of arguments a function could have</option></select>
 
-**Question 9.**  Evaluate this statement "An R Package can contain code functions, data, or both."
+**Question 8.**  Evaluate this statement "An R Package can contain code functions, data, or both."
 
 <select class='webex-select'><option value='blank'></option><option value='answer'>TRUE</option><option value=''>FALSE</option></select>

@@ -194,7 +194,7 @@ In this example, by grouping on the individual penguin ids, then summarising by 
 
 ```r
 penguin_stats <- penguins %>% 
-  group_by(penguin_id) %>% 
+  group_by(individual_id) %>% 
   summarise(num=n())
 ```
 
@@ -623,9 +623,21 @@ penguins %>%
 
 ## Finished
 
-* Make sure you have **saved your script 💾** in the ["scripts" folder](#activity-1-organising-our-workspace).
+* Make sure you have **saved your script 💾**  and given it the filename "01_import_penguins_data.R" in the ["scripts" folder](#activity-1-organising-our-workspace).
 
 * Make sure your workspace is set **not** to save objects from the environment [*between* sessions](#global-options).
+
+* Does your workspace look like the below? 
+
+<div class="figure" style="text-align: center">
+<img src="images/project_penguin.png" alt="My neat project layout" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-44)My neat project layout</p>
+</div>
+
+<div class="figure" style="text-align: center">
+<img src="images/r_script.png" alt="My scripts and file subdirectory" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-45)My scripts and file subdirectory</p>
+</div>
 
 ## Activity: Test yourself
 

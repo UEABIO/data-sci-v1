@@ -41,7 +41,7 @@ Today we are going to make a NEW R script in the same project space as we have p
 
 * Open a **new** R script - we are moving on from data wrangling to data visualisation
 
-* Save this file in the scripts folder and call it `02_visualisation_penguins.R`
+* Save this file **in the scripts folder** and call it `02_visualisation_penguins.R`
 
 * Add the following to your script and run it:
 
@@ -54,11 +54,58 @@ source("scripts/01_import_penguins_data.R")
 
 * You should find your Environment fills up with objects from script 1
 
-* Save this **new** file inside the scripts folder and call it `02_graphs_penguins.R`
 
 ```{block, type = "info"}
 The `source()` function is a very handy way of allowing you to have different scripts for different parts of your R project, but allow access to objects built elsewhere. In this way we are building our analysis in stages.
 ```
+
+```{block, type = "warning"}
+
+The above command will ONLY work if you remembered to save and name your script exactly as above AND put that script inside a subfolder called scripts. 
+
+Does your project look like the one below?
+
+```
+
+
+```{r, eval=TRUE, echo=FALSE, out.width="100%",  fig.cap="My neat project layout"}
+knitr::include_graphics("images/project_penguin.png")
+```
+
+```{r, eval=TRUE, echo=FALSE, out.width="100%",  fig.cap="If you have sucessfully saved 02_visualisation_penguins.R it should be visible here too "}
+knitr::include_graphics("images/r_script.png")
+```
+
+### What if source isn't working?
+
+If source isn't working, or you can't figure out your project set-up you can complete this worksheet if you put the following commands at the top of your script *instead* of `source("scripts/01_import_penguins_data.R")`
+
+`r hide("Script adjustment")`
+
+```{r, eval = F}
+
+#___________________________----
+# SET UP ----
+## An analysis of the bill dimensions of male and female Adelie, Gentoo and Chinstrap penguins ----
+
+### Data first published in  Gorman, KB, TD Williams, and WR Fraser. 2014. “Ecological Sexual Dimorphism and Environmental Variability Within a Community of Antarctic Penguins (Genus Pygoscelis).” PLos One 9 (3): e90081. https://doi.org/10.1371/journal.pone.0090081. ----
+#__________________________----
+
+# PACKAGES ----
+library(tidyverse) # tidy data packages
+library(janitor) # cleans variable names
+library(lubridate) # make sure dates are processed properly
+#__________________________----
+
+# IMPORT DATA ----
+penguins <- read_csv ("data/penguins_raw.csv")
+
+penguins <- janitor::clean_names(penguins) # clean variable names
+#__________________________----
+
+```
+
+`r unhide()`
 
 ## Building a plot
 

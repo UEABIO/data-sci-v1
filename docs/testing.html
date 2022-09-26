@@ -4,18 +4,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 14 Testing | 5023Y</title>
+<title>Chapter 15 Testing | 5023Y</title>
 <meta name="author" content="Philip T. Leftwich">
-<meta name="description" content="14.1 It's t-time In the last chapter we used linear models to calculate estimates, estimates of mean difference and confidence intervals. As we can set our confidence intervals to whatever...">
+<meta name="description" content="15.1 It's t-time In the last chapter we used linear models to calculate estimates, estimates of mean difference and confidence intervals. As we can set our confidence intervals to whatever...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 14 Testing | 5023Y">
+<meta property="og:title" content="Chapter 15 Testing | 5023Y">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://ueabio.github.io/data-sci/testing.html">
 <meta property="og:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
-<meta property="og:description" content="14.1 It's t-time In the last chapter we used linear models to calculate estimates, estimates of mean difference and confidence intervals. As we can set our confidence intervals to whatever...">
+<meta property="og:description" content="15.1 It's t-time In the last chapter we used linear models to calculate estimates, estimates of mean difference and confidence intervals. As we can set our confidence intervals to whatever...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 14 Testing | 5023Y">
-<meta name="twitter:description" content="14.1 It's t-time In the last chapter we used linear models to calculate estimates, estimates of mean difference and confidence intervals. As we can set our confidence intervals to whatever...">
+<meta name="twitter:title" content="Chapter 15 Testing | 5023Y">
+<meta name="twitter:description" content="15.1 It's t-time In the last chapter we used linear models to calculate estimates, estimates of mean difference and confidence intervals. As we can set our confidence intervals to whatever...">
 <meta name="twitter:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.13/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -88,30 +88,35 @@
 <li class="book-part">R Programming</li>
 <li><a class="" href="introduction-to-r-and-rstudio.html"><span class="header-section-number">1</span> Introduction to R and RStudio</a></li>
 <li><a class="" href="basic-programming.html"><span class="header-section-number">2</span> Basic programming</a></li>
+<li class="book-part">Exploring Data</li>
 <li><a class="" href="loading-data.html"><span class="header-section-number">3</span> Loading data</a></li>
 <li><a class="" href="data-wrangling-part-one.html"><span class="header-section-number">4</span> Data wrangling part one</a></li>
 <li><a class="" href="data-wrangling-part-two.html"><span class="header-section-number">5</span> Data wrangling part two</a></li>
 <li><a class="" href="data-visualisation-with-ggplot2.html"><span class="header-section-number">6</span> Data visualisation with ggplot2</a></li>
+<li class="book-part">Literate Programming and Reproducibility</li>
 <li><a class="" href="markdown.html"><span class="header-section-number">7</span> Markdown</a></li>
 <li><a class="" href="github.html"><span class="header-section-number">8</span> Github</a></li>
-<li><a class="" href="functions-and-iteration.html"><span class="header-section-number">9</span> Functions and Iteration</a></li>
-<li><a class="" href="data-insights-part-one.html"><span class="header-section-number">10</span> Data Insights part one</a></li>
-<li><a class="" href="data-insights-part-two.html"><span class="header-section-number">11</span> Data insights part two</a></li>
+<li class="book-part">DRY code</li>
+<li><a class="" href="functions-1.html"><span class="header-section-number">9</span> Functions</a></li>
+<li><a class="" href="iteration.html"><span class="header-section-number">10</span> Iteration</a></li>
+<li class="book-part">Advanced Data Insights</li>
+<li><a class="" href="data-insights-part-one.html"><span class="header-section-number">11</span> Data Insights part one</a></li>
+<li><a class="" href="data-insights-part-two.html"><span class="header-section-number">12</span> Data insights part two</a></li>
 <li class="book-part">Statistics</li>
-<li><a class="" href="introduction-to-statistics.html"><span class="header-section-number">12</span> Introduction to statistics</a></li>
-<li><a class="" href="introduction-to-linear-models.html"><span class="header-section-number">13</span> Introduction to Linear Models</a></li>
-<li><a class="active" href="testing.html"><span class="header-section-number">14</span> Testing</a></li>
-<li><a class="" href="regression.html"><span class="header-section-number">15</span> Regression</a></li>
-<li><a class="" href="anova.html"><span class="header-section-number">16</span> ANOVA</a></li>
-<li><a class="" href="multivariate-linear-models.html"><span class="header-section-number">17</span> Multivariate linear models</a></li>
-<li><a class="" href="complex-models.html"><span class="header-section-number">18</span> Complex models</a></li>
-<li><a class="" href="generalized-linear-models.html"><span class="header-section-number">19</span> Generalized Linear Models</a></li>
+<li><a class="" href="introduction-to-statistics.html"><span class="header-section-number">13</span> Introduction to statistics</a></li>
+<li><a class="" href="introduction-to-linear-models.html"><span class="header-section-number">14</span> Introduction to Linear Models</a></li>
+<li><a class="active" href="testing.html"><span class="header-section-number">15</span> Testing</a></li>
+<li><a class="" href="regression.html"><span class="header-section-number">16</span> Regression</a></li>
+<li><a class="" href="anova.html"><span class="header-section-number">17</span> ANOVA</a></li>
+<li><a class="" href="multivariate-linear-models.html"><span class="header-section-number">18</span> Multivariate linear models</a></li>
+<li><a class="" href="complex-models.html"><span class="header-section-number">19</span> Complex models</a></li>
+<li><a class="" href="generalized-linear-models.html"><span class="header-section-number">20</span> Generalized Linear Models</a></li>
 <li class="book-part">Advanced topics</li>
-<li><a class="" href="mixed-models.html"><span class="header-section-number">20</span> Mixed models</a></li>
-<li><a class="" href="generalised-additive-models.html"><span class="header-section-number">21</span> Generalised Additive Models</a></li>
-<li><a class="" href="survival-models.html"><span class="header-section-number">22</span> Survival models</a></li>
-<li><a class="" href="unsupervised-machine-learning.html"><span class="header-section-number">23</span> Unsupervised Machine Learning</a></li>
-<li><a class="" href="power-analysis.html"><span class="header-section-number">24</span> Power analysis</a></li>
+<li><a class="" href="mixed-models.html"><span class="header-section-number">21</span> Mixed models</a></li>
+<li><a class="" href="generalised-additive-models.html"><span class="header-section-number">22</span> Generalised Additive Models</a></li>
+<li><a class="" href="survival-models.html"><span class="header-section-number">23</span> Survival models</a></li>
+<li><a class="" href="unsupervised-machine-learning.html"><span class="header-section-number">24</span> Unsupervised Machine Learning</a></li>
+<li><a class="" href="power-analysis.html"><span class="header-section-number">25</span> Power analysis</a></li>
 <li class="book-part">Appendices</li>
 <li><a class="" href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></li>
 <li><a class="" href="updating-r-rstudio-and-packages.html"><span class="header-section-number">B</span> Updating R, RStudio, and packages</a></li>
@@ -127,20 +132,20 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="testing" class="section level1" number="14">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="testing" class="section level1" number="15">
 <h1>
-<span class="header-section-number">14</span> Testing<a class="anchor" aria-label="anchor" href="#testing"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15</span> Testing<a class="anchor" aria-label="anchor" href="#testing"><i class="fas fa-link"></i></a>
 </h1>
-<div id="its-t-time" class="section level2" number="14.1">
+<div id="its-t-time" class="section level2" number="15.1">
 <h2>
-<span class="header-section-number">14.1</span> It's t-time<a class="anchor" aria-label="anchor" href="#its-t-time"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.1</span> It's t-time<a class="anchor" aria-label="anchor" href="#its-t-time"><i class="fas fa-link"></i></a>
 </h2>
 <p>In the last chapter we used linear models to calculate estimates, estimates of mean difference and confidence intervals. As we can set our confidence intervals to whatever threshold we choose - reporting these without <em>P</em> should be sufficient for any estimation we choose. It's the interesting bit, reporting the direction and effect size of any relationship or difference at whatever confidence threshold we want.</p>
 <p><em>P</em>-values by comparison, are boring, no-one actually cares about <em>P</em>-values, but you would be forgiven for thinking they are the most important thing about statistics from the way we often see them presented. And so, inevitably, you will be asked to supply a <em>P</em>-value for many of your lab reports, dissertations (and maybe future scientific papers). Luckily significance tests come parcelled in with the coefficients of our linear models.</p>
 </div>
-<div id="students-t-test" class="section level2" number="14.2">
+<div id="students-t-test" class="section level2" number="15.2">
 <h2>
-<span class="header-section-number">14.2</span> Student's <em>t</em>-test<a class="anchor" aria-label="anchor" href="#students-t-test"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.2</span> Student's <em>t</em>-test<a class="anchor" aria-label="anchor" href="#students-t-test"><i class="fas fa-link"></i></a>
 </h2>
 <p>The Student's <em>t</em>-test uses the <em>t</em>-distribution, a small-sample size version of the normal distribution, where tails are fatter if the degrees of freedome are small. There are two basic types of <em>t</em>-test which we have encountered with our linear models.</p>
 <ul>
@@ -176,7 +181,7 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-3" class="tabcontentunnamed-chunk-3">
-<div class="sourceCode" id="cb361"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb389"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">4</span>, <span class="fl">4</span>, length<span class="op">=</span><span class="fl">100</span><span class="op">)</span>
 <span class="va">hx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
 
@@ -196,7 +201,7 @@ Base R
 <div class="inline-figure"><img src="14-Testing_files/figure-html/unnamed-chunk-20-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <div id="option2unnamed-chunk-3" class="tabcontentunnamed-chunk-3">
-<div class="sourceCode" id="cb362"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb390"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">4</span>, <span class="fl">4</span>, length<span class="op">=</span><span class="fl">100</span><span class="op">)</span>
 <span class="va">z_dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
 
@@ -223,7 +228,7 @@ Base R
 </div>
 <p>A potential source of confusion when discussing <em>t</em> is that there are two values that must be considered. There is <em>critical t</em> the value which must be <strong>exceeded</strong> for the test to be significant (e.g. generates a <em>P</em> value that is less than our predefined <span class="math inline">\(\alpha\)</span>). The critical value for <em>t</em> is defined by the <em>df</em>. Then there is the <em>observed </em> value of <em>t</em>, this is the value returned by your statistical test, calculated by <span class="math inline">\(\frac{difference}{SE}\)</span>. When <span class="math inline">\(observed~t &gt; critical~t\)</span> the result can be declared significantly different at that threshold for <span class="math inline">\(\alpha\)</span>.</p>
 <p>We are spending a lot of time with <em>t</em> because it is the default value generated by our linear model outputs, instead of assuming a normal distriubtion and using <em>z</em>. Recall that for a <em>z</em> distribution the critical value for <em>P</em> = 0.05 is <span class="math inline">\(1.96 * SE\)</span> (or roughly double the Standard Error), and actually if we look at the figure above, we can see that even at only 8 <em>df</em> the distribution of <em>t</em> is starting to look pretty close to a <em>z</em> distribution. The values for critical <em>t</em> at each degree of freedom up to 30 are presented below</p>
-<div class="sourceCode" id="cb363"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb391"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span><span class="op">)</span>
 
 <span class="co"># map_dbl forces returned values to be a single vector of numbers (rather than a list)</span>
@@ -239,7 +244,7 @@ Base R
 <div class="inline-figure"><img src="14-Testing_files/figure-html/unnamed-chunk-4-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>So far we have used a mixture of the base R <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function and the broom package tibbles produced by <code><a href="https://generics.r-lib.org/reference/tidy.html">broom::tidy()</a></code>. Summary is the most common way to investigate a model result, but it is its own specific type of R object (e.g. not a dataframe or a tibble), which is why tidying the results into a dataframe like structure can be useful.
 Using either method we can can see that they include <em>t</em>-tests for the coefficient, summary explicity calls them <em>t</em>, while <code><a href="https://generics.r-lib.org/reference/tidy.html">tidy()</a></code> refers to them generically as the 'statistic'</p>
-<div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb392"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lsmodel1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">type</span>, data <span class="op">=</span> <span class="va">darwin</span><span class="op">)</span></code></pre></div>
 <div class="panel panel-default">
 <div class="panel-heading">
@@ -267,7 +272,7 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-7" class="tabcontentunnamed-chunk-7">
-<div class="sourceCode" id="cb365"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb393"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">lsmodel1</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -289,7 +294,7 @@ Base R
 ## F-statistic:  5.94 on 1 and 28 DF,  p-value: 0.02141</code></pre>
 </div>
 <div id="option2unnamed-chunk-7" class="tabcontentunnamed-chunk-7">
-<div class="sourceCode" id="cb367"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb395"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">lsmodel1</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
@@ -357,16 +362,16 @@ typeSelf
 <p>As an example the <em>second</em> row of our table is a test we planned to perform, it tests our null hypothesis by comparing the average observed difference in plant heights between cross and self-pollinated plants, it calculates the average difference (estimate), the amount of uncertainty (std. error), then calculates an <em>observed t</em> value and determines the probability of observing an effect of at least this size (at this sample size) if the null hypothesis is true.</p>
 <p>However, the first row also performs a <em>t</em>-test, it tests a null hypothesis that the intercept (here the mean height of the cross-pollinated plants) is zero. This was not a comparison we intended to make, nor is it likely that this test is particularly useful.</p>
 <p>Anyway the observed difference in plant heights was 2.62 inches ± 1.07, which produces an observed value of <em>t</em> as:</p>
-<div class="sourceCode" id="cb368"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb396"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tidy_model1</span> <span class="op">&lt;-</span> <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">lsmodel1</span><span class="op">)</span>
 
 <span class="va">tidy_model1</span><span class="op">[[</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">/</span> <span class="va">tidy_model1</span><span class="op">[[</span><span class="fl">2</span>,<span class="fl">3</span><span class="op">]</span><span class="op">]</span></code></pre></div>
 <pre><code>## [1] -2.437113</code></pre>
 <p>Which could be the same as the value for <em>t</em> in our model summary.</p>
 </div>
-<div id="paired-t" class="section level2" number="14.3">
+<div id="paired-t" class="section level2" number="15.3">
 <h2>
-<span class="header-section-number">14.3</span> Paired t<a class="anchor" aria-label="anchor" href="#paired-t"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.3</span> Paired t<a class="anchor" aria-label="anchor" href="#paired-t"><i class="fas fa-link"></i></a>
 </h2>
 <p>The structure of our linear model so far has produced the output for a standard two-sample Student's <em>t</em>-test. However, when we <em>first</em> <a href="introduction-to-statistics.html#differences-between-groups">calculated our estimates by hand</a> - we started by making an average of the paired differences in height. To generate the equivalent of a paired <em>t</em>-test, we simply have to add the factor for pairs to our linear model formula:</p>
 <button id="displayTextunnamed-chunk-9" onclick="javascript:toggle('unnamed-chunk-9');">
@@ -388,7 +393,7 @@ Base R
 </div>
 <div id="option1unnamed-chunk-9" class="tabcontentunnamed-chunk-9">
 <p>Note that I have made pair a factor - pair 2 is not greater than pair 1 - so it does nott make sense to treat these as number values.</p>
-<div class="sourceCode" id="cb370"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb398"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lsmodel_darwin</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">type</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">pair</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">darwin</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">lsmodel_darwin</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -425,7 +430,7 @@ Base R
 ## F-statistic: 0.8243 on 15 and 14 DF,  p-value: 0.6434</code></pre>
 </div>
 <div id="option2unnamed-chunk-9" class="tabcontentunnamed-chunk-9">
-<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb400"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">darwin</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>pair <span class="op">=</span> <span class="fu">as_factor</span><span class="op">(</span><span class="va">pair</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">type</span> <span class="op">+</span> <span class="va">pair</span>, data <span class="op">=</span> <span class="va">.</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -737,7 +742,7 @@ pair15
 </ul>
 <p>Again the linear model computes every possible combination of <em>t</em>-statistic and <em>P</em>-value, however the only one we care about is the difference in Cross and Self-pollinated plant heights. If we ignore the pair comparisons the second row gives us a <em>paired t</em>-test. 'What is the difference in height between Cross and Self-pollinated plants when we hold pairs constant.'</p>
 <p>For completeness let's generate the confidence intervals for the <em>paired t</em>-test.</p>
-<div class="sourceCode" id="cb373"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb401"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">type</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">pair</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">darwin</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">.</span>, conf.int<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span> <span class="co"># just show first two rows</span></code></pre></div>
@@ -817,7 +822,7 @@ typeSelf
 </table></div>
 </div>
 <p>We can see that estimate of the mean difference is identical but the 95% confidence intervals are now slightly different. So in this particular version we have actually increased our level of uncertainty by including the pair parameter.</p>
-<div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb402"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">type</span>, data <span class="op">=</span> <span class="va">darwin</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">.</span>, conf.int<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="fl">2</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -844,15 +849,15 @@ In future sessions we will work through model building and simplification, in th
 </p>
 </div>
 </div>
-<div id="effect-sizes" class="section level2" number="14.4">
+<div id="effect-sizes" class="section level2" number="15.4">
 <h2>
-<span class="header-section-number">14.4</span> Effect sizes<a class="anchor" aria-label="anchor" href="#effect-sizes"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.4</span> Effect sizes<a class="anchor" aria-label="anchor" href="#effect-sizes"><i class="fas fa-link"></i></a>
 </h2>
 <p>We have discussed the importance of using confidence intervals to talk about effect sizes. When our 95% confidence intervals do not overlap the intercept, this indicates we have difference in our means which is significant at <span class="math inline">\(\alpha\)</span> = 0.05. More interestingly than this it allows us to talk about the 'amount of difference' between our treatments, the lower margin of our confidence intervals is the smallest/minimum effect size. On the response scale of our variables this is very useful, we can report for example that there is <em>at least</em> a 0.43 inch height difference between self and crossed fertilised plants at <span class="math inline">\(\alpha\)</span> = 0.05.</p>
 </div>
-<div id="type-1-and-type-2-errors" class="section level2" number="14.5">
+<div id="type-1-and-type-2-errors" class="section level2" number="15.5">
 <h2>
-<span class="header-section-number">14.5</span> Type 1 and Type 2 errors<a class="anchor" aria-label="anchor" href="#type-1-and-type-2-errors"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.5</span> Type 1 and Type 2 errors<a class="anchor" aria-label="anchor" href="#type-1-and-type-2-errors"><i class="fas fa-link"></i></a>
 </h2>
 <p>The repeatability of results is a key part of the scientific method. Unfortunately there is often an emphasis in the literature on 'novel findings', which means that unusual/interesting results that happen to reach statistical significance may be more likely to be published. The reality is that we know if we set an <span class="math inline">\(\alpha\)</span> = 0.05, that we run the risk of rejecting the null hypothesis incorrectly in 1 in 20 of our experiments (A Type 1 error).</p>
 <p>Type 2 errors. Statistical tests provide you with the probability of making a Type 1 error (rejecting the null hypothesis incorrectly) in the form of <em>P</em>. But what about Type 2 errors? Keeping the null hypothesis, when we should be rejecting it? Or not finding an effect.</p>
@@ -864,13 +869,13 @@ All experiments/statistical analyses will become <em>statistically significant</
 </p>
 </div>
 </div>
-<div id="repeatability" class="section level2" number="14.6">
+<div id="repeatability" class="section level2" number="15.6">
 <h2>
-<span class="header-section-number">14.6</span> Repeatability<a class="anchor" aria-label="anchor" href="#repeatability"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.6</span> Repeatability<a class="anchor" aria-label="anchor" href="#repeatability"><i class="fas fa-link"></i></a>
 </h2>
 <p>It is <strong>not possible</strong> for you to know from a single experiment whether you have made Type 1 or Type 2 errors. However, over time as experiments are eventually repeated the literature builds up allowing us to synthesise the evidence. Let's try that now &amp; imagine a scenario where Darwin's experiment has been repeated another 20 times.</p>
 <p>In the example below we have made a for loop that assumes we 'know' the true mean difference of crossed and fertilised plants and the standard deviation of the 'population'(we have taken Darwin's experimental data for this). The for loop then creates 20 new sampling experiments, and calculates the estimated mean difference for each experiment</p>
-<div class="sourceCode" id="cb375"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb403"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span>
 
 <span class="va">myList</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span><span class="st">"list"</span>, <span class="fl">20</span><span class="op">)</span>
@@ -890,9 +895,9 @@ All experiments/statistical analyses will become <em>statistically significant</
 
 <span class="co"># the new dataframe y contains the results of 20 new experiments</span></code></pre></div>
 </div>
-<div id="activity-1-experimental-repeatability" class="section level2" number="14.7">
+<div id="activity-1-experimental-repeatability" class="section level2" number="15.7">
 <h2>
-<span class="header-section-number">14.7</span> Activity 1: Experimental Repeatability<a class="anchor" aria-label="anchor" href="#activity-1-experimental-repeatability"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.7</span> Activity 1: Experimental Repeatability<a class="anchor" aria-label="anchor" href="#activity-1-experimental-repeatability"><i class="fas fa-link"></i></a>
 </h2>
 <div class="panel panel-default">
 <div class="panel-heading">
@@ -911,7 +916,7 @@ Show Solution
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb376"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb404"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">y</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>`p value &lt; 0.05` <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">p.value</span> <span class="op">&gt;</span> <span class="fl">0.049</span>, <span class="st">"non-significant"</span>, <span class="st">"significant"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">`p value &lt; 0.05`</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -968,7 +973,7 @@ Show Solution
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb405"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">y</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">`experiment number`</span>, y<span class="op">=</span><span class="va">estimate</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_pointrange</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>ymin <span class="op">=</span> <span class="va">conf.low</span>, ymax<span class="op">=</span><span class="va">conf.high</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
@@ -982,9 +987,9 @@ Solution
 <p>By illustrating this visually, it is clearer to see that the results are not really inconsistent, the negative effects of inbreeding depression are clear to see in all of the experiments - we are simply observing the effect of sampling error.</p>
 <p>All 20 studies showed the effect of inbreeding depression, and all the experiments have identical levels of uncertainty. We can clearly see that estimates and intervals are a substantial improvement in the way we report experiments, and that they make comparisons across repeated studies more valuable.</p>
 </div>
-<div id="summary-4" class="section level2" number="14.8">
+<div id="summary-4" class="section level2" number="15.8">
 <h2>
-<span class="header-section-number">14.8</span> Summary<a class="anchor" aria-label="anchor" href="#summary-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.8</span> Summary<a class="anchor" aria-label="anchor" href="#summary-4"><i class="fas fa-link"></i></a>
 </h2>
 <p>This chapter finally allowed us to calculate <em>P</em>-values and test statistical significance for our experiments using linear models. We also compared the linear model structures for producing a paired vs. unpaired <em>t</em>-test.</p>
 <p>However we also learned to appreciate the potential issues around making Type 1 and Type 2 errors, and how an appreciation of confidence intervals and standardised effect sizes can be used to assess these.</p>
@@ -1172,20 +1177,20 @@ $( document ).ready(function() {
   );
 });
 </script><div class="chapter-nav">
-<div class="prev"><a href="introduction-to-linear-models.html"><span class="header-section-number">13</span> Introduction to Linear Models</a></div>
-<div class="next"><a href="regression.html"><span class="header-section-number">15</span> Regression</a></div>
+<div class="prev"><a href="introduction-to-linear-models.html"><span class="header-section-number">14</span> Introduction to Linear Models</a></div>
+<div class="next"><a href="regression.html"><span class="header-section-number">16</span> Regression</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#testing"><span class="header-section-number">14</span> Testing</a></li>
-<li><a class="nav-link" href="#its-t-time"><span class="header-section-number">14.1</span> It's t-time</a></li>
-<li><a class="nav-link" href="#students-t-test"><span class="header-section-number">14.2</span> Student's t-test</a></li>
-<li><a class="nav-link" href="#paired-t"><span class="header-section-number">14.3</span> Paired t</a></li>
-<li><a class="nav-link" href="#effect-sizes"><span class="header-section-number">14.4</span> Effect sizes</a></li>
-<li><a class="nav-link" href="#type-1-and-type-2-errors"><span class="header-section-number">14.5</span> Type 1 and Type 2 errors</a></li>
-<li><a class="nav-link" href="#repeatability"><span class="header-section-number">14.6</span> Repeatability</a></li>
-<li><a class="nav-link" href="#activity-1-experimental-repeatability"><span class="header-section-number">14.7</span> Activity 1: Experimental Repeatability</a></li>
-<li><a class="nav-link" href="#summary-4"><span class="header-section-number">14.8</span> Summary</a></li>
+<li><a class="nav-link" href="#testing"><span class="header-section-number">15</span> Testing</a></li>
+<li><a class="nav-link" href="#its-t-time"><span class="header-section-number">15.1</span> It's t-time</a></li>
+<li><a class="nav-link" href="#students-t-test"><span class="header-section-number">15.2</span> Student's t-test</a></li>
+<li><a class="nav-link" href="#paired-t"><span class="header-section-number">15.3</span> Paired t</a></li>
+<li><a class="nav-link" href="#effect-sizes"><span class="header-section-number">15.4</span> Effect sizes</a></li>
+<li><a class="nav-link" href="#type-1-and-type-2-errors"><span class="header-section-number">15.5</span> Type 1 and Type 2 errors</a></li>
+<li><a class="nav-link" href="#repeatability"><span class="header-section-number">15.6</span> Repeatability</a></li>
+<li><a class="nav-link" href="#activity-1-experimental-repeatability"><span class="header-section-number">15.7</span> Activity 1: Experimental Repeatability</a></li>
+<li><a class="nav-link" href="#summary-4"><span class="header-section-number">15.8</span> Summary</a></li>
 </ul>
 
       <div class="book-extra">
@@ -1203,7 +1208,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-09-18.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-09-26.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

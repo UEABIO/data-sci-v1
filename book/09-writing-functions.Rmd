@@ -1,84 +1,54 @@
+# (PART\*) DRY code {.unnumbered}
 
-# Functions and Iteration
+
+# Functions 
 
 ```{r, child='_setup.Rmd'}
+
 ```
 
 ```{r, include = FALSE}
 library(tidyverse)
 library(patchwork)
 library(here)
-
 ```
 
+Most of the time when we work in R, we will use functions; often pre-written functions that we access from baseR or installed packages. But you can also write your own functions. Eventually you could even turn a collection of your own functions into a package (for yourself or others).
 
-In this chapter we are going to look at two processes that streamline our code and make it more efficient. The principle behind this is to try and make **DRY** code.
+**Functions** make it easy to use sets of code instructions repeatedly (without filling our scripts with the code underlying the function) and help us carry out multiple tasks in a single step without having to go through the details of how the steps are executed.
 
-So what the flip is **DRY** code anyway? It stands for **D**on't **R**epeat **Y**ourself. It's aimed at reducing the repetition and number of lines of code in your scripts. 
-
-Why is this useful? 
-
-* If you keep repeating the same/similar lines of code over and over then your script will become very large
-
-* Changes or updates have to be manually applied to each and every time you have used a line of code in your script
-
-* Mistakes can easily start to creep in
-
-There are two broad ways we can DRY out our code: 
-
-1) Use **Functions** - functions contain code instructions, and we can re-use them for similar processes simply by changing the arguments. In R you can use pre-built functions and start building your own!
-
-2) Use **Iteration** - Apply functions to loop or repeat over different groups or lists.
+If you need a refresher on what makes up a function [check here][last time](#functions).
 
 
-## Functions
-
-Most of the time when we work in R, we will use functions; either pre-written functions or ones we write ourselves. **Functions** make it easy to use sets of code instructions repeatedly (without filling our scripts with the code underlying the function) and help us carry out multiple tasks in a single step without having to go through the details of how the steps are executed.
-
-### Common functions
-
-You have been using functions in R from week one, we type the name of the function followed by parentheses e.g. `read_csv()`. Within the parentheses is where we will specify the function input and options, separated by commas `,`. One function you will use a lot is the **combine function** `c()`, which as the name suggests lets you concatenate different types of values into a **vector**.
 
 
-```{task}
-Complete the script below to combine any set of numerical values using `c()`. 
 
-Then use the `sum()` function to add them together
-```
-
-```{solution}
-
-``{r, eval = F}
-my_combined_values <- c(__,__) 
-sum(my_combined_values)
-``
-
-```
-
-
-### Write your own function
+## Structuring a function
 
 R makes it easy to create user defined functions by using `function()`. Here is how it works:
 
+```{r, eval = FALSE}
+
+my_function_name <- function(my_args) {
+  # code to run
+  # return (some value)
+}
+
+
+```
+
 * Give your function an object name and assign the function to it, e.g. `my_function_name <- function()`.
 
-* Within the parentheses you specify inputs and arguments just like how pre-written functions work, e.g. `function(input_data)`.
+* Within the parentheses you specify inputs and arguments just like how pre-written functions work, e.g. `function(my_args)`.
 
-* Next, put all the code you want your function to execute inside curly brackets like this: `function(input_data) {code to run}`
+* Next, put all the code you want your function to execute inside curly brackets like this: `function(my_args) {code to run}`
 
 * Use `return()` to specify what you want to your function to output once it is done running the code.
 
-```{task}
-Use the custom function below to add ten to each element of this vector
-```
 
-```{r}
-vector <- c(1,5,10)
-```
+## Activity 1: Understand the function
 
-Here we are making a function, remember `input_data` is a placeholder for real values that will be supplied *later*. 
-
-In this example we are telling R that *when* we provide data (a value) in the position of the argument `input_data` it should add 1 to this, and return the result:
+Here is a very simple function. Can you guess what it does?
 
 ```{r}
 add_one <- function(input_data) {
@@ -86,47 +56,50 @@ add_one <- function(input_data) {
 }
 ```
 
-
-```{block, type = "info"}
-
-Remember, when you make a function like the one above, nothing will happen until you use the function on same data! 
+```{r}
+add_one(10)
 
 ```
 
+What value did you get when running the function above? `r fitb("11")`
 
-
-Let's try our new function out on the vector we made.
+Now try applying your function to this vector:
 
 ```{r}
-
-add_one(vector)
-
+number_series <- c(1,5,10)
 ```
 
-### Activity 1: Use the following instructions to complete the function in the window below:
+You should see it worked on *each element* inside the vector. This emphasises that R is a vector based language (it will by default apply functions on all elements in an object). 
 
-* I’ve started writing a function for you that will sum up values and take the square root of the sum. To take the square root, we use the `sqrt()` function.
+### Activity 2: Write your own function:
 
-* Complete this function by filling in input_data for the `sum()`, and then filling in the remaining empty parentheses with the appropriate object names.
+* I’ve started writing a function for you that will square values, sum them and divide by `n-1`. To take the square root, we use the `sqrt()` function.
 
-* Now create an object containing a set of numerical values and call it `my_combined_values`. Then try out your new function on this object, which will compute the square root of the objects sum.
+* Complete this function by filling in input_data for the `sqrt()`, and then filling in the remaining empty parentheses with the appropriate object names.
+
+* Now test your function on the `number_series` vector (or any other vector you like).
+
+What is the function retruning when applied to a vector? `r mcq(c("standard deviation", answer = "variance", "sum of squares"))`
+
 
 ```{task}
 Finish writing the function below
 ```
  
-```{r, eval = F}
+```
+
 # Use the instructions above to complete the function below
-my_function_name <- function(input_data){
-  s <- sum(__)
-  ss <- sqrt(__)
+variance <- function(input_data){
+  square <- sqrt(__)
+  ss <- sum(__)
+  variance <- (__/(length(__)-1))
   return(__)
 }
 
-# Create a new object and try out your new function
-my_combined_values <- c(__,__) 
+# Use vector (or make a new one) and try out your new function
 
-my_function_name(my_combined_values)
+
+variance(number_series)
 
 ```
 
@@ -134,17 +107,12 @@ my_function_name(my_combined_values)
 ```{solution}
 
 ``{r}
-# Use the instructions above to complete the function below
-my_function_name <- function(input_data){
-  s <- sum(input_data)
-  ss <- sqrt(s)
-  return(ss)
+variance <- function(input_data){
+     square <- sqrt(input_data)
+     ss <- sum(square)
+     variance <- (ss/length(input_data-1))
+     return(variance)
 }
-
-# Create a new object and try out your new function
-my_combined_values <- c( 5, 10) 
-
-my_function_name(my_combined_values)
 ``
 
 ```
@@ -162,43 +130,7 @@ A really good way to organise your functions is to organise them into a separate
 
 ```
 
-### Activity 2: More functions
-
-It might surprise you to know that there is no pre-built function for standard error in base R, but we can build our own!
-
-```{block, type = "info"}
-Here you can see we replaced `input_data` with `.x` as the name of our argument. These placeholders can have whatever name we like to choose, but we should avoid using names that match any R objects we make in our project
-```
-
-```{r}
-
-se <- function(.x) {
-  se <- sd(.x)/(sqrt(length(.x)))
-  return(se)
-  }
-
-```
-
-
-```{r}
-# The seq R function generates a sequence of numeric values
-x <- seq(8, 20, length=100)
-
-# use the mean function to calculate average for x
-mean(x)
-
-# use our custom function to calculate se for x
-se(x)
-
-```
-
-```{block, type="warning"}
-
-Functions can basically be given any name you want. However, you may accidentally overwrite existing functions if you give them the same name, so try and make them unique.
-
-```
-
-### Even more functions
+## Argument defaults
 
 This is an example of a very simple function that just prints the string "Hello World" whenever you type the function `say_hello()`
 
@@ -211,8 +143,13 @@ say_hello()
 
 ```
 
+### Activity 3: Understand arguments and defaults
+
 ```{task}
-What happens when you try to put something in the brackets when using this function?
+What happens when you try to put something in the brackets when **using** this function?
+  
+e.g. say_hello("Phil")
+
 ```
 
 ```{solution}
@@ -249,6 +186,8 @@ Error in paste("Good morning", x) :
 
 So that was an example where we included an argument for our function. But now it requires a value be provided in order to work. 
 
+#### Argument defaults
+
 However, you are probably used to the idea that many functions have "default" values for arguments, and we can easily set these.
 
 ```{r}
@@ -260,11 +199,124 @@ say_morning_default()
 ```
 
 ```{block, type = "try"}
+
 There is now a default value supplied to the argument, but this should still be able to changed when running the function. Try it! 
 
 ```
 
-### Activity 3
+
+## Conditonal functions
+
+Let's make a function that reports p-values in APA format (with "p = [rounded value]" when p >= .001 and "p < .001" when p < .001).
+
+You can add a default value to any argument. If that argument is skipped, then the function uses the default argument.
+
+First we could make a function that rounds any value to three digits.
+
+```{r}
+
+report_p <- function(p, digits = 3) {
+      roundp <- round(p, digits)
+    reported <-  paste("p =", roundp)
+    
+    return(reported)
+}
+
+```
+
+But we would like this to have a conditional response as well: so we need and `if` `else` statement (or `if_else`)
+
+```{task}
+Can you write this function? to print the statements required above?
+
+```
+
+
+```{solution, multCode = T}
+
+``{r, eval = F}
+
+ report_p <- function(p, digits = 3) {
+     reported <- if_else(p < 0.001,
+             "p < 0.001",
+             paste("p=", round(p, digits)))
+     
+     return(reported)
+ }
+ 
+``
+
+####
+
+``{r}
+
+report_p <- function(p, digits = 3) {
+  if (p < .001) {
+    reported = "p < .001"
+  } else {
+    roundp <- round(p, digits)
+    reported = paste("p =", roundp)
+  }
+  
+  return(reported)
+}
+
+``
+
+```
+
+
+
+## Scope
+
+Note that any objects created *inside* a function, stay in the function. So it is possible to have variables with the same name (one inside a function, one in the R environment). Changing the values of one will have **no effect** on the other. 
+
+## Warnings and errors
+
+```{block, type = "try"}
+
+What happens when omit an argument for p, set the value to 1.5 or a character "a"?
+
+```
+
+Sometimes the function will not run, in the first example because we did not provide an argument default. 
+
+For `p = 1.5` it probably *shouldn't* run (p = 1.5 makes no sense), but it does! 
+
+For `p = "a"` there is a warning but perhaps not a very intuitive one. 
+
+We can make our own custom/specific warnings, try this and run it with the arguments above again! 
+
+
+```{r}
+
+ report_p <- function(p, digits = 3) {
+   
+  if (!is.numeric(p)) stop("p must be a number")
+  if (p <= 0) warning("p-values cannot less 0")
+  if (p >= 1) warning("p-values cannot be greater than 1")
+   
+     reported <- if_else(p < 0.001,
+             "p < 0.001",
+             paste("p=", round(p, digits)))
+     return(reported)
+}
+```
+
+## Anonymous functions
+
+Anonymous functions are ones where the function definiton is not bound to an R object. That is the function may be created and used but never assigned to a variable. We don't normally encounter these out in the "wild", but may be quite common when used with Iteration (see next chapter).
+
+```{r, eval = F}
+
+function(input_data) {
+  return(input_data + 1)
+}
+
+```
+
+
+## Activity 3 : Stretch Exercise
 
 We are going to try and write a custom function called `find_largest_male()`, it will be used to identify the largest male *Drosophila* from a small dataset. 
 
@@ -273,7 +325,7 @@ We are going to try and write a custom function called `find_largest_male()`, it
 
 vial <- (c((1:10),(1:10)))
 sex <- (c(rep("male",10),rep("female", 10)))
-weight_mg <- c(rnorm(10, mean=0.2, sd=0.02), rnorm(10, mean=0.25, sd=0.01))
+weight_mg <- c(rnorm(10, mean=0.2, sd=0.02), rnorm(10, mean=0.21, sd=0.01))
 
 dros_weight <- tibble(vial, sex, weight_mg)
 
@@ -317,7 +369,11 @@ find_largest_male <- function(df){
 
 Now we have a basic function we can work to refine and extend it. 
 
-What if we made a function that could pick the largest Drosophila overall, or male or female depending on what we need?
+What if we made a function that could pick the largest Drosophila overall, or filter by male or female depending on what we need?
+
+Could we extend it to return more than one value if requested?
+
+To make an argument except more than one value as the potential default at once use `c("male", "female")`
 
 
 ```{solution}
@@ -333,13 +389,15 @@ find_largest_fly <- function(df,  n=1, s=c("male", "female") ){
 
 ```
 
-## Examples
+#### Step 4. Stretch exercise
 
-### Custom ggplot themes
+Can you add any useful warning messages? Perhaps if a fruitfly weight is above 0.4mg that this is an unusual value? Or warnings against the wrong types of data being supplied `is.numeric`? 
+
+## Activity 4: Custom ggplot themes
 
 It is often the case that we start to default to a particular 'style' for our figures, or you may be making several similar figures within a research paper. Creating custom functions can extend to making our own custom ggplot themes. You have probably already used theme variants such as `theme_bw()`, `theme_void()`, `theme_minimal()` - these are incredibly useful, but you might find you still wish to make consistent changes. 
 
-Here is a plot we made in the previous chapter
+Here is a plot we can make with the `dros_weight` tibble:
 
 ```{r, eval=TRUE}
 plot <- dros_weight %>% 
@@ -361,7 +419,16 @@ plot+
 
 ```
 
-But I **still** want to make some more changes, rather than do this work for one figure, and potentially have to repeat this several times for subsequent figures, I can decide to make a new function instead. 
+But I **still** want to make some more changes, rather than do this work for one figure, and potentially have to repeat this several times for subsequent figures, I can decide to make a new function instead. See [here](https://ggplot2.tidyverse.org/reference/theme.html) for a full breakdown of the arguments for the `theme()` function. 
+
+```{block, type = "info"}
+Note when using a pre-set theme, and then modifying it further, it is important to get the order of syntax correct e.g
+
+theme_classic + theme() # is correct
+
+theme() + theme_classic() # will not work as intended
+
+```
 
 ```{r, eval=TRUE}
 
@@ -403,7 +470,6 @@ theme(
 
 ```
 
-
 With this function set, I can now use it for as many figures as I wish. To use it in the future I should probably save it in a unique script, with a clear title and comments for future use. 
 
 I could then easily use `source("custom_theme_function.R")` to make this available to any scripts I was using. 
@@ -421,16 +487,198 @@ Functions are about 'abstracting' a command, so it can be used more than once. I
 ```
 
 
-### Writing Packages
+## Writing Packages
 
 You should be familiar by now with the idea that R packages add data and functions to your workspace. They are bundles of code that anyone can write, most commonly you will be downloading packages from CRAN. However development stage packages can also be downloaded directly from GitHub. 
 
 In the previous section we walked through some very basic writing of new functions. We can save these as R scripts and move them from project to project. Or we could choose to write them into a documented R package. 
 [This tutorial](https://ourcodingclub.github.io/tutorials/writing-r-package/) shows you just how to do that. Writing packages is a useful thing to do, even if you think the only person that will ever use them is yourself, as you then more easily access these functions across different workspaces and projects. 
 
-## Iteration
+
+## Resources
+
+* [R4DS: Functions](https://r4ds.had.co.nz/functions.html) 
+
+
+
+
+# Iteration
+
+```{r, child='_setup.Rmd'}
+
+```
+
+```{r, include = FALSE}
+library(tidyverse)
+library(patchwork)
+library(here)
+```
 
 We’ve seen how to write a function and how they can be used to create concise re-usable operations that can be applied multiple times in a script without having to copy and paste, but where functions really come into their own is when combined with iteration. Iteration is the process of running the same operation on a group of objects, further minimising code replication. 
+
+
+## Data structures
+
+Functional programming in R requires a good understanding of the types of data structure available in R. Here we have a quick introduction
+
+|Data type|Definition|
+|---|---|
+| Vector| Contains multiple elements of the same type of data `logical`, `integer`, `double`, `character`|
+| Lists| Can contain elements of any type, each element can be a single value, a vector or even an entire dataframe|
+| Matrix| A collection of elements of the same data type `logical`, `integer`, `double`, `character` arranged into rows and columns|
+| Dataframe| A collection of vectors, each vector is a column, each row contains one set of values from each column. Data stored in a dataframe can be of any type of data|
+| tibble| as dataframe, displays data types for each column alongside data|
+
+### Vector
+
+```{r}
+
+vector_one <- (1:3)
+
+vector_two <- c("apples", "bananas", "pears")
+
+```
+
+### List
+
+```{r}
+
+
+new_list <- list(vector_one, vector_two)
+
+names(new_list) <- c("numbers", "fruit")
+
+```
+
+### Matrix
+
+```{r}
+
+new_matrix <- cbind(vector_one, vector_two)
+
+is.matrix(new_matrix)
+
+
+matrix(nrow = 2, ncol = 2)
+
+```
+
+### Dataframe
+
+```{r}
+
+new_dataframe <- data.frame(vector_one, vector_two)
+
+```
+
+### tibble
+
+```{r}
+
+new_tibble <- tibble(vector_one, vector_two)
+
+```
+
+
+## Simple iteration functions
+
+### `rep()`
+
+The function `rep()` lets you repeat the first argument a set number of times.
+
+```{r}
+rep(1:5, 5)
+
+rep(c("Adelie", "Gentoo", "Chinstrap"), 2)
+
+```
+
+The default for the amount of repetition is `times = ` it will print the entire vector start to finish THEN repeat.
+
+If the second argument is a vector with the same number of elements as the *first* vector, then it will repeat to the specified values for each
+
+```{r}
+rep(c("Adelie", "Gentoo", "Chinstrap"), c(2, 1, 3))
+
+```
+
+Or if you use the argument `each` then it will rep all of the first element *first* followed by the second etc.
+
+
+```{r}
+rep(c("Adelie", "Gentoo", "Chinstrap"), each = 3)
+```
+What do you think will happen if you set both times to 3 and each to 2?
+
+```{r, eval = F}
+
+rep(c("Adelie", "Gentoo", "Chinstrap"), times = 2, each = 3)
+
+```
+
+```{solution}
+
+``{r, echo = FALSE}
+
+rep(c("Adelie", "Gentoo", "Chinstrap"), times = 2, each = 3)
+
+``
+
+```
+
+
+### `seq()`
+
+The function `seq()` is useful for generating a sequence of numbers with some pattern.
+
+Use `seq()` to create a vector of the integers 0 to 10.
+
+
+```{r}
+
+seq(1,5)
+
+```
+
+This is initially very similar to just making a vector with
+
+```{r}
+
+c(1:5)
+
+```
+
+But with `seq` we have extra functions. You can set the by argument to count by numbers other than 1 (the default). Use `seq()` to create a vector of the numbers 0 to 100 by 10s.
+
+```{r}
+seq(0, 100, by = 10)
+
+```
+
+
+We also have the argument `length.out`, which is useful when you want to know how to many steps to divide something into
+
+```{r}
+seq(0, 100, length.out = 12)
+
+```
+
+### `replicate()`
+
+Replicate is our first example of a function whose purpose is to iterate *other* functions
+
+For example the `rnorm` function generates numbers from a normal distribution.
+
+Nesting this inside the `replicate()` function will repeat this command a specified number of times
+
+```{r}
+replicate(3, # times to replicate function
+          expr = rnorm(n = 5, 
+                       mean = 1,
+                       sd = 1))
+
+```
+
 
 Here we will introduce two approaches to iterative operations - using for loops and using the package `purrr`.
 
@@ -439,7 +687,9 @@ Here we will introduce two approaches to iterative operations - using for loops 
 2. The `purrr` package is the tidyverse approach to iterative operations - it works by “mapping” a function across many inputs (values, columns, datasets, etc.)
 
 
-### For Loops
+## For Loops
+
+For loops are an **essential** part of many programming languages, but they are often less utilised in R because of our ability to apply functions to all elements of a vector. However, I will include them here for completeness. 
 
 A for loop has three core parts:
 
@@ -477,6 +727,9 @@ for (num in c(1,2,3,4,5)) {  # the SEQUENCE is defined (numbers 1 to 5) and loop
 So let's make a slightly more complicated function - first we are making a new tibble, first we have four vectors - made of 10 numbers each randomly generated to be roughly close to a 0 mean with a s.d. of 1. Then we combine them to make a tibble
 
 ```{r}
+
+set.seed(1234)
+
 # a simple tibble
 df <- tibble(
   a =  rnorm(10),
@@ -485,35 +738,171 @@ df <- tibble(
   d = rnorm(10)
 )
 
-```
-
-Each vector is randomly generated so the actual averages will be slightly different
-
-```{r, eval = F}
-median(df$a)
-# [1] 0.3085154
-median(df$b)
-# [1] 0.5429483
-median(df$c)
-# [1] -0.5137691
-median(df$d)
-# [1] 0.04415608
+df
 
 ```
 
-So the above code works, but it is repetitive, applying the same function again and again. Below we have a simple for loop 
+Each vector is randomly generated so the actual averages will be slightly different, we can test that here:
+
+```{r, eval = T}
+mean(df$a)
+
+mean(df$b)
+
+mean(df$c)
+
+mean(df$d)
+
+
+```
+
+So the above code works, but it is repetitive, applying the same function again and again. 
+
+Below we have a simple for loop 
 
 ```{r}
-output <- vector("double", ncol(df))  # 1. output having a predefined empty list of the right size works best, we choose to make the vector "double" specifying that it is empty and ready to receive number values. 
+output <- vector("double", ncol(df))  # 1. output having a predefined empty vector of the right size works best, here we choose to make the vector "double" specifying that it is empty and ready to receive number values, ncol(df) means that the vector will be as long as the number of columns in our tibble 
+output
+```
+Now we run our loop:
 
+```{r}
 for (i in seq_along(df)) {            # 2. sequence - determines what to loop over - here we are looping along df, rather than down the length of each vector
   
-  output[[i]] <- median(df[[i]])      # 3. body - each time the loop runs it allocates a value to output, 
+  output[[i]] <- mean(df[[i]])      # 3. body - each time the loop runs it allocates a value to output, 
 }
 output
-# [1]  0.30851540  0.54294832 -0.51376911  0.0441560
+
 
 ```
+
+Each time the mean is calculate for one column in `df` this is then stored as an element in the previously empty `output` vector.
+
+`for()` loops are very useful for quickly iterating over a list, but because R prefers to store everything as a new object with each loop iteration, loops can become quite slow if they are complex, or running many processes and many iterations. As an alternative the `apply` family of functions from base R and `purrr::map` from tidyverse more broadly can be used as an alternative to loops.
+
+
+### Activity 1: Loop exercise
+
+We have made a function that converts values with a normal distribution into their z scores:
+
+```{r}
+
+z_score <- function(x) {
+  (x - min(x, na.rm = TRUE)) /  
+  diff(range(x, na.rm = TRUE))
+}
+
+```
+
+Assuming that *each* column in the dataframe `df` comes from a different population. How would you use a loop to apply this function to each column independently?
+
+Hint copy your `df` to a new object `z_df` with `z_df <- df` as a destination tibble for your new z scores.
+
+```{solution}
+
+``{r}
+
+z_df <- df
+
+for (i in 1:ncol(df)) { # loop through each element
+  z_df[i] <- z_score(df[[i]]) #apply function and store in out[]
+}
+z_df
+
+```
+
+
+## apply
+
+We can perform exactly the same action with `apply` - the `apply` functions in R allow iteration without the use of loop constructs. They can be used for an input list or matrix.
+
+`MARGIN = 1` means apply function over rows
+
+`MARGIN = 2` means apply function over columns
+
+```{r}
+apply(df, MARGIN = 2,  z_score)
+
+```
+
+|Function|Arguments|Objective|Input|Output|
+|---|---|---|---|---|
+|apply|apply(X, MARGIN, FUN)|Apply a function to the rows, columns or both| Dataframe or matrix| vector, list or matrix|
+|lapply| lapply(X,FUN)|Apply a function to all the elements of the input| List, vector or dataframe| list|
+|sapply| sapply(X,FUN)| Apply a function to all the elements of the input| List, vector or dataframe| vector or matrix|
+
+```{r, eval = F}
+
+is.matrix(apply(df, 2,  z_score))
+
+is.data.frame(apply(df, 2,  z_score))
+
+
+```
+
+## map
+
+`map` is the tidyverse equivalent of `apply` it work well with %>% and there are a few extended functions to it works better with tibbles and dataframes
+
+The basic syntax is map(`.x` = SEQUENCE, `.f` = FUNCTION, OTHER ARGUMENTS). In a bit more detail:
+
+* `.x` = are the inputs upon which the .f function will be iteratively applied - e.g. a vector of jurisdiction names, columns in a data frame, or a list of data frames
+
+* `.f` = is the function to apply to each element of the .x input - it could be a function like print() that already exists, or a custom function that you define. The function is often written after a tilde ~ (details below).
+A few more notes on syntax:
+
+* If the function needs no further arguments specified, it can be written with no parentheses and no tilde (e.g. `.f = mean`). To provide arguments that will be the same value for each iteration, provide them within `map()` but outside the `.f = argument`, such as the `na.rm = T` in `map(.x = my_list, .f = mean, na.rm=T)`.
+
+* You can use `.x` (or simply `.`) within the `.f = function` as a placeholder for the `.x` value of that iteration
+
+* Use tilde syntax (`~`) to have greater control over the function - write the function as normal with parentheses, such as: `map(.x = my_list, .f = ~mean(., na.rm = T))`. Use this syntax particularly if the value of an argument will change each iteration, or if it is the value `.x` itself.
+
+**The output of using` map()` is a list** - a list is an object class like a vector but whose elements can be of different classes. So, a list produced by `map()` could contain many data frames, or many vectors, many single values, or even many lists! There are alternative versions of `map()` explained below that produce other types of outputs (e.g. `map_dfr()` to produce a data frame, `map_chr()` to produce character vectors, and `map_dbl()` to produce numeric vectors).
+
+Basic `map()` will *always* return a `list`, othr variants return different data types.Unlike `apply` `map` will ONLY return one type of data, removing the potential for changing data types that occasionally happens when using `apply`. 
+
+|Function| Data type returned|
+|------|------|
+|`map_lgl()`| returns a logical|
+| `map_int()`| returns an integer vector|
+| `map_dbl()`| returns a double vector|
+| `map_chr()`| returns a character vector|
+| `map_df()`| returns a data frame|
+
+
+Thre different ways of applyig syntax the `map` function
+
+```{r}
+
+map_df(.x = df, 
+       .f = z_score)
+
+df %>% 
+  map_df(z_score)
+
+df %>% 
+    map_df(~z_score(.))
+
+```
+
+
+## Anonymous functions
+
+In the previous chapter we were introduced to anonymous functions, if we do not plan to use a function outside of this particular iteration example, we might choose just to write it in directly
+
+
+```{r}
+
+map_df(.x = df, 
+       .f = function(x) {
+  (x - min(x, na.rm = TRUE)) /  
+  diff(range(x, na.rm = TRUE))
+       }
+)
+
+```
+
+
 
 ### Exercise for For Loops
 
@@ -533,51 +922,20 @@ downloadthis::download_link(
 First we should import the data:
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-LPI <- read_csv(here("book", "files", "LPI_data_loops.csv"))
+LPI_UK <- read_csv(here("book", "files", "LPI_data_loops.csv"))
 
 ```
 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE}
-LPI <- read_csv("data/LPI_data_loops.csv")
+LPI_UK <- read_csv("data/LPI_data_loops.csv")
 
 ```
 
-Here is an example of a graph we can make from the data looking at Griffon Vulture changes in numbers over time. 
 
-```{r, eval=TRUE, message=FALSE}
-
-vultureITCR <- LPI %>% 
-  filter(Common.Name == "Griffon vulture / Eurasian griffon") %>%
-  filter(Country.list==c("Croatia", "Italy"))
-
-vulture_scatter <- ggplot(vultureITCR, aes(x = year, y = abundance, colour = Country.list)) +
-    geom_point(size = 2) +  
-  # Changing point size
-    geom_smooth(method = lm, aes(fill = Country.list)) + 
-  # Adding a linear model fit and colour-coding by country
-    scale_fill_manual(values = c("#EE7600", "#00868B")) +               
-  # Adding custom colours
-    scale_colour_manual(values = c("#EE7600", "#00868B"),               
-                        # Adding custom colours
-                        labels = c("Croatia", "Italy")) +               
-  # Adding labels for the legend
-    ylab("Griffon vulture abundance\n") +                             
-    xlab("\nYear")  +
-		theme_bw() 
-
-vulture_scatter
-```
-
-We can use custom themes (like the one you made earlier) to quickly update figures
-
-```{r}
-vulture_scatter+theme_custom()
-```
-
-Now let's take a look at using functions and loops to help us build figures. 
+Let's take a look at using functions and loops to help us build figures. 
 
 ```{r, eval=TRUE, message=FALSE, warning=FALSE}
-LPI_UK <- filter(LPI, Country.list == "United Kingdom")
+
 
 # Pick 4 species and make scatterplots with a simple regression model fits that show how the population has varied through time
 
@@ -665,8 +1023,8 @@ for (i in 1:length(Sp_list)) {
    # makes a list of all the plots generates
   my_plots[[i]] <- plot 
   
-  # prints each plot out as it is made
-  print(plot) 
+
+
 }
 ```
 
@@ -681,7 +1039,9 @@ wrap_plots(my_plots)+
 
 What if you want to write a loop to save all four plots at once - can you modify the script to do this?
 
-```{r, eval = FALSE}
+```{solution}
+
+``{r, eval = FALSE}
 for (i in 1:length(Sp_list)) {                                    
   # For every item along the length of Sp_list we want R to perform the following functions
   data <- as.data.frame(Sp_list[i])                               
@@ -701,102 +1061,16 @@ for (i in 1:length(Sp_list)) {
 # use paste to automatically add filename
   ggsave(plot, file=paste("figure/", sp.name, ".png", sep=''), dpi=900) 
 }
-```
 
-
-### Iteration in R
-
-Loops are a fundamental part of programming in many languages - that's why they have been introduced as a concept with examples here. However in R, Loops are used much less often than in other languages. That is because R is a 'vector based language', something we often take for granted. But what does that mean?
-
-Here's an example - in the below written for R if we make a vector then apply a function to it, then it is applied to each element of the function, this is something we take for granted in R, but simply doesn't exist in languages like C++
-
-```
-x <- c(2,4,6,8,10)
-
-x/2
-
-# [1] 1 2 3 4 5
-
-```
-
-Instead for C++ we would be required to write a loop, in order to explicitly request that the division is applied to each element of the vector
-
-```
-for(i in seq_along(x)){
-x[i] = x[i]/2
-}
-x
-
-# [1] 1 2 3 4 5
-
-```
-
-A lot of functions in R are already vectorised and you don't even have to think about this concept. When we want more control over how this vectorization is applied, we have used the function `group_by()` It allows us to subset our data into hidden vectors, then command R to perform subsequent `dplyr` functions on each group separately. Because of the combined functionality of R's vectorization and dplyr's data tools you might find there is little need for loops. When we *do* wish to apply a function that isn't vectorize in the way we want - then tidyverse has an answer to this as well - purrr @R-purrr and the `map()` function
-
-### Learn to purrr
-
-There are also a few other advantages to using `purrr::map()` - you can use it with pipes %>%, it handles errors better than normal for loops, and the syntax is quite clean and simple! 
-
-**Remember** purrr is a very tidyverse focused method of iteration, so understanding for loops can be useful if you end up learning other programming languages in the future. 
-
-**purrr** is more focused on the function, and less obviously focused on the looping aspect, as you might be able to see below.
-
-
-
-The basic syntax is map(`.x` = SEQUENCE, `.f` = FUNCTION, OTHER ARGUMENTS). In a bit more detail:
-
-* `.x` = are the inputs upon which the .f function will be iteratively applied - e.g. a vector of jurisdiction names, columns in a data frame, or a list of data frames
-
-* `.f` = is the function to apply to each element of the .x input - it could be a function like print() that already exists, or a custom function that you define. The function is often written after a tilde ~ (details below).
-A few more notes on syntax:
-
-* If the function needs no further arguments specified, it can be written with no parentheses and no tilde (e.g. `.f = mean`). To provide arguments that will be the same value for each iteration, provide them within `map()` but outside the `.f = argument`, such as the `na.rm = T` in `map(.x = my_list, .f = mean, na.rm=T)`.
-
-* You can use `.x` (or simply `.`) within the `.f = function` as a placeholder for the `.x` value of that iteration
-
-* Use tilde syntax (`~`) to have greater control over the function - write the function as normal with parentheses, such as: `map(.x = my_list, .f = ~mean(., na.rm = T))`. Use this syntax particularly if the value of an argument will change each iteration, or if it is the value `.x` itself.
-
-**The output of using` map()` is a list** - a list is an object class like a vector but whose elements can be of different classes. So, a list produced by `map()` could contain many data frames, or many vectors, many single values, or even many lists! There are alternative versions of `map()` explained below that produce other types of outputs (e.g. `map_dfr()` to produce a data frame, `map_chr()` to produce character vectors, and `map_dbl()` to produce numeric vectors).
-
-Basic `map()` will *always* return a list of values
-
-* `map_lgl()` returns a logical
-* `map_int()` returns an integer vector
-* `map_dbl()` returns a double vector
-* `map_chr()` returns a character vector
-* `map_df()` returns a data frame
-
-
-```{r}
-# Apply n_distinct to all variables, returning a double (numeric) for each
-map_dbl_result <- LPI %>% 
-  map_dbl(n_distinct)
-
-# Print out result
-map_dbl_result
-
-# Print out type of result
-typeof(map_dbl_result)
-
-```
-
-```{r}
-# Apply n_distinct to all variables, returning a dataframe
-map_df_result <- LPI %>% 
-  map_df(n_distinct)
-
-# Print out result
-map_df_result
-
-# Check if output is a data frame (tibble in this case)
-is_tibble(map_df_result)
+``
 
 ```
 
 
-## Reading and writing lots of files
 
-### Writing
+## Automating analyses with `map`
+
+### Writing a dataframe into multiple csv files
 
 ```{r, eval = F}
 LPI_list <- LPI %>% 
@@ -807,16 +1081,11 @@ LPI_list <- LPI %>%
 
 I’ll also use `purrr::map()` to take the character values from the Class column itself for assigning names to the list. `map()` transforms an input by applying a function to each element of the input, and then returns a vector the same length as the input. In this immediate example, the input is the list_of_dfs and we apply the function `dplyr::pull()` to extract the Class variable from each data frame. We then repeat this approach to convert Class into character type with `as.character()` and take out a single value with `unique()`:
 
-```{r, eval = F}
-  names(LPI_list) <- LPI_list %>%
-  purrr::map(~pull(.,Class)) %>% # Pull out Species variable
-  purrr::map(~as.character(.)) %>% # Convert factor to character
-  purrr::map(~unique(.)) # Set this as names for list members
 
-names(LPI_list)
+
 
 ```
-```
+
  [1] "Actinopterygii"            "Amphibia"                  "Aves"                      "Cephalaspidomorphi"       
  [5] "Cetacea"                   "Chondrichthyes"            "Elasmobranchii"            "Holocephali"              
  [9] "Mammalia"                  "Myxini"                    "Perciformes"               "Reptilia"                 
@@ -830,37 +1099,27 @@ Exporting the list of data frames into multiple CSV files will take a few more l
 
 2. Create a named list where the names match the arguments of the function you’ve just defined (data and names), and should contain the objects that you would like to pass through to the function for the respective arguments. In this case, list_of_dfs will provide the three data frames, and names(list_of_dfs) will provide the names of those three data frames. This is necessary for running pmap(), which in my view is basically a super-powered version of map() that lets you iterate over multiple inputs simultaneously.
 
-3. `pmap()` will then iterate through the two sets of inputs through output_csv() (the inputs are used as arguments), which then writes the three CSV files with the file names you want. For the “writing” function, you could either use write_csv() from readr (part of tidyverse) or fwrite() from data.table, depending on your workflow / style.
+3. `map()` will then iterate through the two sets of inputs through output_csv() (the inputs are used as arguments), which then writes the three CSV files with the file names you want. For the “writing” function, you could either use write_csv() from readr (part of tidyverse) or fwrite() from data.table, depending on your workflow / style.
 
 
 ```{r, eval = F}
-# Step 1
-# Define a function for exporting csv with the desired file names and into the right path
-output_csv <- function(data, names){ 
-    folder_path <- "../data/"
-    
-    write_csv(data, paste0(folder_path, "class-", names, ".csv"))
-  }
-
-# Step 2
-list(data = LPI_list,
-     names = names(LPI_list)) %>% 
-  
-# Step 3
-  purrr::pmap(output_csv) 
-
+LPI_list %>% 
+  map(~write_csv(.x, 
+  paste0("data/", .x$Class[1], ".csv")))
 ```
 
 
 
-### Reading
+### Reading multiple csv files into one object
 
 The method for reading CSV files into a directory is slightly different, as you’ll need to find a way to identify or create a character vector of names of all the files that you want to load into R. To do this, we’ll use `list.files()`, which produces a character vector of the names of files or directories in the named directory:
 
 ```{r, eval = F}
 
-list.files(path="../data/", pattern = "*.csv", full.names = T)
+data_path <- "data/"
 
+list.files(path = data_path, 
+           pattern = "*.csv")
 ```
 ```
  [1] "class-Actinopterygii.csv"     "class-Amphibia.csv"           "class-Aves.csv"               "class-Cephalaspidomorphi.csv"
@@ -870,43 +1129,52 @@ list.files(path="../data/", pattern = "*.csv", full.names = T)
 
 ```
 
-The code below takes that list of files, pipes it to a `map_df()` function that runs read_csv on each file, then outputs everything toa dataframe
+The code below takes that list of files, pipes it to a `map_df()` function that runs read_csv on each file, then outputs everything to a 'nested' dataframe.
 
 ```{r, eval = F}
-LPI <- list.files(path="../data/", pattern = "*.csv", full.names = T) %>% 
-     map_df(~read_csv(.))
+data <- files %>%
+    map(~read_csv(.)) %>%    # read in all the files individually, using
+    # the function read_csv() from the readr package
+    reduce(rbind)        # reduce with rbind into one dataframe
+data
   
 ```
 
-I think `map_df` is extremely useful because you can feed it’s output directly into a ggplot2 call:
 
-```{r}
-LPI %>% 
-  map_df(n_distinct) %>% 
-  # Convert to longer format
-  pivot_longer(everything(), names_to = "variable", values_to = "count") %>%
-  # Start plotting
-  ggplot(aes(x = variable, y = count)) +
-  geom_col() +
-  coord_flip()
+```{r, eval = F}
+# Keep info on where data came from
+
+data <- tibble(filename = files) %>% 
+  mutate(file_contents = 
+           map(filename, 
+               ~ read_csv(file.path(data_path, .))))
+
+data
+```
+
+```{r, eval = F}
+
+unnest(data)
+
 ```
 
 
-Now you have a simple grasp of `purrr` you should see that we have a list containing species objects, and an anonymous function ~ggplot on the right. We can use this to quickly make four plots, just like we did with our for loops. 
-
-the `map()` function takes a list or vector as the first argument, and a function (prefixed by ~) as the second argument, it will then apply the function to each element of the list or vector. It will then return the output as new list. Simple! 
+### Plotting with `map`
 
 ```{r, fig.width = 10}
 
-my_plots_2 <- 
-  map(Sp_list, ~ ggplot(., aes (x = year, y = abundance)) +              
-                      geom_point(size = 2, colour = "#00868B") +                                                
-                      geom_smooth(method = lm, colour = "#00868B", fill = "#00868B") +          
-                      theme_custom() +
-                      labs(y = "Abundance\n", x = "")) 
+LPI_UK %>% 
+    filter(Common.Name == "House sparrow" | 
+               Common.Name == "Great tit" | 
+               Common.Name == "Corn bunting" | 
+               Common.Name == "Meadow pipit" ) %>% 
+    group_by(Common.Name) %>% 
+    nest() %>% 
+    mutate(plots = map(data, ~ ggplot(., aes (x = year, y = abundance)) +              
+            geom_point(size = 2, colour = "#00868B") +                                                
+            geom_smooth(method = lm, colour = "#00868B", fill = "#00868B") +          
+            labs(y = "Abundance\n", x = "")))
 
-
-wrap_plots(my_plots_2)+plot_layout(design=layout)
 
 ```
 
@@ -959,7 +1227,7 @@ addtwo <- function(num1, num2){
 ```
 
 
-**Question 4.**  Recode values of a datase. tFor example, if you have a survey of age data, you may want to convert any crazy values (like anything below 0 or above 100) to NA. Write a function called recode.integer() with 3 arguments: x, lb, and ub. We’ll assume that x is a numeric vector. The function should look at the values of x, convert any values below lb and above ub to NA, and then return the resulting vector. Here is the function in action:
+**Question 4.**  Recode values of a datase. For example, if you have a survey of age data, you may want to convert any crazy values (like anything below 0 or above 100) to NA. Write a function called recode.integer() with 3 arguments: x, lb, and ub. We’ll assume that x is a numeric vector. The function should look at the values of x, convert any values below lb and above ub to NA, and then return the resulting vector. Here is the function in action:
 
 Some hints: there are multiple ways to solve this. 
 
@@ -1003,6 +1271,8 @@ return(x)
 
 ```
 
+
+
 ## Activity 5
 
 If you are hungry for more `map()` then check out [this blogpost](https://www.rebeccabarter.com/blog/2019-08-19_purrr/#simplest-usage-repeated-looping-with-map)
@@ -1017,6 +1287,8 @@ Below are some links you may find useful
 
 * [R4DS - intro to programming](https://r4ds.had.co.nz/program-intro.html)
 
-* [Coding club](https://ourcodingclub.github.io/tutorials/funandloops/#function)
+
 
 * [EpiR handbook](https://epirhandbook.com/en/iteration-loops-and-lists.html)
+
+

@@ -22,10 +22,21 @@ We are introduced to the fruitfly dataset Partridge and Farquhar (1981)^[https:/
 
 The flies used were an outbred stock, sexual activity was manipulated by supplying males with either new virgin females each day, previously mated females ( Inseminated, so remating rates are lower), or provide no females at all (Control). All groups were otherwise treated identically.
 
-```{r, eval = TRUE}
+```{r, eval = TRUE, echo = FALSE}
 fruitfly <- readRDS(here::here("book", "files", "fruitfly.RDS"))
-
 ```
+
+```{r, eval = TRUE, echo = FALSE}
+downloadthis::download_link(
+  link = "https://raw.githubusercontent.com/Philip-Leftwich/physalia-stats-intro/main/book/files/fruitfly.csv",
+  button_label = "Download Fruitfly data as csv",
+  button_type = "success",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
 
 * **type**: type of female companion (virgin, inseminated, control(partners = 0))
 

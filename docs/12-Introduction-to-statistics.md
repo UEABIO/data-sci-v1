@@ -81,8 +81,6 @@ darwin %>%
             max=max(height, na.rm=TRUE))
 
 # check for typos by looking at distinct characters/values
-darwin %>% 
-  distinct(pot)
 
 darwin %>% 
   distinct(pair)

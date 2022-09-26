@@ -188,7 +188,7 @@ In this example, by grouping on the individual penguin ids, then summarising by 
 
 ```{r, eval  = F}
 penguin_stats <- penguins %>% 
-  group_by(penguin_id) %>% 
+  group_by(individual_id) %>% 
   summarise(num=n())
 ```
 
@@ -544,9 +544,19 @@ penguins %>%
 
 ## Finished
 
-* Make sure you have **saved your script 💾** in the ["scripts" folder](#activity-1-organising-our-workspace).
+* Make sure you have **saved your script 💾**  and given it the filename "01_import_penguins_data.R" in the ["scripts" folder](#activity-1-organising-our-workspace).
 
 * Make sure your workspace is set **not** to save objects from the environment [*between* sessions](#global-options).
+
+* Does your workspace look like the below? 
+
+```{r, eval=TRUE, echo=FALSE, out.width="100%",  fig.cap="My neat project layout"}
+knitr::include_graphics("images/project_penguin.png")
+```
+
+```{r, eval=TRUE, echo=FALSE, out.width="100%",  fig.cap="My scripts and file subdirectory"}
+knitr::include_graphics("images/r_script.png")
+```
 
 ## Activity: Test yourself
 
