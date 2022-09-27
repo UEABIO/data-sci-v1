@@ -1690,7 +1690,7 @@ Solution
 <code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">files</span> <span class="op">%&gt;%</span>
     <span class="fu">map</span><span class="op">(</span><span class="op">~</span><span class="fu">read_csv</span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>    <span class="co"># read in all the files individually, using</span>
     <span class="co"># the function read_csv() from the readr package</span>
-    <span class="fu">reduce</span><span class="op">(</span><span class="va">rbind</span><span class="op">)</span>        <span class="co"># reduce with rbind into one dataframe</span>
+    <span class="fu"><a href="https://wilkelab.org/ggridges/reference/reduce.html">reduce</a></span><span class="op">(</span><span class="va">rbind</span><span class="op">)</span>        <span class="co"># reduce with rbind into one dataframe</span>
 <span class="va">data</span></code></pre></div>
 <div class="sourceCode" id="cb292"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Keep info on where data came from</span>

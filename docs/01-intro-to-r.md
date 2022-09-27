@@ -904,7 +904,7 @@ You could now safely quit R, and when you log on next time to this project, your
 # 📦 PACKAGES ----
 
 library(ggplot2) # create elegant data visualisations
-library(palmer penguins) # Palmer Archipelago Penguin Data
+library(palmerpenguins) # Palmer Archipelago Penguin Data
 
 # ________________----
 # DATA VISUAL ----
