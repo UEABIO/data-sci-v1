@@ -772,7 +772,7 @@ Use the document outline button to help organise your script.
 # 📦 PACKAGES ----
 
 library(ggplot2) # create elegant data visualisations
-library(palmer penguins) # Palmer Archipelago Penguin Data
+library(palmerpenguins) # Palmer Archipelago Penguin Data
 
 # ______________----
 

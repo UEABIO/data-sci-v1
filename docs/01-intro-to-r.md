@@ -797,7 +797,7 @@ To use the functions from a package in our script they must be loaded *before* w
 # 📦 PACKAGES ----
 
 library(ggplot2) # create elegant data visualisations
-library(palmer penguins) # Palmer Archipelago Penguin Data
+library(palmerpenguins) # Palmer Archipelago Penguin Data
 
 # ______________----
 ```
