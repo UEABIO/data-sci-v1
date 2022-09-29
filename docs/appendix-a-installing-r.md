@@ -2,9 +2,12 @@
 
 ## Why should I install R on my computer?
 
-The R Server cuts down on a lot of installation problems and it means that you have all the packages and functions you need already installed. However, it requires an internet connection to use and additional when it comes time to submit your R assessments, if you don't have R on your computer it means that you won't be able to open the files you download from the server to check they're ok before you submit them.
+The R StudioCloud cuts down on a lot of installation problems and it means that you have all the packages and functions you need already installed. However, it requires an internet connection to use.
+
+Eventually to continue your R and Data Science journey you will probably want R and RStudio on your own computer.
 
 There are some great detailed walkthrough videos by [Danielle Narvarro on YouTube](https://www.youtube.com/playlist?list=PLRPB0ZzEYegOZivdelOuEn-R-XUN-DOjd) re: how to install R on both Windows and Mac.
+
 
 ## Windows
 
@@ -46,7 +49,7 @@ This will install the `tidyverse` package on your computer. If you have any prob
 
 ## Chromebooks
 
-Please note that you cannot currently install R on a Chromebook, please use the R Server.
+Please note that you cannot currently install R on a Chromebook, please use the R StudioCloud.
 ## RStudio Settings
 
 There are a few settings you should fix immediately after updating RStudio. Go to **`Global Options...`** under the **`Tools`** menu (&#8984;,), and in the General tab, uncheck the box that says **`Restore .RData into workspace at startup`**.  If you keep things around in your workspace, things will get messy, and unexpected things will happen. You should always start with a clear workspace. This also means that you never want to save your workspace when you exit, so set this to **`Never`**. The only thing you want to save are your scripts.
@@ -65,6 +68,12 @@ You may also want to change the settings in the Code tab. Foe example, Lisa pref
 <p class="caption">(\#fig:settings-code)RStudio Code settings</p>
 </div>
 
+
+## Using RStudio on your computer
+
+Functionally there is no difference using RStudio on your own computer, just be mindful about where you are setting up your projects, and where files are located on your computer. My top tips:
+
+Set up a folder for in your Documents folder for `R projects`. Within this folder make sure each unique analysis project *has its own subfolder*. 
 
 ## Installing LaTeX
 

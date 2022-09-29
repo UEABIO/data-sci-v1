@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>A Installing R | 5023Y</title>
 <meta name="author" content="Philip T. Leftwich">
-<meta name="description" content="A.1 Why should I install R on my computer? The R Server cuts down on a lot of installation problems and it means that you have all the packages and functions you need already installed. However,...">
+<meta name="description" content="A.1 Why should I install R on my computer? The R StudioCloud cuts down on a lot of installation problems and it means that you have all the packages and functions you need already installed....">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="A Installing R | 5023Y">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://ueabio.github.io/data-sci/installing-r.html">
 <meta property="og:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
-<meta property="og:description" content="A.1 Why should I install R on my computer? The R Server cuts down on a lot of installation problems and it means that you have all the packages and functions you need already installed. However,...">
+<meta property="og:description" content="A.1 Why should I install R on my computer? The R StudioCloud cuts down on a lot of installation problems and it means that you have all the packages and functions you need already installed....">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="A Installing R | 5023Y">
-<meta name="twitter:description" content="A.1 Why should I install R on my computer? The R Server cuts down on a lot of installation problems and it means that you have all the packages and functions you need already installed. However,...">
+<meta name="twitter:description" content="A.1 Why should I install R on my computer? The R StudioCloud cuts down on a lot of installation problems and it means that you have all the packages and functions you need already installed....">
 <meta name="twitter:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.13/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -140,7 +140,8 @@
 <h2>
 <span class="header-section-number">A.1</span> Why should I install R on my computer?<a class="anchor" aria-label="anchor" href="#why-should-i-install-r-on-my-computer"><i class="fas fa-link"></i></a>
 </h2>
-<p>The R Server cuts down on a lot of installation problems and it means that you have all the packages and functions you need already installed. However, it requires an internet connection to use and additional when it comes time to submit your R assessments, if you don't have R on your computer it means that you won't be able to open the files you download from the server to check they're ok before you submit them.</p>
+<p>The R StudioCloud cuts down on a lot of installation problems and it means that you have all the packages and functions you need already installed. However, it requires an internet connection to use.</p>
+<p>Eventually to continue your R and Data Science journey you will probably want R and RStudio on your own computer.</p>
 <p>There are some great detailed walkthrough videos by <a href="https://www.youtube.com/playlist?list=PLRPB0ZzEYegOZivdelOuEn-R-XUN-DOjd">Danielle Narvarro on YouTube</a> re: how to install R on both Windows and Mac.</p>
 </div>
 <div id="windows" class="section level2" number="26.2">
@@ -183,7 +184,7 @@
 <h2>
 <span class="header-section-number">A.4</span> Chromebooks<a class="anchor" aria-label="anchor" href="#chromebooks"><i class="fas fa-link"></i></a>
 </h2>
-<p>Please note that you cannot currently install R on a Chromebook, please use the R Server.
+<p>Please note that you cannot currently install R on a Chromebook, please use the R StudioCloud.
 ## RStudio Settings</p>
 <p>There are a few settings you should fix immediately after updating RStudio. Go to <strong><code>Global Options...</code></strong> under the <strong><code>Tools</code></strong> menu (⌘,), and in the General tab, uncheck the box that says <strong><code>Restore .RData into workspace at startup</code></strong>. If you keep things around in your workspace, things will get messy, and unexpected things will happen. You should always start with a clear workspace. This also means that you never want to save your workspace when you exit, so set this to <strong><code>Never</code></strong>. The only thing you want to save are your scripts.</p>
 <p>You may also want to change the appearance of your code. Different fonts and themes can sometimes help with visual difficulties or <a href="https://datacarpentry.org/blog/2017/09/coding-and-dyslexia" target="_blank">dyslexia</a>.</p>
@@ -201,9 +202,16 @@ Figure A.2: RStudio Code settings
 </p>
 </div>
 </div>
-<div id="installing-latex" class="section level2" number="26.5">
+<div id="using-rstudio-on-your-computer" class="section level2" number="26.5">
 <h2>
-<span class="header-section-number">A.5</span> Installing LaTeX<a class="anchor" aria-label="anchor" href="#installing-latex"><i class="fas fa-link"></i></a>
+<span class="header-section-number">A.5</span> Using RStudio on your computer<a class="anchor" aria-label="anchor" href="#using-rstudio-on-your-computer"><i class="fas fa-link"></i></a>
+</h2>
+<p>Functionally there is no difference using RStudio on your own computer, just be mindful about where you are setting up your projects, and where files are located on your computer. My top tips:</p>
+<p>Set up a folder for in your Documents folder for <code>R projects</code>. Within this folder make sure each unique analysis project <em>has its own subfolder</em>.</p>
+</div>
+<div id="installing-latex" class="section level2" number="26.6">
+<h2>
+<span class="header-section-number">A.6</span> Installing LaTeX<a class="anchor" aria-label="anchor" href="#installing-latex"><i class="fas fa-link"></i></a>
 </h2>
 <p>You can install the LaTeX typesetting system to produce PDF reports from RStudio. Without this additional installation, you will be able to produce reports in HTML but not PDF. This course will not require you to make PDFs. To generate PDF reports, you will additionally need to install <code class="package">tinytex</code> <span class="citation">(<a href="references.html#ref-R-tinytex" role="doc-biblioref">Xie, 2021b</a>)</span> and run the following code:</p>
 <div class="sourceCode" id="cb564"><pre class="downlit sourceCode r">
@@ -401,7 +409,8 @@ $( document ).ready(function() {
 <li><a class="nav-link" href="#windows"><span class="header-section-number">A.2</span> Windows</a></li>
 <li><a class="nav-link" href="#mac"><span class="header-section-number">A.3</span> Mac</a></li>
 <li><a class="nav-link" href="#chromebooks"><span class="header-section-number">A.4</span> Chromebooks</a></li>
-<li><a class="nav-link" href="#installing-latex"><span class="header-section-number">A.5</span> Installing LaTeX</a></li>
+<li><a class="nav-link" href="#using-rstudio-on-your-computer"><span class="header-section-number">A.5</span> Using RStudio on your computer</a></li>
+<li><a class="nav-link" href="#installing-latex"><span class="header-section-number">A.6</span> Installing LaTeX</a></li>
 </ul>
 
       <div class="book-extra">

@@ -141,7 +141,7 @@ say_hello()
 
 ```
 
-### Activity 3: Understand arguments and defaults
+### Activity 3: Understand arguments
 
 ```{task}
 What happens when you try to put something in the brackets when **using** this function?

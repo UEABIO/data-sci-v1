@@ -274,7 +274,7 @@ structuring-a-function
 activity-1-understand-the-function
 activity-2-write-your-own-function
 argument-defaults
-activity-3-understand-arguments-and-defaults
+activity-3-understand-arguments
 argument-defaults-1
 conditonal-functions
 scope
@@ -492,6 +492,7 @@ why-should-i-install-r-on-my-computer
 windows
 mac
 chromebooks
+using-rstudio-on-your-computer
 installing-latex
 updating-r-rstudio-and-packages
 updating-rstudio

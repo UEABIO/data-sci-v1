@@ -67,4 +67,4 @@ library(installr)
 updateR()
 ```
 
-As always, if you're having issues, please ask on Teams or book into a GTA session.
+As always, if you're having issues, please ask.

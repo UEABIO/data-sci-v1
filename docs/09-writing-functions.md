@@ -138,7 +138,7 @@ say_hello()
 ## [1] "Hello World"
 ```
 
-### Activity 3: Understand arguments and defaults
+### Activity 3: Understand arguments
 
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
 What happens when you try to put something in the brackets when **using** this function?
