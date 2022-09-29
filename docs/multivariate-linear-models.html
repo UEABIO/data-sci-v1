@@ -4,17 +4,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 18 Multivariate linear models | 5023Y</title>
+<title>Chapter 17 Multivariate linear models | 5023Y</title>
 <meta name="author" content="Philip T. Leftwich">
 <meta name="description" content="So far we have worked almost exclusively with single explanatory variables either continuous (regression) or categorical (t-test or ANOVA). But what about analyses where we have more than one...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 18 Multivariate linear models | 5023Y">
+<meta property="og:title" content="Chapter 17 Multivariate linear models | 5023Y">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://ueabio.github.io/data-sci/multivariate-linear-models.html">
 <meta property="og:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
 <meta property="og:description" content="So far we have worked almost exclusively with single explanatory variables either continuous (regression) or categorical (t-test or ANOVA). But what about analyses where we have more than one...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 18 Multivariate linear models | 5023Y">
+<meta name="twitter:title" content="Chapter 17 Multivariate linear models | 5023Y">
 <meta name="twitter:description" content="So far we have worked almost exclusively with single explanatory variables either continuous (regression) or categorical (t-test or ANOVA). But what about analyses where we have more than one...">
 <meta name="twitter:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.13/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -85,9 +85,9 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Overview</a></li>
-<li class="book-part">R Programming</li>
+<li class="book-part">Get Started in R</li>
 <li><a class="" href="introduction-to-r-and-rstudio.html"><span class="header-section-number">1</span> Introduction to R and RStudio</a></li>
-<li><a class="" href="basic-programming.html"><span class="header-section-number">2</span> Basic programming</a></li>
+<li><a class="" href="r-basics.html"><span class="header-section-number">2</span> R Basics</a></li>
 <li class="book-part">Exploring Data</li>
 <li><a class="" href="loading-data.html"><span class="header-section-number">3</span> Loading data</a></li>
 <li><a class="" href="data-wrangling-part-one.html"><span class="header-section-number">4</span> Data wrangling part one</a></li>
@@ -96,27 +96,27 @@
 <li class="book-part">Literate Programming and Reproducibility</li>
 <li><a class="" href="markdown.html"><span class="header-section-number">7</span> Markdown</a></li>
 <li><a class="" href="github.html"><span class="header-section-number">8</span> Github</a></li>
-<li class="book-part">DRY code</li>
+<li class="book-part">R Programming</li>
 <li><a class="" href="functions-1.html"><span class="header-section-number">9</span> Functions</a></li>
-<li><a class="" href="iteration.html"><span class="header-section-number">10</span> Iteration</a></li>
 <li class="book-part">Advanced Data Insights</li>
-<li><a class="" href="data-insights-part-one.html"><span class="header-section-number">11</span> Data Insights part one</a></li>
-<li><a class="" href="data-insights-part-two.html"><span class="header-section-number">12</span> Data insights part two</a></li>
+<li><a class="" href="data-insights-part-one.html"><span class="header-section-number">10</span> Data Insights part one</a></li>
+<li><a class="" href="data-insights-part-two.html"><span class="header-section-number">11</span> Data insights part two</a></li>
 <li class="book-part">Statistics</li>
-<li><a class="" href="introduction-to-statistics.html"><span class="header-section-number">13</span> Introduction to statistics</a></li>
-<li><a class="" href="introduction-to-linear-models.html"><span class="header-section-number">14</span> Introduction to Linear Models</a></li>
-<li><a class="" href="testing.html"><span class="header-section-number">15</span> Testing</a></li>
-<li><a class="" href="regression.html"><span class="header-section-number">16</span> Regression</a></li>
-<li><a class="" href="anova.html"><span class="header-section-number">17</span> ANOVA</a></li>
-<li><a class="active" href="multivariate-linear-models.html"><span class="header-section-number">18</span> Multivariate linear models</a></li>
-<li><a class="" href="complex-models.html"><span class="header-section-number">19</span> Complex models</a></li>
-<li><a class="" href="generalized-linear-models.html"><span class="header-section-number">20</span> Generalized Linear Models</a></li>
+<li><a class="" href="introduction-to-statistics.html"><span class="header-section-number">12</span> Introduction to statistics</a></li>
+<li><a class="" href="introduction-to-linear-models.html"><span class="header-section-number">13</span> Introduction to Linear Models</a></li>
+<li><a class="" href="testing.html"><span class="header-section-number">14</span> Testing</a></li>
+<li><a class="" href="regression.html"><span class="header-section-number">15</span> Regression</a></li>
+<li><a class="" href="anova.html"><span class="header-section-number">16</span> ANOVA</a></li>
+<li><a class="active" href="multivariate-linear-models.html"><span class="header-section-number">17</span> Multivariate linear models</a></li>
+<li><a class="" href="complex-models.html"><span class="header-section-number">18</span> Complex models</a></li>
+<li><a class="" href="generalized-linear-models.html"><span class="header-section-number">19</span> Generalized Linear Models</a></li>
 <li class="book-part">Advanced topics</li>
-<li><a class="" href="mixed-models.html"><span class="header-section-number">21</span> Mixed models</a></li>
-<li><a class="" href="generalised-additive-models.html"><span class="header-section-number">22</span> Generalised Additive Models</a></li>
-<li><a class="" href="survival-models.html"><span class="header-section-number">23</span> Survival models</a></li>
-<li><a class="" href="unsupervised-machine-learning.html"><span class="header-section-number">24</span> Unsupervised Machine Learning</a></li>
-<li><a class="" href="power-analysis.html"><span class="header-section-number">25</span> Power analysis</a></li>
+<li><a class="" href="mixed-models.html"><span class="header-section-number">20</span> Mixed models</a></li>
+<li><a class="" href="generalised-additive-models.html"><span class="header-section-number">21</span> Generalised Additive Models</a></li>
+<li><a class="" href="survival-models.html"><span class="header-section-number">22</span> Survival models</a></li>
+<li><a class="" href="unsupervised-machine-learning.html"><span class="header-section-number">23</span> Unsupervised Machine Learning</a></li>
+<li><a class="" href="power-analysis.html"><span class="header-section-number">24</span> Power analysis</a></li>
+<li><a class="" href="iteration.html"><span class="header-section-number">25</span> Iteration</a></li>
 <li class="book-part">Appendices</li>
 <li><a class="" href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></li>
 <li><a class="" href="updating-r-rstudio-and-packages.html"><span class="header-section-number">B</span> Updating R, RStudio, and packages</a></li>
@@ -132,14 +132,14 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="multivariate-linear-models" class="section level1" number="18">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="multivariate-linear-models" class="section level1" number="17">
 <h1>
-<span class="header-section-number">18</span> Multivariate linear models<a class="anchor" aria-label="anchor" href="#multivariate-linear-models"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17</span> Multivariate linear models<a class="anchor" aria-label="anchor" href="#multivariate-linear-models"><i class="fas fa-link"></i></a>
 </h1>
 <p>So far we have worked almost exclusively with single explanatory variables either continuous (regression) or categorical (t-test or ANOVA). But what about analyses where we have more than one possible explanatory variable? Extra terms can easily be incorporated into linear models in order to test this.</p>
-<div id="factorial-linear-models" class="section level2" number="18.1">
+<div id="factorial-linear-models" class="section level2" number="17.1">
 <h2>
-<span class="header-section-number">18.1</span> Factorial linear models<a class="anchor" aria-label="anchor" href="#factorial-linear-models"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.1</span> Factorial linear models<a class="anchor" aria-label="anchor" href="#factorial-linear-models"><i class="fas fa-link"></i></a>
 </h2>
 <blockquote>
 <p>The example data is the response of above ground plant biomass production of grassland plots in relation to two resource addition treatments. The addition of Fertiliser to the soil and the addition of Light to the grassland understorey. If biomass is limited by the nutrients in the soil, we would expect the addition of fertiliser to increase production. If biomass is limited by low levels of light caused by plant crowding we would expect an addition of light to increase biomass.</p>
@@ -147,7 +147,7 @@
 <a href="https://raw.githubusercontent.com/UEABIO/data-sci-v1/main/book/files/biomass.csv">
 <button class="btn btn-success"><i class="fa fa-save"></i> Download biomass data as csv</button>
 </a>
-<div class="sourceCode" id="cb453"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb386"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">biomass</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"book"</span>, <span class="st">"files"</span>, <span class="st">"biomass.csv"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>You should first check the data and look at the top rows, we can see that this shows the application or non-application of fertiliser and light additions, because <em>all four</em> possible combinations are present, this is known as a <em>fully factorial design</em>:</p>
 <ul>
@@ -180,7 +180,7 @@ Show Solution
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb454"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb387"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># check the structure of the data</span>
 <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">biomass</span><span class="op">)</span>
 
@@ -435,9 +435,9 @@ F+L+
 </div>
 </div>
 </div>
-<div id="data-summary" class="section level2" number="18.2">
+<div id="data-summary" class="section level2" number="17.2">
 <h2>
-<span class="header-section-number">18.2</span> Data summary<a class="anchor" aria-label="anchor" href="#data-summary"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.2</span> Data summary<a class="anchor" aria-label="anchor" href="#data-summary"><i class="fas fa-link"></i></a>
 </h2>
 <p>So we have 64 observations with four variables, the last column is the response variable (biomass) and the other three columns are <em>two</em> different ways of indicating the experimental design.</p>
 <ul>
@@ -446,9 +446,9 @@ F+L+
 </ul>
 <p>We will look at the two different ways to analyse this data then, and the pros and cons of these two approaches.</p>
 </div>
-<div id="one-way-anova" class="section level2" number="18.3">
+<div id="one-way-anova" class="section level2" number="17.3">
 <h2>
-<span class="header-section-number">18.3</span> One-way ANOVA<a class="anchor" aria-label="anchor" href="#one-way-anova"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.3</span> One-way ANOVA<a class="anchor" aria-label="anchor" href="#one-way-anova"><i class="fas fa-link"></i></a>
 </h2>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-7"></span>
@@ -458,7 +458,7 @@ Figure 6.2: Boxplot and individual biomass values (black points) with treatment 
 </div>
 <p>Plotting the data and superimposing mean values produces the graph shown above. Now we are confident there is a difference in our sample means, we can begin a linear model to quantify this and test it against a null hypothesis.</p>
 <p>If we use the <code>FL</code> column as a predictor then this is equivalent to a four-level one way ANOVA.</p>
-<div class="sourceCode" id="cb458"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb391"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ls_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Biomass.m2</span> <span class="op">~</span> <span class="va">FL</span>, data <span class="op">=</span> <span class="va">biomass</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">ls_1</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -484,7 +484,7 @@ Figure 6.2: Boxplot and individual biomass values (black points) with treatment 
 <p>We can see that the control treatment (F- L-) is the intercept with a mean of 356g and standard error of 23g. The Light treatment adds an average of 30g to the biomass (but this close to the standard error of this estimated mean difference - 32.72g). In contrast the addition of fertiliser adds 93g to the biomass.</p>
 <p>If we wanted to get the precise confidence intervals we could use <code><a href="https://generics.r-lib.org/reference/tidy.html">broom::tidy(ls_1, conf.int = T)</a></code> or <code><a href="https://rdrr.io/r/stats/confint.html">confint(ls1)</a></code>.</p>
 <p>We can visualise these differences with a coefficient plot, and see clearly that adding light by itself produce a slight increase in the mean biomass of our samples <strong>but</strong> the 95% confidence interval includes zero, so we don't have any real confidence that this is a consistent/true effect.</p>
-<div class="sourceCode" id="cb460"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb393"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">GGally</span><span class="fu">::</span><span class="fu"><a href="https://ggobi.github.io/ggally/reference/ggcoef_model.html">ggcoef_model</a></span><span class="op">(</span><span class="va">ls_1</span>,
                       show_p_values<span class="op">=</span><span class="cn">FALSE</span>,
                       signif_stars <span class="op">=</span> <span class="cn">FALSE</span>,
@@ -497,7 +497,7 @@ Figure 3.2: Effects of light and fertiliser treatments on biomass relative to an
 </div>
 <p>But what about the fourth level - combined fertiliser and light treatments? If there is no interaction (combined effect) between light and fertiliser then we would expect the average biomass difference caused by the light and the and the average biomass difference caused by fertiliser to <em>add together</em> to approximately the value found in the combined treatment.</p>
 <p>In other words if one treatment has an effect size of <em>A</em>, and another treatment has an effect size of <em>B</em>, then ANOVA predicts that in combination the effect size of the combined treatments is <em>A + B</em>.</p>
-<div class="sourceCode" id="cb461"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb394"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># combine the average mean differences of the light effect and fertiliser effect</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">ls_1</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">ls_1</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span> 
 
@@ -512,9 +512,9 @@ Figure 3.2: Effects of light and fertiliser treatments on biomass relative to an
 <p>Using our one-way ANOVA design we are able to accurately estimate the mean difference between the controlled group and the combined treatment group. <strong>But</strong> we cannot really say anything concrete about the <em>strength of the interaction effect</em> e.g. is their a true interaction? how confident can we be in this effect? How does the strength of the interaction effect compare to the main effects?</p>
 <p>In contrast to the one-way ANOVA approach, a factorial design lets us test and compare additive effects and interaction effects</p>
 </div>
-<div id="testing-for-interactions" class="section level2" number="18.4">
+<div id="testing-for-interactions" class="section level2" number="17.4">
 <h2>
-<span class="header-section-number">18.4</span> Testing for interactions<a class="anchor" aria-label="anchor" href="#testing-for-interactions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.4</span> Testing for interactions<a class="anchor" aria-label="anchor" href="#testing-for-interactions"><i class="fas fa-link"></i></a>
 </h2>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-11"></span>
@@ -528,7 +528,7 @@ Figure 3.3: Left an illustration of an additive model, Right an illustration of 
 Look at the figure and determine whether you think there is evidence for an interaction effect?
 </p>
 </div>
-<div class="sourceCode" id="cb463"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb396"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">biomass</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Fert</span>, y<span class="op">=</span><span class="va">Biomass.m2</span>, colour <span class="op">=</span> <span class="va">Light</span>, fill <span class="op">=</span> <span class="va">Light</span>, group <span class="op">=</span> <span class="va">Light</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span>width<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary</a></span><span class="op">(</span>
@@ -543,7 +543,7 @@ Look at the figure and determine whether you think there is evidence for an inte
     <span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="17-Multiple-regression_files/figure-html/unnamed-chunk-13-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>To produce an interactive model, we need to use the <em>separate</em> factors for fertiliser and light rather than the single <code>fl</code> factor. When we make this model, we include the main effects of <code>Light</code> and <code>Fert</code>, if the additive model explains sufficient variance then this will be enough, but if we suspect an interaction term we add this as <code>Light:Fert</code> written out as follows:</p>
-<div class="sourceCode" id="cb464"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb397"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ls_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Biomass.m2</span> <span class="op">~</span> <span class="va">Fert</span> <span class="op">+</span> <span class="co"># main effect</span>
              <span class="va">Light</span> <span class="op">+</span> <span class="co"># main effect</span>
              <span class="va">Fert</span><span class="op">:</span><span class="va">Light</span>, <span class="co"># interaction term</span>
@@ -571,19 +571,19 @@ Look at the figure and determine whether you think there is evidence for an inte
 ## Multiple R-squared:  0.4686, Adjusted R-squared:  0.442 
 ## F-statistic: 17.63 on 3 and 60 DF,  p-value: 2.528e-08</code></pre>
 <p>Notice the estimates of the mean differences are the same as the previous one-way ANOVA model. The fourth line now indicates <em>how much of an effect the two factors interacting changes the mean</em>. Also note the standard error is larger, there is less power to accurately estimate an interaction over a main effect.</p>
-<div class="sourceCode" id="cb466"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb399"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">GGally</span><span class="fu">::</span><span class="fu"><a href="https://ggobi.github.io/ggally/reference/ggcoef_model.html">ggcoef_model</a></span><span class="op">(</span><span class="va">ls_2</span>,
                       show_p_values<span class="op">=</span><span class="cn">FALSE</span>,
                       signif_stars <span class="op">=</span> <span class="cn">FALSE</span>,
                      conf.level<span class="op">=</span><span class="fl">0.95</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="17-Multiple-regression_files/figure-html/unnamed-chunk-15-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>When we use a factorial combination, the last line of the table of coefficients estimates the size of the interaction effect at around 95g. So if combining the light and fertilisation treatments produced a biomass equivalent to their additive predictions, the estimate of the interaction would be <em>zero</em>. Instead it is <strong>95g more than we would expect from the additive effects alone</strong>. This means in order to work out the estimated biomass for the treatment of light and fertiliser we must sum the additive effects of <code>Light</code>+ <code>Fert</code> and the interaction effect <code>Light:Fert</code>.</p>
-<div id="model-estimates-and-confidence-intervals" class="section level3" number="18.4.1">
+<div id="model-estimates-and-confidence-intervals" class="section level3" number="17.4.1">
 <h3>
-<span class="header-section-number">18.4.1</span> Model estimates and confidence intervals<a class="anchor" aria-label="anchor" href="#model-estimates-and-confidence-intervals"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.4.1</span> Model estimates and confidence intervals<a class="anchor" aria-label="anchor" href="#model-estimates-and-confidence-intervals"><i class="fas fa-link"></i></a>
 </h3>
 <p>When we compare this to our one-way ANOVA model, we must add the single terms and the interaction term, this should add up to the combined treatment from our first model:</p>
-<div class="sourceCode" id="cb467"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb400"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># model 1</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">ls_1</span><span class="op">)</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span>
 
@@ -603,9 +603,9 @@ So, if you have a significant interaction term, you must consider the main effec
 </div>
 </div>
 </div>
-<div id="anova-tables" class="section level2" number="18.5">
+<div id="anova-tables" class="section level2" number="17.5">
 <h2>
-<span class="header-section-number">18.5</span> ANOVA tables<a class="anchor" aria-label="anchor" href="#anova-tables"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.5</span> ANOVA tables<a class="anchor" aria-label="anchor" href="#anova-tables"><i class="fas fa-link"></i></a>
 </h2>
 <p>So you have made a linear model with an interaction term, how do you report whether this interaction is significant? How do you report the main effect terms when there is an interaction present?</p>
 <ol style="list-style-type: decimal">
@@ -613,7 +613,7 @@ So, if you have a significant interaction term, you must consider the main effec
 </ol>
 <p>In previous chapters we ran the <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> function directly on our linear model. This works well for simple &amp; 'balanced' designs (there are equal sample sizes in each level of a factor), but can be misleading with <a href="https://mcfromnz.wordpress.com/2011/03/02/anova-type-iiiiii-ss-explained/">'unbalanced' designs or models with complex interactions</a>.</p>
 <p>In order to report an <em>F</em> statistic for the interaction effect, we need to carry out an <em>F</em>-test of two models, one <em>with</em> and one <em>without</em> the interaction effect. This is easy with the function <code><a href="https://rdrr.io/r/stats/add1.html">drop1()</a></code></p>
-<div class="sourceCode" id="cb469"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb402"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/add1.html">drop1</a></span><span class="op">(</span><span class="va">ls_2</span>, test <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
@@ -705,7 +705,7 @@ Remember to check the assumptions of your full model
 </ol>
 <p>A good thing about the <code><a href="https://rdrr.io/r/stats/add1.html">drop1()</a></code> function is that if there are interactions in the model, it stops there. This is because if the interaction effect is significant, then the main effects must be included, even if they aren't significant on their own. We can make further models to test the main effects <strong>but</strong> these are less important because we already know the interaction term provides the main result.</p>
 <p>If we decide to include reports of the main effect then estimates and confidence intervals should come from the <em>full</em> model, but we need to produce an interaction free model to produce accurate <em>F</em>-values (especially for unbalanced designs, see below).</p>
-<div class="sourceCode" id="cb470"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb403"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># we have to remove the interaction term before we can keep using drop1()</span>
 
 <span class="va">ls_3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Biomass.m2</span> <span class="op">~</span> <span class="va">Fert</span> <span class="op">+</span> <span class="va">Light</span>, data <span class="op">=</span> <span class="va">biomass</span><span class="op">)</span>
@@ -814,9 +814,9 @@ You can use this reduced model to get F values, BUT reports of estimates should 
 </p>
 </div>
 </div>
-<div id="balancedunbalanced-designs" class="section level2" number="18.6">
+<div id="balancedunbalanced-designs" class="section level2" number="17.6">
 <h2>
-<span class="header-section-number">18.6</span> Balanced/Unbalanced designs<a class="anchor" aria-label="anchor" href="#balancedunbalanced-designs"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.6</span> Balanced/Unbalanced designs<a class="anchor" aria-label="anchor" href="#balancedunbalanced-designs"><i class="fas fa-link"></i></a>
 </h2>
 <div class="warning">
 <p>
@@ -830,12 +830,12 @@ lm(Light + Fert)
 </p>
 </div>
 <p>In the examples above, you are unlikely to find much of a difference between running the <code><a href="https://rdrr.io/r/stats/add1.html">drop1()</a></code> function or <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> on the complex or reduced models. This is because these designs are 'balanced' (equal numbers in each level of a predictor). When designs are not balanced then the order matters when we use <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> - this is because the sum of squares is calculated sequentially (in the order of the formula), and so we could get different results depending on the order in which we assemble predictors into our model!</p>
-<div id="practice" class="section level3" number="18.6.1">
+<div id="practice" class="section level3" number="17.6.1">
 <h3>
-<span class="header-section-number">18.6.1</span> Practice<a class="anchor" aria-label="anchor" href="#practice"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.6.1</span> Practice<a class="anchor" aria-label="anchor" href="#practice"><i class="fas fa-link"></i></a>
 </h3>
 <p>Let's start by making a deliberately unbalanced dataset</p>
-<div class="sourceCode" id="cb471"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb404"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># make three vectors and combine them into a new tibble</span>
 
 <span class="va">height</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">50</span>,<span class="fl">57</span>,<span class="fl">91</span>,<span class="fl">94</span>,<span class="fl">102</span>,<span class="fl">110</span>,<span class="fl">57</span>,<span class="fl">71</span>,<span class="fl">85</span>,<span class="fl">105</span>,<span class="fl">120</span><span class="op">)</span>
@@ -985,9 +985,9 @@ Removal
 </div>
 </div>
 </div>
-<div id="activity-1-sums-of-squares" class="section level2" number="18.7">
+<div id="activity-1-sums-of-squares" class="section level2" number="17.7">
 <h2>
-<span class="header-section-number">18.7</span> Activity 1: Sums of Squares<a class="anchor" aria-label="anchor" href="#activity-1-sums-of-squares"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.7</span> Activity 1: Sums of Squares<a class="anchor" aria-label="anchor" href="#activity-1-sums-of-squares"><i class="fas fa-link"></i></a>
 </h2>
 <div class="panel panel-default">
 <div class="panel-heading">
@@ -1006,7 +1006,7 @@ Show Solution
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb472"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb405"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">treatment</span> <span class="op">+</span> <span class="va">size</span>, data <span class="op">=</span> <span class="va">unbalanced</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">model_1</span><span class="op">)</span>
 
@@ -1203,7 +1203,7 @@ Show Solution
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb473"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb406"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/add1.html">drop1</a></span><span class="op">(</span><span class="va">model_1</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/add1.html">drop1</a></span><span class="op">(</span><span class="va">model_2</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
@@ -1357,12 +1357,12 @@ treatment
 </div>
 </div>
 </div>
-<div id="post-hoc" class="section level2" number="18.8">
+<div id="post-hoc" class="section level2" number="17.8">
 <h2>
-<span class="header-section-number">18.8</span> post-hoc<a class="anchor" aria-label="anchor" href="#post-hoc"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.8</span> post-hoc<a class="anchor" aria-label="anchor" href="#post-hoc"><i class="fas fa-link"></i></a>
 </h2>
 <p>In this example it is unnecessary to spend time looking at pairwise comparisons between the four possible levels, the interesting finding is to report the strength of the interaction effect. <strong>But</strong> it is possible to generate estimated means, and produce pairwise comparisons with the <code><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html">emmeans()</a></code> package</p>
-<div class="sourceCode" id="cb474"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb407"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">emmeans</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html">emmeans</a></span><span class="op">(</span><span class="va">ls_2</span>, specs <span class="op">=</span> <span class="va">pairwise</span> <span class="op">~</span> <span class="va">Light</span> <span class="op">+</span> <span class="va">Fert</span> <span class="op">+</span> <span class="va">Light</span><span class="op">:</span><span class="va">Fert</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/stats/confint.html">confint</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co"># including the argument pairwise in front of the ~ prompts the post-hoc pairwise comparisons.</span>
@@ -1389,21 +1389,21 @@ treatment
 ## Confidence level used: 0.95 
 ## Conf-level adjustment: tukey method for comparing a family of 4 estimates</code></pre>
 </div>
-<div id="continuous-linear-models" class="section level2" number="18.9">
+<div id="continuous-linear-models" class="section level2" number="17.9">
 <h2>
-<span class="header-section-number">18.9</span> Continuous Linear Models<a class="anchor" aria-label="anchor" href="#continuous-linear-models"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.9</span> Continuous Linear Models<a class="anchor" aria-label="anchor" href="#continuous-linear-models"><i class="fas fa-link"></i></a>
 </h2>
 <p>The previous section looked at an interaction between two categorical variables, we can also examine interactions between a factor and a continuous variable. Often referred to as ANCOVA.</p>
 <a href="https://raw.githubusercontent.com/UEABIO/data-sci-v1/main/book/files/pollution.csv">
 <button class="btn btn-success"><i class="fa fa-save"></i> Download pollution data as csv</button>
 </a>
-<div class="sourceCode" id="cb476"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb409"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pollution</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"book"</span>, <span class="st">"files"</span>, <span class="st">"pollution.csv"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>The data is from an experimental study of the effects of low-level atmospheric pollutants and drought on agricultural yields. The experiment aimed to see how the yields soya bean (William variety), were affected by stress and Ozone levels. Your task is to first determine whether there is any evidence of an interaction effect, and if not report the effects of the two predictors separately.</p>
 </div>
-<div id="activity-2-build-your-own-analysis" class="section level2" number="18.10">
+<div id="activity-2-build-your-own-analysis" class="section level2" number="17.10">
 <h2>
-<span class="header-section-number">18.10</span> Activity 2: Build your own analysis<a class="anchor" aria-label="anchor" href="#activity-2-build-your-own-analysis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.10</span> Activity 2: Build your own analysis<a class="anchor" aria-label="anchor" href="#activity-2-build-your-own-analysis"><i class="fas fa-link"></i></a>
 </h2>
 <p>Try and make as much progress as you can without checking the solutions. Click on the boxes when you need help/to check your working</p>
 <div class="panel panel-default">
@@ -1423,7 +1423,7 @@ Show Solution
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb477"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb410"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># check the structure of the data</span>
 <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">pollution</span><span class="op">)</span>
 
@@ -1613,7 +1613,7 @@ Show Solution
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb481"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb414"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pollution</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">O3</span>, y <span class="op">=</span> <span class="va">William</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
@@ -1642,7 +1642,7 @@ Show Solution
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb482"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb415"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">William_ls1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">William</span> <span class="op">~</span> <span class="va">O3</span> <span class="op">+</span> <span class="va">Stress</span> <span class="op">+</span> <span class="va">O3</span><span class="op">:</span><span class="va">Stress</span>, data <span class="op">=</span> <span class="va">pollution</span><span class="op">)</span>
 
 <span class="va">William_ls1</span> <span class="op">%&gt;%</span> 
@@ -1772,15 +1772,15 @@ It looks as though there is no strong evidence here for an interaction effect, b
 </div>
 </div>
 </div>
-<div id="check-the-model-fit" class="section level3" number="18.10.1">
+<div id="check-the-model-fit" class="section level3" number="17.10.1">
 <h3>
-<span class="header-section-number">18.10.1</span> Check the model fit<a class="anchor" aria-label="anchor" href="#check-the-model-fit"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.10.1</span> Check the model fit<a class="anchor" aria-label="anchor" href="#check-the-model-fit"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb483"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb416"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">performance</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html">check_model</a></span><span class="op">(</span><span class="va">William_ls1</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="17-Multiple-regression_files/figure-html/unnamed-chunk-37-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>Everything looks pretty good, so now we could go ahead and simplify our model.</p>
-<div class="sourceCode" id="cb484"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb417"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/add1.html">drop1</a></span><span class="op">(</span><span class="va">William_ls1</span>, test <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
@@ -1856,9 +1856,9 @@ O3:Stress
 </tbody>
 </table></div>
 </div>
-<div class="sourceCode" id="cb485"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb418"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">William_ls2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">William</span> <span class="op">~</span> <span class="va">O3</span> <span class="op">+</span> <span class="va">Stress</span>, data <span class="op">=</span> <span class="va">pollution</span><span class="op">)</span> </code></pre></div>
-<div class="sourceCode" id="cb486"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb419"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/add1.html">drop1</a></span><span class="op">(</span><span class="va">William_ls2</span>, test <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
@@ -1980,9 +1980,9 @@ I hypothesised that plants under stress might react more negatively to pollution
 </div>
 </div>
 </div>
-<div id="summary-8" class="section level2" number="18.11">
+<div id="summary-7" class="section level2" number="17.11">
 <h2>
-<span class="header-section-number">18.11</span> Summary<a class="anchor" aria-label="anchor" href="#summary-8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.11</span> Summary<a class="anchor" aria-label="anchor" href="#summary-7"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li><p>Always have a good hypothesis for including an interaction</p></li>
@@ -2174,29 +2174,29 @@ $( document ).ready(function() {
   );
 });
 </script><div class="chapter-nav">
-<div class="prev"><a href="anova.html"><span class="header-section-number">17</span> ANOVA</a></div>
-<div class="next"><a href="complex-models.html"><span class="header-section-number">19</span> Complex models</a></div>
+<div class="prev"><a href="anova.html"><span class="header-section-number">16</span> ANOVA</a></div>
+<div class="next"><a href="complex-models.html"><span class="header-section-number">18</span> Complex models</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#multivariate-linear-models"><span class="header-section-number">18</span> Multivariate linear models</a></li>
-<li><a class="nav-link" href="#factorial-linear-models"><span class="header-section-number">18.1</span> Factorial linear models</a></li>
-<li><a class="nav-link" href="#data-summary"><span class="header-section-number">18.2</span> Data summary</a></li>
-<li><a class="nav-link" href="#one-way-anova"><span class="header-section-number">18.3</span> One-way ANOVA</a></li>
+<li><a class="nav-link" href="#multivariate-linear-models"><span class="header-section-number">17</span> Multivariate linear models</a></li>
+<li><a class="nav-link" href="#factorial-linear-models"><span class="header-section-number">17.1</span> Factorial linear models</a></li>
+<li><a class="nav-link" href="#data-summary"><span class="header-section-number">17.2</span> Data summary</a></li>
+<li><a class="nav-link" href="#one-way-anova"><span class="header-section-number">17.3</span> One-way ANOVA</a></li>
 <li>
-<a class="nav-link" href="#testing-for-interactions"><span class="header-section-number">18.4</span> Testing for interactions</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#model-estimates-and-confidence-intervals"><span class="header-section-number">18.4.1</span> Model estimates and confidence intervals</a></li></ul>
+<a class="nav-link" href="#testing-for-interactions"><span class="header-section-number">17.4</span> Testing for interactions</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#model-estimates-and-confidence-intervals"><span class="header-section-number">17.4.1</span> Model estimates and confidence intervals</a></li></ul>
 </li>
-<li><a class="nav-link" href="#anova-tables"><span class="header-section-number">18.5</span> ANOVA tables</a></li>
+<li><a class="nav-link" href="#anova-tables"><span class="header-section-number">17.5</span> ANOVA tables</a></li>
 <li>
-<a class="nav-link" href="#balancedunbalanced-designs"><span class="header-section-number">18.6</span> Balanced/Unbalanced designs</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#practice"><span class="header-section-number">18.6.1</span> Practice</a></li></ul>
+<a class="nav-link" href="#balancedunbalanced-designs"><span class="header-section-number">17.6</span> Balanced/Unbalanced designs</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#practice"><span class="header-section-number">17.6.1</span> Practice</a></li></ul>
 </li>
-<li><a class="nav-link" href="#activity-1-sums-of-squares"><span class="header-section-number">18.7</span> Activity 1: Sums of Squares</a></li>
-<li><a class="nav-link" href="#post-hoc"><span class="header-section-number">18.8</span> post-hoc</a></li>
-<li><a class="nav-link" href="#continuous-linear-models"><span class="header-section-number">18.9</span> Continuous Linear Models</a></li>
+<li><a class="nav-link" href="#activity-1-sums-of-squares"><span class="header-section-number">17.7</span> Activity 1: Sums of Squares</a></li>
+<li><a class="nav-link" href="#post-hoc"><span class="header-section-number">17.8</span> post-hoc</a></li>
+<li><a class="nav-link" href="#continuous-linear-models"><span class="header-section-number">17.9</span> Continuous Linear Models</a></li>
 <li>
-<a class="nav-link" href="#activity-2-build-your-own-analysis"><span class="header-section-number">18.10</span> Activity 2: Build your own analysis</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#check-the-model-fit"><span class="header-section-number">18.10.1</span> Check the model fit</a></li></ul>
+<a class="nav-link" href="#activity-2-build-your-own-analysis"><span class="header-section-number">17.10</span> Activity 2: Build your own analysis</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#check-the-model-fit"><span class="header-section-number">17.10.1</span> Check the model fit</a></li></ul>
 </li>
-<li><a class="nav-link" href="#summary-8"><span class="header-section-number">18.11</span> Summary</a></li>
+<li><a class="nav-link" href="#summary-7"><span class="header-section-number">17.11</span> Summary</a></li>
 </ul>
 
       <div class="book-extra">
@@ -2214,7 +2214,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-09-27.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-09-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -4,18 +4,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 17 ANOVA | 5023Y</title>
+<title>Chapter 16 ANOVA | 5023Y</title>
 <meta name="author" content="Philip T. Leftwich">
-<meta name="description" content="17.1 Analysis of Variance (ANOVA) So far we have used linear models for analyses between two 'categorical' explanatory variables e.g. t-tests, and for regression with two 'continuous' variables....">
+<meta name="description" content="16.1 Analysis of Variance (ANOVA) So far we have used linear models for analyses between two 'categorical' explanatory variables e.g. t-tests, and for regression with two 'continuous' variables....">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 17 ANOVA | 5023Y">
+<meta property="og:title" content="Chapter 16 ANOVA | 5023Y">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://ueabio.github.io/data-sci/anova.html">
 <meta property="og:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
-<meta property="og:description" content="17.1 Analysis of Variance (ANOVA) So far we have used linear models for analyses between two 'categorical' explanatory variables e.g. t-tests, and for regression with two 'continuous' variables....">
+<meta property="og:description" content="16.1 Analysis of Variance (ANOVA) So far we have used linear models for analyses between two 'categorical' explanatory variables e.g. t-tests, and for regression with two 'continuous' variables....">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 17 ANOVA | 5023Y">
-<meta name="twitter:description" content="17.1 Analysis of Variance (ANOVA) So far we have used linear models for analyses between two 'categorical' explanatory variables e.g. t-tests, and for regression with two 'continuous' variables....">
+<meta name="twitter:title" content="Chapter 16 ANOVA | 5023Y">
+<meta name="twitter:description" content="16.1 Analysis of Variance (ANOVA) So far we have used linear models for analyses between two 'categorical' explanatory variables e.g. t-tests, and for regression with two 'continuous' variables....">
 <meta name="twitter:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.13/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -85,9 +85,9 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Overview</a></li>
-<li class="book-part">R Programming</li>
+<li class="book-part">Get Started in R</li>
 <li><a class="" href="introduction-to-r-and-rstudio.html"><span class="header-section-number">1</span> Introduction to R and RStudio</a></li>
-<li><a class="" href="basic-programming.html"><span class="header-section-number">2</span> Basic programming</a></li>
+<li><a class="" href="r-basics.html"><span class="header-section-number">2</span> R Basics</a></li>
 <li class="book-part">Exploring Data</li>
 <li><a class="" href="loading-data.html"><span class="header-section-number">3</span> Loading data</a></li>
 <li><a class="" href="data-wrangling-part-one.html"><span class="header-section-number">4</span> Data wrangling part one</a></li>
@@ -96,27 +96,27 @@
 <li class="book-part">Literate Programming and Reproducibility</li>
 <li><a class="" href="markdown.html"><span class="header-section-number">7</span> Markdown</a></li>
 <li><a class="" href="github.html"><span class="header-section-number">8</span> Github</a></li>
-<li class="book-part">DRY code</li>
+<li class="book-part">R Programming</li>
 <li><a class="" href="functions-1.html"><span class="header-section-number">9</span> Functions</a></li>
-<li><a class="" href="iteration.html"><span class="header-section-number">10</span> Iteration</a></li>
 <li class="book-part">Advanced Data Insights</li>
-<li><a class="" href="data-insights-part-one.html"><span class="header-section-number">11</span> Data Insights part one</a></li>
-<li><a class="" href="data-insights-part-two.html"><span class="header-section-number">12</span> Data insights part two</a></li>
+<li><a class="" href="data-insights-part-one.html"><span class="header-section-number">10</span> Data Insights part one</a></li>
+<li><a class="" href="data-insights-part-two.html"><span class="header-section-number">11</span> Data insights part two</a></li>
 <li class="book-part">Statistics</li>
-<li><a class="" href="introduction-to-statistics.html"><span class="header-section-number">13</span> Introduction to statistics</a></li>
-<li><a class="" href="introduction-to-linear-models.html"><span class="header-section-number">14</span> Introduction to Linear Models</a></li>
-<li><a class="" href="testing.html"><span class="header-section-number">15</span> Testing</a></li>
-<li><a class="" href="regression.html"><span class="header-section-number">16</span> Regression</a></li>
-<li><a class="active" href="anova.html"><span class="header-section-number">17</span> ANOVA</a></li>
-<li><a class="" href="multivariate-linear-models.html"><span class="header-section-number">18</span> Multivariate linear models</a></li>
-<li><a class="" href="complex-models.html"><span class="header-section-number">19</span> Complex models</a></li>
-<li><a class="" href="generalized-linear-models.html"><span class="header-section-number">20</span> Generalized Linear Models</a></li>
+<li><a class="" href="introduction-to-statistics.html"><span class="header-section-number">12</span> Introduction to statistics</a></li>
+<li><a class="" href="introduction-to-linear-models.html"><span class="header-section-number">13</span> Introduction to Linear Models</a></li>
+<li><a class="" href="testing.html"><span class="header-section-number">14</span> Testing</a></li>
+<li><a class="" href="regression.html"><span class="header-section-number">15</span> Regression</a></li>
+<li><a class="active" href="anova.html"><span class="header-section-number">16</span> ANOVA</a></li>
+<li><a class="" href="multivariate-linear-models.html"><span class="header-section-number">17</span> Multivariate linear models</a></li>
+<li><a class="" href="complex-models.html"><span class="header-section-number">18</span> Complex models</a></li>
+<li><a class="" href="generalized-linear-models.html"><span class="header-section-number">19</span> Generalized Linear Models</a></li>
 <li class="book-part">Advanced topics</li>
-<li><a class="" href="mixed-models.html"><span class="header-section-number">21</span> Mixed models</a></li>
-<li><a class="" href="generalised-additive-models.html"><span class="header-section-number">22</span> Generalised Additive Models</a></li>
-<li><a class="" href="survival-models.html"><span class="header-section-number">23</span> Survival models</a></li>
-<li><a class="" href="unsupervised-machine-learning.html"><span class="header-section-number">24</span> Unsupervised Machine Learning</a></li>
-<li><a class="" href="power-analysis.html"><span class="header-section-number">25</span> Power analysis</a></li>
+<li><a class="" href="mixed-models.html"><span class="header-section-number">20</span> Mixed models</a></li>
+<li><a class="" href="generalised-additive-models.html"><span class="header-section-number">21</span> Generalised Additive Models</a></li>
+<li><a class="" href="survival-models.html"><span class="header-section-number">22</span> Survival models</a></li>
+<li><a class="" href="unsupervised-machine-learning.html"><span class="header-section-number">23</span> Unsupervised Machine Learning</a></li>
+<li><a class="" href="power-analysis.html"><span class="header-section-number">24</span> Power analysis</a></li>
+<li><a class="" href="iteration.html"><span class="header-section-number">25</span> Iteration</a></li>
 <li class="book-part">Appendices</li>
 <li><a class="" href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></li>
 <li><a class="" href="updating-r-rstudio-and-packages.html"><span class="header-section-number">B</span> Updating R, RStudio, and packages</a></li>
@@ -132,20 +132,20 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="anova" class="section level1" number="17">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="anova" class="section level1" number="16">
 <h1>
-<span class="header-section-number">17</span> ANOVA<a class="anchor" aria-label="anchor" href="#anova"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16</span> ANOVA<a class="anchor" aria-label="anchor" href="#anova"><i class="fas fa-link"></i></a>
 </h1>
-<div id="analysis-of-variance-anova" class="section level2" number="17.1">
+<div id="analysis-of-variance-anova" class="section level2" number="16.1">
 <h2>
-<span class="header-section-number">17.1</span> Analysis of Variance (ANOVA)<a class="anchor" aria-label="anchor" href="#analysis-of-variance-anova"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.1</span> Analysis of Variance (ANOVA)<a class="anchor" aria-label="anchor" href="#analysis-of-variance-anova"><i class="fas fa-link"></i></a>
 </h2>
 <p>So far we have used linear models for analyses between <em>two</em> 'categorical' explanatory variables e.g. <em>t</em>-tests, and for regression with <em>two</em> 'continuous' variables. However, as designs become more complicated, the number of comparisons can quickly become overwhelming, working with estimates and intervals alone can become harder.</p>
 <p>As designs become more elaborate the number of pairwise <em>t</em>-tests rapidly increases, and therefore our risk of false positives (Type I errors). It is therefore useful to have a complementary approach that first asks if there is any support for a difference between the different means <em>before</em> diving into multiple comparisons. This approach is called <em>analysis of variance</em> (ANOVA), and although it tends to be associated with categorical data, we will see in the following chapters that the ANOVA is just another type of linear model, so this approach can also be extended to included continuous variables.</p>
 </div>
-<div id="maize-data" class="section level2" number="17.2">
+<div id="maize-data" class="section level2" number="16.2">
 <h2>
-<span class="header-section-number">17.2</span> Maize data<a class="anchor" aria-label="anchor" href="#maize-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.2</span> Maize data<a class="anchor" aria-label="anchor" href="#maize-data"><i class="fas fa-link"></i></a>
 </h2>
 <p>Our simple linear model for the maize data was:</p>
 <pre><code>lsmodel1 &lt;- lm(height ~ type, data = darwin)</code></pre>
@@ -168,12 +168,12 @@
 Least squares quantifies A) total least squares, B) treatment least squares, C) error sum of squares (SST, SSR, SSE). The vertical lines measure the distances, which are then squared and summed. SST is calculated by measuring to the intercept, SSR is calculated by measuring the distance of the estimates to the intercept, SSE is calculated by measuring the distance to the estimates
 </p>
 </div>
-<div id="the-anova-table" class="section level3" number="17.2.1">
+<div id="the-anova-table" class="section level3" number="16.2.1">
 <h3>
-<span class="header-section-number">17.2.1</span> The ANOVA table<a class="anchor" aria-label="anchor" href="#the-anova-table"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.2.1</span> The ANOVA table<a class="anchor" aria-label="anchor" href="#the-anova-table"><i class="fas fa-link"></i></a>
 </h3>
 <p>If we want to get the ANOVA table for a linear model we can use the <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> function:</p>
-<div class="sourceCode" id="cb444"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lsmodel1</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
@@ -255,7 +255,7 @@ In our example <em>F</em> = 5.9, which means that the estimated signal is nearly
 <p>The probability value can be looked up in an ANOVA table, and is calculated from an <em>F</em> distribution. The <em>F</em>-test takes sample size into account, and the probability assigned takes into account the degrees of freedom of both the signal and noise.</p>
 <p>We can see this if we use the R function <code><a href="https://rdrr.io/r/stats/Fdist.html">pf()</a></code> that this should recreate the exact <em>P</em>-value we see in our ANOVA table.</p>
 <p>The first three arguments here are the <em>F</em>-value, degrees of freedom for the signal, and noise. The last argument is to set this as a two directional test.</p>
-<div class="sourceCode" id="cb445"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb378"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Fdist.html">pf</a></span><span class="op">(</span><span class="fl">5.9395</span>, <span class="fl">1</span>, <span class="fl">28</span>, lower.tail<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 0.02141466</code></pre>
 <p>It is common to see <em>P</em>-values reported with no supporting information (naked <em>P</em>-values). But it is impossible to interpret these without knowing:</p>
@@ -274,15 +274,15 @@ In our example <em>F</em> = 5.9, which means that the estimated signal is nearly
 </blockquote>
 </div>
 </div>
-<div id="two-way-anova" class="section level2" number="17.3">
+<div id="two-way-anova" class="section level2" number="16.3">
 <h2>
-<span class="header-section-number">17.3</span> Two-way ANOVA<a class="anchor" aria-label="anchor" href="#two-way-anova"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.3</span> Two-way ANOVA<a class="anchor" aria-label="anchor" href="#two-way-anova"><i class="fas fa-link"></i></a>
 </h2>
 <p>Two way ANOVA (as you might guess) includes <strong>two</strong> explanatory variables. Usually these are treatments of interest, but for this example we will stick with including the pair variable.</p>
-<div class="sourceCode" id="cb447"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lsmodel2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">type</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">pair</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">darwin</span><span class="op">)</span></code></pre></div>
 <p>And we can look at this table using the <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> function again</p>
-<div class="sourceCode" id="cb448"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lsmodel2</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
@@ -379,15 +379,15 @@ When mean squares of the regression are smaller than the residuals it implies a 
 </p>
 </div>
 </div>
-<div id="summary-7" class="section level2" number="17.4">
+<div id="summary-6" class="section level2" number="16.4">
 <h2>
-<span class="header-section-number">17.4</span> Summary<a class="anchor" aria-label="anchor" href="#summary-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.4</span> Summary<a class="anchor" aria-label="anchor" href="#summary-6"><i class="fas fa-link"></i></a>
 </h2>
 <p>ANOVA tables can be built for any linear model. The tables partition the variance into signal(s) and noise, which can be compared using an <em>F</em>-test. For complex analyses where many pairwise comparisons could be performed, an initial <em>F</em>-test can provide the initial evidence for whether there are any differences at all, reducing the risk of overtesting and the false positives that can be generated.</p>
 </div>
-<div id="activity" class="section level2" number="17.5">
+<div id="activity" class="section level2" number="16.5">
 <h2>
-<span class="header-section-number">17.5</span> Activity<a class="anchor" aria-label="anchor" href="#activity"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.5</span> Activity<a class="anchor" aria-label="anchor" href="#activity"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li><p>Set up an R project for your analysis</p></li>
@@ -411,9 +411,9 @@ When mean squares of the regression are smaller than the residuals it implies a 
 <li><p>Our explanatory variable is Temperature, with 3 levels: 13°C, 18°C and 25°C.</p></li>
 </ul>
 <p>We want to compare the means of 3 independent groups (13°C, 18°C and 25°C temperature groups) and we have one continuous response variable (Hatching time in days) and one categorical explanatory variable (Temperature). One-way ANOVA is the appropriate analysis!</p>
-<div id="hypothesis" class="section level3" number="17.5.1">
+<div id="hypothesis" class="section level3" number="16.5.1">
 <h3>
-<span class="header-section-number">17.5.1</span> Hypothesis<a class="anchor" aria-label="anchor" href="#hypothesis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.5.1</span> Hypothesis<a class="anchor" aria-label="anchor" href="#hypothesis"><i class="fas fa-link"></i></a>
 </h3>
 <p>Always make a hypothesis and prediction, before you delve into the data analysis.</p>
 <p>A hypothesis is a tentative answer to a well-framed question, referring to a mechanistic explanation of the expected pattern. It can be verified via predictions, which can be tested by making additional observations and performing experiments.</p>
@@ -438,7 +438,7 @@ Show Solution
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb449"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#___________________________----</span>
 
 <span class="co"># SET UP ----</span>
@@ -482,7 +482,7 @@ Show Solution
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb450"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb383"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># ANALYSIS ----</span>
 <span class="va">lsmodel_frogs1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">days</span> <span class="op">~</span> <span class="va">temperature</span>, data <span class="op">=</span> <span class="va">frogs</span><span class="op">)</span>
 
@@ -619,12 +619,12 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-18" class="tabcontentunnamed-chunk-18">
-<div class="sourceCode" id="cb451"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">lsmodel_frogs1</span><span class="op">)</span></code></pre></div>
 <p><img src="16-ANOVA_files/figure-html/unnamed-chunk-26-1.png" width="100%" style="display: block; margin: auto;"><img src="16-ANOVA_files/figure-html/unnamed-chunk-26-2.png" width="100%" style="display: block; margin: auto;"><img src="16-ANOVA_files/figure-html/unnamed-chunk-26-3.png" width="100%" style="display: block; margin: auto;"><img src="16-ANOVA_files/figure-html/unnamed-chunk-26-4.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
 <div id="option2unnamed-chunk-18" class="tabcontentunnamed-chunk-18">
-<div class="sourceCode" id="cb452"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb385"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">performance</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html">check_model</a></span><span class="op">(</span><span class="va">lsmodel_frogs1</span>,
                          check <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"qq"</span>, <span class="st">"outliers"</span>, <span class="st">"homogeneity"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="16-ANOVA_files/figure-html/unnamed-chunk-27-1.png" width="100%" style="display: block; margin: auto;"></div>
@@ -654,7 +654,7 @@ Solution
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-28"></span>
 <img src="16-ANOVA_files/figure-html/unnamed-chunk-28-1.png" alt="Frogspawn hatching times at 13, 18 and 25 degrees Celsius. Boxplot displays median, hinges are first and third quartiles, whiskers extend from the hinge to 1.5X the interquartile range. Points represent individual frogspawns." width="100%"><p class="caption">
-Figure 17.1: Frogspawn hatching times at 13, 18 and 25 degrees Celsius. Boxplot displays median, hinges are first and third quartiles, whiskers extend from the hinge to 1.5X the interquartile range. Points represent individual frogspawns.
+Figure 16.1: Frogspawn hatching times at 13, 18 and 25 degrees Celsius. Boxplot displays median, hinges are first and third quartiles, whiskers extend from the hinge to 1.5X the interquartile range. Points represent individual frogspawns.
 </p>
 </div>
 <p>Whereas the next figure, uses the <code><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html">emmeans()</a></code> package to produce estimate means and confidence intervals from the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> and therefore is the produce of inferential statistics, this figure illustrates the estimates of our model rather than the parameters of our sample.</p>
@@ -662,7 +662,7 @@ Figure 17.1: Frogspawn hatching times at 13, 18 and 25 degrees Celsius. Boxplot 
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-29"></span>
 <img src="16-ANOVA_files/figure-html/unnamed-chunk-29-1.png" alt="Time to hatching is inversely related to temperature in frogspawn. Circles represent estimated mean hatching times with 95% confidence intervals from a one-way ANOVA (F~1,28~ = 385.9, P &lt; 0.001). Dashed lines indicate the slope of the mean difference between 13-18 degrees and 13-25 degrees Celsius. Faded points represent individual data points." width="100%"><p class="caption">
-Figure 11.4: Time to hatching is inversely related to temperature in frogspawn. Circles represent estimated mean hatching times with 95% confidence intervals from a one-way ANOVA (F<sub>1,28</sub> = 385.9, P &lt; 0.001). Dashed lines indicate the slope of the mean difference between 13-18 degrees and 13-25 degrees Celsius. Faded points represent individual data points.
+Figure 10.4: Time to hatching is inversely related to temperature in frogspawn. Circles represent estimated mean hatching times with 95% confidence intervals from a one-way ANOVA (F<sub>1,28</sub> = 385.9, P &lt; 0.001). Dashed lines indicate the slope of the mean difference between 13-18 degrees and 13-25 degrees Celsius. Faded points represent individual data points.
 </p>
 </div>
 </div>
@@ -873,20 +873,20 @@ $( document ).ready(function() {
   );
 });
 </script><div class="chapter-nav">
-<div class="prev"><a href="regression.html"><span class="header-section-number">16</span> Regression</a></div>
-<div class="next"><a href="multivariate-linear-models.html"><span class="header-section-number">18</span> Multivariate linear models</a></div>
+<div class="prev"><a href="regression.html"><span class="header-section-number">15</span> Regression</a></div>
+<div class="next"><a href="multivariate-linear-models.html"><span class="header-section-number">17</span> Multivariate linear models</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#anova"><span class="header-section-number">17</span> ANOVA</a></li>
-<li><a class="nav-link" href="#analysis-of-variance-anova"><span class="header-section-number">17.1</span> Analysis of Variance (ANOVA)</a></li>
+<li><a class="nav-link" href="#anova"><span class="header-section-number">16</span> ANOVA</a></li>
+<li><a class="nav-link" href="#analysis-of-variance-anova"><span class="header-section-number">16.1</span> Analysis of Variance (ANOVA)</a></li>
 <li>
-<a class="nav-link" href="#maize-data"><span class="header-section-number">17.2</span> Maize data</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#the-anova-table"><span class="header-section-number">17.2.1</span> The ANOVA table</a></li></ul>
+<a class="nav-link" href="#maize-data"><span class="header-section-number">16.2</span> Maize data</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#the-anova-table"><span class="header-section-number">16.2.1</span> The ANOVA table</a></li></ul>
 </li>
-<li><a class="nav-link" href="#two-way-anova"><span class="header-section-number">17.3</span> Two-way ANOVA</a></li>
-<li><a class="nav-link" href="#summary-7"><span class="header-section-number">17.4</span> Summary</a></li>
+<li><a class="nav-link" href="#two-way-anova"><span class="header-section-number">16.3</span> Two-way ANOVA</a></li>
+<li><a class="nav-link" href="#summary-6"><span class="header-section-number">16.4</span> Summary</a></li>
 <li>
-<a class="nav-link" href="#activity"><span class="header-section-number">17.5</span> Activity</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#hypothesis"><span class="header-section-number">17.5.1</span> Hypothesis</a></li></ul>
+<a class="nav-link" href="#activity"><span class="header-section-number">16.5</span> Activity</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#hypothesis"><span class="header-section-number">16.5.1</span> Hypothesis</a></li></ul>
 </li>
 </ul>
 
@@ -905,7 +905,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-09-27.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-09-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

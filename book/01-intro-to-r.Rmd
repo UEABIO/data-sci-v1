@@ -1,4 +1,4 @@
-# (PART\*) R Programming {.unnumbered}
+# (PART\*) Get Started in R {.unnumbered}
 
 # Introduction to R and RStudio
 
