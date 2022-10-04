@@ -295,14 +295,14 @@ If you wanted to select all the Penguin species except Adelies, you use 'not equ
 
 
 ```r
-filter(.data = new_penguins, species != "Adelie Penguin (Pygoscelis adeliae)")
+filter(.data = new_penguins, species != "Adelie")
 ```
 
 This is the same as 
 
 
 ```r
-filter(.data = new_penguins, species %in% c("Chinstrap penguin (Pygoscelis antarctica)", "Gentoo penguin (Pygoscelis papua)"))
+filter(.data = new_penguins, species %in% c("Chinstrap", "Gentoo"))
 ```
 You can include multiple expressions within `filter()` and it will pull out only those rows that evaluate to `TRUE` for all of your conditions. 
 
@@ -310,7 +310,7 @@ For example the below code will pull out only those observations of Adelie pengu
 
 
 ```r
-filter(.data = new_penguins, species == "Adelie Penguin (Pygoscelis adeliae)", flipper_length_mm > 190)
+filter(.data = new_penguins, species == "Adelie", flipper_length_mm > 190)
 ```
 
 ### Arrange
