@@ -159,6 +159,11 @@ penguins <- penguins %>%
                              species == "Chinstrap penguin (Pygoscelis antarctica)" ~ "Chinstrap"))
 ```
 
+<div class="warning">
+<p>Have you checked that the above code block worked? Inspect your new tibble and check the variables have been renamed as you wanted.</p>
+</div>
+
+
 ## dplyr verbs
 
 In this section we will be introduced to some of the most commonly used data wrangling functions, these come from the `dplyr` package (part of the `tidyverse`). These are functions you are likely to become *very* familiar with. 
@@ -252,7 +257,7 @@ filter(.data = new_penguins, species == "Adelie Penguin (Pygoscelis adeliae)")
 Filter is quite a complicate function, and uses several differe operators to assess the way in which it should apply a filter.
 
 <table class="table" style="font-size: 16px; width: auto !important; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">(\#tab:unnamed-chunk-14)Boolean expressions</caption>
+<caption style="font-size: initial !important;">(\#tab:unnamed-chunk-15)Boolean expressions</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> Operator </th>

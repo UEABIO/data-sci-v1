@@ -15,7 +15,7 @@ fig:img-kitteh
 fig:unnamed-chunk-6
 fig:unnamed-chunk-9
 fig:unnamed-chunk-11
-tab:unnamed-chunk-14
+tab:unnamed-chunk-15
 fig:unnamed-chunk-44
 fig:unnamed-chunk-45
 fig:ambitious-figure

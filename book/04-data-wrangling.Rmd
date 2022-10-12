@@ -158,6 +158,13 @@ penguins <- penguins %>%
 
 ```
 
+```{block, type = "warning"}
+
+Have you checked that the above code block worked? Inspect your new tibble and check the variables have been renamed as you wanted.
+
+```
+
+
 ## dplyr verbs
 
 In this section we will be introduced to some of the most commonly used data wrangling functions, these come from the `dplyr` package (part of the `tidyverse`). These are functions you are likely to become *very* familiar with. 
