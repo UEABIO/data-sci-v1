@@ -403,13 +403,41 @@ To access the range of themes available type `help(ggthemes)` then follow the do
 
 The `geom_jitter()` command adds some random scatter to the points which can reduce over-plotting. Compare these two plots:
 
-```{r}
+```{r, echo = FALSE}
+
+p2 <- ggplot(data = penguins, aes(x = species, y = culmen_length_mm)) +
+  geom_jitter(aes(color = species),
+              width = 0.1, # specifies the width, change this to change the range of scatter
+              alpha = 0.7, # specifies the amount of transparency in the points
+              show.legend = FALSE) # don't leave a legend in a plot, if it doesn't add value
+
+p1 <- ggplot(data = penguins, aes(x = species, y = culmen_length_mm)) +
+  geom_point(aes(color = species),
+              alpha = 0.7, 
+              show.legend = FALSE) 
+
+library(patchwork)
+
+p1/p2
+
+```
+
+```{r, eval = FALSE}
+
+## geom point
+
+ggplot(data = penguins, aes(x = species, y = culmen_length_mm)) +
+  geom_point(aes(color = species),
+              alpha = 0.7, 
+              show.legend = FALSE) 
+
 ## More geoms ----
 ggplot(data = penguins, aes(x = species, y = culmen_length_mm)) +
   geom_jitter(aes(color = species),
               width = 0.1, # specifies the width, change this to change the range of scatter
               alpha = 0.7, # specifies the amount of transparency in the points
               show.legend = FALSE) # don't leave a legend in a plot, if it doesn't add value
+
 ```
 
 ### Boxplots

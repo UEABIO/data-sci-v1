@@ -246,7 +246,7 @@ You can also include minimal R code within back-ticks. Within the back-ticks, be
 
 \` r Sys.Date()\`
 
-When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead: 2022-10-12
+When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead: 2022-10-14
 
 <div class="try">
 <p>Having added some in-line code, try re-knitting your .Rmd file, what is the output?</p>

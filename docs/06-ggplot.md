@@ -417,8 +417,17 @@ penguins %>%
 
 The `geom_jitter()` command adds some random scatter to the points which can reduce over-plotting. Compare these two plots:
 
+<img src="06-ggplot_files/figure-html/unnamed-chunk-31-1.png" width="100%" style="display: block; margin: auto;" />
+
 
 ```r
+## geom point
+
+ggplot(data = penguins, aes(x = species, y = culmen_length_mm)) +
+  geom_point(aes(color = species),
+              alpha = 0.7, 
+              show.legend = FALSE) 
+
 ## More geoms ----
 ggplot(data = penguins, aes(x = species, y = culmen_length_mm)) +
   geom_jitter(aes(color = species),
@@ -426,8 +435,6 @@ ggplot(data = penguins, aes(x = species, y = culmen_length_mm)) +
               alpha = 0.7, # specifies the amount of transparency in the points
               show.legend = FALSE) # don't leave a legend in a plot, if it doesn't add value
 ```
-
-<img src="06-ggplot_files/figure-html/unnamed-chunk-31-1.png" width="100%" style="display: block; margin: auto;" />
 
 ### Boxplots
 
@@ -447,7 +454,7 @@ ggplot(data = penguins, aes(x = species, y = culmen_length_mm)) +
               show.legend = FALSE)
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-33-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-34-1.png" width="100%" style="display: block; margin: auto;" />
 
 <div class="try">
 <p>Note that when specifying colour variables using <code>aes()</code> some geometric shapes support an internal colour "fill" and an external colour "colour". Try changing the aes fill for colour in the code above, and note what happens.</p>
@@ -470,7 +477,7 @@ ggplot(data = penguins, aes(x = species, y = culmen_length_mm)) +
   theme(legend.position = "none")
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-35-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-36-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 <div class="warning">
@@ -490,7 +497,7 @@ penguins %>%
     geom_histogram(bins=50)
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-37-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-38-1.png" width="100%" style="display: block; margin: auto;" />
 
 At first you might struggle to see/understand the difference between these two charts. The shapes should be roughly the same. 
 
@@ -503,7 +510,7 @@ penguins %>%
                    position = "identity")
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-38-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-39-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 <div class='webex-solution'><button>Explain this</button>
@@ -535,7 +542,7 @@ penguins %>%
                    colour="black")
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-40-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-41-1.png" width="100%" style="display: block; margin: auto;" />
 
 ### Choosing and using colour palettes
 
@@ -566,7 +573,7 @@ penguins %>%
   theme_minimal()
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-42-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-43-1.png" width="100%" style="display: block; margin: auto;" />
 
 You can also use a range of inbuilt colour palettes: 
 
@@ -580,7 +587,7 @@ penguins %>%
   theme_minimal()
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-43-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-44-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 <div class="info">
@@ -605,7 +612,7 @@ library(colorBlindness)
 colorBlindness::cvdPlot() # will automatically run on the last plot you made
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-46-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-47-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 ### Guides to visual accessibility 
@@ -637,7 +644,7 @@ penguins %>%
   facet_wrap(~sex)
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-49-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-50-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Patchwork
 
@@ -678,7 +685,7 @@ p3 <- penguins %>%
   plot_layout(guides = "collect") 
 ```
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-50-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-51-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Activity: Replicate this figure
 
@@ -687,7 +694,7 @@ p3 <- penguins %>%
 <p>Make sure to use the tips and links at the end of this chapter, when you are done save the file and submit!</p>
 </div>
 
-<img src="06-ggplot_files/figure-html/unnamed-chunk-52-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-ggplot_files/figure-html/unnamed-chunk-53-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 

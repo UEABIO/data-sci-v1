@@ -524,14 +524,21 @@ To access the range of themes available type <code>help(ggthemes)</code> then fo
 <span class="header-section-number">6.7.1</span> Jitter<a class="anchor" aria-label="anchor" href="#jitter"><i class="fas fa-link"></i></a>
 </h3>
 <p>The <code><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter()</a></code> command adds some random scatter to the points which can reduce over-plotting. Compare these two plots:</p>
+<div class="inline-figure"><img src="06-ggplot_files/figure-html/unnamed-chunk-31-1.png" width="100%" style="display: block; margin: auto;"></div>
 <div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## More geoms ----</span>
+<code class="sourceCode R"><span class="co">## geom point</span>
+
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">species</span>, y <span class="op">=</span> <span class="va">culmen_length_mm</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">species</span><span class="op">)</span>,
+              alpha <span class="op">=</span> <span class="fl">0.7</span>, 
+              show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> 
+
+<span class="co">## More geoms ----</span>
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">species</span>, y <span class="op">=</span> <span class="va">culmen_length_mm</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">species</span><span class="op">)</span>,
               width <span class="op">=</span> <span class="fl">0.1</span>, <span class="co"># specifies the width, change this to change the range of scatter</span>
               alpha <span class="op">=</span> <span class="fl">0.7</span>, <span class="co"># specifies the amount of transparency in the points</span>
               show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co"># don't leave a legend in a plot, if it doesn't add value</span></code></pre></div>
-<div class="inline-figure"><img src="06-ggplot_files/figure-html/unnamed-chunk-31-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <div id="boxplots" class="section level3" number="6.7.2">
 <h3>
@@ -547,7 +554,7 @@ The whisker line extending above and below the IQR box define Q3 + (1.5 x IQR), 
               alpha <span class="op">=</span> <span class="fl">0.7</span>, 
               width <span class="op">=</span> <span class="fl">0.5</span>, <span class="co"># change width of boxplot</span>
               show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="06-ggplot_files/figure-html/unnamed-chunk-33-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="06-ggplot_files/figure-html/unnamed-chunk-34-1.png" width="100%" style="display: block; margin: auto;"></div>
 <div class="try">
 <p>
 Note that when specifying colour variables using <code><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes()</a></code> some geometric shapes support an internal colour "fill" and an external colour "colour". Try changing the aes fill for colour in the code above, and note what happens.
@@ -564,7 +571,7 @@ Note that when specifying colour variables using <code><a href="https://ggplot2.
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="va">species</span><span class="op">)</span>,
                 width<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="06-ggplot_files/figure-html/unnamed-chunk-35-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="06-ggplot_files/figure-html/unnamed-chunk-36-1.png" width="100%" style="display: block; margin: auto;"></div>
 <div class="warning">
 <p>
 In the above example I switched from using show.legend=FALSE inside the geom layer to using theme(legend.position="none"). Why? This is an example of reducing redundant code. I would have to specify show.legend=FALSE for every geom layer in my plot, but the theme function applies to every layer. Save code, save time, reduce errors!
@@ -581,7 +588,7 @@ In the above example I switched from using show.legend=FALSE inside the geom lay
     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">culmen_length_mm</span>, fill<span class="op">=</span><span class="va">species</span><span class="op">)</span>,
            position <span class="op">=</span> <span class="st">"identity"</span><span class="op">)</span><span class="op">+</span>
     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>bins<span class="op">=</span><span class="fl">50</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="06-ggplot_files/figure-html/unnamed-chunk-37-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="06-ggplot_files/figure-html/unnamed-chunk-38-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>At first you might struggle to see/understand the difference between these two charts. The shapes should be roughly the same.</p>
 <div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
@@ -589,7 +596,7 @@ In the above example I switched from using show.legend=FALSE inside the geom lay
     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>bins<span class="op">=</span><span class="fl">50</span>, 
                    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y<span class="op">=</span><span class="va">..density..</span><span class="op">)</span>,
                    position <span class="op">=</span> <span class="st">"identity"</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="06-ggplot_files/figure-html/unnamed-chunk-38-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="06-ggplot_files/figure-html/unnamed-chunk-39-1.png" width="100%" style="display: block; margin: auto;"></div>
 <div class="webex-solution">
 <button>
 Explain this
@@ -614,7 +621,7 @@ assigned to variables.</p>
                        fill<span class="op">=</span><span class="va">species</span><span class="op">)</span>, 
                    position <span class="op">=</span> <span class="st">"identity"</span>,
                    colour<span class="op">=</span><span class="st">"black"</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="06-ggplot_files/figure-html/unnamed-chunk-40-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="06-ggplot_files/figure-html/unnamed-chunk-41-1.png" width="100%" style="display: block; margin: auto;"></div>
 <div id="choosing-and-using-colour-palettes" class="section level3" number="6.8.1">
 <h3>
 <span class="header-section-number">6.8.1</span> Choosing and using colour palettes<a class="anchor" aria-label="anchor" href="#choosing-and-using-colour-palettes"><i class="fas fa-link"></i></a>
@@ -638,7 +645,7 @@ assigned to variables.</p>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>colour<span class="op">=</span><span class="va">species</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="va">penguin_colours</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="06-ggplot_files/figure-html/unnamed-chunk-42-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="06-ggplot_files/figure-html/unnamed-chunk-43-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>You can also use a range of inbuilt colour palettes:</p>
 <div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
@@ -647,7 +654,7 @@ assigned to variables.</p>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>colour<span class="op">=</span><span class="va">species</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_color_brewer</a></span><span class="op">(</span>palette<span class="op">=</span><span class="st">"Set1"</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="06-ggplot_files/figure-html/unnamed-chunk-43-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="06-ggplot_files/figure-html/unnamed-chunk-44-1.png" width="100%" style="display: block; margin: auto;"></div>
 <div class="info">
 <p>
 You can explore all schemes available with the command <code><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">RColorBrewer::display.brewer.all()</a></code>
@@ -671,7 +678,7 @@ You can explore all schemes available with the command <code><a href="https://rd
 
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">colorBlindness</span><span class="op">)</span>
 <span class="fu">colorBlindness</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/colorBlindness/man/cvdPlot.html">cvdPlot</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># will automatically run on the last plot you made</span></code></pre></div>
-<div class="inline-figure"><img src="06-ggplot_files/figure-html/unnamed-chunk-46-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="06-ggplot_files/figure-html/unnamed-chunk-47-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <div id="guides-to-visual-accessibility" class="section level3" number="6.9.2">
 <h3>
@@ -699,7 +706,7 @@ You can explore all schemes available with the command <code><a href="https://rd
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method<span class="op">=</span><span class="st">"lm"</span>,    
               se<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">sex</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="06-ggplot_files/figure-html/unnamed-chunk-49-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="06-ggplot_files/figure-html/unnamed-chunk-50-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <div id="patchwork" class="section level2" number="6.11">
 <h2>
@@ -738,7 +745,7 @@ You can explore all schemes available with the command <code><a href="https://rd
 
  <span class="op">(</span><span class="va">p1</span><span class="op">+</span><span class="va">p2</span><span class="op">)</span><span class="op">/</span><span class="va">p3</span><span class="op">+</span>
   <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html">plot_layout</a></span><span class="op">(</span>guides <span class="op">=</span> <span class="st">"collect"</span><span class="op">)</span> </code></pre></div>
-<div class="inline-figure"><img src="06-ggplot_files/figure-html/unnamed-chunk-50-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="06-ggplot_files/figure-html/unnamed-chunk-51-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <div id="activity-replicate-this-figure" class="section level2" number="6.12">
 <h2>
@@ -752,7 +759,7 @@ How close can you get to replicating the figure below?
 Make sure to use the tips and links at the end of this chapter, when you are done save the file and submit!
 </p>
 </div>
-<div class="inline-figure"><img src="06-ggplot_files/figure-html/unnamed-chunk-52-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="06-ggplot_files/figure-html/unnamed-chunk-53-1.png" width="100%" style="display: block; margin: auto;"></div>
 <div class="webex-solution">
 <button>
 Solution
@@ -1111,7 +1118,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-10-12.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-10-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
