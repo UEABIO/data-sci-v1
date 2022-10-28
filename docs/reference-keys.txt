@@ -21,7 +21,7 @@ fig:unnamed-chunk-45
 fig:ambitious-figure
 fig:unnamed-chunk-7
 fig:unnamed-chunk-8
-tab:unnamed-chunk-27
+tab:unnamed-chunk-28
 fig:unnamed-chunk-14
 fig:unnamed-chunk-16
 fig:unnamed-chunk-19
@@ -212,8 +212,9 @@ code-chunks
 activity-2-knit-your-first-document
 global-options-1
 in-text-code
-activity-3-generating-a-self-contained-report-from-data
-here
+activity-3-make-some-markdown-edits
+activity-4-generating-a-self-contained-report-from-data
+heuristic-file-paths-with-here
 activity-4-can-you-change-the-global-options-of-your-rmd-file-so-that-it-doesnt-display-any-code-warnings-or-messages
 static-images
 ggplot
@@ -268,7 +269,6 @@ final-git-tips
 glossary-github
 summing-up-github
 what-we-learned-2
-activity-3-test-yourself
 functions-1
 structuring-a-function
 activity-1-understand-the-function

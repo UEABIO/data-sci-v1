@@ -1,8 +1,6 @@
 
 # Github
 
-https://intro2r.com/use_git.html#undo
-
 ## Let's Git it started 
 
 Git is a **version control system**. Originally built to help groups of developers work collaboratively on big software projects. It helps us manage our RStudio projects - with tracked changes. 
@@ -304,7 +302,7 @@ You should make regular commits and pushes to save your work as you go - and I w
 <p>When you accept an assignment on GitHub classrooms - the repo won't appear on your main profile, this is because it belongs to our class rather than you. You can always find it by searching through your Organisations - <strong>but</strong> it's probably easiest just check the URL in Project Options on RStudio</p>
 </div>
 
-**a.** Follow this [invite link](https://classroom.github.com/a/QFt76-i2)
+**a.** Follow this [invite link](https://classroom.github.com/a/fM_53MuL)
 
 **b.** You will be invited to sign-in to Github (if not already) & to join the UEABIO organisation
 
@@ -402,14 +400,19 @@ ggplotly(mortality_figure, tooltip = c("infant_mortality_rate"))
 
 (**NOTE** this will be in your organisations rather than repos)
 
-
-
 **Make sure you finish both exercises before next week to become a GitHub pro!!!!!!!!!**
 
 ## Find your classroom repos
 
-When you work with GitHub classrooms your repos become part of our organisation UEABIO. 
-If you want to find your repos on GitHub then you can use the direct URL (if you noted it), or head to (https://github.com/UEABIO) - you should only be able to see repos that belong to **you**. 
+When you work with GitHub classrooms your repos become part of our organisation UEABIO.
+
+If you want to find your repos on GitHub then you can do this in a couple of ways
+
+1) Bookmark the direct URL (if you noted it) from when you first visit the repo
+
+2) Head to (https://github.com/UEABIO) - you should only be able to see repos that belong to **you**. 
+
+3) From RStudio Cloud head to Tools > Project Options > Git to find the URL. 
 
 <img src="images/classroom-organisation.png" width="100%" style="display: block; margin: auto;" />
 
@@ -598,6 +601,6 @@ You have used
 
 * `usethis` @R-usethis
 
-## Activity 3: Test yourself
+
 
 
