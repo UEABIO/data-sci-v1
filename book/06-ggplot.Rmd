@@ -751,7 +751,7 @@ You should specify the output path to your **figures** folder, then provide a fi
 ```{r, eval = F}
 # OUTPUT FIGURE TO FILE
 
-ggsave("figures/YYYYMMDD_ggplot_workshop_final_plot.png", dpi=300)
+ggsave("outputs/YYYYMMDD_ggplot_workshop_final_plot.png", dpi=300)
 
 ```
 

@@ -43,7 +43,7 @@ Before we can begin working with the data, we need to do some set-up.
   * scripts
 
 <div class="warning">
-<p>R is case-sensitive so type everything exactly as printed here</p>
+<p>R is case-sensitive so type everything EXACTLY as printed here</p>
 </div>
 
 Having these separate subfolders within our project helps keep things tidy, means it's harder to lose things, and lets you easily tell R exactly where to go to retrieve data.  
@@ -60,6 +60,10 @@ A Project will contain several files, possibly organised into sub-folders contai
 </div>
 
 Within this project you will notice there is already one file *.Rproj*. This is an R project file, this is a very useful feature, it interacts with R to tell it you are working in a very specific place on the computer (in this case the cloud server we have dialed into). It means R will automatically treat the location of your project file as the 'working directory' and makes importing and exporting easier^[More on projects can be found in the R4DS book (https://r4ds.had.co.nz/workflow-projects.html)]. 
+
+<div class="warning">
+<p>It is very important to NEVER to move the .Rproj file, this may prevent your workspace from opening properly.</p>
+</div>
 
 ## Activity 2: Access our data
 
@@ -97,7 +101,7 @@ In practice, that means we only use our data file for data entry and storage. Al
 
 <div class="figure" style="text-align: center">
 <img src="images/excel_csv.png" alt="excel view, csv view" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-9)Top image: Penguins data viewed in Excel, Bottom image: Penguins data in native csv format</p>
+<p class="caption">(\#fig:unnamed-chunk-10)Top image: Penguins data viewed in Excel, Bottom image: Penguins data in native csv format</p>
 </div>
 
 In raw format, each line of a CSV is separated by commas for different values. When you open this in a spreadsheet program like Excel it automatically converts those comma-separated values into tables and columns. 
@@ -117,7 +121,7 @@ In raw format, each line of a CSV is separated by commas for different values. W
 
 <div class="figure" style="text-align: center">
 <img src="images/upload.png" alt="File tab" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-11)Highlighted the buttons to upload files, and more options</p>
+<p class="caption">(\#fig:unnamed-chunk-12)Highlighted the buttons to upload files, and more options</p>
 </div>
 
 ## Activity 4: Make a script

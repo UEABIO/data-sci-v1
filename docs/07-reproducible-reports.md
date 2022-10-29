@@ -248,7 +248,7 @@ You can also include minimal R code within back-ticks. Within the back-ticks, be
 
 \` r Sys.Date()\`
 
-When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead: 2022-10-28
+When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead: 2022-10-29
 
 ## Activity 3: Make some markdown edits
 
