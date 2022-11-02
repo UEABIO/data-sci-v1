@@ -178,10 +178,16 @@
 <h2>
 <span class="header-section-number">7.3</span> Activity 1: Make an Rmarkdown file<a class="anchor" aria-label="anchor" href="#activity-1-make-an-rmarkdown-file"><i class="fas fa-link"></i></a>
 </h2>
+<div class="try">
+<p>
+Try your first "knit" to make a document.
+</p>
+</div>
 <ul>
-<li><p>Create a new Rmarkdown file.</p></li>
+<li><p>Create a new Rmarkdown file. It comes prepopulated with some example text and code.</p></li>
 <li><p>Save this (without changes) to <strong>the same location as your <code>.Rproj</code> file</strong> name it <code>contained_report_penguins.Rmd</code>.</p></li>
 <li><p>We have moved from visualisation to reproducible report making.</p></li>
+<li><p>Try your first <em>knit</em> just hit the button and watch it work - see how the R code chunks are processed.</p></li>
 <li><p>Read the intro information below to learn more about how Markdown works.</p></li>
 </ul>
 <div class="info">
@@ -292,7 +298,7 @@ Can you edit the YAML in the Rmarkdown file in the markdown folder to have your 
 <p>Sections of the script that are dedicated to running R code are called “chunks”. This is where you may load packages, import data, and perform the actual data management and visualisation. There may be many code chunks, so they can help you organize your R code into parts, perhaps interspersed with text. To note: These ‘chunks’ will appear to have a slightly different background colour from the narrative part of the document.</p>
 <p>Each chunk is opened with a line that starts with three back-ticks, and curly brackets that contain parameters for the chunk { }. The chunk ends with three more back-ticks.</p>
 <div class="sourceCode" id="cb174"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb174-1"><a href="markdown.html#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb174-2"><a href="markdown.html#cb174-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb174-2"><a href="markdown.html#cb174-2" aria-hidden="true" tabindex="-1"></a><span class="in">code goes here</span></span>
 <span id="cb174-3"><a href="markdown.html#cb174-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>You can create a new chunk by typing it out yourself, by using the keyboard shortcut “Ctrl + Alt + i” (or Cmd + Shift + r in Mac), or by clicking the green ‘insert a new code chunk’ icon at the top of your script editor.</p>
 <div class="info">
@@ -366,19 +372,13 @@ fig.show='hold' if your chunk prints multiple figures and you want them printed 
 <p>There are also two arrows at the top right of each chunk, which are useful to run code within a chunk, or all code in prior chunks. Hover over them to see what they do.</p>
 </div>
 </div>
-<div id="activity-2-knit-your-first-document" class="section level2" number="7.5">
+<div id="activity-2-setting-code-chunks" class="section level2" number="7.5">
 <h2>
-<span class="header-section-number">7.5</span> Activity 2: Knit your first document<a class="anchor" aria-label="anchor" href="#activity-2-knit-your-first-document"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.5</span> Activity 2: Setting code chunks<a class="anchor" aria-label="anchor" href="#activity-2-setting-code-chunks"><i class="fas fa-link"></i></a>
 </h2>
-<div class="try">
-<p>
-Try your first "knit" to make a document.
-</p>
-</div>
-<p>Knit the template document provided when you opened the new Rmd file. Make a note of the different R chunks, how they are processed and what the outputs look like.</p>
 <p><strong>Question 1.</strong> The global option for this document is set to show the R code used to render chunks <select class="webex-select"><option value="blank"></option>
-<option value="answer">TRUE</option>
-<option value="">FALSE</option></select></p>
+<option value="">FALSE</option>
+<option value="answer">TRUE</option></select></p>
 <div class="webex-solution">
 <button>
 Explain This Answer
@@ -408,14 +408,19 @@ This is very handy if you know you will want the majority of your code chunks to
 For instance, so that only the outputs are shown for each code chunk and not the code itself, you can include this command in the R code chunk (and set this chunk to <code>include = false</code>):</p>
 <div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/knitr/man/opts_chunk.html">opts_chunk</a></span><span class="op">$</span><span class="fu">set</span><span class="op">(</span>echo <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> </code></pre></div>
+<div class="info">
+<p>
+Global options are useful, but <em>each</em> code block can still be individually set.
+</p>
+</div>
 </div>
 <div id="in-text-code" class="section level3" number="7.5.2">
 <h3>
 <span class="header-section-number">7.5.2</span> In-text code<a class="anchor" aria-label="anchor" href="#in-text-code"><i class="fas fa-link"></i></a>
 </h3>
 <p>You can also include minimal R code within back-ticks. Within the back-ticks, begin the code with “r” and a space, so RStudio knows to evaluate the code as R code. See the example below.</p>
-<p>` r Sys.Date()`</p>
-<p>When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead: 2022-10-29</p>
+<p><code>md 2022-11-02</code></p>
+<p>When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead: 2022-11-02</p>
 </div>
 </div>
 <div id="activity-3-make-some-markdown-edits" class="section level2" number="7.6">
@@ -461,7 +466,7 @@ Remove your example code blocks from the document and replace them with the ones
 <span id="cb177-7"><a href="markdown.html#cb177-7" aria-hidden="true" tabindex="-1"></a><span class="in">library(tidyverse)</span></span>
 <span id="cb177-8"><a href="markdown.html#cb177-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb177-9"><a href="markdown.html#cb177-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
-<div class="sourceCode" id="cb178"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb178-1"><a href="markdown.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, include=FALSE}</span></span>
+<div class="sourceCode" id="cb178"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb178-1"><a href="markdown.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb178-2"><a href="markdown.html#cb178-2" aria-hidden="true" tabindex="-1"></a><span class="in"># READ DATA ----</span></span>
 <span id="cb178-3"><a href="markdown.html#cb178-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb178-4"><a href="markdown.html#cb178-4" aria-hidden="true" tabindex="-1"></a><span class="in">penguins &lt;- read_csv("data/penguins_raw.csv")</span></span>
@@ -519,23 +524,13 @@ You might want start using the <code>here()</code> from now on to read in and ex
 </h2>
 <p>Once you have made your edits to the <a href="markdown.html#code-chunks">chunk options</a> try hitting 'knit' again.</p>
 </div>
-<div id="static-images" class="section level2" number="7.9">
+<div id="ggplot" class="section level2" number="7.9">
 <h2>
-<span class="header-section-number">7.9</span> Static images<a class="anchor" aria-label="anchor" href="#static-images"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.9</span> ggplot<a class="anchor" aria-label="anchor" href="#ggplot"><i class="fas fa-link"></i></a>
 </h2>
-<p>You can include images in your R Markdown in several ways:</p>
-<p>knitr::include_graphics("path/to/image.png")</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="markdown.html#cb181-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"../images/darwin.png"</span>)</span>
-<span id="cb181-2"><a href="markdown.html#cb181-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb181-3"><a href="markdown.html#cb181-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">here</span>(<span class="st">"images"</span>, <span class="st">"darwin.png"</span>)</span></code></pre></div>
-</div>
-<div id="ggplot" class="section level2" number="7.10">
-<h2>
-<span class="header-section-number">7.10</span> ggplot<a class="anchor" aria-label="anchor" href="#ggplot"><i class="fas fa-link"></i></a>
-</h2>
-<div id="size-options-for-figures" class="section level3" number="7.10.1">
+<div id="size-options-for-figures" class="section level3" number="7.9.1">
 <h3>
-<span class="header-section-number">7.10.1</span> Size options for figures<a class="anchor" aria-label="anchor" href="#size-options-for-figures"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.9.1</span> Size options for figures<a class="anchor" aria-label="anchor" href="#size-options-for-figures"><i class="fas fa-link"></i></a>
 </h3>
 <p>Options <code>fig.width</code> and <code>fig.height</code> enable to set width and height of R produced figures. The default value is set to <strong>7 (inches)</strong>. When I play with these options, I prefer using only one of them (<code>fig.width</code>) in association with another one, <code>fig.asp</code>, which sets the <em>height-to-width</em> ratio of the figure. It’s easier in my mind to play with this ratio than to give a width and a height separately. The default value of fig.asp is NULL but I often set it to <code>(0.8)</code>, which often corresponds to the expected result.</p>
 <p>Size options of figures produced by R have consequences on relative sizes of elements in this figures. For a <code>ggplot2</code> figure, these elements will remain to the size defined in the used theme, whatever the chosen size of the figure. Therefore a huge size can lead to a very small text and vice versa.</p>
@@ -544,6 +539,19 @@ You might want start using the <code>here()</code> from now on to read in and ex
 The base font size is 11 pts by default. You can change it with the <code>base_size</code> argument in the theme you’re using.
 </p>
 </div>
+<div class="warning">
+<p>
+The code below is likely to produce an error and cause the document to fail to knit. From the error message can you work out what is missing from our code that is causing this? Hint - there is a difference in the column names we are asking for and the ones in the actual spreadsheet we just imported
+</p>
+</div>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># snake_case names need to be made</span>
+
+<span class="va">penguins</span> <span class="op">&lt;-</span> <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/janitor/man/clean_names.html">clean_names</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">penguin_colours</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkolivegreen4"</span>, <span class="st">"darkorchid3"</span>, <span class="st">"goldenrod1"</span><span class="op">)</span>
 
@@ -557,39 +565,39 @@ The base font size is 11 pts by default. You can change it with the <code>base_s
 <span id="cb183-2"><a href="markdown.html#cb183-2" aria-hidden="true" tabindex="-1"></a><span class="in">plot</span></span>
 <span id="cb183-3"><a href="markdown.html#cb183-3" aria-hidden="true" tabindex="-1"></a><span class="in"># figure elements are too big</span></span>
 <span id="cb183-4"><a href="markdown.html#cb183-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
-<div class="inline-figure"><img src="07-reproducible-reports_files/figure-html/unnamed-chunk-21-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="07-reproducible-reports_files/figure-html/unnamed-chunk-23-1.png" width="100%" style="display: block; margin: auto;"></div>
 <div class="sourceCode" id="cb184"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb184-1"><a href="markdown.html#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r fig.asp = 0.8, fig.width = 10}</span></span>
 <span id="cb184-2"><a href="markdown.html#cb184-2" aria-hidden="true" tabindex="-1"></a><span class="in">plot</span></span>
 <span id="cb184-3"><a href="markdown.html#cb184-3" aria-hidden="true" tabindex="-1"></a><span class="in"># figure elements are too small</span></span>
 <span id="cb184-4"><a href="markdown.html#cb184-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
-<div class="inline-figure"><img src="07-reproducible-reports_files/figure-html/unnamed-chunk-22-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="07-reproducible-reports_files/figure-html/unnamed-chunk-24-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>To find the result you like, you’ll need to combine sizes set in your theme and set in the chunk options. With my customised theme, the default size (<code>7</code>) looks good to me.</p>
 <div class="sourceCode" id="cb185"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb185-1"><a href="markdown.html#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r fig.asp = 0.8, fig.width = 7}</span></span>
 <span id="cb185-2"><a href="markdown.html#cb185-2" aria-hidden="true" tabindex="-1"></a><span class="in">plot</span></span>
 <span id="cb185-3"><a href="markdown.html#cb185-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
-<div class="inline-figure"><img src="07-reproducible-reports_files/figure-html/unnamed-chunk-23-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="07-reproducible-reports_files/figure-html/unnamed-chunk-25-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>When texts axis are longer or when figures is overloaded, you can choose bigger size (8 or 9) to relatively reduce the figure elements. it’s worth noting that for the text sizes, you can also modify the base size in your theme to obtain similar figures.</p>
 <div class="sourceCode" id="cb186"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb186-1"><a href="markdown.html#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r fig.asp = 0.8, fig.width = 7}</span></span>
 <span id="cb186-2"><a href="markdown.html#cb186-2" aria-hidden="true" tabindex="-1"></a><span class="in">plot + theme(base_size = 14)</span></span>
 <span id="cb186-3"><a href="markdown.html#cb186-3" aria-hidden="true" tabindex="-1"></a><span class="in"># figure width stays the same, but modify the text size in ggplot</span></span>
 <span id="cb186-4"><a href="markdown.html#cb186-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
-<div class="inline-figure"><img src="07-reproducible-reports_files/figure-html/unnamed-chunk-24-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="07-reproducible-reports_files/figure-html/unnamed-chunk-26-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
-<div id="size-of-final-figure-in-document" class="section level3" number="7.10.2">
+<div id="size-of-final-figure-in-document" class="section level3" number="7.9.2">
 <h3>
-<span class="header-section-number">7.10.2</span> Size of final figure in document<a class="anchor" aria-label="anchor" href="#size-of-final-figure-in-document"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.9.2</span> Size of final figure in document<a class="anchor" aria-label="anchor" href="#size-of-final-figure-in-document"><i class="fas fa-link"></i></a>
 </h3>
 <p>Figures made with R in a R Markdown document are exported (by default in png format) and then inserted into the final rendered document. Options <code>out.width</code> and <code>out.height</code> enable us to choose the size of the figure in the final document.</p>
 <p>It is rare I need to re-scale height-to-width ratio after the figures were produced with R and this ratio is kept if you modify only one option therefore I only use <code>out.width</code>. i like to use percentage to define the size of output figures. For example with a size set to 50%</p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb187-1"><a href="markdown.html#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r fig.asp = 0.8, fig.width = 7, out.width = "50%}</span></span>
+<div class="sourceCode" id="cb187"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb187-1"><a href="markdown.html#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r fig.asp = 0.8, fig.width = 7, out.width = "50%"}</span></span>
 <span id="cb187-2"><a href="markdown.html#cb187-2" aria-hidden="true" tabindex="-1"></a><span class="in">plot </span></span>
 <span id="cb187-3"><a href="markdown.html#cb187-3" aria-hidden="true" tabindex="-1"></a><span class="in"># The final rendered size of the image changes according to out.width</span></span>
 <span id="cb187-4"><a href="markdown.html#cb187-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
-<div class="inline-figure"><img src="07-reproducible-reports_files/figure-html/unnamed-chunk-25-1.png" width="50%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="07-reproducible-reports_files/figure-html/unnamed-chunk-27-1.png" width="50%" style="display: block; margin: auto;"></div>
 </div>
-<div id="changing-default-values-of-chunk-options" class="section level3" number="7.10.3">
+<div id="changing-default-values-of-chunk-options" class="section level3" number="7.9.3">
 <h3>
-<span class="header-section-number">7.10.3</span> Changing default values of chunk options<a class="anchor" aria-label="anchor" href="#changing-default-values-of-chunk-options"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.9.3</span> Changing default values of chunk options<a class="anchor" aria-label="anchor" href="#changing-default-values-of-chunk-options"><i class="fas fa-link"></i></a>
 </h3>
 <p>You can also change default values of chunk options by writing this at the beginning of your R Markdown document.</p>
 <div class="sourceCode" id="cb188"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb188-1"><a href="markdown.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
@@ -601,6 +609,17 @@ The base font size is 11 pts by default. You can change it with the <code>base_s
 <span id="cb188-7"><a href="markdown.html#cb188-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <p>These values will be applied for all chunks unless you specify other value in a chunk locally. You can set values often used (which differ from the default one) and avoid repeating them for each chunk.</p>
 </div>
+</div>
+<div id="static-images" class="section level2" number="7.10">
+<h2>
+<span class="header-section-number">7.10</span> Static images<a class="anchor" aria-label="anchor" href="#static-images"><i class="fas fa-link"></i></a>
+</h2>
+<p>You can include images in your R Markdown in several ways:</p>
+<p>knitr::include_graphics("path/to/image.png")</p>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="markdown.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="co"># choose ONE of these</span></span>
+<span id="cb189-2"><a href="markdown.html#cb189-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"../images/darwin.png"</span>)</span>
+<span id="cb189-3"><a href="markdown.html#cb189-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb189-4"><a href="markdown.html#cb189-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">here</span>(<span class="st">"images"</span>, <span class="st">"darwin.png"</span>)</span></code></pre></div>
 </div>
 <div id="tables" class="section level2" number="7.11">
 <h2>
@@ -643,20 +662,20 @@ The base font size is 11 pts by default. You can change it with the <code>base_s
 Can you get this working? Add the library call for <code>kableExtra</code> to the first chunk of your Rmd file, then make a chunk for the below at the bottom of your file and hit knit to test.
 </p>
 </div>
-<div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>`Body Mass (g)`<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">`Body Mass (g)`</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>,
-            `Flipper Length (mm)`<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">`Flipper Length (mm)`</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>`Body Mass (g)`<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">body_mass_g</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>,
+            `Flipper Length (mm)`<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">flipper_length_mm</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">kbl</span><span class="op">(</span>caption <span class="op">=</span> <span class="st">"Mean Body mass (g) and flipper length (mm) for three species of Penguin in the Palmer Archipelago"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">kable_styling</span><span class="op">(</span>bootstrap_options <span class="op">=</span> <span class="st">"striped"</span>, full_width <span class="op">=</span> <span class="cn">F</span>, position <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped" style="width: auto !important; ">
 <caption>
-<span id="tab:unnamed-chunk-28">Table 7.1: </span>Mean Body mass (g) and flipper length (mm) for three species of Penguin in the Palmer Archipelago
+<span id="tab:unnamed-chunk-30">Table 7.1: </span>Mean Body mass (g) and flipper length (mm) for three species of Penguin in the Palmer Archipelago
 </caption>
 <thead><tr>
 <th style="text-align:left;">
-Species
+species
 </th>
 <th style="text-align:right;">
 Body Mass (g)
@@ -668,7 +687,7 @@ Flipper Length (mm)
 <tbody>
 <tr>
 <td style="text-align:left;">
-Adelie Penguin (Pygoscelis adeliae)
+Adelie
 </td>
 <td style="text-align:right;">
 3700.662
@@ -679,7 +698,7 @@ Adelie Penguin (Pygoscelis adeliae)
 </tr>
 <tr>
 <td style="text-align:left;">
-Chinstrap penguin (Pygoscelis antarctica)
+Chinstrap
 </td>
 <td style="text-align:right;">
 3733.088
@@ -690,7 +709,7 @@ Chinstrap penguin (Pygoscelis antarctica)
 </tr>
 <tr>
 <td style="text-align:left;">
-Gentoo penguin (Pygoscelis papua)
+Gentoo
 </td>
 <td style="text-align:right;">
 5076.016
@@ -707,11 +726,11 @@ Gentoo penguin (Pygoscelis papua)
 <span class="header-section-number">7.11.3</span> gt()<a class="anchor" aria-label="anchor" href="#gt"><i class="fas fa-link"></i></a>
 </h3>
 <p>The <code>gt</code> <span class="citation"><a href="references.html#ref-R-gt" role="doc-biblioref">Iannone et al.</a> (<a href="references.html#ref-R-gt" role="doc-biblioref">2021</a>)</span> package is all about making it simple to produce nice-looking display tables in HTML (so won't work for LaTex). <a href="https://gt.rstudio.com/index.html">It has a lot of customisation options.</a></p>
-<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">penguins</span> <span class="op">%&gt;%</span> 
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>`Body Mass (g)`<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">`Body Mass (g)`</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>,
-              `Flipper Length (mm)`<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">`Flipper Length (mm)`</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>`Body Mass (g)`<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">body_mass_g</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>,
+              `Flipper Length (mm)`<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">flipper_length_mm</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div id="aqdpglteuq" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
@@ -1052,23 +1071,23 @@ Gentoo penguin (Pygoscelis papua)
 </style>
 <div class="inline-table"><table class="gt_table">
 <thead class="gt_col_headings"><tr>
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Species</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">species</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Body Mass (g)</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Flipper Length (mm)</th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td class="gt_row gt_left">Adelie Penguin (Pygoscelis adeliae)</td>
+<td class="gt_row gt_left">Adelie</td>
 <td class="gt_row gt_right">3700.662</td>
 <td class="gt_row gt_right">189.9536</td>
 </tr>
 <tr>
-<td class="gt_row gt_left">Chinstrap penguin (Pygoscelis antarctica)</td>
+<td class="gt_row gt_left">Chinstrap</td>
 <td class="gt_row gt_right">3733.088</td>
 <td class="gt_row gt_right">195.8235</td>
 </tr>
 <tr>
-<td class="gt_row gt_left">Gentoo penguin (Pygoscelis papua)</td>
+<td class="gt_row gt_left">Gentoo</td>
 <td class="gt_row gt_right">5076.016</td>
 <td class="gt_row gt_right">217.1870</td>
 </tr>
@@ -1113,35 +1132,35 @@ This is why it's usually simpler to save your .Rmd file in the same place as you
 We will now source the pre-written scripts for data loading and wrangling in your R project, just use the source command to read in this script - then you can call objects made externally - in this case a penguin plot - put the code block in and hit knit.
 </p>
 </div>
-<div class="sourceCode" id="cb193"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb193-1"><a href="markdown.html#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
-<span id="cb193-2"><a href="markdown.html#cb193-2" aria-hidden="true" tabindex="-1"></a><span class="in"># GLOBAL KNITR OPTIONS ----</span></span>
-<span id="cb193-3"><a href="markdown.html#cb193-3" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(echo = TRUE)</span></span>
-<span id="cb193-4"><a href="markdown.html#cb193-4" aria-hidden="true" tabindex="-1"></a><span class="in"># ____________________----</span></span>
-<span id="cb193-5"><a href="markdown.html#cb193-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb193-6"><a href="markdown.html#cb193-6" aria-hidden="true" tabindex="-1"></a><span class="in"># PACKAGES ----</span></span>
-<span id="cb193-7"><a href="markdown.html#cb193-7" aria-hidden="true" tabindex="-1"></a><span class="in">library(tidyverse)</span></span>
-<span id="cb193-8"><a href="markdown.html#cb193-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb193-9"><a href="markdown.html#cb193-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb193-10"><a href="markdown.html#cb193-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
-<div class="sourceCode" id="cb194"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb194-1"><a href="markdown.html#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r read-data, include=FALSE}</span></span>
-<span id="cb194-2"><a href="markdown.html#cb194-2" aria-hidden="true" tabindex="-1"></a><span class="in"># READ DATA ----</span></span>
-<span id="cb194-3"><a href="markdown.html#cb194-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb194-4"><a href="markdown.html#cb194-4" aria-hidden="true" tabindex="-1"></a><span class="in">source("scripts/02_visualisation_penguins.R")</span></span>
+<div class="sourceCode" id="cb194"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb194-1"><a href="markdown.html#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
+<span id="cb194-2"><a href="markdown.html#cb194-2" aria-hidden="true" tabindex="-1"></a><span class="in"># GLOBAL KNITR OPTIONS ----</span></span>
+<span id="cb194-3"><a href="markdown.html#cb194-3" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(echo = TRUE)</span></span>
+<span id="cb194-4"><a href="markdown.html#cb194-4" aria-hidden="true" tabindex="-1"></a><span class="in"># ____________________----</span></span>
 <span id="cb194-5"><a href="markdown.html#cb194-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb194-6"><a href="markdown.html#cb194-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb194-7"><a href="markdown.html#cb194-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb194-8"><a href="markdown.html#cb194-8" aria-hidden="true" tabindex="-1"></a><span class="in">```{r figure, include=FALSE}</span></span>
+<span id="cb194-6"><a href="markdown.html#cb194-6" aria-hidden="true" tabindex="-1"></a><span class="in"># PACKAGES ----</span></span>
+<span id="cb194-7"><a href="markdown.html#cb194-7" aria-hidden="true" tabindex="-1"></a><span class="in">library(tidyverse)</span></span>
+<span id="cb194-8"><a href="markdown.html#cb194-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb194-9"><a href="markdown.html#cb194-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb194-10"><a href="markdown.html#cb194-10" aria-hidden="true" tabindex="-1"></a><span class="in"> (p1+p2)/p3+</span></span>
-<span id="cb194-11"><a href="markdown.html#cb194-11" aria-hidden="true" tabindex="-1"></a><span class="in">  plot_layout(guides = "collect") </span></span>
-<span id="cb194-12"><a href="markdown.html#cb194-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb194-13"><a href="markdown.html#cb194-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<span id="cb194-10"><a href="markdown.html#cb194-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb195-1"><a href="markdown.html#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r read-data, include=FALSE}</span></span>
+<span id="cb195-2"><a href="markdown.html#cb195-2" aria-hidden="true" tabindex="-1"></a><span class="in"># READ DATA ----</span></span>
+<span id="cb195-3"><a href="markdown.html#cb195-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb195-4"><a href="markdown.html#cb195-4" aria-hidden="true" tabindex="-1"></a><span class="in">source("scripts/02_visualisation_penguins.R")</span></span>
+<span id="cb195-5"><a href="markdown.html#cb195-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb195-6"><a href="markdown.html#cb195-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb195-7"><a href="markdown.html#cb195-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb195-8"><a href="markdown.html#cb195-8" aria-hidden="true" tabindex="-1"></a><span class="in">```{r figure, include=FALSE}</span></span>
+<span id="cb195-9"><a href="markdown.html#cb195-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb195-10"><a href="markdown.html#cb195-10" aria-hidden="true" tabindex="-1"></a><span class="in"> (p1+p2)/p3+</span></span>
+<span id="cb195-11"><a href="markdown.html#cb195-11" aria-hidden="true" tabindex="-1"></a><span class="in">  plot_layout(guides = "collect") </span></span>
+<span id="cb195-12"><a href="markdown.html#cb195-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb195-13"><a href="markdown.html#cb195-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 </div>
 <div id="activity-6-test-yourself" class="section level2" number="7.14">
 <h2>
 <span class="header-section-number">7.14</span> Activity 6: Test yourself<a class="anchor" aria-label="anchor" href="#activity-6-test-yourself"><i class="fas fa-link"></i></a>
 </h2>
-<p>Let's make another reproducible report.</p>
+<p>Let's make <strong>another</strong> reproducible report.</p>
 <ul>
 <li><p>Make a new Rmarkdown or RNotebook file <code>YYYYMMDD_surname_5023Y_rmd_workshop.Rmd</code></p></li>
 <li><p>Make any summary figure you want from the penguins data with <code>ggplot</code></p></li>
@@ -1160,24 +1179,24 @@ We will now source the pre-written scripts for data loading and wrangling in you
 <li><p>All packages</p></li>
 <li><p>Reading data</p></li>
 </ul>
-<div class="sourceCode" id="cb195"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb195-1"><a href="markdown.html#cb195-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb195-2"><a href="markdown.html#cb195-2" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup , include=FALSE}</span></span>
-<span id="cb195-3"><a href="markdown.html#cb195-3" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(echo = TRUE, </span></span>
-<span id="cb195-4"><a href="markdown.html#cb195-4" aria-hidden="true" tabindex="-1"></a><span class="in">                      fig.align = "center",</span></span>
-<span id="cb195-5"><a href="markdown.html#cb195-5" aria-hidden="true" tabindex="-1"></a><span class="in">                      fig.width = 6,</span></span>
-<span id="cb195-6"><a href="markdown.html#cb195-6" aria-hidden="true" tabindex="-1"></a><span class="in">                      fig.asp = 0.8,</span></span>
-<span id="cb195-7"><a href="markdown.html#cb195-7" aria-hidden="true" tabindex="-1"></a><span class="in">                      out.width = "80%</span></span>
-<span id="cb195-8"><a href="markdown.html#cb195-8" aria-hidden="true" tabindex="-1"></a><span class="in">                      )</span></span>
-<span id="cb195-9"><a href="markdown.html#cb195-9" aria-hidden="true" tabindex="-1"></a><span class="in">                      </span></span>
-<span id="cb195-10"><a href="markdown.html#cb195-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb195-11"><a href="markdown.html#cb195-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb195-12"><a href="markdown.html#cb195-12" aria-hidden="true" tabindex="-1"></a><span class="in">```{r library}</span></span>
-<span id="cb195-13"><a href="markdown.html#cb195-13" aria-hidden="true" tabindex="-1"></a><span class="in">library(tidyverse)</span></span>
-<span id="cb195-14"><a href="markdown.html#cb195-14" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb195-15"><a href="markdown.html#cb195-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb195-16"><a href="markdown.html#cb195-16" aria-hidden="true" tabindex="-1"></a><span class="in">```{r read-data}</span></span>
-<span id="cb195-17"><a href="markdown.html#cb195-17" aria-hidden="true" tabindex="-1"></a><span class="in">source("scripts/02_visualisation_penguins.R")</span></span>
-<span id="cb195-18"><a href="markdown.html#cb195-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb196-1"><a href="markdown.html#cb196-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-2"><a href="markdown.html#cb196-2" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup , include=FALSE}</span></span>
+<span id="cb196-3"><a href="markdown.html#cb196-3" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(echo = TRUE, </span></span>
+<span id="cb196-4"><a href="markdown.html#cb196-4" aria-hidden="true" tabindex="-1"></a><span class="in">                      fig.align = "center",</span></span>
+<span id="cb196-5"><a href="markdown.html#cb196-5" aria-hidden="true" tabindex="-1"></a><span class="in">                      fig.width = 6,</span></span>
+<span id="cb196-6"><a href="markdown.html#cb196-6" aria-hidden="true" tabindex="-1"></a><span class="in">                      fig.asp = 0.8,</span></span>
+<span id="cb196-7"><a href="markdown.html#cb196-7" aria-hidden="true" tabindex="-1"></a><span class="in">                      out.width = "80%</span></span>
+<span id="cb196-8"><a href="markdown.html#cb196-8" aria-hidden="true" tabindex="-1"></a><span class="in">                      )</span></span>
+<span id="cb196-9"><a href="markdown.html#cb196-9" aria-hidden="true" tabindex="-1"></a><span class="in">                      </span></span>
+<span id="cb196-10"><a href="markdown.html#cb196-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-11"><a href="markdown.html#cb196-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-12"><a href="markdown.html#cb196-12" aria-hidden="true" tabindex="-1"></a><span class="in">```{r library}</span></span>
+<span id="cb196-13"><a href="markdown.html#cb196-13" aria-hidden="true" tabindex="-1"></a><span class="in">library(tidyverse)</span></span>
+<span id="cb196-14"><a href="markdown.html#cb196-14" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-15"><a href="markdown.html#cb196-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-16"><a href="markdown.html#cb196-16" aria-hidden="true" tabindex="-1"></a><span class="in">```{r read-data}</span></span>
+<span id="cb196-17"><a href="markdown.html#cb196-17" aria-hidden="true" tabindex="-1"></a><span class="in">source("scripts/02_visualisation_penguins.R")</span></span>
+<span id="cb196-18"><a href="markdown.html#cb196-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 </div>
 </div>
 <div id="common-knit-issues" class="section level2" number="7.15">
@@ -1189,12 +1208,12 @@ We will now source the pre-written scripts for data loading and wrangling in you
 <h3>
 <span class="header-section-number">7.15.1</span> Duplication<a class="anchor" aria-label="anchor" href="#duplication"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb196"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb196-1"><a href="markdown.html#cb196-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-2"><a href="markdown.html#cb196-2" aria-hidden="true" tabindex="-1"></a><span class="in">```{r title-one}</span></span>
-<span id="cb196-3"><a href="markdown.html#cb196-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-4"><a href="markdown.html#cb196-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-5"><a href="markdown.html#cb196-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r title-one}</span></span>
-<span id="cb196-6"><a href="markdown.html#cb196-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb197-1"><a href="markdown.html#cb197-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb197-2"><a href="markdown.html#cb197-2" aria-hidden="true" tabindex="-1"></a><span class="in">```{r title-one}</span></span>
+<span id="cb197-3"><a href="markdown.html#cb197-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb197-4"><a href="markdown.html#cb197-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb197-5"><a href="markdown.html#cb197-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r title-one}</span></span>
+<span id="cb197-6"><a href="markdown.html#cb197-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 </div>
 <div id="not-the-right-order" class="section level3" number="7.15.2">
 <h3>
@@ -1244,10 +1263,14 @@ my_table &lt;- table(mtcars$cyl)</a></code></pre>
 </h2>
 <div class="try">
 <p>
-Submit your final report to Blackboard
+Submit your final knitted report YYYYMMDD_surname_5023Y_rmd_workshop.html to Blackboard
+</p>
+<p>
+You may need to send this to a zipped folder for submission at the Blackboard portal
 </p>
 </div>
-<p>Find the doi for the <code>palmerpenguins</code> <span class="citation"><a href="references.html#ref-R-palmerpenguins" role="doc-biblioref">Horst et al.</a> (<a href="references.html#ref-R-palmerpenguins" role="doc-biblioref">2020</a>)</span> package, and use the <strong>visual editor</strong> to easily include a reference. When completed and the document is reknit. Check the output document and your original markdown file + project space.</p>
+<p>Find the doi for the <code>palmerpenguins</code> <span class="citation"><a href="references.html#ref-R-palmerpenguins" role="doc-biblioref">Horst et al.</a> (<a href="references.html#ref-R-palmerpenguins" role="doc-biblioref">2020</a>)</span> package, and use the <strong>visual editor</strong> to easily include a reference in your report.</p>
+<p>When completed and the document is reknit. Check the output document and your original markdown file + project space.</p>
 <p>You should find a new file in your project space <code>.bib</code> and new conditions in your YAML?</p>
 </div>
 <div id="summing-up-rmarkdown" class="section level2" number="7.18">
@@ -1463,7 +1486,10 @@ $( document ).ready(function() {
     license
   );
 });
-</script><div class="chapter-nav">
+</script>
+
+</div>
+<div class="chapter-nav">
 <div class="prev"><a href="data-visualisation-with-ggplot2.html"><span class="header-section-number">6</span> Data visualisation with ggplot2</a></div>
 <div class="next"><a href="github.html"><span class="header-section-number">8</span> Github</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
@@ -1483,7 +1509,7 @@ $( document ).ready(function() {
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#activity-2-knit-your-first-document"><span class="header-section-number">7.5</span> Activity 2: Knit your first document</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#activity-2-setting-code-chunks"><span class="header-section-number">7.5</span> Activity 2: Setting code chunks</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#global-options-1"><span class="header-section-number">7.5.1</span> Global options</a></li>
 <li><a class="nav-link" href="#in-text-code"><span class="header-section-number">7.5.2</span> In-text code</a></li>
 </ul>
@@ -1493,14 +1519,14 @@ $( document ).ready(function() {
 <a class="nav-link" href="#activity-4-generating-a-self-contained-report-from-data"><span class="header-section-number">7.7</span> Activity 4: Generating a self-contained report from data</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#heuristic-file-paths-with-here"><span class="header-section-number">7.7.1</span> Heuristic file paths with here()</a></li></ul>
 </li>
 <li><a class="nav-link" href="#activity-4-can-you-change-the-global-options-of-your-rmd-file-so-that-it-doesnt-display-any-code-warnings-or-messages"><span class="header-section-number">7.8</span> Activity 4: Can you change the global options of your Rmd file so that it doesn't display any code, warnings or messages?</a></li>
-<li><a class="nav-link" href="#static-images"><span class="header-section-number">7.9</span> Static images</a></li>
 <li>
-<a class="nav-link" href="#ggplot"><span class="header-section-number">7.10</span> ggplot</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#size-options-for-figures"><span class="header-section-number">7.10.1</span> Size options for figures</a></li>
-<li><a class="nav-link" href="#size-of-final-figure-in-document"><span class="header-section-number">7.10.2</span> Size of final figure in document</a></li>
-<li><a class="nav-link" href="#changing-default-values-of-chunk-options"><span class="header-section-number">7.10.3</span> Changing default values of chunk options</a></li>
+<a class="nav-link" href="#ggplot"><span class="header-section-number">7.9</span> ggplot</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#size-options-for-figures"><span class="header-section-number">7.9.1</span> Size options for figures</a></li>
+<li><a class="nav-link" href="#size-of-final-figure-in-document"><span class="header-section-number">7.9.2</span> Size of final figure in document</a></li>
+<li><a class="nav-link" href="#changing-default-values-of-chunk-options"><span class="header-section-number">7.9.3</span> Changing default values of chunk options</a></li>
 </ul>
 </li>
+<li><a class="nav-link" href="#static-images"><span class="header-section-number">7.10</span> Static images</a></li>
 <li>
 <a class="nav-link" href="#tables"><span class="header-section-number">7.11</span> Tables</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#markdown-tables"><span class="header-section-number">7.11.1</span> Markdown tables</a></li>
@@ -1540,14 +1566,12 @@ $( document ).ready(function() {
 </div>
     </nav>
 </div>
-
-</div>
 </div> <!-- .container -->
 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-10-29.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-11-02.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -1584,5 +1608,6 @@ for (let popover of popovers) {
   }
 }
 </script>
+</div>
 </body>
 </html>

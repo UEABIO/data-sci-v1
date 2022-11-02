@@ -54,11 +54,17 @@ R Studio will give you some output options to pick from. In the example below we
 ## Activity 1: Make an Rmarkdown file
 
 
-* Create a new Rmarkdown file.
+<div class="try">
+<p>Try your first "knit" to make a document.</p>
+</div>
+
+* Create a new Rmarkdown file. It comes prepopulated with some example text and code.
 
 * Save this (without changes) to **the same location as your `.Rproj` file** name it `contained_report_penguins.Rmd`.
 
 * We have moved from visualisation to reproducible report making.
+
+* Try your first *knit* just hit the button and watch it work - see how the R code chunks are processed. 
 
 * Read the intro information below to learn more about how Markdown works. 
  
@@ -161,7 +167,7 @@ Each chunk is opened with a line that starts with three back-ticks, and curly br
 
 ````md
 ```{r}
-
+code goes here
 ```
 ````
 
@@ -200,15 +206,9 @@ Read more extensively about the knitr options here^[(https://yihui.org/knitr/opt
 
 There are also two arrows at the top right of each chunk, which are useful to run code within a chunk, or all code in prior chunks. Hover over them to see what they do.
 
-## Activity 2: Knit your first document
+## Activity 2: Setting code chunks
 
-<div class="try">
-<p>Try your first "knit" to make a document.</p>
-</div>
-
-Knit the template document provided when you opened the new Rmd file. Make a note of the different R chunks, how they are processed and what the outputs look like.
-
-**Question 1.** The global option for this document is set to show the R code used to render chunks <select class='webex-select'><option value='blank'></option><option value='answer'>TRUE</option><option value=''>FALSE</option></select>
+**Question 1.** The global option for this document is set to show the R code used to render chunks <select class='webex-select'><option value='blank'></option><option value=''>FALSE</option><option value='answer'>TRUE</option></select>
 
 
 <div class='webex-solution'><button>Explain This Answer</button>
@@ -242,13 +242,18 @@ For instance, so that only the outputs are shown for each code chunk and not the
 knitr::opts_chunk$set(echo = FALSE) 
 ```
 
+
+<div class="info">
+<p>Global options are useful, but <em>each</em> code block can still be individually set.</p>
+</div>
+
 ### In-text code
 
 You can also include minimal R code within back-ticks. Within the back-ticks, begin the code with “r” and a space, so RStudio knows to evaluate the code as R code. See the example below.
 
-\` r Sys.Date()\`
+``md 2022-11-02 ``
 
-When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead: 2022-10-29
+When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead: 2022-11-02
 
 ## Activity 3: Make some markdown edits
 
@@ -295,7 +300,7 @@ library(tidyverse)
 ````
 
 ````md
-```{r, include=FALSE}
+```{r}
 # READ DATA ----
 
 penguins <- read_csv("data/penguins_raw.csv")
@@ -362,20 +367,6 @@ head(penguins)
 Once you have made your edits to the [chunk options](#code-chunks) try hitting 'knit' again. 
 
 
-## Static images
-
-You can include images in your R Markdown in several ways:
-
-knitr::include_graphics("path/to/image.png")
-
-
-```r
-knitr::include_graphics("../images/darwin.png")
-
-knitr::include_graphics(here("images", "darwin.png")
-```
-
-
 ## ggplot
 
 ### Size options for figures
@@ -387,6 +378,22 @@ Size options of figures produced by R have consequences on relative sizes of ele
 <div class="info">
 <p>The base font size is 11 pts by default. You can change it with the <code>base_size</code> argument in the theme you’re using.</p>
 </div>
+
+<div class="warning">
+<p>The code below is likely to produce an error and cause the document to fail to knit. From the error message can you work out what is missing from our code that is causing this? Hint - there is a difference in the column names we are asking for and the ones in the actual spreadsheet we just imported</p>
+</div>
+
+
+
+<div class='webex-solution'><button>Solution</button>
+
+
+
+```r
+# snake_case names need to be made
+
+penguins <- janitor::clean_names(penguins)
+```
 
 
 ```r
@@ -406,7 +413,7 @@ plot
 # figure elements are too big
 ```
 ````
-<img src="07-reproducible-reports_files/figure-html/unnamed-chunk-21-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="07-reproducible-reports_files/figure-html/unnamed-chunk-23-1.png" width="100%" style="display: block; margin: auto;" />
 
 ````md
 ```{r fig.asp = 0.8, fig.width = 10}
@@ -415,7 +422,7 @@ plot
 ```
 ````
 
-<img src="07-reproducible-reports_files/figure-html/unnamed-chunk-22-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="07-reproducible-reports_files/figure-html/unnamed-chunk-24-1.png" width="100%" style="display: block; margin: auto;" />
 
 To find the result you like, you’ll need to combine sizes set in your theme and set in the chunk options. With my customised theme, the default size (`7`) looks good to me.
 
@@ -425,7 +432,7 @@ plot
 ```
 ````
 
-<img src="07-reproducible-reports_files/figure-html/unnamed-chunk-23-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="07-reproducible-reports_files/figure-html/unnamed-chunk-25-1.png" width="100%" style="display: block; margin: auto;" />
 
 When texts axis are longer or when figures is overloaded, you can choose bigger size (8 or 9) to relatively reduce the figure elements. it’s worth noting that for the text sizes, you can also modify the base size in your theme to obtain similar figures.
 
@@ -436,7 +443,7 @@ plot + theme(base_size = 14)
 ```
 ````
 
-<img src="07-reproducible-reports_files/figure-html/unnamed-chunk-24-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="07-reproducible-reports_files/figure-html/unnamed-chunk-26-1.png" width="100%" style="display: block; margin: auto;" />
 
 ### Size of final figure in document
 
@@ -445,13 +452,13 @@ Figures made with R in a R Markdown document are exported (by default in png for
 It is rare I need to re-scale height-to-width ratio after the figures were produced with R and this ratio is kept if you modify only one option therefore I only use `out.width`. i like to use percentage to define the size of output figures. For example with a size set to 50%
 
 ````md
-```{r fig.asp = 0.8, fig.width = 7, out.width = "50%}
+```{r fig.asp = 0.8, fig.width = 7, out.width = "50%"}
 plot 
 # The final rendered size of the image changes according to out.width
 ```
 ````
 
-<img src="07-reproducible-reports_files/figure-html/unnamed-chunk-25-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="07-reproducible-reports_files/figure-html/unnamed-chunk-27-1.png" width="50%" style="display: block; margin: auto;" />
 
 ### Changing default values of chunk options
 
@@ -468,6 +475,23 @@ knitr::opts_chunk$set(
 ````
 
 These values will be applied for all chunks unless you specify other value in a chunk locally. You can set values often used (which differ from the default one) and avoid repeating them for each chunk.
+
+
+
+## Static images
+
+You can include images in your R Markdown in several ways:
+
+knitr::include_graphics("path/to/image.png")
+
+
+
+```r
+# choose ONE of these
+knitr::include_graphics("../images/darwin.png")
+
+knitr::include_graphics(here("images", "darwin.png")
+```
 
 
 ## Tables
@@ -500,38 +524,37 @@ To create and manage able objects, we first pass the data frame through the `kab
 
 
 
-
 ```r
 penguins %>% 
-  group_by(Species) %>% 
-  summarise(`Body Mass (g)`= mean(`Body Mass (g)`, na.rm = T),
-            `Flipper Length (mm)`= mean(`Flipper Length (mm)`, na.rm = T)) %>% 
+  group_by(species) %>% 
+  summarise(`Body Mass (g)`= mean(body_mass_g, na.rm = T),
+            `Flipper Length (mm)`= mean(flipper_length_mm, na.rm = T)) %>% 
   kbl(caption = "Mean Body mass (g) and flipper length (mm) for three species of Penguin in the Palmer Archipelago") %>% 
   kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
 ```
 
 <table class="table table-striped" style="width: auto !important; ">
-<caption>(\#tab:unnamed-chunk-28)Mean Body mass (g) and flipper length (mm) for three species of Penguin in the Palmer Archipelago</caption>
+<caption>(\#tab:unnamed-chunk-30)Mean Body mass (g) and flipper length (mm) for three species of Penguin in the Palmer Archipelago</caption>
  <thead>
   <tr>
-   <th style="text-align:left;"> Species </th>
+   <th style="text-align:left;"> species </th>
    <th style="text-align:right;"> Body Mass (g) </th>
    <th style="text-align:right;"> Flipper Length (mm) </th>
   </tr>
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> Adelie Penguin (Pygoscelis adeliae) </td>
+   <td style="text-align:left;"> Adelie </td>
    <td style="text-align:right;"> 3700.662 </td>
    <td style="text-align:right;"> 189.9536 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> Chinstrap penguin (Pygoscelis antarctica) </td>
+   <td style="text-align:left;"> Chinstrap </td>
    <td style="text-align:right;"> 3733.088 </td>
    <td style="text-align:right;"> 195.8235 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> Gentoo penguin (Pygoscelis papua) </td>
+   <td style="text-align:left;"> Gentoo </td>
    <td style="text-align:right;"> 5076.016 </td>
    <td style="text-align:right;"> 217.1870 </td>
   </tr>
@@ -545,9 +568,9 @@ The `gt` @R-gt package is all about making it simple to produce nice-looking dis
 
 ```r
 penguins %>% 
-    group_by(Species) %>% 
-    summarise(`Body Mass (g)`= mean(`Body Mass (g)`, na.rm = T),
-              `Flipper Length (mm)`= mean(`Flipper Length (mm)`, na.rm = T)) %>% gt::gt()
+    group_by(species) %>% 
+    summarise(`Body Mass (g)`= mean(body_mass_g, na.rm = T),
+              `Flipper Length (mm)`= mean(flipper_length_mm, na.rm = T)) %>% gt::gt()
 ```
 
 ```{=html}
@@ -893,19 +916,19 @@ penguins %>%
   
   <thead class="gt_col_headings">
     <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Species</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">species</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Body Mass (g)</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Flipper Length (mm)</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">Adelie Penguin (Pygoscelis adeliae)</td>
+    <tr><td class="gt_row gt_left">Adelie</td>
 <td class="gt_row gt_right">3700.662</td>
 <td class="gt_row gt_right">189.9536</td></tr>
-    <tr><td class="gt_row gt_left">Chinstrap penguin (Pygoscelis antarctica)</td>
+    <tr><td class="gt_row gt_left">Chinstrap</td>
 <td class="gt_row gt_right">3733.088</td>
 <td class="gt_row gt_right">195.8235</td></tr>
-    <tr><td class="gt_row gt_left">Gentoo penguin (Pygoscelis papua)</td>
+    <tr><td class="gt_row gt_left">Gentoo</td>
 <td class="gt_row gt_right">5076.016</td>
 <td class="gt_row gt_right">217.1870</td></tr>
   </tbody>
@@ -981,7 +1004,7 @@ source("scripts/02_visualisation_penguins.R")
 
 ## Activity 6: Test yourself
 
-Let's make another reproducible report. 
+Let's make **another** reproducible report. 
 
 * Make a new Rmarkdown or RNotebook file `YYYYMMDD_surname_5023Y_rmd_workshop.Rmd`
 
@@ -1081,10 +1104,13 @@ You can switch between modes with a button push, try it out!
 ## Activity 7: Test yourself
 
 <div class="try">
-<p>Submit your final report to Blackboard</p>
+<p>Submit your final knitted report YYYYMMDD_surname_5023Y_rmd_workshop.html to Blackboard</p>
+<p>You may need to send this to a zipped folder for submission at the Blackboard portal</p>
 </div>
 
-Find the doi for the `palmerpenguins` @R-palmerpenguins package, and use the **visual editor** to easily include a reference. When completed and the document is reknit. Check the output document and your original markdown file + project space.
+Find the doi for the `palmerpenguins` @R-palmerpenguins package, and use the **visual editor** to easily include a reference in your report.
+
+When completed and the document is reknit. Check the output document and your original markdown file + project space.
 
 You should find a new file in your project space `.bib` and new conditions in your YAML? 
 

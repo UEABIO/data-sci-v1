@@ -691,6 +691,7 @@ p3 <- penguins %>%
 
 <div class="try">
 <p>How close can you get to replicating the figure below?</p>
+<p>Make a NEW script for this assignment - replicate_figure.R</p>
 <p>Make sure to use the tips and links at the end of this chapter, when you are done save the file and submit!</p>
 </div>
 
@@ -739,7 +740,7 @@ You should specify the output path to your **figures** folder, then provide a fi
 ```r
 # OUTPUT FIGURE TO FILE
 
-ggsave("figures/YYYYMMDD_ggplot_workshop_final_plot.png", dpi=300)
+ggsave("outputs/YYYYMMDD_ggplot_workshop_final_plot.png", dpi=300)
 ```
 
 <div class="try">
@@ -764,7 +765,7 @@ ggsave("figures/YYYYMMDD_ggplot_workshop_final_plot.png", dpi=300)
 
 ## Finished
 
-* Make sure you have **saved your script 💾** in the ["scripts" folder](#activity-1-organising-our-workspace).
+* Make sure you have **saved your scripts 💾** in the ["scripts" folder](#activity-1-organising-our-workspace).
 
 * Make sure your workspace is set **not** to save objects from the environment [*between* sessions](#global-options).
 

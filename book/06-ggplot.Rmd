@@ -688,6 +688,8 @@ p3 <- penguins %>%
 ```{block, type = "try"}
 How close can you get to replicating the figure below?
 
+Make a NEW script for this assignment - replicate_figure.R
+
 Make sure to use the tips and links at the end of this chapter, when you are done save the file and submit!
 
 ```
@@ -779,7 +781,7 @@ run `SessionInfo()` at the end of your script to gather the packages and version
 
 ## Finished
 
-* Make sure you have **saved your script 💾** in the ["scripts" folder](#activity-1-organising-our-workspace).
+* Make sure you have **saved your scripts 💾** in the ["scripts" folder](#activity-1-organising-our-workspace).
 
 * Make sure your workspace is set **not** to save objects from the environment [*between* sessions](#global-options).
 
