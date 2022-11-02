@@ -251,9 +251,11 @@ knitr::opts_chunk$set(echo = FALSE)
 
 You can also include minimal R code within back-ticks. Within the back-ticks, begin the code with “r” and a space, so RStudio knows to evaluate the code as R code. See the example below.
 
-``md 2022-11-02 ``
+This book was printed on `` `r Sys.Date()` ``
 
-When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead: 2022-11-02
+When typed in-line within a section of what would otherwise be Markdown text, it knows to produce an r output instead: 
+
+This book was printed on 2022-11-02
 
 ## Activity 3: Make some markdown edits
 

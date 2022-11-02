@@ -250,7 +250,7 @@ You create a commit in two stages:
 
 ### Stage 
 
-```{box, type = "info"}
+```{block, type = "info"}
 The staging section allows you to have finescale control over the files that are included with each commit. So in theory you could separate changes made in different files into different commitments. 
 
 ```

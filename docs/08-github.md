@@ -231,11 +231,9 @@ You create a commit in two stages:
 
 ### Stage 
 
-
-```box
-The staging section allows you to have finescale control over the files that are included with each commit. So in theory you could separate changes made in different files into different commitments. 
-
-```
+<div class="info">
+<p>The staging section allows you to have finescale control over the files that are included with each commit. So in theory you could separate changes made in different files into different commitments.</p>
+</div>
 
 First **save** your files, then select files for inclusion by *staging* them, tick the checkbox and then select the commit box.
 
