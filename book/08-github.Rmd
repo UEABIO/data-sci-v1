@@ -174,7 +174,7 @@ usethis::use_git_config(user.name = "Jane Doe", user.email = "jane@example.org")
 ```
 
 
-Then you need to give RStudio Cloud your GitHub Personal Access Token, which you can retrieve by going to Settings > Developer Settings > Generate Token 
+Then you need to give RStudio Cloud your GitHub Personal Access Token, which you can retrieve by going to Github.com and finding Settings > Developer Settings > Generate Token 
 
 Select all the "scopes" and name your token. 
 
@@ -188,8 +188,14 @@ Make a note of this because you will need it whenever you set up a new project y
 gitcreds::gitcreds_set()
 ```
 
+```{block, type = "info"}
 
-If you forget your PAT - that's ok - you can't retrieve it - but you can just generate a new one.
+When you start working on your own computer, you should only have to re-input your PAT when it expires. On RStudio Cloud it works a little differently. 
+
+In theory you should only need to input your PAT once per project. Sometimes it seems to forget and asks for it again between one session and the next. So you might want to write it down somewhere. 
+
+If you forget your PAT - that's ok - you can't retrieve it - but you can just generate a new one o Github. 
+```
 
 ### See changes
 
@@ -287,6 +293,14 @@ Once you click > commit, a new window will open that summarises your commit - an
 ```{r , echo=FALSE, eval=TRUE}
 knitr::include_graphics("images/stage_step_6.png")
 ```
+
+
+```{block, type = "info"}
+
+When you commit changes - you are not simply saving a new version of the file. It is committing the exact line changes made, and only modifying those files which you have selected for commit. 
+
+```
+
 
 ### Push
 
@@ -389,6 +403,7 @@ subset_infant_mortality <- infant_mortality %>%
 
 HINT - use `geom_line()` and remember to separate countries by colour
 
+`r hide("Solution")`
 
 ```{r, eval = F}
 ggplot(data = subset_infant_mortality) +
@@ -398,20 +413,20 @@ ggplot(data = subset_infant_mortality) +
 
 ```
 
+`r unhide()`
 
 **l.** Update your graph with direct labels (using `annotate`) and vertical or horizontal lines with `geom_vline` or `geom_hline`. 
 
-```{r, echo=FALSE, eval=FALSE, warning=FALSE, message=FALSE}
+```{r, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE, fig.asp = 0.9, fig.width = 8}
 # Graph
 # New things: annotation + vertical line
 
 library(tidyverse)
 library(lubridate)
 library(janitor)
-library(plotly)
+library(here)
 
-
-infant_mortality <- read_csv("data/infant_mortality.csv") 
+infant_mortality <- read_csv(here("book", "files", "infant_mortality.csv"))
 
 subset_infant_mortality <- infant_mortality %>%
   pivot_longer(cols="1960":"2020", 
@@ -426,7 +441,7 @@ subset_infant_mortality <- infant_mortality %>%
              "Afghanistan", 
              "United Kingdom")) # extract four countries
 
-mortality_figure <- ggplot(data = subset_infant_mortality,
+ggplot(data = subset_infant_mortality,
                            aes(x = year,
                  y = infant_mortality_rate,
                  color = country_name)) +
@@ -465,9 +480,55 @@ mortality_figure <- ggplot(data = subset_infant_mortality,
        y="Deaths per 100,000")+
   ggtitle("Mortality rate, infant (per 1,000 live births) \nhas been steadily falling in Afghanistan from 1970 to present")
 
-ggplotly(mortality_figure, tooltip=c("infant_mortality_rate"))
+
 
 ```
+
+`r hide("Solution")`
+
+```{r, eval = F}
+ggplot(data = subset_infant_mortality,
+                           aes(x = year,
+                 y = infant_mortality_rate,
+                 color = country_name)) +
+  geom_line() +
+  scale_color_manual(values = c("black", "blue", "magenta", "orange")) +
+  annotate(geom = "text",
+           x = 2023,
+           y = 50,
+           label = "Afghanistan",
+           size = 4,
+           colour="black") +
+    annotate(geom = "text",
+           x = 2023,
+           y = -2,
+           label = "Japan",
+           size = 4,
+           colour="blue") +
+    annotate(geom = "text",
+           x = 2023,
+           y = 15,
+           label = "United Kingdom",
+           size = 4,
+           colour="orange") +
+    annotate(geom = "text",
+           x = 2023,
+           y = 5,
+           label = "United States",
+           size = 4,
+           colour="magenta") +
+  geom_vline(xintercept = 2000,
+             lty = 2) +
+  theme_minimal()+
+  theme(legend.position="none")+
+  xlim(1970, 2025)+
+  labs(x="Year",
+       y="Deaths per 100,000")+
+  ggtitle("Mortality rate, infant (per 1,000 live births) \nhas been steadily falling in Afghanistan from 1970 to present")
+
+```
+
+`r unhide()`
 
 **m.** Use ggsave() to write your graph to a .png in the ‘final_graphs’ subfolder
 
@@ -659,5 +720,96 @@ You have used
 * `usethis` @R-usethis
 
 
+## Sharing a Github repo - Dealing with conflict when collaborating
+
+`r hide("Exercises to support group project assignment")`
+
+### How to avoid a conflict
+
+The best and simplest way to avoid Github conflicts is to follow some simple guidelines. If two people are sharing a repo and commit their work usually this will go smoothly. However, if you try to merge changes on the same part of the same file you will get a merge conflict. 
+
+```
+git merge issue-5
+# Auto-merging index.html
+# CONFLICT (content): Merge conflict in index.html
+# Automatic merge failed; fix conflicts and then commit the result.
+
+```
+
+If you see a message like this, the first thing is **do not panic**. Merge conflicts can be easily fixed.
+
+We can avoid merge conflicts altogether by following some simple organisation tips: 
+
+1. Partition the project, work on independent R scripts, so that changes made by one person have no affect on the files someone else is working on.
+
+2. Communicate - organise times when one person might work on a shared file, so that two people don't work on the same file at the same time
+
+3. Always Pull the latest version of the repo *before* you start working, try pulling **just before you push** in order to collect the latest changes & **always** push to Github at the *end* of a session.
 
 
+### Dealing with a conflict
+
+Let's imagine you HAVE made a mistake and two people have tried to push changes for the same file at the same time! 
+
+The *second* person trying to push a change to Github will get an error
+
+```{r , echo=FALSE, eval=TRUE, fig.cap = "Git conflict"}
+knitr::include_graphics("images/git-conflict-01-push-error.png")
+```
+
+Do what the message says and pull the changes from Github, this will generate a **different** error mesage. In this case indicating a merge conflict because of the differences on the same line of a file. In the Git pane, the file will now be flagged with an orange 'U'. This stands for 'unresolved'
+
+```{r , echo=FALSE, eval=TRUE, fig.cap = "git conflict"}
+knitr::include_graphics("images/git-conflict-03-conflict.png")
+```
+
+To resolve the conflict, this file now needs to be edited. Git has flagged the locations in which conflicts have occurred with `<<<<<<<`, `=======` and `>>>>>>>`. The file needs to be edited merging the appropriate changes until the file reads how it should and all conflict markers are removed. 
+
+```{r , echo=FALSE, eval=TRUE}
+knitr::include_graphics("images/git-conflict-04-conflict-tags.png")
+```
+
+```{r , echo=FALSE, eval=TRUE}
+knitr::include_graphics("images/git-conflict-05-resolved-file.png")
+```
+
+### Commit resolutions
+
+Proceed as normal, commit the file changes, this should change the file from orange `U` to blue `M` and push this to Github, all collaborators will need to be informed to Pull the updated repo to get the new changes. 
+
+### Try and create and solve a merge error. 
+
+```{block, type = "try"}
+
+Merge Conflict Challenge
+As part of your group why not try and intentionally create a merge conflict, and then go through the steps needed to resolve the issues and continue developing with the merged files. See the sections above for help with each of these steps:
+
+Step 0: Ensure you have the same starting project
+Step 1: Project co-ordinator makes a change and commits - a small change to the README.md
+Step 2: Collaborator makes a change and commits on the same line
+Step 3: Collaborator pushes the file to GitHub
+Step 4: Owner pushes their changes and gets an error
+Step 5: Owner pulls from GitHub to get Collaborator changes
+Step 6: Owner edits the file to resolve the conflict
+Step 7: Owner commits the resolved changes
+Step 8: Owner pushes the resolved changes to GitHub
+Step 9: Collaborator pulls the resolved changes from GitHub
+Step 10: Both can view commit history
+
+```
+
+
+
+### Abort! 
+
+Sometimes you just made a mistake. When you get a merge conflict, the repository is placed in a ‘Merging’ state until you resolve it. There’s a commandline command to abort doing the merge altogether:
+
+In the terminal type
+
+```
+git merge --abort
+```
+
+Of course, after doing that you still haven’t synced with your collaborator’s changes, so things are still unresolved. But at least your repository is now usable on your local machine. Let me know asap and we can fix the issue
+
+`r unhide()`

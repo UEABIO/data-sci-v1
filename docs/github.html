@@ -284,13 +284,23 @@ Make sure you go to your RStudio Cloud profile &gt; Authentication and select Gi
 </div>
 <div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_git_config.html">use_git_config</a></span><span class="op">(</span>user.name <span class="op">=</span> <span class="st">"Jane Doe"</span>, user.email <span class="op">=</span> <span class="st">"jane@example.org"</span><span class="op">)</span></code></pre></div>
-<p>Then you need to give RStudio Cloud your GitHub Personal Access Token, which you can retrieve by going to Settings &gt; Developer Settings &gt; Generate Token</p>
+<p>Then you need to give RStudio Cloud your GitHub Personal Access Token, which you can retrieve by going to Github.com and finding Settings &gt; Developer Settings &gt; Generate Token</p>
 <p>Select all the "scopes" and name your token.</p>
 <div class="inline-figure"><img src="images/git-PAT.png" width="100%" style="display: block; margin: auto;"></div>
 <p>Make a note of this because you will need it whenever you set up a new project you want to talk to GitHub. GitHub recently removed password authentication in favour of PATs, but RStudio Cloud doesn't seem to have updated this yet - that's ok though - just enter this line of code - then copy+paste your PAT when prompted. - Option set/replace these credentials.</p>
 <div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">gitcreds</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gitcreds/man/gitcreds_get.html">gitcreds_set</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p>If you forget your PAT - that's ok - you can't retrieve it - but you can just generate a new one.</p>
+<div class="info">
+<p>
+When you start working on your own computer, you should only have to re-input your PAT when it expires. On RStudio Cloud it works a little differently.
+</p>
+<p>
+In theory you should only need to input your PAT once per project. Sometimes it seems to forget and asks for it again between one session and the next. So you might want to write it down somewhere.
+</p>
+<p>
+If you forget your PAT - that's ok - you can't retrieve it - but you can just generate a new one o Github.
+</p>
+</div>
 <div id="see-changes" class="section level3" number="8.4.1">
 <h3>
 <span class="header-section-number">8.4.1</span> See changes<a class="anchor" aria-label="anchor" href="#see-changes"><i class="fas fa-link"></i></a>
@@ -359,7 +369,7 @@ The staging section allows you to have finescale control over the files that are
 <p>If you click on a file name you see the changes that have been made highlighted in the bottom panel. Added content is highlighted in green, removed content is highlighted in red.</p>
 <p>To <strong>commit</strong> these changes (take a snapshot) you must enter a mandatory commit message in the "commit message" box.</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-14"></span>
+<span style="display:block;" id="fig:unnamed-chunk-15"></span>
 <img src="images/stage_step_5.png" alt="Green = added content, Red = deleted content" width="100%"><p class="caption">
 Figure 8.1: Green = added content, Red = deleted content
 </p>
@@ -369,6 +379,11 @@ Figure 8.1: Green = added content, Red = deleted content
 <p>It is tradition to enter the very first message of a new project as "First Commit".</p>
 <p>Once you click &gt; commit, a new window will open that summarises your commit - and you can close this</p>
 <div class="inline-figure"><img src="images/stage_step_6.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="info">
+<p>
+When you commit changes - you are not simply saving a new version of the file. It is committing the exact line changes made, and only modifying those files which you have selected for commit.
+</p>
+</div>
 </div>
 <div id="push" class="section level3" number="8.5.3">
 <h3>
@@ -456,18 +471,68 @@ When you accept an assignment on GitHub classrooms - the repo won't appear on yo
 <span class="co"># subset the date according to (US,UK, Japan = lowest infant death rates, Afghanistan = highest infant death rates)</span></code></pre></div>
 <p><strong>k.</strong> Make a ggplot plotting the infant mortality rate by country</p>
 <p>HINT - use <code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line()</a></code> and remember to separate countries by colour</p>
+<div class="webex-solution">
+<button>
+Solution
+</button>
 <div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">subset_infant_mortality</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>,
                  y <span class="op">=</span> <span class="va">infant_mortality_rate</span>,
                  color <span class="op">=</span> <span class="va">country_name</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+</div>
 <p><strong>l.</strong> Update your graph with direct labels (using <code>annotate</code>) and vertical or horizontal lines with <code>geom_vline</code> or <code>geom_hline</code>.</p>
-<p><strong>m.</strong> Use ggsave() to write your graph to a .png in the ‘final_graphs’ subfolder</p>
+<div class="inline-figure"><img src="08-github_files/figure-html/unnamed-chunk-24-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="webex-solution">
+<button>
+Solution
+</button>
 <div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">subset_infant_mortality</span>,
+                           <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>,
+                 y <span class="op">=</span> <span class="va">infant_mortality_rate</span>,
+                 color <span class="op">=</span> <span class="va">country_name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"blue"</span>, <span class="st">"magenta"</span>, <span class="st">"orange"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span>geom <span class="op">=</span> <span class="st">"text"</span>,
+           x <span class="op">=</span> <span class="fl">2023</span>,
+           y <span class="op">=</span> <span class="fl">50</span>,
+           label <span class="op">=</span> <span class="st">"Afghanistan"</span>,
+           size <span class="op">=</span> <span class="fl">4</span>,
+           colour<span class="op">=</span><span class="st">"black"</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span>geom <span class="op">=</span> <span class="st">"text"</span>,
+           x <span class="op">=</span> <span class="fl">2023</span>,
+           y <span class="op">=</span> <span class="op">-</span><span class="fl">2</span>,
+           label <span class="op">=</span> <span class="st">"Japan"</span>,
+           size <span class="op">=</span> <span class="fl">4</span>,
+           colour<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span>geom <span class="op">=</span> <span class="st">"text"</span>,
+           x <span class="op">=</span> <span class="fl">2023</span>,
+           y <span class="op">=</span> <span class="fl">15</span>,
+           label <span class="op">=</span> <span class="st">"United Kingdom"</span>,
+           size <span class="op">=</span> <span class="fl">4</span>,
+           colour<span class="op">=</span><span class="st">"orange"</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span>geom <span class="op">=</span> <span class="st">"text"</span>,
+           x <span class="op">=</span> <span class="fl">2023</span>,
+           y <span class="op">=</span> <span class="fl">5</span>,
+           label <span class="op">=</span> <span class="st">"United States"</span>,
+           size <span class="op">=</span> <span class="fl">4</span>,
+           colour<span class="op">=</span><span class="st">"magenta"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">2000</span>,
+             lty <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position<span class="op">=</span><span class="st">"none"</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">xlim</a></span><span class="op">(</span><span class="fl">1970</span>, <span class="fl">2025</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Year"</span>,
+       y<span class="op">=</span><span class="st">"Deaths per 100,000"</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Mortality rate, infant (per 1,000 live births) \nhas been steadily falling in Afghanistan from 1970 to present"</span><span class="op">)</span></code></pre></div>
+</div>
+<p><strong>m.</strong> Use ggsave() to write your graph to a .png in the ‘final_graphs’ subfolder</p>
+<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a></span><span class="op">(</span><span class="st">"figures/infant mortality graph.png"</span>, plot<span class="op">=</span><span class="va">mortality_figure</span>, dpi<span class="op">=</span><span class="fl">900</span>, width <span class="op">=</span> <span class="fl">7</span>, height <span class="op">=</span> <span class="fl">7</span><span class="op">)</span></code></pre></div>
 <p><strong>n.</strong> Save, stage, commit</p>
 <p><strong>o</strong> Let's do one more cool and fun thing! And make an interactive version of our plot using plotly <span class="citation"><a href="references.html#ref-R-plotly" role="doc-biblioref">Sievert et al.</a> (<a href="references.html#ref-R-plotly" role="doc-biblioref">2021</a>)</span> just for fun!</p>
-<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb205"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/plotly/man/ggplotly.html">ggplotly</a></span><span class="op">(</span><span class="va">mortality_figure</span>, tooltip <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"infant_mortality_rate"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">## uses plotly package</span></code></pre></div>
 <p><strong>p</strong> Now save, stage, commit &amp; <strong>push</strong></p>
@@ -724,6 +789,86 @@ A token that is used in place of a password when performing Git operations over 
 </ul>
 </div>
 </div>
+<div id="sharing-a-github-repo---dealing-with-conflict-when-collaborating" class="section level2" number="8.13">
+<h2>
+<span class="header-section-number">8.13</span> Sharing a Github repo - Dealing with conflict when collaborating<a class="anchor" aria-label="anchor" href="#sharing-a-github-repo---dealing-with-conflict-when-collaborating"><i class="fas fa-link"></i></a>
+</h2>
+<div class="webex-solution">
+<button>
+Exercises to support group project assignment
+</button>
+<div id="how-to-avoid-a-conflict" class="section level3" number="8.13.1">
+<h3>
+<span class="header-section-number">8.13.1</span> How to avoid a conflict<a class="anchor" aria-label="anchor" href="#how-to-avoid-a-conflict"><i class="fas fa-link"></i></a>
+</h3>
+<p>The best and simplest way to avoid Github conflicts is to follow some simple guidelines. If two people are sharing a repo and commit their work usually this will go smoothly. However, if you try to merge changes on the same part of the same file you will get a merge conflict.</p>
+<pre><code>git merge issue-5
+# Auto-merging index.html
+# CONFLICT (content): Merge conflict in index.html
+# Automatic merge failed; fix conflicts and then commit the result.
+</code></pre>
+<p>If you see a message like this, the first thing is <strong>do not panic</strong>. Merge conflicts can be easily fixed.</p>
+<p>We can avoid merge conflicts altogether by following some simple organisation tips:</p>
+<ol style="list-style-type: decimal">
+<li><p>Partition the project, work on independent R scripts, so that changes made by one person have no affect on the files someone else is working on.</p></li>
+<li><p>Communicate - organise times when one person might work on a shared file, so that two people don't work on the same file at the same time</p></li>
+<li><p>Always Pull the latest version of the repo <em>before</em> you start working, try pulling <strong>just before you push</strong> in order to collect the latest changes &amp; <strong>always</strong> push to Github at the <em>end</em> of a session.</p></li>
+</ol>
+</div>
+<div id="dealing-with-a-conflict" class="section level3" number="8.13.2">
+<h3>
+<span class="header-section-number">8.13.2</span> Dealing with a conflict<a class="anchor" aria-label="anchor" href="#dealing-with-a-conflict"><i class="fas fa-link"></i></a>
+</h3>
+<p>Let's imagine you HAVE made a mistake and two people have tried to push changes for the same file at the same time!</p>
+<p>The <em>second</em> person trying to push a change to Github will get an error</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-30"></span>
+<img src="images/git-conflict-01-push-error.png" alt="Git conflict" width="100%"><p class="caption">
+Figure 8.2: Git conflict
+</p>
+</div>
+<p>Do what the message says and pull the changes from Github, this will generate a <strong>different</strong> error mesage. In this case indicating a merge conflict because of the differences on the same line of a file. In the Git pane, the file will now be flagged with an orange 'U'. This stands for 'unresolved'</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-31"></span>
+<img src="images/git-conflict-03-conflict.png" alt="git conflict" width="100%"><p class="caption">
+Figure 8.3: git conflict
+</p>
+</div>
+<p>To resolve the conflict, this file now needs to be edited. Git has flagged the locations in which conflicts have occurred with <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code> and <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>. The file needs to be edited merging the appropriate changes until the file reads how it should and all conflict markers are removed.</p>
+<div class="inline-figure"><img src="images/git-conflict-04-conflict-tags.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="images/git-conflict-05-resolved-file.png" width="100%" style="display: block; margin: auto;"></div>
+</div>
+<div id="commit-resolutions" class="section level3" number="8.13.3">
+<h3>
+<span class="header-section-number">8.13.3</span> Commit resolutions<a class="anchor" aria-label="anchor" href="#commit-resolutions"><i class="fas fa-link"></i></a>
+</h3>
+<p>Proceed as normal, commit the file changes, this should change the file from orange <code>U</code> to blue <code>M</code> and push this to Github, all collaborators will need to be informed to Pull the updated repo to get the new changes.</p>
+</div>
+<div id="try-and-create-and-solve-a-merge-error." class="section level3" number="8.13.4">
+<h3>
+<span class="header-section-number">8.13.4</span> Try and create and solve a merge error.<a class="anchor" aria-label="anchor" href="#try-and-create-and-solve-a-merge-error."><i class="fas fa-link"></i></a>
+</h3>
+<div class="try">
+<p>
+Merge Conflict Challenge As part of your group why not try and intentionally create a merge conflict, and then go through the steps needed to resolve the issues and continue developing with the merged files. See the sections above for help with each of these steps:
+</p>
+<p>
+Step 0: Ensure you have the same starting project Step 1: Project co-ordinator makes a change and commits - a small change to the README.md Step 2: Collaborator makes a change and commits on the same line Step 3: Collaborator pushes the file to GitHub Step 4: Owner pushes their changes and gets an error Step 5: Owner pulls from GitHub to get Collaborator changes Step 6: Owner edits the file to resolve the conflict Step 7: Owner commits the resolved changes Step 8: Owner pushes the resolved changes to GitHub Step 9: Collaborator pulls the resolved changes from GitHub Step 10: Both can view commit history
+</p>
+</div>
+</div>
+<div id="abort" class="section level3" number="8.13.5">
+<h3>
+<span class="header-section-number">8.13.5</span> Abort!<a class="anchor" aria-label="anchor" href="#abort"><i class="fas fa-link"></i></a>
+</h3>
+<p>Sometimes you just made a mistake. When you get a merge conflict, the repository is placed in a ‘Merging’ state until you resolve it. There’s a commandline command to abort doing the merge altogether:</p>
+<p>In the terminal type</p>
+<pre><code>git merge --abort</code></pre>
+<p>Of course, after doing that you still haven’t synced with your collaborator’s changes, so things are still unresolved. But at least your repository is now usable on your local machine. Let me know asap and we can fix the issue</p>
+</div>
+</div>
+
+</div>
 </div>
 
 
@@ -950,6 +1095,15 @@ $( document ).ready(function() {
 <li>
 <a class="nav-link" href="#summing-up-github"><span class="header-section-number">8.12</span> Summing up GitHub</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#what-we-learned-2"><span class="header-section-number">8.12.1</span> What we learned</a></li></ul>
 </li>
+<li>
+<a class="nav-link" href="#sharing-a-github-repo---dealing-with-conflict-when-collaborating"><span class="header-section-number">8.13</span> Sharing a Github repo - Dealing with conflict when collaborating</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#how-to-avoid-a-conflict"><span class="header-section-number">8.13.1</span> How to avoid a conflict</a></li>
+<li><a class="nav-link" href="#dealing-with-a-conflict"><span class="header-section-number">8.13.2</span> Dealing with a conflict</a></li>
+<li><a class="nav-link" href="#commit-resolutions"><span class="header-section-number">8.13.3</span> Commit resolutions</a></li>
+<li><a class="nav-link" href="#try-and-create-and-solve-a-merge-error."><span class="header-section-number">8.13.4</span> Try and create and solve a merge error.</a></li>
+<li><a class="nav-link" href="#abort"><span class="header-section-number">8.13.5</span> Abort!</a></li>
+</ul>
+</li>
 </ul>
 
       <div class="book-extra">
@@ -967,7 +1121,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-11-02.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-11-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

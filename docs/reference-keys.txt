@@ -22,7 +22,9 @@ fig:ambitious-figure
 fig:unnamed-chunk-7
 fig:unnamed-chunk-8
 tab:unnamed-chunk-30
-fig:unnamed-chunk-14
+fig:unnamed-chunk-15
+fig:unnamed-chunk-30
+fig:unnamed-chunk-31
 fig:unnamed-chunk-16
 fig:unnamed-chunk-19
 fig:unnamed-chunk-27
@@ -269,6 +271,12 @@ final-git-tips
 glossary-github
 summing-up-github
 what-we-learned-2
+sharing-a-github-repo---dealing-with-conflict-when-collaborating
+how-to-avoid-a-conflict
+dealing-with-a-conflict
+commit-resolutions
+try-and-create-and-solve-a-merge-error.
+abort
 functions-1
 structuring-a-function
 activity-1-understand-the-function

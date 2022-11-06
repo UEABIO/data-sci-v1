@@ -163,7 +163,7 @@ Save this file inside the scripts folder and call it `01_import_penguins_data.R`
 
 ## Activity 5: Read in data
 
-Now we can read in the data. To do this we will use the function `read_csv()` that allows us to read in .csv files. There are also functions that allow you to read in .xlsx files and other formats, however in this course we will only use .csv files.
+Now we can read in the data. To do this we will use the function `readr::read_csv()` that allows us to read in .csv files. There are also functions that allow you to read in .xlsx files and other formats, however in this course we will only use .csv files.
 
 * First, we will create an object called `penguins_data` that contains the data in the `penguins_raw.csv` file. 
 
