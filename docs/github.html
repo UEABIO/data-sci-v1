@@ -435,8 +435,7 @@ When you accept an assignment on GitHub classrooms - the repo won't appear on yo
 <p><strong>a.</strong> Follow this <a href="https://classroom.github.com/a/fM_53MuL">invite link</a></p>
 <p><strong>b.</strong> You will be invited to sign-in to Github (if not already) &amp; to join the UEABIO organisation</p>
 <p><strong>c.</strong> Clone your assignment to work locally in RStudio Cloud - 5023Y Workspace</p>
-<p><strong>d.</strong> In your local project folder, create subfolders ‘data’ and ‘figures’, 'scripts', 'markdown' (<strong>Note</strong> use the dir.create commands in the console)</p>
-<p><strong>e.</strong> Drop the file disease_burden.csv into the ‘data’ subfolder</p>
+<p><strong>d.</strong> In your local project folder, create subfolders ‘data’ and ‘figures’, 'scripts'.</p>
 <p><strong>f.</strong> Open a new <code>.R</code> script (or <code>.Rmd</code> if you prefer to practice with this)</p>
 <p><strong>g.</strong> Attach the <code>tidyverse</code>, <code>janitor</code>, and optionally <code>here</code> packages</p>
 <p><strong>h.</strong> Read in the infant_mortality.csv data</p>
@@ -488,7 +487,7 @@ Solution
 Solution
 </button>
 <div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">subset_infant_mortality</span>,
+<code class="sourceCode R"><span class="va">mortality_figure</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">subset_infant_mortality</span>,
                            <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>,
                  y <span class="op">=</span> <span class="va">infant_mortality_rate</span>,
                  color <span class="op">=</span> <span class="va">country_name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -529,7 +528,7 @@ Solution
 </div>
 <p><strong>m.</strong> Use ggsave() to write your graph to a .png in the ‘final_graphs’ subfolder</p>
 <div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a></span><span class="op">(</span><span class="st">"figures/infant mortality graph.png"</span>, plot<span class="op">=</span><span class="va">mortality_figure</span>, dpi<span class="op">=</span><span class="fl">900</span>, width <span class="op">=</span> <span class="fl">7</span>, height <span class="op">=</span> <span class="fl">7</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a></span><span class="op">(</span><span class="st">"figures/infant mortality graph.png"</span>, plot <span class="op">=</span> <span class="va">mortality_figure</span>, dpi<span class="op">=</span><span class="fl">900</span>, width <span class="op">=</span> <span class="fl">7</span>, height <span class="op">=</span> <span class="fl">7</span><span class="op">)</span></code></pre></div>
 <p><strong>n.</strong> Save, stage, commit</p>
 <p><strong>o</strong> Let's do one more cool and fun thing! And make an interactive version of our plot using plotly <span class="citation"><a href="references.html#ref-R-plotly" role="doc-biblioref">Sievert et al.</a> (<a href="references.html#ref-R-plotly" role="doc-biblioref">2021</a>)</span> just for fun!</p>
 <div class="sourceCode" id="cb205"><pre class="downlit sourceCode r">
@@ -793,10 +792,6 @@ A token that is used in place of a password when performing Git operations over 
 <h2>
 <span class="header-section-number">8.13</span> Sharing a Github repo - Dealing with conflict when collaborating<a class="anchor" aria-label="anchor" href="#sharing-a-github-repo---dealing-with-conflict-when-collaborating"><i class="fas fa-link"></i></a>
 </h2>
-<div class="webex-solution">
-<button>
-Exercises to support group project assignment
-</button>
 <div id="how-to-avoid-a-conflict" class="section level3" number="8.13.1">
 <h3>
 <span class="header-section-number">8.13.1</span> How to avoid a conflict<a class="anchor" aria-label="anchor" href="#how-to-avoid-a-conflict"><i class="fas fa-link"></i></a>
@@ -865,9 +860,8 @@ Step 0: Ensure you have the same starting project Step 1: Project co-ordinator m
 <p>In the terminal type</p>
 <pre><code>git merge --abort</code></pre>
 <p>Of course, after doing that you still haven’t synced with your collaborator’s changes, so things are still unresolved. But at least your repository is now usable on your local machine. Let me know asap and we can fix the issue</p>
-</div>
-</div>
 
+</div>
 </div>
 </div>
 

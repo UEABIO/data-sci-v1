@@ -315,9 +315,8 @@ You should make regular commits and pushes to save your work as you go - and I w
 
 **c.** Clone your assignment to work locally in RStudio Cloud - 5023Y Workspace
 
-**d.** In your local project folder, create subfolders ‘data’ and ‘figures’, 'scripts', 'markdown' (**Note** use the dir.create commands in the console)
+**d.** In your local project folder, create subfolders ‘data’ and ‘figures’, 'scripts'.
 
-**e.** Drop the file disease_burden.csv into the ‘data’ subfolder
 
 **f.** Open a new `.R` script (or `.Rmd` if you prefer to practice with this)
 
@@ -394,7 +393,7 @@ ggplot(data = subset_infant_mortality) +
 
 
 ```r
-ggplot(data = subset_infant_mortality,
+mortality_figure <- ggplot(data = subset_infant_mortality,
                            aes(x = year,
                  y = infant_mortality_rate,
                  color = country_name)) +
@@ -443,7 +442,7 @@ ggplot(data = subset_infant_mortality,
 
 
 ```r
-ggsave("figures/infant mortality graph.png", plot=mortality_figure, dpi=900, width = 7, height = 7)
+ggsave("figures/infant mortality graph.png", plot = mortality_figure, dpi=900, width = 7, height = 7)
 ```
 
 **n.** Save, stage, commit
@@ -668,8 +667,6 @@ You have used
 ## Sharing a Github repo - Dealing with conflict when collaborating
 
 
-<div class='webex-solution'><button>Exercises to support group project assignment</button>
-
 
 ### How to avoid a conflict
 
@@ -742,7 +739,4 @@ git merge --abort
 ```
 
 Of course, after doing that you still haven’t synced with your collaborator’s changes, so things are still unresolved. But at least your repository is now usable on your local machine. Let me know asap and we can fix the issue
-
-
-</div>
 
