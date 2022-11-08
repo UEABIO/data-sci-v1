@@ -354,7 +354,7 @@ When you accept an assignment on GitHub classrooms - the repo won't appear on yo
 
 **e.** Drop the file disease_burden.csv into the ‘data’ subfolder
 
-**f.** Open a new .R script
+**f.** Open a new `.R` script (or `.Rmd` if you prefer to practice with this)
 
 **g.** Attach the `tidyverse`, `janitor`, and optionally `here` packages
 

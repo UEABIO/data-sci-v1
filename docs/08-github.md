@@ -319,7 +319,7 @@ You should make regular commits and pushes to save your work as you go - and I w
 
 **e.** Drop the file disease_burden.csv into the ‘data’ subfolder
 
-**f.** Open a new .R script
+**f.** Open a new `.R` script (or `.Rmd` if you prefer to practice with this)
 
 **g.** Attach the `tidyverse`, `janitor`, and optionally `here` packages
 

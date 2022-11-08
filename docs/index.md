@@ -1,7 +1,7 @@
 --- 
 title: "5023Y"
 author: "Philip T. Leftwich"
-date: "2022-11-06"
+date: "2022-11-08"
 subtitle: Data Science for Biologists
 site: bookdown::bookdown_site
 documentclass: book
