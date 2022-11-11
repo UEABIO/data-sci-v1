@@ -13,6 +13,24 @@ library(patchwork)
 library(here)
 ```
 
+```{block, type = "try"}
+Today's workshop can be carried out in any R project. 
+
+Why not try and set up a project on Github and open it on RStudio Cloud?
+
+First - go to (https://github.com) and log in. 
+
+Near repositories click the big green "New" button. 
+
+Set it to no template, give it a name like "Learning R functions". 
+
+Initialise the project with a README and create repository
+
+Click on the green "Code" button to get the link to Clone the repository into RStudio Cloud. 
+
+```
+
+
 Most of the time when we work in R, we will use functions; often pre-written functions that we access from baseR or installed packages. But you can also write your own functions. Eventually you could even turn a collection of your own functions into a package (for yourself or others).
 
 **Functions** make it easy to use sets of code instructions repeatedly (without filling our scripts with the code underlying the function) and help us carry out multiple tasks in a single step without having to go through the details of how the steps are executed.

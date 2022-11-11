@@ -8,6 +8,17 @@
 
 
 
+<div class="try">
+<p>Today's workshop can be carried out in any R project.</p>
+<p>Why not try and set up a project on Github and open it on RStudio Cloud?</p>
+<p>First - go to (<a href="https://github.com" class="uri">https://github.com</a>) and log in.</p>
+<p>Near repositories click the big green "New" button.</p>
+<p>Set it to no template, give it a name like "Learning R functions".</p>
+<p>Initialise the project with a README and create repository</p>
+<p>Click on the green "Code" button to get the link to Clone the repository into RStudio Cloud.</p>
+</div>
+
+
 Most of the time when we work in R, we will use functions; often pre-written functions that we access from baseR or installed packages. But you can also write your own functions. Eventually you could even turn a collection of your own functions into a package (for yourself or others).
 
 **Functions** make it easy to use sets of code instructions repeatedly (without filling our scripts with the code underlying the function) and help us carry out multiple tasks in a single step without having to go through the details of how the steps are executed.
@@ -100,9 +111,9 @@ variance(number_series)
 ```
 
 
-<button id="displayTextunnamed-chunk-8" onclick="javascript:toggle('unnamed-chunk-8');">Show Solution</button>
+<button id="displayTextunnamed-chunk-9" onclick="javascript:toggle('unnamed-chunk-9');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-8" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-9" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 variance <- function(input_data){
@@ -146,9 +157,9 @@ What happens when you try to put something in the brackets when **using** this f
 e.g. say_hello("Phil")
  </div></div>
 
-<button id="displayTextunnamed-chunk-12" onclick="javascript:toggle('unnamed-chunk-12');">Show Solution</button>
+<button id="displayTextunnamed-chunk-13" onclick="javascript:toggle('unnamed-chunk-13');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-12" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-13" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 Error in say_hello( or something similar, this function has not been set with any arguments, therefore it doesn't know what to do with any values provided to it. </div></div></div>
 
 Now lets try a similar function, but we include an argument:
@@ -170,9 +181,9 @@ say_morning("Phil")
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
 What happens when you DO NOT put something in the brackets when using this function? </div></div>
 
-<button id="displayTextunnamed-chunk-15" onclick="javascript:toggle('unnamed-chunk-15');">Show Solution</button>
+<button id="displayTextunnamed-chunk-16" onclick="javascript:toggle('unnamed-chunk-16');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-15" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-16" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 Error in paste("Good morning", x) : 
@@ -229,9 +240,9 @@ Can you write this function? to print the statements required above?
  </div></div>
 
 
-<button id="displayTextunnamed-chunk-20" onclick="javascript:toggle('unnamed-chunk-20');">Show Solution</button>
+<button id="displayTextunnamed-chunk-21" onclick="javascript:toggle('unnamed-chunk-21');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-20" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body"><div class="tab"><button class="tablinksunnamed-chunk-20 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-20', 'unnamed-chunk-20');">Base R</button><button class="tablinksunnamed-chunk-20" onclick="javascript:openCode(event, 'option2unnamed-chunk-20', 'unnamed-chunk-20');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-20" class="tabcontentunnamed-chunk-20">
+<div id="toggleTextunnamed-chunk-21" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body"><div class="tab"><button class="tablinksunnamed-chunk-21 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-21', 'unnamed-chunk-21');">Base R</button><button class="tablinksunnamed-chunk-21" onclick="javascript:openCode(event, 'option2unnamed-chunk-21', 'unnamed-chunk-21');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-21" class="tabcontentunnamed-chunk-21">
 
 ```r
  report_p <- function(p, digits = 3) {
@@ -242,7 +253,7 @@ Can you write this function? to print the statements required above?
      return(reported)
  }
 ```
-</div><div id="option2unnamed-chunk-20" class="tabcontentunnamed-chunk-20">
+</div><div id="option2unnamed-chunk-21" class="tabcontentunnamed-chunk-21">
 
 ```r
 report_p <- function(p, digits = 3) {
@@ -256,7 +267,7 @@ report_p <- function(p, digits = 3) {
   return(reported)
 }
 ```
-</div><script> javascript:hide('option2unnamed-chunk-20') </script></div></div></div>
+</div><script> javascript:hide('option2unnamed-chunk-21') </script></div></div></div>
 
 
 
@@ -325,9 +336,9 @@ dros_weight <- tibble(vial, sex, weight_mg)
 
 What functions would you use to extract the heaviest male from this dataset? Try and think that through first.
 
-<button id="displayTextunnamed-chunk-25" onclick="javascript:toggle('unnamed-chunk-25');">Show Solution</button>
+<button id="displayTextunnamed-chunk-26" onclick="javascript:toggle('unnamed-chunk-26');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-25" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-26" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
   dros_weight %>% 
@@ -350,7 +361,7 @@ What functions would you use to extract the heaviest male from this dataset? Try
   <tr>
    <td style="text-align:right;"> 9 </td>
    <td style="text-align:left;"> male </td>
-   <td style="text-align:right;"> 0.2137661 </td>
+   <td style="text-align:right;"> 0.2444658 </td>
   </tr>
 </tbody>
 </table>
@@ -362,9 +373,9 @@ What functions would you use to extract the heaviest male from this dataset? Try
 
 Abstract your lines of code to make a function. How could you remove the data and introduce a placeholder instead?
 
-<button id="displayTextunnamed-chunk-26" onclick="javascript:toggle('unnamed-chunk-26');">Show Solution</button>
+<button id="displayTextunnamed-chunk-27" onclick="javascript:toggle('unnamed-chunk-27');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-26" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-27" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 find_largest_male <- function(df){ 
@@ -388,9 +399,9 @@ Could we extend it to return more than one value if requested?
 To make an argument except more than one value as the potential default at once use `c("male", "female")`
 
 
-<button id="displayTextunnamed-chunk-27" onclick="javascript:toggle('unnamed-chunk-27');">Show Solution</button>
+<button id="displayTextunnamed-chunk-28" onclick="javascript:toggle('unnamed-chunk-28');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-27" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-28" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 find_largest_fly <- function(df,  n=1, s=c("male", "female") ){ 
@@ -422,7 +433,7 @@ plot <- dros_weight %>%
 plot
 ```
 
-<img src="09-writing-functions_files/figure-html/unnamed-chunk-28-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="09-writing-functions_files/figure-html/unnamed-chunk-29-1.png" width="100%" style="display: block; margin: auto;" />
 
 With the addition of a title and `theme_classic()` we can improve the style quickly
 
@@ -433,7 +444,7 @@ plot+
   theme_classic()
 ```
 
-<img src="09-writing-functions_files/figure-html/unnamed-chunk-29-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="09-writing-functions_files/figure-html/unnamed-chunk-30-1.png" width="100%" style="display: block; margin: auto;" />
 
 But I **still** want to make some more changes, rather than do this work for one figure, and potentially have to repeat this several times for subsequent figures, I can decide to make a new function instead. See [here](https://ggplot2.tidyverse.org/reference/theme.html) for a full breakdown of the arguments for the `theme()` function. 
 
@@ -491,7 +502,7 @@ plot+
 theme_custom()
 ```
 
-<img src="09-writing-functions_files/figure-html/unnamed-chunk-32-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="09-writing-functions_files/figure-html/unnamed-chunk-33-1.png" width="100%" style="display: block; margin: auto;" />
 
 <div class="info">
 <p>Functions are about 'abstracting' a command, so it can be used more than once. If you are having trouble writing a function, start by writing a standard set of commands as you would to solve a specific problem. Then work backwards to turn this into a function.</p>
