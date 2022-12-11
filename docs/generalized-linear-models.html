@@ -259,7 +259,7 @@ Show Solution
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb445"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb446"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">flyls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">longevity</span> <span class="op">~</span> <span class="va">type</span> <span class="op">+</span> <span class="va">thorax</span> <span class="op">+</span> <span class="va">sleep</span>, data <span class="op">=</span> <span class="va">fruitfly</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">flyls</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -287,7 +287,7 @@ Solution
 <h4>
 <span class="header-section-number">19.2.0.1</span> <a class="anchor" aria-label="anchor" href="#section"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb447"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb448"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">flyglm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">longevity</span> <span class="op">~</span> <span class="va">type</span> <span class="op">+</span> <span class="va">thorax</span> <span class="op">+</span> <span class="va">sleep</span>, 
              family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">gaussian</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"identity"</span><span class="op">)</span>,
              data <span class="op">=</span> <span class="va">fruitfly</span><span class="op">)</span>
@@ -411,12 +411,12 @@ The question of interest is:</p>
 <blockquote>
 <p>How does nestling mass affect begging rates between the different species?</p>
 </blockquote>
-<div class="sourceCode" id="cb449"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb450"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cuckoo</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"book"</span>, <span class="st">"files"</span>, <span class="st">"cuckoo.csv"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <a href="https://raw.githubusercontent.com/UEABIO/data-sci-v1/main/book/files/cuckoo.csv">
 <button class="btn btn-success"><i class="fa fa-save"></i> Download cuckoo data as csv</button>
 </a>
-<div class="sourceCode" id="cb450"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb451"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">cuckoo</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
@@ -510,7 +510,7 @@ Cuckoo
 <li>
 <strong>Species</strong>: Warbler or Cuckoo</li>
 </ul>
-<div class="sourceCode" id="cb451"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb452"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">cuckoo</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Mass</span>, y<span class="op">=</span><span class="va">Beg</span>, colour<span class="op">=</span><span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="19-Generalized-Linear-Models_files/figure-html/unnamed-chunk-15-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>There seem to be a relationship between mass and begging calls and it could
@@ -522,11 +522,11 @@ of the original paper did; <strong>reed warbler chicks</strong> (solid circles, 
 <p>This model is inadequate. It is predicting <strong>negative</strong> begging calls <em>within</em> the
 range of the observed data, which clearly does not make any sense.</p>
 <p>Let us display the model diagnostics plots for this linear model.</p>
-<div class="sourceCode" id="cb452"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb453"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Fit model</span>
 <span class="co">## There is an interaction term here, it is reasonable to think that how calling rates change with size might be different between the two species.</span>
 <span class="va">cuckoo_ls1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Beg</span> <span class="op">~</span> <span class="va">Mass</span><span class="op">+</span><span class="va">Species</span><span class="op">+</span><span class="va">Mass</span><span class="op">:</span><span class="va">Species</span>, data<span class="op">=</span><span class="va">cuckoo</span><span class="op">)</span> </code></pre></div>
-<div class="sourceCode" id="cb453"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb454"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">performance</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html">check_model</a></span><span class="op">(</span><span class="va">cuckoo_ls1</span>, 
                          check <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"homogeneity"</span>,
                                    <span class="st">"qq"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -570,7 +570,7 @@ both species have the same slope for the relationship between begging rate and m
 \end{aligned}
 \]</span></p>
 <p>Fit the model with the interaction term in R:</p>
-<div class="sourceCode" id="cb454"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb455"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cuckoo_glm1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Beg</span> <span class="op">~</span> <span class="va">Mass</span> <span class="op">+</span> <span class="va">Species</span> <span class="op">+</span> <span class="va">Mass</span><span class="op">:</span><span class="va">Species</span>, data<span class="op">=</span><span class="va">cuckoo</span>, family<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/family.html">poisson</a></span><span class="op">(</span>link<span class="op">=</span><span class="st">"log"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">cuckoo_glm1</span><span class="op">)</span></code></pre></div>
@@ -617,7 +617,7 @@ Show Solution
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb456"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb457"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># using augment allows you to generate fitted outcomes from the regression, make sure to set the predictions onto the response scale in order to 'back transform` the data onto the original scale</span>
 
 <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="va">cuckoo_glm1</span>, type.predict <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -644,7 +644,7 @@ Show Solution
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb457"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb458"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="va">cuckoo_glm1</span><span class="op">)</span> <span class="op">%&gt;%</span> 
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Mass</span>, y<span class="op">=</span><span class="va">.fitted</span>, colour<span class="op">=</span><span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
@@ -656,12 +656,12 @@ Solution
 </div>
 </div>
 <p>Compare the new Poisson model fits to the ordinary least squares model. We can see that although the homogeneity of variance is far from perfect, the curvature in the model has been drastically reduced (this makes sense as now we have a model fitted to exponential data), and the qqplot is within acceptable confidence intervals.</p>
-<div class="sourceCode" id="cb458"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb459"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">performance</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html">check_model</a></span><span class="op">(</span><span class="va">cuckoo_glm1</span>, 
                          check <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"homogeneity"</span>,
                                    <span class="st">"qq"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="19-Generalized-Linear-Models_files/figure-html/unnamed-chunk-22-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb459"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb460"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">cuckoo_glm1</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -707,7 +707,7 @@ Because this is a Poisson distribution where variance is fixed with the mean we 
 <span class="header-section-number">19.6</span> Estimates and Intervals<a class="anchor" aria-label="anchor" href="#estimates-and-intervals"><i class="fas fa-link"></i></a>
 </h2>
 <p>Remember that not only is this <strong>Poisson</strong> model fitting variance using a Poisson and not Normal distribution. It is also relating the predictors to the response variable with a "<em>log-link</em>" this means we need to exponentiate our estimates to get them on the same scale as the response (y) variable. Until you do this all the model estimates are logn(y).</p>
-<div class="sourceCode" id="cb461"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb462"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">cuckoo_glm1</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="co">### Intercept - Incidence rate at Mass=0, and Species = Cuckoo</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">cuckoo_glm1</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span> <span class="co">### Change in the average incidence rate with Mass </span>
@@ -724,7 +724,7 @@ Because this is a Poisson distribution where variance is fixed with the mean we 
 ## Mass:SpeciesWarbler 
 ##           0.9785598</code></pre>
 <p>Luckily when you tidy your models up with <code>broom</code> you can specify that you want to put model predictions on the <em>response</em> variable scale by specifying <code>exponentiate = T</code> which will remove the log transformation, and allow easy calculation of confidence intervals.</p>
-<div class="sourceCode" id="cb463"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb464"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">cuckoo_glm1</span>, 
             exponentiate <span class="op">=</span> <span class="cn">T</span>, 
             conf.int <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
@@ -864,7 +864,7 @@ Also remember that as Poisson models have 'fixed variance' z- and Chisquare dist
 </div>
 <p>In this example we wished to infer the relationship between begging rates and mass in these two species.</p>
 <p>I hypothesised that the rate of begging in chicks would increase as their body size increased. Interestingly I found there was a significant interaction effect with mass and species, where Warbler chicks increased their calling rate with mass at a rate that was only 0.98 [95%CI: 0.96-0.99] that of Cuckoo chicks (Poisson GLM: <span class="math inline">\(\chi^2\)</span><sub>1,47</sub> = 6.77, <em>P</em> = 0.009). This meant that while at hatching Warbler chicks start with a mean call rate that is higher than their parasitic brood mates, this quickly reverses as they grow.</p>
-<div class="sourceCode" id="cb464"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb465"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># For a fixed  mean-variance model we use a Chisquare distribution</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/add1.html">drop1</a></span><span class="op">(</span><span class="va">cuckoo_glm1</span>, test <span class="op">=</span> <span class="st">"Chisq"</span><span class="op">)</span>
 
@@ -955,7 +955,7 @@ Mass:Species
 <p>Overdispersion statistic values <strong>&gt; 1 = Overdispersed</strong></p>
 <p>Overdispersion is a result of larger than expected variance for that mean under a Poisson distribution, this is clearly an issue with our model!</p>
 <p>Luckily a simple fix is to fit a <em>quasi-likelihood</em> model which accounts for this, think of "quasi" as "sort of but not completely" Poisson.</p>
-<div class="sourceCode" id="cb466"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb467"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cuckoo_glm2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Beg</span> <span class="op">~</span> <span class="va">Mass</span><span class="op">+</span><span class="va">Species</span><span class="op">+</span><span class="va">Mass</span><span class="op">:</span><span class="va">Species</span>, data<span class="op">=</span><span class="va">cuckoo</span>, family<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/family.html">quasipoisson</a></span><span class="op">(</span>link<span class="op">=</span><span class="st">"log"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">cuckoo_glm2</span><span class="op">)</span></code></pre></div>
@@ -1081,7 +1081,7 @@ p = \frac{e^{\beta_0 + \beta_1 X}}{1 + e^{\beta_0 + \beta_1 X}}
 <a href="https://raw.githubusercontent.com/UEABIO/data-sci-v1/main/book/files/Challenger.csv">
 <button class="btn btn-success"><i class="fa fa-save"></i> Download Challenger data as csv</button>
 </a>
-<div class="sourceCode" id="cb469"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb470"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">challenger</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
@@ -1196,7 +1196,7 @@ flight
 </ul>
 <p>It was frequently discussed issue that temperature might play a role in the critical safety of the o-rings on the shuttles.
 One of the biggest mistakes made in assessing the flight risk for the Challenger was to only look at the flights <strong>where a failure had occurred</strong></p>
-<div class="sourceCode" id="cb470"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb471"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">challenger</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">oring_dt</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">%&gt;%</span> 
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y<span class="op">=</span><span class="va">oring_dt</span>, x<span class="op">=</span><span class="va">temp</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
@@ -1204,7 +1204,7 @@ One of the biggest mistakes made in assessing the flight risk for the Challenger
 <div class="inline-figure"><img src="19-Generalized-Linear-Models_files/figure-html/unnamed-chunk-39-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>From this it was concluded that temperature did not appear to affect o-ring risk of failure, as o-ring failures were detected at a range of different temperatures.</p>
 <p>However when we compare this to the full data that was available a very different picture emerges.</p>
-<div class="sourceCode" id="cb471"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb472"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">challenger</span> <span class="op">%&gt;%</span> 
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y<span class="op">=</span><span class="va">oring_dt</span>, 
            x<span class="op">=</span><span class="va">temp</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
@@ -1216,11 +1216,11 @@ One of the biggest mistakes made in assessing the flight risk for the Challenger
 <p>However if we want to understand the actual relationship between temperature and risk then there are several issues with fitting a linear model here - once again the data is an integer, and bounded by zero (our model predicts negative failure rates within the observed data range).</p>
 <p>We COULD consider this as suitable for a Poisson model - but if we are really interested in determining the binary risk of <strong>having a flight with o-ring failure vs. no failure</strong>. Then we should implement a GLM with a Binomial distribution.</p>
 <p>We can use dplyr to generate a binary column of no incident '0' and fail '1' for anything &gt;0.</p>
-<div class="sourceCode" id="cb472"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb473"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">challenger</span> <span class="op">&lt;-</span> <span class="va">challenger</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>oring_binary <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">oring_dt</span> <span class="op">==</span><span class="st">'0'</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Fitting a binary GLM</p>
-<div class="sourceCode" id="cb473"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb474"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">binary_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">oring_binary</span><span class="op">~</span><span class="va">temp</span>, family<span class="op">=</span><span class="va">binomial</span>, data<span class="op">=</span><span class="va">challenger</span><span class="op">)</span>
 <span class="va">binary_model</span> <span class="op">%&gt;%</span> 
   <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span>conf.int<span class="op">=</span><span class="cn">T</span><span class="op">)</span></code></pre></div>
@@ -1307,7 +1307,7 @@ temp
 \log\left[ \frac { P( \operatorname{oring\_binary} = fail) }{ 1 - P( \operatorname{oring\_binary} = fail) } \right] = \beta_{0} + \beta_{1}(\operatorname{temp})
 \]</span></p>
 <p>Which in R will look like this:</p>
-<div class="sourceCode" id="cb474"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb475"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">binary_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">oring_binary</span><span class="op">~</span><span class="va">temp</span>, family<span class="op">=</span><span class="va">binomial</span>, data<span class="op">=</span><span class="va">challenger</span><span class="op">)</span></code></pre></div>
 <ul>
 <li>Intercept = <span class="math inline">\(\beta_{0}\)</span> = 23.77</li>
@@ -1398,7 +1398,7 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-44" class="tabcontentunnamed-chunk-44">
-<div class="sourceCode" id="cb475"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb476"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">binary_model</span>, type <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span></code></pre></div>
 <pre><code>##           1           2           3           4           5           6 
 ## 0.394769696 0.130776531 0.178373050 0.238538593 0.311308842 0.067388639 
@@ -1410,7 +1410,7 @@ Base R
 ## 0.016393905 0.005516836 0.023485304 0.016393905 0.924582363</code></pre>
 </div>
 <div id="option2unnamed-chunk-44" class="tabcontentunnamed-chunk-44">
-<div class="sourceCode" id="cb477"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb478"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="va">binary_model</span>, 
                type.predict <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
@@ -2055,7 +2055,7 @@ temp
 </h3>
 <p>If we use the <code><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html">emmeans()</a></code> function it will convert <em>log-odds</em> to estimate the probability of o-ring failure at the mean value of x (temperature). And add confidence intervals!</p>
 <p>But how do log-odds and probability actually relate?</p>
-<div class="sourceCode" id="cb478"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb479"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">emmeans</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html">emmeans</a></span><span class="op">(</span><span class="va">binary_model</span>, specs<span class="op">=</span><span class="op">~</span><span class="va">temp</span>, type<span class="op">=</span><span class="st">"response"</span><span class="op">)</span></code></pre></div>
 <pre><code>##  temp prob     SE  df asymp.LCL asymp.UCL
 ##  69.6 0.15 0.0985 Inf    0.0373     0.445
@@ -2067,7 +2067,7 @@ temp
 P(\operatorname{risk of failure at }  X=69)\left[ \frac{e^{23.77+(-0.37 \times 69.6)}}{1+e^{23.77+(-0.37 \times 69.6)}} \right]
 \]</span></p>
 <p>Which produces the following result and we can confirm the risk of an o-ring failure on an <em>average</em> day is 0.15</p>
-<div class="sourceCode" id="cb480"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb481"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">odds_at_69.6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">binary_model</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">binary_model</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">*</span><span class="fl">69.6</span><span class="op">)</span>
 <span class="co"># To convert from odds to a probability, divide the odds by one plus the odds</span>
 
@@ -2085,7 +2085,7 @@ P(\operatorname{risk of failure at }  X=69)\left[ \frac{e^{23.77+(-0.37 \times 6
 <p>In our example the <strong>maximum difference</strong> in probability from a one degree change in Temp is <span class="math inline">\(-0.37/4 = -0.09\)</span></p>
 <p>So the <strong>maximum difference</strong> in probability of failure corresponding to a one degree change is 9%</p>
 <p>Remember if you want to augment your data with the model, you can use the <code><a href="https://generics.r-lib.org/reference/augment.html">augment()</a></code> function, remembering to specify <code>type.predict = "response</code> to get probabilities of o-ring failure (not log odds).</p>
-<div class="sourceCode" id="cb482"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb483"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="va">binary_model</span>, 
                type.predict<span class="op">=</span><span class="st">"response"</span>, 
                se_fit <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -2301,7 +2301,7 @@ temp
 </div>
 <p>Annoyingly a limitation of the augment function is that it won't produce 95% CI for predictions on glms. But I have written a short function to do this
 Don't worry if this is a lot to get your head around - the main thing is use this code to produce 95% CI.</p>
-<div class="sourceCode" id="cb483"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb484"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">augment_glm</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">mod</span>, <span class="va">predict</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span><span class="op">{</span>
   <span class="va">fam</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">family</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span>
   <span class="va">ilink</span> <span class="op">&lt;-</span> <span class="va">fam</span><span class="op">$</span><span class="va">linkinv</span>
@@ -3160,7 +3160,7 @@ temp
 </table></div>
 </div>
 <p>Alternatively we can also do this calculation via emmeans</p>
-<div class="sourceCode" id="cb484"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb485"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">emmeans</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html">emmeans</a></span><span class="op">(</span><span class="va">binary_model</span>, 
                  specs <span class="op">=</span> <span class="op">~</span> <span class="va">temp</span>, 
                  at<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>temp<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">66</span><span class="op">:</span><span class="fl">27</span><span class="op">)</span><span class="op">)</span>, 
@@ -3226,7 +3226,7 @@ Show Solution
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb486"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb487"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">augment_glm</span><span class="op">(</span><span class="va">binary_model</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">temp</span>, y<span class="op">=</span><span class="va">oring_binary</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">temp</span>, y<span class="op">=</span><span class="va">.fitted</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html">geom_ribbon</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>ymin<span class="op">=</span><span class="va">.lower</span>, ymax<span class="op">=</span><span class="va">.upper</span><span class="op">)</span>, alpha<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span></code></pre></div>
@@ -3264,7 +3264,7 @@ Solution
 </div>
 <div class="panel-body">
 <p>First - we make a new dataset with the temperature on the day of the Challenger Launch <strong>36°F</strong></p>
-<div class="sourceCode" id="cb487"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb488"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">new_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>temp<span class="op">=</span><span class="fl">36</span>, oring_binary<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
 
 
@@ -3325,7 +3325,7 @@ oring_binary
 </h2>
 <p>The standard model checks from <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/plot.html">plot()</a></code> cannot be used on binomial glms, they are usually a mess!</p>
 <p>Luckily the <code>performance</code> package detects and alters the checks. Pay particular attention to the binned residuals plot - this is your best estimate of possible overdispersion (requiring a quasi-likelihood check). In this case there is likely not enough data for robust checks</p>
-<div class="sourceCode" id="cb488"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb489"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">performance</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html">check_model</a></span><span class="op">(</span><span class="va">binary_model</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="19-Generalized-Linear-Models_files/figure-html/unnamed-chunk-54-1.png" width="100%" style="display: block; margin: auto;"></div>
 <div id="activity-5-write-up" class="section level3" number="19.12.1">
@@ -3343,7 +3343,7 @@ Write-up
 <blockquote>
 <p>Note you could use drop1( test = "Chisq") here, but as there is only one, continuous variable, we can also report directly from the summary table.</p>
 </blockquote>
-<div class="sourceCode" id="cb489"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb490"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/add1.html">drop1</a></span><span class="op">(</span><span class="va">binary_model</span>, test<span class="op">=</span><span class="st">"Chisq"</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
@@ -3692,7 +3692,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-11-11.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-12-11.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

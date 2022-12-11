@@ -153,7 +153,7 @@ This graph is OK *but not great*, the height of each section of the bar represen
 
 The best graph is then probably the first one we made - with a few minor tweak we can rapidly improve this. 
 
-```{r, echo=FALSE, eval=TRUE}
+```{r, echo=TRUE, eval=TRUE}
 penguins %>% 
   mutate(species=factor(species, levels=c("Adelie",
                                           "Gentoo",
@@ -173,6 +173,7 @@ penguins %>%
   theme_minimal()
 
 ```
+
 This is an example of a figure we might use in a report or paper. Having cleaned up the theme, added some simple colour, made sure our labels are clear and descriptive, ordered our categories in ascending frequency order, and included some simple text of percentages to aid readability. 
 
 ### Two categorical variables

@@ -205,7 +205,29 @@ This graph is OK *but not great*, the height of each section of the bar represen
 
 The best graph is then probably the first one we made - with a few minor tweak we can rapidly improve this. 
 
+
+```r
+penguins %>% 
+  mutate(species=factor(species, levels=c("Adelie",
+                                          "Gentoo",
+                                          "Chinstrap"))) %>% 
+  # set as factor and provide levels
+  ggplot()+
+  geom_bar(aes(x=species),
+           fill="steelblue",
+           width=0.8)+
+  labs(x="Species",
+       y = "Number of observations")+
+  geom_text(data=prob_obs_species,
+            aes(y=(n+10),
+                x=species,
+                label=scales::percent(prob_obs)))+
+  coord_flip()+
+  theme_minimal()
+```
+
 <img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-9-1.png" width="100%" style="display: block; margin: auto;" />
+
 This is an example of a figure we might use in a report or paper. Having cleaned up the theme, added some simple colour, made sure our labels are clear and descriptive, ordered our categories in ascending frequency order, and included some simple text of percentages to aid readability. 
 
 ### Two categorical variables
