@@ -7,6 +7,8 @@
 
 
 
+
+
 ## What is mixed modelling and why do we need it?
 
 Ecological and biological data is often complicated and messy. We can have lots of **grouping factors** like populations, data collection sites that mean our data has clusters so that our data points are not truly **independent**. This is where **mixed models** are useful, these combine **fixed** and **random** effects to help us deal with messy data, structured data, and they help us save degrees of freedom. They are incredibly useful, but frequently tricky to implement well! 
@@ -53,23 +55,23 @@ Rats data - Exeter
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
 1. Plot a scatterplot of `Alcohol` vs `TotalPhenols` and colour data points by `WineType` </div></div>
 
-<button id="displayTextunnamed-chunk-4" onclick="javascript:toggle('unnamed-chunk-4');">Show Solution</button>
+<button id="displayTextunnamed-chunk-5" onclick="javascript:toggle('unnamed-chunk-5');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-4" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body"><div class="tab"><button class="tablinksunnamed-chunk-4 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-4', 'unnamed-chunk-4');">Base R</button><button class="tablinksunnamed-chunk-4" onclick="javascript:openCode(event, 'option2unnamed-chunk-4', 'unnamed-chunk-4');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-4" class="tabcontentunnamed-chunk-4">
+<div id="toggleTextunnamed-chunk-5" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body"><div class="tab"><button class="tablinksunnamed-chunk-5 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-5', 'unnamed-chunk-5');">Base R</button><button class="tablinksunnamed-chunk-5" onclick="javascript:openCode(event, 'option2unnamed-chunk-5', 'unnamed-chunk-5');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-5" class="tabcontentunnamed-chunk-5">
 
 ```r
 plot(iris)
 ```
 
-<img src="20-mixed-models_files/figure-html/unnamed-chunk-11-1.png" width="100%" style="display: block; margin: auto;" />
-</div><div id="option2unnamed-chunk-4" class="tabcontentunnamed-chunk-4">
+<img src="20-mixed-models_files/figure-html/unnamed-chunk-19-1.png" width="100%" style="display: block; margin: auto;" />
+</div><div id="option2unnamed-chunk-5" class="tabcontentunnamed-chunk-5">
 
 ```r
 plot(cars)
 ```
 
-<img src="20-mixed-models_files/figure-html/unnamed-chunk-12-1.png" width="100%" style="display: block; margin: auto;" />
-</div><script> javascript:hide('option2unnamed-chunk-4') </script></div></div></div>
+<img src="20-mixed-models_files/figure-html/unnamed-chunk-20-1.png" width="100%" style="display: block; margin: auto;" />
+</div><script> javascript:hide('option2unnamed-chunk-5') </script></div></div></div>
 
 
 
@@ -94,10 +96,50 @@ Something
 
 # Power analysis
 
-However we may also see reports describing "large", "medium" or "small" effect sizes, how do we know if we are looking at a result with a "large" effect size? The answer is to use a method of standardisation. Interestingly there are lots of these, but we will look at one of the most common **Cohen's D**. It is simply a measure of standardising effect sizes across experiments according to the standard deviations of the differences.
+The statistical power of a hypothesis test is the probability of detecting an effect, if there is a true effect present to detect.
+
+Power can be calculated and reported for a completed experiment to comment on the confidence one might have in the conclusions drawn from the results of the study. It can also be used as a tool to estimate the number of observations or sample size required in order to detect an effect in an experiment.
+
+In this tutorial, you will discover the importance of the statistical power of a hypothesis test and now to calculate power analyses and power curves as part of experimental design.
+
+After completing this tutorial, you will know:
+
+- Statistical power is the probability of a hypothesis test of finding an effect *if there is an effect to be found*.
+
+- A power analysis can be used to estimate the minimum sample size required for an experiment, given a desired significance level, effect size, and statistical power.
+
+- How to calculate and plot power analysis for the Student’s t test in R in order to effectively design an experiment.
+
+## Why do we need statistical power?
+
+When interpreting statistical power, we seek experiential setups that have high statistical power.
+
+- Low Statistical Power: Large risk of committing Type II errors, e.g. a false negative.
+
+- High Statistical Power: Small risk of committing Type II errors.
+
+It is common to design experiments with a statistical power of 80% or better, e.g. 0.80. This means a 20% probability of encountering a Type II error (if the alternative hypothesis is true). 
+
+## What is statistical power?
+
+Statistical power is one piece in a puzzle that has four related parts; they are:
+
+- Effect Size. The quantified magnitude of a result present in the population. Effect size is calculated using a specific statistical measure, such as Pearson’s correlation coefficient for the relationship between variables or Cohen’s d for the difference between groups.
+
+- Sample Size. The number of observations in the sample.
+
+- Significance. The significance level used in the statistical test, e.g. $\alpha$. Often set to 5% or 0.05.
+
+- Statistical Power. The probability of accepting the alternative hypothesis if it is true $1-\beta$.
+
+## Standardised effect size
+
+### Cohen's D
+
+Cohens d is a standardized effect size for measuring the difference between two group means. So it is the effect size we use when carrying out t-tests. 
 
 <table class="table table-striped" style="width: auto !important; ">
-<caption>(\#tab:unnamed-chunk-5)Cohen's D</caption>
+<caption>(\#tab:unnamed-chunk-6)Cohen's D</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> Effect size </th>
@@ -132,28 +174,153 @@ However we may also see reports describing "large", "medium" or "small" effect s
 </tbody>
 </table>
 
-For the unpaired *t*-test and then the paired *t*-test (lsmodel1, lsmodel2), see if you can use the following equations to manually calculate *d*. 
+For the unpaired *t*-test, see if you can use the following equations to manually calculate *d*. 
+
+We will be using the models from [Chapter 14](#testing).
+
+```
+lm(height ~ type, data = darwin)
+
+```
 
 Unpaired *t*-test - the difference in means divided by the pooled standard deviation:
 
-$$ \frac{difference}{\frac{(s^2_1+s^2_2)}{2}}$$
 
-Paired *t*-test:
+$$ \frac{mean~difference}{SD_{pooled}} =  \frac{mean~difference}{\sqrt{(n_1-1)s_1^2+(n_2-1)s_2^2 \over n_1 + n_2-2}}$$
+Let's try and work this out by hand first, then we will investigate functions that can make this process faster.
 
-$$ \frac{t}{\sqrt(N)}$$
-<details><summary> **What do you calculate as the effect size for these two analyses? Click-me for answer**</summary>
+<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
+Use data wrangling to summarise the means, standard deviations and sample size of each cross.
+ </div></div>
 
-unpaired *t*-test: 0.92
 
-paired *t*-test: 0.45
+<div class='webex-solution'><button>Solution</button>
 
-There is also a package with functions to help you calculate a range of common standardised effect size measures - it also provides confidence intervals on a standardised scale (where 0 would be no effect): 
+
+
+```r
+summary_darwin <- darwin %>% 
+  group_by(type) %>% 
+  summarise(mean = mean(height),
+            sd = sd(height),
+            n = n())
+summary_darwin
+```
+
+<div class="kable-table">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> type </th>
+   <th style="text-align:right;"> mean </th>
+   <th style="text-align:right;"> sd </th>
+   <th style="text-align:right;"> n </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Cross </td>
+   <td style="text-align:right;"> 20.19167 </td>
+   <td style="text-align:right;"> 3.616945 </td>
+   <td style="text-align:right;"> 15 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Self </td>
+   <td style="text-align:right;"> 17.57500 </td>
+   <td style="text-align:right;"> 2.051676 </td>
+   <td style="text-align:right;"> 15 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+
+</div>
+
+
+
+<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
+Can you calculate the mean difference and the pooled standard deviation from this?
+
+You need to turn standard deviation into variance, and follow the formula above </div></div>
+
+
+<div class='webex-solution'><button>Solution</button>
+
+
+
+```r
+summary_darwin %>% 
+    mutate(variance = sd^2) %>% 
+    mutate(per_sample_var = variance * (n-1)) %>% 
+  summarise(sd_pooled = sqrt(sum(per_sample_var)/sum(n-2)),
+            mean_diff = diff(mean))
+```
+
+<div class="kable-table">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> sd_pooled </th>
+   <th style="text-align:right;"> mean_diff </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 3.051376 </td>
+   <td style="text-align:right;"> -2.616667 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+
+</div>
+
+
+<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
+What do you calculate as Cohen's D for this analysis?
+ </div></div>
+
+
+
+<div class='webex-solution'><button>Solution</button>
+
+
+
+```r
+2.61/3.05
+```
+
+```
+## [1] 0.8557377
+```
+
+
+
+</div>
+
+
+
+### Cohen's D from a linear model
+
+Most of the time, we do not have to calculate these values by hand. Instead there are a range of functions which will allow us to do this: 
+
 
 ```r
 library(effectsize)
 
+# simple t-test
+lsmodel1 <- lm(height ~ type, data = darwin)
 
 t_to_d(2.437, df_error = 28, paired = F)
+
+# paired t-test
+lsmodel2 <- lm(height ~ type +factor(pair), data = darwin)
 
 t_to_d(2.456, df_error=27, paired=T)
 ```
@@ -203,7 +370,7 @@ t_to_d(2.456, df_error=27, paired=T)
 </div>
 </details>
 
-### Power
+## Power
 
 
 ```r
@@ -226,14 +393,46 @@ There are two potential uses for Power analysis
 2) Working out what sample size you *need* before an experiment to make sure you reach the desired power. Often a common $\beta$ value is 0.8, in much the same way that a common $\alpha$ is 0.05, it is an arbitrary target, but here means we can tolerate a risk of failing to reject the null when we should have in 20% of our experiments that do not produce a significant result. 
 
 
+<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
 
-
-```r
-# for n, d, sig.level and power - put values for three of the arguments and it will return the value of the fourth e.g. can you work out the power of our two sample t-test above? 
+For n, d, sig.level and power - put values for three of the arguments and it will return the value of the fourth e.g. can you work out the power of our two sample t-test above? 
+  
 pwr.t.test(n = NULL, d = NULL, sig.level = 0.05, power = NULL,
 type = c("two.sample"),
 alternative = c("two.sided"))
+
+n = number of observations per sample(
+
+d = Effect size
+
+sig.level = agreed alpha
+
+power = desired power of test (beta)
+)
+ </div></div>
+
+
+<div class='webex-solution'><button>Solution</button>
+
+
+
+```r
+library(pwr)
+# Calculate the power of our model 
+test.power <- pwr.t.test(n = 15, d = 0.92, sig.level = 0.05)
+
+# Calculate the sample size we need to get power of 0.8 for a medium effect size (d = 0.5)
+
+samp.size <- pwr.t.test(d = 0.5, sig.level = 0.05, power = 0.8)
 ```
+
+From this we can see that even though our test did find a significant difference in heights between groups, the power of the test is not optimal.
+
+We can also see that if we wanted to detect smaller effects of inbreeding reliably, we need a much larger sample size.
+
+
+</div>
+
 
 **Now you know how the pwr.t.test() function works - Can you make a simple iteration to check the power for a lower effect size (d) of 0.2 for a two-sided t-test at sample sizes from 0-1000 increasing by 10 each time?**
 
@@ -244,15 +443,14 @@ sample_size <- seq(0,1000, by=10)
 output <- list(length(sample_size))
 
 
-
 for (i in 1:length(sample_size)) { 
   
   sample <- pwr.t.test(n=sample_size[i], d=0.2, sig.level=0.05)
   output[[i]] <- sample
   
-      if(i %% 1==0){    # The %% operator is the remainder, this handy if line prints a number every time it completes a loop
-    print(i)
-    }
+ #     if(i %% 1==0){    # The %% operator is the remainder, this handy if line prints a number every time it completes a loop
+ #   print(i)
+  #  }
 }
 
 sample_list <- as.list(sample_size)
@@ -262,110 +460,6 @@ names(output) <- sample_size
 #  now you should be able to call any sample size and check statistical power!
 
 # output$`30`
-```
-
-```
-## [1] 1
-## [1] 2
-## [1] 3
-## [1] 4
-## [1] 5
-## [1] 6
-## [1] 7
-## [1] 8
-## [1] 9
-## [1] 10
-## [1] 11
-## [1] 12
-## [1] 13
-## [1] 14
-## [1] 15
-## [1] 16
-## [1] 17
-## [1] 18
-## [1] 19
-## [1] 20
-## [1] 21
-## [1] 22
-## [1] 23
-## [1] 24
-## [1] 25
-## [1] 26
-## [1] 27
-## [1] 28
-## [1] 29
-## [1] 30
-## [1] 31
-## [1] 32
-## [1] 33
-## [1] 34
-## [1] 35
-## [1] 36
-## [1] 37
-## [1] 38
-## [1] 39
-## [1] 40
-## [1] 41
-## [1] 42
-## [1] 43
-## [1] 44
-## [1] 45
-## [1] 46
-## [1] 47
-## [1] 48
-## [1] 49
-## [1] 50
-## [1] 51
-## [1] 52
-## [1] 53
-## [1] 54
-## [1] 55
-## [1] 56
-## [1] 57
-## [1] 58
-## [1] 59
-## [1] 60
-## [1] 61
-## [1] 62
-## [1] 63
-## [1] 64
-## [1] 65
-## [1] 66
-## [1] 67
-## [1] 68
-## [1] 69
-## [1] 70
-## [1] 71
-## [1] 72
-## [1] 73
-## [1] 74
-## [1] 75
-## [1] 76
-## [1] 77
-## [1] 78
-## [1] 79
-## [1] 80
-## [1] 81
-## [1] 82
-## [1] 83
-## [1] 84
-## [1] 85
-## [1] 86
-## [1] 87
-## [1] 88
-## [1] 89
-## [1] 90
-## [1] 91
-## [1] 92
-## [1] 93
-## [1] 94
-## [1] 95
-## [1] 96
-## [1] 97
-## [1] 98
-## [1] 99
-## [1] 100
-## [1] 101
 ```
 
 

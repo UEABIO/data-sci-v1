@@ -41,7 +41,7 @@ fig:unnamed-chunk-36
 tab:unnamed-chunk-22
 fig:unnamed-chunk-23
 tab:unnamed-chunk-40
-tab:unnamed-chunk-5
+tab:unnamed-chunk-6
 fig:settings-general
 fig:settings-code
 fig:img-updaterstudio
@@ -470,6 +470,11 @@ generalised-additive-models
 survival-models
 unsupervised-machine-learning
 power-analysis
+why-do-we-need-statistical-power
+what-is-statistical-power
+standardised-effect-size
+cohens-d
+cohens-d-from-a-linear-model
 power
 iteration
 data-structures

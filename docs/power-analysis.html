@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 24 Power analysis | 5023Y</title>
 <meta name="author" content="Philip T. Leftwich">
-<meta name="description" content='However we may also see reports describing "large", "medium" or "small" effect sizes, how do we know if we are looking at a result with a "large" effect size? The answer is to use a method of...'>
+<meta name="description" content="The statistical power of a hypothesis test is the probability of detecting an effect, if there is a true effect present to detect. Power can be calculated and reported for a completed experiment...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 24 Power analysis | 5023Y">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://ueabio.github.io/data-sci/power-analysis.html">
 <meta property="og:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
-<meta property="og:description" content='However we may also see reports describing "large", "medium" or "small" effect sizes, how do we know if we are looking at a result with a "large" effect size? The answer is to use a method of...'>
+<meta property="og:description" content="The statistical power of a hypothesis test is the probability of detecting an effect, if there is a true effect present to detect. Power can be calculated and reported for a completed experiment...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 24 Power analysis | 5023Y">
-<meta name="twitter:description" content='However we may also see reports describing "large", "medium" or "small" effect sizes, how do we know if we are looking at a result with a "large" effect size? The answer is to use a method of...'>
+<meta name="twitter:description" content="The statistical power of a hypothesis test is the probability of detecting an effect, if there is a true effect present to detect. Power can be calculated and reported for a completed experiment...">
 <meta name="twitter:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.13/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -136,10 +136,50 @@
 <h1>
 <span class="header-section-number">24</span> Power analysis<a class="anchor" aria-label="anchor" href="#power-analysis"><i class="fas fa-link"></i></a>
 </h1>
-<p>However we may also see reports describing "large", "medium" or "small" effect sizes, how do we know if we are looking at a result with a "large" effect size? The answer is to use a method of standardisation. Interestingly there are lots of these, but we will look at one of the most common <strong>Cohen's D</strong>. It is simply a measure of standardising effect sizes across experiments according to the standard deviations of the differences.</p>
+<p>The statistical power of a hypothesis test is the probability of detecting an effect, if there is a true effect present to detect.</p>
+<p>Power can be calculated and reported for a completed experiment to comment on the confidence one might have in the conclusions drawn from the results of the study. It can also be used as a tool to estimate the number of observations or sample size required in order to detect an effect in an experiment.</p>
+<p>In this tutorial, you will discover the importance of the statistical power of a hypothesis test and now to calculate power analyses and power curves as part of experimental design.</p>
+<p>After completing this tutorial, you will know:</p>
+<ul>
+<li><p>Statistical power is the probability of a hypothesis test of finding an effect <em>if there is an effect to be found</em>.</p></li>
+<li><p>A power analysis can be used to estimate the minimum sample size required for an experiment, given a desired significance level, effect size, and statistical power.</p></li>
+<li><p>How to calculate and plot power analysis for the Student’s t test in R in order to effectively design an experiment.</p></li>
+</ul>
+<div id="why-do-we-need-statistical-power" class="section level2" number="24.1">
+<h2>
+<span class="header-section-number">24.1</span> Why do we need statistical power?<a class="anchor" aria-label="anchor" href="#why-do-we-need-statistical-power"><i class="fas fa-link"></i></a>
+</h2>
+<p>When interpreting statistical power, we seek experiential setups that have high statistical power.</p>
+<ul>
+<li><p>Low Statistical Power: Large risk of committing Type II errors, e.g. a false negative.</p></li>
+<li><p>High Statistical Power: Small risk of committing Type II errors.</p></li>
+</ul>
+<p>It is common to design experiments with a statistical power of 80% or better, e.g. 0.80. This means a 20% probability of encountering a Type II error (if the alternative hypothesis is true).</p>
+</div>
+<div id="what-is-statistical-power" class="section level2" number="24.2">
+<h2>
+<span class="header-section-number">24.2</span> What is statistical power?<a class="anchor" aria-label="anchor" href="#what-is-statistical-power"><i class="fas fa-link"></i></a>
+</h2>
+<p>Statistical power is one piece in a puzzle that has four related parts; they are:</p>
+<ul>
+<li><p>Effect Size. The quantified magnitude of a result present in the population. Effect size is calculated using a specific statistical measure, such as Pearson’s correlation coefficient for the relationship between variables or Cohen’s d for the difference between groups.</p></li>
+<li><p>Sample Size. The number of observations in the sample.</p></li>
+<li><p>Significance. The significance level used in the statistical test, e.g. <span class="math inline">\(\alpha\)</span>. Often set to 5% or 0.05.</p></li>
+<li><p>Statistical Power. The probability of accepting the alternative hypothesis if it is true <span class="math inline">\(1-\beta\)</span>.</p></li>
+</ul>
+</div>
+<div id="standardised-effect-size" class="section level2" number="24.3">
+<h2>
+<span class="header-section-number">24.3</span> Standardised effect size<a class="anchor" aria-label="anchor" href="#standardised-effect-size"><i class="fas fa-link"></i></a>
+</h2>
+<div id="cohens-d" class="section level3" number="24.3.1">
+<h3>
+<span class="header-section-number">24.3.1</span> Cohen's D<a class="anchor" aria-label="anchor" href="#cohens-d"><i class="fas fa-link"></i></a>
+</h3>
+<p>Cohens d is a standardized effect size for measuring the difference between two group means. So it is the effect size we use when carrying out t-tests.</p>
 <div class="inline-table"><table class="table table-striped" style="width: auto !important; ">
 <caption>
-<span id="tab:unnamed-chunk-5">Table 24.1: </span>Cohen's D
+<span id="tab:unnamed-chunk-6">Table 24.1: </span>Cohen's D
 </caption>
 <thead><tr>
 <th style="text-align:left;">
@@ -200,20 +240,153 @@ huge
 </tr>
 </tbody>
 </table></div>
-<p>For the unpaired <em>t</em>-test and then the paired <em>t</em>-test (lsmodel1, lsmodel2), see if you can use the following equations to manually calculate <em>d</em>.</p>
+<p>For the unpaired <em>t</em>-test, see if you can use the following equations to manually calculate <em>d</em>.</p>
+<p>We will be using the models from <a href="testing.html#testing">Chapter 14</a>.</p>
+<pre><code><a href="https://rdrr.io/r/stats/lm.html">lm(height ~ type, data = darwin)
+</a></code></pre>
 <p>Unpaired <em>t</em>-test - the difference in means divided by the pooled standard deviation:</p>
-<p><span class="math display">\[ \frac{difference}{\frac{(s^2_1+s^2_2)}{2}}\]</span></p>
-<p>Paired <em>t</em>-test:</p>
-<span class="math display">\[ \frac{t}{\sqrt(N)}\]</span>
-<details><summary><strong>What do you calculate as the effect size for these two analyses? Click-me for answer</strong>
-</summary><p>unpaired <em>t</em>-test: 0.92</p>
-<p>paired <em>t</em>-test: 0.45</p>
-<p>There is also a package with functions to help you calculate a range of common standardised effect size measures - it also provides confidence intervals on a standardised scale (where 0 would be no effect):</p>
-<div class="sourceCode" id="cb494"><pre class="downlit sourceCode r">
+<p><span class="math display">\[ \frac{mean~difference}{SD_{pooled}} =  \frac{mean~difference}{\sqrt{(n_1-1)s_1^2+(n_2-1)s_2^2 \over n_1 + n_2-2}}\]</span>
+Let's try and work this out by hand first, then we will investigate functions that can make this process faster.</p>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+Use data wrangling to summarise the means, standard deviations and sample size of each cross.
+</div>
+</div>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<div class="sourceCode" id="cb495"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">summary_darwin</span> <span class="op">&lt;-</span> <span class="va">darwin</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span>,
+            sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span>,
+            n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<span class="va">summary_darwin</span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+type
+</th>
+<th style="text-align:right;">
+mean
+</th>
+<th style="text-align:right;">
+sd
+</th>
+<th style="text-align:right;">
+n
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Cross
+</td>
+<td style="text-align:right;">
+20.19167
+</td>
+<td style="text-align:right;">
+3.616945
+</td>
+<td style="text-align:right;">
+15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Self
+</td>
+<td style="text-align:right;">
+17.57500
+</td>
+<td style="text-align:right;">
+2.051676
+</td>
+<td style="text-align:right;">
+15
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+<p>Can you calculate the mean difference and the pooled standard deviation from this?</p>
+You need to turn standard deviation into variance, and follow the formula above
+</div>
+</div>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<div class="sourceCode" id="cb496"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">summary_darwin</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>variance <span class="op">=</span> <span class="va">sd</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>per_sample_var <span class="op">=</span> <span class="va">variance</span> <span class="op">*</span> <span class="op">(</span><span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>sd_pooled <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">per_sample_var</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">-</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span>,
+            mean_diff <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="va">mean</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:right;">
+sd_pooled
+</th>
+<th style="text-align:right;">
+mean_diff
+</th>
+</tr></thead>
+<tbody><tr>
+<td style="text-align:right;">
+3.051376
+</td>
+<td style="text-align:right;">
+-2.616667
+</td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+What do you calculate as Cohen's D for this analysis?
+</div>
+</div>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<div class="sourceCode" id="cb497"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fl">2.61</span><span class="op">/</span><span class="fl">3.05</span></code></pre></div>
+<pre><code>## [1] 0.8557377</code></pre>
+</div>
+</div>
+<div id="cohens-d-from-a-linear-model" class="section level3" number="24.3.2">
+<h3>
+<span class="header-section-number">24.3.2</span> Cohen's D from a linear model<a class="anchor" aria-label="anchor" href="#cohens-d-from-a-linear-model"><i class="fas fa-link"></i></a>
+</h3>
+<p>Most of the time, we do not have to calculate these values by hand. Instead there are a range of functions which will allow us to do this:</p>
+<div class="sourceCode" id="cb499"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/effectsize/">effectsize</a></span><span class="op">)</span>
 
+<span class="co"># simple t-test</span>
+<span class="va">lsmodel1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">type</span>, data <span class="op">=</span> <span class="va">darwin</span><span class="op">)</span>
 
 <span class="fu"><a href="https://easystats.github.io/effectsize/reference/t_to_r.html">t_to_d</a></span><span class="op">(</span><span class="fl">2.437</span>, df_error <span class="op">=</span> <span class="fl">28</span>, paired <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
+
+<span class="co"># paired t-test</span>
+<span class="va">lsmodel2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">type</span> <span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">pair</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">darwin</span><span class="op">)</span>
 
 <span class="fu"><a href="https://easystats.github.io/effectsize/reference/t_to_r.html">t_to_d</a></span><span class="op">(</span><span class="fl">2.456</span>, df_error<span class="op">=</span><span class="fl">27</span>, paired<span class="op">=</span><span class="cn">T</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
@@ -280,11 +453,14 @@ CI_high
 </tr></tbody>
 </table></div>
 </div>
-</details><div id="power" class="section level3" number="24.0.1">
-<h3>
-<span class="header-section-number">24.0.1</span> Power<a class="anchor" aria-label="anchor" href="#power"><i class="fas fa-link"></i></a>
-</h3>
-<div class="sourceCode" id="cb495"><pre class="downlit sourceCode r">
+
+</div>
+</div>
+<div id="power" class="section level2" number="24.4">
+<h2>
+<span class="header-section-number">24.4</span> Power<a class="anchor" aria-label="anchor" href="#power"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb500"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/heliosdrm/pwr">pwr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/pitakakariki/simr">simr</a></span><span class="op">)</span></code></pre></div>
 <p>You don't necessarily need to report effect sizes in a write-up, it is fairly rare to see them included in a paper. It will be more useful for you to report confidence intervals on the original measurement scale. But it does provide two important pieces of information.</p>
@@ -298,17 +474,42 @@ CI_high
 <li><p>Working out what the statistical power of you analysis was <em>post hoc</em> to determine how likely it was you missed an effect ( but see<a href="https://gpsych.bmj.com/content/32/4/e100069">This useful paper</a>.</p></li>
 <li><p>Working out what sample size you <em>need</em> before an experiment to make sure you reach the desired power. Often a common <span class="math inline">\(\beta\)</span> value is 0.8, in much the same way that a common <span class="math inline">\(\alpha\)</span> is 0.05, it is an arbitrary target, but here means we can tolerate a risk of failing to reject the null when we should have in 20% of our experiments that do not produce a significant result.</p></li>
 </ol>
-<div class="sourceCode" id="cb496"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># for n, d, sig.level and power - put values for three of the arguments and it will return the value of the fourth e.g. can you work out the power of our two sample t-test above? </span>
-<span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>n <span class="op">=</span> <span class="cn">NULL</span>, d <span class="op">=</span> <span class="cn">NULL</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="cn">NULL</span>,
-type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"two.sample"</span><span class="op">)</span>,
-alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"two.sided"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+<p>For n, d, sig.level and power - put values for three of the arguments and it will return the value of the fourth e.g. can you work out the power of our two sample t-test above?</p>
+<p>pwr.t.test(n = NULL, d = NULL, sig.level = 0.05, power = NULL,
+type = c("two.sample"),
+alternative = c("two.sided"))</p>
+<p>n = number of observations per sample(</p>
+<p>d = Effect size</p>
+<p>sig.level = agreed alpha</p>
+power = desired power of test (beta)
+)
+</div>
+</div>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<div class="sourceCode" id="cb501"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/heliosdrm/pwr">pwr</a></span><span class="op">)</span>
+<span class="co"># Calculate the power of our model </span>
+<span class="va">test.power</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">15</span>, d <span class="op">=</span> <span class="fl">0.92</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span>
+
+<span class="co"># Calculate the sample size we need to get power of 0.8 for a medium effect size (d = 0.5)</span>
+
+<span class="va">samp.size</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.5</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></code></pre></div>
+<p>From this we can see that even though our test did find a significant difference in heights between groups, the power of the test is not optimal.</p>
+<p>We can also see that if we wanted to detect smaller effects of inbreeding reliably, we need a much larger sample size.</p>
+</div>
 <p><strong>Now you know how the pwr.t.test() function works - Can you make a simple iteration to check the power for a lower effect size (d) of 0.2 for a two-sided t-test at sample sizes from 0-1000 increasing by 10 each time?</strong></p>
-<div class="sourceCode" id="cb497"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb502"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sample_size</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1000</span>, by<span class="op">=</span><span class="fl">10</span><span class="op">)</span>
 
 <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sample_size</span><span class="op">)</span><span class="op">)</span>
-
 
 
 <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sample_size</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span> 
@@ -316,9 +517,9 @@ alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/
   <span class="va">sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>n<span class="op">=</span><span class="va">sample_size</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, d<span class="op">=</span><span class="fl">0.2</span>, sig.level<span class="op">=</span><span class="fl">0.05</span><span class="op">)</span>
   <span class="va">output</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">sample</span>
   
-      <span class="kw">if</span><span class="op">(</span><span class="va">i</span> <span class="op">%%</span> <span class="fl">1</span><span class="op">==</span><span class="fl">0</span><span class="op">)</span><span class="op">{</span>    <span class="co"># The %% operator is the remainder, this handy if line prints a number every time it completes a loop</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">i</span><span class="op">)</span>
-    <span class="op">}</span>
+ <span class="co">#     if(i %% 1==0){    # The %% operator is the remainder, this handy if line prints a number every time it completes a loop</span>
+ <span class="co">#   print(i)</span>
+  <span class="co">#  }</span>
 <span class="op">}</span>
 
 <span class="va">sample_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="va">sample_size</span><span class="op">)</span>
@@ -328,107 +529,6 @@ alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/
 <span class="co">#  now you should be able to call any sample size and check statistical power!</span>
 
 <span class="co"># output$`30`</span></code></pre></div>
-<pre><code>## [1] 1
-## [1] 2
-## [1] 3
-## [1] 4
-## [1] 5
-## [1] 6
-## [1] 7
-## [1] 8
-## [1] 9
-## [1] 10
-## [1] 11
-## [1] 12
-## [1] 13
-## [1] 14
-## [1] 15
-## [1] 16
-## [1] 17
-## [1] 18
-## [1] 19
-## [1] 20
-## [1] 21
-## [1] 22
-## [1] 23
-## [1] 24
-## [1] 25
-## [1] 26
-## [1] 27
-## [1] 28
-## [1] 29
-## [1] 30
-## [1] 31
-## [1] 32
-## [1] 33
-## [1] 34
-## [1] 35
-## [1] 36
-## [1] 37
-## [1] 38
-## [1] 39
-## [1] 40
-## [1] 41
-## [1] 42
-## [1] 43
-## [1] 44
-## [1] 45
-## [1] 46
-## [1] 47
-## [1] 48
-## [1] 49
-## [1] 50
-## [1] 51
-## [1] 52
-## [1] 53
-## [1] 54
-## [1] 55
-## [1] 56
-## [1] 57
-## [1] 58
-## [1] 59
-## [1] 60
-## [1] 61
-## [1] 62
-## [1] 63
-## [1] 64
-## [1] 65
-## [1] 66
-## [1] 67
-## [1] 68
-## [1] 69
-## [1] 70
-## [1] 71
-## [1] 72
-## [1] 73
-## [1] 74
-## [1] 75
-## [1] 76
-## [1] 77
-## [1] 78
-## [1] 79
-## [1] 80
-## [1] 81
-## [1] 82
-## [1] 83
-## [1] 84
-## [1] 85
-## [1] 86
-## [1] 87
-## [1] 88
-## [1] 89
-## [1] 90
-## [1] 91
-## [1] 92
-## [1] 93
-## [1] 94
-## [1] 95
-## [1] 96
-## [1] 97
-## [1] 98
-## [1] 99
-## [1] 100
-## [1] 101</code></pre>
 
 </div>
 </div>
@@ -616,9 +716,18 @@ $( document ).ready(function() {
 <div class="next"><a href="iteration.html"><span class="header-section-number">25</span> Iteration</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li>
-<a class="nav-link" href="#power-analysis"><span class="header-section-number">24</span> Power analysis</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#power"><span class="header-section-number">24.0.1</span> Power</a></li></ul>
-</li></ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#power-analysis"><span class="header-section-number">24</span> Power analysis</a></li>
+<li><a class="nav-link" href="#why-do-we-need-statistical-power"><span class="header-section-number">24.1</span> Why do we need statistical power?</a></li>
+<li><a class="nav-link" href="#what-is-statistical-power"><span class="header-section-number">24.2</span> What is statistical power?</a></li>
+<li>
+<a class="nav-link" href="#standardised-effect-size"><span class="header-section-number">24.3</span> Standardised effect size</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#cohens-d"><span class="header-section-number">24.3.1</span> Cohen's D</a></li>
+<li><a class="nav-link" href="#cohens-d-from-a-linear-model"><span class="header-section-number">24.3.2</span> Cohen's D from a linear model</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#power"><span class="header-section-number">24.4</span> Power</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
@@ -635,7 +744,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2022-12-11.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2023-02-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
