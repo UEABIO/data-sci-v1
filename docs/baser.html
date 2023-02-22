@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>E Base R vs. Tidyverse | 5023Y</title>
 <meta name="author" content="Philip T. Leftwich">
-<meta name="description" content='library(tidyverse)  E.1 Extract variables  Show Solution   Solution   Base R  tidyverse  iris$Sepal.Length # single variable iris[, c("Species", "Petal.Width")] # by name iris[, c(5, 4)] # by...'>
+<meta name="description" content="library(tidyverse) We have worked primarily with the tidyverse tools in this course. While many of the advantages of the tidyverse tools for data wrangling are their simplicity and human...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="E Base R vs. Tidyverse | 5023Y">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://ueabio.github.io/data-sci/baser.html">
 <meta property="og:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
-<meta property="og:description" content='library(tidyverse)  E.1 Extract variables  Show Solution   Solution   Base R  tidyverse  iris$Sepal.Length # single variable iris[, c("Species", "Petal.Width")] # by name iris[, c(5, 4)] # by...'>
+<meta property="og:description" content="library(tidyverse) We have worked primarily with the tidyverse tools in this course. While many of the advantages of the tidyverse tools for data wrangling are their simplicity and human...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="E Base R vs. Tidyverse | 5023Y">
-<meta name="twitter:description" content='library(tidyverse)  E.1 Extract variables  Show Solution   Solution   Base R  tidyverse  iris$Sepal.Length # single variable iris[, c("Species", "Petal.Width")] # by name iris[, c(5, 4)] # by...'>
+<meta name="twitter:description" content="library(tidyverse) We have worked primarily with the tidyverse tools in this course. While many of the advantages of the tidyverse tools for data wrangling are their simplicity and human...">
 <meta name="twitter:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.13/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -136,21 +136,14 @@
 <h1>
 <span class="header-section-number">E</span> Base R vs. Tidyverse<a class="anchor" aria-label="anchor" href="#baser"><i class="fas fa-link"></i></a>
 </h1>
-<div class="sourceCode" id="cb576"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb582"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
+<p>We have worked primarily with the tidyverse tools in this course. While many of the advantages of the tidyverse tools for data wrangling are their simplicity and human readability, there is actually nothing that tidyverse does which cannot be similarly achieved with baseR commands. If you are interested in comparing and contrasting check out the examples below.</p>
+<p>These all use the <code>iris</code> dataset, a dataset that comes with baseR (just type <code>iris</code>).</p>
 <div id="extract-variables" class="section level2" number="30.1">
 <h2>
 <span class="header-section-number">E.1</span> Extract variables<a class="anchor" aria-label="anchor" href="#extract-variables"><i class="fas fa-link"></i></a>
 </h2>
-<button id="displayTextunnamed-chunk-3" onclick="javascript:toggle('unnamed-chunk-3');">
-Show Solution
-</button>
-<div id="toggleTextunnamed-chunk-3" style="display: none">
-<div class="panel panel-default">
-<div class="panel-heading panel-heading1">
-Solution
-</div>
-<div class="panel-body">
 <div class="tab">
 <button class="tablinksunnamed-chunk-3 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-3', 'unnamed-chunk-3');">
 Base R
@@ -160,35 +153,23 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-3" class="tabcontentunnamed-chunk-3">
-<div class="sourceCode" id="cb577"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb583"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span> <span class="co"># single variable</span>
 <span class="va">iris</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Species"</span>, <span class="st">"Petal.Width"</span><span class="op">)</span><span class="op">]</span> <span class="co"># by name</span>
 <span class="va">iris</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">4</span><span class="op">)</span><span class="op">]</span>  <span class="co"># by column index</span></code></pre></div>
 </div>
 <div id="option2unnamed-chunk-3" class="tabcontentunnamed-chunk-3">
-<div class="sourceCode" id="cb578"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb584"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Species</span><span class="op">)</span>
 <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Species</span>, <span class="va">Petal.Width</span><span class="op">)</span> <span class="co"># by name</span>
 <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fl">5</span>, <span class="fl">4</span><span class="op">)</span>  <span class="co"># by column index</span></code></pre></div>
 </div>
 <script> javascript:hide('option2unnamed-chunk-3') </script>
 </div>
-</div>
-</div>
-</div>
 <div id="make-new-variables" class="section level2" number="30.2">
 <h2>
 <span class="header-section-number">E.2</span> Make new variables<a class="anchor" aria-label="anchor" href="#make-new-variables"><i class="fas fa-link"></i></a>
 </h2>
-<button id="displayTextunnamed-chunk-4" onclick="javascript:toggle('unnamed-chunk-4');">
-Show Solution
-</button>
-<div id="toggleTextunnamed-chunk-4" style="display: none">
-<div class="panel panel-default">
-<div class="panel-heading panel-heading1">
-Solution
-</div>
-<div class="panel-body">
 <div class="tab">
 <button class="tablinksunnamed-chunk-4 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-4', 'unnamed-chunk-4');">
 Base R
@@ -198,31 +179,18 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-4" class="tabcontentunnamed-chunk-4">
-<div class="sourceCode" id="cb579"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb585"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">iris</span><span class="op">$</span><span class="va">Petal.Ratio</span> <span class="op">&lt;-</span> <span class="va">iris</span><span class="op">$</span><span class="va">Petal.Length</span><span class="op">/</span><span class="va">iris</span><span class="op">$</span><span class="va">Petal.Width</span>
 
 <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Ratio</span> <span class="op">&lt;-</span> <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span><span class="op">/</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span></code></pre></div>
 </div>
 <div id="option2unnamed-chunk-4" class="tabcontentunnamed-chunk-4">
-<div class="sourceCode" id="cb580"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb586"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">iris</span>, 
        Petal.Ratio <span class="op">=</span> <span class="va">Petal.Length</span><span class="op">/</span><span class="va">Petal.Width</span>,
        Sepal.Ratio <span class="op">=</span> <span class="va">Sepal.Length</span><span class="op">/</span><span class="va">Sepal.Width</span><span class="op">)</span></code></pre></div>
 </div>
-<script> javascript:hide('option2unnamed-chunk-4') </script>
-</div>
-</div>
-</div>
-<p>Extract observations (rows)</p>
-<button id="displayTextunnamed-chunk-5" onclick="javascript:toggle('unnamed-chunk-5');">
-Show Solution
-</button>
-<div id="toggleTextunnamed-chunk-5" style="display: none">
-<div class="panel panel-default">
-<div class="panel-heading panel-heading1">
-Solution
-</div>
-<div class="panel-body">
+<script> javascript:hide('option2unnamed-chunk-4') </script><p>Extract observations (rows)</p>
 <div class="tab">
 <button class="tablinksunnamed-chunk-5 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-5', 'unnamed-chunk-5');">
 Base R
@@ -232,7 +200,7 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-5" class="tabcontentunnamed-chunk-5">
-<div class="sourceCode" id="cb581"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb587"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Using [,]</span>
 <span class="va">iris</span><span class="op">[</span><span class="va">iris</span><span class="op">$</span><span class="va">Petal.Width</span> <span class="op">&gt;</span> <span class="fl">0.5</span> <span class="op">&amp;</span> <span class="va">iris</span><span class="op">$</span><span class="va">Species</span> <span class="op">==</span> <span class="st">"setosa"</span>, <span class="op">]</span>
 
@@ -258,12 +226,6 @@ Petal.Width
 <th style="text-align:left;">
 Species
 </th>
-<th style="text-align:right;">
-Petal.Ratio
-</th>
-<th style="text-align:right;">
-Sepal.Ratio
-</th>
 </tr></thead>
 <tbody><tr>
 <td style="text-align:left;">
@@ -283,12 +245,6 @@ Sepal.Ratio
 </td>
 <td style="text-align:left;">
 setosa
-</td>
-<td style="text-align:right;">
-2.666667
-</td>
-<td style="text-align:right;">
-1.428571
 </td>
 </tr></tbody>
 </table></div>
@@ -313,12 +269,6 @@ Petal.Width
 <th style="text-align:left;">
 Species
 </th>
-<th style="text-align:right;">
-Petal.Ratio
-</th>
-<th style="text-align:right;">
-Sepal.Ratio
-</th>
 </tr></thead>
 <tbody><tr>
 <td style="text-align:left;">
@@ -339,18 +289,12 @@ Sepal.Ratio
 <td style="text-align:left;">
 setosa
 </td>
-<td style="text-align:right;">
-2.666667
-</td>
-<td style="text-align:right;">
-1.428571
-</td>
 </tr></tbody>
 </table></div>
 </div>
 </div>
 <div id="option2unnamed-chunk-5" class="tabcontentunnamed-chunk-5">
-<div class="sourceCode" id="cb582"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb588"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Petal.Width</span> <span class="op">&gt;</span> <span class="fl">0.5</span> <span class="op">&amp;</span> <span class="va">Species</span> <span class="op">==</span> <span class="st">"setosa"</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
@@ -370,12 +314,6 @@ Petal.Width
 <th style="text-align:left;">
 Species
 </th>
-<th style="text-align:right;">
-Petal.Ratio
-</th>
-<th style="text-align:right;">
-Sepal.Ratio
-</th>
 </tr></thead>
 <tbody><tr>
 <td style="text-align:right;">
@@ -393,34 +331,16 @@ Sepal.Ratio
 <td style="text-align:left;">
 setosa
 </td>
-<td style="text-align:right;">
-2.666667
-</td>
-<td style="text-align:right;">
-1.428571
-</td>
 </tr></tbody>
 </table></div>
 </div>
 </div>
 <script> javascript:hide('option2unnamed-chunk-5') </script>
 </div>
-</div>
-</div>
-</div>
 <div id="arrange-observations-rows" class="section level2" number="30.3">
 <h2>
 <span class="header-section-number">E.3</span> Arrange observations (rows)<a class="anchor" aria-label="anchor" href="#arrange-observations-rows"><i class="fas fa-link"></i></a>
 </h2>
-<button id="displayTextunnamed-chunk-6" onclick="javascript:toggle('unnamed-chunk-6');">
-Show Solution
-</button>
-<div id="toggleTextunnamed-chunk-6" style="display: none">
-<div class="panel panel-default">
-<div class="panel-heading panel-heading1">
-Solution
-</div>
-<div class="panel-body">
 <div class="tab">
 <button class="tablinksunnamed-chunk-6 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-6', 'unnamed-chunk-6');">
 Base R
@@ -430,33 +350,21 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-6" class="tabcontentunnamed-chunk-6">
-<div class="sourceCode" id="cb583"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb589"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># descending order of species (alphabetic) followed by ascending order of Petal.Width</span>
 <span class="va">iris</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Petal.Width</span><span class="op">)</span> , <span class="op">]</span></code></pre></div>
 </div>
 <div id="option2unnamed-chunk-6" class="tabcontentunnamed-chunk-6">
-<div class="sourceCode" id="cb584"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb590"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># descending order of species (alphabetic) followed by ascending order of Petal.Width</span>
 <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span>, <span class="va">Petal.Width</span><span class="op">)</span> </code></pre></div>
 </div>
 <script> javascript:hide('option2unnamed-chunk-6') </script>
 </div>
-</div>
-</div>
-</div>
 <div id="summarise-observations-rows" class="section level2" number="30.4">
 <h2>
 <span class="header-section-number">E.4</span> Summarise observations (rows)<a class="anchor" aria-label="anchor" href="#summarise-observations-rows"><i class="fas fa-link"></i></a>
 </h2>
-<button id="displayTextunnamed-chunk-7" onclick="javascript:toggle('unnamed-chunk-7');">
-Show Solution
-</button>
-<div id="toggleTextunnamed-chunk-7" style="display: none">
-<div class="panel panel-default">
-<div class="panel-heading panel-heading1">
-Solution
-</div>
-<div class="panel-body">
 <div class="tab">
 <button class="tablinksunnamed-chunk-7 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-7', 'unnamed-chunk-7');">
 Base R
@@ -466,7 +374,7 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-7" class="tabcontentunnamed-chunk-7">
-<div class="sourceCode" id="cb585"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb591"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Manually create a data.frame</span>
 <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Petal.Length.mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Petal.Length</span><span class="op">)</span>,
            Petal.Length.sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Petal.Length</span><span class="op">)</span>,
@@ -506,7 +414,7 @@ Sepal.Length.sd
 </div>
 </div>
 <div id="option2unnamed-chunk-7" class="tabcontentunnamed-chunk-7">
-<div class="sourceCode" id="cb586"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb592"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="va">iris</span>, 
           Petal.Length.mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Petal.Length</span><span class="op">)</span>,
           Petal.Length.sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">Petal.Length</span><span class="op">)</span>,
@@ -547,22 +455,10 @@ Sepal.Length.sd
 </div>
 <script> javascript:hide('option2unnamed-chunk-7') </script>
 </div>
-</div>
-</div>
-</div>
 <div id="grouped-operations" class="section level2" number="30.5">
 <h2>
 <span class="header-section-number">E.5</span> Grouped operations<a class="anchor" aria-label="anchor" href="#grouped-operations"><i class="fas fa-link"></i></a>
 </h2>
-<button id="displayTextunnamed-chunk-8" onclick="javascript:toggle('unnamed-chunk-8');">
-Show Solution
-</button>
-<div id="toggleTextunnamed-chunk-8" style="display: none">
-<div class="panel panel-default">
-<div class="panel-heading panel-heading1">
-Solution
-</div>
-<div class="panel-body">
 <div class="tab">
 <button class="tablinksunnamed-chunk-8 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-8', 'unnamed-chunk-8');">
 Base R
@@ -572,7 +468,7 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-8" class="tabcontentunnamed-chunk-8">
-<div class="sourceCode" id="cb587"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb593"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># First operate in the data.frame by group (split-apply)</span>
 <span class="va">mtcars_by</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/by.html">by</a></span><span class="op">(</span><span class="va">mtcars</span>, 
    INDICES <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">cyl</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span><span class="op">)</span>,
@@ -775,7 +671,7 @@ NA
 </div>
 </div>
 <div id="option2unnamed-chunk-8" class="tabcontentunnamed-chunk-8">
-<div class="sourceCode" id="cb588"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb594"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mtcars</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">cyl</span>, <span class="va">gear</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mpg.mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span>,
@@ -972,22 +868,10 @@ NA
 </div>
 <script> javascript:hide('option2unnamed-chunk-8') </script>
 </div>
-</div>
-</div>
-</div>
 <div id="create-new-columns-as-calculations" class="section level2" number="30.6">
 <h2>
 <span class="header-section-number">E.6</span> Create new columns as calculations<a class="anchor" aria-label="anchor" href="#create-new-columns-as-calculations"><i class="fas fa-link"></i></a>
 </h2>
-<button id="displayTextunnamed-chunk-9" onclick="javascript:toggle('unnamed-chunk-9');">
-Show Solution
-</button>
-<div id="toggleTextunnamed-chunk-9" style="display: none">
-<div class="panel panel-default">
-<div class="panel-heading panel-heading1">
-Solution
-</div>
-<div class="panel-body">
 <div class="tab">
 <button class="tablinksunnamed-chunk-9 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-9', 'unnamed-chunk-9');">
 Base R
@@ -997,7 +881,7 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-9" class="tabcontentunnamed-chunk-9">
-<div class="sourceCode" id="cb589"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb595"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># First operate in the data.frame by group (split-apply)</span>
 <span class="va">iris_by</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/by.html">by</a></span><span class="op">(</span><span class="va">iris</span>, 
               INDICES <span class="op">=</span> <span class="va">iris</span><span class="op">$</span><span class="va">Species</span>, 
@@ -1010,7 +894,7 @@ Base R
 <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="va">iris_by</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="option2unnamed-chunk-9" class="tabcontentunnamed-chunk-9">
-<div class="sourceCode" id="cb590"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb596"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">iris</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Petal.Width.centered <span class="op">=</span> <span class="va">Petal.Width</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Petal.Width</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -1018,22 +902,10 @@ Base R
 </div>
 <script> javascript:hide('option2unnamed-chunk-9') </script>
 </div>
-</div>
-</div>
-</div>
 <div id="filter-rows-with-conditions-evaluated-by-group" class="section level2" number="30.7">
 <h2>
 <span class="header-section-number">E.7</span> Filter rows with conditions evaluated by group<a class="anchor" aria-label="anchor" href="#filter-rows-with-conditions-evaluated-by-group"><i class="fas fa-link"></i></a>
 </h2>
-<button id="displayTextunnamed-chunk-10" onclick="javascript:toggle('unnamed-chunk-10');">
-Show Solution
-</button>
-<div id="toggleTextunnamed-chunk-10" style="display: none">
-<div class="panel panel-default">
-<div class="panel-heading panel-heading1">
-Solution
-</div>
-<div class="panel-body">
 <div class="tab">
 <button class="tablinksunnamed-chunk-10 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-10', 'unnamed-chunk-10');">
 Base R
@@ -1043,7 +915,7 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-10" class="tabcontentunnamed-chunk-10">
-<div class="sourceCode" id="cb591"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb597"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># First operate in the data.frame by group (split-apply)</span>
 <span class="va">widest_petals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/by.html">by</a></span><span class="op">(</span><span class="va">iris</span>, 
                     INDICES <span class="op">=</span> <span class="va">iris</span><span class="op">$</span><span class="va">Species</span>, 
@@ -1216,7 +1088,7 @@ virginica
 </div>
 </div>
 <div id="option2unnamed-chunk-10" class="tabcontentunnamed-chunk-10">
-<div class="sourceCode" id="cb592"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb598"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">iris</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Petal.Width</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">Petal.Width</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -1367,22 +1239,10 @@ virginica
 </div>
 <script> javascript:hide('option2unnamed-chunk-10') </script>
 </div>
-</div>
-</div>
-</div>
 <div id="pivot-data" class="section level2" number="30.8">
 <h2>
 <span class="header-section-number">E.8</span> Pivot data<a class="anchor" aria-label="anchor" href="#pivot-data"><i class="fas fa-link"></i></a>
 </h2>
-<button id="displayTextunnamed-chunk-11" onclick="javascript:toggle('unnamed-chunk-11');">
-Show Solution
-</button>
-<div id="toggleTextunnamed-chunk-11" style="display: none">
-<div class="panel panel-default">
-<div class="panel-heading panel-heading1">
-Solution
-</div>
-<div class="panel-body">
 <div class="tab">
 <button class="tablinksunnamed-chunk-11 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-11', 'unnamed-chunk-11');">
 Base R
@@ -1392,7 +1252,7 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-11" class="tabcontentunnamed-chunk-11">
-<div class="sourceCode" id="cb593"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb599"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/reshape.html">reshape</a></span><span class="op">(</span><span class="va">iris</span>, 
         varying <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Sepal.Length"</span>, <span class="st">"Sepal.Width"</span>, <span class="st">"Petal.Length"</span>, <span class="st">"Petal.Width"</span><span class="op">)</span>,
         timevar <span class="op">=</span> <span class="st">"trait"</span>,
@@ -1401,15 +1261,11 @@ Base R
         direction <span class="op">=</span> <span class="st">"long"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="option2unnamed-chunk-11" class="tabcontentunnamed-chunk-11">
-<div class="sourceCode" id="cb594"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb600"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">iris</span> <span class="op">%&gt;%</span> 
  <span class="fu">pivot_longer</span><span class="op">(</span>cols <span class="op">=</span> <span class="va">Sepal.Length</span><span class="op">:</span><span class="va">Petal.Width</span>, values_to <span class="op">=</span> <span class="st">"measurement"</span>, names_to <span class="op">=</span> <span class="st">"trait"</span> <span class="op">)</span></code></pre></div>
 </div>
 <script> javascript:hide('option2unnamed-chunk-11') </script>
-</div>
-</div>
-</div>
-
 </div>
 </div>
 <script>
@@ -1623,7 +1479,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2023-02-17.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2023-02-22.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

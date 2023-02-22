@@ -18,6 +18,14 @@ library(performance)
 
 So far we have used linear models for analyses between *two* 'categorical' explanatory variables e.g. *t*-tests. But what about when we have a 'continuous' explanatory variable? For that we need to use a regression analysis, luckily this is just another 'special case' of the linear model, so we can use the same `lm()` function we have already been using, and we can interpret the outputs in the same way. 
 
+```{r, eval=F, echo=T}
+
+library(tidyverse)
+library(rstatix)
+library(performance)
+
+```
+
 ## Linear regression
 
 Much like the *t*-test we have generating from our linear model, the regression analysis is interpreting the strength of the 'signal' (the change in mean values according to the explanatory variable), vs the amount of 'noise' (variance around the mean). 
@@ -53,7 +61,7 @@ Here we are going to use example data from the Australian forestry industry, rec
 
 With regression, we can test the biological hypothesis that wood density can be used to predict timber hardness, and use this regression to predict timber hardness for new samples of known density. 
 
-Timber hardness is quantified using the 'Janka scale', and the data we are going to use today comes from an R package 'SemiPar' - once loaded you will then need to call the data using another function `data()` (note this is different to PalmerPenguins where the data was immediately available).
+Timber hardness is quantified using the 'Janka scale', and the data we are going to use today comes originally from an R package `SemiPar`
 
 ```{r, eval=T, echo = FALSE}
 library(tidyverse)
@@ -82,7 +90,7 @@ Check the data is imported correctly and make sure it is 'tidy' with no obvious 
 ## Activity 1: Exploratory Analysis
 
 ```{task}
-Is there any visual evidence for a linear association between wood density and timber hardness?
+Make a plot. Is there any visual evidence for a linear association between wood density and timber hardness?
 ```
 
 ```{solution}
@@ -97,11 +105,19 @@ janka %>%
 
 ```
 
-## Correlation
 
-Wood density and timber hardness appear to be positively related, and the linear appears to be fairly linear. We can look at a simple strength of this association between dens and hardness using correlation
+`r hide("Explanation")`
 
-## Activty 2: Generate Pearson's R
+Wood density and timber hardness appear to be positively related, and the relationship appears to be fairly linear. We can look at a simple strength of this association between dens and hardness using correlation
+
+`r unhide()`
+
+
+## Activity 2: Correlation - Generate Pearson's R
+
+Can you work out the code needed to generate Pearson's R? - Try using a google search, then check your code and answer against the solution.
+
+> Hint try the rstatix package?
 
 ```{solution, multCode = T}
 
@@ -151,12 +167,15 @@ This linear model will estimate a 'line of best fit' using the method of 'least 
 We can add a regression line to our ggplots very easily with the function `geom_smooth()`.
 
 ```{r}
+
+# specify linear model method for line fitting
+
 janka %>% 
   ggplot(aes(x=dens, y=hardness))+
   geom_point()+
   geom_smooth(method="lm")
 
-  # specify linear model method for line fitting
+
 
 ```
 
@@ -176,19 +195,34 @@ So when you combine both uncertainties of the prediction there is a spread betwe
 
 ### Summary
 
-```{r}
+
+```{multCode}
+
+``{r}
+
+summary(janka_ls1)
+
+``
+####
+
+``{r}
+
 janka_ls1 %>% 
   broom::tidy()
 
-# base R summary(janka_ls1)
+``
+
 
 ```
 
+
 This output should look very familiar to you, because it's the same output produced for the analysis of the maize data. Including a column for the coefficient estimates, standard error, *t*-statistic and *P*-value. The first row is the intercept, and the second row is the difference in the mean from the intercept caused by our explanantory variable. 
 
+```{block, type = "info"}
 In many ways the intercept makes more intuitive sense in a regression model than a difference model. Here the intercept describes the value of *y* (timber hardness) when *x* (wood density) = 0. The standard error is standard error of this calculated mean value. The only wrinkle here is that that value of *y* is an impossible value - timber hardness obviously cannot be a negative value (anti-hardness???). This does not affect the fit of our line, it just means a regression line (being an infinite straight line) can move into impossible value ranges.
 
 One way in which the intercept can be made more valuable is to use a technique known as 'centering'. By subtracting the average (mean) value of *x* from every data point, the intercept (when *x* is 0) can effectively be right-shifted into the centre of the data. 
+```
 
 ## Activity 3: Mean centered regression
 
@@ -228,14 +262,34 @@ According to our model summary, this estimated change in the mean is statistical
 
 Just like with the maize data, we can produce upper and lower bounds of confidence intervals: 
 
-```{r}
+```{multCode}
+
+``{r}
+
+confint(janka_ls1)
+
+``
+
+####
+
+``{r}
+
 broom::tidy(janka_ls1, conf.int=T, conf.level=0.95)
 
-# base r
-# confint(lsmodel1)
+``
+
 ```
 
+
+```{task}
+What would you say is the minimum effect size (at 95% confidence) of density on the janka scale?
+```
+
+`r mcq(c(answer = "52.9", "62.1", "57.5", "2.28"))`
+
+```{solution}
 Here we can say that at $\alpha$ = 0.05 we think there is at least a 52.9 unit increase on the janka scale for every unit increase in density ($\rho$). Because our 95% confidence intervals do not span 0, we know that there is a significant relationship at $\alpha$ = 0.05. 
+```
 
 ### Effect size
 
@@ -243,12 +297,21 @@ With a regression model, we can also produce a standardised effect size. The est
 
 The value of $R^2$ can be found in the model summaries as follows
 
-```{r}
+```{multCode}
+
+``{r}
+summary(janka_ls1)
+``
+
+####
+
+``{r}
 janka_ls1 %>% 
   broom::glance()
+``
 
-# base r
-# summary(janka_ls1)
+
+
 
 ```
 
@@ -272,7 +335,7 @@ Regression models make ALL the same assumptions as all linear models - that the 
 
 Remember, the residuals are the *difference* between the observed values and the fitted values predicted by the model. Or in other words it is the *vertical* distance between a data point and the fitted value on the regression line. We can take a look at this with another function in the `broom` package `augment()`. This generates the predicted value for each data point according to the regression, and calculates the residuals for each data point. 
 
-```{solution, multCode = T}
+```{multCode}
 
 ``{r}
 
@@ -356,6 +419,14 @@ The above is an example of functional, but repetitive code - could you make a fu
 HINT - to make sure your arguments for a ggplot are passed properly use this structure x=.data[[x]] , y = .data[[y]]
 ```
 
+This is an example of the [function](#functions) we want to make:
+
+```
+model_plot(data=augmented_ls1, 
+            x="dens", 
+            y="hardness", 
+            title="Full data")
+```
 
 ```{solution}
 
@@ -394,7 +465,7 @@ plot(janka_ls1, which=c(2,2))
 
 ####
 
-``{r}
+``{r, eval = T}
 performance::check_model(janka_ls1, check=c("normality","qq"))
 ``
 
@@ -509,15 +580,19 @@ broom::augment(janka_ls1,
 
 ### Adding confidence intervals
 
+#### Standard error 
+
 ```{r}
 
-broom::augment(janka_ls1, newdata = tibble(dens=c(22,35,65), se=TRUE))
+broom::augment(janka_ls1, newdata = tibble(dens=c(22,35,65)), se=TRUE)
 
 ```
 
+#### 95% Confidence Intervals
+
 ```{r}
 
-broom::augment(janka_ls1, newdata=tibble(dens=c(22,35,65), interval="confidence"))
+broom::augment(janka_ls1, newdata=tibble(dens=c(22,35,65)), interval="confidence")
 
 ```
 
@@ -541,6 +616,8 @@ emmeans::emmeans(janka_ls1,
 ```{task}
 can you plot the three new predicted values onto an existing figure to recreate the below? 
 ```
+
+> Hint - first make a new R object that contains your predictions, then work out how to add two dataframes to one plot. 
 
 ```{solution}
 

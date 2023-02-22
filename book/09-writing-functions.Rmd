@@ -35,7 +35,6 @@ Most of the time when we work in R, we will use functions; often pre-written fun
 
 **Functions** make it easy to use sets of code instructions repeatedly (without filling our scripts with the code underlying the function) and help us carry out multiple tasks in a single step without having to go through the details of how the steps are executed.
 
-If you need a refresher on what makes up a function [check here][last time](#functions).
 
 
 ## Structuring a function

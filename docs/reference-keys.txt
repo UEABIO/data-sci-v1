@@ -33,12 +33,11 @@ fig:unnamed-chunk-40
 fig:unnamed-chunk-41
 tab:unnamed-chunk-10
 fig:unnamed-chunk-26
-tab:unnamed-chunk-18
+tab:unnamed-chunk-22
 fig:unnamed-chunk-28
 fig:unnamed-chunk-9
 fig:unnamed-chunk-11
 fig:unnamed-chunk-36
-tab:unnamed-chunk-22
 fig:unnamed-chunk-23
 tab:unnamed-chunk-40
 tab:unnamed-chunk-6
@@ -377,8 +376,7 @@ introduction-to-regression
 linear-regression
 data
 activity-1-exploratory-analysis
-correlation
-activty-2-generate-pearsons-r
+activity-2-correlation---generate-pearsons-r
 regression-in-r
 summary-4
 activity-3-mean-centered-regression
@@ -391,6 +389,8 @@ equal-variance-1
 outliers-1
 prediction
 adding-confidence-intervals
+standard-error
+confidence-intervals-3
 activity-4-prediction
 summary-5
 anova
