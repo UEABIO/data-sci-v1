@@ -203,6 +203,7 @@ So when you combine both uncertainties of the prediction there is a spread betwe
 summary(janka_ls1)
 
 ``
+
 ####
 
 ``{r}
@@ -211,7 +212,6 @@ janka_ls1 %>%
   broom::tidy()
 
 ``
-
 
 ```
 

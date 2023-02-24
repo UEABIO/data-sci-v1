@@ -242,7 +242,8 @@ summary(janka_ls1)
 ## Residual standard error: 183.1 on 34 degrees of freedom
 ## Multiple R-squared:  0.9493,	Adjusted R-squared:  0.9478 
 ## F-statistic:   637 on 1 and 34 DF,  p-value: < 2.2e-16
-```</div><div id="option2unnamed-chunk-13" class="tabcontentunnamed-chunk-13">
+```
+</div><div id="option2unnamed-chunk-13" class="tabcontentunnamed-chunk-13">
 
 ```r
 janka_ls1 %>% 
@@ -280,7 +281,6 @@ janka_ls1 %>%
 </table>
 
 </div>
-
 </div><script> javascript:hide('option2unnamed-chunk-13') </script>
 
 
