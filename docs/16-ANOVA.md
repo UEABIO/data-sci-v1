@@ -218,7 +218,7 @@ anova(lsmodel2)
 Note how some of the degrees of freedom which were initially in the residuals, have now been 'used' by the new term in the more complex model. And that some of the SSE has now been used by SSR explained by the pair term. 
 
 <div class="warning">
-<p>As we should already have been able to predict from the last time that we looked at this model structure, the pairing doesn't really do anything (<em>F</em> &gt; 1). If pairing did 'nothing' we would still expect an <em>F</em> ratio ~ 1. However, we can see that is actually quite a bit lower than this, and this implies a 'negative variance component' - it has actually <em>increased</em> the relative proportion of SSE compared to SSR here.</p>
+<p>As we should already have been able to predict from the last time that we looked at this model structure, the pairing doesn't really do anything ( here <em>F</em>&lt; 1). If pairing did 'nothing' we would still expect an <em>F</em> ratio ~ 1. However, we can see that is actually quite a bit lower than this, and this implies a 'negative variance component' - it has actually <em>increased</em> the relative proportion of SSE compared to SSR here.</p>
 <p>When mean squares of the regression are smaller than the residuals it implies a problem with the experimental design. It could be a result of undersampling (more pairs are needed), however it could also be that these pairs were not sampled at random.</p>
 </div>
 
@@ -228,13 +228,17 @@ ANOVA tables can be built for any linear model. The tables partition the varianc
 
 ## Activity
 
-* Set up an R project for your analysis
+Write a short R based report (Rmd) using ANOVA to test an experimental hypothesis:
+
+* Set up a new R project for your analysis - get it talking to Github
 
 * Import, clean and analyse your data
 
 * Test an experimental hypothesis
 
 * Produce a data visual summary
+
+* Produce a short write-up
 
 Now is the time to try and put your analysis skills into action. Below are instructions for importing data and setting up a new project to answer the question, does temperature affect frogspawn development? This is your chance to practice: 
 
