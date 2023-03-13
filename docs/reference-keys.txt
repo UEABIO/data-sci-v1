@@ -415,6 +415,10 @@ post-hoc
 continuous-linear-models
 activity-2-build-your-own-analysis
 check-the-model-fit
+simplify-the-model
+section
+section-1
+section-2
 summary-7
 complex-models
 designing-a-model
@@ -435,7 +439,7 @@ supplementary-code
 generalized-linear-models
 motivation
 generalised-linear-models-glms
-section
+section-3
 workflow-for-fitting-a-glm
 poisson-regression-for-count-data-or-rate-data
 example-cuckoos

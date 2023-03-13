@@ -933,7 +933,7 @@ The previous section looked at an interaction between two categorical variables,
 pollution <- read_csv(here::here("book", "files", "pollution.csv"))
 ```
 
-The data is from an experimental study of the effects of low-level atmospheric pollutants and drought on agricultural yields. The experiment aimed to see how the yields soya bean (William variety), were affected by stress and Ozone levels. Your task is to first determine whether there is any evidence of an interaction effect, and if not report the effects of the two predictors separately. 
+The data is from an experimental study of the effects of low-level atmospheric pollutants and drought on agricultural yields. The experiment aimed to see how the yields soya bean (William variety), were affected by stress and Ozone levels. **Your task is to first determine whether there is any evidence of an interaction effect, and if not drop this term from your model and then report the estimates and confidence intervals from the simplified model**. 
 
 ## Activity 2: Build your own analysis
 
@@ -1172,15 +1172,30 @@ It looks as though there is no strong evidence here for an interaction effect, b
 
 ### Check the model fit
 
+<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
+Check the residuals of your model </div></div>
+
+<button id="displayTextunnamed-chunk-38" onclick="javascript:toggle('unnamed-chunk-38');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-38" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 performance::check_model(William_ls1)
 ```
 
-<img src="17-Multiple-regression_files/figure-html/unnamed-chunk-37-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="17-Multiple-regression_files/figure-html/unnamed-chunk-45-1.png" width="100%" style="display: block; margin: auto;" />
+</div></div></div>
 
-Everything looks pretty good, so now we could go ahead and simplify our model. 
+### Simplify the model
 
+<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
+Everything looks pretty good, so now we could go ahead and simplify our model.  </div></div>
+
+<button id="displayTextunnamed-chunk-40" onclick="javascript:toggle('unnamed-chunk-40');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-40" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+
+Testing that dropping the interaction term does not significantly reduce the variance explained
 
 ```r
 drop1(William_ls1, test = "F")
@@ -1224,13 +1239,16 @@ drop1(William_ls1, test = "F")
 
 </div>
 
-
+####
+Making a simpler model
 
 ```r
 William_ls2 <- lm(William ~ O3 + Stress, data = pollution) 
 ```
 
+####
 
+Get the F values of the simpler model
 
 ```r
 drop1(William_ls2, test = "F")
@@ -1283,7 +1301,61 @@ drop1(William_ls2, test = "F")
 
 </div>
 
+####
+Report the estimates and confidence intervals of the new model
 
+```r
+William_ls2 %>% 
+    broom::tidy(conf.int = T)
+```
+
+<div class="kable-table">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> term </th>
+   <th style="text-align:right;"> estimate </th>
+   <th style="text-align:right;"> std.error </th>
+   <th style="text-align:right;"> statistic </th>
+   <th style="text-align:right;"> p.value </th>
+   <th style="text-align:right;"> conf.low </th>
+   <th style="text-align:right;"> conf.high </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> (Intercept) </td>
+   <td style="text-align:right;"> 8.5333427 </td>
+   <td style="text-align:right;"> 0.0733079 </td>
+   <td style="text-align:right;"> 116.404189 </td>
+   <td style="text-align:right;"> 0.0000000 </td>
+   <td style="text-align:right;"> 8.3829273 </td>
+   <td style="text-align:right;"> 8.6837580 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> O3 </td>
+   <td style="text-align:right;"> -7.1407992 </td>
+   <td style="text-align:right;"> 0.9810200 </td>
+   <td style="text-align:right;"> -7.278954 </td>
+   <td style="text-align:right;"> 0.0000001 </td>
+   <td style="text-align:right;"> -9.1536861 </td>
+   <td style="text-align:right;"> -5.1279124 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> StressWell-watered </td>
+   <td style="text-align:right;"> 0.1780046 </td>
+   <td style="text-align:right;"> 0.0535173 </td>
+   <td style="text-align:right;"> 3.326113 </td>
+   <td style="text-align:right;"> 0.0025466 </td>
+   <td style="text-align:right;"> 0.0681962 </td>
+   <td style="text-align:right;"> 0.2878131 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div></div></div>
 
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
 Write up the results </div></div>

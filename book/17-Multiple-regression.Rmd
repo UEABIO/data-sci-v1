@@ -414,7 +414,7 @@ pollution <- read_csv(here::here("book", "files", "pollution.csv"))
 
 ```
 
-The data is from an experimental study of the effects of low-level atmospheric pollutants and drought on agricultural yields. The experiment aimed to see how the yields soya bean (William variety), were affected by stress and Ozone levels. Your task is to first determine whether there is any evidence of an interaction effect, and if not report the effects of the two predictors separately. 
+The data is from an experimental study of the effects of low-level atmospheric pollutants and drought on agricultural yields. The experiment aimed to see how the yields soya bean (William variety), were affected by stress and Ozone levels. **Your task is to first determine whether there is any evidence of an interaction effect, and if not drop this term from your model and then report the estimates and confidence intervals from the simplified model**. 
 
 ## Activity 2: Build your own analysis
 
@@ -488,6 +488,7 @@ Model the data
 ```{solution}
 
 ``{r, eval = T}
+
 William_ls1 <- lm(William ~ O3 + Stress + O3:Stress, data = pollution)
 
 William_ls1 %>% 
@@ -499,31 +500,67 @@ It looks as though there is no strong evidence here for an interaction effect, b
 
 ### Check the model fit
 
-```{r, eval = T}
+```{task} 
+Check the residuals of your model
+```
+
+```{solution}
+
+``{r, eval = T}
+
 performance::check_model(William_ls1)
+
+``
+
 ```
 
+### Simplify the model
+
+```{task}
 Everything looks pretty good, so now we could go ahead and simplify our model. 
-
-```{r}
-drop1(William_ls1, test = "F")
 ```
 
+```{solution}
 
-```{r}
+Testing that dropping the interaction term does not significantly reduce the variance explained
+
+``{r, eval = T}
+
+drop1(William_ls1, test = "F")
+
+``
+
+####
+Making a simpler model
+
+
+``{r, eval = T}
 
 William_ls2 <- lm(William ~ O3 + Stress, data = pollution) 
 
-```
+``
 
+####
 
-```{r}
+Get the F values of the simpler model
+
+``{r, eval = T}
 
 drop1(William_ls2, test = "F")
 
+``
+
+####
+Report the estimates and confidence intervals of the new model
+
+``{r, eval = T}
+
+William_ls2 %>% 
+    broom::tidy(conf.int = T)
+
+``
+
 ```
-
-
 
 ```{task}
 Write up the results

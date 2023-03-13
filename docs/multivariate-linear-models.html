@@ -1399,7 +1399,7 @@ treatment
 </a>
 <div class="sourceCode" id="cb420"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pollution</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"book"</span>, <span class="st">"files"</span>, <span class="st">"pollution.csv"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>The data is from an experimental study of the effects of low-level atmospheric pollutants and drought on agricultural yields. The experiment aimed to see how the yields soya bean (William variety), were affected by stress and Ozone levels. Your task is to first determine whether there is any evidence of an interaction effect, and if not report the effects of the two predictors separately.</p>
+<p>The data is from an experimental study of the effects of low-level atmospheric pollutants and drought on agricultural yields. The experiment aimed to see how the yields soya bean (William variety), were affected by stress and Ozone levels. <strong>Your task is to first determine whether there is any evidence of an interaction effect, and if not drop this term from your model and then report the estimates and confidence intervals from the simplified model</strong>.</p>
 </div>
 <div id="activity-2-build-your-own-analysis" class="section level2" number="17.10">
 <h2>
@@ -1776,10 +1776,52 @@ It looks as though there is no strong evidence here for an interaction effect, b
 <h3>
 <span class="header-section-number">17.10.1</span> Check the model fit<a class="anchor" aria-label="anchor" href="#check-the-model-fit"><i class="fas fa-link"></i></a>
 </h3>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+Check the residuals of your model
+</div>
+</div>
+<button id="displayTextunnamed-chunk-38" onclick="javascript:toggle('unnamed-chunk-38');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-38" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
 <div class="sourceCode" id="cb427"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">performance</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html">check_model</a></span><span class="op">(</span><span class="va">William_ls1</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="17-Multiple-regression_files/figure-html/unnamed-chunk-37-1.png" width="100%" style="display: block; margin: auto;"></div>
-<p>Everything looks pretty good, so now we could go ahead and simplify our model.</p>
+<div class="inline-figure"><img src="17-Multiple-regression_files/figure-html/unnamed-chunk-45-1.png" width="100%" style="display: block; margin: auto;"></div>
+</div>
+</div>
+</div>
+</div>
+<div id="simplify-the-model" class="section level3" number="17.10.2">
+<h3>
+<span class="header-section-number">17.10.2</span> Simplify the model<a class="anchor" aria-label="anchor" href="#simplify-the-model"><i class="fas fa-link"></i></a>
+</h3>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+Everything looks pretty good, so now we could go ahead and simplify our model.
+</div>
+</div>
+<button id="displayTextunnamed-chunk-40" onclick="javascript:toggle('unnamed-chunk-40');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-40" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<p>Testing that dropping the interaction term does not significantly reduce the variance explained</p>
 <div class="sourceCode" id="cb428"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/add1.html">drop1</a></span><span class="op">(</span><span class="va">William_ls1</span>, test <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
@@ -1856,8 +1898,19 @@ O3:Stress
 </tbody>
 </table></div>
 </div>
+<div id="section" class="section level4" number="17.10.2.1">
+<h4>
+<span class="header-section-number">17.10.2.1</span> <a class="anchor" aria-label="anchor" href="#section"><i class="fas fa-link"></i></a>
+</h4>
+<p>Making a simpler model</p>
 <div class="sourceCode" id="cb429"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">William_ls2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">William</span> <span class="op">~</span> <span class="va">O3</span> <span class="op">+</span> <span class="va">Stress</span>, data <span class="op">=</span> <span class="va">pollution</span><span class="op">)</span> </code></pre></div>
+</div>
+<div id="section-1" class="section level4" number="17.10.2.2">
+<h4>
+<span class="header-section-number">17.10.2.2</span> <a class="anchor" aria-label="anchor" href="#section-1"><i class="fas fa-link"></i></a>
+</h4>
+<p>Get the F values of the simpler model</p>
 <div class="sourceCode" id="cb430"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/add1.html">drop1</a></span><span class="op">(</span><span class="va">William_ls2</span>, test <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span></code></pre></div>
 <div class="kable-table">
@@ -1956,6 +2009,117 @@ Stress
 </tr>
 </tbody>
 </table></div>
+</div>
+</div>
+<div id="section-2" class="section level4" number="17.10.2.3">
+<h4>
+<span class="header-section-number">17.10.2.3</span> <a class="anchor" aria-label="anchor" href="#section-2"><i class="fas fa-link"></i></a>
+</h4>
+<p>Report the estimates and confidence intervals of the new model</p>
+<div class="sourceCode" id="cb431"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">William_ls2</span> <span class="op">%&gt;%</span> 
+    <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span>conf.int <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+term
+</th>
+<th style="text-align:right;">
+estimate
+</th>
+<th style="text-align:right;">
+std.error
+</th>
+<th style="text-align:right;">
+statistic
+</th>
+<th style="text-align:right;">
+p.value
+</th>
+<th style="text-align:right;">
+conf.low
+</th>
+<th style="text-align:right;">
+conf.high
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+8.5333427
+</td>
+<td style="text-align:right;">
+0.0733079
+</td>
+<td style="text-align:right;">
+116.404189
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+8.3829273
+</td>
+<td style="text-align:right;">
+8.6837580
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+O3
+</td>
+<td style="text-align:right;">
+-7.1407992
+</td>
+<td style="text-align:right;">
+0.9810200
+</td>
+<td style="text-align:right;">
+-7.278954
+</td>
+<td style="text-align:right;">
+0.0000001
+</td>
+<td style="text-align:right;">
+-9.1536861
+</td>
+<td style="text-align:right;">
+-5.1279124
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+StressWell-watered
+</td>
+<td style="text-align:right;">
+0.1780046
+</td>
+<td style="text-align:right;">
+0.0535173
+</td>
+<td style="text-align:right;">
+3.326113
+</td>
+<td style="text-align:right;">
+0.0025466
+</td>
+<td style="text-align:right;">
+0.0681962
+</td>
+<td style="text-align:right;">
+0.2878131
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
@@ -2194,7 +2358,10 @@ $( document ).ready(function() {
 <li><a class="nav-link" href="#post-hoc"><span class="header-section-number">17.8</span> post-hoc</a></li>
 <li><a class="nav-link" href="#continuous-linear-models"><span class="header-section-number">17.9</span> Continuous Linear Models</a></li>
 <li>
-<a class="nav-link" href="#activity-2-build-your-own-analysis"><span class="header-section-number">17.10</span> Activity 2: Build your own analysis</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#check-the-model-fit"><span class="header-section-number">17.10.1</span> Check the model fit</a></li></ul>
+<a class="nav-link" href="#activity-2-build-your-own-analysis"><span class="header-section-number">17.10</span> Activity 2: Build your own analysis</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#check-the-model-fit"><span class="header-section-number">17.10.1</span> Check the model fit</a></li>
+<li><a class="nav-link" href="#simplify-the-model"><span class="header-section-number">17.10.2</span> Simplify the model</a></li>
+</ul>
 </li>
 <li><a class="nav-link" href="#summary-7"><span class="header-section-number">17.11</span> Summary</a></li>
 </ul>
@@ -2214,7 +2381,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2023-03-03.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2023-03-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

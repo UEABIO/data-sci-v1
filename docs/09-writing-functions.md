@@ -479,7 +479,7 @@ theme(
   # add axis lines
   axis.line=element_line(),
    # Adding a 0.5cm margin around the plot
-  plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), units = , "cm"),    
+  plot.margin = unit(c(0.2, 0.5, 0.5, 0.5), units = , "cm"),    
    # Setting the font for the legend text
   legend.text = element_text(face = "italic"),   
     # Removing the legend title
