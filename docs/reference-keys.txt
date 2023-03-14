@@ -38,8 +38,10 @@ fig:unnamed-chunk-28
 fig:unnamed-chunk-9
 fig:unnamed-chunk-11
 fig:unnamed-chunk-36
-fig:unnamed-chunk-23
-tab:unnamed-chunk-40
+fig:unnamed-chunk-42
+tab:unnamed-chunk-26
+tab:unnamed-chunk-42
+fig:unnamed-chunk-43
 tab:unnamed-chunk-6
 fig:settings-general
 fig:settings-code

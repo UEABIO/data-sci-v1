@@ -17,6 +17,7 @@ The flies used were an outbred stock, sexual activity was manipulated by supplyi
 
 
 
+
 ```{=html}
 <a href="https://raw.githubusercontent.com/Philip-Leftwich/physalia-stats-intro/main/book/files/fruitfly.csv">
 <button class="btn btn-success"><i class="fa fa-save"></i> Download Fruitfly data as csv</button>
@@ -71,8 +72,10 @@ GGally::ggpairs(fruitfly)
 
 ## Activity 1: Think about your data
 
+Think carefully about the plots you should make to investigate the potential differences and relationships you wish to investigate - examples hidden behind dropdowns.
+
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
-Think carefully about the plots you should make to investigate the potential differences and relationships you wish to investigate - examples hidden behing this dropdown </div></div>
+Is there an obvious difference in the longevities of males across the three treatments? </div></div>
 
 <button id="displayTextunnamed-chunk-9" onclick="javascript:toggle('unnamed-chunk-9');">Show Solution</button>
 
@@ -96,9 +99,57 @@ fruitfly %>%
 </div>
 </div></div></div>
 
-With careful thought we can construct figures that help us investigate the distribution of multiple potential predictors at once. Here we can overlay body size onto the three treatments. 
+**Q** Does it like size affects longevity? <select class='webex-select'><option value='blank'></option><option value='answer'>Yes</option><option value=''>No</option></select>
+
+
+<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
+Does it look like size affects longevity? </div></div>
+
+<button id="displayTextunnamed-chunk-11" onclick="javascript:toggle('unnamed-chunk-11');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-11" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+In this first figure - we can investigate whether there is an obvious difference in the longevities of males across the three treatments
+
+```r
+fruitfly %>% 
+  ggplot(aes(x = thorax, y = longevity))+
+  geom_point()+
+  theme_minimal()+
+  theme(legend.position = "none")
+```
+
+<div class="figure" style="text-align: center">
+<img src="18-Complex-models_files/figure-html/unnamed-chunk-42-1.png" alt="A scatterplot of longevity against body size (thorax (mm)). No trend line added - often it is a good idea to look at data points without being lead to a conclusion by a line" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-42)A scatterplot of longevity against body size (thorax (mm)). No trend line added - often it is a good idea to look at data points without being lead to a conclusion by a line</p>
+</div>
+</div></div></div>
 
 **Q** Does it like size affects longevity? <select class='webex-select'><option value='blank'></option><option value='answer'>Yes</option><option value=''>No</option></select>
+
+<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
+Does it look like size interacts with treatment to affect longevity? </div></div>
+
+<button id="displayTextunnamed-chunk-13" onclick="javascript:toggle('unnamed-chunk-13');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-13" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+
+```r
+colours <- c("cyan", "darkorange", "purple")
+
+fruitfly %>% 
+  ggplot(aes(x=thorax, y = longevity, group = type, colour = type))+
+  geom_point( alpha = 0.6)+
+  geom_smooth(method = "lm",
+            se = FALSE)+
+  scale_colour_manual(values = colours)+
+  theme_minimal()
+```
+
+<div class="figure" style="text-align: center">
+<img src="18-Complex-models_files/figure-html/unnamed-chunk-42-1.png" alt="A scatterplot of thorax against longevity - colours indicate treatment types. This time I have included a line, as it will help determine if I think the slopes are different by group" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-42)A scatterplot of thorax against longevity - colours indicate treatment types. This time I have included a line, as it will help determine if I think the slopes are different by group</p>
+</div>
+</div></div></div>
 
 **Q** Does it look like size affects longevity differently between treatment groups? <select class='webex-select'><option value='blank'></option><option value=''>Yes</option><option value='answer'>No</option></select>
 
@@ -106,59 +157,44 @@ With careful thought we can construct figures that help us investigate the distr
 <div class='webex-solution'><button>Explain this</button>
 
 
-Here it does look as though larger flies have a longer lifespan than smaller flies. But there appears to be little difference in the distribution of body sizes by treatment. This does not mean we can't test this in our model. But we should have a clear idea of which will have largest probable effect sizes
+Here it does look as though larger flies have a longer lifespan than smaller flies. But there appears to be little difference in the angle of the slopes between groups. This does not mean we can't test this in our model, but we may decide it is not worth including.
 
 
 </div>
 
 
 
+
+We are also interested in the potential effect of sleep on activity, we can construct a scatter plot of sleep against longevity, while including treatment as a covariate.
+
+<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
+Does it look like sleep interacts with treatment to affect longevity? </div></div>
+
+<button id="displayTextunnamed-chunk-15" onclick="javascript:toggle('unnamed-chunk-15');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-15" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+
 ```r
 fruitfly %>% 
-  ggplot(aes(x=type, y = longevity, fill = type))+
-  geom_boxplot(alpha = 0.4)+
-  geom_jitter(aes(size = thorax),
-              alpha = 0.6,
-              width = 0.4,
-              shape = 21)+
-  scale_fill_manual(values = colours)+
-    guides(fill = "none",
-         colour = "none")+
+  ggplot(aes(x=sleep, y = longevity, group = type, colour = type))+
+  geom_point( alpha = 0.6)+
+  geom_smooth(method = "lm",
+            se = FALSE)+
+  scale_colour_manual(values = colours)+
   theme_minimal()
 ```
 
 <div class="figure" style="text-align: center">
-<img src="18-Complex-models_files/figure-html/unnamed-chunk-10-1.png" alt="A boxplot of longevity across three treatments of sexual activity. Individual points represent individual males, where the size of each point represents thorax length." width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-10)A boxplot of longevity across three treatments of sexual activity. Individual points represent individual males, where the size of each point represents thorax length.</p>
+<img src="18-Complex-models_files/figure-html/unnamed-chunk-42-1.png" alt="A scatter plot of proportion of time spent sleeping against longevity with a linear model trendline. Points represent individual flies, colours represent treatments." width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-42)A scatter plot of proportion of time spent sleeping against longevity with a linear model trendline. Points represent individual flies, colours represent treatments.</p>
 </div>
+</div></div></div>
 
-We are also interested in the potential effect of sleep on activity, we can construct a scatter plot of sleep against longevity, while including body size as a covariate. 
 
-In these faceted plots - Are the trendlines moving in the same direction?  <select class='webex-select'><option value='blank'></option><option value=''>Yes</option><option value='answer'>No</option></select>
+In these plots - Are the trendlines moving in the same direction?  <select class='webex-select'><option value='blank'></option><option value=''>Yes</option><option value='answer'>No</option></select>
 
 Investigating these can help us determine is there much evidence of a potential effect of sleep, is there evidence for whether this might be an additive effect or one which interacts with the the three treatments?
 
-
-```r
-fruitfly %>% 
-ggplot(aes(x=sleep, y = longevity, fill = type))+
-  geom_point(aes(size = thorax,
-                 fill = type),
-             shape = 21,
-             alpha = 0.4)+
-  geom_smooth(method = "lm", colour = "black",
-              se = FALSE)+
-  scale_fill_manual(values = colours)+
-  guides(fill = "none",
-         colour = "none")+
-  facet_wrap(~ type)+
-  theme_minimal()
-```
-
-<div class="figure" style="text-align: center">
-<img src="18-Complex-models_files/figure-html/unnamed-chunk-11-1.png" alt="A scatter plot of proportion of time spent sleeping against longevity with a linear model trendline. Points represent individual flies, and the size of each point represents thorax length (mm)." width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-11)A scatter plot of proportion of time spent sleeping against longevity with a linear model trendline. Points represent individual flies, and the size of each point represents thorax length (mm).</p>
-</div>
 
 
 ## Designing a model
@@ -253,9 +289,9 @@ flyls1 %>%
 From the model summary table could you say what the mean longevity of a male with a 0.79mm thorax, that sleeps for 22% of the day and is paired with virgin females would be? </div></div>
 
 
-<button id="displayTextunnamed-chunk-16" onclick="javascript:toggle('unnamed-chunk-16');">Show Solution</button>
+<button id="displayTextunnamed-chunk-20" onclick="javascript:toggle('unnamed-chunk-20');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-16" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-20" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 # intercept
@@ -292,15 +328,15 @@ Before we start playing with the terms in our model, we should check to see if t
 performance::check_model(flyls1)
 ```
 
-<img src="18-Complex-models_files/figure-html/unnamed-chunk-17-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="18-Complex-models_files/figure-html/unnamed-chunk-21-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Activity 2: Model checking
 
 **Question - IS the assumption of homogeneity of variance met?** <select class='webex-select'><option value='blank'></option><option value='answer'>Yes</option><option value=''>No</option></select>
 
-<button id="displayTextunnamed-chunk-18" onclick="javascript:toggle('unnamed-chunk-18');">Show Solution</button>
+<button id="displayTextunnamed-chunk-22" onclick="javascript:toggle('unnamed-chunk-22');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-18" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-22" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 * Mostly - the reference line is fairly flat (there is a slight curve).
 
@@ -313,9 +349,9 @@ With a slight curvature this could indicate that you *might* get a better fit wi
 
 **Question - ARE the residuals normally distributed?** <select class='webex-select'><option value='blank'></option><option value='answer'>Yes</option><option value=''>No</option></select>
 
-<button id="displayTextunnamed-chunk-19" onclick="javascript:toggle('unnamed-chunk-19');">Show Solution</button>
+<button id="displayTextunnamed-chunk-23" onclick="javascript:toggle('unnamed-chunk-23');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-19" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-23" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 Yes - the QQplot looks pretty good, a very minor indication of a right skew, but nothing to worry about. 
 
 [Interpreting QQ plots][What is a Quantile-Quantile (QQ) plot?]
@@ -324,9 +360,9 @@ Yes - the QQplot looks pretty good, a very minor indication of a right skew, but
 
 **Question - IS their an issue with Collinearity?** <select class='webex-select'><option value='blank'></option><option value=''>Yes</option><option value='answer'>No</option></select>
 
-<button id="displayTextunnamed-chunk-20" onclick="javascript:toggle('unnamed-chunk-20');">Show Solution</button>
+<button id="displayTextunnamed-chunk-24" onclick="javascript:toggle('unnamed-chunk-24');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-20" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-24" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 This graph clearly shows there **is** collinearity. But this is not unusual when we include an *interaction term*, if we see evidence of collinearity in terms that are not part of an interaction **then** we should take another look^[https://easystats.github.io/performance/reference/check_collinearity.html].
 
@@ -368,7 +404,7 @@ The most common issues when trying to fit simple linear regression models is tha
 </div>
 
 <table class="table" style="font-size: 16px; width: auto !important; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">(\#tab:unnamed-chunk-22)Common Box-Cox Transformations</caption>
+<caption style="font-size: initial !important;">(\#tab:unnamed-chunk-26)Common Box-Cox Transformations</caption>
  <thead>
   <tr>
    <th style="text-align:right;"> lambda value </th>
@@ -402,15 +438,24 @@ MASS::boxcox(flyls1)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="18-Complex-models_files/figure-html/unnamed-chunk-23-1.png" alt="standard curve fitted by maximum likelihood, dashed lines represent the 95% confidence interval range for picking the 'best' transformation for the dependent variable" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-23)standard curve fitted by maximum likelihood, dashed lines represent the 95% confidence interval range for picking the 'best' transformation for the dependent variable</p>
+<img src="18-Complex-models_files/figure-html/unnamed-chunk-27-1.png" alt="standard curve fitted by maximum likelihood, dashed lines represent the 95% confidence interval range for picking the 'best' transformation for the dependent variable" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-27)standard curve fitted by maximum likelihood, dashed lines represent the 95% confidence interval range for picking the 'best' transformation for the dependent variable</p>
 </div>
 
 **Question - Does the fit of the model improve with a square root transformation?** <select class='webex-select'><option value='blank'></option><option value=''>Yes</option><option value='answer'>No</option></select>
 
-<button id="displayTextunnamed-chunk-24" onclick="javascript:toggle('unnamed-chunk-24');">Show Solution</button>
+<button id="displayTextunnamed-chunk-28" onclick="javascript:toggle('unnamed-chunk-28');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-24" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-28" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+
+```r
+flyls_sqrt <- lm(sqrt(longevity) ~ type + thorax + sleep + type:sleep, data = fruitfly)
+
+performance::check_model(flyls_sqrt)
+```
+
+<img src="18-Complex-models_files/figure-html/unnamed-chunk-46-1.png" width="100%" style="display: block; margin: auto;" />
+
 Not really, despite the suggestion that a sqrt transformation would improve the model, residual fits are not really any better - so we might as well stick with the original scale.</div></div></div>
 
 ## Model selection
@@ -538,9 +583,9 @@ drop1(flyls2, test = "F")
 
 **Question - Should we drop sleep from this model?** <select class='webex-select'><option value='blank'></option><option value=''>Yes</option><option value='answer'>No</option></select>
 
-<button id="displayTextunnamed-chunk-28" onclick="javascript:toggle('unnamed-chunk-28');">Show Solution</button>
+<button id="displayTextunnamed-chunk-32" onclick="javascript:toggle('unnamed-chunk-32');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-28" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-32" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 There is good reason to remove non-significant *interaction terms* from a model, they complicate estimates and make interpretations more difficult. For **main** effects things are a little more ambiguous. 
 
@@ -589,11 +634,20 @@ emmeans::emmeans(flyls2, specs = pairwise ~ type + thorax + sleep)
 ## Activity 3: Write-up
 
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
+Can you write an Analysis section? </div></div>
+
+<button id="displayTextunnamed-chunk-36" onclick="javascript:toggle('unnamed-chunk-36');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-36" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+I constructed an ordinary least squares model to investigate the effects of sleep, mating type and body size on longevity in adult Drosophila melanogaster. I also included an interaction term between sleep and mating type. All Analyses and data cleaning was carried out in R ver 4.1.2 with the tidyverse range of packages (Wickham et al 2019), model residuals were checked with the performance package (Lüdecke et al 2021), and summary tables produced with broom (Robinson et al 2022) and kableExtra (Zhu 2020).</div></div></div>
+
+
+<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
 Can you write a Results section? </div></div>
 
-<button id="displayTextunnamed-chunk-32" onclick="javascript:toggle('unnamed-chunk-32');">Show Solution</button>
+<button id="displayTextunnamed-chunk-38" onclick="javascript:toggle('unnamed-chunk-38');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-32" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-38" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 I tested the hypothesis that sexual activity is costly for male *Drosophila melanogaster* fruitflies. Previous research indicated that sleep deprived males are less attractive to females, this would indicate that levels of sexual activity might be affected by sleep and impact the effect on longevity, as such this was included as an interaction term in the full model. Body size is also know to affect lifespan, as such this was included as a covariate in the mode. 
 
 There was a small interaction effect of decreased lifespan with increasing sleep in the treatment groups compared to control in our samples, but this was not significantly different from no effect (F~2,118~ = 0.512, P = 0.6), and was therefore dropped from the full model (Table 15.1). 
@@ -615,7 +669,7 @@ kbl(col.names = c("Predictors",
 ```
 
 <table class="table" style="font-size: 16px; width: auto !important; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">(\#tab:unnamed-chunk-40)Linear model coefficients</caption>
+<caption style="font-size: initial !important;">(\#tab:unnamed-chunk-42)Linear model coefficients</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> Predictors </th>
@@ -676,76 +730,9 @@ Post hoc analysis showed that these differences were statistically significant f
 
 Comparing the treatment effects against other predictors of longevity such as body size and sleep, I found that sleep had a very small effect on longevity (mean change -0.05 days [-0.18 - 0.07]) which was not significantly different from no effect (Linear model: F~1,120~ = 0.68, P = 0.41). Body size (taken from thorax length) was a significant predictor of longevity (F~1,120~ = 121, P < 0.001), with each 0.1 mm increase in body size adding 14.4 days to the individual lifespan [11.8 - 17]. It appears as though body size has a stronger effect on longevity than treatment, indicating that while there is a measurable cost of sexual activity to males, it may be less severe than in females (not compared here), and less severe than other measurable predictors. 
 
-```r
-# optional extras for adding animal silhouette
-library(rphylopic)
-# search for the right image in the database
-fruitfly_phylo <- name_search(text = "Drosophila melanogaster", options = "namebankID")[[1]] 
-
-# name_images(uuid = fruitfly$uid[1])
-
-# extract the ID of thr right image
-fruitfly_2 <- name_images(uuid = fruitfly_phylo$uid[1])$same[[2]]$ui
-
-# get the actual image
-fruitfly_pic <- image_data(fruitfly_2, size = 256)[[1]]
-
-# density plot of thorax length by treatment
-marginal1 <- fruitfly %>% 
-  ggplot()+
-  geom_density(aes(x = thorax, fill = type),
-               alpha = 0.5)+
-  scale_fill_manual(values = colours)+
-  theme_void()+
-  theme(legend.position = "none")
-
-# density plot of longevity by treatment
-marginal2 <- fruitfly %>% 
-  ggplot()+
-  geom_density(aes(x = longevity, fill = type),
-               alpha = 0.5)+
-  scale_fill_manual(values = colours)+
-  theme_void()+
-  coord_flip()
-
-
-# create a new dataset where all sleep values are set to a constant (mean) values - see the emmeans table
-
-fruitfly_2 <- fruitfly %>% 
-  mutate(sleep = mean(sleep))
-
-# use the final model to produce model predictions set to the new constant sleep dataframe
-model_plot <- broom::augment(flyls2, newdata = fruitfly_2, interval = "confidence") %>% 
-  ggplot(aes(x=thorax, y = .fitted, colour = type, fill = type))+
-  geom_ribbon(aes(ymin=.lower, ymax=.upper), alpha = 0.2)+
-    geom_line(linetype = "dashed", show.legend = FALSE)+
-  geom_point(data = fruitfly, aes(x = thorax, y = longevity),
-             show.legend = FALSE)+
-  scale_colour_manual(values = colours)+
-  scale_fill_manual(values = colours)+
-  labs(y = "Lifespan in days",
-       x = "Thorax length (mm)",
-       fill = "Type of female exposure")+
-  guides(colour = "none")+
-  theme_classic()+
-  theme(legend.position = "none")+
-  add_phylopic(fruitfly_pic, alpha = 0.8, x = 0.7, y = 80, ysize = 10)
-
-
-
-layout <- "
-AAA#
-BBBC
-BBBC
-BBBC"
-
-
-marginal1+model_plot+marginal2 +plot_layout(design = layout)
-```
-
 <div class="figure" style="text-align: center">
-<img src="18-Complex-models_files/figure-html/unnamed-chunk-41-1.png" alt=" A scatter plot of longevity against body size across three treatments of differening male sexual activity. Fitted model slopes are from the reduced linear model (main effects only of thorax size, sleep and treatment group), with 95% confidence intervals, circles are individual data points. Marginal plots are density plot distributions for thorax length and longevity split by treatments." width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-41) A scatter plot of longevity against body size across three treatments of differening male sexual activity. Fitted model slopes are from the reduced linear model (main effects only of thorax size, sleep and treatment group), with 95% confidence intervals, circles are individual data points. Marginal plots are density plot distributions for thorax length and longevity split by treatments.</p>
+<img src="18-Complex-models_files/figure-html/unnamed-chunk-43-1.png" alt=" A scatter plot of longevity against body size across three treatments of differening male sexual activity. Fitted model slopes are from the reduced linear model (main effects only of thorax size, sleep and treatment group), with 95% confidence intervals, circles are individual data points. Marginal plots are density plot distributions for thorax length and longevity split by treatments." width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-43) A scatter plot of longevity against body size across three treatments of differening male sexual activity. Fitted model slopes are from the reduced linear model (main effects only of thorax size, sleep and treatment group), with 95% confidence intervals, circles are individual data points. Marginal plots are density plot distributions for thorax length and longevity split by treatments.</p>
 </div>
 </div></div></div>
 
@@ -843,12 +830,12 @@ tbl_regression(flyls2)
 ```
 
 ```{=html}
-<div id="wrbvotzglu" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="evdibnozhj" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#wrbvotzglu .gt_table {
+#evdibnozhj .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -873,7 +860,7 @@ tbl_regression(flyls2)
   border-left-color: #D3D3D3;
 }
 
-#wrbvotzglu .gt_heading {
+#evdibnozhj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -885,7 +872,7 @@ tbl_regression(flyls2)
   border-right-color: #D3D3D3;
 }
 
-#wrbvotzglu .gt_title {
+#evdibnozhj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -895,7 +882,7 @@ tbl_regression(flyls2)
   border-bottom-width: 0;
 }
 
-#wrbvotzglu .gt_subtitle {
+#evdibnozhj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -905,13 +892,13 @@ tbl_regression(flyls2)
   border-top-width: 0;
 }
 
-#wrbvotzglu .gt_bottom_border {
+#evdibnozhj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wrbvotzglu .gt_col_headings {
+#evdibnozhj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -926,7 +913,7 @@ tbl_regression(flyls2)
   border-right-color: #D3D3D3;
 }
 
-#wrbvotzglu .gt_col_heading {
+#evdibnozhj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -946,7 +933,7 @@ tbl_regression(flyls2)
   overflow-x: hidden;
 }
 
-#wrbvotzglu .gt_column_spanner_outer {
+#evdibnozhj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -958,15 +945,15 @@ tbl_regression(flyls2)
   padding-right: 4px;
 }
 
-#wrbvotzglu .gt_column_spanner_outer:first-child {
+#evdibnozhj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wrbvotzglu .gt_column_spanner_outer:last-child {
+#evdibnozhj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wrbvotzglu .gt_column_spanner {
+#evdibnozhj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -978,7 +965,7 @@ tbl_regression(flyls2)
   width: 100%;
 }
 
-#wrbvotzglu .gt_group_heading {
+#evdibnozhj .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1000,7 +987,7 @@ tbl_regression(flyls2)
   vertical-align: middle;
 }
 
-#wrbvotzglu .gt_empty_group_heading {
+#evdibnozhj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1015,15 +1002,15 @@ tbl_regression(flyls2)
   vertical-align: middle;
 }
 
-#wrbvotzglu .gt_from_md > :first-child {
+#evdibnozhj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wrbvotzglu .gt_from_md > :last-child {
+#evdibnozhj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wrbvotzglu .gt_row {
+#evdibnozhj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1042,7 +1029,7 @@ tbl_regression(flyls2)
   overflow-x: hidden;
 }
 
-#wrbvotzglu .gt_stub {
+#evdibnozhj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1054,7 +1041,7 @@ tbl_regression(flyls2)
   padding-left: 12px;
 }
 
-#wrbvotzglu .gt_summary_row {
+#evdibnozhj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1064,7 +1051,7 @@ tbl_regression(flyls2)
   padding-right: 5px;
 }
 
-#wrbvotzglu .gt_first_summary_row {
+#evdibnozhj .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1074,7 +1061,7 @@ tbl_regression(flyls2)
   border-top-color: #D3D3D3;
 }
 
-#wrbvotzglu .gt_grand_summary_row {
+#evdibnozhj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1084,7 +1071,7 @@ tbl_regression(flyls2)
   padding-right: 5px;
 }
 
-#wrbvotzglu .gt_first_grand_summary_row {
+#evdibnozhj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1094,11 +1081,11 @@ tbl_regression(flyls2)
   border-top-color: #D3D3D3;
 }
 
-#wrbvotzglu .gt_striped {
+#evdibnozhj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wrbvotzglu .gt_table_body {
+#evdibnozhj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1107,7 +1094,7 @@ tbl_regression(flyls2)
   border-bottom-color: #D3D3D3;
 }
 
-#wrbvotzglu .gt_footnotes {
+#evdibnozhj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1121,13 +1108,13 @@ tbl_regression(flyls2)
   border-right-color: #D3D3D3;
 }
 
-#wrbvotzglu .gt_footnote {
+#evdibnozhj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#wrbvotzglu .gt_sourcenotes {
+#evdibnozhj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1141,41 +1128,41 @@ tbl_regression(flyls2)
   border-right-color: #D3D3D3;
 }
 
-#wrbvotzglu .gt_sourcenote {
+#evdibnozhj .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#wrbvotzglu .gt_left {
+#evdibnozhj .gt_left {
   text-align: left;
 }
 
-#wrbvotzglu .gt_center {
+#evdibnozhj .gt_center {
   text-align: center;
 }
 
-#wrbvotzglu .gt_right {
+#evdibnozhj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wrbvotzglu .gt_font_normal {
+#evdibnozhj .gt_font_normal {
   font-weight: normal;
 }
 
-#wrbvotzglu .gt_font_bold {
+#evdibnozhj .gt_font_bold {
   font-weight: bold;
 }
 
-#wrbvotzglu .gt_font_italic {
+#evdibnozhj .gt_font_italic {
   font-style: italic;
 }
 
-#wrbvotzglu .gt_super {
+#evdibnozhj .gt_super {
   font-size: 65%;
 }
 
-#wrbvotzglu .gt_footnote_marks {
+#evdibnozhj .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;

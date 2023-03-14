@@ -259,7 +259,7 @@ Use data wrangling to summarise the means, standard deviations and sample size o
 <button>
 Solution
 </button>
-<div class="sourceCode" id="cb503"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb504"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">summary_darwin</span> <span class="op">&lt;-</span> <span class="va">darwin</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span>,
@@ -328,7 +328,7 @@ You need to turn standard deviation into variance, and follow the formula above
 <button>
 Solution
 </button>
-<div class="sourceCode" id="cb504"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb505"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">summary_darwin</span> <span class="op">%&gt;%</span> 
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>variance <span class="op">=</span> <span class="va">sd</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span> 
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>per_sample_var <span class="op">=</span> <span class="va">variance</span> <span class="op">*</span> <span class="op">(</span><span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -367,7 +367,7 @@ What do you calculate as Cohen's D for this analysis?
 <button>
 Solution
 </button>
-<div class="sourceCode" id="cb505"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb506"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fl">2.61</span><span class="op">/</span><span class="fl">3.05</span></code></pre></div>
 <pre><code>## [1] 0.8557377</code></pre>
 </div>
@@ -377,7 +377,7 @@ Solution
 <span class="header-section-number">24.3.2</span> Cohen's D from a linear model<a class="anchor" aria-label="anchor" href="#cohens-d-from-a-linear-model"><i class="fas fa-link"></i></a>
 </h3>
 <p>Most of the time, we do not have to calculate these values by hand. Instead there are a range of functions which will allow us to do this:</p>
-<div class="sourceCode" id="cb507"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb508"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/effectsize/">effectsize</a></span><span class="op">)</span>
 
 <span class="co"># simple t-test</span>
@@ -460,7 +460,7 @@ CI_high
 <h2>
 <span class="header-section-number">24.4</span> Power<a class="anchor" aria-label="anchor" href="#power"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb508"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb509"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/heliosdrm/pwr">pwr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/pitakakariki/simr">simr</a></span><span class="op">)</span></code></pre></div>
 <p>You don't necessarily need to report effect sizes in a write-up, it is fairly rare to see them included in a paper. It will be more useful for you to report confidence intervals on the original measurement scale. But it does provide two important pieces of information.</p>
@@ -494,7 +494,7 @@ power = desired power of test (beta)
 <button>
 Solution
 </button>
-<div class="sourceCode" id="cb509"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb510"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/heliosdrm/pwr">pwr</a></span><span class="op">)</span>
 <span class="co"># Calculate the power of our model </span>
 <span class="va">test.power</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">15</span>, d <span class="op">=</span> <span class="fl">0.92</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span>
@@ -506,7 +506,7 @@ Solution
 <p>We can also see that if we wanted to detect smaller effects of inbreeding reliably, we need a much larger sample size.</p>
 </div>
 <p><strong>Now you know how the pwr.t.test() function works - Can you make a simple iteration to check the power for a lower effect size (d) of 0.2 for a two-sided t-test at sample sizes from 0-1000 increasing by 10 each time?</strong></p>
-<div class="sourceCode" id="cb510"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb511"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sample_size</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1000</span>, by<span class="op">=</span><span class="fl">10</span><span class="op">)</span>
 
 <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sample_size</span><span class="op">)</span><span class="op">)</span>
@@ -744,7 +744,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2023-03-13.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2023-03-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

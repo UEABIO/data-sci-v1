@@ -14,6 +14,7 @@ library(ggridges)
 library(performance)
 library(patchwork)
 
+colours <- c("cyan", "darkorange", "purple")
 ```
 
 ## Designing a Model
@@ -25,6 +26,7 @@ The flies used were an outbred stock, sexual activity was manipulated by supplyi
 ```{r, eval = TRUE, echo = FALSE}
 fruitfly <- readRDS(here::here("book", "files", "fruitfly.RDS"))
 ```
+
 
 ```{r, eval = TRUE, echo = FALSE}
 downloadthis::download_link(
@@ -84,8 +86,10 @@ GGally::ggpairs(fruitfly)
 
 ## Activity 1: Think about your data
 
+Think carefully about the plots you should make to investigate the potential differences and relationships you wish to investigate - examples hidden behind dropdowns.
+
 ```{task}
-Think carefully about the plots you should make to investigate the potential differences and relationships you wish to investigate - examples hidden behing this dropdown
+Is there an obvious difference in the longevities of males across the three treatments?
 ```
 
 ```{solution}
@@ -107,58 +111,89 @@ fruitfly %>%
 
 ```
 
-With careful thought we can construct figures that help us investigate the distribution of multiple potential predictors at once. Here we can overlay body size onto the three treatments. 
+**Q** Does it like size affects longevity? `r mcq(c(answer = "Yes","No"))`
+
+
+```{task}
+Does it look like size affects longevity?
+```
+
+```{solution}
+In this first figure - we can investigate whether there is an obvious difference in the longevities of males across the three treatments
+
+``{r, message = FALSE, eval = TRUE, fig.cap = "A scatterplot of longevity against body size (thorax (mm)). No trend line added - often it is a good idea to look at data points without being lead to a conclusion by a line"}
+
+
+fruitfly %>% 
+  ggplot(aes(x = thorax, y = longevity))+
+  geom_point()+
+  theme_minimal()+
+  theme(legend.position = "none")
+
+
+``
+
+```
 
 **Q** Does it like size affects longevity? `r mcq(c(answer = "Yes","No"))`
+
+```{task}
+Does it look like size interacts with treatment to affect longevity?
+```
+
+```{solution}
+
+``{r, message = FALSE, eval = TRUE, fig.cap = "A scatterplot of thorax against longevity - colours indicate treatment types. This time I have included a line, as it will help determine if I think the slopes are different by group"}
+
+colours <- c("cyan", "darkorange", "purple")
+
+fruitfly %>% 
+  ggplot(aes(x=thorax, y = longevity, group = type, colour = type))+
+  geom_point( alpha = 0.6)+
+  geom_smooth(method = "lm",
+            se = FALSE)+
+  scale_colour_manual(values = colours)+
+  theme_minimal()
+``
+
+```
 
 **Q** Does it look like size affects longevity differently between treatment groups? `r mcq(c("Yes", answer = "No"))`
 
 `r hide("Explain this")`
 
-Here it does look as though larger flies have a longer lifespan than smaller flies. But there appears to be little difference in the distribution of body sizes by treatment. This does not mean we can't test this in our model. But we should have a clear idea of which will have largest probable effect sizes
+Here it does look as though larger flies have a longer lifespan than smaller flies. But there appears to be little difference in the angle of the slopes between groups. This does not mean we can't test this in our model, but we may decide it is not worth including.
 
 `r unhide()`
 
-```{r, message = FALSE, eval = TRUE, fig.cap = "A boxplot of longevity across three treatments of sexual activity. Individual points represent individual males, where the size of each point represents thorax length."}
+
+
+We are also interested in the potential effect of sleep on activity, we can construct a scatter plot of sleep against longevity, while including treatment as a covariate.
+
+```{task}
+Does it look like sleep interacts with treatment to affect longevity?
+```
+
+```{solution}
+
+``{r, message = FALSE, eval = TRUE, fig.cap = "A scatter plot of proportion of time spent sleeping against longevity with a linear model trendline. Points represent individual flies, colours represent treatments."}
 
 fruitfly %>% 
-  ggplot(aes(x=type, y = longevity, fill = type))+
-  geom_boxplot(alpha = 0.4)+
-  geom_jitter(aes(size = thorax),
-              alpha = 0.6,
-              width = 0.4,
-              shape = 21)+
-  scale_fill_manual(values = colours)+
-    guides(fill = "none",
-         colour = "none")+
+  ggplot(aes(x=sleep, y = longevity, group = type, colour = type))+
+  geom_point( alpha = 0.6)+
+  geom_smooth(method = "lm",
+            se = FALSE)+
+  scale_colour_manual(values = colours)+
   theme_minimal()
-
+``
 
 ```
 
-We are also interested in the potential effect of sleep on activity, we can construct a scatter plot of sleep against longevity, while including body size as a covariate. 
 
-In these faceted plots - Are the trendlines moving in the same direction?  `r mcq(c("Yes", answer ="No"))`
+In these plots - Are the trendlines moving in the same direction?  `r mcq(c("Yes", answer ="No"))`
 
 Investigating these can help us determine is there much evidence of a potential effect of sleep, is there evidence for whether this might be an additive effect or one which interacts with the the three treatments?
 
-```{r, message = FALSE, eval = TRUE, fig.cap = "A scatter plot of proportion of time spent sleeping against longevity with a linear model trendline. Points represent individual flies, and the size of each point represents thorax length (mm)."}
-
-fruitfly %>% 
-ggplot(aes(x=sleep, y = longevity, fill = type))+
-  geom_point(aes(size = thorax,
-                 fill = type),
-             shape = 21,
-             alpha = 0.4)+
-  geom_smooth(method = "lm", colour = "black",
-              se = FALSE)+
-  scale_fill_manual(values = colours)+
-  guides(fill = "none",
-         colour = "none")+
-  facet_wrap(~ type)+
-  theme_minimal()
-
-```
 
 
 ## Designing a model
@@ -312,6 +347,13 @@ MASS::boxcox(flyls1)
 **Question - Does the fit of the model improve with a square root transformation?** `r mcq(c("Yes", answer ="No"))`
 
 ```{solution}
+
+``{r}
+flyls_sqrt <- lm(sqrt(longevity) ~ type + thorax + sleep + type:sleep, data = fruitfly)
+
+performance::check_model(flyls_sqrt)
+``
+
 Not really, despite the suggestion that a sqrt transformation would improve the model, residual fits are not really any better - so we might as well stick with the original scale.
 ```
 
@@ -369,6 +411,15 @@ For continuous variables (sleep and thorax) - `emmeans` has set these to the mea
 
 ## Activity 3: Write-up
 
+```{task}
+Can you write an Analysis section?
+```
+
+```{solution}
+I constructed an ordinary least squares model to investigate the effects of sleep, mating type and body size on longevity in adult Drosophila melanogaster. I also included an interaction term between sleep and mating type. All Analyses and data cleaning was carried out in R ver 4.1.2 with the tidyverse range of packages (Wickham et al 2019), model residuals were checked with the performance package (Lüdecke et al 2021), and summary tables produced with broom (Robinson et al 2022) and kableExtra (Zhu 2020).
+```
+
+
 ```{task} 
 Can you write a Results section?
 ```
@@ -400,21 +451,21 @@ Post hoc analysis showed that these differences were statistically significant f
 
 Comparing the treatment effects against other predictors of longevity such as body size and sleep, I found that sleep had a very small effect on longevity (mean change -0.05 days [-0.18 - 0.07]) which was not significantly different from no effect (Linear model: F~1,120~ = 0.68, P = 0.41). Body size (taken from thorax length) was a significant predictor of longevity (F~1,120~ = 121, P < 0.001), with each 0.1 mm increase in body size adding 14.4 days to the individual lifespan [11.8 - 17]. It appears as though body size has a stronger effect on longevity than treatment, indicating that while there is a measurable cost of sexual activity to males, it may be less severe than in females (not compared here), and less severe than other measurable predictors. 
 
-``{r,eval = TRUE, message = F, warning = F, fig.cap = " A scatter plot of longevity against body size across three treatments of differening male sexual activity. Fitted model slopes are from the reduced linear model (main effects only of thorax size, sleep and treatment group), with 95% confidence intervals, circles are individual data points. Marginal plots are density plot distributions for thorax length and longevity split by treatments."}
+``{r,eval = TRUE, echo = F, message = F, warning = F, fig.cap = " A scatter plot of longevity against body size across three treatments of differening male sexual activity. Fitted model slopes are from the reduced linear model (main effects only of thorax size, sleep and treatment group), with 95% confidence intervals, circles are individual data points. Marginal plots are density plot distributions for thorax length and longevity split by treatments."}
 
 
 # optional extras for adding animal silhouette
-library(rphylopic)
+#library(rphylopic) rphylopic not working
 # search for the right image in the database
-fruitfly_phylo <- name_search(text = "Drosophila melanogaster", options = "namebankID")[[1]] 
+#fruitfly_phylo <- name_search(text = "Drosophila melanogaster", options = "namebankID")[[1]] 
 
 # name_images(uuid = fruitfly$uid[1])
 
 # extract the ID of thr right image
-fruitfly_2 <- name_images(uuid = fruitfly_phylo$uid[1])$same[[2]]$ui
+#fruitfly_2 <- name_images(uuid = fruitfly_phylo$uid[1])$same[[2]]$ui
 
 # get the actual image
-fruitfly_pic <- image_data(fruitfly_2, size = 256)[[1]]
+#fruitfly_pic <- image_data(fruitfly_2, size = 256)[[1]]
 
 # density plot of thorax length by treatment
 marginal1 <- fruitfly %>% 
@@ -454,8 +505,8 @@ model_plot <- broom::augment(flyls2, newdata = fruitfly_2, interval = "confidenc
        fill = "Type of female exposure")+
   guides(colour = "none")+
   theme_classic()+
-  theme(legend.position = "none")+
-  add_phylopic(fruitfly_pic, alpha = 0.8, x = 0.7, y = 80, ysize = 10)
+  theme(legend.position = "none")
+#  add_phylopic(fruitfly_pic, alpha = 0.8, x = 0.7, y = 80, ysize = 10)
 
 
 
