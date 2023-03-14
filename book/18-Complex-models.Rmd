@@ -86,11 +86,12 @@ GGally::ggpairs(fruitfly)
 
 ## Activity 1: Think about your data
 
-Think carefully about the plots you should make to investigate the potential differences and relationships you wish to investigate - examples hidden behind dropdowns.
+Think carefully about the plots you should make to investigate the potential differences and relationships you wish to investigate - try and answer the questions first before checking the examples hidden behind dropdowns.
 
 ```{task}
-Is there an obvious difference in the longevities of males across the three treatments?
+Make density distributions for longevity of males across the three treatments.
 ```
+
 
 ```{solution}
 In this first figure - we can investigate whether there is an obvious difference in the longevities of males across the three treatments
@@ -111,12 +112,12 @@ fruitfly %>%
 
 ```
 
-**Q** Does it like size affects longevity? `r mcq(c(answer = "Yes","No"))`
-
+**Q** Does it like treatment affects longevity? `r mcq(c(answer = "Yes","No"))`
 
 ```{task}
-Does it look like size affects longevity?
+Make a scatterplot of size against longevity.
 ```
+
 
 ```{solution}
 In this first figure - we can investigate whether there is an obvious difference in the longevities of males across the three treatments
@@ -135,10 +136,12 @@ fruitfly %>%
 
 ```
 
-**Q** Does it like size affects longevity? `r mcq(c(answer = "Yes","No"))`
+
+**Q** Does it look like size affects longevity? `r mcq(c(answer = "Yes","No"))`
+
 
 ```{task}
-Does it look like size interacts with treatment to affect longevity?
+Make an interaction plot to see if size interacts with treatment to affect longevity. (Use colour and groups to make differentiate points and lines)
 ```
 
 ```{solution}
@@ -171,7 +174,7 @@ Here it does look as though larger flies have a longer lifespan than smaller fli
 We are also interested in the potential effect of sleep on activity, we can construct a scatter plot of sleep against longevity, while including treatment as a covariate.
 
 ```{task}
-Does it look like sleep interacts with treatment to affect longevity?
+Make an interaction plot to see if sleep interacts with treatment to affect longevity.
 ```
 
 ```{solution}
@@ -192,7 +195,11 @@ fruitfly %>%
 
 In these plots - Are the trendlines moving in the same direction?  `r mcq(c("Yes", answer ="No"))`
 
-Investigating these can help us determine is there much evidence of a potential effect of sleep, is there evidence for whether this might be an additive effect or one which interacts with the the three treatments?
+`r hide("Explain this")`
+
+Here it does look as though sleep interacts with treatment to affect lifespan. As the slopes of the lines are very different in each group. But in order to know the strength of this association, and if it is significantly different from what we might observe under the null hypothesis, we will have to build a model.
+
+`r unhide()`
 
 
 

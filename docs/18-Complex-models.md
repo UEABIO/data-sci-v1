@@ -72,10 +72,11 @@ GGally::ggpairs(fruitfly)
 
 ## Activity 1: Think about your data
 
-Think carefully about the plots you should make to investigate the potential differences and relationships you wish to investigate - examples hidden behind dropdowns.
+Think carefully about the plots you should make to investigate the potential differences and relationships you wish to investigate - try and answer the questions first before checking the examples hidden behind dropdowns.
 
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
-Is there an obvious difference in the longevities of males across the three treatments? </div></div>
+Make density distributions for longevity of males across the three treatments. </div></div>
+
 
 <button id="displayTextunnamed-chunk-9" onclick="javascript:toggle('unnamed-chunk-9');">Show Solution</button>
 
@@ -99,11 +100,11 @@ fruitfly %>%
 </div>
 </div></div></div>
 
-**Q** Does it like size affects longevity? <select class='webex-select'><option value='blank'></option><option value='answer'>Yes</option><option value=''>No</option></select>
-
+**Q** Does it like treatment affects longevity? <select class='webex-select'><option value='blank'></option><option value='answer'>Yes</option><option value=''>No</option></select>
 
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
-Does it look like size affects longevity? </div></div>
+Make a scatterplot of size against longevity. </div></div>
+
 
 <button id="displayTextunnamed-chunk-11" onclick="javascript:toggle('unnamed-chunk-11');">Show Solution</button>
 
@@ -124,10 +125,12 @@ fruitfly %>%
 </div>
 </div></div></div>
 
-**Q** Does it like size affects longevity? <select class='webex-select'><option value='blank'></option><option value='answer'>Yes</option><option value=''>No</option></select>
+
+**Q** Does it look like size affects longevity? <select class='webex-select'><option value='blank'></option><option value='answer'>Yes</option><option value=''>No</option></select>
+
 
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
-Does it look like size interacts with treatment to affect longevity? </div></div>
+Make an interaction plot to see if size interacts with treatment to affect longevity. (Use colour and groups to make differentiate points and lines) </div></div>
 
 <button id="displayTextunnamed-chunk-13" onclick="javascript:toggle('unnamed-chunk-13');">Show Solution</button>
 
@@ -168,7 +171,7 @@ Here it does look as though larger flies have a longer lifespan than smaller fli
 We are also interested in the potential effect of sleep on activity, we can construct a scatter plot of sleep against longevity, while including treatment as a covariate.
 
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
-Does it look like sleep interacts with treatment to affect longevity? </div></div>
+Make an interaction plot to see if sleep interacts with treatment to affect longevity. </div></div>
 
 <button id="displayTextunnamed-chunk-15" onclick="javascript:toggle('unnamed-chunk-15');">Show Solution</button>
 
@@ -193,7 +196,15 @@ fruitfly %>%
 
 In these plots - Are the trendlines moving in the same direction?  <select class='webex-select'><option value='blank'></option><option value=''>Yes</option><option value='answer'>No</option></select>
 
-Investigating these can help us determine is there much evidence of a potential effect of sleep, is there evidence for whether this might be an additive effect or one which interacts with the the three treatments?
+
+<div class='webex-solution'><button>Explain this</button>
+
+
+Here it does look as though sleep interacts with treatment to affect lifespan. As the slopes of the lines are very different in each group. But in order to know the strength of this association, and if it is significantly different from what we might observe under the null hypothesis, we will have to build a model.
+
+
+</div>
+
 
 
 
