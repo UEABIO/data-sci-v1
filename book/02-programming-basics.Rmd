@@ -358,13 +358,13 @@ By default, when you open R Studio it will show you what you were last working o
 knitr::include_graphics("images/session.png")
 
 ```
-```{block, type = "warning"}
+
+
 
 Restore .RData into workspace at startup `r mcq(c("checked", answer = "unchecked"))`
 
-Save workspace to .RData on exit `r mcq(c("Always", answer = "Never", "Ask))`
+Save workspace to .RData on exit `r mcq(c("Always", answer = "Never", "Ask"))`
 
-```
 
 ## R sessions
 
@@ -428,10 +428,16 @@ knitr::include_graphics("images/kitteh.png")
 Getting good at programming really means getting good trying stuff out,  searching for help online, and finding examples of code to copy. If you are having difficulty with any of the exercises contained in this book then you can ask for help on Teams, however, learning to problem-solve effectively is a key skill that you need to develop throughout this course. 
 
 * Use the help documentation. If you're struggling to understand how a function works, remember the `?function` and `help()` command.
+
 * If you get an error message, copy and paste it in to Google - it's very likely someone else has had the same problem.
-* Rememver to ask for help on the course Yammer page
+
+* If you are struggling to produce a particular output or process - try organising your google searches to include key terms such as "in R" or "tidyverse". - e.g. *"how to change character strings into NA values with tidyverse"*
+
+*  The official [Cheatsheets](https://posit.co/resources/cheatsheets/) are a great resource to keep bookmarked. 
+
+* **Remember to ask for help** 
+
 * In addition to these course materials there are a number of excellent resources for learning R:
-  * [R Cookbook](http://www.cookbook-r.com/)
   * [StackOverflow](https://stackoverflow.com/)
   * [R for Data Science](https://r4ds.had.co.nz/)
   * Search or use the [#rstats](https://twitter.com/search?f=tweets&q=%23rstats&src=typd) hashtag on Twitter
@@ -441,9 +447,22 @@ Getting good at programming really means getting good trying stuff out,  searchi
 
 A large part of coding is trying to figure why your code doesn't work and this is true whether you are a novice or an expert. As you progress through this course  you should keep a record of mistakes you make and how you fixed them. In each chapter we will provide a number of common mistakes to look out for but you will undoubtedly make (and fix!) new mistakes yourself.
 
+### Prevent errors
+
+**Read console outputs as you go**
+
+**Check that functions are producing the output you expect**
+
+**Build complex code in simple stages**
+
+### Fix errors
+
 * Have you loaded the correct packages for the functions you are trying to use? One very common mistake is to write the code to load the package, e.g., `library(tidyverse)` but then forget to run it.
+
 * Have you made a typo? Remember `data` is not the same as `DATA` and `t.test` is not the same as `t_test`.
+
 * Is there a package conflict? Have you tried specifying the package and function with `package::function`?
+
 * Is it definitely an error? Not all red text in R means an error - sometimes it is just giving you a message with information. 
 
 ## Activity 7: Test yourself

@@ -108,6 +108,8 @@ activity-2
 how-to-cite-r-and-rstudio
 help-and-additional-resources
 debugging-tips
+prevent-errors
+fix-errors
 activity-7-test-yourself
 loading-data
 meet-the-penguins

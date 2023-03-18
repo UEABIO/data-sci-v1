@@ -501,14 +501,13 @@ Figure 2.4: Clearing the workspace
 Figure 2.5: Set these options to increase reproducibility
 </p>
 </div>
-<div class="warning">
-<p>
-Restore .RData into workspace at startup <code>r mcq(c("checked", answer = "unchecked"))</code>
-</p>
-<p>
-Save workspace to .RData on exit <code>r mcq(c("Always", answer = "Never", "Ask))</code>
-</p>
-</div>
+<p>Restore .RData into workspace at startup <select class="webex-select"><option value="blank"></option>
+<option value="">checked</option>
+<option value="answer">unchecked</option></select></p>
+<p>Save workspace to .RData on exit <select class="webex-select"><option value="blank"></option>
+<option value="">Always</option>
+<option value="answer">Never</option>
+<option value="">Ask</option></select></p>
 </div>
 <div id="r-sessions" class="section level2" number="2.11">
 <h2>
@@ -606,12 +605,14 @@ Figure 2.7: The truth about programming
 </div>
 <p>Getting good at programming really means getting good trying stuff out, searching for help online, and finding examples of code to copy. If you are having difficulty with any of the exercises contained in this book then you can ask for help on Teams, however, learning to problem-solve effectively is a key skill that you need to develop throughout this course.</p>
 <ul>
-<li>Use the help documentation. If you're struggling to understand how a function works, remember the <code>?function</code> and <code>help()</code> command.</li>
-<li>If you get an error message, copy and paste it in to Google - it's very likely someone else has had the same problem.</li>
-<li>Rememver to ask for help on the course Yammer page</li>
-<li>In addition to these course materials there are a number of excellent resources for learning R:
+<li><p>Use the help documentation. If you're struggling to understand how a function works, remember the <code>?function</code> and <code>help()</code> command.</p></li>
+<li><p>If you get an error message, copy and paste it in to Google - it's very likely someone else has had the same problem.</p></li>
+<li><p>If you are struggling to produce a particular output or process - try organising your google searches to include key terms such as "in R" or "tidyverse". - e.g. <em>"how to change character strings into NA values with tidyverse"</em></p></li>
+<li><p>The official <a href="https://posit.co/resources/cheatsheets/">Cheatsheets</a> are a great resource to keep bookmarked.</p></li>
+<li><p><strong>Remember to ask for help</strong></p></li>
+<li>
+<p>In addition to these course materials there are a number of excellent resources for learning R:</p>
 <ul>
-<li><a href="http://www.cookbook-r.com/">R Cookbook</a></li>
 <li><a href="https://stackoverflow.com/">StackOverflow</a></li>
 <li><a href="https://r4ds.had.co.nz/">R for Data Science</a></li>
 <li>Search or use the <a href="https://twitter.com/search?f=tweets&amp;q=%23rstats&amp;src=typd">#rstats</a> hashtag on Twitter</li>
@@ -624,12 +625,25 @@ Figure 2.7: The truth about programming
 <span class="header-section-number">2.15</span> Debugging tips<a class="anchor" aria-label="anchor" href="#debugging-tips"><i class="fas fa-link"></i></a>
 </h2>
 <p>A large part of coding is trying to figure why your code doesn't work and this is true whether you are a novice or an expert. As you progress through this course you should keep a record of mistakes you make and how you fixed them. In each chapter we will provide a number of common mistakes to look out for but you will undoubtedly make (and fix!) new mistakes yourself.</p>
+<div id="prevent-errors" class="section level3" number="2.15.1">
+<h3>
+<span class="header-section-number">2.15.1</span> Prevent errors<a class="anchor" aria-label="anchor" href="#prevent-errors"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Read console outputs as you go</strong></p>
+<p><strong>Check that functions are producing the output you expect</strong></p>
+<p><strong>Build complex code in simple stages</strong></p>
+</div>
+<div id="fix-errors" class="section level3" number="2.15.2">
+<h3>
+<span class="header-section-number">2.15.2</span> Fix errors<a class="anchor" aria-label="anchor" href="#fix-errors"><i class="fas fa-link"></i></a>
+</h3>
 <ul>
-<li>Have you loaded the correct packages for the functions you are trying to use? One very common mistake is to write the code to load the package, e.g., <code><a href="https://tidyverse.tidyverse.org">library(tidyverse)</a></code> but then forget to run it.</li>
-<li>Have you made a typo? Remember <code>data</code> is not the same as <code>DATA</code> and <code>t.test</code> is not the same as <code>t_test</code>.</li>
-<li>Is there a package conflict? Have you tried specifying the package and function with <code>package::function</code>?</li>
-<li>Is it definitely an error? Not all red text in R means an error - sometimes it is just giving you a message with information.</li>
+<li><p>Have you loaded the correct packages for the functions you are trying to use? One very common mistake is to write the code to load the package, e.g., <code><a href="https://tidyverse.tidyverse.org">library(tidyverse)</a></code> but then forget to run it.</p></li>
+<li><p>Have you made a typo? Remember <code>data</code> is not the same as <code>DATA</code> and <code>t.test</code> is not the same as <code>t_test</code>.</p></li>
+<li><p>Is there a package conflict? Have you tried specifying the package and function with <code>package::function</code>?</p></li>
+<li><p>Is it definitely an error? Not all red text in R means an error - sometimes it is just giving you a message with information.</p></li>
 </ul>
+</div>
 </div>
 <div id="activity-7-test-yourself" class="section level2" number="2.16">
 <h2>
@@ -903,7 +917,12 @@ $( document ).ready(function() {
 <li><a class="nav-link" href="#activity-2"><span class="header-section-number">2.12</span> Activity 2</a></li>
 <li><a class="nav-link" href="#how-to-cite-r-and-rstudio"><span class="header-section-number">2.13</span> How to cite R and RStudio</a></li>
 <li><a class="nav-link" href="#help-and-additional-resources"><span class="header-section-number">2.14</span> Help and additional resources</a></li>
-<li><a class="nav-link" href="#debugging-tips"><span class="header-section-number">2.15</span> Debugging tips</a></li>
+<li>
+<a class="nav-link" href="#debugging-tips"><span class="header-section-number">2.15</span> Debugging tips</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#prevent-errors"><span class="header-section-number">2.15.1</span> Prevent errors</a></li>
+<li><a class="nav-link" href="#fix-errors"><span class="header-section-number">2.15.2</span> Fix errors</a></li>
+</ul>
+</li>
 <li><a class="nav-link" href="#activity-7-test-yourself"><span class="header-section-number">2.16</span> Activity 7: Test yourself</a></li>
 </ul>
 
@@ -922,7 +941,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2023-03-14.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2023-03-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -698,7 +698,7 @@ You can explore all schemes available with the command <code><a href="https://rd
 <div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Facetting ----</span>
 <span class="va">penguins</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">sex</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">drop_na</span><span class="op">(</span><span class="va">sex</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">flipper_length_mm</span>, 
              y <span class="op">=</span> <span class="va">body_mass_g</span>,
              colour<span class="op">=</span><span class="va">species</span><span class="op">)</span><span class="op">)</span><span class="op">+</span> 
@@ -734,7 +734,7 @@ You can explore all schemes available with the command <code><a href="https://rd
 <span class="va">p3</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op">%&gt;%</span>     
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">sex</span>,<span class="va">species</span><span class="op">)</span> <span class="op">%&gt;%</span> 
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>n<span class="op">=</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-     <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">sex</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+     <span class="fu">drop_na</span><span class="op">(</span><span class="va">sex</span><span class="op">)</span> <span class="op">%&gt;%</span> 
      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">species</span>, y<span class="op">=</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="va">sex</span><span class="op">)</span>, 
                width<span class="op">=</span><span class="fl">0.8</span>,
@@ -1121,7 +1121,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2023-03-14.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2023-03-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
