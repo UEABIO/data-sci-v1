@@ -658,8 +658,8 @@ unnest(data)
 ### Plotting with `map`
 
 ```{r, fig.width = 10}
-
-LPI_UK %>% 
+# map the plots to a dataframe
+nested_plots <- LPI_UK %>% 
     filter(Common.Name == "House sparrow" | 
                Common.Name == "Great tit" | 
                Common.Name == "Corn bunting" | 
@@ -670,7 +670,8 @@ LPI_UK %>%
             geom_point(size = 2, colour = "#00868B") +                                                
             geom_smooth(method = lm, colour = "#00868B", fill = "#00868B") +          
             labs(y = "Abundance\n", x = "")))
-
+# print the plots
+print(nested_plots$plots)
 
 ```
 

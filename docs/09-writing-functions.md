@@ -459,7 +459,7 @@ But I **still** want to make some more changes, rather than do this work for one
 theme_custom <- function(base_size=12, base_family="serif"){
   theme_classic(base_size = base_size, 
                 base_family = base_family,
-                ) +
+                )  %+replace%
 # update theme minimal 
 theme(
   # specify default settings for plot titles - use rel to set titles relative to base size
