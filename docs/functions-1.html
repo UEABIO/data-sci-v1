@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 9 Functions | 5023Y</title>
 <meta name="author" content="Philip T. Leftwich">
-<meta name="description" content="Today's workshop can be carried out in any R project.  Why not try and set up a project on Github and open it on RStudio Cloud?  First - go to (https://github.com) and log in.  Near repositories...">
+<meta name="description" content="Most of the time when we work in R, we will use functions; often pre-written functions that we access from baseR or installed packages. But you can also write your own functions. Eventually you...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 9 Functions | 5023Y">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://ueabio.github.io/data-sci/functions-1.html">
 <meta property="og:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
-<meta property="og:description" content="Today's workshop can be carried out in any R project.  Why not try and set up a project on Github and open it on RStudio Cloud?  First - go to (https://github.com) and log in.  Near repositories...">
+<meta property="og:description" content="Most of the time when we work in R, we will use functions; often pre-written functions that we access from baseR or installed packages. But you can also write your own functions. Eventually you...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 9 Functions | 5023Y">
-<meta name="twitter:description" content="Today's workshop can be carried out in any R project.  Why not try and set up a project on Github and open it on RStudio Cloud?  First - go to (https://github.com) and log in.  Near repositories...">
+<meta name="twitter:description" content="Most of the time when we work in R, we will use functions; often pre-written functions that we access from baseR or installed packages. But you can also write your own functions. Eventually you...">
 <meta name="twitter:image" content="https://ueabio.github.io/data-sci/images/logos/twitter_card.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.13/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -98,25 +98,25 @@
 <li><a class="" href="github.html"><span class="header-section-number">8</span> Github</a></li>
 <li class="book-part">R Programming</li>
 <li><a class="active" href="functions-1.html"><span class="header-section-number">9</span> Functions</a></li>
+<li><a class="" href="iteration.html"><span class="header-section-number">10</span> Iteration</a></li>
 <li class="book-part">Advanced Data Insights</li>
-<li><a class="" href="data-insights-part-one.html"><span class="header-section-number">10</span> Data Insights part one</a></li>
-<li><a class="" href="data-insights-part-two.html"><span class="header-section-number">11</span> Data insights part two</a></li>
+<li><a class="" href="data-insights-part-one.html"><span class="header-section-number">11</span> Data Insights part one</a></li>
+<li><a class="" href="data-insights-part-two.html"><span class="header-section-number">12</span> Data insights part two</a></li>
 <li class="book-part">Statistics</li>
-<li><a class="" href="introduction-to-statistics.html"><span class="header-section-number">12</span> Introduction to statistics</a></li>
-<li><a class="" href="introduction-to-linear-models.html"><span class="header-section-number">13</span> Introduction to Linear Models</a></li>
-<li><a class="" href="testing.html"><span class="header-section-number">14</span> Testing</a></li>
-<li><a class="" href="regression.html"><span class="header-section-number">15</span> Regression</a></li>
-<li><a class="" href="anova.html"><span class="header-section-number">16</span> ANOVA</a></li>
-<li><a class="" href="multivariate-linear-models.html"><span class="header-section-number">17</span> Multivariate linear models</a></li>
-<li><a class="" href="complex-models.html"><span class="header-section-number">18</span> Complex models</a></li>
-<li><a class="" href="generalized-linear-models.html"><span class="header-section-number">19</span> Generalized Linear Models</a></li>
+<li><a class="" href="introduction-to-statistics.html"><span class="header-section-number">13</span> Introduction to statistics</a></li>
+<li><a class="" href="introduction-to-linear-models.html"><span class="header-section-number">14</span> Introduction to Linear Models</a></li>
+<li><a class="" href="testing.html"><span class="header-section-number">15</span> Testing</a></li>
+<li><a class="" href="regression.html"><span class="header-section-number">16</span> Regression</a></li>
+<li><a class="" href="anova.html"><span class="header-section-number">17</span> ANOVA</a></li>
+<li><a class="" href="multivariate-linear-models.html"><span class="header-section-number">18</span> Multivariate linear models</a></li>
+<li><a class="" href="complex-models.html"><span class="header-section-number">19</span> Complex models</a></li>
+<li><a class="" href="generalized-linear-models.html"><span class="header-section-number">20</span> Generalized Linear Models</a></li>
 <li class="book-part">Advanced topics</li>
-<li><a class="" href="mixed-models.html"><span class="header-section-number">20</span> Mixed models</a></li>
-<li><a class="" href="generalised-additive-models.html"><span class="header-section-number">21</span> Generalised Additive Models</a></li>
-<li><a class="" href="survival-models.html"><span class="header-section-number">22</span> Survival models</a></li>
-<li><a class="" href="unsupervised-machine-learning.html"><span class="header-section-number">23</span> Unsupervised Machine Learning</a></li>
-<li><a class="" href="power-analysis.html"><span class="header-section-number">24</span> Power analysis</a></li>
-<li><a class="" href="iteration.html"><span class="header-section-number">25</span> Iteration</a></li>
+<li><a class="" href="mixed-models.html"><span class="header-section-number">21</span> Mixed models</a></li>
+<li><a class="" href="generalised-additive-models.html"><span class="header-section-number">22</span> Generalised Additive Models</a></li>
+<li><a class="" href="survival-models.html"><span class="header-section-number">23</span> Survival models</a></li>
+<li><a class="" href="unsupervised-machine-learning.html"><span class="header-section-number">24</span> Unsupervised Machine Learning</a></li>
+<li><a class="" href="power-analysis.html"><span class="header-section-number">25</span> Power analysis</a></li>
 <li class="book-part">Appendices</li>
 <li><a class="" href="installing-r.html"><span class="header-section-number">A</span> Installing R</a></li>
 <li><a class="" href="updating-r-rstudio-and-packages.html"><span class="header-section-number">B</span> Updating R, RStudio, and packages</a></li>
@@ -136,29 +136,6 @@
 <h1>
 <span class="header-section-number">9</span> Functions<a class="anchor" aria-label="anchor" href="#functions-1"><i class="fas fa-link"></i></a>
 </h1>
-<div class="try">
-<p>
-Today's workshop can be carried out in any R project.
-</p>
-<p>
-Why not try and set up a project on Github and open it on RStudio Cloud?
-</p>
-<p>
-First - go to (<a href="https://github.com" class="uri">https://github.com</a>) and log in.
-</p>
-<p>
-Near repositories click the big green "New" button.
-</p>
-<p>
-Set it to no template, give it a name like "Learning R functions".
-</p>
-<p>
-Initialise the project with a README and create repository
-</p>
-<p>
-Click on the green "Code" button to get the link to Clone the repository into RStudio Cloud.
-</p>
-</div>
 <p>Most of the time when we work in R, we will use functions; often pre-written functions that we access from baseR or installed packages. But you can also write your own functions. Eventually you could even turn a collection of your own functions into a package (for yourself or others).</p>
 <p><strong>Functions</strong> make it easy to use sets of code instructions repeatedly (without filling our scripts with the code underlying the function) and help us carry out multiple tasks in a single step without having to go through the details of how the steps are executed.</p>
 <div id="structuring-a-function" class="section level2" number="9.1">
@@ -231,10 +208,10 @@ variance &lt;- function(input_data){
 
 variance(number_series)
 </code></pre>
-<button id="displayTextunnamed-chunk-9" onclick="javascript:toggle('unnamed-chunk-9');">
+<button id="displayTextunnamed-chunk-8" onclick="javascript:toggle('unnamed-chunk-8');">
 Show Solution
 </button>
-<div id="toggleTextunnamed-chunk-9" style="display: none">
+<div id="toggleTextunnamed-chunk-8" style="display: none">
 <div class="panel panel-default">
 <div class="panel-heading panel-heading1">
 Solution
@@ -290,10 +267,10 @@ Task
 e.g. say_hello("Phil")
 </div>
 </div>
-<button id="displayTextunnamed-chunk-13" onclick="javascript:toggle('unnamed-chunk-13');">
+<button id="displayTextunnamed-chunk-12" onclick="javascript:toggle('unnamed-chunk-12');">
 Show Solution
 </button>
-<div id="toggleTextunnamed-chunk-13" style="display: none">
+<div id="toggleTextunnamed-chunk-12" style="display: none">
 <div class="panel panel-default">
 <div class="panel-heading panel-heading1">
 Solution
@@ -320,10 +297,10 @@ Task
 What happens when you DO NOT put something in the brackets when using this function?
 </div>
 </div>
-<button id="displayTextunnamed-chunk-16" onclick="javascript:toggle('unnamed-chunk-16');">
+<button id="displayTextunnamed-chunk-15" onclick="javascript:toggle('unnamed-chunk-15');">
 Show Solution
 </button>
-<div id="toggleTextunnamed-chunk-16" style="display: none">
+<div id="toggleTextunnamed-chunk-15" style="display: none">
 <div class="panel panel-default">
 <div class="panel-heading panel-heading1">
 Solution
@@ -378,47 +355,44 @@ Task
 Can you write this function? to print the statements required above?
 </div>
 </div>
-<button id="displayTextunnamed-chunk-21" onclick="javascript:toggle('unnamed-chunk-21');">
+<button id="displayTextunnamed-chunk-20" onclick="javascript:toggle('unnamed-chunk-20');">
 Show Solution
 </button>
-<div id="toggleTextunnamed-chunk-21" style="display: none">
+<div id="toggleTextunnamed-chunk-20" style="display: none">
 <div class="panel panel-default">
 <div class="panel-heading panel-heading1">
 Solution
 </div>
 <div class="panel-body">
 <div class="tab">
-<button class="tablinksunnamed-chunk-21 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-21', 'unnamed-chunk-21');">
+<button class="tablinksunnamed-chunk-20 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-20', 'unnamed-chunk-20');">
 Base R
 </button>
-<button class="tablinksunnamed-chunk-21" onclick="javascript:openCode(event, 'option2unnamed-chunk-21', 'unnamed-chunk-21');">
+<button class="tablinksunnamed-chunk-20" onclick="javascript:openCode(event, 'option2unnamed-chunk-20', 'unnamed-chunk-20');">
 <tt>tidyverse</tt>
 </button>
 </div>
-<div id="option1unnamed-chunk-21" class="tabcontentunnamed-chunk-21">
+<div id="option1unnamed-chunk-20" class="tabcontentunnamed-chunk-20">
 <div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
 <code class="sourceCode R"> <span class="va">report_p</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">p</span>, <span class="va">digits</span> <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">{</span>
-     <span class="va">reported</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">p</span> <span class="op">&lt;</span> <span class="fl">0.001</span>,
+     <span class="va">reported</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">p</span> <span class="op">&lt;</span> <span class="fl">0.001</span>,
              <span class="st">"p &lt; 0.001"</span>,
-             <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"p="</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">digits</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+             <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"p ="</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">digits</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
      
      <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">reported</span><span class="op">)</span>
  <span class="op">}</span></code></pre></div>
 </div>
-<div id="option2unnamed-chunk-21" class="tabcontentunnamed-chunk-21">
+<div id="option2unnamed-chunk-20" class="tabcontentunnamed-chunk-20">
 <div class="sourceCode" id="cb227"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">report_p</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">p</span>, <span class="va">digits</span> <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">{</span>
-  <span class="kw">if</span> <span class="op">(</span><span class="va">p</span> <span class="op">&lt;</span> <span class="fl">.001</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">reported</span> <span class="op">=</span> <span class="st">"p &lt; .001"</span>
-  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
-    <span class="va">roundp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">digits</span><span class="op">)</span>
-    <span class="va">reported</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"p ="</span>, <span class="va">roundp</span><span class="op">)</span>
-  <span class="op">}</span>
-  
-  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">reported</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<code class="sourceCode R"> <span class="va">report_p</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">p</span>, <span class="va">digits</span> <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">{</span>
+     <span class="va">reported</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">p</span> <span class="op">&lt;</span> <span class="fl">0.001</span>,
+             <span class="st">"p &lt; 0.001"</span>,
+             <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"p ="</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">digits</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+     
+     <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">reported</span><span class="op">)</span>
+ <span class="op">}</span></code></pre></div>
 </div>
-<script> javascript:hide('option2unnamed-chunk-21') </script>
+<script> javascript:hide('option2unnamed-chunk-20') </script>
 </div>
 </div>
 </div>
@@ -442,24 +416,63 @@ What happens when omit an argument for p, set the value to 1.5 or a character "a
 <p>For <code>p = 1.5</code> it probably <em>shouldn't</em> run (p = 1.5 makes no sense), but it does!</p>
 <p>For <code>p = "a"</code> there is a warning but perhaps not a very intuitive one.</p>
 <p>We can make our own custom/specific warnings, try this and run it with the arguments above again!</p>
-<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
-<code class="sourceCode R"> <span class="va">report_p</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">p</span>, <span class="va">digits</span> <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">{</span>
-   
-  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">"p must be a number"</span><span class="op">)</span>
-  <span class="kw">if</span> <span class="op">(</span><span class="va">p</span> <span class="op">&lt;=</span> <span class="fl">0</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/warning.html">warning</a></span><span class="op">(</span><span class="st">"p-values cannot less 0"</span><span class="op">)</span>
-  <span class="kw">if</span> <span class="op">(</span><span class="va">p</span> <span class="op">&gt;=</span> <span class="fl">1</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/warning.html">warning</a></span><span class="op">(</span><span class="st">"p-values cannot be greater than 1"</span><span class="op">)</span>
-   
-     <span class="va">reported</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">p</span> <span class="op">&lt;</span> <span class="fl">0.001</span>,
-             <span class="st">"p &lt; 0.001"</span>,
-             <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"p="</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">digits</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-     <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">reported</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<button id="displayTextunnamed-chunk-22" onclick="javascript:toggle('unnamed-chunk-22');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-22" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="tab">
+<button class="tablinksunnamed-chunk-22 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-22', 'unnamed-chunk-22');">
+Base R
+</button>
+<button class="tablinksunnamed-chunk-22" onclick="javascript:openCode(event, 'option2unnamed-chunk-22', 'unnamed-chunk-22');">
+<tt>tidyverse</tt>
+</button>
+</div>
+<div id="option1unnamed-chunk-22" class="tabcontentunnamed-chunk-22">
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="functions-1.html#cb228-1" aria-hidden="true" tabindex="-1"></a> report_p <span class="ot">&lt;-</span> <span class="cf">function</span>(p, <span class="at">digits =</span> <span class="dv">3</span>) {</span>
+<span id="cb228-2"><a href="functions-1.html#cb228-2" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb228-3"><a href="functions-1.html#cb228-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.numeric</span>(p)) <span class="fu">stop</span>(<span class="st">"p must be a number"</span>)</span>
+<span id="cb228-4"><a href="functions-1.html#cb228-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (p <span class="sc">&lt;=</span> <span class="dv">0</span>) <span class="fu">warning</span>(<span class="st">"p-values cannot less 0"</span>)</span>
+<span id="cb228-5"><a href="functions-1.html#cb228-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (p <span class="sc">&gt;=</span> <span class="dv">1</span>) <span class="fu">warning</span>(<span class="st">"p-values cannot be greater than 1"</span>)</span>
+<span id="cb228-6"><a href="functions-1.html#cb228-6" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb228-7"><a href="functions-1.html#cb228-7" aria-hidden="true" tabindex="-1"></a>     reported <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(p <span class="sc">&lt;</span> <span class="fl">0.001</span>,</span>
+<span id="cb228-8"><a href="functions-1.html#cb228-8" aria-hidden="true" tabindex="-1"></a>             <span class="st">"p &lt; 0.001"</span>,</span>
+<span id="cb228-9"><a href="functions-1.html#cb228-9" aria-hidden="true" tabindex="-1"></a>             <span class="fu">paste</span>(<span class="st">"p ="</span>, <span class="fu">round</span>(p, digits)))</span>
+<span id="cb228-10"><a href="functions-1.html#cb228-10" aria-hidden="true" tabindex="-1"></a>     <span class="fu">return</span>(reported)</span>
+<span id="cb228-11"><a href="functions-1.html#cb228-11" aria-hidden="true" tabindex="-1"></a> }</span>
+<span id="cb228-12"><a href="functions-1.html#cb228-12" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">&lt;/div&gt;&lt;div id="option2unnamed-chunk-22" class="tabcontentunnamed-chunk-22"&gt;</span></span>
+<span id="cb228-13"><a href="functions-1.html#cb228-13" aria-hidden="true" tabindex="-1"></a><span class="at"> </span></span>
+<span id="cb228-14"><a href="functions-1.html#cb228-14" aria-hidden="true" tabindex="-1"></a><span class="at"> </span></span>
+<span id="cb228-15"><a href="functions-1.html#cb228-15" aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="st">```</span>r</span>
+<span id="cb228-16"><a href="functions-1.html#cb228-16" aria-hidden="true" tabindex="-1"></a> report_p <span class="ot">&lt;-</span> <span class="cf">function</span>(p, <span class="at">digits =</span> <span class="dv">3</span>) {</span>
+<span id="cb228-17"><a href="functions-1.html#cb228-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb228-18"><a href="functions-1.html#cb228-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.numeric</span>(p)) <span class="fu">stop</span>(<span class="st">"p must be a number"</span>)</span>
+<span id="cb228-19"><a href="functions-1.html#cb228-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb228-20"><a href="functions-1.html#cb228-20" aria-hidden="true" tabindex="-1"></a>    result <span class="ot">&lt;-</span> <span class="fu">case_when</span>(</span>
+<span id="cb228-21"><a href="functions-1.html#cb228-21" aria-hidden="true" tabindex="-1"></a>        p <span class="sc">&lt;=</span> <span class="dv">0</span> <span class="sc">~</span> <span class="fu">warning</span>(<span class="st">"p-values cannot be less than or equal to 0"</span>),</span>
+<span id="cb228-22"><a href="functions-1.html#cb228-22" aria-hidden="true" tabindex="-1"></a>        p <span class="sc">&gt;=</span> <span class="dv">1</span> <span class="sc">~</span> <span class="fu">warning</span>(<span class="st">"p-values cannot be greater than or equal to 1"</span>),</span>
+<span id="cb228-23"><a href="functions-1.html#cb228-23" aria-hidden="true" tabindex="-1"></a>        p <span class="sc">&lt;</span> <span class="fl">0.001</span> <span class="sc">~</span> <span class="st">"p &lt; 0.001"</span>,</span>
+<span id="cb228-24"><a href="functions-1.html#cb228-24" aria-hidden="true" tabindex="-1"></a>        <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fu">paste</span>(<span class="st">"p ="</span>, <span class="fu">round</span>(p, digits))</span>
+<span id="cb228-25"><a href="functions-1.html#cb228-25" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb228-26"><a href="functions-1.html#cb228-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb228-27"><a href="functions-1.html#cb228-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(result)</span>
+<span id="cb228-28"><a href="functions-1.html#cb228-28" aria-hidden="true" tabindex="-1"></a> }</span></code></pre></div>
+</div>
+<script> javascript:hide('option2unnamed-chunk-22') </script>
+</div>
+</div>
+</div>
 </div>
 <div id="anonymous-functions" class="section level2" number="9.8">
 <h2>
 <span class="header-section-number">9.8</span> Anonymous functions<a class="anchor" aria-label="anchor" href="#anonymous-functions"><i class="fas fa-link"></i></a>
 </h2>
-<p>Anonymous functions are ones where the function definiton is not bound to an R object. That is the function may be created and used but never assigned to a variable. We don't normally encounter these out in the "wild", but may be quite common when used with Iteration (see next chapter).</p>
+<p>Anonymous functions are ones where the function definition is not bound to an R object. That is the function may be created and used but never assigned to a variable. We don't normally encounter these out in the "wild", but may be quite common when used with Iteration (see next chapter).</p>
 <div class="sourceCode" id="cb229"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw">function</span><span class="op">(</span><span class="va">input_data</span><span class="op">)</span> <span class="op">{</span>
   <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">input_data</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span>
@@ -483,10 +496,10 @@ What happens when omit an argument for p, set the value to 1.5 or a character "a
 <span class="header-section-number">9.9.0.1</span> Step 1.<a class="anchor" aria-label="anchor" href="#step-1."><i class="fas fa-link"></i></a>
 </h4>
 <p>What functions would you use to extract the heaviest male from this dataset? Try and think that through first.</p>
-<button id="displayTextunnamed-chunk-26" onclick="javascript:toggle('unnamed-chunk-26');">
+<button id="displayTextunnamed-chunk-25" onclick="javascript:toggle('unnamed-chunk-25');">
 Show Solution
 </button>
-<div id="toggleTextunnamed-chunk-26" style="display: none">
+<div id="toggleTextunnamed-chunk-25" style="display: none">
 <div class="panel panel-default">
 <div class="panel-heading panel-heading1">
 Solution
@@ -512,13 +525,13 @@ weight_mg
 </tr></thead>
 <tbody><tr>
 <td style="text-align:right;">
-9
+1
 </td>
 <td style="text-align:left;">
 male
 </td>
 <td style="text-align:right;">
-0.2444658
+0.2182045
 </td>
 </tr></tbody>
 </table></div>
@@ -532,10 +545,10 @@ male
 <span class="header-section-number">9.9.0.2</span> Step 2.<a class="anchor" aria-label="anchor" href="#step-2."><i class="fas fa-link"></i></a>
 </h4>
 <p>Abstract your lines of code to make a function. How could you remove the data and introduce a placeholder instead?</p>
-<button id="displayTextunnamed-chunk-27" onclick="javascript:toggle('unnamed-chunk-27');">
+<button id="displayTextunnamed-chunk-26" onclick="javascript:toggle('unnamed-chunk-26');">
 Show Solution
 </button>
-<div id="toggleTextunnamed-chunk-27" style="display: none">
+<div id="toggleTextunnamed-chunk-26" style="display: none">
 <div class="panel panel-default">
 <div class="panel-heading panel-heading1">
 Solution
@@ -543,6 +556,7 @@ Solution
 <div class="panel-body">
 <div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">find_largest_male</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">{</span> 
+  
   <span class="va">df</span> <span class="op">%&gt;%</span> 
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">sex</span> <span class="op">==</span> <span class="st">"male"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">.</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">weight_mg</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -560,10 +574,10 @@ Solution
 <p>What if we made a function that could pick the largest Drosophila overall, or filter by male or female depending on what we need?</p>
 <p>Could we extend it to return more than one value if requested?</p>
 <p>To make an argument except more than one value as the potential default at once use <code><a href="https://rdrr.io/r/base/c.html">c("male", "female")</a></code></p>
-<button id="displayTextunnamed-chunk-28" onclick="javascript:toggle('unnamed-chunk-28');">
+<button id="displayTextunnamed-chunk-27" onclick="javascript:toggle('unnamed-chunk-27');">
 Show Solution
 </button>
-<div id="toggleTextunnamed-chunk-28" style="display: none">
+<div id="toggleTextunnamed-chunk-27" style="display: none">
 <div class="panel panel-default">
 <div class="panel-heading panel-heading1">
 Solution
@@ -571,20 +585,16 @@ Solution
 <div class="panel-body">
 <div class="sourceCode" id="cb233"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">find_largest_fly</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span>,  <span class="va">n</span><span class="op">=</span><span class="fl">1</span>, <span class="va">s</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"male"</span>, <span class="st">"female"</span><span class="op">)</span> <span class="op">)</span><span class="op">{</span> 
+  
   <span class="va">df</span> <span class="op">%&gt;%</span> 
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">sex</span> <span class="op">==</span> <span class="va">s</span><span class="op">)</span> <span class="op">%&gt;%</span> 
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">.</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">weight_mg</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
     <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.</span>, n<span class="op">=</span><span class="va">n</span><span class="op">)</span>
+  
 <span class="op">}</span></code></pre></div>
 </div>
 </div>
 </div>
-</div>
-<div id="step-4.-stretch-exercise" class="section level4" number="9.9.0.4">
-<h4>
-<span class="header-section-number">9.9.0.4</span> Step 4. Stretch exercise<a class="anchor" aria-label="anchor" href="#step-4.-stretch-exercise"><i class="fas fa-link"></i></a>
-</h4>
-<p>Can you add any useful warning messages? Perhaps if a fruitfly weight is above 0.4mg that this is an unusual value? Or warnings against the wrong types of data being supplied <code>is.numeric</code>?</p>
 </div>
 </div>
 <div id="activity-4-custom-ggplot-themes" class="section level2" number="9.10">
@@ -600,13 +610,13 @@ Solution
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>
 
 <span class="va">plot</span></code></pre></div>
-<div class="inline-figure"><img src="09-writing-functions_files/figure-html/unnamed-chunk-29-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="09-writing-functions_files/figure-html/unnamed-chunk-28-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>With the addition of a title and <code><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic()</a></code> we can improve the style quickly</p>
 <div class="sourceCode" id="cb235"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">plot</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Comparison of weights (mg) between \nmale and female Drosophila"</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="09-writing-functions_files/figure-html/unnamed-chunk-30-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="09-writing-functions_files/figure-html/unnamed-chunk-29-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>But I <strong>still</strong> want to make some more changes, rather than do this work for one figure, and potentially have to repeat this several times for subsequent figures, I can decide to make a new function instead. See <a href="https://ggplot2.tidyverse.org/reference/theme.html">here</a> for a full breakdown of the arguments for the <code><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme()</a></code> function.</p>
 <div class="info">
 <p>
@@ -659,7 +669,7 @@ theme() + theme_classic() # will not work as intended
 <div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">plot</span><span class="op">+</span>
 <span class="fu">theme_custom</span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="09-writing-functions_files/figure-html/unnamed-chunk-33-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="09-writing-functions_files/figure-html/unnamed-chunk-32-1.png" width="100%" style="display: block; margin: auto;"></div>
 <div class="info">
 <p>
 Functions are about 'abstracting' a command, so it can be used more than once. If you are having trouble writing a function, start by writing a standard set of commands as you would to solve a specific problem. Then work backwards to turn this into a function.
@@ -683,9 +693,6 @@ Functions are about 'abstracting' a command, so it can be used more than once. I
 </ul>
 </div>
 </div>
-
-
-
 <script>
 
 /* update total correct if #webex-total_correct exists */
@@ -867,7 +874,7 @@ $( document ).ready(function() {
 });
 </script><div class="chapter-nav">
 <div class="prev"><a href="github.html"><span class="header-section-number">8</span> Github</a></div>
-<div class="next"><a href="data-insights-part-one.html"><span class="header-section-number">10</span> Data Insights part one</a></div>
+<div class="next"><a href="iteration.html"><span class="header-section-number">10</span> Iteration</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -903,7 +910,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2023-05-17.</p>
+    <p>"<strong>5023Y</strong>: Data Science for Biologists" was written by Philip T. Leftwich. It was last built on 2023-10-10.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -13,23 +13,6 @@ library(patchwork)
 library(here)
 ```
 
-```{block, type = "try"}
-Today's workshop can be carried out in any R project. 
-
-Why not try and set up a project on Github and open it on RStudio Cloud?
-
-First - go to (https://github.com) and log in. 
-
-Near repositories click the big green "New" button. 
-
-Set it to no template, give it a name like "Learning R functions". 
-
-Initialise the project with a README and create repository
-
-Click on the green "Code" button to get the link to Clone the repository into RStudio Cloud. 
-
-```
-
 
 Most of the time when we work in R, we will use functions; often pre-written functions that we access from baseR or installed packages. But you can also write your own functions. Eventually you could even turn a collection of your own functions into a package (for yourself or others).
 
@@ -252,9 +235,9 @@ Can you write this function? to print the statements required above?
 ``{r, eval = F}
 
  report_p <- function(p, digits = 3) {
-     reported <- if_else(p < 0.001,
+     reported <- ifelse(p < 0.001,
              "p < 0.001",
-             paste("p=", round(p, digits)))
+             paste("p =", round(p, digits)))
      
      return(reported)
  }
@@ -265,16 +248,16 @@ Can you write this function? to print the statements required above?
 
 ``{r}
 
-report_p <- function(p, digits = 3) {
-  if (p < .001) {
-    reported = "p < .001"
-  } else {
-    roundp <- round(p, digits)
-    reported = paste("p =", roundp)
-  }
-  
-  return(reported)
-}
+
+
+
+ report_p <- function(p, digits = 3) {
+     reported <- if_else(p < 0.001,
+             "p < 0.001",
+             paste("p =", round(p, digits)))
+     
+     return(reported)
+ }
 
 ``
 
@@ -303,7 +286,9 @@ For `p = "a"` there is a warning but perhaps not a very intuitive one.
 We can make our own custom/specific warnings, try this and run it with the arguments above again! 
 
 
-```{r}
+```{solution, multCode = T}
+
+``{r}
 
  report_p <- function(p, digits = 3) {
    
@@ -311,16 +296,38 @@ We can make our own custom/specific warnings, try this and run it with the argum
   if (p <= 0) warning("p-values cannot less 0")
   if (p >= 1) warning("p-values cannot be greater than 1")
    
-     reported <- if_else(p < 0.001,
+     reported <- ifelse(p < 0.001,
              "p < 0.001",
-             paste("p=", round(p, digits)))
+             paste("p =", round(p, digits)))
      return(reported)
+ }
+ 
+ ``
+ ####
+ 
+ ``{r}
+ 
+report_p <- function(p, digits = 3) {
+  
+  if (!is.numeric(p)) stop("p must be a number")
+  
+    result <- case_when(
+        p <= 0 ~ warning("p-values cannot be less than or equal to 0"),
+        p >= 1 ~ warning("p-values cannot be greater than or equal to 1"),
+        p < 0.001 ~ "p < 0.001",
+        TRUE ~ paste("p =", round(p, digits))
+    )
+    
+    return(result)
 }
+ 
+ ``
+ 
 ```
 
 ## Anonymous functions
 
-Anonymous functions are ones where the function definiton is not bound to an R object. That is the function may be created and used but never assigned to a variable. We don't normally encounter these out in the "wild", but may be quite common when used with Iteration (see next chapter).
+Anonymous functions are ones where the function definition is not bound to an R object. That is the function may be created and used but never assigned to a variable. We don't normally encounter these out in the "wild", but may be quite common when used with Iteration (see next chapter).
 
 ```{r, eval = F}
 
@@ -369,6 +376,7 @@ Abstract your lines of code to make a function. How could you remove the data an
 
 ``{r}
 find_largest_male <- function(df){ 
+  
   df %>% 
     filter(sex == "male") %>% 
     arrange(., desc(weight_mg)) %>% 
@@ -395,18 +403,18 @@ To make an argument except more than one value as the potential default at once 
 
 ``{r}
 find_largest_fly <- function(df,  n=1, s=c("male", "female") ){ 
+  
   df %>% 
     filter(sex == s) %>% 
     arrange(., desc(weight_mg)) %>% 
     head(., n=n)
+  
 }
 ``
 
 ```
 
-#### Step 4. Stretch exercise
 
-Can you add any useful warning messages? Perhaps if a fruitfly weight is above 0.4mg that this is an unusual value? Or warnings against the wrong types of data being supplied `is.numeric`? 
 
 ## Activity 4: Custom ggplot themes
 
